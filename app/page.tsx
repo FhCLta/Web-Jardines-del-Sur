@@ -46,7 +46,7 @@ export default async function Home() {
           <div className={styles.footerBrand}>
             <h2>Altta<span>Homes</span></h2>
             <span className={styles.footerTagline}>by Grupo Sadasi · Cancún</span>
-            <p>Más de 30 años construyendo hogares y forjando patrimonio para familias mexicanas.</p>
+            <p>50 años de trayectoria ininterrumpida, 430,000 viviendas entregadas y el respaldo de la primera desarrolladora mexicana certificada <em>Best Place to Live</em>.</p>
             <a
               href="https://wa.me/529982059044?text=Hola,%20quiero%20informes%20de%20los%20desarrollos"
               target="_blank"

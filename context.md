@@ -1,7 +1,7 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
-> **Última actualización:** 1 de mayo de 2026 (sesión 2)  
-> **Estado:** Fases A–D completas + pulido visual completo. Fase E pendiente.
+> **Última actualización:** 1 de mayo de 2026 (sesión 3)  
+> **Estado:** Fases A–D completas + pulido visual + performance + datos institucionales. Fase E pendiente.
 
 ---
 
@@ -133,6 +133,9 @@
 /larioja2/Casa Modelo Alamo/             → (disponibles)
 /larioja2/Casa noni/                     → (disponibles)
 /larioja2/Casa Noni Elite/               → (disponibles)
+/amenidades/                             → alberca.webp, alberca2.webp, gimnasio.webp, gimnasio1.webp,
+                                           cancha.webp, "area de juego infantil.webp", "Vista aerea1.webp"
+                                           (6 imágenes usadas en AmenitiesSection)
 ```
 
 ---
@@ -152,7 +155,9 @@
 | **Fase D** | ✅ | AmenitiesSection masonry navy/gold + Footer premium oscuro 3 cols |
 | Pulido visual PropertyCard | ✅ | Pills eliminadas, split header Casa+Depto desktop, legal legend Jardines, 3-stats inline mobile |
 | Fix VirtualTourModal mobile | ✅ | WhatsApp correcto, z-index 9000, X 44×44, body.modal-open oculta header y sticky bar |
-| Eliminar MobileStickyWhatsApp | ✅ | Removido de page.tsx — FAB flotante es suficiente |
+| Datos institucionales Sadasi | ✅ | Hero eyebrow 50 AÑOS, trust 430k/12 estados/15% plusvalía; AmenitiesSection trust row actualizado; footer tagline; meta description SEO |
+| Optimización de performance | ✅ | Hero Opción B (lazy slides idle), PropertyCard `<img>` → `<Image fill>`, next.config.ts Cache-Control + AVIF, `<link rel=preload>` primera imagen hero |
+| AmenitiesSection imágenes | ✅ | Reimplementada con 6 imágenes de `/amenidades/`: alberca (Jardines), gimnasio1, área infantil, cancha, gimnasio exterior, Vista aerea1 (La Rioja 2) |
 | **Fase E** | ⏳ | Reveal-on-scroll Intersection Observer + micro-animaciones |
 | Fotos Lirios 2 | ⏳ | Pendiente de recibir imágenes |
 | SEO / Analytics | ⏳ | Diferido por solicitud del usuario |

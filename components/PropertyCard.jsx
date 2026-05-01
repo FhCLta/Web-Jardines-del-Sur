@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import VirtualTourModal from './VirtualTourModal';
 import styles from './PropertyCard.module.css';
@@ -86,12 +87,16 @@ export default function PropertyCard({ property }) {
               backgroundImage: `url('${images[currentImgIndex]}')`
             }}
           />
-          <div 
-            className={styles.imageForeground} 
-            style={{ 
-              backgroundImage: `url('${images[currentImgIndex]}')`
-            }}
-          />
+          <div className={styles.imageForeground}>
+            <Image
+              src={images[currentImgIndex]}
+              alt={`${property.nombre_modelo} - imagen ${currentImgIndex + 1}`}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+              style={{ objectFit: 'contain' }}
+              priority={currentImgIndex === 0}
+            />
+          </div>
           {property.status && (
             <span className={styles.statusBadge}>{property.status}</span>
           )}

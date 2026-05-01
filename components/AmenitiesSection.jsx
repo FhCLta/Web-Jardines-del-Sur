@@ -4,39 +4,39 @@ import styles from './AmenitiesSection.module.css';
 
 const AMENITIES = [
   {
-    img: "/jardines/Imagnes de amenidades y hero/alberca.webp",
-    label: "Alberca",
-    desc: "Área de natación y descanso para toda la familia",
+    img: "/amenidades/alberca.webp",
+    label: "Alberca y Casa Club · Jardines del Sur",
+    desc: "Alberca olímpica rodeada de jardines tropicales y casa club con área de convivencia",
     size: "large",
   },
   {
-    img: "/larioja2/Imagnes de amenidades y hero/Terraza.webp",
-    label: "Terraza Premium",
-    desc: "Espacios al aire libre con vista panorámica",
+    img: "/amenidades/gimnasio1.webp",
+    label: "Gimnasio Equipado",
+    desc: "Maquinaria Technogym de última generación con ventanales al jardín",
     size: "tall",
   },
   {
-    img: "/jardines/Imagnes de amenidades y hero/gimnasio.webp",
-    label: "Gimnasio",
-    desc: "Equipado para tu rutina diaria",
-    size: "normal",
-  },
-  {
-    img: "/jardines/Imagnes de amenidades y hero/cancha.webp",
-    label: "Cancha Deportiva",
-    desc: "Para los más activos del hogar",
-    size: "normal",
-  },
-  {
-    img: "/jardines/Imagnes de amenidades y hero/area de juego infantil.webp",
+    img: "/amenidades/area de juego infantil.webp",
     label: "Área Infantil",
-    desc: "Diversión segura para los pequeños",
+    desc: "Juegos, columpios y resbaladillas bajo palmeras y cielo abierto",
     size: "normal",
   },
   {
-    img: "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
-    label: "Vista Panorámica",
-    desc: "Ubicación privilegiada en el corazón de Cancún",
+    img: "/amenidades/cancha.webp",
+    label: "Cancha Deportiva",
+    desc: "Pasto sintético profesional para fútbol y actividades al aire libre",
+    size: "normal",
+  },
+  {
+    img: "/amenidades/gimnasio.webp",
+    label: "Gimnasio · Exterior",
+    desc: "Acceso directo desde los jardines con estacionamiento exclusivo para residentes",
+    size: "normal",
+  },
+  {
+    img: "/amenidades/Vista aerea1.webp",
+    label: "Alberca y Casa Club · La Rioja 2",
+    desc: "Vista aérea del complejo: alberca, casa club, jardines y áreas verdes integradas",
     size: "wide",
   },
 ];
@@ -79,10 +79,10 @@ export default function AmenitiesSection() {
 
         <div className={styles.trustRow}>
           {[
-            { num: "5,000+", label: "Familias con Sadasi" },
-            { num: "30+", label: "Años de experiencia" },
-            { num: "3", label: "Desarrollos activos" },
-            { num: "4.9★", label: "Satisfacción de clientes" },
+            { num: "430,000+", label: "Viviendas entregadas" },
+            { num: "50", label: "Años de trayectoria" },
+            { num: "12", label: "Estados y 16 ciudades" },
+            { num: "2M+", label: "Personas en comunidades Sadasi" },
           ].map((t, i) => (
             <div key={i} className={styles.trustItem}>
               <span className={styles.trustNum}>{t.num}</span>

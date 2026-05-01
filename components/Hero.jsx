@@ -15,6 +15,8 @@ const WA_HREF =
 
 export default function Hero() {
   const [idx, setIdx] = useState(0);
+  // Opción B: sólo carga la primera imagen al inicio; las demás se añaden cuando el browser está idle
+  const [loadedCount, setLoadedCount] = useState(1);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -23,17 +25,30 @@ export default function Hero() {
     return () => clearInterval(t);
   }, []);
 
+  useEffect(() => {
+    const load = () => setLoadedCount(SLIDES.length);
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(load, { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    } else {
+      const t = setTimeout(load, 300);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
   return (
     <section id="top" className={styles.hero}>
       <div className={styles.bgLayer}>
-        {SLIDES.map((src, i) => (
-          <div
-            key={src}
-            className={`${styles.slide} ${i === idx ? styles.slideActive : ""}`}
-            style={{ backgroundImage: `url('${src}')` }}
-            aria-hidden="true"
-          />
-        ))}
+        {SLIDES.map((src, i) =>
+          i < loadedCount ? (
+            <div
+              key={src}
+              className={`${styles.slide} ${i === idx ? styles.slideActive : ""}`}
+              style={{ backgroundImage: `url('${src}')` }}
+              aria-hidden="true"
+            />
+          ) : null
+        )}
         <div className={styles.overlay} />
         <div className={styles.vignette} />
       </div>
@@ -41,7 +56,7 @@ export default function Hero() {
       <div className={`container ${styles.content}`}>
         <span className={styles.eyebrow}>
           <span className={styles.eyebrowDot} />
-          <strong>30+ AÑOS</strong>
+          <strong>50 AÑOS</strong>
           <span className={styles.eyebrowSep}>·</span>
           GRUPO SADASI
           <span className={styles.eyebrowSep}>·</span>
@@ -84,18 +99,18 @@ export default function Hero() {
 
         <div className={styles.trust}>
           <div className={styles.trustItem}>
-            <strong>5,000+</strong>
-            <span>Familias</span>
+            <strong>430,000+</strong>
+            <span>Viviendas entregadas</span>
           </div>
           <div className={styles.trustDivider} aria-hidden="true" />
           <div className={styles.trustItem}>
-            <strong>3</strong>
-            <span>Desarrollos</span>
+            <strong>12</strong>
+            <span>Estados</span>
           </div>
           <div className={styles.trustDivider} aria-hidden="true" />
           <div className={styles.trustItem}>
-            <strong>4.9★</strong>
-            <span>Reseñas</span>
+            <strong>15%</strong>
+            <span>Plusvalía anual</span>
           </div>
         </div>
       </div>

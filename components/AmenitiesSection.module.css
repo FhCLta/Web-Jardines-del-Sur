@@ -86,11 +86,16 @@
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Posicionamiento óptimo por tipo de tile */
+.tile_large .tileImg  { background-position: center 30%; }
+.tile_tall  .tileImg  { background-position: center 20%; }
+.tile_wide  .tileImg  { background-position: center 35%; }
+
 .tile:hover .tileImg {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .tileOverlay {
@@ -98,11 +103,26 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    transparent 35%,
-    rgba(8, 14, 28, 0.55) 70%,
-    rgba(8, 14, 28, 0.88) 100%
+    transparent 25%,
+    rgba(8, 14, 28, 0.45) 60%,
+    rgba(8, 14, 28, 0.92) 100%
   );
   transition: opacity 0.4s ease;
+}
+
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(209, 146, 0, 0);
+  transition: border-color 0.4s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.tile:hover::after {
+  border-color: rgba(209, 146, 0, 0.45);
 }
 
 .tileContent {
