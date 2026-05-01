@@ -1,0 +1,337 @@
+.container {
+  width: 100%;
+}
+
+/* Selector segmentado premium para desarrollos */
+.devSelector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 0 auto 2.5rem;
+  padding: 0.5rem;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 1.1rem;
+  max-width: 720px;
+}
+
+.devCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.85rem 0.4rem 0.95rem;
+  border: none;
+  background: transparent;
+  border-radius: 0.85rem;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-montserrat);
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.35s ease;
+  isolation: isolate;
+  min-height: 92px;
+}
+
+.devCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid transparent;
+  transition: border-color 0.3s ease;
+  pointer-events: none;
+}
+
+.devCard:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.devCardImage {
+  position: relative;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  z-index: 1;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.15);
+  transition: transform 0.35s ease, border-color 0.3s ease;
+}
+
+.devCardName {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Estado activo */
+.devCardActive {
+  background: #fff;
+  box-shadow: 0 14px 28px -16px rgba(15, 23, 42, 0.25),
+    0 0 0 2px rgba(209, 146, 0, 0.55);
+  transform: translateY(-2px);
+}
+
+.devCardActive::before {
+  border-color: rgba(209, 146, 0, 0.15);
+}
+
+.devCardActive .devCardImage {
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.devCardActive::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-right: 2px solid rgba(209, 146, 0, 0.55);
+  border-bottom: 2px solid rgba(209, 146, 0, 0.55);
+  transform: translateX(-50%) rotate(45deg);
+  border-bottom-right-radius: 3px;
+  z-index: -1;
+}
+
+.tabPanel {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.quickSummary {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.summaryCard {
+  position: relative;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 6px 16px -10px rgba(15, 23, 42, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.summaryCard::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient-gold);
+  opacity: 0.85;
+}
+
+.summaryCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 30px -16px rgba(15, 23, 42, 0.22);
+  border-color: rgba(209, 146, 0, 0.3);
+}
+
+.summaryCard p {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-family: var(--font-montserrat);
+}
+
+.summaryCard strong {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 1.15rem;
+  color: var(--primary);
+  font-family: var(--font-montserrat);
+  letter-spacing: -0.01em;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .devCardName {
+    font-size: 0.85rem;
+  }
+  .devCardImage {
+    width: 48px;
+    height: 48px;
+  }
+  .devCard {
+    padding: 1rem 0.6rem 1.1rem;
+    min-height: 110px;
+  }
+}
+
+@media (max-width: 767px) {
+  .summaryCard {
+    text-align: center;
+    padding: 1rem 0.9rem;
+  }
+
+  .summaryCard::before {
+    left: 0;
+    right: 0;
+    bottom: auto;
+    top: 0;
+    width: 100%;
+    height: 3px;
+  }
+
+  .summaryCard p {
+    font-size: 0.65rem;
+  }
+
+  .summaryCard strong {
+    font-size: 1.05rem;
+  }
+
+  .tabsWrapper {
+    margin-bottom: 1.75rem;
+  }
+
+  .tabBtn {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .quickSummary {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+  background-color: var(--surface);
+  border-radius: 1rem;
+  border: 1px dashed #CBD5E0;
+}
+
+/* Dynamic Amenities Section */
+.amenitiesSection {
+  margin-top: 5rem;
+  padding-top: 5rem;
+  border-top: 1px solid #E2E8F0;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.sectionHeader span {
+  display: block;
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+}
+
+.sectionHeader h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader p {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.amenitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+.amenityCard {
+  border-radius: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.amenityCard:hover {
+  transform: translateY(-10px);
+}
+
+.amenityImage {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.amenityContent {
+  padding: 1.5rem;
+}
+
+.amenityContent h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.amenityContent p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .amenitiesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .amenitiesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

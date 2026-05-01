@@ -1,0 +1,287 @@
+{
+  "inventory_stitch_2026": [
+    {
+      "id": "jds6-capua",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Departamento Capua",
+      "precio": 1853830,
+      "metros_construccion": 85.34,
+      "metros_terreno": null,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, Baño completo"},
+        {"nivel": 2, "desc": "Recámara principal con baño, 2 Recámaras secundarias"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2 Baños", "Smart Home Ready", "Doble Filtro"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/capua",
+      "images": [
+        "/jardines/Modelo Capua/1.webp",
+        "/jardines/Modelo Capua/2.webp",
+        "/jardines/Modelo Capua/3.webp",
+        "/jardines/Modelo Capua/4.webp",
+        "/jardines/Modelo Capua/5.webp",
+        "/jardines/Modelo Capua/6.webp"
+      ]
+    },
+    {
+      "id": "jds6-cedro-plus",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Departamento Cedro Plus",
+      "precio": 2100000,
+      "metros_construccion": 104.00,
+      "metros_terreno": null,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Patio"},
+        {"nivel": 2, "desc": "Recámara principal con baño, 2 Recámaras secundarias"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/cedro-plus",
+      "images": [
+        "/jardines/Modelo Cedro Plus/1.webp",
+        "/jardines/Modelo Cedro Plus/2.webp",
+        "/jardines/Modelo Cedro Plus/3.webp",
+        "/jardines/Modelo Cedro Plus/4.webp",
+        "/jardines/Modelo Cedro Plus/5.webp",
+        "/jardines/Modelo Cedro Plus/6.webp"
+      ]
+    },
+    {
+      "id": "jds6-flamboyan",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Casa Flamboyán",
+      "precio": 2225850,
+      "metros_construccion": 89.00,
+      "metros_terreno": 90.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Recámara, Patio"},
+        {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño/vestidor, Recámara secundaria con baño"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Estancia TV"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/flamboyan",
+      "images": [
+        "/jardines/Modelo Flamboyan/1.webp",
+        "/jardines/Modelo Flamboyan/2.webp",
+        "/jardines/Modelo Flamboyan/3.webp",
+        "/jardines/Modelo Flamboyan/4.webp",
+        "/jardines/Modelo Flamboyan/5.webp"
+      ]
+    },
+    {
+      "id": "jds6-ceiba",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Casa Ceiba",
+      "precio": 2602050,
+      "metros_construccion": 120.00,
+      "metros_terreno": 90.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Patio"},
+        {"nivel": 2, "desc": "Recámara Principal con vestidor, Recámara secundaria"},
+        {"nivel": 3, "desc": "Estancia TV, Recámara con baño, Roof Garden"}
+      ],
+      "amenidades_key": ["3 Recámaras", "3 Niveles", "3.5 Baños", "Roof Garden", "Estancia TV"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/ceiba-2",
+      "images": [
+        "/jardines/Modelo Ceiba/1.webp",
+        "/jardines/Modelo Ceiba/2.webp",
+        "/jardines/Modelo Ceiba/3.webp",
+        "/jardines/Modelo Ceiba/4.webp",
+        "/jardines/Modelo Ceiba/5.webp",
+        "/jardines/Modelo Ceiba/6.webp",
+        "/jardines/Modelo Ceiba/7.webp"
+      ]
+    },
+    {
+      "id": "jds6-tabachin",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Casa Tabachín",
+      "precio": 2664750,
+      "metros_construccion": 116.04,
+      "metros_terreno": 120.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Patio"},
+        {"nivel": 2, "desc": "Recámara principal con baño y vestidor, 2 Recámaras secundarias, Baño completo"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/tabachin",
+      "images": [
+        "/jardines/Modelo Tabachin/1.webp",
+        "/jardines/Modelo Tabachin/2.webp",
+        "/jardines/Modelo Tabachin/3.webp",
+        "/jardines/Modelo Tabachin/4.webp",
+        "/jardines/Modelo Tabachin/5.webp",
+        "/jardines/Modelo Tabachin/6.webp"
+      ]
+    },
+    {
+      "id": "jds6-noni",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Casa Noni",
+      "precio": 3161125,
+      "metros_construccion": 157.20,
+      "metros_terreno": 120.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Patio"},
+        {"nivel": 2, "desc": "Recámara principal con vestidor, 2 Recámaras secundarias, Sala TV"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Sala TV", "Estacionamiento 2 autos"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni",
+      "images": [
+        "/jardines/Modelo Noni/1.webp",
+        "/jardines/Modelo Noni/2.webp",
+        "/jardines/Modelo Noni/3.webp",
+        "/jardines/Modelo Noni/4.webp",
+        "/jardines/Modelo Noni/5.webp",
+        "/jardines/Modelo Noni/6.webp",
+        "/jardines/Modelo Noni/7.webp"
+      ]
+    },
+    {
+      "id": "larioja2-fresno",
+      "development": "La Rioja 2",
+      "status": "Preventa",
+      "nombre_modelo": "Casa Fresno Elite",
+      "precio": 4446997,
+      "metros_construccion": 194.80,
+      "metros_terreno": 120.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Cuarto de lavado"},
+        {"nivel": 2, "desc": "Recámara principal, 2 Recámaras secundarias, Área TV"},
+        {"nivel": 3, "desc": "Estancia TV, Baño completo, Terraza al frente"}
+      ],
+      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Terraza", "Cuarto de lavado"],
+      "url_recorrido_virtual": "https://my.matterport.com/show/?m=x62HpdD1L5u",
+      "images": [
+        "/larioja2/Casa Fresno Elite/1.webp",
+        "/larioja2/Casa Fresno Elite/2.webp",
+        "/larioja2/Casa Fresno Elite/3.webp",
+        "/larioja2/Casa Fresno Elite/4.webp",
+        "/larioja2/Casa Fresno Elite/5.webp",
+        "/larioja2/Casa Fresno Elite/6.webp",
+        "/larioja2/Casa Fresno Elite/7.webp",
+        "/larioja2/Casa Fresno Elite/8.webp",
+        "/larioja2/Casa Fresno Elite/9.webp",
+        "/larioja2/Casa Fresno Elite/10.webp"
+      ]
+    },
+    {
+      "id": "larioja2-alamo",
+      "development": "La Rioja 2",
+      "status": "Preventa",
+      "nombre_modelo": "Casa Modelo Alamo",
+      "precio": 4436025,
+      "metros_construccion": 200.00,
+      "metros_terreno": 150.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Cuarto de lavado"},
+        {"nivel": 2, "desc": "Recámara principal con baño, 2da y 3ra recámara con baño, Terraza"}
+      ],
+      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Terraza", "Cuarto de lavado"],
+      "url_recorrido_virtual": "https://my.matterport.com/show/?m=vQmF3ZiR427",
+      "images": [
+        "/larioja2/Casa Modelo Alamo/1.webp",
+        "/larioja2/Casa Modelo Alamo/2.webp",
+        "/larioja2/Casa Modelo Alamo/3.webp",
+        "/larioja2/Casa Modelo Alamo/4.webp",
+        "/larioja2/Casa Modelo Alamo/5.webp",
+        "/larioja2/Casa Modelo Alamo/6.webp",
+        "/larioja2/Casa Modelo Alamo/7.webp",
+        "/larioja2/Casa Modelo Alamo/8.webp",
+        "/larioja2/Casa Modelo Alamo/9.webp",
+        "/larioja2/Casa Modelo Alamo/10.webp",
+        "/larioja2/Casa Modelo Alamo/11.webp",
+        "/larioja2/Casa Modelo Alamo/12.webp"
+      ]
+    },
+    {
+      "id": "larioja2-noni-elite",
+      "development": "La Rioja 2",
+      "status": "Preventa",
+      "nombre_modelo": "Casa Noni Elite",
+      "precio": 4294950,
+      "metros_construccion": 191.70,
+      "metros_terreno": 150.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina integral, 1/2 Baño, Cuarto de lavado"},
+        {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño y vestidor, 2 secundarias con baño compartido"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Estancia TV", "Cuarto de lavado"],
+      "url_recorrido_virtual": "https://my.matterport.com/show/?m=iCAizJbUAuS",
+      "images": [
+        "/larioja2/Casa Noni Elite/1_new.png",
+        "/larioja2/Casa Noni Elite/2.webp",
+        "/larioja2/Casa Noni Elite/3.webp",
+        "/larioja2/Casa Noni Elite/4.webp",
+        "/larioja2/Casa Noni Elite/5.webp",
+        "/larioja2/Casa Noni Elite/6.webp",
+        "/larioja2/Casa Noni Elite/7.webp",
+        "/larioja2/Casa Noni Elite/8.webp",
+        "/larioja2/Casa Noni Elite/9.webp",
+        "/larioja2/Casa Noni Elite/10.webp",
+        "/larioja2/Casa Noni Elite/11.webp"
+      ]
+    },
+    {
+      "id": "larioja2-noni",
+      "development": "La Rioja 2",
+      "status": "Preventa",
+      "nombre_modelo": "Casa Noni",
+      "precio": 4049375,
+      "metros_construccion": 156.70,
+      "metros_terreno": 120.00,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Cuarto de lavado"},
+        {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño/vestidor, Recámara secundaria con baño"}
+      ],
+      "amenidades_key": ["2 Recámaras", "2.5 Baños", "Estancia TV", "Cuarto de lavado"],
+      "url_recorrido_virtual": "https://my.matterport.com/show/?m=TnGVL9aSTvY",
+      "images": [
+        "/larioja2/Casa noni/1.webp",
+        "/larioja2/Casa noni/2.webp",
+        "/larioja2/Casa noni/3.webp",
+        "/larioja2/Casa noni/4.webp",
+        "/larioja2/Casa noni/5.webp",
+        "/larioja2/Casa noni/6.webp",
+        "/larioja2/Casa noni/7.webp",
+        "/larioja2/Casa noni/8.webp",
+        "/larioja2/Casa noni/9.webp",
+        "/larioja2/Casa noni/10.webp",
+        "/larioja2/Casa noni/11.webp"
+      ]
+    },
+    {
+      "id": "lirios2-blanco",
+      "development": "Lirios Residencial 2",
+      "status": "Próximamente",
+      "nombre_modelo": "Depto Lirio Blanco",
+      "precio": 1850000,
+      "metros_construccion": 80.00,
+      "metros_terreno": null,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, Cuarto de lavado, 2 Recámaras, 2 Baños"}
+      ],
+      "amenidades_key": ["2 Recámaras", "2 Baños", "Alberca Resort", "Gimnasio Equipado"],
+      "url_recorrido_virtual": "#",
+      "images": ["/placeholder-lirios.jpg"]
+    },
+    {
+      "id": "lirios2-azul",
+      "development": "Lirios Residencial 2",
+      "status": "Próximamente",
+      "nombre_modelo": "Depto Lirio Azul",
+      "precio": 2100000,
+      "metros_construccion": 95.00,
+      "metros_terreno": null,
+      "levels": [
+        {"nivel": 1, "desc": "Sala, Comedor, Cocina, Cuarto de lavado, 3 Recámaras, 2 Baños"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2 Baños", "Alberca Resort", "Gimnasio Equipado"],
+      "url_recorrido_virtual": "#",
+      "images": ["/placeholder-lirios.jpg"]
+    }
+  ]
+}
