@@ -150,6 +150,8 @@
     border-color 0.25s ease;
   z-index: 90;
   position: relative;
+  justify-self: end;
+  grid-column: 3;
 }
 
 .header:not(.scrolled) .burger {
