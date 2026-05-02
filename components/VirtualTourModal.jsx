@@ -4,6 +4,22 @@ import React, { useEffect } from 'react';
 import styles from './VirtualTourModal.module.css';
 
 export default function VirtualTourModal({ onClose, property }) {
+  const getWhatsAppText = () => {
+    let nameLower = property.nombre_modelo.toLowerCase();
+    let text = property.nombre_modelo;
+    let prefix = "la propiedad";
+    if (nameLower.startsWith("casa modelo ")) {
+      prefix = "la casa modelo"; text = property.nombre_modelo.substring(12);
+    } else if (nameLower.startsWith("casa ")) {
+      prefix = "la casa modelo"; text = property.nombre_modelo.substring(5);
+    } else if (nameLower.startsWith("departamento modelo ")) {
+      prefix = "el departamento modelo"; text = property.nombre_modelo.substring(20);
+    } else if (nameLower.startsWith("departamento ")) {
+      prefix = "el departamento modelo"; text = property.nombre_modelo.substring(13);
+    }
+    return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.`;
+  };
+
   // Prevent scrolling when modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -38,7 +54,7 @@ export default function VirtualTourModal({ onClose, property }) {
         </div>
         <div className={styles.footer}>
           <p>¿Te interesa este modelo?</p>
-          <a href={`https://wa.me/529982059044?text=${encodeURIComponent(`Hola, quiero cotizar el modelo ${property.nombre_modelo}.`)}`} target="_blank" rel="noreferrer" className="btn btn-primary">
+          <a href={`https://wa.me/529982059044?text=${encodeURIComponent(getWhatsAppText())}`} target="_blank" rel="noreferrer" className="btn btn-primary">
             Solicitar Cotización
           </a>
         </div>

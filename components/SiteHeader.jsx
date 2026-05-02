@@ -19,8 +19,10 @@ export default function SiteHeader() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    document.body.classList.toggle("drawer-open", open);
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("drawer-open");
     };
   }, [open]);
 
@@ -36,13 +38,14 @@ export default function SiteHeader() {
           </a>
 
           <nav className={styles.navDesktop} aria-label="Navegación principal">
-            <a href="#desarrollos">Desarrollos</a>
-            <a href="#modelos">Modelos</a>
+            <a href="#top">Inicio</a>
+            <a href="#desarrollos">Modelos y Precios</a>
             <a href="#contacto">Contacto</a>
-            <a href={WA_HREF} className={`btn btn-primary ${styles.ctaBtn}`}>
-              Informes WhatsApp
-            </a>
           </nav>
+
+          <a href={WA_HREF} className={`btn btn-primary ${styles.ctaBtn}`}>
+            Informes WhatsApp
+          </a>
 
           <button
             type="button"
@@ -65,10 +68,10 @@ export default function SiteHeader() {
         aria-hidden={!open}
       >
         <nav className={styles.drawerNav}>
-          <a href="#desarrollos" onClick={closeAndGo}>
-            <span className={styles.drawerNum}>01</span>Desarrollos
+          <a href="#top" onClick={closeAndGo}>
+            <span className={styles.drawerNum}>01</span>Inicio
           </a>
-          <a href="#modelos" onClick={closeAndGo}>
+          <a href="#desarrollos" onClick={closeAndGo}>
             <span className={styles.drawerNum}>02</span>Modelos y Precios
           </a>
           <a href="#contacto" onClick={closeAndGo}>

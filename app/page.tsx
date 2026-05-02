@@ -30,9 +30,10 @@ export default async function Home() {
           <div className={styles.sectionHeader}>
             <span className="text-accent">Inventario y Precios</span>
             <h2>Modelos Disponibles en Cancún</h2>
-            <p>Compara Jardines del Sur 6, La Rioja 2 y Lirios 2. Selecciona un desarrollo y solicita informes por WhatsApp en minutos.</p>
+            <p>Explora los modelos disponibles en Jardines del Sur 6, La Rioja 2 y Lirios 2.</p>
           </div>
 
+          <div id="desarrollos" style={{scrollMarginTop: '72px'}} />
           <DevelopmentTabs inventoryData={inventoryData} />
         </div>
       </section>

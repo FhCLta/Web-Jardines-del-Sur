@@ -174,10 +174,10 @@ export default function PropertyCard({ property }) {
           </div>
 
           <div className={styles.levels}>
-            <h4>Distribución:</h4>
+            <h4>{property.id === 'jds6-capua' ? 'Distribución de todos los niveles:' : 'Distribución:'}</h4>
             <ul>
               {property.levels && property.levels.map((level, i) => (
-                <li key={i}><strong>Nivel {level.nivel}:</strong> {level.desc}</li>
+                <li key={i}>{property.levels.length > 1 && <strong>Nivel {level.nivel}: </strong>}{level.desc}</li>
               ))}
             </ul>
           </div>
@@ -195,15 +195,15 @@ export default function PropertyCard({ property }) {
               target="_blank"
               rel="noreferrer"
             >
-              Cotizar
+              Cotizar ahora
             </a>
           </div>
 
           {isJardinesCard && (
             <div className={styles.legalLegend}>
-              <p><strong>*</strong> No incluye gastos de escrituracion.</p>
-              <p><strong>**</strong> Actualizacion a febrero del 2026.</p>
-              <p><strong>***</strong> Lote tipo. Esquina o con terreno excedente varia el costo.</p>
+              <p><strong>*</strong> Precio no incluye gastos de escrituración</p>
+              <p><strong>**</strong> Actualizado a FEBRERO DEL 2026</p>
+              {property.metros_terreno && <p><strong>****</strong> Lote tipo. Esquina o excedente varía el costo.</p>}
             </div>
           )}
         </div>

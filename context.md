@@ -1,7 +1,7 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
-> **Última actualización:** 1 de mayo de 2026 (sesión 3)  
-> **Estado:** Fases A–D completas + pulido visual + performance + datos institucionales. Fase E pendiente.
+> **Última actualización:** 1 de mayo de 2026 (sesión 4)  
+> **Estado:** Fases A–D completas + distribución de niveles actualizada + CTAs optimizados + nav centrado. Fase E pendiente.
 
 ---
 
@@ -39,19 +39,17 @@
 ### Componentes activos
 | Archivo | Descripción |
 |---|---|
-| `app/page.tsx` | Server component. Importa: `SiteHeader`, `Hero`, `DevelopmentTabs`, `AmenitiesSection`, footer inline, `FloatingWhatsApp` (**MobileStickyWhatsApp eliminado** — era redundante con el FAB flotante) |
+| `app/page.tsx` | Server component. Importa: `SiteHeader`, `Hero`, `DevelopmentTabs`, `AmenitiesSection`, footer inline, `FloatingWhatsApp`. Subtítulo sección modelos: "Explora los modelos disponibles en Jardines del Sur 6, La Rioja 2 y Lirios 2." Ancla `<div id="desarrollos">` añadida justo antes de DevelopmentTabs con `scrollMarginTop: 72px` |
 | `app/layout.tsx` | Fonts (Montserrat, Lato, Playfair Display), className incluye `${playfair.variable}` |
 | `app/globals.css` | Tokens, `.btn` shimmer hover, `.btn-primary` sólido dorado, `.glass` blur(14px) |
 | `app/page.module.css` | Footer premium oscuro, sectionHeader, inventory section |
-| `components/SiteHeader.jsx/.module.css` | Header glass scroll + hamburger drawer mobile. z-index: 120. Drawer z-index: 115 |
-| `components/Hero.jsx/.module.css` | 4 slides Ken Burns, eyebrow pulsante, título Playfair, trust strip, scrollHint |
-| `components/DevelopmentTabs.jsx/.module.css` | Selector segmentado 3 cols (foto circular + nombre), quickSummary, grid de PropertyCards. Sección old amenidades **ELIMINADA** |
-| `components/PropertyCard.jsx/.module.css` | Badge status pulsante, imagen 75%, título Playfair, priceBlock "DESDE $X", statsRow iconos, lightbox via `createPortal` al `document.body` (z-index 9999). **CTAs intocables** |
-| `components/AmenitiesSection.jsx/.module.css` | **NUEVA Fase D.** Fondo navy oscuro, grid masonry 12 cols, 6 tiles (large/tall/wide/normal), trust row stats dorados |
-| `components/FloatingWhatsApp.jsx/.module.css` | Dark/gold tooltip Golden Scissors style, cycling 2s/3s/0.5s, ping aura, FAB bottom:5rem mobile |
-| `components/MobileStickyWhatsApp.jsx/.module.css` | **OBSOLETO** — archivo existe pero ya NO se importa en page.tsx. Era la barra verde sticky inferior que resultó redundante |
-| `components/VirtualTourModal.jsx/.module.css` | Modal de recorrido 360°. **Fix aplicado:** WhatsApp `529982059044`, `useEffect` body class toggle, z-index overlay 9000, closeBtn 44×44 |
-| `components/SiteHeader.module.css` | Se oculta con `:global(body.modal-open) .header { display:none }` para no tapar la X del modal en mobile |
+| `components/SiteHeader.jsx/.module.css` | Header glass scroll + hamburger drawer mobile. Nav desktop: **3 columnas grid** (logo izq · links centrados · botón der). Links: **Inicio · Modelos y Precios · Contacto**. Botón "Informes WhatsApp" separado del nav (fuera del `<nav>`). z-index: 120. Drawer z-index: 115 |
+| `components/Hero.jsx/.module.css` | 4 slides Ken Burns, eyebrow pulsante, título Playfair, trust strip, scrollHint. CTA primario: **"Ver Modelos y Precios"** → `#desarrollos`. CTA secundario: **"Hablar con un asesor"** → WA |
+| `components/DevelopmentTabs.jsx/.module.css` | Selector segmentado 3 cols. `id="desarrollos"` removido (ahora está en page.tsx) |
+| `components/PropertyCard.jsx/.module.css` | Encabezado distribución: `"Distribución de todos los niveles:"` solo en Capua, `"Distribución:"` en el resto. Etiqueta "Nivel N:" solo aparece si hay más de 1 nivel (`levels.length > 1`). CTA: **"Cotizar ahora"** (antes "Cotizar"). Legal legend: `***` nota de lote tipo oculta cuando `metros_terreno === null` (departamentos). Textos legales actualizados: "Precio no incluye gastos de escrituración", "Actualizado a FEBRERO DEL 2026", "Lote tipo. Esquina o excedente varía el costo." |
+| `components/VirtualTourModal.jsx/.module.css` | Mensaje WA sincronizado con PropertyCard: usa `getWhatsAppText()` con la misma lógica inteligente de prefijo (casa modelo / departamento modelo) |
+| `components/AmenitiesSection.jsx/.module.css` | Masonry navy/gold, 6 tiles con imágenes de `/amenidades/` |
+| `components/FloatingWhatsApp.jsx/.module.css` | Dark/gold tooltip, FAB bottom:5rem mobile |
 
 ---
 
@@ -108,14 +106,27 @@
 
 ---
 
-## 6. Datos de Inventario
-| Desarrollo | Modelos | Precio desde |
-|---|---|---|
-| Jardines del Sur 6 | Capua, Cedro Plus, Flamboyán, Ceiba, Tabachín, Noni | $1,853,830 |
-| La Rioja 2 | Fresno Elite, Alamo, Noni Elite, Noni | — |
-| Lirios Residencial 2 | — (Próximamente) | — |
+## 6. Datos de Inventario — Distribución actualizada sesión 4
 
-**Fix aplicado:** Casa Ceiba en `inventory.json` ahora tiene `"3 Recámaras"` en `amenidades_key` para mostrar los 4 stats correctamente.
+| Desarrollo | Modelo | Niveles | Estado |
+|---|---|---|---|
+| Jardines del Sur 6 | Departamento Capua | 1 nivel (depto) | ✅ actualizado |
+| Jardines del Sur 6 | Departamento Cedro Plus | 1 nivel (depto) | ✅ actualizado |
+| Jardines del Sur 6 | Casa Flamboyán | PB + PA (2 niveles) | ✅ actualizado |
+| Jardines del Sur 6 | Casa Ceiba | PB + 1er + 3er nivel | ✅ actualizado |
+| Jardines del Sur 6 | Casa Tabachín | PB + PA (2 niveles) | ✅ actualizado |
+| Jardines del Sur 6 | Casa Noni | PB + PA (2 niveles) | ✅ actualizado |
+| La Rioja 2 | Casa Fresno Elite | — | ⏳ pendiente sesión 5 |
+| La Rioja 2 | Casa Modelo Alamo | — | ⏳ pendiente sesión 5 |
+| La Rioja 2 | Casa Noni Elite | — | ⏳ pendiente sesión 5 |
+| La Rioja 2 | Casa Noni | — | ⏳ pendiente sesión 5 |
+| Lirios Residencial 2 | Lirio Blanco / Lirio Azul | — | ⏳ pendiente fotos y datos |
+
+**Regla de encabezado distribución:**
+- Solo `jds6-capua` → `"Distribución de todos los niveles:"`
+- Resto → `"Distribución:"`
+- Etiqueta `"Nivel N:"` → solo cuando `levels.length > 1`
+- Nota `****` lote tipo → solo cuando `metros_terreno !== null`
 
 ---
 
@@ -158,18 +169,23 @@
 | Datos institucionales Sadasi | ✅ | Hero eyebrow 50 AÑOS, trust 430k/12 estados/15% plusvalía; AmenitiesSection trust row actualizado; footer tagline; meta description SEO |
 | Optimización de performance | ✅ | Hero Opción B (lazy slides idle), PropertyCard `<img>` → `<Image fill>`, next.config.ts Cache-Control + AVIF, `<link rel=preload>` primera imagen hero |
 | AmenitiesSection imágenes | ✅ | Reimplementada con 6 imágenes de `/amenidades/`: alberca (Jardines), gimnasio1, área infantil, cancha, gimnasio exterior, Vista aerea1 (La Rioja 2) |
+| **Sesión 4 — Distribución** | ✅ | Todos los niveles de Jardines del Sur 6 actualizados. Encabezado inteligente. Etiqueta "Nivel N:" condicional. Nota lote tipo condicional por terreno |
+| **Sesión 4 — CTAs y Nav** | ✅ | Hero: "Hablar con un asesor" + "Ver Modelos y Precios". Cards: "Cotizar ahora". Nav: Inicio · Modelos y Precios · Contacto centrados (grid 3 cols). Ancla `#desarrollos` en page.tsx |
+| **Sesión 4 — VirtualTourModal WA** | ✅ | Mensaje WA del modal sincronizado con lógica de PropertyCard (`getWhatsAppText()`) |
 | **Fase E** | ⏳ | Reveal-on-scroll Intersection Observer + micro-animaciones |
+| Distribución La Rioja 2 | ⏳ | Pendiente para sesión 5 |
 | Fotos Lirios 2 | ⏳ | Pendiente de recibir imágenes |
 | SEO / Analytics | ⏳ | Diferido por solicitud del usuario |
 
 ---
 
 ## 9. Notas Importantes para Continuar
-1. **No tocar CTAs de PropertyCard** — "Visita Virtual" y "Cotizar" están bloqueados por instrucción del usuario
-2. **Fase E** es el siguiente paso: `IntersectionObserver` en tarjetas, sectionHeader, amenidades tiles — entrada suave desde abajo con `opacity 0→1` + `translateY(24px→0)`
-3. El dev server puede requerir `npm run dev` en `D:/Web de Jardines` — los terminales anteriores tienen Exit Code 1
-4. Verificar siempre en mobile (390×844) Y desktop (1366×900) tras cada cambio visual
-5. Usar `createPortal` para cualquier modal/overlay que necesite escapar del stacking context
-6. Para ocultar chrome (header, sticky bars) cuando hay modal: usar `body.modal-open` class + `:global(body.modal-open) .selector { display: none }` en el módulo CSS correspondiente — evita prop drilling
-7. Para especificidad en media queries: usar `.parent.modifier` en lugar de solo `.modifier` para vencer reglas del breakpoint padre
-8. `MobileStickyWhatsApp` está obsoleto pero el archivo se conserva. No reimportar en page.tsx.
+1. **No tocar CTAs de PropertyCard** — "Visita Virtual" y "Cotizar ahora" están bloqueados por instrucción del usuario
+2. **Distribución La Rioja 2** — pendiente para sesión 5 (Fresno Elite, Alamo, Noni Elite, Noni)
+3. **Fase E** es el siguiente paso mayor: `IntersectionObserver` en tarjetas, sectionHeader, amenidades tiles — entrada suave desde abajo con `opacity 0→1` + `translateY(24px→0)`
+4. El dev server puede requerir `npm run dev` en `D:/Web de Jardines` — verificar con `curl http://localhost:3000`
+5. Verificar siempre en mobile (390×844) Y desktop (1366×900) tras cada cambio visual
+6. Para ocultar chrome cuando hay modal: `body.modal-open` class + `:global(body.modal-open) .selector { display: none }` en el módulo CSS
+7. `MobileStickyWhatsApp` está obsoleto — no reimportar en page.tsx
+8. El browser interno de VS Code tiene caché agresivo — usar Chrome/Edge externo con Ctrl+Shift+R para ver cambios en tiempo real
+9. **SiteHeader grid:** `grid-template-columns: 1fr auto 1fr`. Logo: `justify-self: start`. ctaBtn (fuera del nav): `justify-self: end`. Nav: `justify-content: center`. No mover ctaBtn dentro del nav.

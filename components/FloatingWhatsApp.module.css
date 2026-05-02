@@ -193,6 +193,13 @@
   }
 }
 
+/* Ocultar cuando el drawer mobile está abierto */
+:global(body.drawer-open) .wrapper {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
 /* Mobile: tooltip más pequeño y suave */
 @media (max-width: 767px) {
   .wrapper {

@@ -45,7 +45,7 @@ export default function DevelopmentTabs({ inventoryData }) {
   };
 
   return (
-    <div className={styles.container} id="desarrollos">
+    <div className={styles.container}>
       <div className={styles.devSelector} role="tablist" aria-label="Selecciona desarrollo">
         {developments.map((dev) => {
           const props = inventoryData.filter((p) => p.development === dev);
