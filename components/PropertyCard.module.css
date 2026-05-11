@@ -104,11 +104,11 @@
   left: -10%;
   width: 120%;
   height: 120%;
-  background-size: cover;
-  background-position: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.96), rgba(247, 245, 240, 0.68) 42%, rgba(232, 226, 214, 0.78) 100%);
   filter: blur(22px) brightness(1.18);
   opacity: 0.55;
-  transition: background-image 0.3s ease-in-out, transform 0.6s ease;
+  transition: transform 0.6s ease;
   z-index: 1;
 }
 

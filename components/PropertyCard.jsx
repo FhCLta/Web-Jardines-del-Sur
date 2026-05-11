@@ -83,12 +83,7 @@ export default function PropertyCard({ property }) {
     <>
       <div className={`${styles.card} glass`}>
         <div className={styles.imageContainer} onClick={() => setIsLightboxOpen(true)}>
-          <div 
-            className={styles.imageBackground} 
-            style={{ 
-              backgroundImage: `url('${images[currentImgIndex]}')`
-            }}
-          />
+          <div className={styles.imageBackground} />
           <div className={styles.imageForeground}>
             <Image
               src={images[currentImgIndex]}
@@ -96,12 +91,9 @@ export default function PropertyCard({ property }) {
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
               style={{ objectFit: 'contain' }}
-              priority={currentImgIndex === 0}
+              loading="lazy"
             />
           </div>
-          {property.status && (
-            <span className={styles.statusBadge}>{property.status}</span>
-          )}
           {images.length > 1 && (
             <>
               <button className={styles.carouselBtnLeft} onClick={handlePrev}>‹</button>

@@ -4,37 +4,37 @@ import styles from './AmenitiesSection.module.css';
 
 const AMENITIES = [
   {
-    img: "/amenidades/alberca.webp",
+    img: "/optimized/amenidades/alberca.webp",
     label: "Alberca y Casa Club · Jardines del Sur",
     desc: "Alberca olímpica rodeada de jardines tropicales y casa club con área de convivencia",
     size: "large",
   },
   {
-    img: "/amenidades/gimnasio1.webp",
+    img: "/optimized/amenidades/gimnasio1.webp",
     label: "Gimnasio Equipado",
     desc: "Maquinaria Technogym de última generación con ventanales al jardín",
     size: "tall",
   },
   {
-    img: "/amenidades/area de juego infantil.webp",
+    img: "/optimized/amenidades/area-infantil.webp",
     label: "Área Infantil",
     desc: "Juegos, columpios y resbaladillas bajo palmeras y cielo abierto",
     size: "normal",
   },
   {
-    img: "/amenidades/cancha.webp",
+    img: "/optimized/amenidades/cancha.webp",
     label: "Cancha Deportiva",
     desc: "Pasto sintético profesional para fútbol y actividades al aire libre",
     size: "normal",
   },
   {
-    img: "/amenidades/gimnasio.webp",
+    img: "/optimized/amenidades/gimnasio.webp",
     label: "Gimnasio · Exterior",
     desc: "Acceso directo desde los jardines con estacionamiento exclusivo para residentes",
     size: "normal",
   },
   {
-    img: "/amenidades/Vista aerea1.webp",
+    img: "/optimized/amenidades/vista-aerea.webp",
     label: "Alberca y Casa Club · La Rioja 2",
     desc: "Vista aérea del complejo: alberca, casa club, jardines y áreas verdes integradas",
     size: "wide",

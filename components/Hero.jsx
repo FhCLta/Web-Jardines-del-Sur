@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 
 const SLIDES = [
-  "/jardines/Imagnes de amenidades y hero/alberca.webp",
-  "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
-  "/jardines/Imagnes de amenidades y hero/area de juego infantil.webp",
-  "/larioja2/Imagnes de amenidades y hero/Terraza.webp",
+  "/optimized/hero/alberca-desktop.webp",
+  "/optimized/hero/vista-aerea.webp",
+  "/optimized/hero/area-infantil.webp",
+  "/optimized/hero/terraza.webp",
 ];
+
+const HERO_MOBILE_IMAGE = "/optimized/hero/alberca-mobile.webp";
 
 const WA_HREF =
   "https://wa.me/529982059044?text=Hola,%20quiero%20informacion%20de%20modelos%20y%20precios%20en%20Cancun.";
@@ -39,7 +41,26 @@ export default function Hero() {
   return (
     <section id="top" className={styles.hero}>
       <div className={styles.bgLayer}>
+        <picture
+          className={`${styles.slide} ${styles.heroPicture} ${
+            idx === 0 ? styles.slideActive : ""
+          }`}
+        >
+          <source media="(max-width: 767px)" srcSet={HERO_MOBILE_IMAGE} />
+          <img
+            className={styles.heroImage}
+            src={SLIDES[0]}
+            alt=""
+            width="984"
+            height="656"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
+
         {SLIDES.map((src, i) =>
+          i === 0 ? null :
           i < loadedCount ? (
             <div
               key={src}

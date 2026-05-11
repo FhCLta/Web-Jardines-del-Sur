@@ -94,8 +94,16 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/jardines/Imagnes%20de%20amenidades%20y%20hero/alberca.webp"
+          href="/optimized/hero/alberca-mobile.webp"
           type="image/webp"
+          media="(max-width: 767px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/optimized/hero/alberca-desktop.webp"
+          type="image/webp"
+          media="(min-width: 768px)"
         />
       </head>
       <body>
