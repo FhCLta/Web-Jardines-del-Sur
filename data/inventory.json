@@ -1,6 +1,28 @@
 {
   "inventory_stitch_2026": [
     {
+      "id": "jds6-capua",
+      "development": "Jardines del Sur 6",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Departamento Capua",
+      "precio": 1853830,
+      "metros_construccion": 85.34,
+      "metros_terreno": null,
+      "levels": [
+        {"nivel": 1, "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet"}
+      ],
+      "amenidades_key": ["3 Recámaras", "2 Baños", "Smart Home Ready", "Doble Filtro"],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/capua",
+      "images": [
+        "/jardines/Modelo Capua/1.webp",
+        "/jardines/Modelo Capua/2.webp",
+        "/jardines/Modelo Capua/3.webp",
+        "/jardines/Modelo Capua/4.webp",
+        "/jardines/Modelo Capua/5.webp",
+        "/jardines/Modelo Capua/6.webp"
+      ]
+    },
+    {
       "id": "jds6-cedro-plus",
       "development": "Jardines del Sur 6",
       "status": "Preventa 2026",
