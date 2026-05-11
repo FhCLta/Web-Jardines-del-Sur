@@ -18,9 +18,79 @@ async function getInventory() {
 
 export default async function Home() {
   const inventoryData = await getInventory();
+  const siteUrl = 'https://jardinesdelsurcancun.mx';
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'RealEstateAgent',
+        '@id': `${siteUrl}/#business`,
+        name: 'Altta Homes Cancún',
+        alternateName: 'Jardines del Sur Cancún',
+        url: siteUrl,
+        telephone: '+529982059044',
+        foundingDate: '1975',
+        parentOrganization: {
+          '@type': 'Organization',
+          name: 'Grupo Sadasi',
+        },
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Av. 127 SM 342 MZ 27',
+          addressLocality: 'Cancún',
+          addressRegion: 'Quintana Roo',
+          postalCode: '77536',
+          addressCountry: 'MX',
+        },
+        areaServed: [
+          {
+            '@type': 'City',
+            name: 'Cancún',
+          },
+          {
+            '@type': 'Place',
+            name: 'Polígono Sur Cancún',
+          },
+        ],
+        sameAs: [
+          'https://maps.app.goo.gl/9sKBR1fUNSswv5d19',
+          'https://jardinesdelsur-cancun.web.app',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${siteUrl}/#website`,
+        url: siteUrl,
+        name: 'Jardines del Sur Cancún',
+        inLanguage: 'es-MX',
+        publisher: {
+          '@id': `${siteUrl}/#business`,
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${siteUrl}/#developments`,
+        name: 'Desarrollos en Polígono Sur Cancún',
+        itemListElement: [
+          'Jardines del Sur 6',
+          'La Rioja 2',
+          'Lirios Residencial 2',
+        ].map((name, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name,
+          url: `${siteUrl}/#desarrollos`,
+        })),
+      },
+    ],
+  };
 
   return (
     <div className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
 
       <Hero />

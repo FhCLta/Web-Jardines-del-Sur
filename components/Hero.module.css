@@ -133,14 +133,19 @@
   font-family: var(--font-display, "Playfair Display"), serif;
   font-weight: 600;
   font-size: clamp(2.4rem, 6.5vw, 5rem);
-  line-height: 1.05;
+  line-height: 1.02;
   letter-spacing: -0.02em;
   color: #fff;
   margin: 0;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
 }
 
+.titleLine {
+  display: block;
+}
+
 .title em {
+  display: inline-block;
   font-style: italic;
   font-weight: 500;
   color: var(--accent-2);
@@ -148,6 +153,14 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.title .trustTitle {
+  max-width: min(720px, 100%);
+  margin-top: 0.18rem;
+  font-size: clamp(1.55rem, 3.2vw, 2.7rem);
+  line-height: 1.08;
+  letter-spacing: 0;
 }
 
 .subtitle {
@@ -316,7 +329,16 @@
   }
 
   .title {
-    font-size: clamp(2.2rem, 9.5vw, 3.2rem);
+    font-size: clamp(2.05rem, 9vw, 3rem);
+    line-height: 1.03;
+  }
+
+  .title .trustTitle {
+    max-width: none;
+    margin-top: 0.16rem;
+    font-size: clamp(1.25rem, 5.5vw, 1.72rem);
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   .subtitle {

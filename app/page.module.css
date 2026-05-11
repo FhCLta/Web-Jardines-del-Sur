@@ -369,7 +369,7 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .page {
-    padding-bottom: 4.5rem;
+    padding-bottom: 0;
   }
 
   .header {
@@ -452,7 +452,15 @@
   }
 
   .footerContactItem {
-    justify-content: center;
+    width: min(100%, 330px);
+    margin-inline: auto;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+  }
+
+  .footerContactItem a,
+  .footerContactItem button {
     text-align: left;
   }
 

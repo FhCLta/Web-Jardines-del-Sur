@@ -64,13 +64,14 @@ export default function Hero() {
         </span>
 
         <h1 className={styles.title}>
-          Vive en Cancún<br />
-          <em>como te lo mereces</em>
+          <span className={styles.titleLine}>Casas y departamentos</span>
+          <span className={styles.titleLine}>en Cancún</span>
+          <em className={styles.trustTitle}>con el respaldo de Grupo Sadasi</em>
         </h1>
 
         <p className={styles.subtitle}>
           Casas y departamentos en <strong>Jardines del Sur 6</strong>,{" "}
-          <strong>La Rioja 2</strong> y <strong>Lirios Residencial</strong>.
+          <strong>La Rioja 2</strong> y <strong>Lirios Residencial 2</strong>.
           Inventario actualizado, precios reales, informes en minutos.
         </p>
 
