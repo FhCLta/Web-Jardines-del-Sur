@@ -10,17 +10,17 @@ export default function DevelopmentTabs({ inventoryData }) {
 
   const DEV_META = {
     "Jardines del Sur 6": {
-      image: "/jardines/Imagnes de amenidades y hero/alberca.webp",
+      image: "/optimized/dev-tabs/jardines-6.webp",
       tagline: "Familias y plusvalía",
       short: "Jardines 6",
     },
     "La Rioja 2": {
-      image: "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
+      image: "/optimized/dev-tabs/la-rioja-2.webp",
       tagline: "Exclusividad y confort",
       short: "La Rioja 2",
     },
     "Lirios Residencial 2": {
-      image: "/jardines/Imagnes de amenidades y hero/area de juego infantil.webp",
+      image: "/optimized/dev-tabs/lirios-2.webp",
       tagline: "Próximamente",
       short: "Lirios 2",
     },

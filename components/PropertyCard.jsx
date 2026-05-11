@@ -2,9 +2,27 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { createPortal } from 'react-dom';
-import VirtualTourModal from './VirtualTourModal';
 import styles from './PropertyCard.module.css';
+
+const VirtualTourModal = dynamic(() => import('./VirtualTourModal'), {
+  ssr: false,
+  loading: () => null,
+});
+
+const FIRST_IMAGE_THUMBS = {
+  '/jardines/Modelo Capua/1.webp': '/optimized/model-thumbs/jardines-Modelo-Capua-1.webp',
+  '/jardines/Modelo Cedro Plus/1.webp': '/optimized/model-thumbs/jardines-Modelo-Cedro-Plus-1.webp',
+  '/jardines/Modelo Flamboyan/1.webp': '/optimized/model-thumbs/jardines-Modelo-Flamboyan-1.webp',
+  '/jardines/Modelo Ceiba/1.webp': '/optimized/model-thumbs/jardines-Modelo-Ceiba-1.webp',
+  '/jardines/Modelo Tabachin/1.webp': '/optimized/model-thumbs/jardines-Modelo-Tabachin-1.webp',
+  '/jardines/Modelo Noni/1.webp': '/optimized/model-thumbs/jardines-Modelo-Noni-1.webp',
+  '/larioja2/Casa Fresno Elite/1.webp': '/optimized/model-thumbs/larioja2-Casa-Fresno-Elite-1.webp',
+  '/larioja2/Casa Modelo Alamo/1.webp': '/optimized/model-thumbs/larioja2-Casa-Modelo-Alamo-1.webp',
+  '/larioja2/Casa Noni Elite/1_new.png': '/optimized/model-thumbs/larioja2-Casa-Noni-Elite-1_new.webp',
+  '/larioja2/Casa noni/1.webp': '/optimized/model-thumbs/larioja2-Casa-noni-1.webp',
+};
 
 export default function PropertyCard({ property }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +44,9 @@ export default function PropertyCard({ property }) {
   const images = property.images && property.images.length > 0 
     ? property.images 
     : ['/placeholder-jds.jpg'];
+  const displayImage = currentImgIndex === 0
+    ? FIRST_IMAGE_THUMBS[images[0]] || images[0]
+    : images[currentImgIndex];
 
   const handlePrev = (e) => {
     e.stopPropagation();
@@ -86,7 +107,7 @@ export default function PropertyCard({ property }) {
           <div className={styles.imageBackground} />
           <div className={styles.imageForeground}>
             <Image
-              src={images[currentImgIndex]}
+              src={displayImage}
               alt={`${property.nombre_modelo} - imagen ${currentImgIndex + 1}`}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"

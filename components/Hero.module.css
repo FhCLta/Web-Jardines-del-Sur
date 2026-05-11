@@ -306,19 +306,20 @@
   content: "";
   position: absolute;
   left: -1px;
-  top: -36px;
+  top: 0;
   width: 3px;
   height: 36px;
   background: linear-gradient(180deg, transparent, var(--accent-2));
   animation: scrollDown 1.8s ease-in-out infinite;
+  transform: translateY(-100%);
 }
 
 @keyframes scrollDown {
   0% {
-    top: -36px;
+    transform: translateY(-100%);
   }
   100% {
-    top: 100%;
+    transform: translateY(100%);
   }
 }
 
@@ -398,6 +399,5 @@
   }
   .scrollArrow::after {
     height: 28px;
-    top: -28px;
   }
 }

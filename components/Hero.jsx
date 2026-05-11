@@ -28,14 +28,8 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    const load = () => setLoadedCount(SLIDES.length);
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      const id = window.requestIdleCallback(load, { timeout: 2000 });
-      return () => window.cancelIdleCallback(id);
-    } else {
-      const t = setTimeout(load, 300);
-      return () => clearTimeout(t);
-    }
+    const t = setTimeout(() => setLoadedCount(SLIDES.length), 4200);
+    return () => clearTimeout(t);
   }, []);
 
   return (
@@ -137,7 +131,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <a href="#modelos" className={styles.scrollHint} aria-label="Ver modelos">
+      <a href="#modelos" className={styles.scrollHint} aria-label="SCROLL a modelos">
         <span>SCROLL</span>
         <span className={styles.scrollArrow} aria-hidden="true" />
       </a>
