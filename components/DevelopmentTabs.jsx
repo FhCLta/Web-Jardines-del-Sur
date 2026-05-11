@@ -27,30 +27,22 @@ export default function DevelopmentTabs({ inventoryData }) {
   };
 
   const activeProperties = inventoryData.filter(prop => prop.development === activeTab);
-  const minPrice = activeProperties.length > 0
-    ? Math.min(...activeProperties.map((property) => property.precio))
-    : null;
+  const activePrices = activeProperties
+    .map((property) => property.precio)
+    .filter((price) => typeof price === 'number' && price > 0);
+  const minPrice = activePrices.length > 0 ? Math.min(...activePrices) : null;
 
   const totalAvailable = activeProperties.filter((property) => property.status !== 'Próximamente').length;
 
   const formatPrice = (price) => {
-    if (!price) return 'Por definir';
+    if (!price) return 'Precio por definir';
     return `$${price.toLocaleString('es-MX')} MXN`;
-  };
-
-  const compactPrice = (price) => {
-    if (!price) return null;
-    if (price >= 1000000) return `$${(price / 1000000).toFixed(2)}M`;
-    return `$${(price / 1000).toFixed(0)}K`;
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.devSelector} role="tablist" aria-label="Selecciona desarrollo">
         {developments.map((dev) => {
-          const props = inventoryData.filter((p) => p.development === dev);
-          const min = props.length > 0 ? Math.min(...props.map((p) => p.precio)) : null;
-          const count = props.filter((p) => p.status !== 'Próximamente').length;
           const meta = DEV_META[dev] || {};
           const isActive = activeTab === dev;
           return (

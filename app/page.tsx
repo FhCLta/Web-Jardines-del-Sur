@@ -5,6 +5,7 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import SiteHeader from '@/components/SiteHeader';
 import Hero from '@/components/Hero';
 import AmenitiesSection from '@/components/AmenitiesSection';
+import FooterPhoneContact from '@/components/FooterPhoneContact';
 import styles from './page.module.css';
 
 // Server component to read the inventory data
@@ -63,26 +64,28 @@ export default async function Home() {
           <div className={styles.footerLinks}>
             <h3>Navegación</h3>
             <ul>
+              <li><a href="#top">Inicio</a></li>
               <li><a href="#desarrollos">Desarrollos</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
               <li><a href="#contacto">Contacto</a></li>
               <li><a href="https://wa.me/529982059044">WhatsApp directo</a></li>
-              <li><a href="#">Aviso de Privacidad</a></li>
             </ul>
           </div>
           <div className={styles.footerContact}>
             <h3>Contacto</h3>
             <div className={styles.footerContactItem}>
               <span className={styles.footerContactIcon}>📍</span>
-              <span>Av. Huayacán SM 333, Cancún, Quintana Roo</span>
+              <a
+                href="https://maps.app.goo.gl/9sKBR1fUNSswv5d19"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.
+              </a>
             </div>
             <div className={styles.footerContactItem}>
               <span className={styles.footerContactIcon}>📞</span>
-              <span>+52 998 205 9044</span>
-            </div>
-            <div className={styles.footerContactItem}>
-              <span className={styles.footerContactIcon}>✉️</span>
-              <span>ventas@alttahomes.mx</span>
+              <FooterPhoneContact />
             </div>
           </div>
         </div>

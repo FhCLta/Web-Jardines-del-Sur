@@ -10,9 +10,6 @@ export default function PropertyCard({ property }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     if (!isLightboxOpen) return;
@@ -60,6 +57,11 @@ export default function PropertyCard({ property }) {
     }
 
     return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.`;
+  };
+
+  const formatPrice = (price) => {
+    if (!price) return 'Precio por definir';
+    return `$${price.toLocaleString('es-MX')}`;
   };
 
   // Parsea amenidades clave para extraer recámaras y baños
@@ -120,7 +122,7 @@ export default function PropertyCard({ property }) {
               <span className={styles.priceLabelTop}>Desde</span>
               <h3 className={styles.modelNameTitle}>{modelName}</h3>
               <span className={styles.priceBottom}>
-                ${property.precio.toLocaleString('es-MX')}
+                {formatPrice(property.precio)}
               </span>
             </div>
           ) : (
@@ -129,7 +131,7 @@ export default function PropertyCard({ property }) {
               <span className={styles.priceBlock}>
                 <span className={styles.priceLabel}>Desde</span>
                 <span className={styles.price}>
-                  ${property.precio.toLocaleString('es-MX')}
+                  {formatPrice(property.precio)}
                 </span>
               </span>
             </div>
@@ -174,7 +176,7 @@ export default function PropertyCard({ property }) {
           </div>
 
           <div className={styles.levels}>
-            <h4>{property.id === 'jds6-capua' ? 'Distribución de todos los niveles:' : 'Distribución:'}</h4>
+            <h4>Distribución:</h4>
             <ul>
               {property.levels && property.levels.map((level, i) => (
                 <li key={i}>{property.levels.length > 1 && <strong>Nivel {level.nivel}: </strong>}{level.desc}</li>
@@ -216,7 +218,7 @@ export default function PropertyCard({ property }) {
         />
       )}
 
-      {isLightboxOpen && mounted && createPortal(
+      {isLightboxOpen && createPortal(
         <div className={styles.lightboxOverlay} onClick={() => setIsLightboxOpen(false)}>
           <button
             className={styles.lightboxClose}
@@ -226,10 +228,12 @@ export default function PropertyCard({ property }) {
             ×
           </button>
           <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-            <img 
+            <Image
               src={images[currentImgIndex]} 
               alt={`Imagen ${currentImgIndex + 1} de ${property.nombre_modelo}`} 
-              className={styles.lightboxImage} 
+              fill
+              sizes="100vw"
+              className={styles.lightboxImage}
             />
             {images.length > 1 && (
               <>

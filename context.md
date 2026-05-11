@@ -1,5 +1,9 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **Nota Codex 11 mayo 2026:** proyecto revisado con guias locales de Next.js 16.2.4 en `node_modules/next/dist/docs/`; `npm.cmd run lint` OK; `npm.cmd run build` OK con red permitida para Google Fonts; dev server activo en `http://127.0.0.1:3000`. Ajustes menores: se limpiaron warnings de lint en `DevelopmentTabs.jsx`, se simplifico el portal/lightbox en `PropertyCard.jsx`, y Lirios usa `/amenidades/alberca2.webp` como placeholder existente para evitar 404/500 de imagen.
+
+> **Nota inventario 11 mayo 2026:** `jds6-capua` fue retirado del inventario hasta que esté disponible. `Lirios Residencial 2` queda con un solo modelo: **Departamento Cedro Plus**, mismo layout/fotos/recorrido que Jardines del Sur 6, precio desde **$2,248,750 MXN** y 2 cajones de estacionamiento.
+
 > **Última actualización:** 1 de mayo de 2026 (sesión 4)  
 > **Estado:** Fases A–D completas + distribución de niveles actualizada + CTAs optimizados + nav centrado. Fase E pendiente.
 
@@ -46,7 +50,7 @@
 | `components/SiteHeader.jsx/.module.css` | Header glass scroll + hamburger drawer mobile. Nav desktop: **3 columnas grid** (logo izq · links centrados · botón der). Links: **Inicio · Modelos y Precios · Contacto**. Botón "Informes WhatsApp" separado del nav (fuera del `<nav>`). z-index: 120. Drawer z-index: 115 |
 | `components/Hero.jsx/.module.css` | 4 slides Ken Burns, eyebrow pulsante, título Playfair, trust strip, scrollHint. CTA primario: **"Ver Modelos y Precios"** → `#desarrollos`. CTA secundario: **"Hablar con un asesor"** → WA |
 | `components/DevelopmentTabs.jsx/.module.css` | Selector segmentado 3 cols. `id="desarrollos"` removido (ahora está en page.tsx) |
-| `components/PropertyCard.jsx/.module.css` | Encabezado distribución: `"Distribución de todos los niveles:"` solo en Capua, `"Distribución:"` en el resto. Etiqueta "Nivel N:" solo aparece si hay más de 1 nivel (`levels.length > 1`). CTA: **"Cotizar ahora"** (antes "Cotizar"). Legal legend: `***` nota de lote tipo oculta cuando `metros_terreno === null` (departamentos). Textos legales actualizados: "Precio no incluye gastos de escrituración", "Actualizado a FEBRERO DEL 2026", "Lote tipo. Esquina o excedente varía el costo." |
+| `components/PropertyCard.jsx/.module.css` | Encabezado distribución: `"Distribución:"`. Etiqueta "Nivel N:" solo aparece si hay más de 1 nivel (`levels.length > 1`). CTA: **"Cotizar ahora"** (antes "Cotizar"). Legal legend: `***` nota de lote tipo oculta cuando `metros_terreno === null` (departamentos). Textos legales actualizados: "Precio no incluye gastos de escrituración", "Actualizado a FEBRERO DEL 2026", "Lote tipo. Esquina o excedente varía el costo." |
 | `components/VirtualTourModal.jsx/.module.css` | Mensaje WA sincronizado con PropertyCard: usa `getWhatsAppText()` con la misma lógica inteligente de prefijo (casa modelo / departamento modelo) |
 | `components/AmenitiesSection.jsx/.module.css` | Masonry navy/gold, 6 tiles con imágenes de `/amenidades/` |
 | `components/FloatingWhatsApp.jsx/.module.css` | Dark/gold tooltip, FAB bottom:5rem mobile |
@@ -110,7 +114,6 @@
 
 | Desarrollo | Modelo | Niveles | Estado |
 |---|---|---|---|
-| Jardines del Sur 6 | Departamento Capua | 1 nivel (depto) | ✅ actualizado |
 | Jardines del Sur 6 | Departamento Cedro Plus | 1 nivel (depto) | ✅ actualizado |
 | Jardines del Sur 6 | Casa Flamboyán | PB + PA (2 niveles) | ✅ actualizado |
 | Jardines del Sur 6 | Casa Ceiba | PB + 1er + 3er nivel | ✅ actualizado |
@@ -120,11 +123,10 @@
 | La Rioja 2 | Casa Modelo Alamo | — | ⏳ pendiente sesión 5 |
 | La Rioja 2 | Casa Noni Elite | — | ⏳ pendiente sesión 5 |
 | La Rioja 2 | Casa Noni | — | ⏳ pendiente sesión 5 |
-| Lirios Residencial 2 | Lirio Blanco / Lirio Azul | — | ⏳ pendiente fotos y datos |
+| Lirios Residencial 2 | Departamento Cedro Plus | 1 nivel (depto) | Precio desde $2,248,750 · 2 cajones de estacionamiento |
 
 **Regla de encabezado distribución:**
-- Solo `jds6-capua` → `"Distribución de todos los niveles:"`
-- Resto → `"Distribución:"`
+- Todas las tarjetas → `"Distribución:"`
 - Etiqueta `"Nivel N:"` → solo cuando `levels.length > 1`
 - Nota `****` lote tipo → solo cuando `metros_terreno !== null`
 
