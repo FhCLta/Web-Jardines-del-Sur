@@ -4,6 +4,25 @@ import React, { useEffect } from 'react';
 import styles from './VirtualTourModal.module.css';
 
 export default function VirtualTourModal({ onClose, property }) {
+  const getTourUrl = () => {
+    if (!property.url_recorrido_virtual || property.url_recorrido_virtual === '#') {
+      return null;
+    }
+
+    try {
+      const url = new URL(property.url_recorrido_virtual);
+      if (url.hostname.includes('matterport.com')) {
+        url.searchParams.set('play', '1');
+        url.searchParams.set('qs', '1');
+        url.searchParams.set('wh', '0');
+        url.searchParams.set('nt', '0');
+      }
+      return url.toString();
+    } catch {
+      return property.url_recorrido_virtual;
+    }
+  };
+
   const getWhatsAppText = () => {
     let nameLower = property.nombre_modelo.toLowerCase();
     let text = property.nombre_modelo;
@@ -19,6 +38,7 @@ export default function VirtualTourModal({ onClose, property }) {
     }
     return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.`;
   };
+  const tourUrl = getTourUrl();
 
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -38,9 +58,9 @@ export default function VirtualTourModal({ onClose, property }) {
           <button className={styles.closeBtn} onClick={onClose}>×</button>
         </div>
         <div className={styles.content}>
-          {property.url_recorrido_virtual && property.url_recorrido_virtual !== '#' ? (
+          {tourUrl ? (
             <iframe 
-              src={property.url_recorrido_virtual}
+              src={tourUrl}
               className={styles.iframe}
               allowFullScreen
               frameBorder="0"

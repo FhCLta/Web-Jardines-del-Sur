@@ -19,10 +19,12 @@
   width: 100%;
   max-width: 1000px;
   height: 85vh;
+  max-height: 85dvh;
   display: flex;
   flex-direction: column;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   animation: modalEnter 0.3s ease-out forwards;
+  overflow: hidden;
 }
 
 @keyframes modalEnter {
@@ -42,6 +44,7 @@
   align-items: center;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #E2E8F0;
+  flex: 0 0 auto;
 }
 
 .header h2 {
@@ -74,6 +77,7 @@
 .content {
   padding: 0;
   flex-grow: 1;
+  min-height: 0;
   overflow: hidden;
   background-color: #F7FAFC;
   display: flex;
@@ -85,6 +89,7 @@
   width: 100%;
   height: 100%;
   border: none;
+  display: block;
 }
 
 .placeholder {
@@ -107,6 +112,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex: 0 0 auto;
+  background: var(--surface);
 }
 
 .footer p {
@@ -127,8 +134,15 @@
   }
   
   .modal {
-    height: calc(100vh - 1rem);
-    max-height: calc(100vh - 1rem);
+    height: calc(100dvh - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  @supports not (height: 100dvh) {
+    .modal {
+      height: calc(100vh - 1rem);
+      max-height: calc(100vh - 1rem);
+    }
   }
 
   .overlay {
