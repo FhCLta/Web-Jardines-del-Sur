@@ -152,7 +152,7 @@
         {"nivel": 3, "desc": "Estancia TV, Baño completo, Terraza al frente"}
       ],
       "amenidades_key": ["3 Recámaras", "3.5 Baños", "Terraza", "Cuarto de lavado"],
-      "url_recorrido_virtual": "https://my.matterport.com/show/?m=x62HpdD1L5u",
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/fresno-elite",
       "images": [
         "/larioja2/Casa Fresno Elite/1.webp",
         "/larioja2/Casa Fresno Elite/2.webp",
@@ -179,7 +179,7 @@
         {"nivel": 2, "desc": "Recámara principal con baño, 2da y 3ra recámara con baño, Terraza"}
       ],
       "amenidades_key": ["3 Recámaras", "3.5 Baños", "Terraza", "Cuarto de lavado"],
-      "url_recorrido_virtual": "https://my.matterport.com/show/?m=vQmF3ZiR427",
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/alamo",
       "images": [
         "/larioja2/Casa Modelo Alamo/1.webp",
         "/larioja2/Casa Modelo Alamo/2.webp",
@@ -208,7 +208,7 @@
         {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño y vestidor, 2 secundarias con baño compartido"}
       ],
       "amenidades_key": ["3 Recámaras", "2.5 Baños", "Estancia TV", "Cuarto de lavado"],
-      "url_recorrido_virtual": "https://my.matterport.com/show/?m=iCAizJbUAuS",
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni-elite",
       "images": [
         "/larioja2/Casa Noni Elite/1_new.png",
         "/larioja2/Casa Noni Elite/2.webp",
@@ -236,7 +236,7 @@
         {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño/vestidor, Recámara secundaria con baño"}
       ],
       "amenidades_key": ["2 Recámaras", "2.5 Baños", "Estancia TV", "Cuarto de lavado"],
-      "url_recorrido_virtual": "https://my.matterport.com/show/?m=TnGVL9aSTvY",
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni",
       "images": [
         "/larioja2/Casa noni/1.webp",
         "/larioja2/Casa noni/2.webp",
