@@ -8,8 +8,15 @@ import AmenitiesSection from '@/components/AmenitiesSection';
 import FooterPhoneContact from '@/components/FooterPhoneContact';
 import styles from './page.module.css';
 
+type InventoryProperty = {
+  development: string;
+  nombre_modelo: string;
+  precio: number;
+  metros_construccion: number;
+};
+
 // Server component to read the inventory data
-async function getInventory() {
+async function getInventory(): Promise<InventoryProperty[]> {
   const filePath = path.join(process.cwd(), 'data', 'inventory.json');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const data = JSON.parse(fileContents);
@@ -19,16 +26,25 @@ async function getInventory() {
 export default async function Home() {
   const inventoryData = await getInventory();
   const siteUrl = 'https://jardinesdelsurcancun.mx';
+  const googleBusinessUrl =
+    'https://www.google.com/maps/place/Jardines+del+Sur+6+%7C+Altta+Homes/@21.082209,-86.8865266,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2b2036689c1f:0xa44142d0c992c304!8m2!3d21.082209!4d-86.8865266!16s%2Fg%2F11njlpp4sw';
+  const googleBusinessShortUrl = 'https://maps.app.goo.gl/9sKBR1fUNSswv5d19';
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'RealEstateAgent',
         '@id': `${siteUrl}/#business`,
-        name: 'Altta Homes Cancún',
-        alternateName: 'Jardines del Sur Cancún',
+        name: 'Jardines del Sur 6 | Altta Homes',
+        alternateName: [
+          'Altta Homes Cancun',
+          'Jardines del Sur Cancun',
+          'Altta Homes by Grupo Sadasi',
+        ],
         url: siteUrl,
         telephone: '+529982059044',
+        priceRange: '$$-$$$$',
+        image: `${siteUrl}/jardines/Imagnes%20de%20amenidades%20y%20hero/alberca.webp`,
         foundingDate: '1975',
         parentOrganization: {
           '@type': 'Organization',
@@ -42,6 +58,18 @@ export default async function Home() {
           postalCode: '77536',
           addressCountry: 'MX',
         },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: 21.082209,
+          longitude: -86.8865266,
+        },
+        hasMap: googleBusinessUrl,
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+529982059044',
+          contactType: 'sales',
+          availableLanguage: ['es-MX'],
+        },
         areaServed: [
           {
             '@type': 'City',
@@ -53,9 +81,36 @@ export default async function Home() {
           },
         ],
         sameAs: [
-          'https://maps.app.goo.gl/9sKBR1fUNSswv5d19',
+          googleBusinessUrl,
+          googleBusinessShortUrl,
           'https://jardinesdelsur-cancun.web.app',
         ],
+        makesOffer: {
+          '@type': 'OfferCatalog',
+          name: 'Casas y departamentos en Cancun',
+          itemListElement: inventoryData.map((property) => ({
+            '@type': 'Offer',
+            name: property.nombre_modelo,
+            price: property.precio,
+            priceCurrency: 'MXN',
+            availability: 'https://schema.org/InStock',
+            itemOffered: {
+              '@type': 'Residence',
+              name: `${property.nombre_modelo} - ${property.development}`,
+              floorSize: {
+                '@type': 'QuantitativeValue',
+                value: property.metros_construccion,
+                unitCode: 'MTK',
+              },
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Cancun',
+                addressRegion: 'Quintana Roo',
+                addressCountry: 'MX',
+              },
+            },
+          })),
+        },
       },
       {
         '@type': 'WebSite',
@@ -89,7 +144,7 @@ export default async function Home() {
     <div className={styles.page}>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <SiteHeader />
 
