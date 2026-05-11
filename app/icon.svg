@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Altta Homes favicon</title>
+  <desc id="desc">Monograma AH en azul profundo y dorado.</desc>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="44" x2="432" y2="468" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A365D"/>
+      <stop offset="1" stop-color="#071322"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="128" y1="130" x2="398" y2="382" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F3C55A"/>
+      <stop offset="0.45" stop-color="#D19200"/>
+      <stop offset="1" stop-color="#A37200"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.34"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="72" fill="url(#bg)"/>
+  <path d="M146 136H362" stroke="#D19200" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+  <path d="M164 382H344" stroke="#D19200" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+  <g filter="url(#softShadow)">
+    <path
+      d="M92 354L185 156H218L311 354H264L246 312H157L139 354H92ZM174 272H229L201 207L174 272Z"
+      fill="#FFFFFF"
+    />
+    <path
+      d="M276 354V156H323V232H373V156H420V354H373V277H323V354H276Z"
+      fill="url(#gold)"
+    />
+  </g>
+</svg>
