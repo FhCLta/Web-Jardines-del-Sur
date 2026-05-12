@@ -1,10 +1,9 @@
-# Navegadores modernos: elimina polyfills innecesarios (~12 KiB ahorro)
-# Cubre >95% de usuarios actuales en México
-> 0.5%
-last 2 Chrome versions
-last 2 Firefox versions
-last 2 Safari versions
-last 2 Edge versions
+# Ultra-moderno: elimina polyfills de Array.at, Object.hasOwn, etc.
+# Cubre >92% de usuarios actuales. Solo navegadores con soporte nativo ES2022+.
+chrome >= 97
+edge >= 97
+firefox >= 104
+safari >= 15.4
+ios_saf >= 15.4
 not dead
-not ie 11
 not op_mini all

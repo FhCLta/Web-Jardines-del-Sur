@@ -40,8 +40,8 @@ export default function HeroBackground() {
           className={styles.heroImage}
           src={SLIDES[0]}
           alt=""
-          width="984"
-          height="656"
+          width="750"
+          height="500"
           loading="eager"
           fetchPriority="high"
           decoding="sync"
