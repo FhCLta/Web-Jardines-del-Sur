@@ -1,72 +1,15 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Hero.module.css";
-
-const SLIDES = [
-  "/optimized/hero/alberca-desktop.webp",
-  "/optimized/hero/vista-aerea.webp",
-  "/optimized/hero/area-infantil.webp",
-  "/optimized/hero/terraza.webp",
-];
-
-const HERO_MOBILE_IMAGE = "/optimized/hero/alberca-mobile.webp";
+import HeroBackground from "./HeroBackground";
 
 const WA_HREF =
   "https://wa.me/529982059044?text=Hola,%20quiero%20informacion%20de%20modelos%20y%20precios%20en%20Cancun.";
 
 export default function Hero() {
-  const [idx, setIdx] = useState(0);
-  // Opción B: sólo carga la primera imagen al inicio; las demás se añaden cuando el browser está idle
-  const [loadedCount, setLoadedCount] = useState(1);
-
-  useEffect(() => {
-    const t = setInterval(() => {
-      setIdx((i) => (i + 1) % SLIDES.length);
-    }, 6000);
-    return () => clearInterval(t);
-  }, []);
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoadedCount(SLIDES.length), 4200);
-    return () => clearTimeout(t);
-  }, []);
-
   return (
     <section id="top" className={styles.hero}>
-      <div className={styles.bgLayer}>
-        <picture
-          className={`${styles.slide} ${styles.heroPicture} ${
-            idx === 0 ? styles.slideActive : ""
-          }`}
-        >
-          <source media="(max-width: 767px)" srcSet={HERO_MOBILE_IMAGE} />
-          <img
-            className={styles.heroImage}
-            src={SLIDES[0]}
-            alt=""
-            width="984"
-            height="656"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-          />
-        </picture>
-
-        {SLIDES.map((src, i) =>
-          i === 0 ? null :
-          i < loadedCount ? (
-            <div
-              key={src}
-              className={`${styles.slide} ${i === idx ? styles.slideActive : ""}`}
-              style={{ backgroundImage: `url('${src}')` }}
-              aria-hidden="true"
-            />
-          ) : null
-        )}
-        <div className={styles.overlay} />
-        <div className={styles.vignette} />
-      </div>
+      {/* Fondo animado como Client Component aislado */}
+      <HeroBackground />
 
       <div className={`container ${styles.content}`}>
         <span className={styles.eyebrow}>

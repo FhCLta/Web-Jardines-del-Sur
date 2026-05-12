@@ -6,12 +6,14 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  display: "swap",
 });
 
 const lato = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
   weight: ["300", "400", "700"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
@@ -19,6 +21,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
   style: ["normal", "italic"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -97,6 +100,7 @@ export default function RootLayout({
           href="/optimized/hero/alberca-mobile.webp"
           type="image/webp"
           media="(max-width: 767px)"
+          fetchPriority="high"
         />
         <link
           rel="preload"
@@ -104,6 +108,7 @@ export default function RootLayout({
           href="/optimized/hero/alberca-desktop.webp"
           type="image/webp"
           media="(min-width: 768px)"
+          fetchPriority="high"
         />
       </head>
       <body>
