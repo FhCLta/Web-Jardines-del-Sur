@@ -85,9 +85,12 @@ export default function Hero() {
         </h1>
 
         <p className={styles.subtitle}>
-          Casas y departamentos en <strong>Jardines del Sur 6</strong>,{" "}
-          <strong>La Rioja 2</strong> y <strong>Lirios Residencial 2</strong>.
-          Inventario actualizado, precios reales, informes en minutos.
+          <span className={styles.subtitleDevelopments}>
+            Jardines del Sur 6, La Rioja 2 y Lirios Residencial 2.
+          </span>
+          <span className={styles.subtitleDetail}>
+            Modelos, precios e informes en minutos.
+          </span>
         </p>
 
         <div className={styles.ctas}>
