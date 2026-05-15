@@ -48,7 +48,7 @@ export default function FloatingWhatsApp() {
       </div>
 
       <a
-        href="https://wa.me/529982059044?text=Hola,%20me%20interesa%20recibir%20información%20sobre%20los%20desarrollos%20de%20Grupo%20Sadasi%20en%20Cancún."
+        href="https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn."
         target="_blank"
         rel="noreferrer"
         className={styles.floatBtn}

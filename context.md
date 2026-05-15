@@ -1,5 +1,7 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **Nota deploy 14 mayo 2026 (2):** mensajes de WhatsApp unificados en todos los botones genéricos (FAB, Header, Hero "Hablar con un asesor", Footer, FooterPhoneContact) al texto: `"Hola, quiero más información sobre las casas y departamentos de Altta Homes en Cancún."` Los botones dinámicos de PropertyCard y VirtualTourModal conservan su mensaje específico por modelo/desarrollo. Decisión de diseño: no mencionar desarrollos específicos en botones genéricos porque son leads en la parte alta del funnel; el agente califica en la conversación.
+
 > **Nota deploy 14 mayo 2026:** deploy realizado desde sesión local. Cambios incluidos: fix de z-index del FAB de WhatsApp cuando el lightbox está abierto (`body.lightbox-open` class en PropertyCard + regla `z-index: 10020` en FloatingWhatsApp.module.css); puerto del dev server fijado a `3301` con hostname `127.0.0.1` en `package.json`.
 
 > **Nota produccion 11 mayo 2026:** sitio desplegado en Firebase Hosting (`jardinesdelsur-cancun`) y activo en `https://jardinesdelsurcancun.mx`. JSON-LD reforzado con `RealEstateAgent`, `hasMap`, `geo`, `sameAs` al perfil de Google Business/Maps, `OfferCatalog` basado en inventario real, y sin `aggregateRating` inventado. Google verification meta agregada en `app/layout.tsx`. `sitemap.xml` y `robots.txt` responden 200; Search Console puede tardar en leerlos aunque el XML este correcto.
@@ -208,6 +210,7 @@
 | Datos institucionales Sadasi | ✅ | Hero eyebrow 50 AÑOS, trust 430k/12 estados/15% plusvalía; AmenitiesSection trust row actualizado; footer tagline; meta description SEO |
 | Optimización de performance | ✅ | Hero LCP con `<picture><img>` y `fetchPriority="high"`, slides lazy en idle, assets `/public/optimized/`, cards con imágenes lazy, sin preload accidental de modelos, next.config.ts Cache-Control + AVIF |
 | **Sesión 6 — Fix lightbox z-index** | ✅ | `body.lightbox-open` class en PropertyCard.jsx para disparar regla CSS; FloatingWhatsApp sube a z-index 10020 cuando el lightbox está abierto. Dev server fijado a `--port 3301 --hostname 127.0.0.1` en package.json |
+| **Sesión 6 — WA unificado** | ✅ | Mensaje único en FAB, Header, Hero, Footer y FooterPhoneContact: "Hola, quiero más información sobre las casas y departamentos de Altta Homes en Cancún." PropertyCard y VirtualTourModal conservan mensajes dinámicos por modelo |
 | AmenitiesSection imágenes | ✅ | Reimplementada con 6 imágenes de `/amenidades/`: alberca (Jardines), gimnasio1, área infantil, cancha, gimnasio exterior, Vista aerea1 (La Rioja 2) |
 | **Sesión 4 — Distribución** | ✅ | Todos los niveles de Jardines del Sur 6 actualizados. Encabezado inteligente. Etiqueta "Nivel N:" condicional. Nota lote tipo condicional por terreno |
 | **Sesión 4 — CTAs y Nav** | ✅ | Hero: "Hablar con un asesor" + "Ver Modelos y Precios". Cards: "Cotizar ahora". Nav: Inicio · Modelos y Precios · Contacto centrados (grid 3 cols). Ancla `#desarrollos` en page.tsx |

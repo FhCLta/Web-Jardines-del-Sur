@@ -6,6 +6,7 @@ import SiteHeader from '@/components/SiteHeader';
 import Hero from '@/components/Hero';
 import AmenitiesSection from '@/components/AmenitiesSection';
 import FooterPhoneContact from '@/components/FooterPhoneContact';
+import ContactNavBtn from '@/components/ContactNavBtn';
 import styles from './page.module.css';
 
 type InventoryProperty = {
@@ -175,7 +176,7 @@ export default async function Home() {
             <span className={styles.footerTagline}>by Grupo Sadasi · Cancún</span>
             <p>50 años de trayectoria ininterrumpida, 430,000 viviendas entregadas y el respaldo de la primera desarrolladora mexicana certificada <em>Best Place to Live</em>.</p>
             <a
-              href="https://wa.me/529982059044?text=Hola,%20quiero%20informes%20de%20los%20desarrollos"
+              href="https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn."
               target="_blank"
               rel="noreferrer"
               className={styles.footerBrandCta}
@@ -192,8 +193,7 @@ export default async function Home() {
               <li><a href="#top">Inicio</a></li>
               <li><a href="#desarrollos">Desarrollos</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
-              <li><a href="#contacto">Contacto</a></li>
-              <li><a href="https://wa.me/529982059044">WhatsApp directo</a></li>
+              <li><ContactNavBtn /></li>
             </ul>
           </div>
           <div className={styles.footerContact}>

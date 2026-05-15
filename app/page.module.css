@@ -323,9 +323,22 @@
   display: inline-block;
 }
 
-.footerLinks a:hover {
+.footerLinks a:hover,
+.footerLinks button:hover {
   color: var(--accent);
   padding-left: 4px;
+}
+
+.footerLinks button {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.92rem;
+  font-family: inherit;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .footerContactItem {

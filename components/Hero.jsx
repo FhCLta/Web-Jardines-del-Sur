@@ -3,7 +3,7 @@ import styles from "./Hero.module.css";
 import HeroBackground from "./HeroBackground";
 
 const WA_HREF =
-  "https://wa.me/529982059044?text=Hola,%20quiero%20informacion%20de%20modelos%20y%20precios%20en%20Cancun.";
+  "https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn.";
 
 export default function Hero() {
   return (

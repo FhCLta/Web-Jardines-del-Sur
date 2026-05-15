@@ -6,10 +6,16 @@ import styles from "./FooterPhoneContact.module.css";
 const PHONE_DISPLAY = "+52 998 205 9044";
 const PHONE_TEL = "+529982059044";
 const WA_HREF =
-  "https://wa.me/529982059044?text=Hola,%20quiero%20informes%20de%20los%20desarrollos%20en%20Canc%C3%BAn.";
+  "https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn.";
 
 export default function FooterPhoneContact() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener("open-contact-modal", onOpen);
+    return () => window.removeEventListener("open-contact-modal", onOpen);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
