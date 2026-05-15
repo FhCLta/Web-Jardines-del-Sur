@@ -1,0 +1,7 @@
+Set-Location : No se encuentra ning£n par metro de posici¢n que acepte el argumento 'de'.
+En l¡nea: 1 Car cter: 1
++ Set-Location -LiteralPath D:\Web de Jardines; .\node_modules\.bin\nex ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Set-Location], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+ 

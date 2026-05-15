@@ -33,10 +33,12 @@ export default function PropertyCard({ property }) {
     if (!isLightboxOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('lightbox-open');
     const onKey = (e) => { if (e.key === 'Escape') setIsLightboxOpen(false); };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
+      document.body.classList.remove('lightbox-open');
       window.removeEventListener('keydown', onKey);
     };
   }, [isLightboxOpen]);
