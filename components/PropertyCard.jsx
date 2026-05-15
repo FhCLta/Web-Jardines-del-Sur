@@ -96,7 +96,6 @@ export default function PropertyCard({ property }) {
   };
   const recamaras = parseStat(/^([\d.]+)\s*Rec/i);
   const banos = parseStat(/^([\d.]+)\s*Ba/i);
-  const isJardinesCard = property.development === "Jardines del Sur 6";
   const headerMatch = property.nombre_modelo.match(/^(Departamento|Casa)\s+(.+)$/i);
   const hasSplitHeader = Boolean(headerMatch);
   const modelType = headerMatch ? headerMatch[1] : "";
@@ -216,13 +215,12 @@ export default function PropertyCard({ property }) {
             </a>
           </div>
 
-          {isJardinesCard && (
-            <div className={styles.legalLegend}>
-              <p><strong>*</strong> Precio no incluye gastos de escrituración</p>
-              <p><strong>**</strong> Actualizado a FEBRERO DEL 2026</p>
-              {property.metros_terreno && <p><strong>****</strong> Lote tipo. Esquina o excedente varía el costo.</p>}
-            </div>
-          )}
+          <div className={styles.legalLegend}>
+            <p><strong>*</strong> Precio no incluye gastos de escrituración</p>
+            {property.metros_terreno && (
+              <p><strong>**</strong> Lote tipo. Esquina o excedente varía el costo.</p>
+            )}
+          </div>
         </div>
       </div>
 

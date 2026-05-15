@@ -131,6 +131,57 @@
   justify-self: end;
 }
 
+/* Breadcrumb centered in navbar (silo pages, desktop only) */
+.headerBreadcrumb {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  font-family: var(--font-montserrat);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.headerBreadcrumb a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.headerBreadcrumb a:hover {
+  color: var(--primary);
+}
+
+.headerBreadcrumbSep {
+  color: rgba(15, 23, 42, 0.32);
+}
+
+.headerBreadcrumbCurrent {
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+/* Over dark hero (not scrolled) */
+.header:not(.scrolled) .headerBreadcrumb a {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.header:not(.scrolled) .headerBreadcrumb a:hover {
+  color: var(--accent-2);
+}
+
+.header:not(.scrolled) .headerBreadcrumbSep {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.header:not(.scrolled) .headerBreadcrumbCurrent {
+  color: var(--accent-2);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
 /* Hamburger */
 .burger {
   display: inline-flex;
@@ -276,6 +327,44 @@
   color: var(--accent-2);
 }
 
+.drawerLabel {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-montserrat);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+  position: relative;
+}
+
+.drawerLabel::before,
+.drawerLabel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 1.8rem;
+  height: 1px;
+  background: rgba(232, 180, 58, 0.35);
+}
+
+.drawerLabel::before {
+  right: calc(100% + 0.7rem);
+}
+
+.drawerLabel::after {
+  left: calc(100% + 0.7rem);
+}
+
+.drawerBack {
+  color: var(--accent-2) !important;
+}
+
+.drawerBack .drawerNum {
+  font-size: 1.4rem;
+  letter-spacing: 0;
+}
+
 .drawerCta {
   margin-top: 2.5rem;
   padding: 1rem 2.2rem;
@@ -304,6 +393,9 @@
 /* Breakpoints */
 @media (min-width: 768px) {
   .navDesktop {
+    display: inline-flex;
+  }
+  .headerBreadcrumb {
     display: inline-flex;
   }
   .ctaBtn {

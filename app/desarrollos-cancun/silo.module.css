@@ -1,0 +1,214 @@
+/* Silo page wrapper */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--surface);
+}
+
+/* Breadcrumb (rendered on top of the hero) */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-montserrat);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 0.75rem;
+}
+
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--accent-2);
+}
+
+.breadcrumbSep {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.breadcrumbCurrent {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+/* Models section */
+.modelsSection {
+  background-color: var(--surface);
+  padding: 5rem 0 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 2.25rem;
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.sectionHeader span {
+  display: inline-block;
+  font-family: var(--font-montserrat);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  color: #735000;
+  margin-bottom: 0.85rem;
+}
+
+.sectionHeader h2 {
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.sectionHeader p {
+  font-size: 1.02rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.modelsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* Cap individual cards so a single-card silo (Lirios) doesn't stretch full width */
+.modelsGrid > * {
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
+}
+
+/* About / description section */
+.aboutSection {
+  background: linear-gradient(180deg, #FAFBFC 0%, #F4F6F9 100%);
+  padding: 4rem 0;
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.aboutCopy h2 {
+  font-size: 1.8rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.3rem;
+  line-height: 1.2;
+}
+
+.aboutCopy p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-size: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.aboutCopy p:last-child {
+  margin-bottom: 0;
+}
+
+.highlightsCard {
+  background: #fff;
+  border-radius: 1.1rem;
+  padding: 1.75rem 1.6rem;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  box-shadow: 0 16px 40px -24px rgba(15, 23, 42, 0.18);
+}
+
+.highlightsCard h3 {
+  font-family: var(--font-montserrat);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #735000;
+  margin-bottom: 1.1rem;
+}
+
+.highlightsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.highlightsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  color: var(--secondary);
+  line-height: 1.45;
+}
+
+.highlightCheck {
+  flex: 0 0 18px;
+  margin-top: 0.18rem;
+  color: var(--accent);
+}
+
+.locationStrip {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.locationStrip strong {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Hero breadcrumb: only visible on mobile (in navbar on desktop) */
+@media (min-width: 768px) {
+  .breadcrumb {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .breadcrumb {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .modelsSection {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .aboutSection {
+    padding: 3rem 0;
+  }
+}

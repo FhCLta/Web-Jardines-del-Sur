@@ -128,14 +128,14 @@ export default async function Home() {
         '@id': `${siteUrl}/#developments`,
         name: 'Desarrollos en Polígono Sur Cancún',
         itemListElement: [
-          'Jardines del Sur 6',
-          'La Rioja 2',
-          'Lirios Residencial 2',
-        ].map((name, index) => ({
+          { name: 'Jardines del Sur 6', slug: 'jardines-del-sur-6' },
+          { name: 'La Rioja 2', slug: 'la-rioja-2' },
+          { name: 'Lirios Residencial 2', slug: 'lirios-residencial-2' },
+        ].map(({ name, slug }, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           name,
-          url: `${siteUrl}/#desarrollos`,
+          url: `${siteUrl}/desarrollos-cancun/${slug}`,
         })),
       },
     ],
@@ -191,7 +191,9 @@ export default async function Home() {
             <h3>Navegación</h3>
             <ul>
               <li><a href="#top">Inicio</a></li>
-              <li><a href="#desarrollos">Desarrollos</a></li>
+              <li><a href="/desarrollos-cancun/jardines-del-sur-6">Jardines del Sur 6</a></li>
+              <li><a href="/desarrollos-cancun/la-rioja-2">La Rioja 2</a></li>
+              <li><a href="/desarrollos-cancun/lirios-residencial-2">Lirios Residencial 2</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
               <li><ContactNavBtn /></li>
             </ul>

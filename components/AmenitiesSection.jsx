@@ -35,8 +35,8 @@ const AMENITIES = [
   },
   {
     img: "/optimized/amenidades/vista-aerea.webp",
-    label: "Alberca y Casa Club · La Rioja 2",
-    desc: "Vista aérea del complejo: alberca, casa club, jardines y áreas verdes integradas",
+    label: "",
+    desc: "",
     size: "wide",
   },
 ];
