@@ -43,7 +43,7 @@ export default function SiteHeader() {
             <a href="#contacto">Contacto</a>
           </nav>
 
-          <a href={WA_HREF} className={`btn btn-primary ${styles.ctaBtn}`}>
+          <a href={WA_HREF} className={`btn btn-primary ${styles.ctaBtn}`} target="_blank" rel="noreferrer">
             Informes WhatsApp
           </a>
 
@@ -81,6 +81,8 @@ export default function SiteHeader() {
         <a
           href={WA_HREF}
           className={`btn btn-primary ${styles.drawerCta}`}
+          target="_blank"
+          rel="noreferrer"
           onClick={closeAndGo}
         >
           Informes por WhatsApp
