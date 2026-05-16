@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './VirtualTourModal.module.css';
 
 export default function VirtualTourModal({ onClose, property }) {
@@ -39,6 +40,11 @@ export default function VirtualTourModal({ onClose, property }) {
     return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.`;
   };
   const tourUrl = getTourUrl();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Prevent scrolling when modal is open
   useEffect(() => {
@@ -50,7 +56,9 @@ export default function VirtualTourModal({ onClose, property }) {
     };
   }, []);
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <div className={styles.header}>
@@ -59,11 +67,10 @@ export default function VirtualTourModal({ onClose, property }) {
         </div>
         <div className={styles.content}>
           {tourUrl ? (
-            <iframe 
+            <iframe
               src={tourUrl}
               className={styles.iframe}
               allowFullScreen
-              frameBorder="0"
             />
           ) : (
             <div className={styles.placeholder}>
@@ -79,6 +86,7 @@ export default function VirtualTourModal({ onClose, property }) {
           </a>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

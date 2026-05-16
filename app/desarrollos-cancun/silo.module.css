@@ -94,6 +94,62 @@
   justify-self: center;
 }
 
+/* Model links row (después del grid de cards) */
+.modelLinks {
+  margin: 2.75rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px dashed rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.modelLinksLabel {
+  font-family: var(--font-montserrat);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #735000;
+}
+
+.modelLinksList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem 0.7rem;
+}
+
+.modelLinksList li {
+  display: inline-flex;
+}
+
+.modelLinksList a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  background: rgba(209, 146, 0, 0.06);
+  border: 1px solid rgba(209, 146, 0, 0.28);
+  border-radius: 999px;
+  font-family: var(--font-montserrat);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.modelLinksList a:hover {
+  background: rgba(209, 146, 0, 0.16);
+  border-color: rgba(209, 146, 0, 0.55);
+  transform: translateY(-1px);
+}
+
 /* About / description section */
 .aboutSection {
   background: linear-gradient(180deg, #FAFBFC 0%, #F4F6F9 100%);

@@ -9,6 +9,7 @@ import SiloHero from "@/components/SiloHero";
 import pageStyles from "@/app/page.module.css";
 import styles from "../silo.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
+import { slugifyModel } from "./model-utils";
 
 const SITE_URL = "https://jardinesdelsurcancun.mx";
 const PHONE_E164 = "529982059044";
@@ -154,6 +155,25 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
+
+          {properties.length > 0 && (
+            <div className={styles.modelLinks}>
+              <span className={styles.modelLinksLabel}>
+                Ver ficha completa de cada modelo:
+              </span>
+              <ul className={styles.modelLinksList}>
+                {properties.map((property) => (
+                  <li key={property.id}>
+                    <a
+                      href={`/desarrollos-cancun/${dev.slug}/${slugifyModel(property.nombre_modelo)}`}
+                    >
+                      {property.nombre_modelo}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
 

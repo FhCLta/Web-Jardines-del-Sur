@@ -13,18 +13,39 @@ const SILO_LINKS = [
   { slug: "lirios-residencial-2", name: "Lirios Residencial 2" },
 ];
 
+// Conservar acentos en los nombres de modelos para el breadcrumb del navbar.
+// Los slugs no contienen acentos (slugify los remueve), por eso es necesario este mapa.
+const MODEL_NAMES_BY_SLUG = {
+  "casa-tabachin": "Casa Tabachín",
+  "casa-ceiba": "Casa Ceiba",
+  "casa-flamboyan": "Casa Flamboyán",
+  "casa-noni": "Casa Noni",
+  "casa-fresno-elite": "Casa Fresno Elite",
+  "casa-modelo-alamo": "Casa Modelo Alamo",
+  "casa-noni-elite": "Casa Noni Elite",
+  "departamento-capua": "Departamento Capua",
+  "departamento-cedro-plus": "Departamento Cedro Plus",
+};
+
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname() ?? "";
-  const isSilo = pathname.startsWith("/desarrollos-cancun/");
-  const currentSlug = isSilo
-    ? pathname.slice("/desarrollos-cancun/".length).replace(/\/$/, "")
-    : null;
-  const currentDev = isSilo
+  const isSiloPath = pathname.startsWith("/desarrollos-cancun/");
+  const pathSegments = isSiloPath
+    ? pathname.slice("/desarrollos-cancun/".length).replace(/\/$/, "").split("/")
+    : [];
+  const currentSlug = pathSegments[0] || null;
+  const currentModelSlug = pathSegments[1] || null;
+  const isModelPage = isSiloPath && Boolean(currentModelSlug);
+  const isInSiloContext = isSiloPath; // Silo o página de modelo
+  const currentDev = isInSiloContext
     ? SILO_LINKS.find((s) => s.slug === currentSlug)
     : null;
-  const otherSilos = isSilo
+  const currentModelName = currentModelSlug
+    ? MODEL_NAMES_BY_SLUG[currentModelSlug] || currentModelSlug
+    : null;
+  const otherSilos = isInSiloContext
     ? SILO_LINKS.filter((s) => s.slug !== currentSlug)
     : [];
 
@@ -55,7 +76,7 @@ export default function SiteHeader() {
             <span className={styles.logoAccent}>Homes</span>
           </a>
 
-          {!isSilo && (
+          {!isInSiloContext && (
             <nav className={styles.navDesktop} aria-label="Navegación principal">
               <a href="/#top">Inicio</a>
               <a href="/#desarrollos">Modelos y Precios</a>
@@ -63,7 +84,7 @@ export default function SiteHeader() {
             </nav>
           )}
 
-          {isSilo && currentDev && (
+          {isInSiloContext && currentDev && (
             <nav
               className={styles.headerBreadcrumb}
               aria-label="Breadcrumb"
@@ -76,9 +97,26 @@ export default function SiteHeader() {
               <span className={styles.headerBreadcrumbSep} aria-hidden="true">
                 ›
               </span>
-              <span className={styles.headerBreadcrumbCurrent}>
-                {currentDev.name}
-              </span>
+              {isModelPage ? (
+                <>
+                  <a href={`/desarrollos-cancun/${currentDev.slug}`}>
+                    {currentDev.name}
+                  </a>
+                  <span
+                    className={styles.headerBreadcrumbSep}
+                    aria-hidden="true"
+                  >
+                    ›
+                  </span>
+                  <span className={styles.headerBreadcrumbCurrent}>
+                    {currentModelName}
+                  </span>
+                </>
+              ) : (
+                <span className={styles.headerBreadcrumbCurrent}>
+                  {currentDev.name}
+                </span>
+              )}
             </nav>
           )}
 
@@ -111,8 +149,20 @@ export default function SiteHeader() {
         aria-modal="true"
         aria-hidden={!open}
       >
-        {isSilo ? (
+        {isInSiloContext ? (
           <nav className={styles.drawerNav}>
+            {isModelPage && currentDev && (
+              <a
+                href={`/desarrollos-cancun/${currentDev.slug}`}
+                onClick={closeAndGo}
+                className={styles.drawerBack}
+              >
+                <span className={styles.drawerNum} aria-hidden="true">
+                  ←
+                </span>
+                Volver a {currentDev.name}
+              </a>
+            )}
             <a href="/" onClick={closeAndGo} className={styles.drawerBack}>
               <span className={styles.drawerNum} aria-hidden="true">
                 ←
