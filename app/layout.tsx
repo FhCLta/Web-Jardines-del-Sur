@@ -113,8 +113,9 @@ export default function RootLayout({
           media="(min-width: 768px)"
           fetchPriority="high"
         />
-        {/* Google Tag Manager */}
-        <Script id="gtm-init" strategy="afterInteractive">
+        {/* Google Tag Manager — lazyOnload para no bloquear LCP. Los clicks en wa.me
+            se trackean igual porque GTM usa dataLayer con buffer interno. */}
+        <Script id="gtm-init" strategy="lazyOnload">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
