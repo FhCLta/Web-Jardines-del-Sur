@@ -10,7 +10,8 @@
   pointer-events: none;
 }
 
-:global(body.lightbox-open) .wrapper {
+:global(body.lightbox-open) .wrapper,
+:global(body.modal-open) .wrapper {
   z-index: 10020;
 }
 
