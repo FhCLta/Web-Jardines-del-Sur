@@ -5,6 +5,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import ModelGallery from "./ModelGallery";
+import ModelTour from "./ModelTour";
 import pageStyles from "@/app/page.module.css";
 import styles from "../model.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
@@ -319,14 +320,12 @@ export default async function ModelPage({
                 visitarlo en sitio.
               </p>
             </div>
-            <div className={styles.tourFrame}>
-              <iframe
-                src={tourUrl}
-                title={`Recorrido virtual de ${property.nombre_modelo}`}
-                allowFullScreen
-                loading="lazy"
-              />
-            </div>
+            <ModelTour
+              tourUrl={tourUrl}
+              previewImage={property.images[0]}
+              modelName={property.nombre_modelo}
+              development={property.development}
+            />
           </div>
         </section>
       )}
@@ -404,7 +403,7 @@ export default async function ModelPage({
             <p>
               50 años de trayectoria ininterrumpida, 430,000 viviendas
               entregadas y el respaldo de la primera desarrolladora mexicana
-              certificada <em>Best Place to Live</em>.
+              certificada <em style={{ whiteSpace: "nowrap" }}>Best Place to Live</em>.
             </p>
             <a
               href={waHref}

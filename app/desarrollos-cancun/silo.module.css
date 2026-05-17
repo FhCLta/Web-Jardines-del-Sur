@@ -267,4 +267,10 @@
   .aboutSection {
     padding: 3rem 0;
   }
+
+  .aboutCopy h2 {
+    font-size: 1.4rem;
+    line-height: 1.25;
+    margin-bottom: 1.1rem;
+  }
 }

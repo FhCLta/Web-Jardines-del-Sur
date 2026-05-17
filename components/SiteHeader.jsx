@@ -8,9 +8,9 @@ const WA_HREF =
   "https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn.";
 
 const SILO_LINKS = [
-  { slug: "jardines-del-sur-6", name: "Jardines del Sur 6" },
-  { slug: "la-rioja-2", name: "La Rioja 2" },
-  { slug: "lirios-residencial-2", name: "Lirios Residencial 2" },
+  { slug: "jardines-del-sur-6", name: "Jardines del Sur 6", shortName: "Jardines 6" },
+  { slug: "la-rioja-2", name: "La Rioja 2", shortName: "La Rioja 2" },
+  { slug: "lirios-residencial-2", name: "Lirios Residencial 2", shortName: "Lirios 2" },
 ];
 
 // Conservar acentos en los nombres de modelos para el breadcrumb del navbar.
@@ -160,7 +160,7 @@ export default function SiteHeader() {
                 <span className={styles.drawerNum} aria-hidden="true">
                   ←
                 </span>
-                Volver a {currentDev.name}
+                Volver a {currentDev.shortName || currentDev.name}
               </a>
             )}
             <a href="/" onClick={closeAndGo} className={styles.drawerBack}>

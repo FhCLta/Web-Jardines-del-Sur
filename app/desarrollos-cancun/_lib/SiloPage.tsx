@@ -245,7 +245,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
               by Grupo Sadasi · Cancún
             </span>
             <p>
-              50 años de trayectoria ininterrumpida, 430,000 viviendas entregadas y el respaldo de la primera desarrolladora mexicana certificada <em>Best Place to Live</em>.
+              50 años de trayectoria ininterrumpida, 430,000 viviendas entregadas y el respaldo de la primera desarrolladora mexicana certificada <em style={{ whiteSpace: "nowrap" }}>Best Place to Live</em>.
             </p>
             <a
               href={waHref}
