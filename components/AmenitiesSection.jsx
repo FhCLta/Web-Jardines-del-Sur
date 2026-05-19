@@ -2,7 +2,7 @@
 
 import styles from './AmenitiesSection.module.css';
 
-const AMENITIES = [
+const DEFAULT_ITEMS = [
   {
     img: "/optimized/amenidades/alberca.webp",
     label: "Alberca y Casa Club · Jardines del Sur",
@@ -41,24 +41,51 @@ const AMENITIES = [
   },
 ];
 
-export default function AmenitiesSection() {
+const DEFAULT_HEADER = {
+  eyebrow: "Estilo de Vida · Grupo Sadasi",
+  titleLine1: "Amenidades que elevan",
+  titleEm: "tu calidad de vida",
+  subtitle:
+    "Cada desarrollo incluye espacios diseñados para el bienestar, la convivencia y el descanso de toda tu familia.",
+};
+
+const DEFAULT_TRUST = [
+  { num: "430,000+", label: "Viviendas entregadas" },
+  { num: "50", label: "Años de trayectoria" },
+  { num: "12", label: "Estados y 16 ciudades" },
+  { num: "2M+", label: "Personas en comunidades Sadasi" },
+];
+
+/**
+ * @param {object} [props]
+ * @param {Array<{img:string,label:string,desc:string,size:string}>} [props.items]
+ * @param {{eyebrow:string,titleLine1:string,titleEm:string,subtitle:string}} [props.header]
+ * @param {Array<{num:string,label:string}>} [props.trustItems]
+ * @param {string[]} [props.extraAmenities]
+ * @param {string[]} [props.equipment]
+ */
+export default function AmenitiesSection({
+  items = DEFAULT_ITEMS,
+  header = DEFAULT_HEADER,
+  trustItems = DEFAULT_TRUST,
+  extraAmenities,
+  equipment,
+} = {}) {
   return (
     <section className={styles.section}>
       <div className={styles.bgGlow} aria-hidden="true" />
       <div className="container">
         <div className={styles.header}>
-          <span className={styles.eyebrow}>Estilo de Vida · Grupo Sadasi</span>
+          <span className={styles.eyebrow}>{header.eyebrow}</span>
           <h2 className={styles.title}>
-            Amenidades que elevan<br />
-            <em>tu calidad de vida</em>
+            {header.titleLine1}<br />
+            <em>{header.titleEm}</em>
           </h2>
-          <p className={styles.subtitle}>
-            Cada desarrollo incluye espacios diseñados para el bienestar, la convivencia y el descanso de toda tu familia.
-          </p>
+          <p className={styles.subtitle}>{header.subtitle}</p>
         </div>
 
         <div className={styles.grid}>
-          {AMENITIES.map((a, i) => (
+          {items.map((a, i) => (
             <div
               key={i}
               className={`${styles.tile} ${styles[`tile_${a.size}`]}`}
@@ -77,19 +104,56 @@ export default function AmenitiesSection() {
           ))}
         </div>
 
-        <div className={styles.trustRow}>
-          {[
-            { num: "430,000+", label: "Viviendas entregadas" },
-            { num: "50", label: "Años de trayectoria" },
-            { num: "12", label: "Estados y 16 ciudades" },
-            { num: "2M+", label: "Personas en comunidades Sadasi" },
-          ].map((t, i) => (
-            <div key={i} className={styles.trustItem}>
-              <span className={styles.trustNum}>{t.num}</span>
-              <span className={styles.trustLabel}>{t.label}</span>
-            </div>
-          ))}
-        </div>
+        {extraAmenities && extraAmenities.length > 0 && (
+          <div className={styles.extraBlock}>
+            <span className={styles.extraEyebrow}>Más amenidades incluidas</span>
+            <ul className={styles.extraList}>
+              {extraAmenities.map((item, i) => (
+                <li key={i} className={styles.extraItem}>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {equipment && equipment.length > 0 && (
+          <div className={styles.equipmentBlock}>
+            <span className={styles.equipmentEyebrow}>Equipamiento del desarrollo</span>
+            <ul className={styles.equipmentList}>
+              {equipment.map((item, i) => (
+                <li key={i} className={styles.equipmentItem}>
+                  <span className={styles.equipmentDot} aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {trustItems && trustItems.length > 0 && (
+          <div className={styles.trustRow}>
+            {trustItems.map((t, i) => (
+              <div key={i} className={styles.trustItem}>
+                <span className={styles.trustNum}>{t.num}</span>
+                <span className={styles.trustLabel}>{t.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

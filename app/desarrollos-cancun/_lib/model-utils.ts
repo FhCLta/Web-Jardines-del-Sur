@@ -8,6 +8,7 @@ export type InventoryProperty = {
   nombre_modelo: string;
   precio: number;
   metros_construccion: number;
+  metros_construccion_variable?: boolean;
   metros_terreno: number | null;
   levels: { nivel: number; desc: string }[];
   amenidades_key: string[];

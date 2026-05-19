@@ -166,6 +166,103 @@
   opacity: 1;
 }
 
+/* Bloque "Más amenidades incluidas" (pills checkmark) */
+.extraBlock {
+  margin: -1rem 0 3rem;
+  text-align: center;
+}
+
+.extraEyebrow {
+  display: inline-block;
+  font-family: var(--font-montserrat);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 1.2rem;
+}
+
+.extraList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 0.7rem;
+}
+
+.extraItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  background: rgba(209, 146, 0, 0.07);
+  border: 1px solid rgba(209, 146, 0, 0.32);
+  border-radius: 999px;
+  font-family: var(--font-montserrat);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(245, 230, 200, 0.95);
+}
+
+.extraItem svg {
+  color: var(--accent-2);
+  flex-shrink: 0;
+}
+
+/* Bloque "Equipamiento del desarrollo" (lista compacta institucional) */
+.equipmentBlock {
+  margin: 0 0 3rem;
+  padding: 2rem 1.5rem 2.2rem;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+}
+
+.equipmentEyebrow {
+  display: inline-block;
+  font-family: var(--font-montserrat);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 1.2rem;
+}
+
+.equipmentList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem 1.5rem;
+  max-width: 920px;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.equipmentItem {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.4;
+}
+
+.equipmentDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(209, 146, 0, 0.5);
+}
+
 /* Fila de trust stats */
 .trustRow {
   display: flex;

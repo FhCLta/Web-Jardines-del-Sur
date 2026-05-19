@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
@@ -221,7 +220,9 @@ export default async function ModelPage({
                 </span>
               </div>
               <div className={styles.heroStat}>
-                <span className={styles.heroStatLabel}>Construcción</span>
+                <span className={styles.heroStatLabel}>
+                  {property.metros_construccion_variable ? "Construcción desde" : "Construcción"}
+                </span>
                 <span className={styles.heroStatValue}>
                   {property.metros_construccion} m²
                 </span>

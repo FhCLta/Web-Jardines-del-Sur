@@ -166,7 +166,12 @@ export default function PropertyCard({ property }) {
               <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M3 11l9-8 9 8M5 9.5V21h14V9.5" />
               </svg>
-              <span className={styles.statValue}>{property.metros_construccion}</span>
+              <span className={styles.statValue}>
+                {property.metros_construccion_variable && (
+                  <span className={styles.statFrom}>desde </span>
+                )}
+                {property.metros_construccion}
+              </span>
               <span className={styles.statUnit}>m² construcción</span>
             </div>
             {recamaras && (

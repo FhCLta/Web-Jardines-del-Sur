@@ -257,20 +257,20 @@
       "status": "Preventa 2026",
       "nombre_modelo": "Departamento Cedro Plus",
       "precio": 2248750,
-      "metros_construccion": 103.7,
+      "metros_construccion": 92.1,
+      "metros_construccion_variable": true,
       "metros_terreno": null,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 2 autos, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet"}
+        {"nivel": 1, "desc": "Sala, Cocina, Comedor, 1 medio baño, Área de lavado, Habitación principal con área para clóset y baño completo, 2 habitaciones secundarias con clóset y baño compartido, Estacionamiento para 2 autos, Roof garden (sólo N3)"}
       ],
       "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready", "Estacionamiento 2 autos"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/cedro-plus",
       "images": [
-        "/jardines/Modelo Cedro Plus/1.webp",
-        "/jardines/Modelo Cedro Plus/2.webp",
-        "/jardines/Modelo Cedro Plus/3.webp",
-        "/jardines/Modelo Cedro Plus/4.webp",
-        "/jardines/Modelo Cedro Plus/5.webp",
-        "/jardines/Modelo Cedro Plus/6.webp"
+        "/lirios/cedro-plus/1.webp",
+        "/lirios/cedro-plus/2.webp",
+        "/lirios/cedro-plus/3.webp",
+        "/lirios/cedro-plus/4.webp",
+        "/lirios/cedro-plus/5.webp"
       ]
     }
   ]

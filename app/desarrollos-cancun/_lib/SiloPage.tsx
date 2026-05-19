@@ -6,6 +6,7 @@ import PropertyCard from "@/components/PropertyCard";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import SiloHero from "@/components/SiloHero";
+import AmenitiesSection from "@/components/AmenitiesSection";
 import pageStyles from "@/app/page.module.css";
 import styles from "../silo.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
@@ -234,6 +235,16 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
           </div>
         </div>
       </section>
+
+      {dev.amenitiesSection && (
+        <AmenitiesSection
+          items={dev.amenitiesSection.items}
+          header={dev.amenitiesSection.header}
+          trustItems={dev.amenitiesSection.trustItems}
+          extraAmenities={dev.amenitiesSection.extraAmenities}
+          equipment={dev.amenitiesSection.equipment}
+        />
+      )}
 
       <footer id="contacto" className={pageStyles.footer}>
         <div className={`container ${pageStyles.footerGrid}`}>

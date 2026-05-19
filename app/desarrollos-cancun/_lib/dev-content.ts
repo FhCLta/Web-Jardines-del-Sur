@@ -26,6 +26,23 @@ export type DevContent = {
     paragraphs: string[];
   };
   highlights: string[];
+  amenitiesSection?: {
+    header: {
+      eyebrow: string;
+      titleLine1: string;
+      titleEm: string;
+      subtitle: string;
+    };
+    items: Array<{
+      img: string;
+      label: string;
+      desc: string;
+      size: "large" | "tall" | "normal" | "wide";
+    }>;
+    extraAmenities?: string[];
+    equipment?: string[];
+    trustItems?: Array<{ num: string; label: string }>;
+  };
 };
 
 export const DEVS: Record<DevSlug, DevContent> = {
@@ -134,7 +151,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     shortName: "Lirios 2",
     metaTitle: "Lirios Residencial 2 Cancún · Departamento Cedro Plus desde $2.25M | Altta Homes",
     metaDescription:
-      "Departamentos Cedro Plus en Lirios Residencial 2 Cancún. 103.7 m², 3 recámaras, 2.5 baños y 2 cajones de estacionamiento desde $2,248,750 MXN. Respaldo de Grupo Sadasi.",
+      "Departamentos Cedro Plus en Lirios Residencial 2 Cancún. Desde 92.1 m² (hasta 114.6 m²), 3 recámaras, 2.5 baños y 2 cajones de estacionamiento desde $2,248,750 MXN. Respaldo de Grupo Sadasi.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
     heroSubtitle:
       "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
@@ -162,18 +179,74 @@ export const DEVS: Record<DevSlug, DevContent> = {
     intro: {
       eyebrow: "Próxima Apertura · Cancún",
       paragraphs: [
-        "Lirios Residencial 2 es el nuevo desarrollo de Altta Homes en Cancún, pensado para quienes buscan un departamento amplio, moderno y bien ubicado, con la calidad constructiva y el respaldo de Grupo Sadasi.",
-        "El modelo disponible en esta etapa es el Departamento Cedro Plus: 103.7 metros cuadrados de construcción, tres recámaras (la principal con clóset y baño completo), 2.5 baños, sala, comedor, cocina, área de lavado y dos cajones de estacionamiento — una ventaja real en zonas con alta demanda vehicular. El diseño es Smart Home Ready y se entrega con acabados premium.",
-        "Lirios Residencial 2 ofrece un esquema de preventa con precios competitivos y opciones de financiamiento. Si buscas una primera vivienda en Cancún, un activo de inversión con plusvalía sostenida o una segunda casa para vacaciones, este desarrollo combina ubicación, marca y calidad en una sola propuesta.",
+        "El nuevo proyecto de Altta Homes en la zona sur de Cancún, que ofrece a sus habitantes una excelente ubicación con rápido acceso a importantes vialidades como la Av. 135, así como centros educativos, plazas comerciales, tiendas de autoservicios y al Santuario María Desatadora de Nudos.",
+        "Residencial con control de acceso. Departamentos de tres recámaras y hasta dos lugares de estacionamiento, organizados en torres de cuatro niveles.",
+        "Un moderno fraccionamiento. Cada uno de nuestros departamentos está diseñado para brindarte a ti y a tu familia la privacidad y comodidad que están buscando.",
+        "Nuestro objetivo: brindar a cada familia un hogar, con arquitectura moderna y un espacio libre, seguro y hermoso.",
       ],
     },
     highlights: [
-      "Departamento Cedro Plus · 103.7 m²",
+      "Departamento Cedro Plus · 92.1 m²",
+      "N3 con roof garden · 114.6 m²",
       "3 recámaras · 2.5 baños",
       "2 cajones de estacionamiento",
       "Precio desde $2,248,750 MXN",
-      "Smart Home Ready",
-      "Próxima apertura · Preventa abierta",
+      "Torres de 4 niveles · Control de acceso",
     ],
+    amenitiesSection: {
+      header: {
+        eyebrow: "Estilo de Vida · Lirios 2",
+        titleLine1: "Amenidades que elevan",
+        titleEm: "tu calidad de vida",
+        subtitle:
+          "Lirios 2 ofrece excelentes amenidades para relajarte, ejercitarte o simplemente pasar un buen momento en compañía de tus seres queridos.",
+      },
+      items: [
+        {
+          img: "/optimized/hero/hero-lirios.webp",
+          label: "Pérgolas y Áreas de Reunión",
+          desc: "Espacios cubiertos diseñados para convivir con familia y amigos.",
+          size: "large",
+        },
+        {
+          img: "/lirios/amenidades/padel.webp",
+          label: "Cancha de Padel",
+          desc: "Profesional, iluminada y abierta a residentes — uno de los deportes con mayor crecimiento.",
+          size: "tall",
+        },
+        {
+          img: "/lirios/amenidades/areas-verdes.webp",
+          label: "Áreas Verdes",
+          desc: "Senderos y jardines para caminar, hacer ejercicio o pasear a tu mascota.",
+          size: "normal",
+        },
+        {
+          img: "/lirios/amenidades/voleibol-playa.webp",
+          label: "Voleibol de Playa",
+          desc: "Cancha de arena para deporte casual y reuniones al aire libre.",
+          size: "normal",
+        },
+      ],
+      extraAmenities: [
+        "Alberca",
+        "Juegos infantiles",
+        "Cancha de usos múltiples",
+        "Asadores",
+        "Pet Park",
+      ],
+      equipment: [
+        "Caseta de acceso con reconocimiento facial",
+        "Macrocisterna",
+        "Contenedores de basura",
+        "Estacionamiento de visitas con geomalla y gravilla",
+        "Cerco eléctrico perimetral",
+      ],
+      trustItems: [
+        { num: "50", label: "Años de trayectoria Sadasi" },
+        { num: "430,000+", label: "Viviendas entregadas" },
+        { num: "13", label: "Amenidades + Equipamiento" },
+        { num: "4", label: "Niveles por torre" },
+      ],
+    },
   },
 };

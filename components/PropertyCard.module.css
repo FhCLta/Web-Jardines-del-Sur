@@ -430,6 +430,16 @@
   line-height: 1.15;
 }
 
+.statFrom {
+  font-family: var(--font-montserrat);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  margin-right: 0.1rem;
+}
+
 .levels {
   margin-bottom: 1.35rem;
   flex-grow: 1;
