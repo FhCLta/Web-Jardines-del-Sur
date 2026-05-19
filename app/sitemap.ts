@@ -13,7 +13,7 @@ const DEV_SLUG_BY_NAME: Record<string, DevSlug> = {
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date('2026-05-15T00:00:00-05:00');
+  const lastModified = new Date();
 
   const baseEntries: MetadataRoute.Sitemap = [
     {
