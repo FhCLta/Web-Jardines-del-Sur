@@ -1,5 +1,41 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **⚠️ EN PROGRESO — Catálogo WhatsApp Business + descripciones de modelos (sesión 15, 20 may 2026):** El usuario está armando el catálogo de WhatsApp Business con cada modelo como producto. Ya generadas las descripciones para: Departamento Capua, Departamento Cedro Plus (Jardines y Lirios), Casa Flamboyán, Casa Ceiba. **Faltan**: Casa Tabachín, Casa Noni (Jardines), Casa Fresno Elite, Casa Modelo Álamo, Casa Noni Elite, Casa Noni (La Rioja). Formato establecido por el usuario:
+> ```
+> [Nombre Modelo]
+> 💰 Precio desde $X,XXX,XXX MXN
+>
+> ✨ CARACTERÍSTICAS DEL MODELO
+> • [items]
+>
+> Visita virtual👇
+> https://jardinesdelsurcancun.mx/tour-[slug]
+> ```
+> **Importante**: las descripciones reflejan los datos ACTUALIZADOS del `inventory.json` (corregidos durante esta sesión, ver nota siguiente). Próxima sesión: continuar con los modelos faltantes en orden Tabachín → Noni Jardines → modelos de La Rioja 2.
+
+> **Nota Firebase redirects para URLs cortas + tour 360° (sesión 15, 20 may 2026):** Creados redirects 301 en `firebase.json` para resolver el problema de que WhatsApp Business Catalog tiene **límite de caracteres en el campo de enlace** (rechaza la URL larga `/desarrollos-cancun/<dev>/<modelo>` directa). Dos sets de redirects:
+> 1. **URLs cortas al modelo (top de página)**: `/capua`, `/cedro-plus`, `/flamboyan`, `/ceiba`, `/tabachin`, `/noni`, `/fresno-elite`, `/alamo`, `/noni-elite`, `/noni-la-rioja`, `/lirios-cedro`, más silos `/jardines`, `/la-rioja`, `/lirios`.
+> 2. **URLs cortas DIRECTO al tour 360°** (con anchor `#recorrido` en destination, server-side): `/tour-capua`, `/tour-cedro-plus`, `/tour-flamboyan`, `/tour-ceiba`, `/tour-tabachin`, `/tour-noni`, `/tour-fresno-elite`, `/tour-alamo`, `/tour-noni-elite`, `/tour-noni-la-rioja`, `/tour-lirios-cedro`.
+> **CRÍTICO**: WhatsApp rechaza URLs con `#recorrido` en el string (validación regex). Por eso se hizo el doble set: la URL corta `/tour-X` es limpia (sin `#`), pero el destino del 301 sí lleva el `#recorrido` que el browser preserva al hacer el redirect. Esto da el efecto deseado: el usuario llega directo a la sección de recorrido virtual al hacer click en el catálogo.
+
+> **Nota correcciones de datos Cedro Plus + Flamboyán (sesión 15, 20 may 2026):** El usuario corrigió datos importantes del inventario que estaban inexactos:
+> - **Departamento Cedro Plus (aplica a ambas versiones, Jardines y Lirios)**:
+>   - `metros_construccion`: 104.00 (Jardines) / 92.1 (Lirios) → **104.06 m²** estándar (PB, N1, N2) en ambos
+>   - **N3 con roof garden**: 121.13 m²
+>   - Agregado flag `metros_construccion_variable: true` al de **Jardines** (Lirios ya lo tenía)
+>   - Agregado "Roof garden (sólo N3)" al level desc de Jardines Cedro Plus (Lirios ya lo tenía)
+>   - **Precio Jardines Cedro Plus**: $2,100,000 → **$2,247,700 MXN** (corregido)
+>   - **Precio Lirios Cedro Plus**: $2,248,750 MXN (sin cambio)
+>   - **Diferencias intencionales** entre ambos: estacionamiento (Jardines 1 auto / Lirios 2 autos), imágenes y acabados (cada uno en su propia carpeta `/public/jardines/Modelo Cedro Plus/` vs `/public/lirios/cedro-plus/`)
+>   - `dev-content.ts` highlights de Lirios actualizado: "104.06 m²" + "N3 con roof garden · 121.13 m²"
+>   - `metaDescription` de Lirios actualizado al nuevo rango
+> - **Casa Flamboyán** (Jardines del Sur 6):
+>   - `amenidades_key`: **"2.5 Baños" → "3 Baños"** (eran 3 completos, no 2.5)
+>   - Agregado "Vestidor" como amenidad
+>   - Level 1 desc corregido: el baño completo de PB está en el **área común (sala), NO dentro de la recámara**. Antes decía "Recámara con área para closet"; ahora dice "Baño completo, Recámara".
+>   - Level 2 desc simplificado: "Estancia de TV, Recámara principal con baño completo y vestidor, Recámara secundaria con baño completo"
+>   - **Layout real corregido**: PB tiene 1 recámara (sin baño propio) + 1 baño en área común + sala/comedor/cocina/patio. N2 tiene 2 recámaras (cada una con baño) + estancia TV. Total: 3 recámaras, 3 baños completos, 1 vestidor en principal.
+
 > **⚠️ PENDIENTE — Replicar AmenitiesSection para La Rioja 2 y Jardines del Sur 6 (sesión 14, 19 may 2026):** Lirios Residencial 2 ya tiene su sección de amenidades con datos propios (5 tiles masonry + pills "Más amenidades" + card "Equipamiento" + trust row custom). La infra ya está lista: `AmenitiesSection.jsx` acepta props con defaults, el tipo `DevContent` tiene el campo opcional `amenitiesSection`, y `SiloPage.tsx` renderiza condicionalmente `{dev.amenitiesSection && <AmenitiesSection ... />}`. **Solo falta llenar los datos** en `dev-content.ts` para:
 > 1. **Jardines del Sur 6** — usar el ya existente AmenitiesSection del home como referencia, pero con datos específicos del desarrollo (alberca, gimnasio, área infantil, cancha deportiva, vista aérea — ya hay imágenes en `/public/optimized/amenidades/`). El usuario tendría que dar la lista exacta de amenidades del desarrollo.
 > 2. **La Rioja 2** — requiere imágenes nuevas (no hay en `/public/`); el usuario tendría que proveer fotos del desarrollo. Las amenidades posibles según `dev-content.ts` actual: casa club, alberca, áreas verdes integradas, seguridad controlada.
@@ -168,8 +204,8 @@
 
 > **Nota SEO 11 mayo 2026:** primer bloque SEO publicado en Firebase Hosting y verificado en `https://jardinesdelsurcancun.mx`: canonical al dominio `.mx`, metadata/Open Graph/Twitter, H1 orientado a "Casas y departamentos en Cancún", JSON-LD `RealEstateAgent` + `WebSite` + `ItemList`, `robots.txt` y `sitemap.xml`. Siguiente fase sugerida: rutas silo `/desarrollos-cancun/...` por desarrollo.
 
-> **Última actualización:** 19 de mayo de 2026 (sesión 14)  
-> **Estado:** Sesión 14 deployada a producción ✅. **Lirios 2 refinado**: masonry reordenado (Pérgolas como tile principal, Alberca pasa a pills), 4 párrafos nuevos en "Sobre Lirios 2" (Av. 135, Santuario María Desatadora de Nudos, control de acceso, "Un moderno fraccionamiento"), m² del Cedro Plus actualizados con flag `metros_construccion_variable` (92.1 estándar / 114.6 N3 con roof garden), 9 espacios en distribución incluyendo "Roof garden (sólo N3)", highlights "Lo Esencial" actualizado. Sitio rankea **posición #3 orgánica para "lirios 2"** en Google. **Pendientes priorizados próxima sesión** (todos documentados arriba): (1) Replicar AmenitiesSection con datos propios para Jardines del Sur 6 y La Rioja 2 (infra lista, falta data en `dev-content.ts` + imágenes para La Rioja). (2) Cuando el usuario lance Google Ads ($100 MXN/día), configurar conversión "WhatsApp Click" en GTM dashboard + montar campaña Search con 3 grupos refinados (Brand defense $20-30, Modelos específicos $30-40, Zonal alto intent $30-40) — CPA esperado $30-45 MXN. (3) Verificar PageSpeed después del contenido nuevo de Lirios para confirmar que sigue 92-96 mobile.
+> **Última actualización:** 20 de mayo de 2026 (sesión 15)  
+> **Estado:** Sesión 15 deployada a producción ✅. **Catálogo WhatsApp en construcción**: 5 modelos con descripción lista (Capua, Cedro Plus Jardines, Cedro Plus Lirios, Flamboyán, Ceiba). **Firebase redirects** creados para URLs cortas (`/capua`, `/tour-capua`, etc.) y bypass del rechazo de WhatsApp a URLs con `#`. **Correcciones de datos**: Cedro Plus ambos a 104.06/121.13 m² + precio Jardines a $2,247,700; Flamboyán a 3 baños completos + baño PB en área común (no en recámara). **Pendientes priorizados próxima sesión** (todos documentados arriba): (1) **Continuar catálogo WhatsApp**: faltan Tabachín, Noni Jardines, Fresno Elite, Modelo Álamo, Noni Elite, Noni La Rioja, Cedro Plus Lirios (recomendación: validar primero con el usuario si hay correcciones de datos pendientes en estos modelos antes de generar las descripciones). (2) Replicar AmenitiesSection con datos propios para Jardines del Sur 6 y La Rioja 2 (infra lista, falta data en `dev-content.ts` + imágenes para La Rioja). (3) Cuando el usuario lance Google Ads ($100 MXN/día), configurar conversión "WhatsApp Click" en GTM dashboard + montar campaña Search con 3 grupos refinados (Brand defense $20-30, Modelos específicos $30-40, Zonal alto intent $30-40) — CPA esperado $30-45 MXN.
 
 ---
 

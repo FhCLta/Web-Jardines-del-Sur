@@ -151,7 +151,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     shortName: "Lirios 2",
     metaTitle: "Lirios Residencial 2 Cancún · Departamento Cedro Plus desde $2.25M | Altta Homes",
     metaDescription:
-      "Departamentos Cedro Plus en Lirios Residencial 2 Cancún. Desde 92.1 m² (hasta 114.6 m²), 3 recámaras, 2.5 baños y 2 cajones de estacionamiento desde $2,248,750 MXN. Respaldo de Grupo Sadasi.",
+      "Departamentos Cedro Plus en Lirios Residencial 2 Cancún. Desde 104.06 m² (hasta 121.13 m² con roof garden en N3), 3 recámaras, 2.5 baños y 2 cajones de estacionamiento desde $2,248,750 MXN. Respaldo de Grupo Sadasi.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
     heroSubtitle:
       "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
@@ -186,8 +186,8 @@ export const DEVS: Record<DevSlug, DevContent> = {
       ],
     },
     highlights: [
-      "Departamento Cedro Plus · 92.1 m²",
-      "N3 con roof garden · 114.6 m²",
+      "Departamento Cedro Plus · 104.06 m²",
+      "N3 con roof garden · 121.13 m²",
       "3 recámaras · 2.5 baños",
       "2 cajones de estacionamiento",
       "Precio desde $2,248,750 MXN",

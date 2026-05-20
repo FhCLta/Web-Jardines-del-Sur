@@ -27,11 +27,12 @@
       "development": "Jardines del Sur 6",
       "status": "Preventa 2026",
       "nombre_modelo": "Departamento Cedro Plus",
-      "precio": 2100000,
-      "metros_construccion": 104.00,
+      "precio": 2247700,
+      "metros_construccion": 104.06,
+      "metros_construccion_variable": true,
       "metros_terreno": null,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet"}
+        {"nivel": 1, "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet, Roof garden (sólo N3)"}
       ],
       "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/cedro-plus",
@@ -53,10 +54,10 @@
       "metros_construccion": 89.00,
       "metros_terreno": 90.00,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 1 auto, Sala, Baño completo, Comedor, Recámara con área para closet, Cocina, Patio posterior"},
-        {"nivel": 2, "desc": "Estancia de T.V., Recámara principal con baño completo y área para closet-vestidor integrado, Recámara secundaria con baño completo"}
+        {"nivel": 1, "desc": "Estacionamiento 1 auto, Sala, Comedor, Cocina, Patio posterior, Baño completo, Recámara"},
+        {"nivel": 2, "desc": "Estancia de TV, Recámara principal con baño completo y vestidor, Recámara secundaria con baño completo"}
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Estancia TV"],
+      "amenidades_key": ["3 Recámaras", "3 Baños", "Estancia TV", "Vestidor"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/flamboyan",
       "images": [
         "/jardines/Modelo Flamboyan/1.webp",
@@ -257,7 +258,7 @@
       "status": "Preventa 2026",
       "nombre_modelo": "Departamento Cedro Plus",
       "precio": 2248750,
-      "metros_construccion": 92.1,
+      "metros_construccion": 104.06,
       "metros_construccion_variable": true,
       "metros_terreno": null,
       "levels": [
