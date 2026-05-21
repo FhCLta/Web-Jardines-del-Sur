@@ -192,7 +192,7 @@ export default async function ModelPage({
       <section id="top" className={styles.modelHero}>
         <div className="container">
           <div className={styles.modelHeroInner}>
-            <span className={styles.eyebrow}>
+            <span className={`${styles.eyebrow} ${modelType === "Departamento" ? styles.eyebrowDepto : ""}`}>
               <span className={styles.eyebrowDot} aria-hidden="true" />
               <span className={styles.eyebrowMain}>{eyebrowMain}</span>
               <span className={styles.eyebrowSep} aria-hidden="true"> · </span>
