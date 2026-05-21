@@ -165,12 +165,18 @@ export default async function ModelPage({
     ],
   };
 
-  const heroEyebrow =
+  const eyebrowMain =
     modelType === "Casa"
-      ? "CASA · CANCÚN"
+      ? `CASA RESIDENCIAL · ${dev.name.toUpperCase()}`
       : modelType === "Departamento"
-      ? "DEPARTAMENTO · CANCÚN"
-      : "MODELO · CANCÚN";
+      ? `DEPARTAMENTO · ${dev.name.toUpperCase()}`
+      : `MODELO · ${dev.name.toUpperCase()}`;
+  const eyebrowSub = "POLÍGONO SUR CANCÚN";
+
+  const strippedName = property.nombre_modelo.replace(/^(Casa|Departamento)\s+/i, "");
+  const heroTitle = strippedName.toLowerCase().startsWith("modelo ")
+    ? strippedName
+    : `Modelo ${strippedName}`;
 
   return (
     <div className={styles.wrapper}>
@@ -188,13 +194,13 @@ export default async function ModelPage({
           <div className={styles.modelHeroInner}>
             <span className={styles.eyebrow}>
               <span className={styles.eyebrowDot} aria-hidden="true" />
-              {heroEyebrow}
+              <span className={styles.eyebrowMain}>{eyebrowMain}</span>
+              <span className={styles.eyebrowSep} aria-hidden="true"> · </span>
+              <span className={styles.eyebrowSub}>{eyebrowSub}</span>
             </span>
 
             <h1 className={styles.h1}>
-              {property.nombre_modelo}
-              <br />
-              <em>en {dev.name}</em>
+              {heroTitle}
             </h1>
 
             <p className={styles.subtitle}>

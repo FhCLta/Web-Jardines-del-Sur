@@ -48,6 +48,30 @@
   background: rgba(209, 146, 0, 0.12);
   border: 1px solid rgba(209, 146, 0, 0.35);
   margin-bottom: 1.4rem;
+  text-align: center;
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .eyebrow {
+    background: transparent;
+    border: none;
+    padding: 0;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+  }
+  .eyebrow .eyebrowDot,
+  .eyebrow .eyebrowSep {
+    display: none;
+  }
+  .eyebrowMain,
+  .eyebrowSub {
+    display: block;
+  }
 }
 
 .eyebrowDot {
