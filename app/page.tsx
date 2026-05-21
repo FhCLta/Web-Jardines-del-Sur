@@ -143,6 +143,24 @@ export default async function Home() {
 
   return (
     <div className={styles.page}>
+      {/* Preload del hero solo en el home (LCP). React 19 hoistea estos <link>
+          al <head>. NO va en layout.tsx porque ahí aplica a todas las páginas. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/optimized/hero/alberca-mobile.webp"
+        type="image/webp"
+        media="(max-width: 767px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/optimized/hero/alberca-desktop.webp"
+        type="image/webp"
+        media="(min-width: 768px)"
+        fetchPriority="high"
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}

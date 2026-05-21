@@ -1,5 +1,40 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **⚠️ EN PROGRESO — Catálogo WhatsApp Business (sesión 16, 20 may 2026):** Se simplificó el formato del catálogo. El usuario adoptó un patrón hub-and-spoke: catálogo simple (imagen fachada + 4 líneas de info + URL corta) → click → ficha completa en el sitio. Esto es estratégicamente superior porque (1) menos texto = mejor UX mobile, (2) actualización en un solo lugar (el sitio), (3) tracking GTM funciona normal en cada click, (4) curiosity gap aumenta CTR. **Formato final establecido por el usuario** (incluye "4 Niveles" en deptos para clarificar arquitectura del edificio):
+> ```
+> [Nombre Modelo]
+> Desde $X,XXX,XXX MXN
+>
+> [4 Niveles (solo deptos)]
+> N recámaras · N baños · N niveles
+> X m² construcción [· X m² terreno]
+> [Featured highlight]
+>
+> Ver ficha y recorrido virtual 👇
+> https://jardinesdelsurcancun.mx/<slug>
+> ```
+> **Listas ya generadas** (10 de 11): Capua, Cedro Plus Jardines, Cedro Plus Lirios, Flamboyán, Ceiba, Tabachín, Noni Jardines, Fresno Elite, Modelo Álamo, Noni Elite, Casa Noni (La Rioja). **Falta**: ninguna casa pendiente — todas las 11 descripciones generadas. Si el usuario quiere variaciones (más corto o más largo), ya está el patrón establecido.
+
+> **Nota fix preload warning en consola (sesión 16, 20 may 2026):** El preload de `alberca-desktop.webp` y `alberca-mobile.webp` estaba en `app/layout.tsx` (root layout) lo que hacía que se ejecutara en TODAS las páginas, incluyendo silos y modelos donde esa imagen no se usa. Browser tiraba warning "preloaded but not used within a few seconds". **Fix**: removidos los `<link rel="preload">` del `<head>` en `app/layout.tsx` y movidos al JSX de `app/page.tsx` (home only). React 19 hoistea automáticamente los `<link>` tags al `<head>` del documento. Resultado: home sigue precargando hero correctamente; silos y modelos ya no descargan ~50 KB innecesarios + console limpia + sin penalización en Lighthouse "Best Practices".
+
+> **Nota Firebase redirects para URLs cortas (sesión 15-16):** Creados redirects 301 en `firebase.json` para resolver dos problemas: (1) WhatsApp Business Catalog tiene límite de caracteres en el campo de enlace, (2) WhatsApp rechaza URLs con `#` en el string (validación regex). Por eso se hicieron DOS sets de redirects:
+> 1. **URLs cortas al modelo (top de página)**: `/capua`, `/cedro-plus`, `/flamboyan`, `/ceiba`, `/tabachin`, `/noni`, `/fresno-elite`, `/alamo`, `/noni-elite`, `/noni-la-rioja`, `/lirios-cedro`, más silos `/jardines`, `/la-rioja`, `/lirios`.
+> 2. **URLs cortas DIRECTO al tour 360°**: `/tour-capua`, `/tour-cedro-plus`, `/tour-flamboyan`, `/tour-ceiba`, `/tour-tabachin`, `/tour-noni`, `/tour-fresno-elite`, `/tour-alamo`, `/tour-noni-elite`, `/tour-noni-la-rioja`, `/tour-lirios-cedro`. El destination del 301 incluye `#recorrido` que el browser preserva al hacer redirect → llega directo al tour.
+
+> **Nota correcciones masivas de datos inventario (sesión 15-16, 19-20 may 2026):** El usuario hizo correcciones importantes a los datos oficiales (de los planos/sales sheets de Altta Homes) que estaban inexactos en `inventory.json`:
+>
+> **Jardines del Sur 6**:
+> - **Cedro Plus**: precio $2,100,000 → **$2,247,700**, m² 104.00 → **104.06** estándar, agregado `metros_construccion_variable: true`, agregado "Roof garden (sólo N3)" al level desc. N3 tiene 121.13 m² con roof garden.
+> - **Flamboyán**: amenidades_key "2.5 Baños" → **"3 Baños"** + agregado "Vestidor". Level 1 corregido: el baño completo de PB está en **área común (sala)**, no dentro de la recámara. Layout final: PB con 1 recámara sin baño propio + baño común; N2 con principal (con baño + vestidor) + secundaria con baño. Total 3 baños completos, 3 recámaras.
+>
+> **La Rioja 2** (TODOS los modelos corregidos con layout oficial detallado):
+> - **Fresno Elite**: precio $4,446,997 → **$4,294,950**, m² 194.80 → **191.70**, terreno 120 → **150**, **DE 3 NIVELES A 2 NIVELES** (era error), baños 3.5 → **2.5**. Layout PB: estacionamiento 2 autos, **recibidor con doble altura**, cocina con alacena, sala-comedor, medio baño, cuarto de lavado, patio posterior con terraza. Layout PA: estancia TV, baño completo, principal con baño privado + closet-vestidor, 2 secundarias con closet.
+> - **Modelo Álamo**: m² 200.00 → **200.20**. Layout corregido: PB con estacionamiento 2 autos, medio baño, sala, comedor, **cocina con alacena**, cuarto de lavado, patio posterior con terraza. PA con principal (baño privado + vestidor), **2 secundarias CADA UNA con baño privado**, estancia TV, terraza. Total **3.5 baños** (correcto), 3 recámaras, cada una con su baño privado.
+> - **Noni Elite**: precio $4,294,950 → **$4,446,997.50** (es el más caro ahora), m² 191.70 → **194.80**, **AHORA SON 3 NIVELES** (era 2). Baños 2.5 → **3.5**. Layout: PB con estacionamiento 2 autos, recibidor, medio baño, sala, comedor, cocina integral con **barra de granito**, alacena bajo escaleras, cuarto de lavado, patio posterior. 1er nivel: principal con baño + vestidor, 2 secundarias, baño completo, **espacio para home office**. 2do nivel: sala TV, baño completo, terraza al frente.
+> - **Casa Noni (La Rioja)**: **MISMA arquitectura que Noni Elite pero sin el 2do nivel** (N3 de Noni Elite). PB + 1er nivel idénticos a Noni Elite. Recámaras 2 → **3** (corregido — antes decía 2 erróneamente). Baños 2.5 (correcto). m² 156.70 sin cambio. Precio $4,049,375 sin cambio. **Galería actualizada**: usa imagen 1 (fachada propia de Casa Noni) + imágenes 5, 6, 9, 2, 4, 7 de Casa Noni Elite (saltó 3 que era duplicada de 2, y 8/10/11 que son del 2do nivel N3 con terraza y sala TV). Total 7 imágenes ahora vs 11 antes.
+
+> **Nota Casa Ceiba — clarificación uso de "Roof Garden" (sesión 16):** El usuario preguntó si está bien decir "Roof Garden" en Ceiba N3 cuando ese nivel también tiene una recámara, baño y estancia TV. **Respuesta**: SÍ es correcto. La arquitectura es un "torreón con roof garden" — parte construida (recámara + estancia + baño) + parte descubierta como terraza sobre el techo del N2. La terraza descubierta del N3 está sobre el techo del N2 = roof garden técnicamente correcto. Comparativa con otros modelos: Fresno Elite "Terraza al frente" en PA (NO es roof garden, es terraza techada/cubierta intermedia), Modelo Álamo "Terraza" en N2 (terraza intermedia, no azotea). Solo Ceiba (y Cedro Plus N3) son auténticos roof gardens. Ceiba es el modelo "estrella" diferenciado por este Roof Garden privado vs la competencia.
+
 > **⚠️ EN PROGRESO — Catálogo WhatsApp Business + descripciones de modelos (sesión 15, 20 may 2026):** El usuario está armando el catálogo de WhatsApp Business con cada modelo como producto. Ya generadas las descripciones para: Departamento Capua, Departamento Cedro Plus (Jardines y Lirios), Casa Flamboyán, Casa Ceiba. **Faltan**: Casa Tabachín, Casa Noni (Jardines), Casa Fresno Elite, Casa Modelo Álamo, Casa Noni Elite, Casa Noni (La Rioja). Formato establecido por el usuario:
 > ```
 > [Nombre Modelo]
@@ -204,8 +239,8 @@
 
 > **Nota SEO 11 mayo 2026:** primer bloque SEO publicado en Firebase Hosting y verificado en `https://jardinesdelsurcancun.mx`: canonical al dominio `.mx`, metadata/Open Graph/Twitter, H1 orientado a "Casas y departamentos en Cancún", JSON-LD `RealEstateAgent` + `WebSite` + `ItemList`, `robots.txt` y `sitemap.xml`. Siguiente fase sugerida: rutas silo `/desarrollos-cancun/...` por desarrollo.
 
-> **Última actualización:** 20 de mayo de 2026 (sesión 15)  
-> **Estado:** Sesión 15 deployada a producción ✅. **Catálogo WhatsApp en construcción**: 5 modelos con descripción lista (Capua, Cedro Plus Jardines, Cedro Plus Lirios, Flamboyán, Ceiba). **Firebase redirects** creados para URLs cortas (`/capua`, `/tour-capua`, etc.) y bypass del rechazo de WhatsApp a URLs con `#`. **Correcciones de datos**: Cedro Plus ambos a 104.06/121.13 m² + precio Jardines a $2,247,700; Flamboyán a 3 baños completos + baño PB en área común (no en recámara). **Pendientes priorizados próxima sesión** (todos documentados arriba): (1) **Continuar catálogo WhatsApp**: faltan Tabachín, Noni Jardines, Fresno Elite, Modelo Álamo, Noni Elite, Noni La Rioja, Cedro Plus Lirios (recomendación: validar primero con el usuario si hay correcciones de datos pendientes en estos modelos antes de generar las descripciones). (2) Replicar AmenitiesSection con datos propios para Jardines del Sur 6 y La Rioja 2 (infra lista, falta data en `dev-content.ts` + imágenes para La Rioja). (3) Cuando el usuario lance Google Ads ($100 MXN/día), configurar conversión "WhatsApp Click" en GTM dashboard + montar campaña Search con 3 grupos refinados (Brand defense $20-30, Modelos específicos $30-40, Zonal alto intent $30-40) — CPA esperado $30-45 MXN.
+> **Última actualización:** 20 de mayo de 2026 (sesión 16)  
+> **Estado:** Sesión 16 deployada a producción ✅. **Catálogo WhatsApp completo**: las 11 descripciones generadas con formato simplificado hub-and-spoke (fachada + 4 líneas + URL corta → click → ficha completa). **Correcciones masivas de datos** aplicadas en todos los modelos de La Rioja 2 con info oficial de planos/sales sheets: Fresno Elite (2 niveles, $4.29M, doble altura), Modelo Álamo (3.5 baños cada recámara con baño privado), Noni Elite (3 niveles, $4.44M, home office, modelo más caro), Casa Noni (3 recámaras, layout = Noni Elite sin N3, galería compartida). Cedro Plus (Jardines y Lirios) con 104.06/121.13 m² y precio Jardines $2,247,700. **Fix preload warning**: removidos preloads del root layout, movidos solo a home → console limpia + 50KB menos en pages internas + sin penalización Lighthouse. **Pendientes priorizados próxima sesión** (todos documentados arriba): (1) Replicar AmenitiesSection con datos propios para Jardines del Sur 6 y La Rioja 2 (infra lista, falta data en `dev-content.ts` + imágenes para La Rioja). (2) Cuando el usuario lance Google Ads ($100 MXN/día), configurar conversión "WhatsApp Click" en GTM dashboard + montar campaña Search con 3 grupos refinados (Brand defense $20-30, Modelos específicos $30-40, Zonal alto intent $30-40) — CPA esperado $30-45 MXN. (3) Re-medir PageSpeed en páginas de modelo/silo después del fix de preload (esperado: subir 2-4 puntos vs medición anterior).
 
 ---
 

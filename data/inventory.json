@@ -144,15 +144,14 @@
       "development": "La Rioja 2",
       "status": "Preventa",
       "nombre_modelo": "Casa Fresno Elite",
-      "precio": 4446997,
-      "metros_construccion": 194.80,
-      "metros_terreno": 120.00,
+      "precio": 4294950,
+      "metros_construccion": 191.70,
+      "metros_terreno": 150.00,
       "levels": [
-        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Cuarto de lavado"},
-        {"nivel": 2, "desc": "Recámara principal, 2 Recámaras secundarias, Área TV"},
-        {"nivel": 3, "desc": "Estancia TV, Baño completo, Terraza al frente"}
+        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Recibidor con doble altura, Cocina con área de alacena, Sala-Comedor, Medio baño, Cuarto de lavado, Patio posterior con terraza"},
+        {"nivel": 2, "desc": "Estancia de TV, Baño completo, Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias con área para closet"}
       ],
-      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Terraza", "Cuarto de lavado"],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Doble altura", "Vestidor", "Estacionamiento 2 autos", "Patio posterior con terraza"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/fresno-elite",
       "images": [
         "/larioja2/Casa Fresno Elite/1.webp",
@@ -173,13 +172,13 @@
       "status": "Preventa",
       "nombre_modelo": "Casa Modelo Alamo",
       "precio": 4436025,
-      "metros_construccion": 200.00,
+      "metros_construccion": 200.20,
       "metros_terreno": 150.00,
       "levels": [
-        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Cuarto de lavado"},
-        {"nivel": 2, "desc": "Recámara principal con baño, 2da y 3ra recámara con baño, Terraza"}
+        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Medio baño, Sala, Comedor, Cocina con área de alacena, Cuarto de lavado, Patio posterior con terraza"},
+        {"nivel": 2, "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias con baño privado y closet, Estancia de TV, Terraza"}
       ],
-      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Terraza", "Cuarto de lavado"],
+      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Vestidor", "Estacionamiento 2 autos", "Patio posterior", "Terraza superior"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/alamo",
       "images": [
         "/larioja2/Casa Modelo Alamo/1.webp",
@@ -201,14 +200,15 @@
       "development": "La Rioja 2",
       "status": "Preventa",
       "nombre_modelo": "Casa Noni Elite",
-      "precio": 4294950,
-      "metros_construccion": 191.70,
+      "precio": 4446997.5,
+      "metros_construccion": 194.80,
       "metros_terreno": 150.00,
       "levels": [
-        {"nivel": 1, "desc": "Sala, Comedor, Cocina integral, 1/2 Baño, Cuarto de lavado"},
-        {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño y vestidor, 2 secundarias con baño compartido"}
+        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Recibidor, Medio baño, Sala, Comedor, Cocina integral con barra de granito, Área de alacena bajo escaleras, Cuarto de lavado, Patio posterior"},
+        {"nivel": 2, "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias, Baño completo, Espacio para home office"},
+        {"nivel": 3, "desc": "Sala de TV, Baño completo, Terraza al frente"}
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Estancia TV", "Cuarto de lavado"],
+      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Vestidor", "Home office", "Estacionamiento 2 autos", "Terraza al frente"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni-elite",
       "images": [
         "/larioja2/Casa Noni Elite/1_new.png",
@@ -233,23 +233,19 @@
       "metros_construccion": 156.70,
       "metros_terreno": 120.00,
       "levels": [
-        {"nivel": 1, "desc": "Sala, Comedor, Cocina, 1/2 Baño, Cuarto de lavado"},
-        {"nivel": 2, "desc": "Estancia TV, Recámara principal con baño/vestidor, Recámara secundaria con baño"}
+        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Recibidor, Medio baño, Sala, Comedor, Cocina integral con barra de granito, Área de alacena bajo escaleras, Cuarto de lavado, Patio posterior"},
+        {"nivel": 2, "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias, Baño completo, Espacio para home office"}
       ],
-      "amenidades_key": ["2 Recámaras", "2.5 Baños", "Estancia TV", "Cuarto de lavado"],
+      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Vestidor", "Home office", "Estacionamiento 2 autos"],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni",
       "images": [
         "/larioja2/Casa noni/1.webp",
-        "/larioja2/Casa noni/2.webp",
-        "/larioja2/Casa noni/3.webp",
-        "/larioja2/Casa noni/4.webp",
-        "/larioja2/Casa noni/5.webp",
-        "/larioja2/Casa noni/6.webp",
-        "/larioja2/Casa noni/7.webp",
-        "/larioja2/Casa noni/8.webp",
-        "/larioja2/Casa noni/9.webp",
-        "/larioja2/Casa noni/10.webp",
-        "/larioja2/Casa noni/11.webp"
+        "/larioja2/Casa Noni Elite/5.webp",
+        "/larioja2/Casa Noni Elite/6.webp",
+        "/larioja2/Casa Noni Elite/9.webp",
+        "/larioja2/Casa Noni Elite/2.webp",
+        "/larioja2/Casa Noni Elite/4.webp",
+        "/larioja2/Casa Noni Elite/7.webp"
       ]
     },
     {

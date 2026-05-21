@@ -96,23 +96,6 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${montserrat.variable} ${lato.variable} ${playfair.variable}`}>
       <head>
-        {/* Preload primera imagen del hero para mejor LCP */}
-        <link
-          rel="preload"
-          as="image"
-          href="/optimized/hero/alberca-mobile.webp"
-          type="image/webp"
-          media="(max-width: 767px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/optimized/hero/alberca-desktop.webp"
-          type="image/webp"
-          media="(min-width: 768px)"
-          fetchPriority="high"
-        />
         {/* Google Tag Manager — lazyOnload para no bloquear LCP. Los clicks en wa.me
             se trackean igual porque GTM usa dataLayer con buffer interno. */}
         <Script id="gtm-init" strategy="lazyOnload">
