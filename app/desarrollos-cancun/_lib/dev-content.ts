@@ -81,9 +81,10 @@ export const DEVS: Record<DevSlug, DevContent> = {
     intro: {
       eyebrow: "Polígono Sur · Cancún",
       paragraphs: [
-        "Jardines del Sur 6 es la sexta etapa del exitoso desarrollo Jardines del Sur en el Polígono Sur de Cancún, una de las zonas con mayor crecimiento y plusvalía de Quintana Roo. Aquí encontrarás casas y departamentos de tres recámaras diseñados por Altta Homes, la marca residencial de Grupo Sadasi con 50 años de trayectoria y más de 430,000 viviendas entregadas en 12 estados del país.",
-        "El catálogo incluye seis modelos cuidadosamente diseñados: los departamentos Capua y Cedro Plus, ideales para parejas jóvenes y primer hogar, y las casas Flamboyán, Ceiba, Tabachín y Noni, pensadas para familias que buscan espacio, privacidad y áreas comunes. Todos los modelos cuentan con tecnología Smart Home Ready, acabados de calidad premium y opciones de financiamiento Infonavit, FOVISSSTE y crédito bancario.",
-        "El residencial está rodeado de amenidades pensadas para el bienestar diario: alberca tipo resort, gimnasio equipado, área infantil, cancha deportiva multifuncional y casa club. La cercanía a vialidades principales, centros comerciales, escuelas y la zona hotelera de Cancún convierten a Jardines del Sur 6 en una de las inversiones residenciales más rentables y seguras del sureste mexicano.",
+        "Jardines del Sur 6 es la sexta etapa del residencial más exitoso del Polígono Sur de Cancún. Un oasis de estilo y serenidad construido con la calidad y garantía que solo una marca con más de 50 años de experiencia como Grupo Sadasi puede ofrecer — más de 430,000 viviendas entregadas en 12 estados del país.",
+        "Cada detalle ha sido meticulosamente diseñado para ofrecer el máximo confort. Espaciosas áreas, acabados elegantes y tecnología Smart Home Ready convierten tu hogar en un santuario de sofisticación. Las amenidades de clase mundial — alberca tipo resort, casa club, gimnasio cerrado, áreas verdes, juegos infantiles y skate park — crean un entorno donde la seguridad y la belleza se entrelazan.",
+        "El residencial ofrece seis modelos para distintos perfiles familiares: los departamentos Capua y Cedro Plus, ideales para parejas jóvenes y primer hogar, y las casas Flamboyán, Ceiba, Tabachín y Noni, pensadas para familias que buscan espacio y privacidad. Todos con esquemas flexibles de financiamiento — Infonavit, FOVISSSTE y crédito bancario.",
+        "La ubicación privilegiada cerca de la Av. 127 te conecta con escuelas de prestigio, plazas comerciales, restaurantes y las playas más hermosas del Caribe Mexicano. Vivir con estilo es… vivir en Jardines del Sur.",
       ],
     },
     highlights: [
@@ -94,6 +95,61 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Alberca, gimnasio, casa club, cancha y área infantil",
       "Polígono Sur Cancún · Av. 127",
     ],
+    amenitiesSection: {
+      header: {
+        eyebrow: "Estilo de Vida · Jardines del Sur 6",
+        titleLine1: "Amenidades que elevan",
+        titleEm: "tu calidad de vida",
+        subtitle:
+          "Jardines del Sur 6 ofrece las mejores amenidades para disfrutar en familia, ejercitarte y vivir conectado con tu comunidad.",
+      },
+      items: [
+        {
+          img: "/jardines/amenidades/alberca.webp",
+          label: "Alberca y Casa Club",
+          desc: "Alberca tipo resort rodeada de jardines tropicales y casa club para convivir.",
+          size: "large",
+        },
+        {
+          img: "/jardines/amenidades/gimnasio.webp",
+          label: "Gimnasio Cerrado",
+          desc: "Equipado y climatizado, abierto a residentes para entrenar todo el año.",
+          size: "tall",
+        },
+        {
+          img: "/jardines/amenidades/juegos-infantiles.webp",
+          label: "Juegos Infantiles",
+          desc: "Área lúdica al aire libre para los más pequeños del residencial.",
+          size: "normal",
+        },
+        {
+          img: "/jardines/amenidades/skate-park.webp",
+          label: "Skate Park",
+          desc: "Pista profesional — una amenidad única que diferencia a Jardines del Sur 6.",
+          size: "normal",
+        },
+        {
+          img: "/jardines/amenidades/areas-verdes.webp",
+          label: "Áreas Verdes",
+          desc: "Senderos y jardines integrados con vegetación nativa para caminar y convivir.",
+          size: "wide",
+        },
+      ],
+      extraAmenities: [
+        "Caseta de seguridad",
+        "Área de usos múltiples",
+        "Canchas deportivas",
+        "Área para mascotas",
+        "Ejercitadores al aire libre",
+        "Estacionamiento de visitas",
+      ],
+      trustItems: [
+        { num: "50", label: "Años de trayectoria Sadasi" },
+        { num: "430,000+", label: "Viviendas entregadas" },
+        { num: "6", label: "Modelos disponibles" },
+        { num: "11", label: "Amenidades del desarrollo" },
+      ],
+    },
   },
 
   "la-rioja-2": {
@@ -111,7 +167,10 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     hero: {
-      slides: ["/optimized/hero/vista-aerea.webp"],
+      slides: [
+        "/optimized/hero/vista-aerea.webp",
+        "/larioja2/amenidades/acceso.webp",
+      ],
       mobileImage: "/optimized/hero/vista-aerea.webp",
       preloadImage: "/optimized/hero/vista-aerea.webp",
       eyebrow: {
@@ -130,9 +189,10 @@ export const DEVS: Record<DevSlug, DevContent> = {
     intro: {
       eyebrow: "Residencial Premium · Cancún",
       paragraphs: [
-        "La Rioja 2 es la segunda etapa del residencial más exclusivo de Altta Homes en Cancún. Pensado para familias que buscan privacidad, espacios amplios y acabados de alta gama, ofrece cuatro modelos de casas con tres recámaras, 2.5 a 3.5 baños y, en algunos casos, hasta tres niveles con terraza al frente y vista panorámica.",
-        "Los modelos disponibles son la Casa Fresno Elite, la Casa Modelo Álamo, la Casa Noni Elite y la Casa Noni, cada una con distribución optimizada para distintos perfiles familiares. Todas incluyen sala, comedor, cocina integral, medio baño en planta baja, cuarto de lavado independiente y recámara principal con vestidor y baño completo. Los recorridos virtuales 360° permiten conocer cada espacio antes de visitar el modelo en sitio.",
-        "El desarrollo cuenta con casa club, alberca, áreas verdes integradas y seguridad controlada. La Rioja 2 es una propuesta para quienes valoran la exclusividad, la calidad constructiva certificada por Grupo Sadasi y una ubicación estratégica con acceso rápido a las principales avenidas, centros comerciales y zonas escolares de Cancún.",
+        "Sé parte de la historia de La Rioja 2 Residencial en Cancún. Vivir aquí será una nueva aventura cada día — la tranquilidad de un ambiente seguro y armonioso que complementará tu estilo de vida, en una de las zonas de mayor plusvalía de la ciudad.",
+        "Cada hogar ha sido cuidadosamente diseñado para ofrecerte espacios únicos, materiales de alta calidad y atención al detalle que transforman tu vida en un sinnúmero de experiencias inolvidables. Espacios amplios, acabados de alta gama y, en algunos modelos, hasta tres niveles con terraza al frente.",
+        "Escoge entre cuatro modelos pensados para distintos perfiles familiares: Casa Fresno Elite, Modelo Álamo, Casa Noni Elite y Casa Noni. Cada uno con distribución optimizada — sala, comedor, cocina integral, medio baño en planta baja, cuarto de lavado independiente y recámara principal con vestidor y baño completo. Los recorridos virtuales 360° permiten conocer cada espacio antes de visitar el modelo en sitio.",
+        "El desarrollo cuenta con casa club, alberca, gimnasio, dog park, cancha de pádel, áreas verdes integradas y vigilancia 24/7. La Rioja 2 es la propuesta para quienes valoran la exclusividad, la calidad constructiva certificada por Grupo Sadasi y una ubicación estratégica en Cancún.",
       ],
     },
     highlights: [
@@ -143,6 +203,59 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Casa club, alberca y áreas verdes",
       "Recorridos virtuales 360° disponibles",
     ],
+    amenitiesSection: {
+      header: {
+        eyebrow: "Estilo de Vida · La Rioja 2",
+        titleLine1: "Amenidades únicas para",
+        titleEm: "una vida exclusiva",
+        subtitle:
+          "Conscientes de la importancia de conectar con el entorno que te rodea, en La Rioja 2 podrás encontrar y disfrutar de amenidades ideales para relajarte, convivir y crear recuerdos inolvidables con tu familia y amigos.",
+      },
+      items: [
+        {
+          img: "/larioja2/amenidades/alberca.webp",
+          label: "Alberca",
+          desc: "Espejo de agua rodeado de áreas verdes y jardines tropicales para disfrutar en familia.",
+          size: "large",
+        },
+        {
+          img: "/larioja2/amenidades/gimnasio.webp",
+          label: "Gimnasio",
+          desc: "Equipado para entrenamiento funcional, abierto a residentes del desarrollo.",
+          size: "tall",
+        },
+        {
+          img: "/larioja2/amenidades/areas-verdes.webp",
+          label: "Parque Principal",
+          desc: "Senderos y áreas verdes integradas para caminar, ejercitarte o convivir.",
+          size: "normal",
+        },
+        {
+          img: "/larioja2/amenidades/dog-park.webp",
+          label: "Área para Mascotas",
+          desc: "Dog park privado diseñado especialmente para que tu mascota juegue y socialice.",
+          size: "normal",
+        },
+        {
+          img: "/larioja2/amenidades/acceso.webp",
+          label: "Acceso con Vigilancia 24/7",
+          desc: "Caseta de control de acceso con seguridad permanente para tu tranquilidad.",
+          size: "wide",
+        },
+      ],
+      extraAmenities: [
+        "Cancha de Pádel",
+        "Área de calistenia",
+        "Área de usos múltiples",
+        "Estacionamiento para visitas",
+      ],
+      trustItems: [
+        { num: "50", label: "Años de trayectoria Sadasi" },
+        { num: "430,000+", label: "Viviendas entregadas" },
+        { num: "4", label: "Modelos premium" },
+        { num: "24/7", label: "Vigilancia y seguridad" },
+      ],
+    },
   },
 
   "lirios-residencial-2": {
@@ -203,7 +316,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       },
       items: [
         {
-          img: "/optimized/hero/hero-lirios.webp",
+          img: "/lirios/amenidades/pergolas.webp",
           label: "Pérgolas y Áreas de Reunión",
           desc: "Espacios cubiertos diseñados para convivir con familia y amigos.",
           size: "large",

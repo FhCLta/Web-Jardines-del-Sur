@@ -203,45 +203,34 @@ export default async function ModelPage({
               {heroTitle}
             </h1>
 
-            <p className={styles.subtitle}>
-              {recamaras ? `${recamaras} recámaras` : ""}
-              {recamaras && banos ? " · " : ""}
-              {banos ? `${banos} baños` : ""}
-              {property.levels.length > 1
-                ? ` · ${property.levels.length} niveles`
-                : ""}
-              .
-            </p>
 
-            <div className={styles.heroStats}>
-              <div className={styles.heroStat}>
-                <span className={styles.heroStatLabel}>Precio desde</span>
-                <span className={styles.heroStatValue}>
-                  <span className={styles.priceDisplay}>
-                    <span className={styles.priceAmount}>
-                      ${property.precio.toLocaleString("es-MX")}
-                    </span>
-                    <span className={styles.priceCurrency}>MXN</span>
+            {property.valor_avaluo ? (
+              <div className={styles.heroPriceBlock}>
+                <span className={styles.heroAvaluoLine}>
+                  <span className={styles.heroAvaluoLabel}>Valor avalúo</span>
+                  <span className={styles.heroAvaluoAmount}>
+                    ${property.valor_avaluo.toLocaleString("es-MX")} MXN
                   </span>
                 </span>
-              </div>
-              <div className={styles.heroStat}>
-                <span className={styles.heroStatLabel}>
-                  {property.metros_construccion_variable ? "Construcción desde" : "Construcción"}
+                <span className={styles.heroPriceLabel}>
+                  {property.precio_variable
+                    ? "Precio con descuento desde"
+                    : "Precio con descuento"}
                 </span>
-                <span className={styles.heroStatValue}>
-                  {property.metros_construccion} m²
+                <span className={styles.heroPriceAmount}>
+                  ${property.precio.toLocaleString("es-MX")}{" "}
+                  <span className={styles.heroPriceCurrency}>MXN</span>
                 </span>
               </div>
-              {property.metros_terreno && (
-                <div className={styles.heroStat}>
-                  <span className={styles.heroStatLabel}>Terreno</span>
-                  <span className={styles.heroStatValue}>
-                    {property.metros_terreno} m²
-                  </span>
-                </div>
-              )}
-            </div>
+            ) : (
+              <div className={styles.heroPriceBlock}>
+                <span className={styles.heroPriceLabel}>Precio desde</span>
+                <span className={styles.heroPriceAmount}>
+                  ${property.precio.toLocaleString("es-MX")}{" "}
+                  <span className={styles.heroPriceCurrency}>MXN</span>
+                </span>
+              </div>
+            )}
 
             <div className={styles.heroCtas}>
               <a
@@ -288,26 +277,77 @@ export default async function ModelPage({
             <div className={styles.sectionHeader}>
               <h2>Distribución</h2>
               <p>
-                {property.levels.length > 1
-                  ? `Distribución por nivel del modelo ${property.nombre_modelo}.`
-                  : `Distribución completa del modelo ${property.nombre_modelo}.`}
+                Distribución completa del modelo {strippedName}.
               </p>
             </div>
-            <div className={styles.levels}>
-              {property.levels.map((level) => (
-                <div key={level.nivel} className={styles.levelBlock}>
-                  <h3>
-                    {property.levels.length > 1
-                      ? `Nivel ${level.nivel}`
-                      : "Espacios"}
-                  </h3>
-                  <ul className={styles.levelList}>
-                    {level.desc.split(",").map((item) => (
-                      <li key={item.trim()}>{item.trim()}</li>
-                    ))}
-                  </ul>
+
+            {/* Stats overview */}
+            <div className={styles.distStats}>
+              {recamaras && (
+                <div className={styles.distStat}>
+                  <svg className={styles.distStatIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 18v-5a3 3 0 013-3h12a3 3 0 013 3v5M3 18h18M6 10V7a2 2 0 012-2h8a2 2 0 012 2v3" />
+                  </svg>
+                  <span className={styles.distStatValue}>{recamaras}</span>
+                  <span className={styles.distStatLabel}>recámaras</span>
                 </div>
-              ))}
+              )}
+              {banos && (
+                <div className={styles.distStat}>
+                  <svg className={styles.distStatIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M4 12h16v3a4 4 0 01-4 4H8a4 4 0 01-4-4v-3zM6 12V6a2 2 0 012-2h1a2 2 0 012 2M16 19v2M8 19v2" />
+                  </svg>
+                  <span className={styles.distStatValue}>{banos}</span>
+                  <span className={styles.distStatLabel}>baños</span>
+                </div>
+              )}
+              <div className={styles.distStat}>
+                <svg className={styles.distStatIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 11l9-8 9 8M5 9.5V21h14V9.5" />
+                </svg>
+                <span className={styles.distStatValue}>{property.metros_construccion}</span>
+                <span className={styles.distStatLabel}>
+                  {property.metros_construccion_variable ? "m² constr. (desde)" : "m² construcción"}
+                </span>
+              </div>
+              {property.metros_terreno && (
+                <div className={styles.distStat}>
+                  <svg className={styles.distStatIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 21V7l9-4 9 4v14H3z M9 21V13h6v8" />
+                  </svg>
+                  <span className={styles.distStatValue}>{property.metros_terreno}</span>
+                  <span className={styles.distStatLabel}>m² terreno</span>
+                </div>
+              )}
+              {property.levels.length > 1 && (
+                <div className={styles.distStat}>
+                  <svg className={styles.distStatIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M3 21h18M5 21V11l3-3M19 21V11l-3-3M9 8h6" />
+                  </svg>
+                  <span className={styles.distStatValue}>{property.levels.length}</span>
+                  <span className={styles.distStatLabel}>niveles</span>
+                </div>
+              )}
+            </div>
+
+            <div className={styles.levels}>
+              {property.levels.map((level) => {
+                const levelNames = ["Planta Baja", "Planta Alta", "Tercer Nivel"];
+                const levelName =
+                  property.levels.length === 1
+                    ? "Espacios"
+                    : levelNames[level.nivel - 1] || `Nivel ${level.nivel}`;
+                return (
+                  <div key={level.nivel} className={styles.levelBlock}>
+                    <h3>{levelName}</h3>
+                    <ul className={styles.levelList}>
+                      {level.desc.split(",").map((item) => (
+                        <li key={item.trim()}>{item.trim()}</li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

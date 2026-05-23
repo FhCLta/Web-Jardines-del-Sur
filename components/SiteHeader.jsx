@@ -182,7 +182,7 @@ export default function SiteHeader() {
                 {silo.name}
               </a>
             ))}
-            <a href="/#contacto" onClick={closeAndGo}>
+            <a href="#contacto" onClick={closeAndGo}>
               <span className={styles.drawerNum}>
                 {String(otherSilos.length + 1).padStart(2, "0")}
               </span>

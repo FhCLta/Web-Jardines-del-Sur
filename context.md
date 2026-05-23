@@ -1,5 +1,104 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **🎯 BACKLOG FEATURES NO URGENTES (post Google Ads launch):** Features identificadas como "alto ROI pero no bloqueantes" para hacer DESPUÉS de tener data real de conversión:
+> 1. **Reviews/testimonios visibles** (alto trust, bajo esfuerzo ~1h). **CAVEAT IMPORTANTE**: el Google Business Profile del usuario es **nuevo y AÚN NO tiene estrellas/reseñas** — implementar la sección sería contraproducente porque mostraría 0 reseñas. **Acción previa requerida**: el usuario debe pedir reseñas a clientes/contactos existentes hasta tener ≥5-10 estrellas, luego integrar.
+> 2. **Blog con 3-5 artículos SEO** (alto en autoridad de dominio, 3-5 días esfuerzo). Temas sugeridos: "Cuánto cuesta vivir en Polígono Sur Cancún", "Infonavit vs FOVISSSTE vs crédito bancario", "Plusvalía en Cancún zonas con mejor proyección 2026". Aumenta tráfico orgánico de keywords informativos que después convierten.
+> 3. **Calculadora de financiamiento Infonavit/FOVISSSTE** (alto conversión +15-20%, 1 día). Feature comprobado en real estate: cuando el usuario calcula su mensualidad antes de contactar, llega a WhatsApp con intención más alta.
+> 4. **Sticky price bar en mobile** (medio conversión, 1 hora). Cuando el usuario scrollea por la ficha del modelo, el precio se mantiene visible arriba con un botón "Cotizar" siempre disponible.
+> 5. **Video del recorrido** (no solo 360°, alto engagement, esfuerzo externo). Filmar un walkthrough humano del modelo subido a YouTube/Vimeo, embebido en la página. Distinto al tour 360° (que es estático) — un video con voz narrando da otra dimensión de venta.
+
+> **✅ COMPLETADO sesión 21 (22 may 2026 — tarde) — Refinamiento Distribución + validación PageSpeed:** Continuación de sesión 20. Cambios:
+> - **Stats overview en Distribución**: Agregada barra de stats con iconos arriba de los niveles (recámaras + baños + m² construcción + m² terreno + niveles). CSS `.distStats`, `.distStat`, `.distStatIcon`, `.distStatValue`, `.distStatLabel`. Para deptos sin terreno, ese stat se omite. Para modelos `metros_construccion_variable: true`, label dice "m² constr. (desde)".
+> - **Subtitle del hero removido**: el subtitle "X recámaras · Y baños · Z niveles + m² construcción · m² terreno" se eliminó del hero del modelo. Esa info se movió completa al stats overview de la Distribución section. El hero ahora es más limpio: título → bloque de precio → CTAs.
+> - **Description uniforme en Distribución**: cambiada de "Distribución por nivel del modelo [X]" / "Distribución completa del modelo [X]" a SIEMPRE "Distribución completa del modelo {strippedName}". Usa `strippedName` (que ya quita el prefijo "Casa"/"Departamento") para no repetir el tipo. Antes decía cosas como "del modelo Departamento Cedro Plus" — redundante; ahora dice "del modelo Cedro Plus".
+> - **Niveles renombrados a español natural**: en lugar de "NIVEL 1", "NIVEL 2", "NIVEL 3" ahora se usan nombres naturales del sector real estate mexicano:
+>   - Nivel 1 → **"Planta Baja"**
+>   - Nivel 2 → **"Planta Alta"**
+>   - Nivel 3 → **"Tercer Nivel"**
+>   - Para 1 solo nivel (deptos): sigue siendo "Espacios"
+>   - Lógica: `const levelNames = ["Planta Baja", "Planta Alta", "Tercer Nivel"];` en ModelPage.tsx.
+> - **Cedro Plus pill actualizado**: Roof garden ahora incluye metraje. "Roof garden (sólo N3)" → **"Roof garden N3 · 121.13 m²"**. Aplica a ambos: `jds6-cedro-plus` y `lirios2-cedro-plus` (replace_all en inventory.json).
+> - **PageSpeed validado** en 3 tipos de página post-cambios:
+>   - Home (`/`): **95 mobile / 97 desktop** ✅
+>   - Silo La Rioja (`/la-rioja`): **93 mobile / 100 desktop** 🏆
+>   - Modelo Capua (`/capua`): **94 mobile / 81 desktop** (desktop baja por iframe Lapentor cargando con CSS bootstrap/font-awesome de terceros — no controlable; mobile 94 sigue elite por usar preview+modal en vez de iframe directo)
+>   - **Conclusión**: mobile uniformemente 93-95 (top 1% del sector). Quality Score Google Ads garantizado en máximo. Desktop 81 en modelos es por Lapentor de terceros, no afecta Quality Score significativamente.
+
+> **✅ COMPLETADO sesión 20 (22 may 2026) — Sistema de descuentos + redesign hero modelo + catálogo amenidades:** Sesión muy productiva. Todos los 11 modelos ahora muestran "Valor avalúo + Precio con descuento" en cards y heroes. Hero del modelo rediseñado a 3 divisiones limpias.
+>
+> **1. Sistema de descuentos en inventory.json:** Agregado campo opcional `valor_avaluo?: number` a `InventoryProperty` (en `model-utils.ts`). Aplicado a TODOS los 11 modelos:
+> - **Jardines del Sur 6**: Capua ($2,330k → $1,853,800), Cedro Plus ($2,920k → $2,247,700), Flamboyán ($2,621k → $2,225,850), Ceiba ($3,230k → $2,602,050), Tabachín ($3,300k → $2,664,750), Noni ($3,850k → $3,161,125)
+> - **La Rioja 2**: Fresno Elite ($5,350k → $4,294,950), Modelo Álamo ($5,820k → $4,436,025), Noni Elite ($5,980k → $4,446,997.50), Noni ($4,490k → $4,049,375)
+> - **Lirios Residencial 2**: Cedro Plus ($2,915k → $2,248,750)
+>
+> **2. Flag separado `precio_variable?: boolean`** (en `model-utils.ts`): Distinto a `metros_construccion_variable`. Controla si el label dice "Precio con descuento **desde**" (variable por nivel) vs "Precio con descuento" (fijo). Aplicado a los 3 deptos: Capua (m² fijos 85.34 pero precio varía por nivel), Cedro Plus Jardines (m² + precio variables), Cedro Plus Lirios (m² + precio variables). Para deptos con `precio_variable` se muestra el MAX avalúo (precio anclado más alto) y el MIN precio neto (precio más atractivo) como rango "desde". Casas no llevan `precio_variable` (precio fijo por modelo).
+>
+> **3. PropertyCard.jsx refactor mayor:** Soporta 3 layouts según el contexto:
+> - **Layout centrado** (`hasDiscount === true`): nuevo `.headerCentered` con `.modelNameFull` (nombre completo) + `.priceAvaluoCentered` (avalúo inline con divider gold sutil 1px) + `.priceFinalRow` (label "Precio con descuento [desde]" + amount gold prominente).
+> - **Layout split** (`hasSplitHeader && !hasDiscount`): wrapper `.titleCol` (modelType + modelName) a la izquierda + `.priceCol` (label "Desde" + amount) a la derecha, ambos como flex columns. Antes era CSS grid 2x2 que rompía con avalúo.
+> - **Layout simple** (raro): h3 + priceBlock como antes.
+> - Lógica del label: `hasDiscount ? "Precio con descuento (desde)" : isDepartamento ? "Desde" : ""`. Casas sin avalúo no muestran label (solo precio).
+>
+> **4. Hero del ModelPage rediseñado a 3 divisiones:**
+> - **División 1: Specs unificados** — subtitle ahora tiene 2 líneas (`.subtitleLine`): línea 1 "X recámaras · Y baños · Z niveles" + línea 2 "X m² construcción · Y m² terreno". La 2da línea con color muted (62% opacity blanco). Border-bottom 1px sutil para separar.
+> - **División 2: Precio (`.heroPriceBlock`)** — flex column centered, sin background ni borde rectangular (versión simplificada). Contiene: `.heroAvaluoLine` (inline "Valor avalúo $X MXN" gris), `.heroPriceLabel` (uppercase accent-2 gold "Precio con descuento [desde]"), `.heroPriceAmount` (gradient gold prominente 2.1rem con `.heroPriceCurrency` MXN sutil).
+> - **División 3: CTAs** — sin cambios.
+> - **Eliminado**: el viejo `.heroStats` con CONSTRUCCIÓN/TERRENO como stats separados con icon borders. Ahora los m² están en el subtitle.
+> - **Pill verde "Ahorras $X"**: probado pero removido a petición del usuario (se veía "tienda de descuentos", no premium real estate).
+>
+> **5. Descripciones de amenidades para catálogo WhatsApp Business:** Generadas 3 versiones (1 por desarrollo) enfocadas SOLO en amenidades (no en datos de modelos), porque las colecciones del catálogo YA están organizadas por desarrollo y los modelos individuales se ven aparte. Cada entry funciona como "complemento" del desarrollo. Títulos del estilo "Amenidades · Jardines del Sur 6" para que el cliente entienda inmediatamente.
+
+> **Nota fix link "Contacto" en drawer mobile (sesión 19, 21 may 2026):** En `components/SiteHeader.jsx` línea 185, el link "Contacto" del drawer mobile (el que aparece cuando `isInSiloContext === true`, es decir en páginas de silo o modelo) estaba apuntando a `/#contacto` (URL absoluta al home). Esto **rompía la experiencia**: el usuario estaba en `/capua` o `/jardines`, hacía click en Contacto del menú móvil, y lo sacaba de la página actual al home + scroll. **Fix**: cambiado a `#contacto` (relativo). Ahora scrollea al footer de la página actual sin navegar. Funciona porque las 3 páginas (home, silo via SiloPage.tsx, modelo via ModelPage.tsx) ya tienen `<footer id="contacto">`. La línea 200 del mismo archivo (drawer que aparece solo en home) y la línea 83 (desktop nav que también solo aparece en home) NO se tocaron porque ahí `/#contacto` apunta a la misma página (home), funciona igual.
+
+> **Nota home AmenitiesSection refactor a "Best Of" curado (sesión 19, 21 may 2026):** Cambio del `DEFAULT_ITEMS` en `components/AmenitiesSection.jsx`. **Antes**: 6 tiles genéricos sin tag de desarrollo claro (alberca generic, gimnasio, área infantil, cancha, gimnasio exterior, vista aérea sin label). **Después**: 6 tiles curados con tag explícito por desarrollo:
+> 1. ALBERCA Y CASA CLUB · Jardines del Sur 6 (large) — `/optimized/amenidades/alberca.webp`
+> 2. ALBERCA · La Rioja 2 (tall) — `/larioja2/amenidades/alberca.webp`
+> 3. SKATE PARK · Jardines del Sur 6 (normal) — `/jardines/amenidades/skate-park.webp`
+> 4. DOG PARK · La Rioja 2 (normal) — `/larioja2/amenidades/dog-park.webp`
+> 5. PÉRGOLAS Y REUNIÓN · Lirios 2 (normal) — `/lirios/amenidades/pergolas.webp`
+> 6. ACCESO CON VIGILANCIA 24/7 · La Rioja 2 (wide) — `/larioja2/amenidades/acceso.webp`
+>
+> **Distribución 2-2-1-1**: 2 Jardines + 2 La Rioja (más 1 wide de La Rioja = 3) + 1 Lirios. La Rioja queda más representada porque es el dev premium y el más caro ($4M+). **Razón del cambio**: el home antes tenía amenidades genéricas que no diferenciaban entre los 3 desarrollos. Ahora cada tile menciona el dev específico → genera curiosidad → click hacia el silo correspondiente. **Wide tile reemplazado** de "vista aérea drone" a "acceso La Rioja 2" porque la vista aérea ya está usada como slide 1 del hero de La Rioja (evita duplicación) + el acceso comunica seguridad + brand visible. El **lightbox heredado funciona automáticamente** con las nuevas imágenes — todas son clickeables con prev/next + teclado + caption.
+
+> **✅ COMPLETADO sesión 19 (21 may 2026) — Sitio feature-complete en los 3 silos:** Las 3 secciones de amenidades + las 3 descripciones "Sobre [Dev]" fusionadas premium + lightbox global en TODAS las amenidades + heroes optimizados. Detalles:
+>
+> **AmenitiesSection — Jardines del Sur 6**:
+> - 5 tiles masonry: Alberca y Casa Club (large), Gimnasio Cerrado (tall), Juegos Infantiles (normal), Skate Park (normal), Áreas Verdes (wide)
+> - Imágenes nuevas convertidas a WebP en `/public/jardines/amenidades/`: alberca (160KB), gimnasio (72KB), juegos-infantiles (258KB), skate-park (91KB), areas-verdes (215KB)
+> - 6 extras pills: Caseta de seguridad, Área de usos múltiples, Canchas deportivas, Área para mascotas, Ejercitadores al aire libre, Estacionamiento de visitas
+> - Trust row custom: 50 años Sadasi · 430,000+ viviendas · 6 modelos · 11 amenidades
+>
+> **AmenitiesSection — La Rioja 2**:
+> - 5 tiles masonry: Alberca (large), Gimnasio (tall), Parque Principal (normal), Área para Mascotas (normal), Acceso con Vigilancia 24/7 (wide)
+> - Imágenes nuevas convertidas a WebP en `/public/larioja2/amenidades/`: alberca (142KB), gimnasio (66KB), areas-verdes (190KB), dog-park (177KB), acceso (70KB)
+> - 4 extras pills: Cancha de Pádel, Área de calistenia, Área de usos múltiples, Estacionamiento para visitas
+> - Trust row custom: 50 años Sadasi · 430,000+ viviendas · 4 modelos premium · 24/7 vigilancia
+>
+> **Descripciones "Sobre [Dev]" fusionadas** (oficial Altta Homes + data específica):
+> - **Jardines del Sur 6**: hook "oasis de estilo y serenidad" + 50 años Sadasi + 6 modelos + Smart Home + tagline cierre "Vivir con estilo es… vivir en Jardines del Sur."
+> - **La Rioja 2**: hook "Sé parte de la historia" + plusvalía + experiencias inolvidables + 4 modelos nombrados + tour 360° + amenidades específicas (alberca, gimnasio, dog park, pádel, 24/7)
+> - **Lirios Residencial 2**: ya estaba fusionado en sesión 14 (Av. 135, Santuario, "Un moderno fraccionamiento")
+>
+> **Heroes optimizados**:
+> - Lirios: hero actualizado a `acceso-lirios-2-residencial.jpg` con branding "LIRIOS 2" visible (46KB, -36% peso vs anterior). Pérgolas movidas a `/lirios/amenidades/pergolas.webp` para mantener tile de amenidades consistente.
+> - La Rioja 2: hero ahora carousel Ken Burns con 2 slides — vista aérea drone (foto real, prueba de entrega) + acceso render (branding + identidad). El componente HeroBackground ya soportaba múltiples slides con rotación. Mobile mantiene single image para LCP. Slide 2 carga lazy a 4.2s.
+> - Jardines del Sur 6: hero mantiene `alberca-desktop.webp` (la decisión fue NO cambiar — la foto profesional con golden hour y casa club naranja es muy fuerte; la imagen "Alberca y Casa Club" del set nuevo se usa en su lugar como tile de amenidades).
+>
+> **Lightbox global en AmenitiesSection (sesión 19, 21 may 2026):** Componente `AmenitiesSection.jsx` ahora tiene lightbox completo igual al de la galería de modelo. Patrón: `useState(lightboxIndex)` + `useEffect(mounted)` para portal + `useEffect(keyboard + scroll lock)` + `useCallback(prev/next)`. Cada tile se convirtió de `<div>` a `<button type="button">` clickeable con `cursor: zoom-in` + `outline focus-visible`. Render con `createPortal(jsx, document.body)` para escapar cualquier stacking context. Lightbox tiene: overlay rgba(5,10,20,0.95), botón close, contador "X / Y" arriba, imagen `next/image` con `fill + priority`, **caption con label + desc** debajo (la galería de modelo no tiene caption, solo el lightbox de amenidades), flechas ‹ › laterales con teclado ← → / Escape. Aplica AUTOMÁTICAMENTE a las 4 secciones de amenidades (home + 3 silos). Clases CSS nuevas: `.lbOverlay`, `.lbClose`, `.lbCounter`, `.lbContent`, `.lbImage`, `.lbCaption`, `.lbNav`, `.lbNavLeft`, `.lbNavRight` + media query mobile para flechas más cercanas al borde.
+
+> **Nota banner WhatsApp/Facebook del usuario (sesión 19, 21 may 2026):** El usuario armó un banner profesional 3780×1890 (ratio 2:1 ideal para Facebook Cover) con: 8 fotos de propiedades estilo polaroid + logo Sadasi 50 años + Altta Homes + 3 desarrollos (Jardines del Sur 6, La Rioja 2, Lirios Residencial 2) + foto personal circular con fondo blanco + saco oscuro. Diagnóstico: profesional, brand hierarchy clara, símetrico, listo para FB/IG/WhatsApp Business. No requiere cambios.
+
+> **Nota hero Lirios 2 cambiado a imagen de acceso con branding (sesión 18, 21 may 2026):** Sustituida la imagen del hero de Lirios Residencial 2. **Antes**: `areas-comunes-4` (pérgolas/lounge area, 72 KB) — genérica, sin branding visible. **Después**: `acceso-lirios-2-residencial.jpg` (980×653 JPG) → WebP q75 effort:6 → **46 KB** (-36% peso). La nueva imagen tiene el **logo "LIRIOS 2" visible** + caseta de control de acceso + arquitectura moderna del desarrollo, comunicando identity + security + escala en un solo shot.
+> - **Mismo aspect ratio** (1.5:1, 980×653) → no CLS, mismo efecto Ken Burns hereda desde Hero component.
+> - **Fix paralelo**: la imagen de pérgolas estaba siendo usada DOS veces (hero + tile "Pérgolas y Áreas de Reunión" en amenidades), ambas apuntando a `/optimized/hero/hero-lirios.webp`. Al cambiar el hero a acceso, el tile de amenidades quedaría inconsistente. Solución: re-convertí `areas-comunes-4-lirios-2-residencial.jpg` a `/public/lirios/amenidades/pergolas.webp` (72 KB) y actualicé `dev-content.ts` para que el tile apunte ahí. Hero independiente de amenidades.
+> - **Estado actual** (3 ubicaciones que usaban la imagen de pérgolas):
+>   - `/optimized/hero/hero-lirios.webp` → **acceso** (nuevo hero)
+>   - `/lirios/amenidades/pergolas.webp` → **pérgolas** (tile masonry de amenidades)
+>   - `/lirios/cedro-plus/1.webp` → **pérgolas** (image #1 de la galería del modelo, copia hecha previamente)
+> - **Mejora LCP esperada** en `/lirios` por 26 KB menos de hero image.
+
+> **Nota Search Console "Error de redirección" — falso positivo (sesión 18, 21 may 2026):** Search Console marcó `https://jardinesdelsurcancun.mx/desarrollos-cancun/jardines-del-sur-6/` (con trailing slash) como "Error de redirección" detectado el 16 may. **Verificación con curl confirma que el redirect funciona correctamente HOY**: 301 → URL sin slash → 200 OK. Solo 1 redirect, sin loop, sin cadena larga. El error está obsoleto — probablemente Googlebot llegó durante los deploys de mayo 15-16 cuando estábamos editando `firebase.json` y captó un momento inconsistente. **Acción**: el usuario debe click "VALIDAR CORRECCIÓN" en Search Console para que Google re-rastree. Tarda 1-2 semanas en validar. Aplica al mismo botón para otras URLs en el mismo reporte si tienen el mismo origen temporal.
+
 > **Nota refactor hero pages de modelo — eyebrow específico + H1 "Modelo [Name]" (sesión 17, 20 may 2026):** Mejora visual + SEO en el hero de las 11 páginas de modelo. **Cambios principales en `_lib/ModelPage.tsx`**:
 > - **Eyebrow refactorizado**: antes `"CASA · CANCÚN"` (genérico, redundante con keywords ya presentes en H1/breadcrumb/title). Ahora se computa específico por modelo+dev en 2 partes (`eyebrowMain` + `eyebrowSub`):
 >   - Casa: `"CASA RESIDENCIAL · [DEV.NAME.toUpperCase()] · POLÍGONO SUR CANCÚN"`
@@ -253,8 +352,8 @@
 
 > **Nota SEO 11 mayo 2026:** primer bloque SEO publicado en Firebase Hosting y verificado en `https://jardinesdelsurcancun.mx`: canonical al dominio `.mx`, metadata/Open Graph/Twitter, H1 orientado a "Casas y departamentos en Cancún", JSON-LD `RealEstateAgent` + `WebSite` + `ItemList`, `robots.txt` y `sitemap.xml`. Siguiente fase sugerida: rutas silo `/desarrollos-cancun/...` por desarrollo.
 
-> **Última actualización:** 20 de mayo de 2026 (sesión 17)  
-> **Estado:** Sesión 17 deployada a producción ✅. **Hero refactor en las 11 páginas de modelo**: eyebrow específico por dev+tipo ("CASA RESIDENCIAL · [DEV] · POLÍGONO SUR CANCÚN" / "DEPARTAMENTO · [DEV] · POLÍGONO SUR CANCÚN") + H1 simplificado a "Modelo [Name]". Responsive: pill dorado en desktop, 2 líneas centradas sin pill en mobile (0.72rem unificado). Más profesional + mejor SEO con "polígono sur" como keyword nueva. **Pendientes priorizados próxima sesión** (todos documentados arriba): (1) Replicar AmenitiesSection con datos propios para Jardines del Sur 6 y La Rioja 2 (infra lista, falta data en `dev-content.ts` + imágenes para La Rioja). (2) Cuando el usuario lance Google Ads ($100 MXN/día), configurar conversión "WhatsApp Click" en GTM dashboard + montar campaña Search con 3 grupos refinados (Brand defense $20-30, Modelos específicos $30-40, Zonal alto intent $30-40) — CPA esperado $30-45 MXN. (3) Re-medir PageSpeed en páginas de modelo/silo después del fix de preload + refactor hero (esperado: subir 2-4 puntos vs medición anterior).
+> **Última actualización:** 22 de mayo de 2026 (sesión 21 — cierre)  
+> **Estado:** Sesión 21 deployada a producción ✅. **Sitio completamente listo para Google Ads**: descuentos aplicados en 11/11 modelos, hero ModelPage simplificado (sin subtitle), stats overview en Distribución con iconos premium, niveles renombrados naturalmente (Planta Baja/Planta Alta/Tercer Nivel), Cedro Plus con metraje en pill de Roof Garden. PageSpeed validado uniformemente arriba de 90 mobile en home, silo y modelo. **PRÓXIMO PASO MAÑANA (sesión 22)**: configurar Google Ads desde 0 — el usuario confirmó "empezamos de cero" cuando le pregunté. Plan documentado: (1) Crear acción de conversión "WhatsApp Click" en Google Ads dashboard (tipo Sitio Web, categoría Lead, método "Usa Google Tag Manager") → obtener Conversion ID + Label. (2) Configurar Tag de conversión en GTM (ID `GTM-53BHDRWC`): Vinculador de conversiones para todas las páginas + Trigger "Click - Solo links" con `Click URL contains wa.me` + Tag "Seguimiento de conversiones de Google Ads" con el ID+Label de paso 1. (3) Verificar con Tag Assistant. (4) Crear campaña Search con presupuesto $100 MXN/día, 3 grupos: Brand defense ($20-30), Modelos específicos ($30-40), Zonal alto intent ($30-40). Keywords + Negative keywords ya documentadas. CPA esperado $30-45 MXN. **Otros pendientes (no urgentes)**: validar indexación Search Console (post-resubmit sitemap del 18 may), posibles features futuras (calculadora Infonavit/FOVISSSTE, reviews Google Business Profile, sticky price bar).
 
 ---
 

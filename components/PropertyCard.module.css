@@ -255,19 +255,134 @@
   display: block;
 }
 
+/* Header centrado para modelos con descuento (La Rioja) */
+.headerCentered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 0.3rem 0 0.1rem;
+}
+
+.modelNameFull {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.priceAvaluoCentered {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(209, 146, 0, 0.18);
+  width: 100%;
+  justify-content: center;
+}
+
+.priceFinalRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.priceFinalLabel {
+  font-family: var(--font-montserrat);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+.priceFinalAmount {
+  font-family: var(--font-montserrat);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.015em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .modelNameFull {
+    font-size: 1.3rem;
+  }
+  .priceFinalAmount {
+    font-size: 1.4rem;
+  }
+}
+
+/* Valor avalúo (inline, una línea, SIN tachado) */
+.priceAvaluo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.priceAvaluoLabel {
+  font-family: var(--font-montserrat);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  opacity: 0.65;
+}
+
+.priceAvaluoAmount {
+  font-family: var(--font-montserrat);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+  .priceAvaluoLabel {
+    font-size: 0.52rem;
+  }
+  .priceAvaluoAmount {
+    font-size: 0.78rem;
+  }
+}
+
 @media (min-width: 769px) {
   .headerSplit {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    align-items: baseline;
-    column-gap: 1rem;
-    row-gap: 0.35rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .titleCol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+
+  .priceCol {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
   .headerSplit .modelType {
-    grid-column: 1;
-    grid-row: 1;
     font-family: var(--font-display);
     font-size: 1.4rem;
     font-weight: 600;
@@ -277,8 +392,6 @@
   }
 
   .headerSplit .modelNameTitle {
-    grid-column: 1;
-    grid-row: 2;
     margin: 0;
     font-family: var(--font-display);
     font-size: 1.4rem;
@@ -289,10 +402,6 @@
   }
 
   .headerSplit .priceLabelTop {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: end;
-    align-self: baseline;
     font-family: var(--font-montserrat);
     font-size: 0.6rem;
     font-weight: 600;
@@ -303,10 +412,6 @@
   }
 
   .headerSplit .priceBottom {
-    grid-column: 2;
-    grid-row: 2;
-    justify-self: end;
-    align-self: baseline;
     font-family: var(--font-montserrat);
     font-size: 1.35rem;
     font-weight: 800;
@@ -320,19 +425,31 @@
 
 @media (max-width: 768px) {
   .header.headerSplit {
-    display: grid;
-    flex-direction: row;
-    grid-template-columns: auto auto;
-    justify-content: center;
-    align-items: baseline;
-    column-gap: 0.4rem;
-    row-gap: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     text-align: center;
   }
 
+  .titleCol {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .priceCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1;
+  }
+
   .header.headerSplit .modelType {
-    grid-column: 1;
-    grid-row: 1;
     margin: 0;
     font-family: var(--font-display);
     font-size: 1.3rem;
@@ -342,8 +459,6 @@
   }
 
   .header.headerSplit .modelNameTitle {
-    grid-column: 2;
-    grid-row: 1;
     margin: 0;
     font-family: var(--font-display);
     font-size: 1.3rem;
@@ -353,22 +468,15 @@
   }
 
   .header.headerSplit .priceLabelTop {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-self: center;
     font-family: var(--font-montserrat);
     font-size: 0.6rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-secondary);
-    margin-top: 0.25rem;
   }
 
   .header.headerSplit .priceBottom {
-    grid-column: 1 / -1;
-    grid-row: 3;
-    justify-self: center;
     font-family: var(--font-montserrat);
     font-size: 1.4rem;
     font-weight: 800;

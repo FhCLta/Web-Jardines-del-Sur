@@ -101,6 +101,18 @@ export default function PropertyCard({ property }) {
   const modelType = headerMatch ? headerMatch[1] : "";
   const modelName = headerMatch ? headerMatch[2].trim() : "";
 
+  // Lógica del label del precio:
+  // - Si tiene valor_avaluo (descuento aplicado) → "Precio con descuento"
+  // - Si es Departamento → "Desde" (precio variable por unidad)
+  // - Si es Casa sin avalúo → sin label (solo el precio)
+  const hasDiscount = Boolean(property.valor_avaluo);
+  const isDepartamento = modelType === "Departamento";
+  const priceLabel = hasDiscount
+    ? "Precio con descuento"
+    : isDepartamento
+    ? "Desde"
+    : "";
+
   return (
     <>
       <div className={`${styles.card} glass`}>
@@ -130,20 +142,48 @@ export default function PropertyCard({ property }) {
         </div>
         
         <div className={styles.content}>
-          {hasSplitHeader ? (
+          {hasDiscount ? (
+            <div className={`${styles.header} ${styles.headerCentered}`}>
+              <h3 className={styles.modelNameFull}>{property.nombre_modelo}</h3>
+              <div className={styles.priceAvaluoCentered}>
+                <span className={styles.priceAvaluoLabel}>Valor avalúo</span>
+                <span className={styles.priceAvaluoAmount}>{formatPrice(property.valor_avaluo)} MXN</span>
+              </div>
+              <div className={styles.priceFinalRow}>
+                <span className={styles.priceFinalLabel}>
+                  {property.precio_variable ? "Precio con descuento desde" : "Precio con descuento"}
+                </span>
+                <span className={styles.priceFinalAmount}>{formatPrice(property.precio)}</span>
+              </div>
+            </div>
+          ) : hasSplitHeader ? (
             <div className={`${styles.header} ${styles.headerSplit}`}>
-              <span className={styles.modelType}>{modelType}</span>
-              <span className={styles.priceLabelTop}>Desde</span>
-              <h3 className={styles.modelNameTitle}>{modelName}</h3>
-              <span className={styles.priceBottom}>
-                {formatPrice(property.precio)}
-              </span>
+              <div className={styles.titleCol}>
+                <span className={styles.modelType}>{modelType}</span>
+                <h3 className={styles.modelNameTitle}>{modelName}</h3>
+              </div>
+              <div className={styles.priceCol}>
+                {priceLabel && (
+                  <span className={styles.priceLabelTop}>{priceLabel}</span>
+                )}
+                <span className={styles.priceBottom}>
+                  {formatPrice(property.precio)}
+                </span>
+              </div>
             </div>
           ) : (
-            <div className={styles.header}>
+            <div className={`${styles.header} ${hasDiscount ? styles.headerDiscount : ""}`}>
               <h3>{property.nombre_modelo}</h3>
               <span className={styles.priceBlock}>
-                <span className={styles.priceLabel}>Desde</span>
+                {hasDiscount && (
+                  <span className={styles.priceAvaluo}>
+                    <span className={styles.priceAvaluoLabel}>Valor avalúo</span>
+                    <span className={styles.priceAvaluoAmount}>{formatPrice(property.valor_avaluo)}</span>
+                  </span>
+                )}
+                {priceLabel && (
+                  <span className={styles.priceLabel}>{priceLabel}</span>
+                )}
                 <span className={styles.price}>
                   {formatPrice(property.precio)}
                 </span>

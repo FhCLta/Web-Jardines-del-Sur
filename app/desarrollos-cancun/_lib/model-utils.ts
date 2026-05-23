@@ -7,6 +7,8 @@ export type InventoryProperty = {
   status: string;
   nombre_modelo: string;
   precio: number;
+  valor_avaluo?: number;
+  precio_variable?: boolean;
   metros_construccion: number;
   metros_construccion_variable?: boolean;
   metros_terreno: number | null;

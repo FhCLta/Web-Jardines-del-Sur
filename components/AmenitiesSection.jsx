@@ -1,42 +1,45 @@
 "use client";
 
+import { useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+import Image from 'next/image';
 import styles from './AmenitiesSection.module.css';
 
 const DEFAULT_ITEMS = [
   {
     img: "/optimized/amenidades/alberca.webp",
-    label: "Alberca y Casa Club · Jardines del Sur",
-    desc: "Alberca olímpica rodeada de jardines tropicales y casa club con área de convivencia",
+    label: "Alberca y Casa Club · Jardines del Sur 6",
+    desc: "Alberca tipo resort rodeada de jardines tropicales y casa club para convivir.",
     size: "large",
   },
   {
-    img: "/optimized/amenidades/gimnasio1.webp",
-    label: "Gimnasio Equipado",
-    desc: "Maquinaria Technogym de última generación con ventanales al jardín",
+    img: "/larioja2/amenidades/alberca.webp",
+    label: "Alberca · La Rioja 2",
+    desc: "Espejo de agua exclusivo en el residencial más premium del Polígono Sur.",
     size: "tall",
   },
   {
-    img: "/optimized/amenidades/area-infantil.webp",
-    label: "Área Infantil",
-    desc: "Juegos, columpios y resbaladillas bajo palmeras y cielo abierto",
+    img: "/jardines/amenidades/skate-park.webp",
+    label: "Skate Park · Jardines del Sur 6",
+    desc: "Pista profesional — amenidad única que diferencia a Jardines del Sur 6.",
     size: "normal",
   },
   {
-    img: "/optimized/amenidades/cancha.webp",
-    label: "Cancha Deportiva",
-    desc: "Pasto sintético profesional para fútbol y actividades al aire libre",
+    img: "/larioja2/amenidades/dog-park.webp",
+    label: "Dog Park · La Rioja 2",
+    desc: "Área privada para que tu mascota juegue y socialice con tranquilidad.",
     size: "normal",
   },
   {
-    img: "/optimized/amenidades/gimnasio.webp",
-    label: "Gimnasio · Exterior",
-    desc: "Acceso directo desde los jardines con estacionamiento exclusivo para residentes",
+    img: "/lirios/amenidades/pergolas.webp",
+    label: "Pérgolas y Áreas de Reunión · Lirios 2",
+    desc: "Espacios cubiertos diseñados para convivir con familia y amigos.",
     size: "normal",
   },
   {
-    img: "/optimized/amenidades/vista-aerea.webp",
-    label: "",
-    desc: "",
+    img: "/larioja2/amenidades/acceso.webp",
+    label: "Acceso con Vigilancia 24/7 · La Rioja 2",
+    desc: "Caseta de control de acceso con seguridad permanente para tu tranquilidad.",
     size: "wide",
   },
 ];
@@ -71,6 +74,46 @@ export default function AmenitiesSection({
   extraAmenities,
   equipment,
 } = {}) {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const open = (i) => setLightboxIndex(i);
+  const close = () => setLightboxIndex(null);
+
+  const prev = useCallback(() => {
+    setLightboxIndex((i) =>
+      i === null ? 0 : i === 0 ? items.length - 1 : i - 1
+    );
+  }, [items.length]);
+
+  const next = useCallback(() => {
+    setLightboxIndex((i) =>
+      i === null ? 0 : i === items.length - 1 ? 0 : i + 1
+    );
+  }, [items.length]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.body.classList.add("lightbox-open");
+    const onKey = (e) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.body.classList.remove("lightbox-open");
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [lightboxIndex, prev, next]);
+
   return (
     <section className={styles.section}>
       <div className={styles.bgGlow} aria-hidden="true" />
@@ -86,9 +129,12 @@ export default function AmenitiesSection({
 
         <div className={styles.grid}>
           {items.map((a, i) => (
-            <div
+            <button
+              type="button"
               key={i}
               className={`${styles.tile} ${styles[`tile_${a.size}`]}`}
+              onClick={() => open(i)}
+              aria-label={`Ver ${a.label || 'imagen ' + (i + 1)} en grande`}
             >
               <div
                 className={styles.tileImg}
@@ -100,7 +146,7 @@ export default function AmenitiesSection({
                 <strong className={styles.tileLabel}>{a.label}</strong>
                 <span className={styles.tileDesc}>{a.desc}</span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
@@ -155,6 +201,63 @@ export default function AmenitiesSection({
           </div>
         )}
       </div>
+
+      {mounted && lightboxIndex !== null &&
+        createPortal(
+          <div className={styles.lbOverlay} onClick={close}>
+            <button
+              type="button"
+              className={styles.lbClose}
+              onClick={(e) => { e.stopPropagation(); close(); }}
+              aria-label="Cerrar"
+            >
+              ×
+            </button>
+
+            <span className={styles.lbCounter}>
+              {lightboxIndex + 1} / {items.length}
+            </span>
+
+            <div className={styles.lbContent} onClick={(e) => e.stopPropagation()}>
+              <Image
+                src={items[lightboxIndex].img}
+                alt={items[lightboxIndex].label || `Amenidad ${lightboxIndex + 1}`}
+                fill
+                sizes="100vw"
+                className={styles.lbImage}
+                priority
+              />
+              {items[lightboxIndex].label && (
+                <div className={styles.lbCaption}>
+                  <strong>{items[lightboxIndex].label}</strong>
+                  {items[lightboxIndex].desc && <span>{items[lightboxIndex].desc}</span>}
+                </div>
+              )}
+            </div>
+
+            {items.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className={`${styles.lbNav} ${styles.lbNavLeft}`}
+                  onClick={(e) => { e.stopPropagation(); prev(); }}
+                  aria-label="Anterior"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.lbNav} ${styles.lbNavRight}`}
+                  onClick={(e) => { e.stopPropagation(); next(); }}
+                  aria-label="Siguiente"
+                >
+                  ›
+                </button>
+              </>
+            )}
+          </div>,
+          document.body
+        )}
     </section>
   );
 }
