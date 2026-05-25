@@ -47,6 +47,17 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
   const pageUrl = `${SITE_URL}/desarrollos-cancun/${dev.slug}`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(dev.whatsappMessage)}`;
 
+  const casasCount = properties.filter((p) => /^(Casa)\s/i.test(p.nombre_modelo)).length;
+  const deptosCount = properties.filter((p) => /^(Departamento)\s/i.test(p.nombre_modelo)).length;
+  const total = properties.length;
+  const minPrice = Math.min(...properties.map((p) => p.precio));
+  const priceFmt = `$${minPrice.toLocaleString("es-MX")} MXN`;
+  const dynamicSubtitleBold = `${total} ${total === 1 ? "modelo" : "modelos"} · Desde ${priceFmt}`;
+  const dynamicSubtitleBreakdown = casasCount > 0 && deptosCount > 0
+    ? `${casasCount} ${casasCount === 1 ? "casa" : "casas"} y ${deptosCount} ${deptosCount === 1 ? "departamento" : "departamentos"}`
+    : undefined;
+  const dynamicSubtitleDetail = dev.hero.subtitle.detail;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -139,7 +150,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
       />
       <SiteHeader />
 
-      <SiloHero dev={dev} waHref={waHref} />
+      <SiloHero dev={dev} waHref={waHref} subtitleBold={dynamicSubtitleBold} subtitleBreakdown={dynamicSubtitleBreakdown} subtitleDetail={dynamicSubtitleDetail} />
 
       <section id="modelos" className={styles.modelsSection}>
         <div className="container">

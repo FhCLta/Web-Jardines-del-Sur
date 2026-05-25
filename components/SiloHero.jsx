@@ -3,7 +3,7 @@ import styles from "./Hero.module.css";
 import siloStyles from "@/app/desarrollos-cancun/silo.module.css";
 import HeroBackground from "./HeroBackground";
 
-export default function SiloHero({ dev, waHref }) {
+export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown, subtitleDetail }) {
   const { hero, name } = dev;
 
   return (
@@ -45,8 +45,11 @@ export default function SiloHero({ dev, waHref }) {
         </h1>
 
         <p className={styles.subtitle}>
-          <span className={styles.subtitleDevelopments}>{hero.subtitle.bold}</span>
-          <span className={styles.subtitleDetail}>{hero.subtitle.detail}</span>
+          <span className={styles.subtitleDevelopments}>{subtitleBold ?? hero.subtitle.bold}</span>
+          {subtitleBreakdown && (
+            <span className={styles.subtitleBreakdown}>{subtitleBreakdown}</span>
+          )}
+          <span className={styles.subtitleDetail}>{subtitleDetail ?? hero.subtitle.detail}</span>
         </p>
 
         <div className={styles.ctas}>

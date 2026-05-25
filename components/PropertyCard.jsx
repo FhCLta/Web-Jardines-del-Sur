@@ -265,6 +265,9 @@ export default function PropertyCard({ property }) {
             {property.metros_terreno && (
               <p><strong>**</strong> Lote tipo. Esquina o excedente varía el costo.</p>
             )}
+            {property.precio_variable && (
+              <p><strong>**</strong> El precio puede variar según nivel y ubicación</p>
+            )}
           </div>
         </div>
       </div>

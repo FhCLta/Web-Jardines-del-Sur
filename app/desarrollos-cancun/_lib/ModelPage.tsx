@@ -221,6 +221,11 @@ export default async function ModelPage({
                   ${property.precio.toLocaleString("es-MX")}{" "}
                   <span className={styles.heroPriceCurrency}>MXN</span>
                 </span>
+                {property.precio_variable && (
+                  <span className={styles.heroPriceNote}>
+                    ** El precio puede variar según nivel y ubicación
+                  </span>
+                )}
               </div>
             ) : (
               <div className={styles.heroPriceBlock}>
