@@ -735,7 +735,73 @@ Tareas concretas, en este orden:
 - Si llegan 2-3 llamadas más esta semana, evaluar **agregar extensión de llamadas a la campaña Search** (Google sí cuenta llamadas como conversión cuando vienen del anuncio)
 
 ### Cómo distinguir leads de Google Ads vs orgánico (recordatorio)
-1. **WhatsApp con texto genérico** "Hola, quiero más información sobre las casas y departamentos de Altta Homes en Cancún" → vino del FAB/Header/Hero/Footer del sitio (puede ser ads o orgánico)
-2. **WhatsApp con texto específico de modelo** ("Hola, quiero cotizar la casa modelo Tabachín en Jardines del Sur 6") → vino de la ficha del modelo o tour 360°
-3. **Llamada telefónica** → siempre de Google Business Profile (orgánico), porque la campaña Ads NO tiene call extension
-4. **Pregunta directa** al lead: "¿Cómo se enteró de los desarrollos?" sigue siendo lo más confiable
+1. **WhatsApp con texto "vi su anuncio en Google..."** → vino del sitelink directo "Informes por WhatsApp" (agregado sesión 23)
+2. **WhatsApp con texto genérico** "Hola, quiero más información sobre las casas y departamentos de Altta Homes en Cancún" → vino del FAB/Header/Hero/Footer del sitio (puede ser ads o orgánico)
+3. **WhatsApp con texto específico de modelo** ("Hola, quiero cotizar la casa modelo Tabachín en Jardines del Sur 6") → vino de la ficha del modelo o tour 360°
+4. **Llamada telefónica** → siempre de Google Business Profile (orgánico), porque la campaña Ads NO tiene call extension
+5. **Pregunta directa** al lead: "¿Cómo se enteró de los desarrollos?" sigue siendo lo más confiable
+
+---
+
+## 📊 SESIÓN 3 — Día 2-3 (25 may 2026)
+
+### Métricas acumuladas al 25 may 2026
+| Métrica | Valor | Lectura |
+|---|---|---|
+| Impresiones | 184 | Buen volumen para brand keywords en Cancún |
+| Clics | 23 | CTR **12.5%** — excelente (esperábamos 3-7%) |
+| CPC promedio | $10.40 MXN | Dentro del rango esperado ($5-15) |
+| Gasto total | $239 MXN | ~2.5 días de campaña, normal |
+| Conversiones | 0 | Normal en días 1-3 de real estate |
+| Hoy (lun 25 may) | 5 clics · 45 imp | Día en curso |
+
+### ✅ Nuevo recurso — Sitelink "Informes por WhatsApp"
+- **Nivel:** Campaña
+- **Texto:** `Informes por WhatsApp`
+- **Descripción 1:** `Respuesta inmediata con un asesor`
+- **Descripción 2:** `Sin costo · Cotiza hoy mismo`
+- **URL final:** `https://wa.me/529982059044?text=Hola%2C%20vi%20su%20anuncio%20en%20Google%20y%20quiero%20informes%20sobre%20los%20modelos%20disponibles%20en%20Canc%C3%BAn.`
+- **Rationale:** lead de alta intención va directo a WhatsApp sin pasar por el sitio. El texto "vi su anuncio en Google" en el mensaje pre-llenado = tracking manual de fuente. No registra conversión en GTM — trade-off aceptado: lead real > dato de conversión en esta etapa temprana.
+- **IMPORTANTE:** si el algoritmo empieza a recibir muchos clicks por sitelink sin conversiones registradas, puede afectar la optimización. Evaluar en semana 3.
+
+### ⏳ Pendiente — Extractos de sitio (Fragmento estructurado)
+Recomendación de Google pendiente de aplicar manualmente:
+- **Encabezado:** `Amenidades`
+- **Valores:** `Alberca y Casa Club` · `Gimnasio Cerrado` · `Cancha de Pádel` · `Skate Park` · `Dog Park` · `Seguridad 24/7`
+
+### ⏳ PENDIENTE — Facebook Pixel + Retargeting Meta
+**Objetivo:** mostrar anuncios de Facebook/Instagram a personas que visitaron el sitio pero no convirtieron.
+
+**Flujo:**
+```
+Usuario busca en Google → entra al sitio → Pixel de Meta se activa
+→ abre Facebook/Instagram → le aparece el anuncio de Altta Homes
+```
+
+**Estado:** usuario tiene Meta Business Manager con portafolio empresarial. Nunca ha creado un Pixel.
+
+**Plan de instalación (via GTM — sin tocar código del sitio):**
+1. business.facebook.com → Administrador de eventos → Crear fuente de datos → Web → Pixel
+2. Copiar el **Pixel ID** (número de ~15 dígitos)
+3. En GTM (container `GTM-53BHDRWC`): Nueva etiqueta → HTML personalizado → pegar código del Pixel
+4. Trigger: All Pages
+5. Publicar contenedor GTM
+6. Verificar con extensión Chrome "Meta Pixel Helper"
+7. En Meta: Audiencias → Crear audiencia personalizada → "Tráfico del sitio web" → todos los visitantes → últimos 30 días
+8. Crear campaña de retargeting con esa audiencia
+
+**Nota:** se necesitan ~100 visitantes acumulados para que Meta pueda crear una audiencia de retargeting funcional.
+
+### Aprendizajes de esta sesión
+1. **CTR 12.5% valida que las keywords de marca son muy relevantes** — usuarios que buscan Altta Homes / Sadasi / Jardines del Sur hacen click
+2. **0 WhatsApps en día 2-3 es normal en real estate** — ciclo de decisión largo; la ventana de conversión es 30 días
+3. **Sitelink directo wa.me = válido para leads de alta intención** — el texto pre-llenado hace tracking manual de fuente
+4. **Google Ads captura intención → Meta Retargeting persigue al visitante** — complementarios, no competidores
+
+### Próxima revisión: Martes 26 may (Día 3 oficial)
+1. **Search Terms Report** — ver qué términos exactos buscaron los 23 usuarios
+2. **Negative keywords** — agregar según términos irrelevantes detectados
+3. **Evaluar conversiones** — ¿llegó algún WhatsApp rastreable?
+4. **Decidir Grupo C** (Zonal alto intent) — si el volumen de Grupo A sigue bajo
+5. **Pausar keywords** con 50+ impresiones y 0 clics
+6. **Completar Facebook Pixel** si no se hizo el 25 may tarde

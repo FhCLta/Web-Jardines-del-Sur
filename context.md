@@ -7,6 +7,35 @@
 > 4. **Sticky price bar en mobile** (medio conversión, 1 hora). Cuando el usuario scrollea por la ficha del modelo, el precio se mantiene visible arriba con un botón "Cotizar" siempre disponible.
 > 5. **Video del recorrido** (no solo 360°, alto engagement, esfuerzo externo). Filmar un walkthrough humano del modelo subido a YouTube/Vimeo, embebido en la página. Distinto al tour 360° (que es estático) — un video con voz narrando da otra dimensión de venta.
 
+> **✅ COMPLETADO sesión 23 (25 may 2026) — Métricas día 2-3 Google Ads + Sitelink WhatsApp + plan Retargeting Meta:**
+>
+> **Métricas Google Ads acumuladas al 25 may (día 2-3):**
+> - 23 clicks · 184 impresiones · CTR **12.5%** (excelente, esperábamos 3-7%) · CPC $10.40 MXN · gasto total $239 MXN
+> - Hoy lunes 25 may: 5 clicks · 45 impresiones (día en curso)
+> - 0 conversiones registradas — **normal** en días 1-3 de real estate (ciclo de decisión largo, ventana 30 días)
+> - Sin WhatsApps de ads todavía — normal. El único contacto fue llamada de GBP (orgánico, Lead #1)
+>
+> **Nuevo sitelink agregado — "Informes por WhatsApp":**
+> - Nivel: **Campaña**
+> - Texto: `Informes por WhatsApp`
+> - Descripción 1: `Respuesta inmediata con un asesor`
+> - Descripción 2: `Sin costo · Cotiza hoy mismo`
+> - URL: `https://wa.me/529982059044?text=Hola%2C%20vi%20su%20anuncio%20en%20Google%20y%20quiero%20informes%20sobre%20los%20modelos%20disponibles%20en%20Canc%C3%BAn.`
+> - Estrategia: lead de alta intención va directo a WhatsApp sin pasar por el sitio. El texto "vi su anuncio en Google" en el mensaje pre-llenado identifica la fuente manualmente. No registra conversión en GTM (bypass del sitio) — trade-off aceptado porque el lead real vale más que el dato de conversión en esta etapa.
+>
+> **Extractos de sitio (Fragmento estructurado) — pendiente de aplicar:**
+> - Encabezado: `Amenidades`
+> - Valores: `Alberca y Casa Club` · `Gimnasio Cerrado` · `Cancha de Pádel` · `Skate Park` · `Dog Park` · `Seguridad 24/7`
+>
+> **Retargeting Meta — PENDIENTE (configurar en siguiente sesión):**
+> - Objetivo: mostrar anuncios de Facebook/Instagram a visitantes del sitio que no convirtieron en WhatsApp
+> - Usuario tiene Meta Business Manager con portafolio empresarial, pero nunca ha creado un Pixel de Meta
+> - Plan: Administrador de eventos → crear Pixel → obtener ID → instalar en GTM (container `GTM-53BHDRWC`) → publicar → crear audiencia "Visitantes del sitio" → campaña retargeting
+> - El Pixel se instala via GTM sin tocar el código del sitio (igual que el tag de Google Ads)
+> - Con ~100 visitantes acumulados ya se puede crear la primera audiencia de retargeting
+>
+> **Próxima revisión (martes 26 may — Día 3 oficial):** Search Terms Report → agregar negativos → evaluar CPA real → decidir Grupo C. Ver `google-ads.md` para detalle.
+
 > **✅ COMPLETADO sesión 22 (24 may 2026) — Google Ads primeros resultados + actualización precios + leyenda precio variable + subtítulo silos dinámico:**
 >
 > **Google Ads — Días 1 y 2:**
@@ -388,8 +417,8 @@
 
 > **Nota SEO 11 mayo 2026:** primer bloque SEO publicado en Firebase Hosting y verificado en `https://jardinesdelsurcancun.mx`: canonical al dominio `.mx`, metadata/Open Graph/Twitter, H1 orientado a "Casas y departamentos en Cancún", JSON-LD `RealEstateAgent` + `WebSite` + `ItemList`, `robots.txt` y `sitemap.xml`. Siguiente fase sugerida: rutas silo `/desarrollos-cancun/...` por desarrollo.
 
-> **Última actualización:** 24 de mayo de 2026 (sesión 22 — cierre)  
-> **Estado:** Sesión 22 deployada a producción ✅. Google Ads en aprendizaje (día 2). Precio Capua JDS6 actualizado a $1,777,640. Leyenda `** El precio puede variar según nivel y ubicación` añadida a departamentos con `precio_variable: true` (en tarjetas y páginas de modelo). Subtítulo del hero de silos ahora es dinámico y se auto-genera desde inventario al hacer build (ver nota sesión 22 arriba). **PRÓXIMA REVISIÓN (martes 26 may — Día 3 de campaña):** Search Terms Report → agregar negativos → evaluar CPA real → decidir si crear Grupo C (Zonal alto intent). **Pendiente urgente (usuario hace en Google Ads browser):** cambiar keywords Grupo A de Amplia → Exacta/Frase + descartar 3 recomendaciones malas (Performance Max, Display, Socios de búsqueda). **Pendientes no urgentes:** validar indexación Search Console, reviews Google Business Profile, calculadora Infonavit/FOVISSSTE, sticky price bar.
+> **Última actualización:** 25 de mayo de 2026 (sesión 23 — cierre)
+> **Estado:** Google Ads día 2-3 en marcha. 23 clicks · 184 imp · CTR 12.5% · $239 gastados · 0 conversiones (normal). Sitelink "Informes por WhatsApp" agregado a nivel campaña (wa.me con mensaje pre-llenado). **PRÓXIMA REVISIÓN (martes 26 may — Día 3 oficial):** Search Terms Report → negativos → CPA real → decidir Grupo C. **PENDIENTE próxima sesión:** instalar Facebook Pixel via GTM para retargeting en FB/Instagram (usuario tiene Meta Business Manager pero sin Pixel creado). **Pendiente urgente (usuario hace en Google Ads):** cambiar keywords Grupo A de Amplia → Exacta/Frase + descartar recomendaciones malas + aplicar Extractos de sitio (Amenidades). **Pendientes no urgentes:** validar indexación Search Console, reviews GBP, calculadora Infonavit/FOVISSSTE, sticky price bar.
 
 ---
 
