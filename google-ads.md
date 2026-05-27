@@ -769,28 +769,74 @@ Recomendación de Google pendiente de aplicar manualmente:
 - **Encabezado:** `Amenidades`
 - **Valores:** `Alberca y Casa Club` · `Gimnasio Cerrado` · `Cancha de Pádel` · `Skate Park` · `Dog Park` · `Seguridad 24/7`
 
-### ⏳ PENDIENTE — Facebook Pixel + Retargeting Meta
-**Objetivo:** mostrar anuncios de Facebook/Instagram a personas que visitaron el sitio pero no convirtieron.
+### ✅ COMPLETADO — Meta Pixel base instalado vía GTM (27 may 2026)
 
-**Flujo:**
+**Pixel ID:** `2016457592282966`
+**Dataset name:** `Jardines del Sur Cancún - Web`
+**Versión GTM publicada:** `v3 - Meta Pixel Base Code` (27/05/2026, 0:20)
+**Método:** HTML personalizado en GTM container `GTM-53BHDRWC`, trigger `All Pages` — cero cambios al código del sitio.
+
+**Cuentas publicitarias conectadas al dataset:**
+- Florencio Real Estate (8254358097993589)
+- Jardines del Sur Cancún (1520643452585889)
+- Marketing Real Estate (2180108582737946)
+
+**Configuración aplicada:**
+- ✅ Coincidencias avanzadas automáticas: ACTIVADAS (hashea email/teléfono client-side si en futuro hay formularios)
+- ❌ API de conversiones (CAPI): DESACTIVADA (fase 2, requiere setup del servidor)
+- ❌ Categorías sensibles: NINGUNA (real estate no aplica)
+- ✅ Evento base: `PageView` automático en cada carga
+
+**Verificación en modo Preview (GTM + Tag Assistant):**
+- ✅ `Meta Pixel - Base Code` → Activado en page load
+- ✅ `WhatsApp Click` → Activado al clickear botón wa.me (sigue funcionando, sin regresión)
+- ✅ `Etiqueta de Google AW-18157218280` → Activado (sin cambios)
+- ✅ 0 etiquetas no activadas indeseadas
+
+**Flujo objetivo:**
 ```
 Usuario busca en Google → entra al sitio → Pixel de Meta se activa
 → abre Facebook/Instagram → le aparece el anuncio de Altta Homes
 ```
 
-**Estado:** usuario tiene Meta Business Manager con portafolio empresarial. Nunca ha creado un Pixel.
+### ⏳ PENDIENTES — Fase 2 Meta (próximas sesiones)
 
-**Plan de instalación (via GTM — sin tocar código del sitio):**
-1. business.facebook.com → Administrador de eventos → Crear fuente de datos → Web → Pixel
-2. Copiar el **Pixel ID** (número de ~15 dígitos)
-3. En GTM (container `GTM-53BHDRWC`): Nueva etiqueta → HTML personalizado → pegar código del Pixel
-4. Trigger: All Pages
-5. Publicar contenedor GTM
-6. Verificar con extensión Chrome "Meta Pixel Helper"
-7. En Meta: Audiencias → Crear audiencia personalizada → "Tráfico del sitio web" → todos los visitantes → últimos 30 días
-8. Crear campaña de retargeting con esa audiencia
+**1. Verificar Pixel en producción (5 min — al despertar 28 may)**
+- Abrir Chrome en incógnito → visitar `https://jardinesdelsurcancun.mx`
+- Extensión Meta Pixel Helper debe mostrar ícono AZUL con `1` + Pixel ID `2016457592282966` + evento `PageView`
+- Si está GRIS: diagnosticar caché, ad blocker, propagación GTM
+- En Meta Events Manager → dataset `Jardines del Sur Cancún - Web` → la barra "Eventos totales" debe empezar a moverse de 0
 
-**Nota:** se necesitan ~100 visitantes acumulados para que Meta pueda crear una audiencia de retargeting funcional.
+**2. Evento `Lead` en click WhatsApp (10-15 min)**
+- Crear segundo tag en GTM: tipo HTML personalizado
+- Snippet: `<script>fbq('track', 'Lead');</script>`
+- Trigger: reusar `Click - WhatsApp wa.me` que ya existe
+- Beneficios: métrica de leads real (no solo tráfico), permite audiencia "Quienes sí clickearon WhatsApp" (warm leads para campaña dedicada)
+- Importante: usar `fbq('track', 'Lead')` (evento estándar de Meta), NO `trackCustom` — el estándar tiene mejor matching y optimización
+
+**3. Verificación de dominio en Meta Business Manager (10 min — importante para iOS 14+)**
+- Business Settings → Brand Safety → Domains → Add `jardinesdelsurcancun.mx`
+- Método recomendado: meta-tag en `<head>` (requiere cambio en `app/layout.tsx`) o registro DNS TXT (sin tocar código)
+- Sin esto, la atribución en usuarios iOS está limitada a 8 eventos prioritarios (Aggregated Event Measurement)
+- Después de verificar: configurar prioridad de eventos en Events Manager
+
+**4. Audiencia de retargeting (cuando hayan ~100 visitantes acumulados, ~1-2 semanas)**
+- Meta Ads Manager → Audiencias → Crear audiencia personalizada → "Tráfico del sitio web"
+- Regla: "Todos los visitantes del sitio web · últimos 30 días"
+- Naming sugerido: `JdS - Web Visitors 30d`
+- Audiencia "warm" adicional cuando se implemente evento Lead: `JdS - Lead Clickers 30d`
+
+**5. Primera campaña de retargeting Meta (cuando audiencia ≥ 1,000 usuarios)**
+- Tipo: Conversiones (objetivo: Lead) o Tráfico al sitio
+- Audiencia: `JdS - Web Visitors 30d` EXCLUYENDO `JdS - Lead Clickers 30d` (para no perseguir a los que ya clickearon)
+- Presupuesto inicial sugerido: $50 MXN/día (complemento de Google Ads, no reemplazo)
+- Creativos: usar el banner 3780×1890 que el usuario ya tiene (sesión 19, 21 may) + 2-3 variantes con highlights de modelos
+
+**6. CAPI (API de conversiones) — fase 3 (mes 2+, si Pixel performance lo justifica)**
+- Requiere endpoint server-side que reciba eventos del sitio y los reenvíe a Meta vía API
+- Beneficio: tracking confiable en iOS, ad blockers, navegadores con cookies bloqueadas
+- Implementación en Next.js: Route handler en `app/api/meta-capi/route.ts` + fetch desde cliente o desde server al disparar eventos
+- Considerar después de tener Pixel funcionando ≥ 1 mes con suficientes datos para justificar el setup
 
 ### Aprendizajes de esta sesión
 1. **CTR 12.5% valida que las keywords de marca son muy relevantes** — usuarios que buscan Altta Homes / Sadasi / Jardines del Sur hacen click
@@ -804,4 +850,4 @@ Usuario busca en Google → entra al sitio → Pixel de Meta se activa
 3. **Evaluar conversiones** — ¿llegó algún WhatsApp rastreable?
 4. **Decidir Grupo C** (Zonal alto intent) — si el volumen de Grupo A sigue bajo
 5. **Pausar keywords** con 50+ impresiones y 0 clics
-6. **Completar Facebook Pixel** si no se hizo el 25 may tarde
+6. ✅ **Meta Pixel base instalado el 27 may madrugada** — ver sección "COMPLETADO — Meta Pixel base" arriba. Pendientes de fase 2 ahí mismo.

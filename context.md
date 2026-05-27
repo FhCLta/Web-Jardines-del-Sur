@@ -7,6 +7,30 @@
 > 4. **Sticky price bar en mobile** (medio conversión, 1 hora). Cuando el usuario scrollea por la ficha del modelo, el precio se mantiene visible arriba con un botón "Cotizar" siempre disponible.
 > 5. **Video del recorrido** (no solo 360°, alto engagement, esfuerzo externo). Filmar un walkthrough humano del modelo subido a YouTube/Vimeo, embebido en la página. Distinto al tour 360° (que es estático) — un video con voz narrando da otra dimensión de venta.
 
+> **✅ COMPLETADO sesión 24 (27 may 2026 madrugada) — Meta Pixel base instalado vía GTM:**
+>
+> **Pixel ID:** `2016457592282966` · **Dataset:** `Jardines del Sur Cancún - Web` · **Versión GTM publicada:** `v3 - Meta Pixel Base Code` (27/05/2026, 0:20)
+>
+> **Método:** HTML personalizado en GTM container `GTM-53BHDRWC`, trigger `All Pages`. **CERO cambios al código del sitio** — todo vía GTM como estaba planeado en sesión 23. La etiqueta convive sin conflicto con las 2 existentes (Etiqueta de Google AW-18157218280 + WhatsApp Click conversion).
+>
+> **Configuración del dataset:**
+> - Cuentas publicitarias conectadas: las 3 que tiene el usuario (Florencio Real Estate `8254358097993589`, Jardines del Sur Cancún `1520643452585889`, Marketing Real Estate `2180108582737946`) — el usuario eligió "Las 3, por si acaso" para flexibilidad futura
+> - Coincidencias avanzadas automáticas: ACTIVADAS (sin impacto inmediato porque el sitio no tiene formularios de email/teléfono; future-proof para cuando se agregue uno)
+> - CAPI (API de conversiones): DESACTIVADA — fase 3 (requiere endpoint server-side en Next.js)
+> - Categorías sensibles: NINGUNA (real estate no aplica)
+>
+> **Verificación en modo Preview (Tag Assistant):** Las 3 etiquetas dispararon correctamente. `Meta Pixel - Base Code` activado en page load, `WhatsApp Click` activado al clickear botón wa.me (sin regresión), `Etiqueta de Google AW-18157218280` sin cambios. Warning amarillo de "Dominio desconocido whatsapp.com" es esperado (al clickear wa.me redirige a whatsapp.com fuera del dominio monitoreado) y NO indica error.
+>
+> **⏳ Pendientes para próxima sesión (28 may o después):**
+> 1. **Verificar Pixel en producción** (5 min) — Chrome incógnito + extensión Meta Pixel Helper en `https://jardinesdelsurcancun.mx`. Esperado: ícono AZUL con `1` + Pixel ID `2016457592282966` + evento `PageView`. Si está gris diagnosticar caché, ad blocker, propagación.
+> 2. **Evento `Lead` en click WhatsApp** (10-15 min) — crear segundo tag HTML personalizado con `<script>fbq('track', 'Lead');</script>`, reusar trigger existente `Click - WhatsApp wa.me`. Usar evento ESTÁNDAR `Lead` no `trackCustom` (mejor matching y optimización). Beneficios: métrica real de leads, audiencia warm para retargeting dedicado.
+> 3. **Verificación de dominio en Meta** (10 min) — importante para iOS 14+ (Aggregated Event Measurement). Business Settings → Brand Safety → Domains → Add `jardinesdelsurcancun.mx`. Método DNS TXT no requiere tocar código; método meta-tag requiere agregar `<meta name="facebook-domain-verification" content="..." />` en `app/layout.tsx`.
+> 4. **Audiencia de retargeting** (cuando hayan ~100 visitantes acumulados, ~1-2 semanas) — Meta Ads Manager → Audiencias personalizadas → "Tráfico del sitio web" → todos los visitantes últimos 30 días. Naming: `JdS - Web Visitors 30d`.
+> 5. **Primera campaña retargeting Meta** (cuando audiencia ≥ 1,000 usuarios) — usar banner 3780×1890 que el usuario ya tiene (sesión 19, 21 may) + variantes con highlights de modelos. Presupuesto sugerido $50 MXN/día (complemento de Google Ads, no reemplazo).
+> 6. **CAPI** (mes 2+, fase 3) — endpoint server-side en `app/api/meta-capi/route.ts` para tracking confiable en iOS/ad blockers.
+>
+> **Detalle completo del flujo + pendientes en `google-ads.md` sección "✅ COMPLETADO — Meta Pixel base instalado vía GTM (27 may 2026)".**
+
 > **✅ COMPLETADO sesión 23 (25 may 2026) — Métricas día 2-3 Google Ads + Sitelink WhatsApp + plan Retargeting Meta:**
 >
 > **Métricas Google Ads acumuladas al 25 may (día 2-3):**
