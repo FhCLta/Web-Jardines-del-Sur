@@ -441,8 +441,8 @@
 
 > **Nota SEO 11 mayo 2026:** primer bloque SEO publicado en Firebase Hosting y verificado en `https://jardinesdelsurcancun.mx`: canonical al dominio `.mx`, metadata/Open Graph/Twitter, H1 orientado a "Casas y departamentos en Cancún", JSON-LD `RealEstateAgent` + `WebSite` + `ItemList`, `robots.txt` y `sitemap.xml`. Siguiente fase sugerida: rutas silo `/desarrollos-cancun/...` por desarrollo.
 
-> **Última actualización:** 25 de mayo de 2026 (sesión 23 — cierre)
-> **Estado:** Google Ads día 2-3 en marcha. 23 clicks · 184 imp · CTR 12.5% · $239 gastados · 0 conversiones (normal). Sitelink "Informes por WhatsApp" agregado a nivel campaña (wa.me con mensaje pre-llenado). **PRÓXIMA REVISIÓN (martes 26 may — Día 3 oficial):** Search Terms Report → negativos → CPA real → decidir Grupo C. **PENDIENTE próxima sesión:** instalar Facebook Pixel via GTM para retargeting en FB/Instagram (usuario tiene Meta Business Manager pero sin Pixel creado). **Pendiente urgente (usuario hace en Google Ads):** cambiar keywords Grupo A de Amplia → Exacta/Frase + descartar recomendaciones malas + aplicar Extractos de sitio (Amenidades). **Pendientes no urgentes:** validar indexación Search Console, reviews GBP, calculadora Infonavit/FOVISSSTE, sticky price bar.
+> **Última actualización:** 27 de mayo de 2026 (sesión 24 — Meta Pixel eventos)
+> **Estado:** Google Ads activo. Meta Pixel base instalado (GTM v3) + eventos ViewContent y Lead configurados vía Meta Event Setup Tool el 27 may. Dataset recibiendo datos correctamente. **PENDIENTE Meta:** verificación de dominio (iOS 14+, no urgente). **PENDIENTE Google Ads (usuario):** cambiar keywords Grupo A de Amplia → Exacta/Frase + descartar recomendaciones malas. **Pendientes no urgentes:** audiencia retargeting Meta cuando haya ~1,000 visitantes, validar indexación Search Console, reviews GBP, calculadora Infonavit/FOVISSSTE, sticky price bar.
 
 ---
 

@@ -799,26 +799,27 @@ Usuario busca en Google → entra al sitio → Pixel de Meta se activa
 → abre Facebook/Instagram → le aparece el anuncio de Altta Homes
 ```
 
-### ⏳ PENDIENTES — Fase 2 Meta (próximas sesiones)
+### ✅ COMPLETADO — Fase 2 Meta eventos configurados (27 may 2026)
 
-**1. Verificar Pixel en producción (5 min — al despertar 28 may)**
-- Abrir Chrome en incógnito → visitar `https://jardinesdelsurcancun.mx`
-- Extensión Meta Pixel Helper debe mostrar ícono AZUL con `1` + Pixel ID `2016457592282966` + evento `PageView`
-- Si está GRIS: diagnosticar caché, ad blocker, propagación GTM
-- En Meta Events Manager → dataset `Jardines del Sur Cancún - Web` → la barra "Eventos totales" debe empezar a moverse de 0
+**1. ✅ Pixel verificado en producción**
+- `PageView` activo, 13+ eventos recibidos — confirmado en Events Manager
+- Dataset `Jardines del Sur Cancún - Web` (ID `2016457592282966`) recibiendo datos correctamente
 
-**2. Evento `Lead` en click WhatsApp (10-15 min)**
-- Crear segundo tag en GTM: tipo HTML personalizado
-- Snippet: `<script>fbq('track', 'Lead');</script>`
-- Trigger: reusar `Click - WhatsApp wa.me` que ya existe
-- Beneficios: métrica de leads real (no solo tráfico), permite audiencia "Quienes sí clickearon WhatsApp" (warm leads para campaña dedicada)
-- Importante: usar `fbq('track', 'Lead')` (evento estándar de Meta), NO `trackCustom` — el estándar tiene mejor matching y optimización
+**2. ✅ Eventos `ViewContent` y `Lead` configurados vía Meta Event Setup Tool**
+- Configurados sin tocar código ni GTM — directamente desde Events Manager usando la herramienta visual
+- `ViewContent` por URL: home, 3 silos (Jardines del Sur 6, La Rioja 2, Lirios Residencial 2) + páginas de modelos individuales
+- `ViewContent` por botón: "ver modelos precios"
+- `Lead`: todos los botones de WhatsApp del sitio
+- Método: `Configuración manual` vía Navegador — confirmado con prueba en `Probar eventos` (Ver contenido × 4 + PageView procesados)
+- 3 cuentas publicitarias conectadas al dataset pueden usar estos datos
 
-**3. Verificación de dominio en Meta Business Manager (10 min — importante para iOS 14+)**
-- Business Settings → Brand Safety → Domains → Add `jardinesdelsurcancun.mx`
-- Método recomendado: meta-tag en `<head>` (requiere cambio en `app/layout.tsx`) o registro DNS TXT (sin tocar código)
-- Sin esto, la atribución en usuarios iOS está limitada a 8 eventos prioritarios (Aggregated Event Measurement)
-- Después de verificar: configurar prioridad de eventos en Events Manager
+### ⏳ PENDIENTES — Fase 2 Meta (restantes)
+
+**3. Verificación de dominio (importante para iOS 14+)**
+- Pendiente: no se encontró la sección en la UI de Meta Business Manager (cambió de ubicación)
+- Opciones: (a) meta-tag en `app/layout.tsx` con código `facebook-domain-verification` o (b) registro DNS TXT en proveedor del dominio
+- Sin esto, atribución en usuarios iOS está limitada (Aggregated Event Measurement)
+- No urgente — no bloquea el tracking actual
 
 **4. Audiencia de retargeting (cuando hayan ~100 visitantes acumulados, ~1-2 semanas)**
 - Meta Ads Manager → Audiencias → Crear audiencia personalizada → "Tráfico del sitio web"
