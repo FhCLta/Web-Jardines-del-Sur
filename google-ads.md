@@ -851,3 +851,100 @@ Usuario busca en Google → entra al sitio → Pixel de Meta se activa
 4. **Decidir Grupo C** (Zonal alto intent) — si el volumen de Grupo A sigue bajo
 5. **Pausar keywords** con 50+ impresiones y 0 clics
 6. ✅ **Meta Pixel base instalado el 27 may madrugada** — ver sección "COMPLETADO — Meta Pixel base" arriba. Pendientes de fase 2 ahí mismo.
+
+---
+
+## 🚨 CIRUGÍA EXITOSA — Rescate de keywords (28 may 2026)
+
+### El daño detectado
+Entre el **23 may 21:18** y **27 may 21:16**, el usuario aceptó (desde celular, sin entender que eran trampas) **6 recomendaciones automáticas malas** de Google Ads que:
+1. **Agregaron 26 keywords en concordancia AMPLIA** (en 4 batches del 23 may entre 21:18-21:29 + 1 batch del 27 may 21:15)
+2. **BORRARON 21 exactas + 7 frase el 27 may 21:16** — recomendación etiquetada como "Palabra clave redundante" (Google sugirió "limpiar" porque las amplias hacían "redundantes" a las exactas — exactamente al revés de lo correcto)
+
+**Estado al detectar (28 may):**
+- 0 exactas activas 🚨
+- 12 frase activas
+- 26 amplia activas (TODAS las búsquedas pasaban por amplia)
+- ~24h corriendo con setup tóxico, ~$87-100 MXN potencialmente desperdiciados
+
+### Método de rescate (clave para el futuro)
+**Historial de cambios → checkbox del cambio → botón `Deshacer`.**
+
+Mucho más limpio y rápido que restaurar/eliminar a mano. Google revierte exactamente la operación atómica (incluyendo "agregó X keywords" o "quitó Y keywords + Z frase").
+
+Originalmente preparé plan de restauración manual (listas de 21 exactas + 7 frase a re-agregar + 26 amplia a borrar). El usuario descubrió `Deshacer` en el Historial → 6 clicks resolvieron 20 min de trabajo manual, sin riesgo de typos.
+
+### Lo que se deshizo (6 cambios, en orden cronológico inverso)
+1. **27 may 21:16** — "Palabra clave redundante" (restauró 21 exactas + 7 frase + 1 amplia)
+2. **27 may 21:15** — "Concordancia amplia" (quitó 1 amplia: "residencial jardines del sur")
+3. **23 may 21:29** — "Concordancia amplia" (quitó 7 amplia)
+4. **23 may 21:28** — "Concordancia amplia" (quitó 1 amplia: "cancun jardines del sur")
+5. **23 may 21:24** — "Concordancia amplia" (quitó 4 amplia)
+6. **23 may 21:18** — "Concordancia amplia" (quitó 14 amplia)
+
+### Lo que NO se tocó (los buenos)
+- **23 may 19:21** — Creación campaña + 11 exactas + 7 frase + 1 anuncio (manual)
+- **23 may 22:40** — Brand extension manual (10 exactas + 12 frase) — la planificada en sesión 22
+
+### Estado final post-rescate ✅
+| Tipo | Cantidad |
+|---|---|
+| Exactas `[ ]` | **21** |
+| Frase `" "` | **19** |
+| Amplia | **0** |
+| **Total** | **40 keywords correctas** |
+
+De las 40, **~10 están en "No apta - publicación limitada"** — NORMAL en brand keywords nicho en Cancún (ya documentado en sesión 22). Google las reactiva automáticamente cuando hay búsquedas reales. NO requieren acción.
+
+Lista de las "No aptas":
+- "altta homes jardines del sur" (frase + exacta)
+- [la rioja 2 altta homes]
+- [sadasi cancun casas]
+- [casas de jardines del sur cancun]
+- [lirios residencial 2] (curioso: ya generó 1 conv y aún así está limitada, normal en sporadic-search keywords)
+- "jardines del sur sadasi" (frase + exacta)
+- [lirios residencial 2 cancun]
+- [sadasi jardines del sur]
+
+### 💡 Insight clave — cuánto se desperdiciaba en amplia
+Reporte de palabras clave del periodo 12-28 may:
+
+| Métrica | Grupo total (con amplia históricas) | Keywords actuales (sin amplia) | Diferencia atribuible a amplia |
+|---|---|---|---|
+| Clicks | 59 | 32 | **27 clicks desperdiciados** |
+| Costo | $480 MXN | $304 MXN | **$176 MXN quemados** |
+| Conversiones | 3 | 3 | **0 conv generadas por amplia** |
+| CPA | $160 | **$101** | — |
+
+→ **37% del presupuesto se quemaba en clicks irrelevantes via amplia, con CERO conversiones.** El rescate bajó el CPA real de $160 → $101 (mejora del 37%).
+
+### 🏆 MVPs identificadas (las que sí convierten)
+| Keyword | Tipo | Clics | CTR | Conv | CPA |
+|---|---|---|---|---|---|
+| `"residencial jardines del sur"` | Frase | 4 | 8.89% | 1 | **$12.90** 🥇 |
+| `[lirios residencial 2]` | Exacta | 2 | 40% | 1 | **$25.38** 🥈 |
+| `[jardines del sur 6]` | Exacta | 12 | 17.91% | 1 | $89.14 🥉 |
+
+**"residencial jardines del sur" en frase = joya escondida.** CPA $12.90 brutal para real estate. Considerar agregar variantes ("residencial sur cancun", "fraccionamiento residencial jardines del sur", etc.) en próxima sesión.
+
+### 📚 Lecciones grabadas (críticas, no repetir)
+1. **NUNCA aceptar recomendaciones de Google Ads desde celular.** Los botones grandes facilitan toques accidentales y muchas recomendaciones son trampas. Desde celular: solo MIRAR métricas.
+2. **El "Nivel de optimización" NO mide calidad** — mide obediencia con Google. 70-80% es saludable cuando rechazas trampas. 100% suele significar que aceptaste recomendaciones malas.
+3. **Aplicación automática SIEMPRE desactivada.** Lo que aplique automáticamente Google a tu cuenta NO lo controlas y suele incluir amplia.
+4. **Para revertir errores en Google Ads:** Historial de cambios → checkbox del cambio → `Deshacer`. Más limpio y rápido que restaurar a mano. Funciona para cambios de los últimos ~90 días.
+5. **Recomendaciones siempre malas (DESCARTAR sistemáticamente):**
+   - "Activa IA Max para Búsqueda"
+   - "Cambia palabras clave a concordancia amplia"
+   - "Aplicar todo" en lista de recomendaciones
+   - "Quita palabras clave redundantes" (Google considera redundantes las exactas si hay amplias — lógica invertida)
+   - "Activa Performance Max"
+   - "Sube tu presupuesto" (subir solo cuando CPA esté bajo y estable ≥7 días)
+   - "Agrega palabras clave nuevas" (Google sugiere generic, no brand)
+
+### ⏳ Pendiente blindaje (al cerrar sesión 28 may)
+1. **Desactivar "Aplicación automática"** en panel de Resumen → desmarcar TODAS las opciones (especialmente "Agrega palabras clave de concordancia amplia" y "Quite palabras clave redundantes")
+2. **Recorrer Recomendaciones** → descartar individualmente todas las trampas conocidas (3 puntitos → Descartar → razón "No es relevante")
+3. **Reglas mentales del usuario** (grabar):
+   - "Desde celular: solo MIRAR métricas, JAMÁS tocar botones azules"
+   - "Desde PC: 'Aplicar todo' NUNCA. Solo aplicar UNA recomendación si entiendo qué hace"
+4. **Monitorear 3-5 días:** el CPA real debería estabilizarse en $80-110 con keywords limpias. Si sube ≥$200 sostenido, revisar Search Terms para agregar negative keywords.

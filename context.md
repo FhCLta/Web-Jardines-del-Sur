@@ -7,6 +7,53 @@
 > 4. **Sticky price bar en mobile** (medio conversión, 1 hora). Cuando el usuario scrollea por la ficha del modelo, el precio se mantiene visible arriba con un botón "Cotizar" siempre disponible.
 > 5. **Video del recorrido** (no solo 360°, alto engagement, esfuerzo externo). Filmar un walkthrough humano del modelo subido a YouTube/Vimeo, embebido en la página. Distinto al tour 360° (que es estático) — un video con voz narrando da otra dimensión de venta.
 
+> **✅ COMPLETADO sesión 25 (28 may 2026) — CIRUGÍA Google Ads: rescate de keywords + Pixel valida con 1 lead real:**
+>
+> **A) Meta Pixel — VALIDADO en producción al final de la sesión ✅:**
+> Verificación realizada via Meta Events Manager (no extensión) — eventos PageView llegando correctamente al dataset `Jardines del Sur Cancún - Web` (Pixel ID 2016457592282966). El setup de sesión 24 (HTML personalizado vía GTM v3) funciona sin tocar código del sitio. Cross-check adicional: Google Ads "Embudo de clientes potenciales" mostró **3 conversiones** (clicks a wa.me) entre 22-28 may, de las cuales **1 llegó como WhatsApp real** (33% click-to-message rate, healthy). Tracking de ambos sistemas confirmado en producción.
+>
+> **B) Detectado problema MAYOR en Google Ads — usuario aceptó 6 recomendaciones malas desde celular:**
+> Entre **23 may 21:18 y 27 may 21:16**, el usuario aceptó (desde móvil, sin entender que eran trampas):
+> 1. **+26 keywords en concordancia AMPLIA** (en 4 batches del 23 may + 1 del 27 may)
+> 2. **-21 exactas + -7 frase BORRADAS el 27 may 21:16** ("Recomendación: Palabra clave redundante" — Google sugirió "limpiar" porque las amplias hacían "redundantes" a las exactas, lógica invertida)
+>
+> **Estado al detectar:** 0 exactas, 12 frase, 26 amplia. ~24h corriendo con setup tóxico, ~$87-100 MXN potencialmente desperdiciados.
+>
+> **C) Rescate ejecutado vía Historial de cambios → Deshacer (6 clicks, 5 min):**
+> En lugar de restaurar/eliminar a mano (plan original con listas de 21 ex + 7 fr a re-agregar + 26 amplia a borrar), se usó el botón `Deshacer` de cada cambio malo en el Historial. Resultado idéntico, sin riesgo de typos, 20 min menos de trabajo.
+>
+> **Estado post-rescate:** 21 exactas + 19 frase + **0 amplia** = 40 keywords correctas. ~10 en "No apta - publicación limitada" (normal en brand nicho, Google reactiva con búsquedas reales).
+>
+> **D) Insight clave del rescate — cuánto se desperdiciaba en amplia:**
+> | Métrica | Grupo (con amplia hist.) | Keywords actuales (limpias) | Atribuible a amplia |
+> |---|---|---|---|
+> | Clicks | 59 | 32 | **27 desperdiciados** |
+> | Costo | $480 | $304 | **$176 quemados** |
+> | Conversiones | 3 | 3 | **0** |
+> | CPA | $160 | **$101** | — |
+>
+> **37% del presupuesto se quemaba en clicks irrelevantes via amplia, con CERO conversiones.** Rescate bajó CPA real de $160 → $101.
+>
+> **E) MVPs identificadas (las que sí convierten):**
+> - `"residencial jardines del sur"` (frase) — CPA **$12.90** 🥇 (joya escondida — considerar variantes próxima sesión)
+> - `[lirios residencial 2]` (exacta) — CPA **$25.38** 🥈
+> - `[jardines del sur 6]` (exacta) — CPA $89.14 🥉
+>
+> **F) Lecciones grabadas (en `google-ads.md` sección "CIRUGÍA EXITOSA — Rescate de keywords" + memoria persistente):**
+> 1. **NUNCA aceptar recomendaciones de Google Ads desde celular** — botones grandes facilitan toques accidentales
+> 2. **"Nivel de optimización" mide OBEDIENCIA con Google, NO calidad** — 70-80% es saludable cuando rechazas trampas
+> 3. **Aplicación automática SIEMPRE desactivada**
+> 4. **Para revertir errores:** Historial de cambios → Deshacer es más limpio que restaurar a mano (funciona ~90 días)
+> 5. **Recomendaciones siempre malas:** IA Max, Cambia a amplia, Aplicar todo, Quita keywords redundantes, Performance Max, Sube presupuesto, Agrega keywords nuevas (Google sugiere genericas no brand)
+>
+> **⏳ Pendiente al cerrar sesión 28 may:**
+> 1. **Desactivar "Aplicación automática"** en Resumen (todas opciones desmarcadas, especialmente amplia + redundantes)
+> 2. **Descartar individualmente** las recomendaciones malas activas (3 puntitos → Descartar → "No es relevante")
+> 3. **Continuar con Meta Pixel:** verificación producción + evento Lead + verificación dominio
+> 4. **Monitorear 3-5 días:** CPA real debería estabilizarse en $80-110 con keywords limpias
+>
+> **Detalle completo en `google-ads.md` sección "🚨 CIRUGÍA EXITOSA — Rescate de keywords (28 may 2026)".**
+
 > **✅ COMPLETADO sesión 24 (27 may 2026 madrugada) — Meta Pixel base instalado vía GTM:**
 >
 > **Pixel ID:** `2016457592282966` · **Dataset:** `Jardines del Sur Cancún - Web` · **Versión GTM publicada:** `v3 - Meta Pixel Base Code` (27/05/2026, 0:20)
