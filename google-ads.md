@@ -949,3 +949,231 @@ Reporte de palabras clave del periodo 12-28 may:
    - "Desde celular: solo MIRAR métricas, JAMÁS tocar botones azules"
    - "Desde PC: 'Aplicar todo' NUNCA. Solo aplicar UNA recomendación si entiendo qué hace"
 4. **Monitorear 3-5 días:** el CPA real debería estabilizarse en $80-110 con keywords limpias. Si sube ≥$200 sostenido, revisar Search Terms para agregar negative keywords.
+
+---
+
+## 🚀 SESIÓN 26 — Optimización integral (29 may 2026)
+
+Sesión maratón. Florencio pasó de "novato Google Ads" a "advertiser intermedio" en 6+ horas. Se ejecutaron 5 fases de optimización + GBP Lirios 2 + Meta AI prompt v2.
+
+### Estado al inicio (post sesión 25)
+- 21 exactas + 19 frase + 0 amplia (cirugía exitosa de ayer)
+- CPA $186 con 3 conv en 64 clics
+- CTR 8.02% (excelente)
+- 0 negative keywords agregadas
+- Aplicación automática: estado desconocido
+- Quality Score: nunca visto
+- Extensiones: 5 callouts + 11 sitelinks + 0 structured snippets
+
+### Estado al cierre (post sesión 26)
+- 21 exactas + 18 frase activas (pausada `"casa en venta jardines del sur"` QS 3) + 0 amplia
+- ~85 keywords NEGATIVAS agregadas a nivel Grupo
+- Aplicación automática CONFIRMADA off (0/7 + 0/14)
+- 3 trampas descartadas: IA Max, Concordancia amplia, Quita redundantes
+- Logo subido para brand verification
+- 9 callouts (5 + 4 nuevos)
+- 10 sitelinks activos (Fresno Elite pausado por 0% CTR, Capua rephraseado)
+- 1 structured snippet creado (header "Servicios" con 6 amenidades)
+- Quality Score visible en columnas
+- Nivel de optimización: 100% (estado "experto")
+
+### Fase 1 — Blindaje
+**Aplicación automática:**
+- Confirmada en 0 de 7 (Mantén tus anuncios) + 0 de 14 (Expande tu empresa)
+- Botones "Seleccionar todas" identificados como peligro máximo
+- Lección crítica: las trampas que aceptó por accidente sesión 23-25 NO vinieron de auto-application, vinieron de aceptación manual desde móvil
+
+**3 recomendaciones descartadas:**
+1. **"Activa IA Max para Búsqueda"** (+17.1%) → trampa: Display + YouTube + Discover sin control
+2. **"Agrega palabras clave de concordancia amplia"** (+13.1%) → la trampa que causó el desastre de sesión 22-25
+3. **"Quite palabras clave redundantes"** (+0.7%) → iba a borrar la MVP `"residencial jardines del sur"` CPA $12.90
+
+**Logo de marca subido:**
+- Resuelve el favicon ausente en anuncios documentado desde sesión 22
+- Aprobación esperada en 1-2 semanas
+- Beneficio esperado: +3-8% CTR cuando aparezca el logo
+
+### Fase 2 — Search Terms + Negative Keywords (la cirugía preventiva)
+
+**Reporte descargado y analizado:**
+- 64 clics distribuidos en ~170 búsquedas distintas
+- $559 invertidos, identificado ~$140 quemado en clicks que nunca iban a convertir
+- 3 conversiones identificadas: `[jardines del sur 6]` exacta ($72.75), `[lirios residencial 2]` exacta ($60.68), 1 conv en "Otros términos" probablemente `"residencial jardines del sur"` frase ($12.90 — la MVP)
+
+**~85 keywords negativas agregadas** clasificadas por categoría:
+
+*Competidores reales identificados (constructoras + agregadores):*
+ara, ruba, cadu, javer, amalba, catania, inmuebles24, hogaresunion, hogares-sm, arbolada, cumbres, turquesa, kulkana, sayab, sense, malibu, real valencia, gran kabah, gran via, las americas, altai, las torres, sacbe, balam, lakin, calakmul, kusamil, maderas, ciudad maderas, ciudad natura, cd natura, santa fe, trovit, urbi, urbana park, liverté, lausana, rio cancun, aqua, palmaris, villa marino, villas del rey, villas del mar, marina turquesa, izamal, sarabi, jade, mayakoba, monteverde, los santos cancun, prado norte, rincon del prado, real oasis, vassari, wolf towers, punta ikal, terraquia, kalam, vista real, privada sacbe, privadas sacbe, privadas balam, privadas lakin, privadas en cancun, privadas turquesa, privadas cancun, rio residencial, inmobiliaria cerca de mi, residenciales cancun, residencial cumbres, residencial turquesa, residencial sense, residencial malibu, residencial arbolada, residencial aqua, residencial real valencia, residencial kulkana, residencial altai, casas javer, jardin del sur (singular).
+
+*Renta / intención equivocada:*
+renta, alquiler, alquilar.
+
+*Infonavit informativo:*
+casas de infonavit, infonavit puntos, como sacar, como se saca.
+
+*Ubicaciones equivocadas:*
+playa del carmen, tulum, puerto morelos, isla mujeres, zona hotelera.
+
+*Fases viejas Jardines del Sur:*
+`[jardines del sur 4]`, `[jardines del sur 5]`, `[jardines del sur 7]`, `"jardines 3"`, `"jardines 4"`, `"jardines del sir"` (typo).
+
+*Genéricos sobre-amplios:*
+casas baratas.
+
+**Conflictos detectados y omitidos correctamente:**
+- `[jardines del sur 1]` — overlap con positivo
+- `[jardines del sur 2]`, `[jardines del sur 3]` — posible overlap con positivos `[jardines del sur 2 cancun]` y `[jardines del sur 3 cancun]`
+- `"residencial la rioja"`, `"residencial lirios"`, `"residencial jardines del sur"` — overlap con keywords MVPs
+
+**Nivel actual: GRUPO de anuncios.** Pendiente subir a nivel CAMPAÑA para que cubran Grupos B y C futuros.
+
+### Fase 5 — Extensiones (callouts + snippets + sitelinks)
+
+**Callouts (Texto destacado) — 4 nuevos agregados:**
+- "Recorrido Virtual 360°" (22 chars)
+- "WhatsApp Inmediato" (18 chars)
+- "Asesor Autorizado Altta" (23 chars)
+- "50 Años Grupo Sadasi" (20 chars)
+
+Total: 9 callouts en rotación. Mejor performer actual: "Crédito Infonavit" (CTR 10.58%). Peor: "Vigilancia 24/7" (2.90%) — dejado por poca data, re-evaluar 7-14 días.
+
+**Structured Snippets — PRIMER fragmento creado a nivel Campaña:**
+- Header: **`Servicios`** (no había "Comodidades" en dropdown para categoría Agente inmobiliario)
+- Valores (6):
+  1. Alberca y Casa Club
+  2. Gimnasio Cerrado
+  3. Cancha de Pádel
+  4. Skate Park
+  5. Dog Park
+  6. Seguridad 24/7
+
+**Sitelinks — auditoría completa de los 11 existentes:**
+
+MVPs (CTR >10%, mantener intactos):
+- `/lirios` (Lirios Residencial 2) — **16.96% CTR** 👑
+- `/noni` (Casa Noni) — 15.31% CTR
+- `/` (Ver Modelos y Precios) — 14.81% CTR
+- `/jardines` (Jardines del Sur 6) — 12.42% CTR
+
+OK (CTR 5-10%, vigilar):
+- `/la-rioja` (La Rioja 2 Cancún) — 8.70% CTR
+- `/alamo` (Modelo Álamo) — 8.16% CTR
+- `/cedro-plus` (Modelo Cedro Plus) — 7.69% CTR (solo 26 impr, poca data)
+- `/ceiba` (Casa Ceiba) — 5.13% CTR
+- `/noni-elite` (Noni Elite) — 5.13% CTR
+
+**ACCIONES de la sesión:**
+- **PAUSADO** `/fresno-elite` (Fresno Elite) — 0 clicks 53 impr **0% CTR** (perro muerto)
+- **REPHRASEADO** `/capua` (Modelo Capua) — era CTR 1.39%, cambiado:
+  - Título antes: "Modelo Capua" → ahora: `Capua desde $1.7M`
+  - Desc 1: "Departamento de 3 recámaras" → `Depto 3 recámaras, 85 m²`
+  - Desc 2: "Ver precio y recorrido virtual" → `Recorrido virtual gratis`
+  - Espera CTR esperado: 6-9% post-rephrase
+
+NO se agregaron más sitelinks (10 activos = suficiente, Google muestra max 4-6 por ad).
+
+### Fase 3 — Quality Score (educativo + 1 acción)
+
+**4 columnas activadas:**
+1. Nivel de calidad
+2. CTR previsto
+3. Exp. en página de destino
+4. Relevancia del anuncio
+
+**Hallazgos:**
+
+🏆 **QS 10 PERFECTO** — `[jardines del sur 6]` exacta
+- Superior en TODOS los sub-factores
+- 13 clics · 81 impr · 16.05% CTR · $7.60 CPC
+- 1 conv · $98.85 CPA
+- Estado: intocable
+
+🟢 **QS 7-8** (8 keywords, todas brand):
+- `[casas sadasi cancun]` (8), `"casas sadasi cancun"` (8)
+- `[jardines del sur cancun]` (7), `[grupo sadasi cancun]` (7), `[altta homes cancun]` (7), `"altta homes cancun"` (7), `"sadasi cancun"` (7), `"jardines del sur cancun"` (7)
+
+🟡 **QS 5** (4 keywords) — **PATRÓN DETECTADO**:
+- `[sadasi cancun]`, `"la rioja 2"`, `[lirios residencial 2]`, `"sadasi cancun"`
+- TODAS con sub-factor "Exp. en página de destino: INFERIOR al promedio"
+- Causa raíz: home `jardinesdelsurcancun.mx` no profundiza en "Sadasi" como marca, se siente genérico para esas búsquedas brand
+- **Oportunidad futura (no urgente):**
+  1. Cambiar URL final de keywords brand para apuntar a silos específicos (`/jardines`, `/la-rioja`, `/lirios`) en lugar del home
+  2. Crear sección "Respaldo Sadasi 50 años · 430,000+ viviendas" más prominente en home
+  3. Crear landing dedicada `/sobre-sadasi` solo si las brand keywords vuelven dominantes en spend
+
+🚨 **QS 3 PAUSADA** — `"casa en venta jardines del sur"` frase
+- Relevancia INFERIOR + Exp INFERIOR (combo malo)
+- 0 clics 2 impr — era lastre que arrastraba QS de grupo
+- Razón probable de mismatch: anuncio dice "casas y departamentos" (genérico), keyword es intención de COMPRA específica
+- Plan: re-activar SOLO si creamos Grupo B con copy específico por modelo
+
+### Insights de Auction Insights (Estadísticas de subasta)
+
+**Competidores identificados:**
+1. **Florencio (TÚ)** — 29% impression share 🥇
+2. ara.com.mx — 23%
+3. cataniaresidencial.mx — 22%
+4. inmuebles24.com — 22%
+5. hogaresunion.com — 20%
+
+**Top spot %:**
+- amalba.mx — 33% (puja agresivo)
+- ara.com.mx — 28%
+- inmuebles24.com — 27%
+- cataniaresidencial.mx — 25%
+- **Florencio — 12%** ⚠️ (oportunidad: subir bid en MVPs)
+
+### Datos demográficos confirmados
+
+- 25-34 años: 18 clics (sweet spot)
+- 18-24 años: ~14 clics
+- 35-44 años: ~12 clics
+- 45-54 años: ~9 clics
+- 55-64 años: ~2 clics
+- 65+: ~2 clics
+- Desconocido: ~14 clics
+
+Para Grupos B y C futuros: bid +10% en 25-44, -50% en 55+.
+
+### Métricas comparativas — antes vs esperado
+
+| Métrica | Antes (12-29 may) | Esperado post-cambios (3-5 días) |
+|---|---|---|
+| CTR | 8.07% | **12-15%** |
+| CPC promedio | $8.91 | **$6-7** |
+| % conversión | 4.55% | **6-8%** |
+| CPA | $186 | **$110-140** |
+| Términos basura del gasto | ~37% | **<10%** |
+
+### Lecciones grabadas en esta sesión
+
+1. **Nivel de optimización 100% NO significa obedecer a Google.** Significa "addressed" — aplicar O descartar. 100% con todas las trampas descartadas = estado ideal.
+2. **No optimizar con poca data** — error #1 de principiantes. Para juzgar un callout/keyword necesitas mínimo 500-1000 impresiones. Antes son ruido.
+3. **Quality Score 5 con conversión > QS 10 sin conversión.** La conversión gana sobre QS siempre.
+4. **El patrón "Exp página INFERIOR" en brand keywords** revela oportunidad de mejorar landing experience para SEO + Ads.
+5. **Una keyword en QS 3 arrastra el QS promedio de toda la cuenta.** Pausar lastres es tan importante como crear ganadoras.
+6. **Los sitelinks son la extensión que más performance da** — 13-17% CTR vs callouts 7-10%. Priorizar siempre tenerlos bien optimizados.
+7. **"Apto (limitado)" NO es enfermedad** — significa "te limitas voluntariamente a brand, tu CPA es 37% mejor que si te abrieras".
+
+### Pendientes claros para próxima sesión
+
+**Antes que nada (cuando regrese):**
+1. **Aclarar scope de FOVISSSTE** — ¿NO se acepta en ningún desarrollo o solo en Lirios 2? Afecta Meta AI prompts + descripciones GBP + anuncios Google Ads
+2. **Subir negatives de Grupo a Campaña** (5 min, esencial antes de crear Grupos B y C)
+
+**Lista corta (próxima sesión):**
+3. Crear GBP La Rioja 2 (misma fórmula validada con Lirios 2)
+4. Esperar 3-5 días para Fase 4 (Grupos B y C) — algoritmo procesando cambios de hoy
+5. Si CPA real bajó a $110-140 → proceder con Fase 4
+6. Si CPA real sigue >$180 → diagnosticar qué nuevos términos basura no negatamos
+
+**Lista larga (futuro):**
+7. Etiquetar 7 URLs de productos del catálogo WhatsApp con su modelo (v3 del prompt Meta AI)
+8. Configurar evento `Lead` en Meta Pixel
+9. Verificación de dominio en Meta (iOS tracking)
+10. Mejorar landing experience para brand keywords (Sadasi/La Rioja/Lirios) → subiría QS de 5 a 7-8
+11. Brand verification de Google Ads (ya enviado, esperar 1-2 sem)
+12. Vigilar performance de los 4 callouts nuevos cuando salgan de "En revisión"
+13. Re-evaluar callout "Vigilancia 24/7" (CTR 2.90%) cuando tenga 500+ impr
+14. Re-evaluar Fresno Elite sitelink (pausado) — solo reactivar si entra a un Grupo B con copy específico
+15. Fotos presenciales Lirios 2 GBP (cuando Florencio visite el pabellón)

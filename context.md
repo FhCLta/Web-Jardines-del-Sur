@@ -7,6 +7,83 @@
 > 4. **Sticky price bar en mobile** (medio conversión, 1 hora). Cuando el usuario scrollea por la ficha del modelo, el precio se mantiene visible arriba con un botón "Cotizar" siempre disponible.
 > 5. **Video del recorrido** (no solo 360°, alto engagement, esfuerzo externo). Filmar un walkthrough humano del modelo subido a YouTube/Vimeo, embebido en la página. Distinto al tour 360° (que es estático) — un video con voz narrando da otra dimensión de venta.
 
+> **✅ COMPLETADO sesión 26 (29 may 2026) — Day of Optimization: GBP Lirios 2 + Meta AI prompt v2 + Google Ads "al 100%" (extensiones + Quality Score + 85 negatives):**
+>
+> **Sesión maratón de 6+ horas. Florencio pasó de novato a advertiser intermedio + ecosistema GBP duplicado.**
+>
+> **A) GBP Lirios 2 verificado al instante:**
+> Nombre: `Lirios 2 Cancún - Asesor Autorizado Altta Homes` (Agente inmobiliario, Av. Robles 77536). Estrategia anti-duplicado validada: nombre diferenciado + categoría distinta a la del perfil pre-existente (otra asesora se adelantó capturando "LIRIOS RESIDENCIAL 2" como Constructora, NO es perfil oficial de Sadasi). Coexisten sin conflicto porque son cuentas Google distintas. Renders de Lirios subidos al perfil; fotos presenciales pendientes para próxima visita.
+>
+> **B) Correcciones de rol y datos:**
+> - Rol oficial: cambiado de "asesor independiente" a **"asesor autorizado de Altta Homes"** en TODOS los contextos públicos (memoria, prompts Meta AI, descripciones GBP). Aplicar en futuras piezas.
+> - Dirección Av. 127 SM 342 MZ 27 confirmada: es el pabellón de ventas de **Jardines del Sur 6 específicamente** (NO oficina genérica de Florencio como decía memoria vieja).
+> - FOVISSSTE NO se acepta en Lirios 2 (quitado de su descripción GBP). **PENDIENTE confirmar:** ¿no se acepta en NINGÚN desarrollo o solo Lirios 2? Tema crítico para limpiar prompts Meta AI + descripciones Google Ads que mencionan FOVISSSTE.
+>
+> **C) Meta AI Prompt v2 (`meta-ai-prompt-whatsapp-v2.txt`):**
+> Catálogo URL `https://wa.me/c/5219982059044` integrado. 9 FAQ + frases prohibidas. URLs individuales de productos guardadas pendientes de etiquetar con su modelo correspondiente.
+>
+> **D) Google Ads "al 100%" — 5 frentes de optimización ejecutados:**
+>
+> **D.1 Blindaje (Fase 1):**
+> - Aplicación automática: confirmada DESACTIVADA (0 de 7 + 0 de 14)
+> - 3 trampas descartadas: IA Max (+17.1%), Concordancia amplia (+13.1%), Quita redundantes (+0.7%) — la 3ra iba a borrar la MVP "residencial jardines del sur" CPA $12.90
+> - Logo de marca subido para verificación (1-2 sem) — resuelve favicon ausente en anuncios
+> - Nivel de optimización: 100% (estado "experto que revisa y descarta") tras aceptar logo + descartar 3
+>
+> **D.2 Search Terms + Negative Keywords (Fase 2):**
+> - Reporte descargado: 64 clics distribuidos en ~170 búsquedas distintas
+> - **~85 keywords negativas agregadas** clasificadas por categoría: competidores (cumbres, turquesa, sayab, malibu, etc.), renta, infonavit informativo, ubicaciones equivocadas (playa del carmen, tulum), zonas de la competencia
+> - Conflicts detectados y omitidos: `[jardines del sur 1]`, `"residencial la rioja"`, `"residencial lirios"` (overlap con positivos)
+> - **Quedaron a nivel Grupo de anuncios** (no Campaña) — al crear Grupos B y C habrá que re-aplicar a nivel Campaña o copiar a los nuevos grupos
+> - Identificado MVP confirmado: `"residencial jardines del sur"` frase con CPA $12.90 (joya escondida)
+>
+> **D.3 Extensiones (Fase 5):**
+> - **Callouts:** 4 nuevos agregados a los 5 existentes (total 9): "Recorrido Virtual 360°", "WhatsApp Inmediato", "Asesor Autorizado Altta", "50 Años Grupo Sadasi"
+> - **Structured Snippets:** primer fragmento estructurado creado nivel Campaña — header "Servicios" (no había "Comodidades" en dropdown) con 6 valores: Alberca y Casa Club, Gimnasio Cerrado, Cancha de Pádel, Skate Park, Dog Park, Seguridad 24/7
+> - **Sitelinks:** auditados — 11 activos, MVPs identificadas (`/lirios` CTR 16.96%, `/noni` CTR 15.31%, `/` CTR 14.81%, `/jardines` CTR 12.42%). **Fresno Elite pausado** (0% CTR, 53 impr — dead). **Modelo Capua rephraseado** (era CTR 1.39%, cambiado título "Capua desde $1.7M" + descripciones con m² y "Recorrido virtual gratis"). NO se agregaron más sitelinks (ya hay 10 activos = suficiente para rotación).
+>
+> **D.4 Quality Score (Fase 3):**
+> - Columnas activadas: Nivel de calidad, CTR prev., Exp. página destino, Relevancia del anuncio
+> - **QS 10 PERFECTO:** `[jardines del sur 6]` exacta — Superior en TODOS los sub-factores, 16.05% CTR, $7.60 CPC, 1 conv $98.85 CPA. Tener QS 10 ya pone la cuenta arriba del 95% del benchmark.
+> - **QS 7-8 (8 keywords):** `[casas sadasi cancun]`, `"casas sadasi cancun"`, `[jardines del sur cancun]`, `[grupo sadasi cancun]`, `[altta homes cancun]`, `"altta homes cancun"`, `"sadasi cancun"`, `"jardines del sur cancun"` — todas saludables
+> - **QS 5 — patrón detectado:** brand keywords de Sadasi/La Rioja/Lirios tienen "Exp. página destino INFERIOR al promedio". Razón: home no profundiza en "Sadasi" como marca, se siente genérico. **Oportunidad futura:** crear landings dedicadas o cambiar URL final de brand keywords a silos específicos (`/jardines`, `/la-rioja`, `/lirios`).
+> - **QS 3 PAUSADA:** `"casa en venta jardines del sur"` frase — Relevancia INFERIOR + Exp INFERIOR. 0 clics 2 impr, era lastre. Si próximamente creamos Grupo B con copy específico, se reactiva.
+>
+> **D.5 No tocado intencionalmente (esperar 3-5 días):**
+> - Fase 4 (Grupos B y C): pospuesta para próxima sesión cuando algoritmo absorba todos estos cambios. Crear ahora ensuciaría learning signal.
+>
+> **E) Insights de auction insights (Estadísticas de subasta):**
+> Florencio lidera impression share con 29% (mejor que ARA, Catania, Inmuebles24, Hogares Unión). PERO solo aparece en top spot 12% del tiempo (amalba.mx 33%, ARA 28%). Oportunidad: subir bid en MVPs para ganar top spot.
+>
+> **F) Datos demográficos confirmados:**
+> - 25-34 años lidera (~18 clics), 18-24 segundo lugar, 35-44 tercero
+> - Sweet spot 18-44 años (target ideal real estate)
+> - Para Grupo B futuro: bid +10% en 25-44, -50% en 55+
+>
+> **G) Estimación de impacto esperado (próximos 3-5 días):**
+> | Métrica | Antes | Esperado |
+> |---|---|---|
+> | CTR | 8.07% | 12-15% |
+> | CPC promedio | $8.91 | $6-7 |
+> | CPA | $186 | $110-140 |
+> | Términos basura | ~37% gasto | <10% |
+>
+> **⏳ Pendientes claros para próxima sesión (30 may o después):**
+> 1. **Aclarar FOVISSSTE** — ¿se acepta en JdS6 o La Rioja 2 o en ninguno? Esto desbloquea limpiar prompts Meta AI + anuncios Google Ads + descripciones GBP.
+> 2. **Crear GBP La Rioja 2** (misma fórmula Lirios 2: "La Rioja 2 Cancún - Asesor Autorizado Altta Homes", Agente inmobiliario, dirección del pabellón La Rioja 2 que Florencio debe pasar).
+> 3. **Pasar negatives de nivel Grupo a nivel Campaña** (5 min) — para que cubran Grupos B y C futuros.
+> 4. **Etiquetar las 7 URLs de productos** del catálogo WhatsApp con su modelo correspondiente, después actualizar `meta-ai-prompt-whatsapp-v3.txt` con esa data.
+> 5. **Después de 3-5 días de espera:** revisar métricas reales post-optimización. Si CPA bajó a $110-140 como esperado → Fase 4 (Grupos B y C).
+> 6. **Evento Lead en Meta Pixel** (10-15 min) — sigue pendiente desde sesión 25.
+> 7. **Verificación de dominio en Meta** para tracking iOS — sigue pendiente.
+> 8. **Fresno Elite sitelink** — vigilar si revivimos en futuro o lo dejamos pausado permanente.
+> 9. **Vigilancia 24/7 callout (CTR 2.90%)** — re-evaluar en 7-14 días cuando tenga 500+ impr.
+> 10. **Brand verification en Google Ads** (logo subido hoy) — esperar 1-2 sem aprobación, luego favicon aparece en anuncios.
+> 11. **Fotos presenciales Lirios 2** — cuando Florencio visite el pabellón.
+> 12. **Considerar:** mejorar landing page para keywords brand (Sadasi/La Rioja/Lirios) → mejoraría QS de 5 a 7-8.
+>
+> **Detalle completo de la sesión en `google-ads.md` sección "🚀 SESIÓN 26 — Optimización integral (29 may 2026)" + entradas de memoria actualizadas (user_florencio_role, project_meta_pixel).**
+
 > **✅ COMPLETADO sesión 25 (28 may 2026) — CIRUGÍA Google Ads: rescate de keywords + Pixel valida con 1 lead real:**
 >
 > **A) Meta Pixel — VALIDADO en producción al final de la sesión ✅:**
