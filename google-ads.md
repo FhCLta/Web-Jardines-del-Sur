@@ -1177,3 +1177,73 @@ Para Grupos B y C futuros: bid +10% en 25-44, -50% en 55+.
 13. Re-evaluar callout "Vigilancia 24/7" (CTR 2.90%) cuando tenga 500+ impr
 14. Re-evaluar Fresno Elite sitelink (pausado) — solo reactivar si entra a un Grupo B con copy específico
 15. Fotos presenciales Lirios 2 GBP (cuando Florencio visite el pabellón)
+
+---
+
+## 🎁 SESIÓN 27 — Crédito promocional $7,000 + subida de presupuesto a $120/día (2 jun 2026)
+
+### La oferta promocional (CONFIRMADA en cuenta)
+- **Oferta:** Obtén un crédito de **MXN $7,000** cuando inviertas **MXN $7,000** en Google Ads
+- **Código:** `7QTVD-WKHV6-MLFY`
+- **Estado:** Ya canjeada y activa (contando gasto automáticamente)
+- **Vence:** **30 jul 2026** (fecha límite para cumplir el requisito de inversión)
+- **Progreso al 2 jun:** invertido **$1,133.28** de $7,000 → faltan **$5,866.72**
+- **Naturaleza:** es CRÉDITO publicitario, no reembolso. El crédito NO cubre el requisito de inversión en sí; se gasta $7,000 de dinero propio → luego se recibe $7,000 de crédito para gasto FUTURO. Verificación posterior tarda hasta 35 días; el crédito luego tiene su propia ventana (~60 días) para gastarse.
+
+### La matemática
+- Faltan **$5,866.72** en **~58 días** (2 jun → 30 jul) = **~$101/día** requerido.
+- Es prácticamente el presupuesto actual de $100/día → **el crédito es casi "dinero gratis"**: se va a gastar ~$5,867 en la campaña de marca que ya funciona (CPA ~$100-140) de todos modos. No requiere distorsionar la estrategia ni comprar tráfico basura.
+
+### Decisión tomada — Presupuesto $100 → $120/día
+- **Razón:** margen cero a $100/día (requerido $101 vs tope $100). Subir a $120 como COLCHÓN para garantizar llegar a $7,000 antes del 30 jul.
+- **NO se subió a $150** (sobrematar; no hay bono por llegar antes, el deadline es fijo; riesgo de tráfico de peor calidad).
+- **$120 es un TECHO, no objetivo:** si el volumen de marca está topado, Google no inventará búsquedas; gastará lo que haya. Bajo "Maximiza conversiones", más presupuesto = pujas más agresivas = más chance de ganar top-spot (hoy solo 12% vs competidores 28-33%).
+
+### Qué vigilar
+- **CPA:** al subir presupuesto el algoritmo puja más alto. Si CPA se queda en $100-140 → OK. Si se dispara >$180 sostenido → regresar a $100/día.
+- **NO bajar presupuesto ni pausar la campaña** o se queda corto del $7,000.
+- **Revisión a ~7 días (≈9 jun):** si va parejo para llegar al $7,000 → no tocar. Si va corto (volumen de marca no llena $120) → evaluar Fase 4 (Grupos B/C) para abrir inventario — decidir con datos, no por la promo.
+- **Recordatorio clave: ~23 jul** verificar progreso 1 semana antes del vencimiento del 30 jul.
+- **Timing del crédito:** se gasta el $7,000 propio (≈ ahora hasta jul) → verificación hasta 35 días → **el crédito de $7,000 llega aprox. septiembre 2026**. Es un "plus"/bonus, no afecta la operación actual.
+
+### Estado final de la revisión (2 jun)
+- ✅ **Presupuesto $120/día APLICADO** (confirmado por Florencio en cuenta).
+- ✅ **Recursos de precios — DECLINADOS** (decisión de Florencio, correcta): doble mantenimiento (Google Ads NO sincroniza con la web), riesgo de precio viejo en anuncio + posible rechazo de Google si no coincide con la landing. Los precios viven en `inventory.json`/la página (fuente de verdad). **Alternativa elegida:** mostrar precio vía **titular redondeado "desde $X"** (bajo mantenimiento) + la página.
+- ⏳ **Por descartar (3 puntitos → Descartar → "No es relevante"):** "Establece un CPA objetivo" (muy temprano, <15 conv, y limitaría el gasto justo cuando se necesita para la promo) + "Suba listas de Segmentación por clientes" (no hay lista de contactos; upsell de IA).
+- ℹ️ **Perfil de Google Business sale "Patrocinado"** = recursos de ubicación (GBP vinculado a Ads). Se deja activo: beneficio de confianza/visibilidad > el tema de tracking. Nota: parte de leads llegarán por llamada del perfil (sin tracking de WhatsApp), como el Lead #1.
+
+### 🎉 HITO — Primer APARTADO desde Google Ads (validación del canal)
+- Un lead de Google Ads **visitó e hizo un apartado**. Embudo completo probado: anuncio → WhatsApp → visita → apartado.
+- **Esto cambia la estrategia:** antes "no expandir solo por la promo"; ahora la expansión (Fase 4) está **justificada con datos** — el canal cierra ventas reales. ROI estimado enorme (~$1,133 invertidos vs comisión de asesor en decenas de miles).
+- ⚠️ Es n=1 y un apartado aún no es venta cerrada. Buenísima señal, pero expandir con disciplina (negativas + vigilar CPA).
+- **PENDIENTE preguntar a Florencio:** ¿de qué modelo/desarrollo fue el apartado? ¿Cuántos leads totales de Google Ads? (para calcular ROI y lead→apartado rate).
+
+### 📄 Investigación documentada — `anuncio-perfecto.md`
+Guía profesional creada (anatomía del anuncio, reglas RSA 2026, copywriting de conversión, palancas de más clicks/más leads, benchmarks) + **auditoría del anuncio actual**. Hallazgos clave abajo.
+
+---
+
+## 📋 PLAN PARA MAÑANA (3 jun) — Actualizar la campaña
+
+> Detalle completo y textos listos para copiar en `anuncio-perfecto.md`. Esto es el resumen accionable.
+
+### A) Correcciones URGENTES del anuncio (Grupo A — bajo esfuerzo, alto impacto)
+1. 🚨 **Descripción 3:** "asesor **independiente** certificado" → **"asesor autorizado de Altta Homes"**. (Quedó copy viejo; ya se corrigió en todo lo demás en sesión 26.)
+2. 🚨 **Titular #7** "Recorrido Virtual 360° Disponible" = **33 caracteres** (límite 30). Verificar si está rechazado y recortar a `Recorrido Virtual 360°` (22).
+3. ⚠️ **Descripción 4:** "plusvalía **garantizada**" (claim absoluta riesgosa) → `alta plusvalía` / `plusvalía proyectada`.
+4. ⚠️ **Descripción 2:** menciona **FOVISSSTE** sin confirmar → resolver pendiente FOVISSSTE antes de afirmarlo (o quitarlo por ahora).
+
+### B) Mejoras del anuncio (variedad + assets)
+5. Agregar 4-5 **titulares nuevos** (ángulos que faltan: ubicación, amenidades, financiamiento, urgencia). Lista ≤30 car. en `anuncio-perfecto.md` §6.
+6. Subir **4+ imágenes** (renders WebP que ya existen) como assets — suben CTR en 2026. (Antes descartado; reactivar.)
+7. Crear **2º RSA** en Grupo A para A/B test (+6.6% conv promedio).
+
+### C) Preparar crecimiento (cuando Florencio confirme capacidad de atender más leads)
+8. Subir las **~85 negativas de nivel Grupo → nivel Campaña** (esencial ANTES de crear B y C).
+9. **Fase 4:** Grupo C (zonal alto intent) + Grupo B (modelos), con URL final a fichas específicas (`/tabachin`, `/capua`...). El crédito $7k subsidia el experimento.
+10. Cambiar URL final de keywords de modelo → su ficha (no al home) — puede duplicar conversión.
+
+### Lo que NO hacer
+- NO "Aplicar" recomendaciones de Google (todo manual).
+- NO bajar presupuesto ni pausar (rompe el avance hacia el $7,000).
+- NO concordancia amplia, NO IA Max, NO Performance Max, NO tCPA todavía.
