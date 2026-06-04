@@ -4,9 +4,14 @@ import { useEffect } from "react";
 import Script from "next/script";
 
 // Destino: chat de WhatsApp con mensaje prellenado que identifica al lead
-// como proveniente de un anuncio de Google.
-const WHATSAPP_URL =
-  "https://wa.me/529982059044?text=Hola%2C%20vi%20su%20anuncio%20en%20Google%20y%20quiero%20informes%20sobre%20los%20modelos%20disponibles%20en%20Canc%C3%BAn.";
+// como proveniente de un anuncio de Google. Editar solo el texto del mensaje;
+// la codificación de la URL se hace sola con encodeURIComponent.
+const WHATSAPP_NUMBER = "529982059044";
+const WHATSAPP_MESSAGE =
+  "Hola, vi su anuncio en Google y quiero más información sobre las propiedades de Altta Homes en Cancún.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  WHATSAPP_MESSAGE
+)}`;
 
 // Conversión "WhatsApp Click" de Google Ads (la misma que dispara GTM en el sitio).
 const ADS_ID = "AW-18157218280";
