@@ -1356,3 +1356,55 @@ Campaña Cancún - Search  ($120/día COMPARTIDOS entre los 4 grupos)
 4. Renombrar "Grupo de anuncios 1" → **"General"** y dejarle solo keywords de marca amplia.
 5. **2º RSA por grupo** (A/B test, +6.6% conv) — pero hasta tener datos (~1-2 semanas), NO ahora.
 6. Subir negativas de Grupo → Campaña (para que protejan a TODOS los grupos nuevos).
+
+---
+
+## 📋 RECETAS LISTAS PARA CREAR — Jardines del Sur 6 + Lirios 2 (pendientes)
+
+> Copy/keywords ya redactados y validados (≤30 car. títulos, ≤90 desc.). Flujo: **`+` crear grupo → tipo Estándar → nombre → Siguiente → llenar URL + quitar chips + keywords + display path + 15 títulos + 4 descripciones.** NO concordancia amplia. Borrar los títulos que rellene la IA de Google.
+
+### 🏡 Grupo: Jardines del Sur 6 (valor / Infonavit OK)
+- **Nombre:** `Jardines del Sur 6`
+- **URL final:** `https://jardinesdelsurcancun.mx/jardines`
+- **Keywords:**
+  ```
+  [jardines del sur 6]
+  [jardines del sur 6 cancun]
+  [jardines del sur 6 precios]
+  "jardines del sur 6"
+  [casas jardines del sur 6]
+  "casas en jardines del sur cancun"
+  ```
+- **Ruta gráfica:** `Jardines-6` / `Polígono-Sur`
+- **15 Títulos:** Jardines del Sur 6 · Jardines del Sur 6 · Cancún · Casas en Jardines del Sur 6 · Casas desde $1.77M MXN · Crédito Infonavit y Bancario · Casas de 2 y 3 Recámaras · Polígono Sur Cancún · Respaldo Grupo Sadasi · Recorrido Virtual 360° · Casa Club y Alberca · Agenda tu Visita Hoy · Informes por WhatsApp · Modelos con Roof Garden · Jardines del Sur 6 Sadasi · Cotiza con un Asesor
+- **4 Descripciones:**
+  1. `Casas de 2 y 3 recámaras en Jardines del Sur 6, Polígono Sur Cancún. Desde $1.77M.`
+  2. `Crédito Infonavit y bancario. Respaldo Grupo Sadasi. Recorrido virtual 360° por WhatsApp.`
+  3. `Casa club, alberca, gimnasio y seguridad 24/7. Agenda tu visita con un asesor sin costo.`
+  4. `Modelos con roof garden y smart home. Inversión con plusvalía en zona de crecimiento.`
+- **Nota FOVISSSTE:** este es el ÚNICO grupo donde se PODRÍA mencionar FOVISSSTE (solo aplica a JdS6, algunos deptos). Opcional: en una descripción depto-específica. Por defecto se dejó solo "Infonavit y bancario" para no sobre-prometer.
+
+### 🏢 Grupo: Lirios 2 (departamentos / Infonavit OK)
+- **Nombre:** `Lirios 2`
+- **URL final:** `https://jardinesdelsurcancun.mx/lirios`
+- **Keywords:**
+  ```
+  [lirios residencial 2]
+  [lirios residencial 2 cancun]
+  "lirios residencial 2"
+  "lirios residencial cancun"
+  [lirios cancun]
+  "residencial lirios"
+  ```
+- **Ruta gráfica:** `Lirios-2` / `Polígono-Sur`
+- **15 Títulos:** Lirios Residencial 2 · Departamentos en Cancún · Lirios 2 · Polígono Sur · Deptos con Roof Garden · Crédito Infonavit y Bancario · Lirios 2 · Altta Homes · Control de Acceso 24/7 · Respaldo Grupo Sadasi · Recorrido Virtual 360° · Amenidades y Áreas Verdes · Agenda tu Visita Hoy · Informes por WhatsApp · Departamentos Lirios 2 · Cotiza con un Asesor · Vive en Lirios 2 Cancún
+- **4 Descripciones:**
+  1. `Departamentos en Lirios Residencial 2, Polígono Sur Cancún. Con opción de roof garden.`
+  2. `Crédito Infonavit y bancario. Respaldo Grupo Sadasi. Recorrido virtual 360° por WhatsApp.`
+  3. `Control de acceso, amenidades y áreas verdes. Agenda tu visita con un asesor sin costo.`
+  4. `Inversión con plusvalía en zona de crecimiento. Cotiza tu departamento hoy por WhatsApp.`
+
+### Después de crear ambos grupos
+- Quitar del "Grupo de anuncios 1" (futuro "General") las keywords específicas de Jardines y Lirios (filtrar `jardines` y `lirios` → Quitar), igual que con La Rioja, para evitar duplicados.
+- Sitelinks a nivel grupo: Jardines → modelos de JdS6 (Tabachín, Flamboyán, Ceiba, Noni, Capua, Cedro Plus) + /jardines + WhatsApp. Lirios → Cedro Plus Lirios + /lirios + WhatsApp.
+- Plan de Florencio: crear los 4 grupos y **dejar correr la campaña hasta que llegue el crédito $7,000 (~sep 2026)** para ver cómo posiciona.
