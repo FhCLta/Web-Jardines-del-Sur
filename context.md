@@ -7,6 +7,22 @@
 > 4. **Sticky price bar en mobile** (medio conversión, 1 hora). Cuando el usuario scrollea por la ficha del modelo, el precio se mantiene visible arriba con un botón "Cotizar" siempre disponible.
 > 5. **Video del recorrido** (no solo 360°, alto engagement, esfuerzo externo). Filmar un walkthrough humano del modelo subido a YouTube/Vimeo, embebido en la página. Distinto al tour 360° (que es estático) — un video con voz narrando da otra dimensión de venta.
 
+> **✅ COMPLETADO sesión 28 (3 jun 2026) — Revisión post-optimización + página `/whatsapp` + cosecha de keywords:**
+>
+> Sesión paso a paso con Florencio. **CPA real confirmado ~$101–115** (mejor que el objetivo $110–140; la optimización de sesión 26 funcionó). Insight: las búsquedas long-tail de bajo volumen traen la mitad de las conversiones y las más baratas (CPA $38).
+>
+> **Lo ejecutado:**
+> - **5 keywords exactas cosechadas** de búsquedas reales (`[casas en jardines del sur cancun]`, `[jardines del sur 6 precios]`, `[casas jardines del sur]`, `[casas jardines del sur cancun]`, `[departamentos jardines del sur]`).
+> - **Anuncio corregido:** descripción → "Crédito Infonavit y bancario. **Asesor autorizado de Altta Homes**, listo para atenderte." (quita FOVISSSTE engañoso + corrige rol). ⚠️ El anuncio vivo YA estaba mejor que lo documentado en `anuncio-perfecto.md` — verificar siempre el texto real.
+> - **FOVISSSTE RESUELTO:** solo en Jardines del Sur 6, algunos deptos. NO en La Rioja ni Lirios. (Guardado en memoria.)
+> - **Imágenes (image assets) NO disponibles aún** — cuenta nueva (~2 sem); Google las desbloquea con ~60-90 días. Revisar en 1-2 meses.
+> - **⭐ Página `/whatsapp` creada y desplegada** (`app/whatsapp/page.tsx` + `WhatsAppRedirect.tsx`): redirección client-side a wa.me con mensaje prellenado, en dominio propio para que Google la acepte como sitelink + dispara la conversión de Ads. Deploy Firebase (commits `a8b4653`, `a5a910a`). Mensaje: "Hola, vi su anuncio en Google y quiero más información sobre las propiedades de Altta Homes en Cancún." Cambiar a futuro: `WHATSAPP_MESSAGE` en `WhatsAppRedirect.tsx` + build + `firebase deploy`.
+> - **Sitelink "Informes por WhatsApp" recreado** (se había borrado) apuntando a `/whatsapp` — Google **ya NO lo rechaza** (dominio propio).
+>
+> **Pendiente próxima sesión (lo grande):** **La Rioja premium (Fase 4)** — grupo aparte con copy de lujo SIN Infonavit (arregla la "diferencia de clase" que detectó Florencio: el anuncio mezcla La Rioja $4M con Crédito Infonavit). Prerequisito: subir negativas de Grupo → Campaña. Detalle completo en `google-ads.md` sección "SESIÓN 28".
+>
+> **Nota:** la sesión 27 (crédito $7,000, presupuesto $120/día, primer apartado real desde Ads, investigación `anuncio-perfecto.md`) quedó documentada solo en `google-ads.md`, no en este context.
+
 > **✅ COMPLETADO sesión 26 (29 may 2026) — Day of Optimization: GBP Lirios 2 + Meta AI prompt v2 + Google Ads "al 100%" (extensiones + Quality Score + 85 negatives):**
 >
 > **Sesión maratón de 6+ horas. Florencio pasó de novato a advertiser intermedio + ecosistema GBP duplicado.**

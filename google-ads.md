@@ -1247,3 +1247,67 @@ Guía profesional creada (anatomía del anuncio, reglas RSA 2026, copywriting de
 - NO "Aplicar" recomendaciones de Google (todo manual).
 - NO bajar presupuesto ni pausar (rompe el avance hacia el $7,000).
 - NO concordancia amplia, NO IA Max, NO Performance Max, NO tCPA todavía.
+
+---
+
+## ✅ SESIÓN 28 — Revisión post-optimización + página /whatsapp + cosecha de keywords (3 jun 2026)
+
+Sesión paso a paso con Florencio (5 días después de la 26/27). Se revisó data real y se ejecutaron varias mejoras. Florencio aportó 2 insights propios muy buenos: cosechar búsquedas reales como exactas, y la "diferencia de clase" (mezclar La Rioja $4M con Crédito Infonavit se ve mal).
+
+### A) Data real confirmada (periodo 12 may – 1/3 jun)
+- 116 clics · ~1,312–1,576 impr · CTR **8.84–9.01%** · CPC ~$8.7–9.0
+- **10–11 conversiones · CPA ~$101–115** → en rango esperado (incluso mejor que el objetivo $110–140). La optimización de la sesión 26 funcionó.
+- **Insight clave:** las "Otros términos de búsqueda" (long-tail de bajo volumen) trajeron **5 conv a CPA $38.63** = la mitad de las conversiones y las más baratas. Las búsquedas chiquitas SÍ valen.
+- MVPs confirmadas en el reporte de términos: `[jardines del sur 6]` (2 conv, $83 CPA, QS 10), `[lirios residencial 2]` ($75), `residencial jardines del sur` ($14), `casas en jardines del sur cancun` ($15.86).
+- Cuenta limpia: casi todos los competidores con **0 clics** (negativas de sesión 26 funcionando). Única fuga nueva detectada: `inmobiliarias en cancún` ($10.73) → pendiente negativar `inmobiliarias`.
+
+### B) Cosecha de keywords (search-term harvesting)
+Agregadas **5 exactas nuevas** al Grupo A, sacadas de búsquedas reales relevantes (quedaron "En revisión"; varias saldrán "volumen bajo" = normal):
+```
+[casas en jardines del sur cancun]   ← convirtió
+[jardines del sur 6 precios]
+[casas jardines del sur]
+[casas jardines del sur cancun]
+[departamentos jardines del sur]
+```
+Criterio enseñado: lo que dice *jardines del sur / sadasi / lirios / la rioja* se cosecha como `[exacta]`; lo de competidores se bloquea como negativa.
+
+### C) Anuncio (RSA) corregido
+- Descripción #4 cambiada → **"Crédito Infonavit y bancario. Asesor autorizado de Altta Homes, listo para atenderte."** (quita FOVISSSTE engañoso + corrige el rol).
+- ⚠️ **El anuncio vivo ya estaba MÁS evolucionado que lo documentado en `anuncio-perfecto.md`.** Los errores viejos ("asesor independiente", "plusvalía garantizada") YA NO existían; los títulos reales (Sadasi Cancun, Casas Polígono Sur, La Rioja 2, etc.) son distintos y mejores. **Lección: verificar siempre el texto REAL antes de editar.**
+- Calidad del anuncio: Excelente (pasa a "Pendiente" temporal tras editar = normal).
+
+### D) FOVISSSTE — RESUELTO (pendiente abierto desde sesión 26)
+Florencio confirmó: **FOVISSSTE solo en Jardines del Sur 6, solo algunos departamentos.** NO en La Rioja 2 ni Lirios. → En piezas generales usar solo "Infonavit y bancario"; FOVISSSTE solo en piezas específicas de JdS6. Guardado en memoria persistente.
+
+### E) Imágenes (image assets) — NO disponibles aún
+El menú "+" de Recursos NO muestra "Imagen". Causa: cuenta nueva (~2 semanas). Google desbloquea imágenes con ~60–90 días de historial. **Pendiente revisar en ~1-2 meses.**
+
+### F) ⭐ Página `/whatsapp` creada y publicada (solución al rechazo de wa.me)
+- **Problema:** Google rechaza sitelinks cuyo *final URL* es `wa.me` (dominio externo, no coincide con el del sitio).
+- **Solución (código):** se creó la ruta `/whatsapp` en el sitio Next.js:
+  - `app/whatsapp/page.tsx` (server, noindex) + `app/whatsapp/WhatsAppRedirect.tsx` (client).
+  - Redirección **client-side** a `wa.me` → Google ve una página de **dominio propio** (la acepta).
+  - Dispara la **conversión de Google Ads** (`AW-18157218280 / UXk0CJTznrIcEOjThNJD`) vía gtag antes de redirigir.
+  - Mensaje prellenado actual: *"Hola, vi su anuncio en Google y quiero más información sobre las propiedades de Altta Homes en Cancún."*
+  - **Para cambiar el mensaje a futuro:** editar `WHATSAPP_MESSAGE` en `app/whatsapp/WhatsAppRedirect.tsx`, luego `next build` + `firebase deploy --only hosting`.
+- **Deploy:** Firebase Hosting (`output: "export"` → `out/` → `firebase deploy --only hosting --project jardinesdelsur-cancun`). Commits `a8b4653` + `a5a910a` en `main`. Verificado en vivo (200 + contenido correcto) en `https://jardinesdelsurcancun.mx/whatsapp`.
+
+### G) Sitelink "Informes por WhatsApp" recreado
+- Se había borrado (no estaba en los 12 sitelinks vivos). Recreado a nivel **Campaña** con la URL nueva:
+  - Texto: `Informes por WhatsApp` · URL: `https://jardinesdelsurcancun.mx/whatsapp`
+  - Desc 1: `Respuesta inmediata con un asesor` · Desc 2: `Sin costo · Cotiza hoy mismo`
+- Quedó "En revisión" (esta vez **se aprobará** por ser dominio propio).
+- Nota: como dispara la conversión en `/whatsapp`, este sí debería contar (a diferencia del wa.me directo viejo que no trackeaba).
+
+### Presupuesto
+- $120/día (decisión sesión 27 por el crédito $7,000). Sin cambios.
+
+### ⏳ Pendientes para la próxima sesión
+1. **La Rioja premium (Fase 4)** — separar La Rioja en su grupo con copy de lujo SIN Infonavit, apuntando a `/la-rioja`. Resuelve la "diferencia de clase" que detectó Florencio (el anuncio de marca mezcla La Rioja $4M con Crédito Infonavit y se ve mal). **Es lo de mayor impacto pendiente.**
+2. **Subir negativas de Grupo → Campaña** (prerequisito de Fase 4; ~5 min).
+3. Negativar `inmobiliarias` (fuga detectada).
+4. Verificar que el sitelink WhatsApp + las 5 keywords nuevas quedaron **aprobadas**.
+5. Llenar **"Nombre de la empresa"** en el anuncio (está vacío → sale nombre genérico de la URL).
+6. Imágenes: revisar en ~1-2 meses cuando se desbloqueen.
+7. Heredados: Grupos B/C, etiquetar URLs catálogo WhatsApp (prompt Meta v3), evento Lead Meta Pixel, verificación dominio Meta, brand verification Google Ads (logo).
