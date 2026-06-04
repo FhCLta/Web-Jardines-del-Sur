@@ -1311,3 +1311,48 @@ El menú "+" de Recursos NO muestra "Imagen". Causa: cuenta nueva (~2 semanas). 
 5. Llenar **"Nombre de la empresa"** en el anuncio (está vacío → sale nombre genérico de la URL).
 6. Imágenes: revisar en ~1-2 meses cuando se desbloqueen.
 7. Heredados: Grupos B/C, etiquetar URLs catálogo WhatsApp (prompt Meta v3), evento Lead Meta Pixel, verificación dominio Meta, brand verification Google Ads (logo).
+
+---
+
+## 🏗️ SESIÓN 28 (cont.) — Grupo "La Rioja 2 - Premium" creado + estrategia de 4 grupos (3 jun 2026)
+
+Florencio decidió arrancar la **Fase 4 de una vez** (separar La Rioja para matar la "diferencia de clase" que él detectó: el anuncio de marca mezclaba La Rioja $4M con "Crédito Infonavit" y se veía mal).
+
+### ✅ Grupo creado: `La Rioja 2 - Premium`
+(en la campaña `Cancún - Search - Casas y Deptos - v1`)
+- **Estado:** Apto. Anuncio: "Pendiente" (en revisión, normal).
+- **Keywords (6, exacta/frase):** `[la rioja 2 cancun]`, `[la rioja 2]`, `[la rioja 2 altta homes]`, `"la rioja cancun"`, `"residencial la rioja"`, `"la rioja 2 residencial"`
+- **URL final:** `https://jardinesdelsurcancun.mx/la-rioja`
+- **Ruta gráfica (display path):** `La-Rioja-2 / Premium`
+- **RSA PREMIUM (SIN Infonavit)** — 15 títulos + 4 descripciones, puro lujo/plusvalía/exclusividad:
+  - *Títulos:* La Rioja 2 Residencial · La Rioja 2 · Altta Homes · Casas Premium La Rioja 2 · La Rioja 2 · Zona Premium · Casas de Lujo en La Rioja 2 · La Rioja 2 Alta Plusvalía · Vive en La Rioja 2 Cancún · Alta Plusvalía en Cancún · Residencial de Lujo · Exclusividad y Seguridad · Respaldo Grupo Sadasi · Recorrido Virtual 360° · Agenda tu Visita Hoy · Informes por WhatsApp · Cotiza con un Asesor
+  - *Descripciones:* "Residencial premium en Polígono Sur Cancún. Casas con amplios espacios y alta plusvalía." / "La Rioja 2 de Altta Homes con respaldo Grupo Sadasi. Recorrido virtual 360° por WhatsApp." / "Exclusividad, seguridad 24/7 y amenidades de lujo. Agenda tu visita con un asesor." / "Inversión con alta plusvalía en la zona de mayor crecimiento de Cancún. Cotiza hoy."
+
+### Lecciones de esta parte
+- **El asistente rellena el anuncio con IA genérica que VUELVE a mezclar desarrollos** (puso "Precios desde $1,777,640" = precio barato de Jardines, y "Departamentos Lirios"). Hay que **borrarlos** y poner el copy premium. = el mismo "feo" que estamos arreglando.
+- **Ad Strength:** pedía "incluya palabras clave populares en sus títulos" → meter `La Rioja 2` en ~7 títulos lo sube de Deficiente/Promedio. Es **guía, NO requisito** — el anuncio corre igual aunque quede en Promedio.
+- **Nombre de empresa:** usar `Jardines del Sur Cancún` (coincide con dominio). **NO** "Altta Homes Cancún" → riesgo de política de marca registrada (Florencio es asesor autorizado, no Altta Homes).
+- **Campo "productos o servicios para promocionar":** dejar VACÍO (solo alimenta sugerencias IA que no usamos).
+
+### 🎯 Estrategia de 4 grupos (visión de Florencio, validada)
+```
+Campaña Cancún - Search  ($120/día COMPARTIDOS entre los 4 grupos)
+├── Grupo General      → anuncio menciona los 3 devs → home. Keywords: marca amplia
+│                         (altta homes, sadasi, grupo sadasi, polígono sur). [= el actual "Grupo de anuncios 1"]
+├── Jardines del Sur 6 → /jardines  (valor / Infonavit).         [POR CREAR]
+├── La Rioja 2         → /la-rioja  (premium, sin Infonavit).     [✅ CREADO HOY]
+└── Lirios 2           → /lirios    (departamentos).              [POR CREAR]
+```
+**Conceptos aclarados con Florencio (importantes):**
+- **El presupuesto es de la CAMPAÑA, no por grupo.** Los 4 grupos COMPARTEN los $120/día → más grupos **NO gasta más**, solo organiza a dónde va el dinero.
+- **Más grupos = mejor EFICIENCIA** (Quality Score↑, CPC↓, CPA↓), NO más volumen de leads (eso necesita más keywords/presupuesto).
+- **El anuncio General SÍ menciona los 3 desarrollos** (texto) y va al home; lo que se separa son las **keywords** (targeting). El anuncio actual del Grupo 1 ya es así → ese se vuelve el "General".
+- **Keyword duplicada en 2 grupos:** Google NO reparte el tráfico; elige UNO por subasta (mayor Ad Rank/Quality Score). Riesgo: a veces gana el grupo equivocado → sale el anuncio genérico en vez del premium. **Regla: cada keyword en UN solo grupo.**
+
+### ⏳ Pendientes de la estructura (próximas sesiones)
+1. **Mañana (tras aprobación del grupo nuevo):** quitar las keywords de La Rioja del "Grupo de anuncios 1" (Palabras clave → filtrar `rioja` → Quitar). **NO hacerlo hoy** = evita un gap mientras el anuncio premium está en revisión.
+2. **5 sitelinks a nivel GRUPO para La Rioja** (tapan los de campaña, que incluyen Capua/Cedro Plus/Jardines): La Rioja 2 Cancún (`/la-rioja`), Modelo Álamo (`/alamo`), Casa Fresno Elite (`/fresno-elite`), Noni Elite (`/noni-elite`), Informes por WhatsApp (`/whatsapp`).
+3. Crear grupo **Jardines del Sur 6** (`/jardines`) + grupo **Lirios 2** (`/lirios`), cada uno con sus keywords específicas + RSA enfocado (Jardines puede llevar Infonavit; Lirios enfoque deptos).
+4. Renombrar "Grupo de anuncios 1" → **"General"** y dejarle solo keywords de marca amplia.
+5. **2º RSA por grupo** (A/B test, +6.6% conv) — pero hasta tener datos (~1-2 semanas), NO ahora.
+6. Subir negativas de Grupo → Campaña (para que protejan a TODOS los grupos nuevos).
