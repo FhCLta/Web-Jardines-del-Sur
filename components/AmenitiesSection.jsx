@@ -115,7 +115,7 @@ export default function AmenitiesSection({
   }, [lightboxIndex, prev, next]);
 
   return (
-    <section className={styles.section}>
+    <section id="amenidades" className={styles.section} style={{ scrollMarginTop: "72px" }}>
       <div className={styles.bgGlow} aria-hidden="true" />
       <div className="container">
         <div className={styles.header}>

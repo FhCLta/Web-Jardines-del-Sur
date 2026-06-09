@@ -80,6 +80,7 @@ export default function SiteHeader() {
             <nav className={styles.navDesktop} aria-label="Navegación principal">
               <a href="/#top">Inicio</a>
               <a href="/#desarrollos">Modelos y Precios</a>
+              <a href="/#amenidades">Amenidades</a>
               <a href="/#contacto">Contacto</a>
             </nav>
           )}
@@ -182,9 +183,22 @@ export default function SiteHeader() {
                 {silo.name}
               </a>
             ))}
-            <a href="#contacto" onClick={closeAndGo}>
+            <a
+              href={
+                currentDev
+                  ? `/desarrollos-cancun/${currentDev.slug}#amenidades`
+                  : "#amenidades"
+              }
+              onClick={closeAndGo}
+            >
               <span className={styles.drawerNum}>
                 {String(otherSilos.length + 1).padStart(2, "0")}
+              </span>
+              Amenidades
+            </a>
+            <a href="#contacto" onClick={closeAndGo}>
+              <span className={styles.drawerNum}>
+                {String(otherSilos.length + 2).padStart(2, "0")}
               </span>
               Contacto
             </a>
@@ -197,8 +211,11 @@ export default function SiteHeader() {
             <a href="/#desarrollos" onClick={closeAndGo}>
               <span className={styles.drawerNum}>02</span>Modelos y Precios
             </a>
+            <a href="/#amenidades" onClick={closeAndGo}>
+              <span className={styles.drawerNum}>03</span>Amenidades
+            </a>
             <a href="/#contacto" onClick={closeAndGo}>
-              <span className={styles.drawerNum}>03</span>Contacto
+              <span className={styles.drawerNum}>04</span>Contacto
             </a>
           </nav>
         )}

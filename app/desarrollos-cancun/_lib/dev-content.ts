@@ -164,6 +164,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Cuatro modelos de casas premium con tres recámaras, baños completos y terraza al frente, en el desarrollo más exclusivo de Altta Homes en Cancún.",
     heroImage: "/optimized/dev-tabs/la-rioja-2.webp",
     ogImage: "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
+    location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     hero: {
@@ -270,6 +271,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
     heroImage: "/optimized/dev-tabs/lirios-2.webp",
     ogImage: "/jardines/Modelo Cedro Plus/1.webp",
+    location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre los departamentos de Lirios Residencial 2 en Cancún.",
     hero: {

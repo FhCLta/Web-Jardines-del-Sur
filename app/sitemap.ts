@@ -35,6 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
+    {
+      url: `${SITE_URL}/preguntas-frecuentes`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
   ];
 
   const modelEntries: MetadataRoute.Sitemap = getInventory()
