@@ -28,6 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     })),
+    // Próximo desarrollo (página "Próximamente", aún sin inventario en DEVS).
+    {
+      url: `${SITE_URL}/desarrollos-cancun/jardines-del-sur-7`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    },
   ];
 
   const modelEntries: MetadataRoute.Sitemap = getInventory()

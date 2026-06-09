@@ -131,6 +131,7 @@ export default async function Home() {
           { name: 'Jardines del Sur 6', slug: 'jardines-del-sur-6' },
           { name: 'La Rioja 2', slug: 'la-rioja-2' },
           { name: 'Lirios Residencial 2', slug: 'lirios-residencial-2' },
+          { name: 'Jardines del Sur 7', slug: 'jardines-del-sur-7' },
         ].map(({ name, slug }, index) => ({
           '@type': 'ListItem',
           position: index + 1,
@@ -212,6 +213,7 @@ export default async function Home() {
               <li><a href="/desarrollos-cancun/jardines-del-sur-6">Jardines del Sur 6</a></li>
               <li><a href="/desarrollos-cancun/la-rioja-2">La Rioja 2</a></li>
               <li><a href="/desarrollos-cancun/lirios-residencial-2">Lirios Residencial 2</a></li>
+              <li><a href="/desarrollos-cancun/jardines-del-sur-7">Jardines del Sur 7 · Próximamente</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
               <li><ContactNavBtn /></li>
             </ul>

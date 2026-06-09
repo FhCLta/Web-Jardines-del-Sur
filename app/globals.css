@@ -29,6 +29,11 @@
 
 html {
   scroll-behavior: smooth;
+  /* Evita que el WebView de Facebook/Instagram (Android) infle el texto
+     automáticamente — síntoma: "todo se ve más grande" y hero cortado.
+     No afecta a Chrome ni Safari (ya operan al 100%). */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {

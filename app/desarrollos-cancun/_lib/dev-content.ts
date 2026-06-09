@@ -83,7 +83,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       paragraphs: [
         "Jardines del Sur 6 es la sexta etapa del residencial más exitoso del Polígono Sur de Cancún. Un oasis de estilo y serenidad construido con la calidad y garantía que solo una marca con más de 50 años de experiencia como Grupo Sadasi puede ofrecer — más de 430,000 viviendas entregadas en 12 estados del país.",
         "Cada detalle ha sido meticulosamente diseñado para ofrecer el máximo confort. Espaciosas áreas, acabados elegantes y tecnología Smart Home Ready convierten tu hogar en un santuario de sofisticación. Las amenidades de clase mundial — alberca tipo resort, casa club, gimnasio cerrado, áreas verdes, juegos infantiles y skate park — crean un entorno donde la seguridad y la belleza se entrelazan.",
-        "El residencial ofrece seis modelos para distintos perfiles familiares: los departamentos Capua y Cedro Plus, ideales para parejas jóvenes y primer hogar, y las casas Flamboyán, Ceiba, Tabachín y Noni, pensadas para familias que buscan espacio y privacidad. Todos con esquemas flexibles de financiamiento — Infonavit, FOVISSSTE y crédito bancario.",
+        "El residencial ofrece seis modelos para distintos perfiles familiares: los departamentos Capua y Cedro Plus, ideales para parejas jóvenes y primer hogar, y las casas Flamboyán, Ceiba, Tabachín y Noni, pensadas para familias que buscan espacio y privacidad. Todos con esquemas flexibles de financiamiento — Infonavit y crédito bancario, y FOVISSSTE en unidades seleccionadas.",
         "La ubicación privilegiada cerca de la Av. 127 te conecta con escuelas de prestigio, plazas comerciales, restaurantes y las playas más hermosas del Caribe Mexicano. Vivir con estilo es… vivir en Jardines del Sur.",
       ],
     },
@@ -91,7 +91,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "6 modelos: 2 departamentos y 4 casas",
       "3 recámaras desde 85.34 m²",
       "Precio desde $1,853,830 MXN",
-      "Smart Home Ready · Infonavit · FOVISSSTE",
+      "Smart Home Ready · Infonavit · FOVISSSTE (unidades selec.)",
       "Alberca, gimnasio, casa club, cancha y área infantil",
       "Polígono Sur Cancún · Av. 127",
     ],

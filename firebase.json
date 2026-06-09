@@ -50,6 +50,7 @@
       { "source": "/noni-la-rioja",   "destination": "/desarrollos-cancun/la-rioja-2/casa-noni",                    "type": 301 },
       { "source": "/lirios-cedro",    "destination": "/desarrollos-cancun/lirios-residencial-2/departamento-cedro-plus", "type": 301 },
       { "source": "/jardines",        "destination": "/desarrollos-cancun/jardines-del-sur-6",                      "type": 301 },
+      { "source": "/jardines-7",      "destination": "/desarrollos-cancun/jardines-del-sur-7",                      "type": 301 },
       { "source": "/la-rioja",        "destination": "/desarrollos-cancun/la-rioja-2",                              "type": 301 },
       { "source": "/lirios",          "destination": "/desarrollos-cancun/lirios-residencial-2",                    "type": 301 },
 
