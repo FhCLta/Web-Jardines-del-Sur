@@ -263,7 +263,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem 2rem 3rem;
+  /* padding-bottom amplio: deja sitio al .drawerFoot (absolute, bottom:2rem)
+     para que el contenido centrado nunca se encime con él en páginas de
+     desarrollo (más items en el menú). overflow-y por si en pantallas muy
+     chicas el contenido excede el alto: scroll en vez de recorte. */
+  padding: 5rem 2rem 6.5rem;
+  overflow-y: auto;
   opacity: 0;
   pointer-events: none;
   transform: translateY(-12px);

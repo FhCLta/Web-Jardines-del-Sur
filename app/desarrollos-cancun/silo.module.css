@@ -6,6 +6,56 @@
   background-color: var(--surface);
 }
 
+/* Barra de anclas bajo el hero (solo escritorio; en móvil está el menú lateral) */
+.anchorNav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .anchorNav {
+    display: block;
+    position: sticky;
+    top: 56px; /* queda justo debajo del header fijo (ya encogido al hacer scroll) */
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    border-bottom: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Respaldo para navegadores sin backdrop-filter (WebView de Facebook) */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .anchorNav {
+      background: #ffffff;
+    }
+  }
+}
+
+.anchorNavInner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.75rem;
+  padding: 0.7rem 1.5rem;
+}
+
+.anchorNav a {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  color: var(--primary);
+  padding: 0.3rem 0.1rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.anchorNav a:hover {
+  color: var(--accent-deep);
+  border-bottom-color: var(--accent);
+}
+
 /* Breadcrumb (rendered on top of the hero) */
 .breadcrumb {
   display: flex;

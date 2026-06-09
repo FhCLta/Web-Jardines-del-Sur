@@ -152,7 +152,16 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
 
       <SiloHero dev={dev} waHref={waHref} subtitleBold={dynamicSubtitleBold} subtitleBreakdown={dynamicSubtitleBreakdown} subtitleDetail={dynamicSubtitleDetail} />
 
-      <section id="modelos" className={styles.modelsSection}>
+      <nav className={styles.anchorNav} aria-label={`Secciones de ${dev.name}`}>
+        <div className={`container ${styles.anchorNavInner}`}>
+          <a href="#modelos">Modelos</a>
+          <a href="#amenidades">Amenidades</a>
+          {location && <a href="#ubicacion">Ubicación</a>}
+          <a href="#contacto">Contacto</a>
+        </div>
+      </nav>
+
+      <section id="modelos" className={styles.modelsSection} style={{ scrollMarginTop: "110px" }}>
         <div className="container">
           <div className={styles.sectionHeader}>
             <span className="text-accent">Inventario y Precios</span>
@@ -189,7 +198,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
         </div>
       </section>
 
-      <section className={styles.aboutSection}>
+      <section id="ubicacion" className={styles.aboutSection} style={{ scrollMarginTop: "110px" }}>
         <div className="container">
           <div className={styles.aboutGrid}>
             <div className={styles.aboutCopy}>
