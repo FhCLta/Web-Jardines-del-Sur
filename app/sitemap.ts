@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getInventory, slugifyModel } from './desarrollos-cancun/_lib/model-utils';
 import { DEVS, type DevSlug } from './desarrollos-cancun/_lib/dev-content';
+import { getAllPosts } from './blog/_lib/posts';
 
 export const dynamic = 'force-static';
 
@@ -41,7 +42,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
   ];
+
+  const blogEntries: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
 
   const modelEntries: MetadataRoute.Sitemap = getInventory()
     .map((property) => {
@@ -57,5 +71,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
     .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
 
-  return [...baseEntries, ...modelEntries];
+  return [...baseEntries, ...modelEntries, ...blogEntries];
 }

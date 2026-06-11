@@ -215,6 +215,7 @@ export default async function Home() {
               <li><a href="/desarrollos-cancun/lirios-residencial-2">Lirios Residencial 2</a></li>
               <li><a href="/desarrollos-cancun/jardines-del-sur-7">Jardines del Sur 7 · Próximamente</a></li>
               <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
+              <li><a href="/blog">Blog</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
               <li><ContactNavBtn /></li>
             </ul>
