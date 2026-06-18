@@ -36,6 +36,22 @@
 >
 > **⏳ ESTADO: pendiente de EJECUTAR — Florencio lo hará "cuando tenga tiempo" para vigilar Ads a diario durante la transición.** A 17 jun 2026: **código NO tocado, nada desplegado, producción intacta** (sigue `jardinesdelsurcancun.mx` como primario). Cuando haya tiempo, seguir el plan de 7 pasos de arriba en ese orden exacto. La parte de código (paso 1) la puede hacer Claude en ~10 min sin afectar producción; los pasos 2-7 son consola (Firebase/Search Console/Ads/GBP/Meta).
 
+> **🧪 EXPERIMENTO FUTURO (post-migración) — Campaña Google Ads "click-to-WhatsApp" (apuntado 17 jun 2026):**
+>
+> Google ofreció el formato vía banner ("Genera más leads con los anuncios de clic para comunicarse por WhatsApp"). Florencio quiere armar una **una vez migrado el dominio** a `alttahomescancun.mx`. NO se activó desde el banner (podría crear campaña nueva / cambiar formato sin control).
+>
+> **Cómo funciona:** se conecta el número de WhatsApp Business a Google Ads (verificación por código una vez). El anuncio muestra botón "Enviar mensaje / Chatea por WhatsApp"; el clic abre el chat directo con mensaje prellenado; la **conversión = inicio de conversación** (clic-a-mensaje), no visita. Vive como asset en campañas de **Búsqueda** o como objetivo nativo en **Demand Gen**. Se paga por **CPC**; CPA suele ser más bajo que web→WhatsApp (menos fricción).
+>
+> **Prerrequisitos (casi todos listos):** WhatsApp Business activo ✅, número verificado ✅, mensajes prellenados por modelo (ya en `model-utils.ts` + `meta-ai-prompt`) ✅, bot Meta AI para respuesta rápida ✅.
+>
+> **Reglas para cuando se haga:**
+> 1. Correrla como **campaña/experimento APARTE**, presupuesto chico (~$40-50/día). NUNCA dentro de la campaña actual optimizada a CPA ~$101.
+> 2. Branding del mensaje ya como "Altta Homes Cancún" consolidado (por eso esperar a migrar).
+> 3. **Trade-off a medir:** estos leads saltan el sitio y NO disparan el Meta Pixel → no alimentan el retargeting. Es COMPLEMENTO, no reemplazo de la campaña web. Comparar: ¿lead directo a WhatsApp convierte mejor que el que pasa por el sitio?
+> 4. Sigue aplicando la regla de oro: NO activar desde banners de recomendación; configurar manualmente.
+>
+> **Detalles del formulario "Agregar mensaje / recurso de mensaje" (visto 17 jun 2026, se dejó sin guardar):** Configura tu recurso de mensaje = **WhatsApp**. GOTCHAS al retomar: (a) el campo País sale por defecto en **"Estados Unidos" → cambiar a México**; (b) Número = WhatsApp Business 998 205 9044; (c) "Mensaje de inicio" (máx 140) = mensaje branded Altta Homes; (d) seleccionar un CTA (llamado a la acción) abajo; (e) el form sugiere agregarlo a nivel **"Cuenta" (aplica a TODAS las campañas) → para el experimento controlado ponerlo a nivel CAMPAÑA**, no cuenta.
+
 > **🎯 BACKLOG FEATURES NO URGENTES (post Google Ads launch):** Features identificadas como "alto ROI pero no bloqueantes" para hacer DESPUÉS de tener data real de conversión:
 > 1. **Reviews/testimonios visibles** (alto trust, bajo esfuerzo ~1h). **CAVEAT IMPORTANTE**: el Google Business Profile del usuario es **nuevo y AÚN NO tiene estrellas/reseñas** — implementar la sección sería contraproducente porque mostraría 0 reseñas. **Acción previa requerida**: el usuario debe pedir reseñas a clientes/contactos existentes hasta tener ≥5-10 estrellas, luego integrar.
 > 2. **Blog con 3-5 artículos SEO** (alto en autoridad de dominio, 3-5 días esfuerzo). Temas sugeridos: "Cuánto cuesta vivir en Polígono Sur Cancún", "Infonavit vs FOVISSSTE vs crédito bancario", "Plusvalía en Cancún zonas con mejor proyección 2026". Aumenta tráfico orgánico de keywords informativos que después convierten.
