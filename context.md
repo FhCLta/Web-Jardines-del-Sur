@@ -1,5 +1,38 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **🧭 DECISIÓN ESTRATÉGICA PENDIENTE (documentada 17 jun 2026) — Posible migración de dominio primario a `alttahomescancun.mx`:**
+>
+> Florencio detectó que tiene 5 dominios en Firebase Hosting y se planteó cambiar el **dominio primario** de `jardinesdelsurcancun.mx` (actual) a **`alttahomescancun.mx`** "para posicionarse mejor", invirtiendo la redirección (que el actual redirija al nuevo).
+>
+> **Estado actual de los dominios (Firebase Hosting):**
+> - `jardinesdelsur-cancun.web.app` — Predeterminado
+> - `jardinesdelsur-cancun.firebaseapp.com` — Predeterminado
+> - `alttahomescancun.mx` — **Redirecciona → jardinesdelsurcancun.mx** (Conectado)
+> - `jardinesdelsurcancun.com.mx` — Redirecciona → jardinesdelsurcancun.mx (Conectado)
+> - **`jardinesdelsurcancun.mx` — Personalizado / PRIMARIO actual (Conectado)** ✅
+>
+> **Alcance técnico medido (commit base 64c59b4):** El dominio viejo está hardcodeado en **11 lugares / 9 archivos** — siempre como constante `SITE_URL` o `metadataBase`/OpenGraph: `app/robots.ts` (×2), `app/layout.tsx` (×2: metadataBase + OG url), `app/sitemap.ts`, `app/page.tsx`, `app/desarrollos-cancun/_lib/SiloPage.tsx`, `app/desarrollos-cancun/_lib/ModelPage.tsx`, `app/blog/page.tsx`, `app/blog/[slug]/page.tsx`, `app/preguntas-frecuentes/page.tsx`, `app/desarrollos-cancun/jardines-del-sur-7/page.tsx`. **NO hay constante centralizada** (copy-paste). Los silos/modelos son agnósticos al dominio (salen de `inventory.json`), NO requieren adaptación.
+>
+> **Plan técnico si se ejecuta (en este orden):**
+> 1. Centralizar el dominio en `lib/site.ts` (`export const SITE_URL = ...`) e importarlo en los 9 archivos → futuros cambios = 1 línea. (~10 min, riesgo cero)
+> 2. Actualizar token de verificación Google en `app/layout.tsx:53` (`verification.google`) — el actual es del dominio viejo; crear propiedad nueva en Search Console y re-verificar.
+> 3. `npm run build` + `firebase deploy`.
+> 4. **En consola Firebase Hosting (NO código):** invertir — `alttahomescancun.mx` → Personalizado/primario; `jardinesdelsurcancun.mx` → Redireccionar 301 al nuevo. Esperar propagación DNS/SSL (horas).
+> 5. **Google Ads:** actualizar URL final de campaña + las ~10 sitelinks + página `/whatsapp` al dominio nuevo (si no, quedan con salto extra de redirección).
+> 6. **GBP (3 perfiles)** y **dominio verificado en Meta**: re-apuntar al nuevo dominio.
+>
+> **🎯 RAZÓN ESTRATÉGICA REAL (aclarada por Florencio 17 jun 2026):**
+> - `alttahomescancun.com` **NO es el sitio oficial de Altta Homes** — es de **otra asesora (competidora)**, y es la que está **mejor posicionada** para "altta homes cancun". Florencio tiene la versión **`.mx`**.
+> - **"Altta Homes" es la marca paraguas que cubre los 3 desarrollos** (Jardines del Sur 6 + La Rioja 2 + Lirios). "Jardines del sur" es solo 1 de 3. El término marca es más amplio y captura intención para TODO el inventario → por eso el cambio es estratégico: poseer el término que abarca todo.
+>
+> **⚠️ VERDAD TÉCNICA CLAVE:** un **redirect 301 NO rankea en Google** (rebota al destino, no aparece en resultados). Mientras `alttahomescancun.mx` sea solo redirect, **NO compite** contra `alttahomescancun.com` por "altta homes cancun". Para disputarle ese posicionamiento a la competidora, `.mx` debe ser el **sitio primario vivo e indexado**. Es decir: migrar es la ÚNICA forma de competir por ese término.
+>
+> **Riesgo restante real:**
+> - **(A) Quality Score / CPA — único costo mecánico inevitable:** el QS de Ads se mide por la URL de destino; cambiar dominio resetea el historial de "experiencia de página destino" → baja temporal de QS y subida de CPA durante ~2-4 semanas, justo tras optimizar el CPA a ~$101. Temporal y manejable si se vigila Ads de cerca durante la transición.
+> - **(B) Riesgo de marca — BAJO (revisado a la baja):** Florencio es asesor **AUTORIZADO**, tiene más derecho a la marca que la competidora que ya rankea sin penalización con `.com`. El mercado ya demostró que se puede. Riesgo residual: que Altta/Sadasi oficial reclame el dominio a futuro, pero su estatus de autorizado lo hace defendible.
+>
+> **Recomendación REVISADA de Claude (no ejecutada — decisión de Florencio):** El caso para MIGRAR es sólido. La lógica del término paraguas es correcta y un redirect no logra competir por "altta homes cancun". Si la meta es ganarle ese posicionamiento a la competidora y cubrir los 3 desarrollos bajo un solo término marca, **migrar tiene sentido**. Hacerlo deliberadamente: presupuestar el bache de QS/CPA de 2-4 semanas y ejecutarlo cuando se pueda monitorear Ads a diario. **Pendiente: Florencio decide el momento. Plan de 6 pasos arriba.**
+
 > **🎯 BACKLOG FEATURES NO URGENTES (post Google Ads launch):** Features identificadas como "alto ROI pero no bloqueantes" para hacer DESPUÉS de tener data real de conversión:
 > 1. **Reviews/testimonios visibles** (alto trust, bajo esfuerzo ~1h). **CAVEAT IMPORTANTE**: el Google Business Profile del usuario es **nuevo y AÚN NO tiene estrellas/reseñas** — implementar la sección sería contraproducente porque mostraría 0 reseñas. **Acción previa requerida**: el usuario debe pedir reseñas a clientes/contactos existentes hasta tener ≥5-10 estrellas, luego integrar.
 > 2. **Blog con 3-5 artículos SEO** (alto en autoridad de dominio, 3-5 días esfuerzo). Temas sugeridos: "Cuánto cuesta vivir en Polígono Sur Cancún", "Infonavit vs FOVISSSTE vs crédito bancario", "Plusvalía en Cancún zonas con mejor proyección 2026". Aumenta tráfico orgánico de keywords informativos que después convierten.
