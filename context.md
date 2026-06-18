@@ -13,13 +13,14 @@
 >
 > **Alcance técnico medido (commit base 64c59b4):** El dominio viejo está hardcodeado en **11 lugares / 9 archivos** — siempre como constante `SITE_URL` o `metadataBase`/OpenGraph: `app/robots.ts` (×2), `app/layout.tsx` (×2: metadataBase + OG url), `app/sitemap.ts`, `app/page.tsx`, `app/desarrollos-cancun/_lib/SiloPage.tsx`, `app/desarrollos-cancun/_lib/ModelPage.tsx`, `app/blog/page.tsx`, `app/blog/[slug]/page.tsx`, `app/preguntas-frecuentes/page.tsx`, `app/desarrollos-cancun/jardines-del-sur-7/page.tsx`. **NO hay constante centralizada** (copy-paste). Los silos/modelos son agnósticos al dominio (salen de `inventory.json`), NO requieren adaptación.
 >
-> **Plan técnico si se ejecuta (en este orden):**
-> 1. Centralizar el dominio en `lib/site.ts` (`export const SITE_URL = ...`) e importarlo en los 9 archivos → futuros cambios = 1 línea. (~10 min, riesgo cero)
-> 2. Actualizar token de verificación Google en `app/layout.tsx:53` (`verification.google`) — el actual es del dominio viejo; crear propiedad nueva en Search Console y re-verificar.
-> 3. `npm run build` + `firebase deploy`.
-> 4. **En consola Firebase Hosting (NO código):** invertir — `alttahomescancun.mx` → Personalizado/primario; `jardinesdelsurcancun.mx` → Redireccionar 301 al nuevo. Esperar propagación DNS/SSL (horas).
+> **Plan técnico — EJECUTAR EN ESTE ORDEN (el orden importa; NO desplegar el código nuevo antes de flipar Firebase, o Google ve un rato confuso):**
+> 1. **(Código, NO afecta producción)** Centralizar el dominio en `lib/site.ts` (`export const SITE_URL = "https://alttahomescancun.mx"`) e importarlo en los 9 archivos que hoy lo tienen hardcodeado → futuros cambios = 1 línea. (~10 min, riesgo cero, no se despliega todavía)
+> 2. **Firebase Hosting consola (esto SÍ mueve producción):** invertir — `alttahomescancun.mx` → Personalizado/primario; `jardinesdelsurcancun.mx` → Redireccionar 301 al nuevo. Esperar propagación DNS/SSL (horas).
+> 3. **Recién entonces:** `npm run build` + `firebase deploy` con el dominio nuevo en el código.
+> 4. **Search Console:** crear propiedad nueva de `alttahomescancun.mx`, verificar, actualizar el token `verification.google` en `app/layout.tsx:53` (el actual es del dominio viejo), enviar sitemap y usar herramienta "Cambio de dirección".
 > 5. **Google Ads:** actualizar URL final de campaña + las ~10 sitelinks + página `/whatsapp` al dominio nuevo (si no, quedan con salto extra de redirección).
-> 6. **GBP (3 perfiles)** y **dominio verificado en Meta**: re-apuntar al nuevo dominio.
+> 6. **GBP (3 perfiles):** re-apuntar el sitio web al dominio nuevo.
+> 7. **Meta:** re-verificar dominio (`alttahomescancun.mx`) en Business Settings → Brand Safety → Domains + re-configurar/validar el **Meta Pixel** (`2016457592282966`) con el dominio nuevo.
 >
 > **🎯 RAZÓN ESTRATÉGICA REAL (aclarada por Florencio 17 jun 2026):**
 > - `alttahomescancun.com` **NO es el sitio oficial de Altta Homes** — es de **otra asesora (competidora)**, y es la que está **mejor posicionada** para "altta homes cancun". Florencio tiene la versión **`.mx`**.
@@ -31,7 +32,9 @@
 > - **(A) Quality Score / CPA — único costo mecánico inevitable:** el QS de Ads se mide por la URL de destino; cambiar dominio resetea el historial de "experiencia de página destino" → baja temporal de QS y subida de CPA durante ~2-4 semanas, justo tras optimizar el CPA a ~$101. Temporal y manejable si se vigila Ads de cerca durante la transición.
 > - **(B) Riesgo de marca — BAJO (revisado a la baja):** Florencio es asesor **AUTORIZADO**, tiene más derecho a la marca que la competidora que ya rankea sin penalización con `.com`. El mercado ya demostró que se puede. Riesgo residual: que Altta/Sadasi oficial reclame el dominio a futuro, pero su estatus de autorizado lo hace defendible.
 >
-> **Recomendación REVISADA de Claude (no ejecutada — decisión de Florencio):** El caso para MIGRAR es sólido. La lógica del término paraguas es correcta y un redirect no logra competir por "altta homes cancun". Si la meta es ganarle ese posicionamiento a la competidora y cubrir los 3 desarrollos bajo un solo término marca, **migrar tiene sentido**. Hacerlo deliberadamente: presupuestar el bache de QS/CPA de 2-4 semanas y ejecutarlo cuando se pueda monitorear Ads a diario. **Pendiente: Florencio decide el momento. Plan de 6 pasos arriba.**
+> **✅ DECISIÓN TOMADA (17 jun 2026): SÍ se migra a `alttahomescancun.mx`.** Razón: posicionamiento de largo plazo + es mejor hacerlo **ahora que lleva poco tiempo** (menos equity de SEO/QS acumulado = menos que perder en el bache de transición). Florencio acepta el costo: bache temporal de QS/CPA (~2-4 semanas) + re-configurar Meta Pixel + Search Console.
+>
+> **⏳ ESTADO: pendiente de EJECUTAR — Florencio lo hará "cuando tenga tiempo" para vigilar Ads a diario durante la transición.** A 17 jun 2026: **código NO tocado, nada desplegado, producción intacta** (sigue `jardinesdelsurcancun.mx` como primario). Cuando haya tiempo, seguir el plan de 7 pasos de arriba en ese orden exacto. La parte de código (paso 1) la puede hacer Claude en ~10 min sin afectar producción; los pasos 2-7 son consola (Firebase/Search Console/Ads/GBP/Meta).
 
 > **🎯 BACKLOG FEATURES NO URGENTES (post Google Ads launch):** Features identificadas como "alto ROI pero no bloqueantes" para hacer DESPUÉS de tener data real de conversión:
 > 1. **Reviews/testimonios visibles** (alto trust, bajo esfuerzo ~1h). **CAVEAT IMPORTANTE**: el Google Business Profile del usuario es **nuevo y AÚN NO tiene estrellas/reseñas** — implementar la sección sería contraproducente porque mostraría 0 reseñas. **Acción previa requerida**: el usuario debe pedir reseñas a clientes/contactos existentes hasta tener ≥5-10 estrellas, luego integrar.
