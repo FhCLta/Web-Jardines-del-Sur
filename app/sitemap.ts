@@ -2,10 +2,9 @@ import type { MetadataRoute } from 'next';
 import { getInventory, slugifyModel } from './desarrollos-cancun/_lib/model-utils';
 import { DEVS, type DevSlug } from './desarrollos-cancun/_lib/dev-content';
 import { getAllPosts } from './blog/_lib/posts';
+import { SITE_URL } from '@/lib/site';
 
 export const dynamic = 'force-static';
-
-const SITE_URL = 'https://jardinesdelsurcancun.mx';
 
 const DEV_SLUG_BY_NAME: Record<string, DevSlug> = {
   'Jardines del Sur 6': 'jardines-del-sur-6',

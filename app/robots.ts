@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/site';
 
 export const dynamic = 'force-static';
 
@@ -8,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://jardinesdelsurcancun.mx/sitemap.xml',
-    host: 'https://jardinesdelsurcancun.mx',
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   };
 }

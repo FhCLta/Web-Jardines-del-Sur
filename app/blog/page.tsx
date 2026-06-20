@@ -7,8 +7,8 @@ import ContactNavBtn from "@/components/ContactNavBtn";
 import pageStyles from "@/app/page.module.css";
 import styles from "./blog.module.css";
 import { getAllPosts } from "./_lib/posts";
+import { SITE_URL } from "@/lib/site";
 
-const SITE_URL = "https://jardinesdelsurcancun.mx";
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";

@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import AmenitiesSection from '@/components/AmenitiesSection';
 import FooterPhoneContact from '@/components/FooterPhoneContact';
 import ContactNavBtn from '@/components/ContactNavBtn';
+import { SITE_URL } from '@/lib/site';
 import styles from './page.module.css';
 
 type InventoryProperty = {
@@ -26,7 +27,7 @@ async function getInventory(): Promise<InventoryProperty[]> {
 
 export default async function Home() {
   const inventoryData = await getInventory();
-  const siteUrl = 'https://jardinesdelsurcancun.mx';
+  const siteUrl = SITE_URL;
   const googleBusinessUrl =
     'https://www.google.com/maps/place/Jardines+del+Sur+6+%7C+Altta+Homes/@21.082209,-86.8865266,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2b2036689c1f:0xa44142d0c992c304!8m2!3d21.082209!4d-86.8865266!16s%2Fg%2F11njlpp4sw';
   const googleBusinessShortUrl = 'https://maps.app.goo.gl/9sKBR1fUNSswv5d19';

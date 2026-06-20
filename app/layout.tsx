@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Lato, Playfair_Display } from "next/font/google";
 import Script from "next/script";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const GTM_ID = "GTM-53BHDRWC";
@@ -28,7 +29,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jardinesdelsurcancun.mx"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Jardines del Sur Cancún | Casas y Departamentos en Polígono Sur",
     template: "%s | Jardines del Sur Cancún",
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "https://jardinesdelsurcancun.mx",
+    url: SITE_URL,
     siteName: "Jardines del Sur Cancún",
     title: "Jardines del Sur Cancún | Casas y Departamentos en Polígono Sur",
     description:
