@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: PAGE_URL,
-    siteName: "Jardines del Sur Cancún",
+    siteName: "Altta Homes Cancún",
     title: metaTitle,
     description: metaDescription,
   },

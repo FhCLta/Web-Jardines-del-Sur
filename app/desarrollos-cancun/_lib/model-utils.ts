@@ -76,6 +76,23 @@ export function formatPriceMxn(price: number | null): string {
   return `$${price.toLocaleString("es-MX")} MXN`;
 }
 
+// Precio compacto para títulos SEO: 1853830 -> "$1.85M" (floor a 2 decimales
+// para "desde": nunca sobrestima el mínimo real).
+export function formatPriceShort(price: number): string {
+  const millions = Math.floor(price / 10000) / 100;
+  return `$${millions.toFixed(2)}M`;
+}
+
+// Precio mínimo "desde" de un desarrollo, leído del inventario (fuente única).
+// Hace que los títulos SEO se actualicen solos al cambiar precios.
+export function getMinPriceByDev(devName: string): number | null {
+  const prices = getPropertiesByDev(devName)
+    .map((p) => p.precio)
+    .filter((p) => p > 0);
+  if (prices.length === 0) return null;
+  return Math.min(...prices);
+}
+
 export function getWhatsAppMessageForModel(property: InventoryProperty): string {
   const lower = property.nombre_modelo.toLowerCase();
   let text = property.nombre_modelo;

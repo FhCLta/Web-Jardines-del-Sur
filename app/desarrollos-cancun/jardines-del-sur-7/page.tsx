@@ -14,13 +14,13 @@ const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/desarrollos-cancun/jardines-del-sur-7`;
 
 const WA_MESSAGE =
-  "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando inicie la preventa.";
+  "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.";
 const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(WA_MESSAGE)}`;
 
 const metaTitle =
-  "Jardines del Sur 7 Cancún · Próximamente | Altta Homes by Grupo Sadasi";
+  "Jardines del Sur 7 Cancún | Próxima Apertura a la Venta";
 const metaDescription =
-  "Jardines del Sur 7, la nueva etapa del residencial más exitoso del Polígono Sur de Cancún. Obra ya iniciada — preventa por anunciar. Escríbenos por WhatsApp y sé de los primeros en conocer modelos, precios y fechas.";
+  "Jardines del Sur 7, la nueva etapa del residencial más exitoso de la Zona Sur de Cancún (Polígono Sur). Próxima apertura a la venta. Chatea con un asesor autorizado de Altta Homes y sé de los primeros en conocer modelos, precios y fechas.";
 
 export const metadata: Metadata = {
   title: { absolute: metaTitle },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: PAGE_URL,
-    siteName: "Jardines del Sur Cancún",
+    siteName: "Altta Homes Cancún",
     title: metaTitle,
     description: metaDescription,
     images: [

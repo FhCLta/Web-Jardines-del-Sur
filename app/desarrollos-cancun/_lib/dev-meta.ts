@@ -5,6 +5,8 @@ import {
   slugifyModel,
   parseStat,
   formatPriceMxn,
+  formatPriceShort,
+  getMinPriceByDev,
   type InventoryProperty,
 } from "./model-utils";
 
@@ -13,16 +15,22 @@ export function buildSiloMetadata(slug: DevSlug): Metadata {
   const canonical = `/desarrollos-cancun/${dev.slug}`;
   const ogImageUrl = dev.ogImage;
 
+  // Precio dinámico desde el inventario → el título nunca queda desactualizado.
+  const minPrice = getMinPriceByDev(dev.name);
+  const title = minPrice
+    ? `${dev.seoTitleLead} desde ${formatPriceShort(minPrice)}`
+    : dev.seoTitleLead;
+
   return {
-    title: { absolute: dev.metaTitle },
+    title: { absolute: title },
     description: dev.metaDescription,
     alternates: { canonical },
     openGraph: {
       type: "website",
       locale: "es_MX",
       url: canonical,
-      siteName: "Jardines del Sur Cancún",
-      title: dev.metaTitle,
+      siteName: "Altta Homes Cancún",
+      title,
       description: dev.metaDescription,
       images: [
         {
@@ -35,7 +43,7 @@ export function buildSiloMetadata(slug: DevSlug): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: dev.metaTitle,
+      title,
       description: dev.metaDescription,
       images: [ogImageUrl],
     },
@@ -85,7 +93,7 @@ export function buildModelMetadata(
       type: "website",
       locale: "es_MX",
       url: canonical,
-      siteName: "Jardines del Sur Cancún",
+      siteName: "Altta Homes Cancún",
       title,
       description,
       images: [

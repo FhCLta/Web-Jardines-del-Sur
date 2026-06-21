@@ -31,19 +31,21 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Jardines del Sur Cancún | Casas y Departamentos en Polígono Sur",
-    template: "%s | Jardines del Sur Cancún",
+    default: "Altta Homes Cancún | Casas y Departamentos en la Zona Sur",
+    template: "%s | Altta Homes Cancún",
   },
   description:
-    "Casas y departamentos en Polígono Sur Cancún con respaldo de Grupo Sadasi y Altta Homes. Conoce Jardines del Sur 6, La Rioja 2 y Lirios Residencial 2.",
-  applicationName: "Jardines del Sur Cancún",
+    "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún (Polígono Sur): Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7 (próxima apertura). Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
+  applicationName: "Altta Homes Cancún",
   keywords: [
     "casas en venta en Cancún",
     "departamentos en Cancún",
+    "Zona Sur Cancún",
     "Polígono Sur Cancún",
     "Jardines del Sur 6",
     "La Rioja 2 Cancún",
     "Lirios Residencial 2",
+    "Jardines del Sur 7",
     "Grupo Sadasi Cancún",
     "Altta Homes Cancún",
   ],
@@ -57,10 +59,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: SITE_URL,
-    siteName: "Jardines del Sur Cancún",
-    title: "Jardines del Sur Cancún | Casas y Departamentos en Polígono Sur",
+    siteName: "Altta Homes Cancún",
+    title: "Altta Homes Cancún | Casas y Departamentos en la Zona Sur",
     description:
-      "Modelos y precios de Jardines del Sur 6, La Rioja 2 y Lirios Residencial 2 con atención directa por WhatsApp.",
+      "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún: Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7 (próxima apertura). Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     images: [
       {
         url: "/jardines/Imagnes de amenidades y hero/alberca.webp",
@@ -72,9 +74,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jardines del Sur Cancún | Casas y Departamentos",
+    title: "Altta Homes Cancún | Casas y Departamentos en la Zona Sur",
     description:
-      "Inventario actualizado de desarrollos en Polígono Sur Cancún con respaldo de Grupo Sadasi.",
+      "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún: Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7. Crédito bancario e Infonavit.",
     images: ["/jardines/Imagnes de amenidades y hero/alberca.webp"],
   },
   robots: {

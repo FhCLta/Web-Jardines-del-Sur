@@ -5,6 +5,9 @@ export type DevContent = {
   name: string;
   shortName: string;
   metaTitle: string;
+  // Parte fija del título SEO (sin precio). El precio "desde $X.XXM" se agrega
+  // dinámico desde el inventario en buildSiloMetadata. Ver dev-meta.ts.
+  seoTitleLead: string;
   metaDescription: string;
   h1: string;
   heroSubtitle: string;
@@ -51,8 +54,9 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "Jardines del Sur 6",
     shortName: "Jardines 6",
     metaTitle: "Jardines del Sur 6 Cancún · Casas y Departamentos desde $1.85M | Altta Homes",
+    seoTitleLead: "Jardines del Sur 6 Cancún | Casas y Deptos",
     metaDescription:
-      "Casas y departamentos en Jardines del Sur 6, Polígono Sur Cancún. 6 modelos con 3 recámaras desde $1,853,830 MXN. Alberca, gimnasio, casa club y respaldo de Grupo Sadasi. Recorridos virtuales e informes por WhatsApp.",
+      "Casas y departamentos en Jardines del Sur 6, Zona Sur de Cancún (Polígono Sur). 6 modelos de 3 recámaras con alberca, gimnasio y casa club, a 5 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas y Departamentos en Jardines del Sur 6, Cancún",
     heroSubtitle:
       "El sexto desarrollo de Jardines del Sur en Polígono Sur Cancún, con seis modelos de casas y departamentos de tres recámaras y el respaldo de 50 años de Grupo Sadasi.",
@@ -157,8 +161,9 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "La Rioja 2",
     shortName: "La Rioja 2",
     metaTitle: "La Rioja 2 Cancún · Casas Residenciales desde $4.04M | Altta Homes",
+    seoTitleLead: "La Rioja 2 Cancún | Casas Residenciales Premium",
     metaDescription:
-      "Casas residenciales premium en La Rioja 2 Cancún. 4 modelos con 3 recámaras, 3.5 baños y terraza desde $4,049,375 MXN. Recorridos virtuales 360°, exclusividad y respaldo de Grupo Sadasi.",
+      "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 5 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",
     heroSubtitle:
       "Cuatro modelos de casas premium con tres recámaras, baños completos y terraza al frente, en el desarrollo más exclusivo de Altta Homes en Cancún.",
@@ -264,8 +269,9 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "Lirios Residencial 2",
     shortName: "Lirios 2",
     metaTitle: "Lirios Residencial 2 Cancún · Departamento Cedro Plus desde $2.25M | Altta Homes",
+    seoTitleLead: "Lirios Residencial 2 Cancún | Departamentos",
     metaDescription:
-      "Departamentos Cedro Plus en Lirios Residencial 2 Cancún. Desde 104.06 m² (hasta 121.13 m² con roof garden en N3), 3 recámaras, 2.5 baños y 2 cajones de estacionamiento desde $2,248,750 MXN. Respaldo de Grupo Sadasi.",
+      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún (Polígono Sur). 3 recámaras, 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 5 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
     heroSubtitle:
       "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",

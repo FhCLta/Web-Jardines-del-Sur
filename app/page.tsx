@@ -37,7 +37,7 @@ export default async function Home() {
       {
         '@type': 'RealEstateAgent',
         '@id': `${siteUrl}/#business`,
-        name: 'Jardines del Sur 6 | Altta Homes',
+        name: 'Altta Homes Cancún',
         alternateName: [
           'Altta Homes Cancun',
           'Jardines del Sur Cancun',
@@ -118,7 +118,7 @@ export default async function Home() {
         '@type': 'WebSite',
         '@id': `${siteUrl}/#website`,
         url: siteUrl,
-        name: 'Jardines del Sur Cancún',
+        name: 'Altta Homes Cancún',
         inLanguage: 'es-MX',
         publisher: {
           '@id': `${siteUrl}/#business`,

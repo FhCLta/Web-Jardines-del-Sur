@@ -41,7 +41,7 @@ export async function generateMetadata({
       type: "article",
       locale: "es_MX",
       url,
-      siteName: "Jardines del Sur Cancún",
+      siteName: "Altta Homes Cancún",
       title: post.metaTitle,
       description: post.description,
       publishedTime: post.date,
@@ -89,7 +89,7 @@ export default async function Page({
         author: { "@type": "Person", name: AUTHOR_NAME },
         publisher: {
           "@type": "Organization",
-          name: "Jardines del Sur Cancún",
+          name: "Altta Homes Cancún",
           logo: { "@type": "ImageObject", url: `${SITE_URL}/apple-icon.png` },
         },
         mainEntityOfPage: { "@type": "WebPage", "@id": url },
