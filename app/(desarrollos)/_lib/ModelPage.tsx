@@ -68,7 +68,7 @@ export default async function ModelPage({
   const modelType = getModelType(property.nombre_modelo);
   const tourUrl = getTourUrl(property.url_recorrido_virtual);
 
-  const pageUrl = `${SITE_URL}/desarrollos-cancun/${dev.slug}/${modeloSlug}`;
+  const pageUrl = `${SITE_URL}/${dev.slug}/${modeloSlug}`;
   const waMessage = getWhatsAppMessageForModel(property);
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
@@ -108,7 +108,7 @@ export default async function ModelPage({
             "@type": "ListItem",
             position: 3,
             name: dev.name,
-            item: `${SITE_URL}/desarrollos-cancun/${dev.slug}`,
+            item: `${SITE_URL}/${dev.slug}`,
           },
           {
             "@type": "ListItem",
@@ -417,7 +417,7 @@ export default async function ModelPage({
               {otherProperties.map((other) => (
                 <a
                   key={other.id}
-                  href={`/desarrollos-cancun/${dev.slug}/${slugifyModel(other.nombre_modelo)}`}
+                  href={`/${dev.slug}/${slugifyModel(other.nombre_modelo)}`}
                   className={styles.relatedCard}
                 >
                   <span className={styles.relatedCardLabel}>
@@ -482,7 +482,7 @@ export default async function ModelPage({
                 <a href="/">Inicio</a>
               </li>
               <li>
-                <a href={`/desarrollos-cancun/${dev.slug}`}>{dev.name}</a>
+                <a href={`/${dev.slug}`}>{dev.name}</a>
               </li>
               <li>
                 <a href="/#modelos">Modelos y Precios</a>

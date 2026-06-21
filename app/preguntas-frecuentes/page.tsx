@@ -33,7 +33,7 @@ const FAQS: Faq[] = [
     q: "¿Puedo comprar con crédito Infonavit, FOVISSSTE o bancario?",
     a: "Sí. Todos nuestros desarrollos aceptan crédito Infonavit y crédito bancario. El crédito FOVISSSTE aplica únicamente en unidades seleccionadas de Jardines del Sur 6. Un asesor puede revisar tu caso y decirte el mejor esquema según tu tipo de crédito.",
     link: {
-      href: "/desarrollos-cancun/jardines-del-sur-6",
+      href: "/jardines-del-sur-6",
       label: "Ver Jardines del Sur 6",
     },
   },
@@ -277,15 +277,15 @@ export default function Page() {
                 <a href="/">Inicio</a>
               </li>
               <li>
-                <a href="/desarrollos-cancun/jardines-del-sur-6">
+                <a href="/jardines-del-sur-6">
                   Jardines del Sur 6
                 </a>
               </li>
               <li>
-                <a href="/desarrollos-cancun/la-rioja-2">La Rioja 2</a>
+                <a href="/la-rioja-2">La Rioja 2</a>
               </li>
               <li>
-                <a href="/desarrollos-cancun/lirios-residencial-2">
+                <a href="/lirios-residencial-2">
                   Lirios Residencial 2
                 </a>
               </li>

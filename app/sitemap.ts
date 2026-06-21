@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
-import { getInventory, slugifyModel } from './desarrollos-cancun/_lib/model-utils';
-import { DEVS, type DevSlug } from './desarrollos-cancun/_lib/dev-content';
+import { getInventory, slugifyModel } from './(desarrollos)/_lib/model-utils';
+import { DEVS, type DevSlug } from './(desarrollos)/_lib/dev-content';
 import { getAllPosts } from './blog/_lib/posts';
 import { SITE_URL } from '@/lib/site';
 
@@ -23,14 +23,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     ...(Object.keys(DEVS) as DevSlug[]).map((slug) => ({
-      url: `${SITE_URL}/desarrollos-cancun/${slug}`,
+      url: `${SITE_URL}/${slug}`,
       lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     })),
     // Próximo desarrollo (página "Próximamente", aún sin inventario en DEVS).
     {
-      url: `${SITE_URL}/desarrollos-cancun/jardines-del-sur-7`,
+      url: `${SITE_URL}/jardines-del-sur-7`,
       lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
@@ -62,7 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       if (!devSlug) return null;
       const modeloSlug = slugifyModel(property.nombre_modelo);
       return {
-        url: `${SITE_URL}/desarrollos-cancun/${devSlug}/${modeloSlug}`,
+        url: `${SITE_URL}/${devSlug}/${modeloSlug}`,
         lastModified,
         changeFrequency: 'monthly' as const,
         priority: 0.7,

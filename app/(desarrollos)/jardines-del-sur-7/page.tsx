@@ -11,7 +11,7 @@ import { SITE_URL } from "@/lib/site";
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
-const PAGE_URL = `${SITE_URL}/desarrollos-cancun/jardines-del-sur-7`;
+const PAGE_URL = `${SITE_URL}/jardines-del-sur-7`;
 
 const WA_MESSAGE =
   "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.";
@@ -25,7 +25,7 @@ const metaDescription =
 export const metadata: Metadata = {
   title: { absolute: metaTitle },
   description: metaDescription,
-  alternates: { canonical: "/desarrollos-cancun/jardines-del-sur-7" },
+  alternates: { canonical: "/jardines-del-sur-7" },
   openGraph: {
     type: "website",
     locale: "es_MX",
@@ -251,19 +251,19 @@ export default function Page() {
           <div className={styles.othersGrid}>
             <a
               className={styles.othersCard}
-              href="/desarrollos-cancun/jardines-del-sur-6"
+              href="/jardines-del-sur-6"
             >
               Jardines del Sur 6 <span aria-hidden="true">→</span>
             </a>
             <a
               className={styles.othersCard}
-              href="/desarrollos-cancun/la-rioja-2"
+              href="/la-rioja-2"
             >
               La Rioja 2 <span aria-hidden="true">→</span>
             </a>
             <a
               className={styles.othersCard}
-              href="/desarrollos-cancun/lirios-residencial-2"
+              href="/lirios-residencial-2"
             >
               Lirios Residencial 2 <span aria-hidden="true">→</span>
             </a>
@@ -312,15 +312,15 @@ export default function Page() {
                 <a href="/">Inicio</a>
               </li>
               <li>
-                <a href="/desarrollos-cancun/jardines-del-sur-6">
+                <a href="/jardines-del-sur-6">
                   Jardines del Sur 6
                 </a>
               </li>
               <li>
-                <a href="/desarrollos-cancun/la-rioja-2">La Rioja 2</a>
+                <a href="/la-rioja-2">La Rioja 2</a>
               </li>
               <li>
-                <a href="/desarrollos-cancun/lirios-residencial-2">
+                <a href="/lirios-residencial-2">
                   Lirios Residencial 2
                 </a>
               </li>

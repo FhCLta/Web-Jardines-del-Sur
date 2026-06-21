@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Hero.module.css";
-import siloStyles from "@/app/desarrollos-cancun/silo.module.css";
+import siloStyles from "@/app/(desarrollos)/silo.module.css";
 import HeroBackground from "./HeroBackground";
 
 export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown, subtitleDetail }) {

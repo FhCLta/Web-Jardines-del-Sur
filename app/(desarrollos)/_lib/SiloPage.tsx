@@ -44,7 +44,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
   const inventory = await getInventory();
   const properties = inventory.filter((p) => p.development === dev.name);
 
-  const pageUrl = `${SITE_URL}/desarrollos-cancun/${dev.slug}`;
+  const pageUrl = `${SITE_URL}/${dev.slug}`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(dev.whatsappMessage)}`;
 
   const casasCount = properties.filter((p) => /^(Casa)\s/i.test(p.nombre_modelo)).length;
@@ -186,7 +186,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
                 {properties.map((property) => (
                   <li key={property.id}>
                     <a
-                      href={`/desarrollos-cancun/${dev.slug}/${slugifyModel(property.nombre_modelo)}`}
+                      href={`/${dev.slug}/${slugifyModel(property.nombre_modelo)}`}
                     >
                       {property.nombre_modelo}
                     </a>

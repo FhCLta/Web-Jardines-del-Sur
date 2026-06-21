@@ -31,9 +31,9 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname() ?? "";
-  const isSiloPath = pathname.startsWith("/desarrollos-cancun/");
+  const isSiloPath = pathname.startsWith("/");
   const pathSegments = isSiloPath
-    ? pathname.slice("/desarrollos-cancun/".length).replace(/\/$/, "").split("/")
+    ? pathname.slice("/".length).replace(/\/$/, "").split("/")
     : [];
   const currentSlug = pathSegments[0] || null;
   const currentModelSlug = pathSegments[1] || null;
@@ -100,7 +100,7 @@ export default function SiteHeader() {
               </span>
               {isModelPage ? (
                 <>
-                  <a href={`/desarrollos-cancun/${currentDev.slug}`}>
+                  <a href={`/${currentDev.slug}`}>
                     {currentDev.name}
                   </a>
                   <span
@@ -154,7 +154,7 @@ export default function SiteHeader() {
           <nav className={styles.drawerNav}>
             {isModelPage && currentDev && (
               <a
-                href={`/desarrollos-cancun/${currentDev.slug}`}
+                href={`/${currentDev.slug}`}
                 onClick={closeAndGo}
                 className={styles.drawerBack}
               >
@@ -174,7 +174,7 @@ export default function SiteHeader() {
             {otherSilos.map((silo, i) => (
               <a
                 key={silo.slug}
-                href={`/desarrollos-cancun/${silo.slug}`}
+                href={`/${silo.slug}`}
                 onClick={closeAndGo}
               >
                 <span className={styles.drawerNum}>
@@ -186,7 +186,7 @@ export default function SiteHeader() {
             <a
               href={
                 currentDev
-                  ? `/desarrollos-cancun/${currentDev.slug}#amenidades`
+                  ? `/${currentDev.slug}#amenidades`
                   : "#amenidades"
               }
               onClick={closeAndGo}

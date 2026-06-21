@@ -12,7 +12,7 @@ import {
 
 export function buildSiloMetadata(slug: DevSlug): Metadata {
   const dev = DEVS[slug];
-  const canonical = `/desarrollos-cancun/${dev.slug}`;
+  const canonical = `/${dev.slug}`;
   const ogImageUrl = dev.ogImage;
 
   // Precio dinámico desde el inventario → el título nunca queda desactualizado.
@@ -82,7 +82,7 @@ export function buildModelMetadata(
 
   const title = `${property.nombre_modelo} en ${dev.name}, Cancún · Desde ${formatPriceMxn(property.precio)} | Altta Homes`;
   const description = `${property.nombre_modelo}: ${property.metros_construccion} m² de construcción${property.metros_terreno ? `, ${property.metros_terreno} m² de terreno` : ""}${recamaras ? `, ${recamaras} recámaras` : ""}${banos ? `, ${banos} baños` : ""}. Desde ${formatPriceMxn(property.precio)}. Recorrido virtual 360°, precios actualizados y atención directa por WhatsApp.`;
-  const canonical = `/desarrollos-cancun/${dev.slug}/${modeloSlug}`;
+  const canonical = `/${dev.slug}/${modeloSlug}`;
   const ogImage = property.images[0] || dev.ogImage;
 
   return {

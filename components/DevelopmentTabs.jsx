@@ -140,7 +140,7 @@ export default function DevelopmentTabs({ inventoryData }) {
           <div className={styles.siloLinkWrap}>
             <a
               className={styles.siloLink}
-              href={`/desarrollos-cancun/${SLUG_BY_DEV[activeTab]}`}
+              href={`/${SLUG_BY_DEV[activeTab]}`}
             >
               <span>Ver página completa de {activeTab}</span>
               <svg
