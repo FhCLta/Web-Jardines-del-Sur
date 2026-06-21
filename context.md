@@ -83,6 +83,17 @@
 > - **Trade-off a recordar:** estos leads saltan el sitio → **NO disparan el Meta Pixel** → no alimentan el retargeting. Es **complemento**, no reemplazo. Medir: ¿CPA del lead directo a WhatsApp < CPA del que pasa por la web?
 > - **Prerrequisitos listos:** WhatsApp Business ✅, número verificado ✅, mensajes prellenados ✅.
 
+> **📝 BACKLOG de blog (Fase 3 SEO — apuntado 21 jun 2026):** Ideas de artículos para seguir publicando (alta intención, alineados a keywords). Reglas: crédito bancario antes que Infonavit ([[feedback_credito_bancario_primero]]), FOVISSSTE solo JdS6 ([[fovissste_scope_jds6]]), usar "Zona Sur de Cancún" + "Polígono Sur", CTA a /whatsapp + asesor autorizado.
+> 1. "Plusvalía en Cancún: zonas con mejor proyección 2026" (Zona Sur, Tren Maya, aeropuerto).
+> 2. "Comprar casa en Cancún con crédito bancario: guía 2026" (lidera con bancario).
+> 3. "Cuánto cuesta vivir en la Zona Sur de Cancún (Polígono Sur)".
+> 4. "Jardines del Sur 6 vs La Rioja 2 vs Lirios 2: cuál elegir según tu presupuesto".
+> 5. "Cómo apartar tu casa en preventa en Cancún, paso a paso".
+> 6. "Vivir cerca del Tren Maya: plusvalía en la Zona Sur de Cancún".
+> 7. Pendiente: actualizar el 1er artículo (dice "1080 puntos" → ya es Modelo T100/100 pts).
+
+> **💡 MEJORA OPCIONAL PENDIENTE — bloque de precio variable en departamentos (apuntado 21 jun 2026):** En casas el precio es fijo (+ promos); en departamentos VARÍA según nivel + vista (alberca vs estacionamiento) + roof garden (Lirios N3). Florencio preguntó si poner listado de precios. DECISIÓN: **NO publicar tabla completa** (se desactualiza, mata el gancho del lead, problema de disponibilidad). Mejora opcional recomendada (cero mantenimiento): en las páginas de departamentos `precio_variable` (Capua, Cedro Plus JdS6, Cedro Plus Lirios) agregar bloque que **explique los factores (nivel/vista/roof garden) + mantenga "desde $X" del inventario + CTA "Cotiza tu nivel y vista por WhatsApp"** → da confianza sin regalar precios ni desactualizarse. Pendiente, baja prioridad.
+
 > **📄 Archivo nuevo `google.md` (21 jun 2026):** referencia con guía/reglas oficiales de Google para el proyecto (Cuenta de Google, GBP reglas clave, Ads y Search Console pendientes de llenar). Se irá llenando. Ojo: cuidar NO mezclar cuentas de Google (GBP/Ads deben ir bajo la misma cuenta correcta; apareció una `rafa401128@gmail.com` en una doc — no usar cuentas distintas para crear activos).
 
 > **✅ Blog nuevo: cambios Infonavit 2026 / Modelo T100 (21 jun 2026):** 2º artículo en `app/blog/_lib/posts.ts`, slug `cambios-infonavit-precalificacion-mci-2026`. Tema: Infonavit actualizó la precalificación en Mi Cuenta Infonavit (MCI) — Buró ya no se consulta al inicio (hasta OCI/inscripción), resultado binario "precalifica/no" con Modelo T100 (de 1,080 pts → 100 pts), validación de datos obligatoria desde 15 jun, restricción >70% ingresos comprometidos + cuenta con atraso >12 meses. Basado en infografía de Altta Homes + investigación web (Modelo T100/MUO, curso obligatorio "Saber + para decidir mejor"). Incluye disclaimer (cambios recientes, verificar fuente oficial) + CTAs a /whatsapp y /jardines. ⚠️ Nota: el 1er artículo del blog dice "1080 puntos" — quedó desactualizado por T100 (considerar actualizarlo después). Es parte de Fase 3 SEO (contenido/autoridad). Desplegado. Florencio debe solicitar indexación de la URL nueva en Search Console.
