@@ -268,7 +268,7 @@ export default function PropertyCard({ property }) {
             {property.precio_variable && (
               <p><strong>**</strong> El precio puede variar según nivel y ubicación</p>
             )}
-            <p><strong>*</strong> Aplican restricciones. Precios, promociones y disponibilidad sujetos a cambios sin previo aviso.</p>
+            <p><strong>***</strong> Aplican restricciones</p>
           </div>
         </div>
       </div>
