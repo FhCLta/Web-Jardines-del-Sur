@@ -87,6 +87,7 @@ export default async function Home() {
           googleBusinessShortUrl,
           'https://jardinesdelsur-cancun.web.app',
         ],
+        employee: { '@id': `${siteUrl}/#florencio` },
         makesOffer: {
           '@type': 'OfferCatalog',
           name: 'Casas y departamentos en Cancun',
@@ -139,6 +140,19 @@ export default async function Home() {
           name,
           url: `${siteUrl}/desarrollos-cancun/${slug}`,
         })),
+      },
+      {
+        '@type': 'Person',
+        '@id': `${siteUrl}/#florencio`,
+        name: 'Florencio Hurtado',
+        alternateName: 'Florencio Real Estate',
+        jobTitle: 'Asesor inmobiliario autorizado de Altta Homes',
+        url: siteUrl,
+        worksFor: { '@id': `${siteUrl}/#business` },
+        sameAs: [
+          'https://www.facebook.com/profile.php?id=61564048801892',
+          'https://www.instagram.com/florenciorealestate',
+        ],
       },
     ],
   };
