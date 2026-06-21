@@ -325,6 +325,11 @@ export default function Page() {
                 </a>
               </li>
               <li>
+                <a href="/jardines-del-sur-7">
+                  Jardines del Sur 7 · Próximamente
+                </a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

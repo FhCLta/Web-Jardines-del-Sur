@@ -11,6 +11,7 @@ const SILO_LINKS = [
   { slug: "jardines-del-sur-6", name: "Jardines del Sur 6", shortName: "Jardines 6" },
   { slug: "la-rioja-2", name: "La Rioja 2", shortName: "La Rioja 2" },
   { slug: "lirios-residencial-2", name: "Lirios Residencial 2", shortName: "Lirios 2" },
+  { slug: "jardines-del-sur-7", name: "Jardines del Sur 7", shortName: "Jardines 7" },
 ];
 
 // Conservar acentos en los nombres de modelos para el breadcrumb del navbar.
