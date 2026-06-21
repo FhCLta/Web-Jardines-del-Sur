@@ -212,7 +212,6 @@
 .subtitleDevelopments {
   color: #fff;
   font-weight: 800;
-  white-space: nowrap;
 }
 
 .subtitleBreakdown {
@@ -388,7 +387,6 @@
     margin-top: 0.16rem;
     font-size: clamp(1.34rem, 5.7vw, 1.82rem);
     line-height: 1.15;
-    white-space: nowrap;
   }
 
   .subtitle {
@@ -399,7 +397,6 @@
 
   .subtitleDevelopments {
     font-size: clamp(0.86rem, 3.85vw, 1rem);
-    white-space: nowrap;
   }
 
   .subtitleDetail {
