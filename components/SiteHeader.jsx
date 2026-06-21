@@ -31,12 +31,22 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname() ?? "";
-  const isSiloPath = pathname.startsWith("/");
-  const pathSegments = isSiloPath
-    ? pathname.slice("/".length).replace(/\/$/, "").split("/")
-    : [];
+  // Slugs que viven en la raíz tras acortar las rutas (route group). Se detecta
+  // el contexto de silo por slug, NO por prefijo de ruta.
+  const SILO_PATH_SLUGS = [
+    "jardines-del-sur-6",
+    "la-rioja-2",
+    "lirios-residencial-2",
+    "jardines-del-sur-7",
+  ];
+  const pathSegments = pathname
+    .slice(1)
+    .replace(/\/$/, "")
+    .split("/")
+    .filter(Boolean);
   const currentSlug = pathSegments[0] || null;
   const currentModelSlug = pathSegments[1] || null;
+  const isSiloPath = currentSlug != null && SILO_PATH_SLUGS.includes(currentSlug);
   const isModelPage = isSiloPath && Boolean(currentModelSlug);
   const isInSiloContext = isSiloPath; // Silo o página de modelo
   const currentDev = isInSiloContext
