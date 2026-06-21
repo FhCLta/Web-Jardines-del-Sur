@@ -171,6 +171,146 @@ export const POSTS: Post[] = [
       },
     ],
   },
+  {
+    slug: "cambios-infonavit-precalificacion-mci-2026",
+    metaTitle:
+      "Cambios Infonavit 2026: Nueva Precalificación (MCI) y Modelo T100 | Altta Homes",
+    title:
+      "Cambios de Infonavit 2026: nueva precalificación en Mi Cuenta Infonavit (Modelo T100)",
+    description:
+      "Infonavit actualizó su precalificación en Mi Cuenta Infonavit (MCI): el Buró ya no se consulta al inicio, el resultado es “precalificas o no” con el Modelo T100, y desde el 15 de junio tus datos deben estar validados. Te explicamos qué cambió y qué hacer.",
+    excerpt:
+      "El Buró ya no se consulta al inicio, la precalificación es “precalificas o no” (Modelo T100) y desde el 15 de junio tus datos en MCI deben estar validados. Qué cambió y qué hacer.",
+    date: "2026-06-21",
+    dateLabel: "21 de junio de 2026",
+    author: "Florencio Hurtado · Asesor inmobiliario",
+    readingMinutes: 5,
+    coverImage: "/hero-alberca-jardines.webp",
+    coverAlt:
+      "Pareja revisando su crédito Infonavit en Mi Cuenta Infonavit para comprar casa en Cancún",
+    keywords: [
+      "cambios infonavit 2026",
+      "precalificación infonavit",
+      "modelo t100 infonavit",
+      "mi cuenta infonavit",
+      "infonavit buró de crédito",
+      "infonavit cancún 2026",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Infonavit actualizó la forma en que funciona la precalificación dentro de Mi Cuenta Infonavit (MCI). Si piensas usar tu crédito para comprar casa en Cancún en 2026, estos cambios te afectan directamente. Aquí te los explicamos en lenguaje sencillo y, sobre todo, qué debes hacer para no atorarte en el trámite.",
+      },
+      {
+        type: "p",
+        text: "Nota importante: algunos de estos cambios son muy recientes y el propio Instituto puede emitir comunicados adicionales. Verifica siempre los detalles vigentes directamente en Mi Cuenta Infonavit o con un asesor antes de tomar decisiones.",
+      },
+      {
+        type: "h2",
+        text: "1. El Buró de Crédito ya no se consulta en la precalificación",
+      },
+      {
+        type: "p",
+        text: "Antes, tu Buró de Crédito influía desde el primer momento. Con el cambio, en la precalificación dentro de MCI ya NO se consulta tu Buró: esa revisión se realiza hasta el momento de la inscripción (en OCI). En la práctica, un mal historial ya no te bloquea de entrada para saber si precalificas.",
+      },
+      {
+        type: "h2",
+        text: "2. La precalificación ya no muestra un puntaje: solo “precalificas” o “no”",
+      },
+      {
+        type: "p",
+        text: "Con el nuevo Modelo T100, la precalificación dejó de mostrar una puntuación numérica. Ahora el resultado es directo: precalificas o no precalificas. El T100 simplificó el modelo —pasó del esquema anterior de 1,080 puntos a un esquema de 100 puntos con menos requisitos— para que el proceso sea más claro.",
+      },
+      {
+        type: "h2",
+        text: "3. Desde el 15 de junio: tus datos en Mi Cuenta Infonavit deben estar validados",
+      },
+      {
+        type: "p",
+        text: "Este es el punto que más detiene a la gente. A partir del 15 de junio de 2026:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Si tus datos personales no están registrados y validados en MCI, no podrás avanzar con la inscripción.",
+          "Es indispensable que tu información esté actualizada y correcta en Mi Cuenta Infonavit.",
+          "Debes tener tu cuenta registrada y activa en Mi Cuenta Infonavit.",
+        ],
+      },
+      {
+        type: "p",
+        text: "En resumen: llega con tus datos en orden para evitar retrasos o rechazos en la inscripción.",
+      },
+      {
+        type: "h2",
+        text: "4. Restricciones por historial crediticio",
+      },
+      {
+        type: "p",
+        text: "Aunque el Buró ya no bloquea la precalificación, sí existe un límite al momento de la inscripción: si tienes más del 70% de tus ingresos comprometidos en Buró de Crédito y además alguna cuenta con falta de pago por más de 12 meses, no serás sujeto de crédito Infonavit. Por eso conviene conocer tus condiciones crediticias ANTES de iniciar tu trámite.",
+      },
+      {
+        type: "h2",
+        text: "¿Qué debes hacer antes de iniciar tu trámite?",
+      },
+      {
+        type: "ol",
+        items: [
+          "Entra a Mi Cuenta Infonavit y confirma que tu cuenta esté registrada y activa.",
+          "Revisa y valida tus datos personales: deben estar correctos y actualizados.",
+          "Consulta tu precalificación (precalificas o no) según el Modelo T100.",
+          "Revisa tu situación en Buró antes de inscribirte: ingresos comprometidos y cuentas con atraso.",
+          "Si aplica, completa el curso obligatorio “Saber + para decidir mejor”.",
+        ],
+      },
+      {
+        type: "cta",
+        href: "/whatsapp",
+        label: "Revisa tu caso Infonavit con un asesor por WhatsApp",
+      },
+      {
+        type: "h2",
+        text: "¿Qué significa esto si quieres comprar casa en Cancún?",
+      },
+      {
+        type: "p",
+        text: "Los cambios buscan simplificar el proceso, pero también exigen que llegues con tu información en orden. La buena noticia: si precalificas, en el Polígono Sur de Cancún hay desarrollos que aceptan crédito Infonavit.",
+      },
+      {
+        type: "ul",
+        items: [
+          "Jardines del Sur 6 — casas y departamentos de 3 recámaras con respaldo de Grupo Sadasi. (Algunas unidades también aceptan FOVISSSTE.)",
+          "Lirios Residencial 2 — departamentos con amenidades en la Zona Sur de Cancún.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Para vivienda residencial premium, como La Rioja 2, el esquema suele ser crédito bancario o cofinanciamiento (Infonavit + banco). Un asesor autorizado de Altta Homes puede orientarte sobre la mejor opción según tu perfil y tu capacidad de crédito.",
+      },
+      {
+        type: "cta",
+        href: "/jardines",
+        label: "Ver casas con Infonavit en Jardines del Sur 6",
+      },
+      {
+        type: "h2",
+        text: "Conclusión",
+      },
+      {
+        type: "p",
+        text: "Mantén tu Mi Cuenta Infonavit al día y conoce tu situación crediticia antes de inscribirte: así evitas retrasos o rechazos. Si quieres, revisamos juntos a qué modelo alcanza tu crédito hoy, sin costo ni compromiso.",
+      },
+      {
+        type: "cta",
+        href: "/whatsapp",
+        label: "Cotiza tu casa con Infonavit por WhatsApp",
+      },
+      {
+        type: "p",
+        text: "Esta información es de carácter general y puede cambiar; el Instituto puede emitir comunicados oficiales. Verifica siempre los detalles vigentes en Mi Cuenta Infonavit o con un asesor.",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
