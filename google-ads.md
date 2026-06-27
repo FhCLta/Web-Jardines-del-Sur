@@ -1408,3 +1408,49 @@ Campaña Cancún - Search  ($120/día COMPARTIDOS entre los 4 grupos)
 - Quitar del "Grupo de anuncios 1" (futuro "General") las keywords específicas de Jardines y Lirios (filtrar `jardines` y `lirios` → Quitar), igual que con La Rioja, para evitar duplicados.
 - Sitelinks a nivel grupo: Jardines → modelos de JdS6 (Tabachín, Flamboyán, Ceiba, Noni, Capua, Cedro Plus) + /jardines + WhatsApp. Lirios → Cedro Plus Lirios + /lirios + WhatsApp.
 - Plan de Florencio: crear los 4 grupos y **dejar correr la campaña hasta que llegue el crédito $7,000 (~sep 2026)** para ver cómo posiciona.
+
+---
+
+## 💬 SESIÓN 30 — WhatsApp Click (recurso de mensaje) + logo cuenta + título SEO + LÍNEA BASE de métricas (27 jun 2026)
+
+**Dominio ya migrado a `alttahomescancun.mx`.** Sesión guiada paso a paso con Florencio.
+
+### A) WhatsApp Click → recurso de MENSAJE en la campaña actual (NO campaña nueva)
+- **Giro de estrategia:** el plan original (campaña de Búsqueda NUEVA `Cancún - WhatsApp Click - v1`) se **descartó a mitad de armado**. Al elegir keywords surgió el problema: las mejores (`jardines del sur 6`, `altta homes cancun`…) **YA están en la campaña actual** → ponerlas en una 2ª campaña = **canibalización** (pujas contra ti mismo, sube tu CPC). Florencio eligió la opción simple y mejor: **agregar el recurso de WhatsApp directo a la campaña que ya jala**, usando sus top keywords sin duplicar.
+- **Quedó:** recurso de **Mensaje (WhatsApp)** a **nivel CAMPAÑA** sobre `Cancún - Search - Casas y Deptos - v1`. País México, número **998 205 9044**, mensaje de inicio *"Hola, vi su anuncio de Altta Homes en Google y quiero informes y precios de casas y departamentos en Cancún."*, CTA **"Obtener información"**, descripción **"Informes por WhatsApp"**. Estado **"Pendiente/En revisión"** (Google aprueba en ~1-2 días → "Apto"). 
+- ⚠️ Se **DESMARCÓ** el check "agregará una acción de conversión de leads de mensajes" → para NO mover la optimización del CPA. **Regla:** NUNCA configurar el mensaje desde el BANNER (lo pone a nivel Cuenta = afecta TODAS las campañas + cambia conversión por defecto). Hacerlo a nivel **Campaña**, check desmarcado.
+- **Trade-off:** estos leads saltan el sitio → NO disparan Meta Pixel → no alimentan retargeting. Complemento, no reemplazo.
+
+### B) Logo de empresa → óvalo a nivel CUENTA
+- Logo nuevo (óvalo "Altta Homes Cancún") puesto a nivel **Cuenta**. ⚠️ A nivel cuenta solo cabe **1 logo** ("Se superó el límite, Límite: 1") → hubo que **Quitar el "AH" viejo** primero, luego agregar el óvalo. Estado "Pendiente/En revisión" 1-3 días. El logo en anuncios solo aparece tras **verificación de marca** (sesión 26, pendiente).
+
+### C) Título SEO del home (sitio, no Ads)
+- `app/layout.tsx`: home title → **`Altta Homes Cancún | Casas y Departamentos en Venta`** (51 car., no se trunca). Desplegado. Pendiente Florencio: solicitar indexación en Search Console.
+
+### 📊 LÍNEA BASE — métricas a batir (reporte 12 may – 1 jun 2026, antes del WhatsApp Click)
+Campaña `Cancún - Search - Casas y Deptos - v1`, 2 anuncios (búsqueda responsiva), ambos Calidad **Excelente**:
+
+| Métrica | Línea base (12 may–1 jun) | Meta a 15 días (vuelve a pasar reporte ~12 jul) |
+|---|---|---|
+| Clics | 116 | ↑ |
+| Impresiones | 1,312 | ↑ |
+| CTR | **8.84%** | mantener/↑ |
+| CPC prom. | $8.73 | ↓ o igual |
+| Costo | $1,013.22 | — |
+| Conversiones | **11** | ↑ |
+| **CPA (costo/conv)** | **$92.11** 🏆 | mantener <$110 |
+| % conversión | 9.48% | mantener/↑ |
+
+> **CPA $92.11 = mejor que el objetivo histórico (~$101-140).** La campaña está en su mejor momento. La hipótesis: con el botón de WhatsApp (menos fricción) las conversiones deberían subir y/o el CPA bajar más.
+
+### D) Anuncio "La Rioja 2 - Premium" → 0 impresiones → PAUSADO
+- En el reporte, el grupo **"La Rioja 2 - Premium"** tuvo **0 impr / 0 clics** (todo el tráfico se lo llevó el grupo general "Grupo de anuncios 1", que SÍ tiene keywords/títulos de La Rioja → **canibalización interna**). El anuncio está **Apto + Calidad Excelente** (NO está roto; es estructura/keywords).
+- **Decisión: PAUSAR (no borrar)** el grupo/anuncio de La Rioja → conserva los 15 títulos premium para el futuro segmento de lujo (La Rioja $4M, copy SIN Infonavit). Reversible. No afecta rendimiento (ya estaba en 0).
+- **Pendiente futuro (opción C, "bien hecho"):** si se quiere reactivar La Rioja premium, mover sus keywords del grupo general al dedicado (o ponerlas como negativas en el general) para que el grupo de La Rioja sí reciba esas búsquedas. Es la reestructura por grupos temáticos.
+
+### 🗓️ PLAN: probar 15 días → re-evaluar (~12 jul 2026)
+Florencio dejará correr ~15 días con el WhatsApp Click activo y volverá a pasar el "Informe de anuncio" para comparar contra esta línea base. Qué revisar al volver:
+1. ¿Subieron clics/conversiones? ¿Bajó el CPA de $92?
+2. ¿El recurso de WhatsApp pasó a "Apto" y está recibiendo clics? (ver stats del recurso de mensaje)
+3. ¿El logo óvalo ya está "Apto" + verificación de marca avanzó? (si sí, quitar definitivamente el "AH").
+4. ¿Conviene reactivar/reestructurar La Rioja premium?
