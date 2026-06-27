@@ -31,7 +31,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Altta Homes Cancún | Casas y Departamentos en la Zona Sur",
+    default: "Altta Homes Cancún | Casas y Departamentos en Venta",
     template: "%s | Altta Homes Cancún",
   },
   description:
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: "es_MX",
     url: SITE_URL,
     siteName: "Altta Homes Cancún",
-    title: "Altta Homes Cancún | Casas y Departamentos en la Zona Sur",
+    title: "Altta Homes Cancún | Casas y Departamentos en Venta",
     description:
       "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún: Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7 (próxima apertura). Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     images: [
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Altta Homes Cancún | Casas y Departamentos en la Zona Sur",
+    title: "Altta Homes Cancún | Casas y Departamentos en Venta",
     description:
       "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún: Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7. Crédito bancario e Infonavit.",
     images: ["/jardines/Imagnes de amenidades y hero/alberca.webp"],
