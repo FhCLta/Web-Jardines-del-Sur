@@ -1,5 +1,17 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **📌 SESIÓN 31 (28 jun 2026) — Consulta SEO post-migración: "site name" y sitelinks en cero (SIN cambios de código, solo aclaración + acción en Search Console):**
+>
+> Florencio observó dos cosas en los resultados de Google (móvil) y preguntó por qué. Se aclararon (NO eran errores del sitio):
+>
+> 1. **"Site name" (nombre del sitio) vs title tag — son DOS cosas distintas.** En el resultado de búsqueda la línea pequeña ARRIBA de la URL es el **site name**; el texto azul grande es el **title tag**. El title azul ("Altta Homes Cancún | Casas y Departamentos…") **SÍ está saliendo bien**. Lo que Florencio esperaba ver "en solitario arriba" es el site name, que todavía muestra el dominio `alttahomescancun.mx` en vez de "Altta Homes Cancún". **El código YA está correcto** — `siteName: "Altta Homes Cancún"` en [app/layout.tsx:62](app/layout.tsx#L62) (og:site_name) + JSON-LD `WebSite.name = "Altta Homes Cancún"` en [app/page.tsx:122](app/page.tsx#L122). El site name **lo decide Google** y lo toma cuando re-rastrea la home; mientras tanto usa el dominio como respaldo. **Prueba de que Google aún NO ha re-rastreado la home post-migración:** en la captura el favicon sigue siendo el monograma viejo "AH", NO la insignia ovalada nueva de la sesión 30. Favicon y site name se actualizan JUNTOS al reindexar la home. **Nada que cambiar en código.**
+>
+> 2. **Sitelinks en 0 (el competidor `alttahomescancun.com` muestra varios: JdS6, Lirios, La Rioja, etc.; el dominio nuevo muestra 0).** Los **sitelinks los genera Google solo** (no se ponen a mano) cuando el dominio tiene indexación + autoridad + tráfico suficientes. Que estén en 0 es el **"bache de transición" ESPERADO de la migración** (dominio nuevo a ojos de Google desde el 20 jun): se reiniciaron y vuelven en **semanas a 1-3 meses** conforme el dominio acumula autoridad. El 301 + el "Cambio de dirección" de Search Console son justo lo que transfiere la autoridad; el tráfico de Google Ads acelera. **NO es daño, no se rompió nada.**
+>
+> **Acción tomada por Florencio en esta sesión:** solicitó indexación en Search Console de la home + los 3 silos (`/jardines-del-sur-6`, `/la-rioja-2`, `/lirios-residencial-2`). **NO hubo cambios de código ni deploy.**
+>
+> **CONCLUSIÓN: solo esperar.** Termómetro real del avance = Search Console → Páginas (cuántas URLs pasan a "Indexada"); chequear ~1 vez por semana, sin obsesionarse. Tiempos esperados: indexación días–2 sem; favicon nuevo + site name días–~3 sem; sitelinks semanas–1-3 meses.
+
 > **✅ COMPLETADO sesión 30 (27 jun 2026) — Nuevo FAVICON de marca "Altta Homes Cancún" (desplegado a producción):**
 >
 > Se reemplazó el favicon (antes un monograma "AH" genérico azul/dorado) por la **insignia ovalada completa de marca**: óvalo con anillo dorado metálico + "Altta" blanco + "HOMES" dorado + techo de marca + cinta dorada "CANCÚN". Refuerza el "look de empresa" del plan SEO (igualar/superar a la competidora `alttahomescancun.com` en reconocimiento de marca).
