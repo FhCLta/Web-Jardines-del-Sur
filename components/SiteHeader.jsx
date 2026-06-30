@@ -82,9 +82,12 @@ export default function SiteHeader() {
     <>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={`container ${styles.inner}`}>
-          <a href="/#top" className={styles.logo} aria-label="AlttaHomes">
-            <span className={styles.logoMain}>Altta</span>
-            <span className={styles.logoAccent}>Homes</span>
+          <a href="/#top" className={styles.logo} aria-label="Altta Homes Cancún">
+            <span className={styles.logoWordmark}>
+              <span className={styles.logoMain}>Altta</span>
+              <span className={styles.logoAccent}>Homes</span>
+            </span>
+            <span className={styles.logoCity}>Cancún</span>
           </a>
 
           {!isInSiloContext && (

@@ -47,15 +47,22 @@
 
 .logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 0.15rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.12rem;
   font-family: var(--font-montserrat);
-  font-weight: 800;
-  font-size: 1.45rem;
-  letter-spacing: -0.01em;
   line-height: 1;
   text-decoration: none;
   justify-self: start;
+}
+
+.logoWordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.15rem;
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
 }
 
 .logoMain {
@@ -67,12 +74,27 @@
   font-weight: 600;
 }
 
+/* "CANCÚN" como cinta debajo del wordmark (imita el logo de marca) */
+.logoCity {
+  color: var(--accent);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  text-indent: 0.34em; /* compensa el espaciado final para centrar bajo "Altta Homes" */
+  text-align: center;
+}
+
 /* Logo color sobre hero oscuro (estado no-scrolled) */
 .header:not(.scrolled) .logoMain {
   color: #fff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 .header:not(.scrolled) .logoAccent {
+  color: var(--accent-2);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+.header:not(.scrolled) .logoCity {
   color: var(--accent-2);
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }

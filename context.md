@@ -1,5 +1,13 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **✅ COMPLETADO sesión 32 (29 jun 2026) — "Cancún" agregado al logo del header (cinta apilada estilo marca, desplegado):**
+>
+> Florencio quería reforzar la marca completa "Altta Homes Cancún" en el logo de arriba a la izquierda del sitio (el wordmark del header, NO el title de Google). **Se le agregó "CANCÚN" como cinta apilada DEBAJO de "Altta Homes"**: chico, dorado, mayúsculas con letter-spacing — imita la cinta dorada "CANCÚN" del logo de marca (el óvalo). Eligió este estilo (apilado) sobre las alternativas "en línea pequeño" y "en línea con punto" porque suma marca SIN apretar el header en móvil (crece en alto, no en ancho).
+>
+> **Implementación** (`components/SiteHeader.jsx` + `SiteHeader.module.css`): el `<a className=logo>` ahora envuelve el wordmark en `.logoWordmark` (la fila "Altta"+"Homes" con su baseline/gap original) y debajo un `<span className=logoCity>Cancún</span>`. `.logo` pasó de fila baseline a **columna** (`flex-direction: column`); las props de tamaño/peso del wordmark se movieron a `.logoWordmark`. `.logoCity` = `font-size 0.6rem`, `letter-spacing 0.34em`, uppercase, `text-indent 0.34em`+`text-align center` para centrar bajo "Altta Homes". Color sobre hero oscuro (no-scrolled) = `--accent-2` con text-shadow, igual que `.logoAccent`. `aria-label` del logo actualizado a "Altta Homes Cancún". Build limpio + `firebase deploy`.
+>
+> **DECISIÓN SOBRE EL TITLE DE GOOGLE (no se tocó):** Florencio preguntó si cambiar el title `Altta Homes Cancún | Casas y Departamentos en Venta` a "...en Cancún" o "...Cancún Sur". **Se recomendó DEJARLO en "en Venta" y NO se cambió.** Razón: "en Cancún" repetiría "Cancún" (ya está al inicio del title — justo lo que se quitó a propósito en sesión 30); "Zona Sur" ya vive en la meta-descripción; "en Venta" es keyword transaccional que sube CTR. Además Google sigue reindexando la migración → no meter ruido. El "Cancún" que Florencio quería ver lo aporta el **site name** (ya configurado), no el title. **Pendiente sin tocar:** actualizar el dato viejo "1080 puntos" del 1er artículo del blog ([app/blog/_lib/posts.ts:74](app/blog/_lib/posts.ts#L74)) — contradice al 2º artículo que ya explica el Modelo T100 (100 pts). Se ofreció, quedó para después.
+
 > **📌 SESIÓN 31 (28 jun 2026) — Consulta SEO post-migración: "site name" y sitelinks en cero (SIN cambios de código, solo aclaración + acción en Search Console):**
 >
 > Florencio observó dos cosas en los resultados de Google (móvil) y preguntó por qué. Se aclararon (NO eran errores del sitio):
