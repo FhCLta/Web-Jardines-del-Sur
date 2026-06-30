@@ -692,7 +692,8 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* respaldo navegadores viejos */
+  height: 100dvh; /* se ajusta a la barra del WebView (FB/IG) */
   background-color: rgba(0, 0, 0, 0.92);
   z-index: 9999;
   display: flex;

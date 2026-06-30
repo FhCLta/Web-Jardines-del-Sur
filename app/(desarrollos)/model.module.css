@@ -504,7 +504,8 @@
 .lbContent {
   position: relative;
   width: 90vw;
-  height: 85vh;
+  height: 85vh; /* respaldo */
+  height: 85dvh; /* se ajusta a la barra del WebView (FB/IG) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -552,7 +553,7 @@
 @media (max-width: 640px) {
   .lbNavLeft  { left: 0.5rem; }
   .lbNavRight { right: 0.5rem; }
-  .lbContent  { width: 100vw; height: 80vh; }
+  .lbContent  { width: 100vw; height: 80vh; height: 80dvh; }
 }
 
 .galleryFeatured {
