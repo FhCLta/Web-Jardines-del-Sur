@@ -161,7 +161,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "La Rioja 2",
     shortName: "La Rioja 2",
     metaTitle: "La Rioja 2 Cancún · Casas Residenciales desde $4.04M | Altta Homes",
-    seoTitleLead: "La Rioja 2 | Casas Premium en Cancún",
+    seoTitleLead: "La Rioja 2 | Casas de Lujo en Cancún",
     metaDescription:
       "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 5 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",

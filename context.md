@@ -8,10 +8,12 @@
 >
 > **Títulos nuevos (en producción):**
 > - JdS6: **`Jardines del Sur 6 | Casas y Departamentos en Cancún`**
-> - La Rioja 2: **`La Rioja 2 | Casas Premium en Cancún`** ("Premium" alineado con el nombre del grupo de anuncios "La Rioja 2 - Premium")
+> - La Rioja 2: **`La Rioja 2 | Casas de Lujo en Cancún`**
 > - Lirios 2: **`Lirios Residencial 2 | Departamentos en Cancún`**
 >
-> **⚠️ Decisión de branding (honesta):** Florencio sugirió "Departamentos **de lujo**" para Lirios; se recomendó **NO** ponerle "de lujo" → **La Rioja es el premium real** ($4M, sin Infonavit); si Lirios (accesible, con Infonavit) también dice "lujo", se diluye la distinción. Lirios queda como "Departamentos" (accesible) y La Rioja brilla como "Premium".
+> **⚠️ Decisión de branding (honesta):** Florencio sugirió "Departamentos **de lujo**" para Lirios; se recomendó **NO** ponerle "de lujo" → **La Rioja es el premium real** ($4M, sin Infonavit); si Lirios (accesible, con Infonavit) también dice "lujo", se diluye la distinción. Lirios queda como "Departamentos" (accesible) y La Rioja brilla como el de lujo.
+>
+> **Ajuste "Premium" → "de Lujo" (mismo día):** el título de La Rioja se puso primero como "Casas Premium" (por consistencia con el nombre del grupo de Ads "La Rioja 2 - Premium"), pero se **cambió a "Casas de Lujo"**. Razón honesta (Claude rectificó su propia recomendación): **"casas de lujo en cancún" es una búsqueda REAL** con volumen en México, mientras "casas premium" casi nadie lo teclea (es adjetivo de marketing, no keyword). Como el objetivo es **posicionar**, gana el término que la gente busca. El nombre del grupo de Ads es interno (el usuario no lo ve) → pesa menos que el keyword. La Rioja SÍ es de lujo ($4M, sin Infonavit) → preciso, no exagera.
 >
 > **Implementación:** `app/(desarrollos)/_lib/dev-content.ts` (3 × `seoTitleLead`) + `app/(desarrollos)/_lib/dev-meta.ts` — se **quitó la lógica de precio dinámico del título de silo** (antes: `${seoTitleLead} desde ${formatPriceShort(minPrice)}` → ahora: `title = dev.seoTitleLead`) + se eliminaron los imports sin uso (`getMinPriceByDev`, `formatPriceShort`). La meta-descripción de JdS6 NO se tocó (estaba correcta). Los títulos de las páginas de MODELO (buildModelMetadata) SÍ conservan el precio ("Desde $X"), no se tocaron. Build limpio + `firebase deploy`; verificados los 3 `<title>` en producción. **Pendiente Florencio:** solicitar indexación de los 3 silos en Search Console para acelerar que Google muestre los títulos nuevos.
 
