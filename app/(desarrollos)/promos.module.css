@@ -1,0 +1,380 @@
+.wrapper {
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* ---- Hero ---- */
+.hero {
+  position: relative;
+  background-color: var(--primary-900);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 9.5rem 0 3.75rem;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 1.25rem;
+}
+
+.crumbs a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  color: var(--accent-2);
+}
+
+.crumbs strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 0.6rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5.5vw, 3.1rem);
+  line-height: 1.08;
+  margin: 0 0 0.6rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
+  max-width: 640px;
+}
+
+.updated {
+  display: inline-block;
+  background: rgba(232, 180, 58, 0.16);
+  color: var(--accent-2);
+  border: 1px solid rgba(232, 180, 58, 0.4);
+  border-radius: 999px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.lead {
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0 0 1.6rem;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gradient-gold);
+  color: #1a1204;
+  font-weight: 700;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: var(--shadow-gold);
+  transition: transform 0.15s ease;
+}
+
+.heroCta:hover {
+  transform: translateY(-2px);
+}
+
+/* ---- Main ---- */
+.main {
+  padding: 2.75rem 0 3.5rem;
+}
+
+.promosSection {
+  margin-bottom: 3rem;
+}
+
+.promoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.promoCard {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-top: 4px solid var(--accent);
+}
+
+.promoTag {
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(209, 146, 0, 0.12);
+  color: var(--accent-deep);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.24rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.promoModel {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0 0 0.15rem;
+}
+
+.promoUbic {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.9rem;
+}
+
+.promoBenefits {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.promoBenefits li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.94rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.promoBenefits li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--gradient-gold);
+}
+
+.promoVigencia {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.promoVigencia span {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.1rem;
+}
+
+.promoRestric {
+  margin: 0.55rem 0 0;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.nota {
+  margin-top: 1.4rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.noPromos {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* ---- Evergreen ---- */
+.evergreen {
+  margin-bottom: 3rem;
+}
+
+.evergreenTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0 0 1.25rem;
+}
+
+.evergreenGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.evergreenItem {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.evergreenItem h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 0.35rem;
+}
+
+.evergreenItem p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---- CTA ---- */
+.ctaBox {
+  background: var(--gradient-primary);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.ctaBox h2 {
+  font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  font-weight: 800;
+  margin: 0 0 0.6rem;
+  color: #fff;
+}
+
+.ctaBox p {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: center;
+}
+
+.ctaBtn {
+  background: var(--gradient-gold);
+  color: #1a1204;
+  font-weight: 700;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: var(--shadow-gold);
+  transition: transform 0.15s ease;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+}
+
+.ctaSecondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: background 0.15s ease;
+}
+
+.ctaSecondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding: 8rem 0 2.75rem;
+    text-align: center;
+  }
+  .crumbs {
+    justify-content: center;
+  }
+  .hero h1,
+  .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .promoGrid {
+    grid-template-columns: 1fr;
+  }
+  .ctaBox {
+    padding: 2rem 1.25rem;
+  }
+
+  /* Centrar TODO el contenido en móvil */
+  .promoCard {
+    text-align: center;
+    align-items: center;
+  }
+  .promoTag {
+    align-self: center;
+  }
+  .promoBenefits {
+    align-items: center;
+  }
+  .promoBenefits li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-left: 0;
+    text-align: center;
+  }
+  .promoBenefits li::before {
+    position: static;
+    top: auto;
+    flex-shrink: 0;
+  }
+  .promoVigencia,
+  .promoRestric,
+  .nota,
+  .noPromos {
+    text-align: center;
+  }
+  .evergreenTitle {
+    text-align: center;
+  }
+  .evergreenItem {
+    text-align: center;
+  }
+}

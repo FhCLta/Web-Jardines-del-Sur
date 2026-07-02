@@ -70,5 +70,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
     .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
 
-  return [...baseEntries, ...modelEntries, ...blogEntries];
+  const promoEntries: MetadataRoute.Sitemap = (Object.keys(DEVS) as DevSlug[])
+    .filter((slug) => DEVS[slug].promos)
+    .map((slug) => ({
+      url: `${SITE_URL}/${slug}/promociones`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }));
+
+  return [...baseEntries, ...promoEntries, ...modelEntries, ...blogEntries];
 }

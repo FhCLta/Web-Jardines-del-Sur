@@ -46,6 +46,19 @@ export type DevContent = {
     equipment?: string[];
     trustItems?: Array<{ num: string; label: string }>;
   };
+  // Promociones del mes (editable). Se muestran en /[silo]/promociones.
+  // Para actualizar: cambia el texto, agrega/borra items y actualiza `updatedLabel`.
+  promos?: {
+    updatedLabel: string; // ej. "Promociones vigentes · julio 2026"
+    nota?: string;
+    items: Array<{
+      titulo?: string; // nombre de la promo, ej. "La Portería de JDS"
+      modelo: string; // "Todos los modelos", "Modelo Capua", etc.
+      ubicaciones?: string;
+      beneficios: string[];
+      vigencia: string; // "31 de julio de 2026"
+    }>;
+  };
 };
 
 export const DEVS: Record<DevSlug, DevContent> = {
@@ -65,6 +78,43 @@ export const DEVS: Record<DevSlug, DevContent> = {
     location: { label: "Ubicación", value: "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
+    promos: {
+      updatedLabel: "Promociones vigentes · julio 2026",
+      nota: "Los minisplits no incluyen instalación. Promociones sujetas a disponibilidad y vigencia; consulta requisitos con tu asesor.",
+      items: [
+        {
+          titulo: "La Portería de JDS",
+          modelo: "Jardines del Sur 6",
+          ubicaciones: "⚽ Todos los modelos · elige tu zona y anota tu descuento",
+          beneficios: [
+            "Zona 1: 1 minisplit de 12,000 BTU",
+            "Zona 2: $5,000 de descuento",
+            "Zona 3: $8,000 de descuento",
+            "Zona 4: $10,000 de descuento",
+          ],
+          vigencia: "15 de julio de 2026",
+        },
+        {
+          titulo: "Si gana México, ganas tú",
+          modelo: "Jardines del Sur 6",
+          ubicaciones: "⚽ Todos los modelos",
+          beneficios: ["1 minisplit de 12,000 BTU al apartar"],
+          vigencia: "48 horas después del partido",
+        },
+        {
+          modelo: "Modelo Capua",
+          ubicaciones: "Jardines del Sur 6 · Ocelote y Antílope",
+          beneficios: ["2 minisplits de 12,000 BTU"],
+          vigencia: "31 de julio de 2026",
+        },
+        {
+          modelo: "Modelo Noni",
+          ubicaciones: "Jardines del Sur 6 · Jabalí Mz 30 L14",
+          beneficios: ["2 minisplits de 12,000 BTU"],
+          vigencia: "31 de julio de 2026",
+        },
+      ],
+    },
     hero: {
       slides: ["/optimized/hero/alberca-desktop.webp"],
       mobileImage: "/optimized/hero/alberca-mobile.webp",

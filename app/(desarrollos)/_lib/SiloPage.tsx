@@ -155,11 +155,45 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
       <nav className={styles.anchorNav} aria-label={`Secciones de ${dev.name}`}>
         <div className={`container ${styles.anchorNavInner}`}>
           <a href="#modelos">Modelos</a>
+          {dev.promos && <a href={`/${dev.slug}/promociones`}>Promociones</a>}
           <a href="#amenidades">Amenidades</a>
           {location && <a href="#ubicacion">Ubicación</a>}
           <a href="#contacto">Contacto</a>
         </div>
       </nav>
+
+      {dev.promos && (
+        <div className="container" style={{ marginTop: "1.25rem" }}>
+          <a
+            href={`/${dev.slug}/promociones`}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "1rem",
+              flexWrap: "wrap",
+              background:
+                "linear-gradient(135deg, #E8B43A 0%, #D19200 55%, #A37200 100%)",
+              color: "#1a1204",
+              textDecoration: "none",
+              borderRadius: "1rem",
+              padding: "1rem 1.4rem",
+              fontWeight: 700,
+              boxShadow: "0 16px 36px -14px rgba(214, 158, 46, 0.55)",
+            }}
+          >
+            <span
+              style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}
+            >
+              <span style={{ fontSize: "1.3rem" }} aria-hidden="true">
+                🏷️
+              </span>
+              Promociones del mes en {dev.name} — minisplits y descuentos
+            </span>
+            <span style={{ whiteSpace: "nowrap" }}>Ver promociones →</span>
+          </a>
+        </div>
+      )}
 
       <section id="modelos" className={styles.modelsSection} style={{ scrollMarginTop: "110px" }}>
         <div className="container">
