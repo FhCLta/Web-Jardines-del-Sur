@@ -5,8 +5,6 @@ import {
   slugifyModel,
   parseStat,
   formatPriceMxn,
-  formatPriceShort,
-  getMinPriceByDev,
   type InventoryProperty,
 } from "./model-utils";
 
@@ -15,11 +13,8 @@ export function buildSiloMetadata(slug: DevSlug): Metadata {
   const canonical = `/${dev.slug}`;
   const ogImageUrl = dev.ogImage;
 
-  // Precio dinámico desde el inventario → el título nunca queda desactualizado.
-  const minPrice = getMinPriceByDev(dev.name);
-  const title = minPrice
-    ? `${dev.seoTitleLead} desde ${formatPriceShort(minPrice)}`
-    : dev.seoTitleLead;
+  // Título limpio y coherente por silo: "[Desarrollo] | [Producto] en Cancún".
+  const title = dev.seoTitleLead;
 
   return {
     title: { absolute: title },

@@ -1,5 +1,20 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **✅ COMPLETADO sesión 35 (2 jul 2026) — Títulos SEO de los 3 silos: limpios, coherentes y sin abreviatura (desplegado):**
+>
+> Florencio quiso posicionar mejor el silo de **Jardines del Sur 6** y notó que el título se veía "mal escrito" — en realidad el problema era la **abreviatura "Deptos"** del título (la descripción estaba bien, sin errores; se le aclaró). Pidió un esquema **coherente** para los 3 silos con el patrón **`[Desarrollo] | [Producto] en Cancún`** (palabra completa, mayúscula correcta, "en Cancún" al final).
+>
+> **Decisión "Opción A" (limpia, sin precio) vs "B" (con gancho de precio):** se eligió **A**. Razón (recomendación honesta): el objetivo AHORA es **posicionar/rankear** (el dominio sigue en el bache de re-indexación post-migración), y tener **"Cancún" literal** en el título ayuda a la relevancia para "jardines del sur 6 cancún"; el gancho de precio ("desde $X.XXM") sirve para CTR **cuando ya rankeas**, no en esta fase. El precio se sigue viendo en tarjetas/ficha.
+>
+> **Títulos nuevos (en producción):**
+> - JdS6: **`Jardines del Sur 6 | Casas y Departamentos en Cancún`**
+> - La Rioja 2: **`La Rioja 2 | Casas Premium en Cancún`** ("Premium" alineado con el nombre del grupo de anuncios "La Rioja 2 - Premium")
+> - Lirios 2: **`Lirios Residencial 2 | Departamentos en Cancún`**
+>
+> **⚠️ Decisión de branding (honesta):** Florencio sugirió "Departamentos **de lujo**" para Lirios; se recomendó **NO** ponerle "de lujo" → **La Rioja es el premium real** ($4M, sin Infonavit); si Lirios (accesible, con Infonavit) también dice "lujo", se diluye la distinción. Lirios queda como "Departamentos" (accesible) y La Rioja brilla como "Premium".
+>
+> **Implementación:** `app/(desarrollos)/_lib/dev-content.ts` (3 × `seoTitleLead`) + `app/(desarrollos)/_lib/dev-meta.ts` — se **quitó la lógica de precio dinámico del título de silo** (antes: `${seoTitleLead} desde ${formatPriceShort(minPrice)}` → ahora: `title = dev.seoTitleLead`) + se eliminaron los imports sin uso (`getMinPriceByDev`, `formatPriceShort`). La meta-descripción de JdS6 NO se tocó (estaba correcta). Los títulos de las páginas de MODELO (buildModelMetadata) SÍ conservan el precio ("Desde $X"), no se tocaron. Build limpio + `firebase deploy`; verificados los 3 `<title>` en producción. **Pendiente Florencio:** solicitar indexación de los 3 silos en Search Console para acelerar que Google muestre los títulos nuevos.
+
 > **✅ COMPLETADO sesión 34 (1 jul 2026) — Google Analytics 4 (GA4) instalado vía GTM, verificado en Tiempo real (SIN tocar código, SIN deploy):**
 >
 > Florencio quiso empezar a usar GA4 para entender su tráfico (de dónde vienen las visitas, qué desarrollo interesa más) — es **complemento, NO reemplazo** de la conversión de Ads. Se instaló **por GTM** (el sitio ya tiene el contenedor `GTM-53BHDRWC` cargado con `lazyOnload`), así que **no se tocó código ni se desplegó nada**.

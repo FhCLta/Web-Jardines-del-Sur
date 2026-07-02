@@ -54,7 +54,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "Jardines del Sur 6",
     shortName: "Jardines 6",
     metaTitle: "Jardines del Sur 6 Cancún · Casas y Departamentos desde $1.85M | Altta Homes",
-    seoTitleLead: "Jardines del Sur 6 Cancún | Casas y Deptos",
+    seoTitleLead: "Jardines del Sur 6 | Casas y Departamentos en Cancún",
     metaDescription:
       "Casas y departamentos en Jardines del Sur 6, Zona Sur de Cancún (Polígono Sur). 6 modelos de 3 recámaras con alberca, gimnasio y casa club, a 5 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas y Departamentos en Jardines del Sur 6, Cancún",
@@ -161,7 +161,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "La Rioja 2",
     shortName: "La Rioja 2",
     metaTitle: "La Rioja 2 Cancún · Casas Residenciales desde $4.04M | Altta Homes",
-    seoTitleLead: "La Rioja 2 Cancún | Casas Residenciales Premium",
+    seoTitleLead: "La Rioja 2 | Casas Premium en Cancún",
     metaDescription:
       "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 5 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",
@@ -269,7 +269,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "Lirios Residencial 2",
     shortName: "Lirios 2",
     metaTitle: "Lirios Residencial 2 Cancún · Departamento Cedro Plus desde $2.25M | Altta Homes",
-    seoTitleLead: "Lirios Residencial 2 Cancún | Departamentos",
+    seoTitleLead: "Lirios Residencial 2 | Departamentos en Cancún",
     metaDescription:
       "Departamentos en Lirios Residencial 2, Zona Sur de Cancún (Polígono Sur). 3 recámaras, 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 5 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
