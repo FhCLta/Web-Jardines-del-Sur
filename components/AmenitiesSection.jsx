@@ -15,7 +15,7 @@ const DEFAULT_ITEMS = [
   {
     img: "/larioja2/amenidades/alberca.webp",
     label: "Alberca · La Rioja 2",
-    desc: "Espejo de agua exclusivo en el residencial más premium del Polígono Sur.",
+    desc: "Espejo de agua exclusivo en el residencial más premium de la Zona Sur.",
     size: "tall",
   },
   {

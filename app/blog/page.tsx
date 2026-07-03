@@ -19,7 +19,7 @@ const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
 
 const metaTitle = "Blog · Guías para comprar casa en Cancún | Altta Homes";
 const metaDescription =
-  "Consejos y guías para comprar casa o departamento en Cancún: créditos Infonavit y bancario, plusvalía, preventa y todo lo que necesitas saber del Polígono Sur.";
+  "Consejos y guías para comprar casa o departamento en Cancún: créditos Infonavit y bancario, plusvalía, preventa y todo lo que necesitas saber de la Zona Sur.";
 
 export const metadata: Metadata = {
   title: { absolute: metaTitle },
@@ -92,7 +92,7 @@ export default function Page() {
           <h1>Guías para comprar casa en Cancún</h1>
           <p>
             Consejos prácticos sobre créditos, plusvalía y preventa para que
-            tomes la mejor decisión en el Polígono Sur de Cancún.
+            tomes la mejor decisión en la Zona Sur de Cancún.
           </p>
         </div>
       </header>

@@ -70,10 +70,10 @@ export const DEVS: Record<DevSlug, DevContent> = {
     metaTitle: "Jardines del Sur 6 Cancún · Casas y Departamentos desde $1.85M | Altta Homes",
     seoTitleLead: "Jardines del Sur 6 | Casas y Departamentos en Cancún",
     metaDescription:
-      "Casas y departamentos en Jardines del Sur 6, Zona Sur de Cancún (Polígono Sur). 6 modelos de 3 recámaras con alberca, gimnasio y casa club, a 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
+      "Casas y departamentos en Jardines del Sur 6, Zona Sur de Cancún. 6 modelos de 3 recámaras con alberca, gimnasio y casa club, a 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas y Departamentos en Jardines del Sur 6, Cancún",
     heroSubtitle:
-      "El sexto desarrollo de Jardines del Sur en Polígono Sur Cancún, con seis modelos de casas y departamentos de tres recámaras y el respaldo de 50 años de Grupo Sadasi.",
+      "El sexto desarrollo de Jardines del Sur en la Zona Sur de Cancún, con seis modelos de casas y departamentos de tres recámaras y el respaldo de 50 años de Grupo Sadasi.",
     heroImage: "/optimized/dev-tabs/jardines-6.webp",
     ogImage: "/jardines/Imagnes de amenidades y hero/alberca.webp",
     location: { label: "Ubicación", value: "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R." },
@@ -123,7 +123,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       mobileImage: "/optimized/hero/alberca-mobile.webp",
       preloadImage: "/optimized/hero/alberca-desktop.webp",
       eyebrow: {
-        strong: "POLÍGONO SUR",
+        strong: "ZONA SUR",
         rest: ["GRUPO SADASI", "6 MODELOS"],
       },
       title: {
@@ -136,9 +136,9 @@ export const DEVS: Record<DevSlug, DevContent> = {
       },
     },
     intro: {
-      eyebrow: "Polígono Sur · Cancún",
+      eyebrow: "Zona Sur · Cancún",
       paragraphs: [
-        "Jardines del Sur 6 es la sexta etapa del residencial más exitoso del Polígono Sur de Cancún. Un oasis de estilo y serenidad construido con la calidad y garantía que solo una marca con más de 50 años de experiencia como Grupo Sadasi puede ofrecer — más de 430,000 viviendas entregadas en 12 estados del país.",
+        "Jardines del Sur 6 es la sexta etapa del residencial más exitoso de la Zona Sur de Cancún. Un oasis de estilo y serenidad construido con la calidad y garantía que solo una marca con más de 50 años de experiencia como Grupo Sadasi puede ofrecer — más de 430,000 viviendas entregadas en 12 estados del país.",
         "Cada detalle ha sido meticulosamente diseñado para ofrecer el máximo confort. Espaciosas áreas, acabados elegantes y tecnología Smart Home Ready convierten tu hogar en un santuario de sofisticación. Las amenidades de clase mundial — alberca tipo resort, casa club, gimnasio cerrado, áreas verdes, juegos infantiles y skate park — crean un entorno donde la seguridad y la belleza se entrelazan.",
         "El residencial ofrece seis modelos para distintos perfiles familiares: los departamentos Capua y Cedro Plus, ideales para parejas jóvenes y primer hogar, y las casas Flamboyán, Ceiba, Tabachín y Noni, pensadas para familias que buscan espacio y privacidad. Todos con esquemas flexibles de financiamiento — Infonavit y crédito bancario, y FOVISSSTE en unidades seleccionadas.",
         "La ubicación privilegiada cerca de la Av. 127 te conecta con escuelas de prestigio, plazas comerciales, restaurantes y las playas más hermosas del Caribe Mexicano. Vivir con estilo es… vivir en Jardines del Sur.",
@@ -150,7 +150,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Precio desde $1,853,830 MXN",
       "Smart Home Ready · Infonavit · FOVISSSTE (unidades selec.)",
       "Alberca, gimnasio, casa club, cancha y área infantil",
-      "Polígono Sur Cancún · Av. 127",
+      "Zona Sur Cancún · Av. 127",
     ],
     amenitiesSection: {
       header: {
@@ -324,7 +324,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     metaTitle: "Lirios Residencial 2 Cancún · Departamento Cedro Plus desde $2.25M | Altta Homes",
     seoTitleLead: "Lirios Residencial 2 | Departamentos en Cancún",
     metaDescription:
-      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún (Polígono Sur). 3 recámaras, 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
+      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún. 3 recámaras, 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
     heroSubtitle:
       "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",

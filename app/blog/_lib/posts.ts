@@ -33,16 +33,16 @@ export const POSTS: Post[] = [
       "Comprar Casa con Infonavit en Cancún 2026: Guía Paso a Paso | Altta Homes",
     title: "Comprar casa con Infonavit en Cancún en 2026: guía paso a paso",
     description:
-      "¿Quieres usar tu crédito Infonavit para comprar casa en Cancún? Te explicamos los requisitos, los puntos, el paso a paso y qué desarrollos del Polígono Sur aceptan Infonavit en 2026.",
+      "¿Quieres usar tu crédito Infonavit para comprar casa en Cancún? Te explicamos los requisitos, los puntos, el paso a paso y qué desarrollos de la Zona Sur aceptan Infonavit en 2026.",
     excerpt:
-      "Requisitos, puntos, paso a paso y qué desarrollos del Polígono Sur de Cancún aceptan crédito Infonavit en 2026.",
+      "Requisitos, puntos, paso a paso y qué desarrollos de la Zona Sur de Cancún aceptan crédito Infonavit en 2026.",
     date: "2026-06-09",
     dateLabel: "9 de junio de 2026",
     author: "Florencio Hurtado · Asesor inmobiliario",
     readingMinutes: 6,
     coverImage: "/hero-alberca-jardines.webp",
     coverAlt:
-      "Casas residenciales con alberca en el Polígono Sur de Cancún, opción con crédito Infonavit",
+      "Casas residenciales con alberca en la Zona Sur de Cancún, opción con crédito Infonavit",
     keywords: [
       "comprar casa con infonavit en cancún",
       "crédito infonavit cancún",
@@ -104,7 +104,7 @@ export const POSTS: Post[] = [
       },
       {
         type: "p",
-        text: "No todos los desarrollos manejan el mismo esquema. Entre las opciones con crédito Infonavit en el Polígono Sur de Cancún están:",
+        text: "No todos los desarrollos manejan el mismo esquema. Entre las opciones con crédito Infonavit en la Zona Sur de Cancún están:",
       },
       {
         type: "ul",
@@ -274,7 +274,7 @@ export const POSTS: Post[] = [
       },
       {
         type: "p",
-        text: "Los cambios buscan simplificar el proceso, pero también exigen que llegues con tu información en orden. La buena noticia: si precalificas, en el Polígono Sur de Cancún hay desarrollos que aceptan crédito Infonavit.",
+        text: "Los cambios buscan simplificar el proceso, pero también exigen que llegues con tu información en orden. La buena noticia: si precalificas, en la Zona Sur de Cancún hay desarrollos que aceptan crédito Infonavit.",
       },
       {
         type: "ul",

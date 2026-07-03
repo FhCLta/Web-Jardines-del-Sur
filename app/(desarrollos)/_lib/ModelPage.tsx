@@ -171,7 +171,7 @@ export default async function ModelPage({
       : modelType === "Departamento"
       ? `DEPARTAMENTO · ${dev.name.toUpperCase()}`
       : `MODELO · ${dev.name.toUpperCase()}`;
-  const eyebrowSub = "POLÍGONO SUR CANCÚN";
+  const eyebrowSub = "ZONA SUR CANCÚN";
 
   const strippedName = property.nombre_modelo.replace(/^(Casa|Departamento)\s+/i, "");
   const heroTitle = strippedName.toLowerCase().startsWith("modelo ")

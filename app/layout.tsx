@@ -35,13 +35,12 @@ export const metadata: Metadata = {
     template: "%s | Altta Homes Cancún",
   },
   description:
-    "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún (Polígono Sur): Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7 (próxima apertura). Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
+    "Casas y departamentos con alta plusvalía en la Zona Sur de Cancún: Jardines del Sur 6, La Rioja 2, Lirios Residencial 2 y Jardines del Sur 7 (próxima apertura). Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
   applicationName: "Altta Homes Cancún",
   keywords: [
     "casas en venta en Cancún",
     "departamentos en Cancún",
     "Zona Sur Cancún",
-    "Polígono Sur Cancún",
     "Jardines del Sur 6",
     "La Rioja 2 Cancún",
     "Lirios Residencial 2",

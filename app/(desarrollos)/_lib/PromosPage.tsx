@@ -120,26 +120,26 @@ export default function PromosPage({ slug }: { slug: DevSlug }) {
                         <li key={j}>{b}</li>
                       ))}
                     </ul>
-                    <div className={styles.promoVigencia}>
-                      <span>Vigencia</span> {item.vigencia}
-                    </div>
-                    <p className={styles.promoRestric}>Aplican restricciones</p>
                     <div className={styles.promoActions}>
+                      <a
+                        href={isModel ? `/${dev.slug}/${item.modeloSlug}` : `/${dev.slug}`}
+                        className={`btn btn-secondary ${styles.promoActionBtn}`}
+                      >
+                        {isModel ? "Ver el modelo" : "Ver modelos y precios"}
+                      </a>
                       <a
                         href={cardWaHref}
                         target="_blank"
                         rel="noreferrer"
-                        className={styles.promoBtn}
+                        className={`btn btn-primary ${styles.promoActionBtn}`}
                       >
                         {isModel ? "Cotizar ahora" : "Contacta con un asesor"}
                       </a>
-                      <a
-                        href={isModel ? `/${dev.slug}/${item.modeloSlug}` : `/${dev.slug}`}
-                        className={styles.promoBtnSecondary}
-                      >
-                        {isModel ? "Ver el modelo" : "Ver modelos y precios"}
-                      </a>
                     </div>
+                    <div className={styles.promoVigencia}>
+                      <span>Vigencia</span> {item.vigencia}
+                    </div>
+                    <p className={styles.promoRestric}>Aplican restricciones</p>
                   </article>
                 );
               })}
@@ -205,7 +205,7 @@ export default function PromosPage({ slug }: { slug: DevSlug }) {
               by Grupo Sadasi · Cancún
             </span>
             <p>
-              Promociones y planes de financiamiento en {dev.name}, Polígono Sur
+              Promociones y planes de financiamiento en {dev.name}, Zona Sur
               de Cancún, con el respaldo de 50 años de Grupo Sadasi.
             </p>
           </div>

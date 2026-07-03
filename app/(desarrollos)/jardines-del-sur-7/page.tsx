@@ -20,7 +20,7 @@ const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(WA_MESSAGE
 const metaTitle =
   "Jardines del Sur 7 Cancún | Próxima Apertura a la Venta";
 const metaDescription =
-  "Jardines del Sur 7, la nueva etapa del residencial más exitoso de la Zona Sur de Cancún (Polígono Sur). Próxima apertura a la venta. Chatea con un asesor autorizado de Altta Homes y sé de los primeros en conocer modelos, precios y fechas.";
+  "Jardines del Sur 7, la nueva etapa del residencial más exitoso de la Zona Sur de Cancún. Próxima apertura a la venta. Chatea con un asesor autorizado de Altta Homes y sé de los primeros en conocer modelos, precios y fechas.";
 
 export const metadata: Metadata = {
   title: { absolute: metaTitle },
@@ -101,7 +101,7 @@ const jsonLd = {
       "@id": `${PAGE_URL}#residence`,
       name: "Jardines del Sur 7",
       description:
-        "Nueva etapa del residencial Jardines del Sur en el Polígono Sur de Cancún, desarrollada por Altta Homes con el respaldo de Grupo Sadasi. Actualmente en obra; preventa por anunciar.",
+        "Nueva etapa del residencial Jardines del Sur en la Zona Sur de Cancún, desarrollada por Altta Homes con el respaldo de Grupo Sadasi. Actualmente en obra; preventa por anunciar.",
       url: PAGE_URL,
       address: {
         "@type": "PostalAddress",
@@ -129,7 +129,7 @@ export default function Page() {
         <div className={styles.heroMedia}>
           <Image
             src="/hero-alberca-jardines.webp"
-            alt="Desarrollo residencial Altta Homes en el Polígono Sur de Cancún"
+            alt="Desarrollo residencial Altta Homes en la Zona Sur de Cancún"
             fill
             priority
             sizes="100vw"
@@ -139,14 +139,14 @@ export default function Page() {
         <div className={`container ${styles.heroInner}`}>
           <span className={styles.eyebrow}>
             <span className={styles.pulse} aria-hidden="true" />
-            Próximamente · Polígono Sur Cancún
+            Próximamente · Zona Sur Cancún
           </span>
           <h1 className={styles.title}>
             <span className={styles.titleSmall}>Nueva etapa · Altta Homes</span>
             Jardines del Sur 7
           </h1>
           <p className={styles.subtitle}>
-            La nueva etapa del residencial más exitoso del Polígono Sur de
+            La nueva etapa del residencial más exitoso de la Zona Sur de
             Cancún, con el respaldo de Grupo Sadasi.{" "}
             <strong>Obra ya iniciada — preventa por anunciar.</strong>
           </p>
@@ -212,8 +212,8 @@ export default function Page() {
           </span>
           <h2>Jardines del Sur 7, lo nuevo de Altta Homes en Cancún</h2>
           <p>
-            Jardines del Sur 7 es la nueva etapa del residencial más exitoso del
-            Polígono Sur de Cancún, desarrollado por Altta Homes con el respaldo
+            Jardines del Sur 7 es la nueva etapa del residencial más exitoso de la
+            Zona Sur de Cancún, desarrollado por Altta Homes con el respaldo
             de Grupo Sadasi — más de 50 años de trayectoria y 430,000 viviendas
             entregadas en México.
           </p>

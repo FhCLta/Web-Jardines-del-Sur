@@ -79,7 +79,7 @@ export default async function Home() {
           },
           {
             '@type': 'Place',
-            name: 'Polígono Sur Cancún',
+            name: 'Zona Sur Cancún',
           },
         ],
         sameAs: [
@@ -128,7 +128,7 @@ export default async function Home() {
       {
         '@type': 'ItemList',
         '@id': `${siteUrl}/#developments`,
-        name: 'Desarrollos en Polígono Sur Cancún',
+        name: 'Desarrollos en Zona Sur Cancún',
         itemListElement: [
           { name: 'Jardines del Sur 6', slug: 'jardines-del-sur-6' },
           { name: 'La Rioja 2', slug: 'la-rioja-2' },

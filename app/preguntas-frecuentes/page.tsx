@@ -22,7 +22,7 @@ type Faq = { q: string; a: string; link?: { href: string; label: string } };
 const FAQS: Faq[] = [
   {
     q: "¿Dónde están ubicados los desarrollos de Altta Homes en Cancún?",
-    a: "Cada desarrollo tiene su propia ubicación dentro del Polígono Sur de Cancún, una de las zonas de mayor crecimiento y plusvalía de la ciudad, con acceso a escuelas, plazas comerciales y vialidades principales. Por ejemplo, Jardines del Sur 6 está sobre la Av. 127, La Rioja 2 sobre la Av. 135 esquina con Av. 127, y Lirios Residencial 2 sobre la Av. Robles. Te compartimos la ubicación exacta y cómo llegar al desarrollo que te interese por WhatsApp.",
+    a: "Cada desarrollo tiene su propia ubicación dentro de la Zona Sur de Cancún, una de las zonas de mayor crecimiento y plusvalía de la ciudad, con acceso a escuelas, plazas comerciales y vialidades principales. Por ejemplo, Jardines del Sur 6 está sobre la Av. 127, La Rioja 2 sobre la Av. 135 esquina con Av. 127, y Lirios Residencial 2 sobre la Av. Robles. Te compartimos la ubicación exacta y cómo llegar al desarrollo que te interese por WhatsApp.",
   },
   {
     q: "¿Qué desarrollos tiene Altta Homes en Cancún?",
@@ -153,7 +153,7 @@ export default function Page() {
           <h1>Preguntas frecuentes sobre comprar en Cancún</h1>
           <p>
             Todo lo que necesitas saber sobre nuestras casas y departamentos en
-            el Polígono Sur de Cancún: créditos, precios, visitas y más.
+            la Zona Sur de Cancún: créditos, precios, visitas y más.
           </p>
         </div>
       </header>
