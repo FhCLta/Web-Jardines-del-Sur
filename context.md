@@ -1,5 +1,15 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **✅ COMPLETADO sesión 36 (2 jul 2026) — CTAs en las tarjetas de la página de Promociones (JdS6) para subir conversión (desplegado):**
+>
+> Idea de Florencio: las 4 tarjetas de promo eran un **callejón sin salida** (mostraban la promo pero sin ningún botón → el interesado tenía que bajar hasta el CTA del pie). Propuso ponerle acción a cada tarjeta, **diferenciada según el tipo** — buena jugada de conversión. Implementado con **2 botones por tarjeta**:
+> - **Tarjetas genéricas** ("La Portería de JDS", "Si gana México, ganas tú"): **[Contacta con un asesor]** (WhatsApp, primario dorado, mensaje prellenado con el nombre de la promo) + **[Ver modelos y precios]** (secundario, → silo `/jardines-del-sur-6`).
+> - **Tarjetas de modelo** (Capua, Noni): **[Cotizar ahora]** (WhatsApp, primario, mensaje prellenado con el modelo + su beneficio) + **[Ver el modelo]** (secundario, → ficha directa). WhatsApp siempre es el botón primario porque es la conversión real.
+>
+> **Arquitectura (reutilizable):** se agregó campo opcional **`modeloSlug?: string`** al tipo `promos.items` en `dev-content.ts`; cuando una promo lo trae → la tarjeta pasa a "modo modelo" (botones Cotizar/Ver el modelo enlazan a `/[silo]/[modeloSlug]`); si no → "modo genérico" (Contacta/Ver modelos → silo). Slugs reales verificados en `data/inventory.json`: **`departamento-capua`** y **`casa-noni`** (Capua es "Departamento Capua", Noni es "Casa Noni"). En `PromosPage.tsx` el `map` calcula `isModel`, `cardMsg` y `cardWaHref` por tarjeta (mensajes WhatsApp prellenados por promo/modelo, coherente con [[project_whatsapp_prefilled_messages]]). Estilos nuevos en `promos.module.css`: `.promoActions` (columna), `.promoBtn` (dorado, reusa `--gradient-gold`/`--shadow-gold`), `.promoBtnSecondary` (outline navy sobre tarjeta blanca). Build limpio + `firebase deploy`; verificado en vivo en `alttahomescancun.mx/jardines-del-sur-6/promociones` (2 model cards con href correcto + 2 genéricas al silo). **Mantenimiento:** al agregar una promo de modelo nueva, incluir su `modeloSlug` para que salgan los botones directos a ficha.
+>
+> **Nota (patrón ya existente):** teléfono en la página = `529982059044`; la página además ya tenía heroCta + ctaBox al pie (no se tocaron). El diseño "a prueba de vacío" (evergreen + noPromos) sigue intacto.
+
 > **✅ COMPLETADO sesión 35 (2 jul 2026) — Títulos SEO de los 3 silos: limpios, coherentes y sin abreviatura (desplegado):**
 >
 > Florencio quiso posicionar mejor el silo de **Jardines del Sur 6** y notó que el título se veía "mal escrito" — en realidad el problema era la **abreviatura "Deptos"** del título (la descripción estaba bien, sin errores; se le aclaró). Pidió un esquema **coherente** para los 3 silos con el patrón **`[Desarrollo] | [Producto] en Cancún`** (palabra completa, mayúscula correcta, "en Cancún" al final).

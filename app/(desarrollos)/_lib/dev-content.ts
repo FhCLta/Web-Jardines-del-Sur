@@ -54,6 +54,7 @@ export type DevContent = {
     items: Array<{
       titulo?: string; // nombre de la promo, ej. "La Portería de JDS"
       modelo: string; // "Todos los modelos", "Modelo Capua", etc.
+      modeloSlug?: string; // si es promo de un modelo, su slug de ficha (ej. "departamento-capua") → activa botones "Cotizar / Ver el modelo"
       ubicaciones?: string;
       beneficios: string[];
       vigencia: string; // "31 de julio de 2026"
@@ -103,12 +104,14 @@ export const DEVS: Record<DevSlug, DevContent> = {
         },
         {
           modelo: "Modelo Capua",
+          modeloSlug: "departamento-capua",
           ubicaciones: "Jardines del Sur 6 · Ocelote y Antílope",
           beneficios: ["2 minisplits de 12,000 BTU"],
           vigencia: "31 de julio de 2026",
         },
         {
           modelo: "Modelo Noni",
+          modeloSlug: "casa-noni",
           ubicaciones: "Jardines del Sur 6 · Jabalí Mz 30 L14",
           beneficios: ["2 minisplits de 12,000 BTU"],
           vigencia: "31 de julio de 2026",

@@ -100,26 +100,49 @@ export default function PromosPage({ slug }: { slug: DevSlug }) {
             aria-label={`Promociones vigentes de ${dev.name}`}
           >
             <div className={styles.promoGrid}>
-              {promos.items.map((item, i) => (
-                <article key={i} className={styles.promoCard}>
-                  {item.titulo && (
-                    <span className={styles.promoTag}>{item.titulo}</span>
-                  )}
-                  <h2 className={styles.promoModel}>{item.modelo}</h2>
-                  {item.ubicaciones && (
-                    <p className={styles.promoUbic}>{item.ubicaciones}</p>
-                  )}
-                  <ul className={styles.promoBenefits}>
-                    {item.beneficios.map((b, j) => (
-                      <li key={j}>{b}</li>
-                    ))}
-                  </ul>
-                  <div className={styles.promoVigencia}>
-                    <span>Vigencia</span> {item.vigencia}
-                  </div>
-                  <p className={styles.promoRestric}>Aplican restricciones</p>
-                </article>
-              ))}
+              {promos.items.map((item, i) => {
+                const isModel = Boolean(item.modeloSlug);
+                const cardMsg = isModel
+                  ? `Hola, vi la promoción del ${item.modelo} en ${dev.name} (${item.beneficios[0]}) y quiero cotizar precio y disponibilidad.`
+                  : `Hola, vi la promoción "${item.titulo ?? item.modelo}" de ${dev.name} y quiero que un asesor me dé informes.`;
+                const cardWaHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(cardMsg)}`;
+                return (
+                  <article key={i} className={styles.promoCard}>
+                    {item.titulo && (
+                      <span className={styles.promoTag}>{item.titulo}</span>
+                    )}
+                    <h2 className={styles.promoModel}>{item.modelo}</h2>
+                    {item.ubicaciones && (
+                      <p className={styles.promoUbic}>{item.ubicaciones}</p>
+                    )}
+                    <ul className={styles.promoBenefits}>
+                      {item.beneficios.map((b, j) => (
+                        <li key={j}>{b}</li>
+                      ))}
+                    </ul>
+                    <div className={styles.promoVigencia}>
+                      <span>Vigencia</span> {item.vigencia}
+                    </div>
+                    <p className={styles.promoRestric}>Aplican restricciones</p>
+                    <div className={styles.promoActions}>
+                      <a
+                        href={cardWaHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={styles.promoBtn}
+                      >
+                        {isModel ? "Cotizar ahora" : "Contacta con un asesor"}
+                      </a>
+                      <a
+                        href={isModel ? `/${dev.slug}/${item.modeloSlug}` : `/${dev.slug}`}
+                        className={styles.promoBtnSecondary}
+                      >
+                        {isModel ? "Ver el modelo" : "Ver modelos y precios"}
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
             {promos.nota && <p className={styles.nota}>{promos.nota}</p>}
           </section>

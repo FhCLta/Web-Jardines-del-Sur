@@ -203,6 +203,54 @@
   font-style: italic;
 }
 
+.promoActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+}
+
+.promoBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--gradient-gold);
+  color: #1a1204;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.72rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: var(--shadow-gold);
+  transition: transform 0.15s ease;
+}
+
+.promoBtn:hover {
+  transform: translateY(-2px);
+}
+
+.promoBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.72rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid var(--border-soft);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.promoBtnSecondary:hover {
+  background: rgba(26, 54, 93, 0.05);
+  border-color: var(--accent);
+}
+
 .nota {
   margin-top: 1.4rem;
   font-size: 0.82rem;
