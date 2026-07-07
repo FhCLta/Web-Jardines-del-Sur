@@ -96,13 +96,6 @@ export const DEVS: Record<DevSlug, DevContent> = {
           vigencia: "15 de julio de 2026",
         },
         {
-          titulo: "Si gana México, ganas tú",
-          modelo: "Jardines del Sur 6",
-          ubicaciones: "⚽ Todos los modelos",
-          beneficios: ["1 minisplit de 12,000 BTU al apartar"],
-          vigencia: "48 horas después del partido",
-        },
-        {
           modelo: "Modelo Capua",
           modeloSlug: "departamento-capua",
           ubicaciones: "Jardines del Sur 6 · Ocelote y Antílope",

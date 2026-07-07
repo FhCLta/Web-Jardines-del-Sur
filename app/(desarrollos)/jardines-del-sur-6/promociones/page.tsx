@@ -5,7 +5,7 @@ import { DEVS } from "../../_lib/dev-content";
 const SLUG = "jardines-del-sur-6" as const;
 const dev = DEVS[SLUG];
 
-const title = "Promociones en Jardines del Sur 6, Cancún | Altta Homes";
+const title = "Promociones en Jardines del Sur 6 | Altta Homes Cancún";
 const description =
   "Promociones y descuentos vigentes en Jardines del Sur 6, Cancún: minisplits, descuentos y precios especiales en casas y departamentos. Consulta la promoción del mes con un asesor autorizado de Altta Homes por WhatsApp.";
 
