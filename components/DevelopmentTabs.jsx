@@ -55,18 +55,18 @@ export default function DevelopmentTabs({ inventoryData }) {
 
   const DEV_META = {
     "Jardines del Sur 6": {
-      image: "/optimized/dev-tabs/jardines-6.webp",
-      tagline: "Familias y plusvalía",
+      logo: "/logos/jardines-6.png",
+      tagline: "Casas y departamentos",
       short: "Jardines 6",
     },
     "La Rioja 2": {
-      image: "/optimized/dev-tabs/la-rioja-2.webp",
-      tagline: "Exclusividad y confort",
+      logo: "/logos/la-rioja-2.png",
+      tagline: "Casas de lujo",
       short: "La Rioja 2",
     },
     "Lirios Residencial 2": {
-      image: "/optimized/dev-tabs/lirios-2.webp",
-      tagline: "Próximamente",
+      logo: "/logos/lirios-2.png",
+      tagline: "Departamentos",
       short: "Lirios 2",
     },
   };
@@ -98,12 +98,13 @@ export default function DevelopmentTabs({ inventoryData }) {
               className={`${styles.devCard} ${isActive ? styles.devCardActive : ''}`}
               onClick={() => handleTabSelect(dev)}
             >
-              <div
-                className={styles.devCardImage}
-                style={{ backgroundImage: `url('${meta.image || ''}')` }}
-                aria-hidden="true"
+              <img
+                className={styles.devCardLogo}
+                src={meta.logo}
+                alt={dev}
+                loading="lazy"
+                decoding="async"
               />
-              <span className={styles.devCardName}>{dev}</span>
             </button>
           );
         })}
