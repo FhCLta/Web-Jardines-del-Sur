@@ -3,6 +3,19 @@ import styles from "./Hero.module.css";
 import siloStyles from "@/app/(desarrollos)/silo.module.css";
 import HeroBackground from "./HeroBackground";
 
+// Resalta en dorado la frase detailAccent dentro del texto del subtítulo
+function renderDetail(text, accent) {
+  if (!accent || !text.includes(accent)) return text;
+  const [before, after] = text.split(accent);
+  return (
+    <>
+      {before}
+      <strong className={styles.subtitleFast}>{accent}</strong>
+      {after}
+    </>
+  );
+}
+
 export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown, subtitleDetail }) {
   const { hero, name } = dev;
 
@@ -49,7 +62,9 @@ export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown,
           {subtitleBreakdown && (
             <span className={styles.subtitleBreakdown}>{subtitleBreakdown}</span>
           )}
-          <span className={styles.subtitleDetail}>{subtitleDetail ?? hero.subtitle.detail}</span>
+          <span className={styles.subtitleDetail}>
+            {renderDetail(subtitleDetail ?? hero.subtitle.detail, hero.subtitle.detailAccent)}
+          </span>
         </p>
 
         <div className={styles.ctas}>

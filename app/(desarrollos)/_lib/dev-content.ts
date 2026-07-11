@@ -22,7 +22,7 @@ export type DevContent = {
     gradientOnly?: boolean;
     eyebrow: { strong: string; rest: string[] };
     title: { lines: string[]; em: string };
-    subtitle: { bold: string; detail: string };
+    subtitle: { bold: string; detail: string; detailAccent?: string };
   };
   intro: {
     eyebrow: string;
@@ -126,6 +126,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       subtitle: {
         bold: "6 modelos desde $1,853,830 MXN",
         detail: "Modelos, precios e informes en minutos.",
+        detailAccent: "en minutos",
       },
     },
     intro: {
@@ -236,6 +237,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       subtitle: {
         bold: "4 modelos desde $4,049,375 MXN",
         detail: "Recorridos virtuales 360° e informes por WhatsApp.",
+        detailAccent: "por WhatsApp",
       },
     },
     intro: {
@@ -341,6 +343,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       subtitle: {
         bold: "Departamento Cedro Plus desde $2,248,750 MXN",
         detail: "Smart Home Ready · 2 cajones de estacionamiento.",
+        detailAccent: "Smart Home Ready",
       },
     },
     intro: {

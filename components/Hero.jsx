@@ -27,12 +27,25 @@ export default function Hero() {
           <em className={styles.trustTitle}>con el respaldo de Grupo Sadasi</em>
         </h1>
 
+        <nav className={styles.devChips} aria-label="Desarrollos">
+          <a href="/jardines-del-sur-6" className={styles.devChip}>
+            <span className={styles.devChipDot} />
+            Jardines del Sur 6
+          </a>
+          <a href="/la-rioja-2" className={styles.devChip}>
+            <span className={styles.devChipDot} />
+            La Rioja 2
+          </a>
+          <a href="/lirios-residencial-2" className={styles.devChip}>
+            <span className={styles.devChipDot} />
+            Lirios Residencial 2
+          </a>
+        </nav>
+
         <p className={styles.subtitle}>
-          <span className={styles.subtitleDevelopments}>
-            Jardines del Sur 6, La Rioja 2 y Lirios Residencial 2.
-          </span>
           <span className={styles.subtitleDetail}>
-            Modelos, precios e informes en minutos.
+            Modelos, precios e informes{" "}
+            <strong className={styles.subtitleFast}>en minutos</strong>.
           </span>
         </p>
 
