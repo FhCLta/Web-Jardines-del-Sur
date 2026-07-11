@@ -98,6 +98,14 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${montserrat.variable} ${lato.variable} ${playfair.variable}`}>
       <head>
+        {/* Navegador interno de FB/IG (iOS): aplica el Dynamic Type del sistema y el
+            texto se infla; Chrome/Safari lo ignoran. Solo en ese WebView: se desactiva
+            el auto-ajuste y se compensa la inflación medida. No toca el pinch-zoom. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var ua=navigator.userAgent||"";if(!/FBAN|FBAV|FB_IAB|Instagram/i.test(ua))return;var d=document.documentElement;d.classList.add("meta-inapp");var p=document.createElement("div");p.style.cssText="font:-apple-system-body;position:absolute;visibility:hidden";d.appendChild(p);var s=parseFloat(getComputedStyle(p).fontSize);d.removeChild(p);if(s>17.5){d.style.fontSize=(17/s*92).toFixed(1)+"%";}}catch(e){}})();`,
+          }}
+        />
         {/* Google Tag Manager — lazyOnload para no bloquear LCP. Los clicks en wa.me
             se trackean igual porque GTM usa dataLayer con buffer interno. */}
         <Script id="gtm-init" strategy="lazyOnload">

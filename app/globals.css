@@ -36,6 +36,22 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Solo dentro del navegador interno de FB/IG (clase puesta por el script del
+   layout): desactiva por completo el auto-inflado de texto del WebView.
+   Chrome/Safari nunca reciben esta clase. */
+html.meta-inapp,
+html.meta-inapp body {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+/* El WebView de Meta agranda un poco incluso con texto de sistema normal:
+   bajada fina para igualar a Chrome (el script del layout la sustituye con
+   la compensación medida cuando el texto del sistema está agrandado). */
+html.meta-inapp {
+  font-size: 92%;
+}
+
 body {
   background-color: var(--background);
   color: var(--text-primary);
