@@ -317,6 +317,9 @@ export default function Page() {
                 </a>
               </li>
               <li>
+                <a href="/jardines-del-sur-6/promociones">Promociones</a>
+              </li>
+              <li>
                 <a href="/la-rioja-2">La Rioja 2</a>
               </li>
               <li>

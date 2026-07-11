@@ -226,6 +226,7 @@ export default async function Home() {
             <ul>
               <li><a href="#top">Inicio</a></li>
               <li><a href="/jardines-del-sur-6">Jardines del Sur 6</a></li>
+              <li><a href="/jardines-del-sur-6/promociones">Promociones</a></li>
               <li><a href="/la-rioja-2">La Rioja 2</a></li>
               <li><a href="/lirios-residencial-2">Lirios Residencial 2</a></li>
               <li><a href="/jardines-del-sur-7">Jardines del Sur 7 · Próximamente</a></li>

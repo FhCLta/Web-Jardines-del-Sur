@@ -61,7 +61,7 @@ export const POSTS: Post[] = [
       },
       {
         type: "p",
-        text: "El Infonavit (Instituto del Fondo Nacional de la Vivienda para los Trabajadores) otorga créditos hipotecarios a quienes cotizan ante el IMSS. Cada mes tu patrón aporta un porcentaje de tu salario a tu Subcuenta de Vivienda, y con el tiempo acumulas “puntos” que determinan si ya puedes ejercer tu crédito.",
+        text: "El Infonavit (Instituto del Fondo Nacional de la Vivienda para los Trabajadores) otorga créditos hipotecarios a quienes cotizan ante el IMSS. Cada mes tu patrón aporta un porcentaje de tu salario a tu Subcuenta de Vivienda, y con el tiempo alcanzas la precalificación que determina si ya puedes ejercer tu crédito.",
       },
       {
         type: "p",
@@ -71,13 +71,22 @@ export const POSTS: Post[] = [
         type: "ul",
         items: [
           "Estar trabajando formalmente y cotizando ante el IMSS.",
-          "Reunir al menos 1080 puntos Infonavit (el sistema los calcula según tu edad, salario, ahorro y bimestres cotizados).",
+          "Precalificar ante Infonavit. Desde 2026, con el nuevo Modelo T100, la precalificación es directa —“precalificas” o “no precalificas”— y ya no muestra un puntaje (antes se hablaba de reunir 1,080 puntos).",
           "No tener un crédito Infonavit vigente.",
         ],
       },
       {
         type: "p",
-        text: "Puedes consultar tus puntos y tu precalificación en cualquier momento desde “Mi Cuenta Infonavit”, en el portal oficial o la app.",
+        text: "Puedes consultar tu precalificación en cualquier momento desde “Mi Cuenta Infonavit”, en el portal oficial o la app.",
+      },
+      {
+        type: "p",
+        text: "Ojo: en 2026 Infonavit cambió su precalificación (nuevo Modelo T100, el Buró ya no se consulta al inicio y tus datos en Mi Cuenta Infonavit deben estar validados). Si vas a iniciar tu trámite, revisa primero qué cambió.",
+      },
+      {
+        type: "cta",
+        href: "/blog/cambios-infonavit-precalificacion-mci-2026",
+        label: "Leer: cambios de Infonavit 2026 (Modelo T100)",
       },
       {
         type: "h2",
@@ -308,6 +317,275 @@ export const POSTS: Post[] = [
       {
         type: "p",
         text: "Esta información es de carácter general y puede cambiar; el Instituto puede emitir comunicados oficiales. Verifica siempre los detalles vigentes en Mi Cuenta Infonavit o con un asesor.",
+      },
+    ],
+  },
+  {
+    slug: "comprar-casa-con-credito-bancario-en-cancun-2026",
+    metaTitle:
+      "Crédito Bancario para Casa en Cancún 2026: Requisitos y Guía | Altta Homes",
+    title:
+      "Comprar casa en Cancún con crédito bancario en 2026: guía práctica",
+    description:
+      "¿Vas a comprar casa en Cancún con crédito hipotecario bancario? Te explicamos requisitos, enganche, tasas de 2026, cómo se calcula tu mensualidad y qué desarrollos de la Zona Sur puedes financiar con banco.",
+    excerpt:
+      "Requisitos, enganche, tasas 2026, mensualidad y cofinanciamiento: cómo comprar casa en Cancún con crédito hipotecario bancario, paso a paso.",
+    date: "2026-07-11",
+    dateLabel: "11 de julio de 2026",
+    author: "Florencio Hurtado · Asesor inmobiliario",
+    readingMinutes: 6,
+    coverImage: "/larioja2-alberca.webp",
+    coverAlt:
+      "Casa residencial premium con alberca en La Rioja 2, Zona Sur de Cancún, opción con crédito bancario",
+    keywords: [
+      "crédito bancario casa cancún",
+      "crédito hipotecario cancún 2026",
+      "comprar casa con banco en cancún",
+      "hipoteca cancún requisitos",
+      "enganche casa cancún",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "No todos compran casa con Infonavit. Si eres profesionista independiente, tienes ingresos mixtos o buscas una vivienda residencial que supera tu crédito Infonavit, el crédito hipotecario bancario suele ser la mejor vía —y muchas veces la única— para comprar en Cancún. En esta guía te explicamos, sin tecnicismos, cómo funciona un crédito bancario en 2026: requisitos, enganche, tasas y cómo se arma tu mensualidad.",
+      },
+      {
+        type: "p",
+        text: "Nota: las cifras de tasas, plazos y requisitos que verás aquí son referencias generales del mercado en 2026 y cambian según el banco y tu perfil. Confirma siempre las condiciones vigentes directamente con la institución o con un asesor antes de decidir.",
+      },
+      {
+        type: "h2",
+        text: "¿Qué es un crédito hipotecario bancario?",
+      },
+      {
+        type: "p",
+        text: "Es un préstamo que un banco te otorga para comprar una vivienda, usando la propia casa como garantía. Tú aportas un enganche (una parte del valor) y el banco financia el resto, que pagas en mensualidades durante un plazo de entre 5 y 20 años. A diferencia del Infonavit, no necesitas cotizar ante el IMSS: lo que evalúa el banco es tu capacidad de pago y tu historial crediticio.",
+      },
+      {
+        type: "h2",
+        text: "Requisitos generales para un crédito bancario en 2026",
+      },
+      {
+        type: "ul",
+        items: [
+          "Ingresos comprobables: como referencia, muchos bancos piden desde ~$7,500 mensuales para asalariados; para independientes suele pedirse comprobar ingresos de forma anual.",
+          "Antigüedad: por lo general, mínimo 6 meses en tu empleo actual si eres asalariado, o alrededor de 2 años de actividad si eres independiente.",
+          "Buen historial en Buró de Crédito (sin atrasos importantes).",
+          "Enganche disponible: comúnmente a partir del 10% al 20% del valor de la vivienda.",
+          "Edad e identificación vigentes, además de la documentación que pida cada banco.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "¿Cuánto es el enganche y cómo afecta tu tasa?",
+      },
+      {
+        type: "p",
+        text: "El enganche es el dinero que aportas de tu bolsillo al inicio. Como referencia general, ronda del 10% al 20% del valor de la casa. Una regla útil: entre mayor sea tu enganche, menor suele ser tu tasa y tu mensualidad, porque el banco te presta menos y con menos riesgo. Si puedes aportar un poco más de enganche, casi siempre conviene.",
+      },
+      {
+        type: "cta",
+        href: "/la-rioja-2",
+        label: "Ver casas premium en La Rioja 2 (crédito bancario)",
+      },
+      {
+        type: "h2",
+        text: "Tasas de interés en 2026: qué esperar",
+      },
+      {
+        type: "p",
+        text: "En 2026 las tasas hipotecarias fijas de la banca en México se han movido, como referencia, en un rango aproximado del 9.5% al 12% anual, e incluso por debajo del 9.5% según tu perfil, tu enganche y el banco. Son valores aproximados que cambian de una institución a otra. Lo más recomendable es contratar tasa fija: tu mensualidad no cambia durante toda la vida del crédito, aunque suban las tasas del mercado. Compara el CAT (Costo Anual Total) entre bancos, no solo la tasa: el CAT incluye comisiones y seguros y te da la comparación real.",
+      },
+      {
+        type: "h2",
+        text: "¿De cuánto sería tu mensualidad?",
+      },
+      {
+        type: "p",
+        text: "La mensualidad depende del monto financiado, la tasa y el plazo. Una recomendación financiera muy usada: que tu pago mensual no supere el 30% de tus ingresos, para no comprometer el resto de tus gastos. Antes de enamorarte de una casa, calcula tu mensualidad estimada con esa regla; así sabes en qué rango de precio moverte con tranquilidad.",
+      },
+      {
+        type: "h2",
+        text: "Cofinanciamiento: Infonavit + banco",
+      },
+      {
+        type: "p",
+        text: "Si cotizas ante el IMSS pero tu crédito Infonavit no alcanza para la casa que quieres, existe el cofinanciamiento: combinas tu crédito Infonavit con un crédito bancario para ampliar tu poder de compra. Es una de las mejores herramientas para dar el salto a una vivienda de mayor valor sin renunciar a lo que ya tienes acumulado en tu Subcuenta de Vivienda.",
+      },
+      {
+        type: "cta",
+        href: "/blog/comprar-casa-con-infonavit-en-cancun-2026",
+        label: "Leer también: cómo comprar con Infonavit en Cancún",
+      },
+      {
+        type: "h2",
+        text: "Paso a paso para comprar con crédito bancario en Cancún",
+      },
+      {
+        type: "ol",
+        items: [
+          "Revisa tu Buró de Crédito y ordena tu situación (sin atrasos, con capacidad de pago).",
+          "Calcula cuánto puedes destinar a la mensualidad (idealmente hasta el 30% de tu ingreso) y cuánto tienes para el enganche.",
+          "Precalifica con dos o tres bancos y compara el CAT, no solo la tasa.",
+          "Elige el desarrollo y el modelo. En la Zona Sur de Cancún puedes usar crédito bancario en La Rioja 2, en Jardines del Sur 6 y en Lirios Residencial 2 (estos dos también aceptan Infonavit y cofinanciamiento).",
+          "Reúne tu documentación, tramita el avalúo y firma ante notario. Considera los gastos de escrituración, que no están incluidos en el precio de lista.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "¿Qué desarrollos en Cancún puedes comprar con crédito bancario?",
+      },
+      {
+        type: "p",
+        text: "En la Zona Sur de Cancún, el crédito bancario abre la puerta a vivienda residencial de mayor plusvalía:",
+      },
+      {
+        type: "ul",
+        items: [
+          "La Rioja 2 — casas premium con respaldo de Grupo Sadasi; su esquema habitual es crédito bancario o cofinanciamiento.",
+          "Jardines del Sur 6 y Lirios Residencial 2 — además de Infonavit, pueden financiarse con banco o cofinanciamiento, según tu perfil.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "Conclusión",
+      },
+      {
+        type: "p",
+        text: "El crédito bancario te da acceso a casas de mayor valor y no depende de que cotices ante el IMSS: depende de tu capacidad de pago y tu historial. Si quieres, revisamos juntos a qué modelo alcanza tu crédito hoy y comparamos esquemas —banco, Infonavit o cofinanciamiento— sin costo ni compromiso.",
+      },
+      {
+        type: "cta",
+        href: "/whatsapp",
+        label: "Cotiza tu crédito bancario por WhatsApp",
+      },
+      {
+        type: "cta",
+        href: "/preguntas-frecuentes",
+        label: "Ver preguntas frecuentes",
+      },
+    ],
+  },
+  {
+    slug: "plusvalia-zona-sur-cancun-poligono-sur-2026",
+    metaTitle:
+      "Plusvalía en la Zona Sur de Cancún 2026: Tren Maya y Crecimiento | Altta Homes",
+    title:
+      "Plusvalía en la Zona Sur de Cancún: por qué es la zona que más crece en 2026",
+    description:
+      "La Zona Sur es el área de mayor proyección de Cancún: cercanía al aeropuerto y al Tren Maya, la Av. Huayacán y nuevos desarrollos. Te explicamos por qué invertir aquí en 2026 y qué opciones hay.",
+    excerpt:
+      "Por qué la Zona Sur de Cancún es la zona de mayor plusvalía en 2026: Tren Maya, aeropuerto, Av. Huayacán y desarrollos con respaldo de Grupo Sadasi.",
+    date: "2026-07-11",
+    dateLabel: "11 de julio de 2026",
+    author: "Florencio Hurtado · Asesor inmobiliario",
+    readingMinutes: 6,
+    coverImage: "/larioja2/vista-aerea.webp",
+    coverAlt:
+      "Vista aérea de un desarrollo residencial en la Zona Sur de Cancún, zona de mayor plusvalía",
+    keywords: [
+      "plusvalía cancún",
+      "invertir zona sur cancún",
+      "zona sur cancún plusvalía",
+      "invertir en cancún 2026",
+      "tren maya plusvalía cancún",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Cuando compras casa no solo compras un lugar para vivir: compras cómo va a valer ese patrimonio en unos años. En Cancún, la Zona Sur se ha convertido en el corredor de mayor proyección de la ciudad. Aquí te explicamos por qué, con datos del sector, y qué significa para ti si piensas comprar o invertir en 2026.",
+      },
+      {
+        type: "p",
+        text: "Nota: las cifras de plusvalía y rendimiento que se mencionan son estimaciones de reportes del sector inmobiliario y no constituyen una garantía. La plusvalía depende de muchos factores y puede variar. Tómalas como referencia para orientar tu decisión, no como una promesa de rendimiento.",
+      },
+      {
+        type: "h2",
+        text: "¿Qué es la Zona Sur y por qué importa?",
+      },
+      {
+        type: "p",
+        text: "La Zona Sur es el área de crecimiento planificado al sur de Cancún, alrededor de la Av. Huayacán y con acceso rápido al aeropuerto. Es donde hoy se concentra buena parte de la nueva vivienda de la ciudad: desarrollos residenciales, servicios, escuelas y comercio creciendo al mismo tiempo. Distintos reportes del sector la señalan como el área con mayor desarrollo inmobiliario proyectado para los próximos 10 a 15 años.",
+      },
+      {
+        type: "h2",
+        text: "Los tres motores de plusvalía de la Zona Sur",
+      },
+      {
+        type: "h3",
+        text: "1. El Tren Maya",
+      },
+      {
+        type: "p",
+        text: "La operación del Tren Maya cambió la movilidad del sureste. En los corredores con estaciones y conectividad real, el efecto sobre el valor del suelo dejó de ser especulativo: se refleja en la demanda. Cancún es uno de los puntos de mayor afluencia de la ruta, lo que refuerza el atractivo de las zonas bien conectadas como la Sur.",
+      },
+      {
+        type: "h3",
+        text: "2. El aeropuerto y la Av. Huayacán",
+      },
+      {
+        type: "p",
+        text: "La cercanía al Aeropuerto Internacional de Cancún (a unos 10 minutos desde la Zona Sur) y la consolidación de la Av. Huayacán como eje de la zona hacen que llegar y salir sea rápido, tanto para quien vive ahí como para quien renta. La conectividad es uno de los factores que más sostiene la plusvalía a largo plazo.",
+      },
+      {
+        type: "h3",
+        text: "3. Desarrollo urbano y nueva inversión",
+      },
+      {
+        type: "p",
+        text: "La Zona Sur suma constantemente servicios, comercio y proyectos de infraestructura. Según reportes del sector, corredores como la Av. Huayacán y el sur de la ciudad han registrado incrementos de plusvalía relevantes en 2026, con estimaciones que ubican a la zona entre las de mayor crecimiento anual de la ciudad. Más servicios y más demanda tienden a empujar el valor de la vivienda hacia arriba.",
+      },
+      {
+        type: "cta",
+        href: "/jardines-del-sur-6",
+        label: "Ver casas en Jardines del Sur 6 (Zona Sur)",
+      },
+      {
+        type: "h2",
+        text: "¿Comprar para vivir o para invertir?",
+      },
+      {
+        type: "p",
+        text: "En la Zona Sur ambas cosas se cruzan. Si compras para vivir, ganas conectividad, servicios y un patrimonio en una zona en ascenso. Si compras para invertir, el crecimiento de la zona y la demanda de renta —impulsada por turismo, trabajo y el propio Tren Maya— hacen atractivo el potencial de plusvalía y de renta. En ambos casos, comprar en preventa suele dar mejor precio de entrada.",
+      },
+      {
+        type: "h2",
+        text: "Dónde comprar en la Zona Sur",
+      },
+      {
+        type: "p",
+        text: "En la Zona Sur, Altta Homes (Grupo Sadasi) desarrolla varias opciones según tu presupuesto:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Jardines del Sur 6 — casas y departamentos con crédito Infonavit o bancario; excelente relación precio-plusvalía.",
+          "La Rioja 2 — residencial premium con crédito bancario, para quien busca mayor exclusividad.",
+          "Lirios Residencial 2 — departamentos con amenidades y opción de roof garden.",
+        ],
+      },
+      {
+        type: "cta",
+        href: "/la-rioja-2",
+        label: "Ver residencial premium en La Rioja 2",
+      },
+      {
+        type: "h2",
+        text: "Conclusión",
+      },
+      {
+        type: "p",
+        text: "La Zona Sur de Cancún reúne lo que más sostiene la plusvalía: conectividad (Tren Maya y aeropuerto), desarrollo urbano constante y respaldo de desarrolladores sólidos. Si quieres, revisamos juntos qué desarrollo se ajusta a tu presupuesto y a tu objetivo —vivir o invertir—, sin costo ni compromiso.",
+      },
+      {
+        type: "cta",
+        href: "/whatsapp",
+        label: "Habla con un asesor por WhatsApp",
+      },
+      {
+        type: "cta",
+        href: "/preguntas-frecuentes",
+        label: "Ver preguntas frecuentes",
       },
     ],
   },
