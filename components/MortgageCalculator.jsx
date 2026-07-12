@@ -1,0 +1,210 @@
+"use client";
+
+// Calculadora de mensualidad hipotecaria estimada.
+// Fórmula calibrada contra los simuladores reales de la banca (jul 2026):
+// mensualidad base (amortización francesa, idéntica a la de los bancos)
+// + seguros/accesorios con factores reales (~0.6‰ vida sobre el crédito
+// + ~0.2‰ daños sobre el valor). Los gastos iniciales se estiman al 8%
+// del valor (escrituración, impuestos, avalúo — dato real de la plaza).
+
+import React, { useMemo, useState } from "react";
+import styles from "./MortgageCalculator.module.css";
+
+const PHONE_E164 = "529982059044";
+
+const LIFE_INSURANCE_FACTOR = 0.0006; // mensual, sobre el saldo del crédito
+const DAMAGE_INSURANCE_FACTOR = 0.0002; // mensual, sobre el valor de la vivienda
+const CLOSING_COSTS_PCT = 0.08; // gastos iniciales: escrituración, impuestos, avalúo
+const SUGGESTED_PAYMENT_TO_INCOME = 0.4; // mensualidad ≤ 40% del ingreso
+
+const TERMS = [5, 10, 15, 20];
+
+const fmtMXN = (n) =>
+  `$${Math.round(n).toLocaleString("es-MX")}`;
+
+export default function MortgageCalculator({ models, initialModelId = null }) {
+  const [modelId, setModelId] = useState(
+    initialModelId && models.some((m) => m.id === initialModelId)
+      ? initialModelId
+      : models[0]?.id
+  );
+  const [downPct, setDownPct] = useState(10);
+  const [years, setYears] = useState(20);
+  const [rate, setRate] = useState(10.25);
+  const [hasInfonavit, setHasInfonavit] = useState(false);
+
+  const model = models.find((m) => m.id === modelId) || models[0];
+  const price = model?.price || 0;
+
+  const calc = useMemo(() => {
+    const downPayment = price * (downPct / 100);
+    const principal = price - downPayment;
+    const monthlyRate = rate / 100 / 12;
+    const n = years * 12;
+    const base =
+      (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
+    const insurance =
+      principal * LIFE_INSURANCE_FACTOR + price * DAMAGE_INSURANCE_FACTOR;
+    const total = base + insurance;
+    return {
+      downPayment,
+      principal,
+      base,
+      insurance,
+      total,
+      closingCosts: price * CLOSING_COSTS_PCT,
+      suggestedIncome: total / SUGGESTED_PAYMENT_TO_INCOME,
+    };
+  }, [price, downPct, years, rate]);
+
+  const waMessage = `Hola, usé la calculadora del sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev} (precio ${fmtMXN(price)}). Con enganche de ${fmtMXN(calc.downPayment)} (${downPct}%) a ${years} años me estimó ${fmtMXN(calc.total)} al mes.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
+  const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
+
+  return (
+    <div className={styles.calculator}>
+      <div className={styles.controls}>
+        <label className={styles.field}>
+          <span className={styles.fieldLabel}>Modelo</span>
+          <select
+            className={styles.select}
+            value={modelId}
+            onChange={(e) => setModelId(e.target.value)}
+          >
+            {models.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.name} · {m.dev} — {fmtMXN(m.price)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className={styles.field}>
+          <span className={styles.fieldLabel}>
+            Enganche: <strong>{downPct}%</strong>{" "}
+            <span className={styles.fieldValue}>({fmtMXN(calc.downPayment)})</span>
+          </span>
+          <input
+            className={styles.slider}
+            type="range"
+            min="5"
+            max="50"
+            step="1"
+            value={downPct}
+            onChange={(e) => setDownPct(Number(e.target.value))}
+          />
+        </label>
+
+        <div className={styles.field}>
+          <span className={styles.fieldLabel}>Plazo</span>
+          <div className={styles.termButtons} role="group" aria-label="Plazo en años">
+            {TERMS.map((t) => (
+              <button
+                key={t}
+                type="button"
+                className={`${styles.termBtn} ${years === t ? styles.termBtnActive : ""}`}
+                onClick={() => setYears(t)}
+              >
+                {t} años
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <label className={styles.field}>
+          <span className={styles.fieldLabel}>
+            Tasa de referencia: <strong>{rate.toFixed(2)}%</strong> anual fija
+          </span>
+          <input
+            className={styles.slider}
+            type="range"
+            min="9.5"
+            max="12"
+            step="0.05"
+            value={rate}
+            onChange={(e) => setRate(Number(e.target.value))}
+          />
+          <span className={styles.fieldHint}>
+            Rango típico de la banca en 2026. La tasa final depende de tu perfil
+            y de cada institución.
+          </span>
+        </label>
+
+        <div className={styles.field}>
+          <span className={styles.fieldLabel}>¿Cuentas con crédito Infonavit?</span>
+          <div className={styles.termButtons} role="group" aria-label="¿Cuentas con crédito Infonavit?">
+            <button
+              type="button"
+              className={`${styles.termBtn} ${hasInfonavit ? styles.termBtnActive : ""}`}
+              onClick={() => setHasInfonavit(true)}
+            >
+              Sí
+            </button>
+            <button
+              type="button"
+              className={`${styles.termBtn} ${!hasInfonavit ? styles.termBtnActive : ""}`}
+              onClick={() => setHasInfonavit(false)}
+            >
+              No
+            </button>
+          </div>
+        </div>
+
+        {hasInfonavit && (
+          <div className={styles.infonavitNote}>
+            <strong>Buena noticia:</strong> con esquemas como{" "}
+            <strong>Cofinavit</strong> o <strong>Apoyo Infonavit</strong>, tu
+            crédito Infonavit se suma al del banco — necesitas menos efectivo
+            para estrenar y tu capacidad de compra sube. La cuenta exacta
+            depende de tu precalificación: te la hacemos gratis por WhatsApp.
+          </div>
+        )}
+      </div>
+
+      <div className={styles.results}>
+        <p className={styles.resultsEyebrow}>Mensualidad estimada*</p>
+        <p className={styles.resultsTotal}>
+          {fmtMXN(calc.total)}
+          <span className={styles.resultsPerMonth}> /mes</span>
+        </p>
+
+        <ul className={styles.breakdown}>
+          <li>
+            <span>Monto a financiar</span>
+            <strong>{fmtMXN(calc.principal)}</strong>
+          </li>
+          <li>
+            <span>Pago del crédito</span>
+            <strong>{fmtMXN(calc.base)}</strong>
+          </li>
+          <li>
+            <span>Seguros y accesorios aprox.</span>
+            <strong>{fmtMXN(calc.insurance)}</strong>
+          </li>
+          <li className={styles.breakdownDivider} aria-hidden="true" />
+          <li>
+            <span>Presupuesta además para escrituración, impuestos y avalúo (~8%)</span>
+            <strong>{fmtMXN(calc.closingCosts)}</strong>
+          </li>
+          <li>
+            <span>Ingreso familiar sugerido</span>
+            <strong>{fmtMXN(calc.suggestedIncome)}</strong>
+          </li>
+        </ul>
+
+        <a className={`btn btn-primary ${styles.cta}`} href={waHref} target="_blank" rel="noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
+          Recibe tu cotización exacta por WhatsApp
+        </a>
+
+        <p className={styles.disclaimer}>
+          *Cálculo estimado con fines informativos, calibrado con simuladores de
+          la banca (2026). No constituye una oferta de crédito ni preaprobación.
+          La tasa, seguros, comisiones y condiciones finales las determina cada
+          institución según tu perfil. Aplican restricciones.
+        </p>
+      </div>
+    </div>
+  );
+}
