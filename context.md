@@ -1,6 +1,16 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
-> **✅ RESUELTO sesión 38 (11 jul 2026) — Zoom/deformación del WebView de FB/IG COMPENSADO (pendiente desde sesión 33), desplegado y CONFIRMADO por Florencio ("quedó perfecto, casi como en Chrome"):**
+> **✅ CERRADO sesión 39 (12 jul 2026) — Zoom del navegador FB/IG/Messenger RESUELTO DEFINITIVO con compensación AUTOMÁTICA medida (confirmado por Florencio: "está perfecto"):**
+>
+> La solución final REEMPLAZÓ los porcentajes fijos adivinados (95/92/89/85/80, que "no hacían nada" — ver por qué abajo). **Cómo funciona ahora:** script inline en `layout.tsx` → si el UA es de Meta (`FBAN|FBAV|FB_IAB|Instagram`): (1) **mide la inflación real** comparando el ancho de un texto en el DOM vs el mismo texto medido en `canvas` (el zoom de texto del WebView no afecta al canvas) → `ratio`; (2) baja el font-size raíz a `(100/ratio)%` (arregla todo el texto rem) y (3) fija la variable CSS **`--mz` = 1/ratio**, y TODOS los font-size con `vw` del sitio (25 clamps en 8 archivos CSS) multiplican su término vw por `var(--mz, 1)` → arregla título del hero y encabezados grandes. En navegadores normales `--mz` no existe → fallback 1 → **cero cambio** (verificado: h1 = 35.1px idéntico en Chrome antes/después). ⚠️ Al agregar un font-size con vw NUEVO al sitio, incluirle `* var(--mz, 1)`.
+>
+> **Diagnóstico que lo destrabó:** modo **`?debugmeta`** (cajita negra al pie con `meta/ratio/probe/htmlFont/UA`) — en el Pixel 9 de Florencio (FB_IAB Android) dio **ratio=1.300** (el WebView infla el texto 30% por el tamaño de fuente del sistema). Con los % fijos "no se veía cambio" porque lo dominante en pantalla (el título del hero) es vw-based y el font-size raíz no lo alcanza. La cajita solo aparece con `?debugmeta` en la URL (mandarse el link por DM y abrirlo dentro de la app para probar).
+>
+> **También quedó (scoped a `html.meta-inapp`):** `text-size-adjust: none` + anti font-boosting de Android (`max-height: 999999px` en contenedores de texto). **La diferencia de ALTURA restante entre Chrome e IG es NORMAL** (cada navegador come distinta pantalla con su UI y el hero llena el alto visible 100svh) — Florencio conforme, NO perseguirla.
+>
+> **BONUS de la sesión — fix de caché importante:** las páginas HTML se cacheaban 1 HORA en el navegador del visitante (la regla `**/*.html → no-cache` de firebase.json NO aplicaba porque el sitio usa URLs limpias sin .html). Se agregó regla `source: "**" → no-cache` al inicio de headers (los assets conservan su caché largo por sus reglas específicas, verificado). Ahora cualquier cambio (promos, precios) se ve al instante. Todo commiteado y pusheado.
+
+> **↩️ (Superada por la sesión 39) sesión 38 (11 jul 2026) — Zoom/deformación del WebView de FB/IG COMPENSADO (pendiente desde sesión 33), desplegado y CONFIRMADO por Florencio ("quedó perfecto, casi como en Chrome"):**
 >
 > Causa (diagnóstico sesión 33): el navegador interno de Meta en iOS aplica el **Dynamic Type** (tamaño de texto del sistema del iPhone) a las webs; Chrome/Safari lo ignoran → el sitio se veía inflado/deforme SOLO en FB/IG. La solución agresiva (viewport `maximum-scale`) sigue vetada (mata pinch-zoom).
 >
