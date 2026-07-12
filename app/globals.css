@@ -45,12 +45,9 @@ html.meta-inapp body {
   text-size-adjust: none;
 }
 
-/* El WebView de Meta agranda un poco incluso con texto de sistema normal:
-   bajada fina para igualar a Chrome (el script del layout la sustituye con
-   la compensación medida cuando el texto del sistema está agrandado). */
-html.meta-inapp {
-  font-size: 80%;
-}
+/* La bajada del tamaño en el WebView de Meta la calcula el script del layout
+   midiendo la inflación real (texto DOM vs canvas) y se aplica como estilo
+   inline en <html> — no hay porcentaje fijo aquí. */
 
 body {
   background-color: var(--background);
