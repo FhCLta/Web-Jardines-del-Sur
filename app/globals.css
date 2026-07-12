@@ -49,6 +49,23 @@ html.meta-inapp body {
    midiendo la inflación real (texto DOM vs canvas) y se aplica como estilo
    inline en <html> — no hay porcentaje fijo aquí. */
 
+/* Truco clásico contra el "font boosting" de Android/Blink (infla párrafos
+   según heurísticas e ignora text-size-adjust en algunos WebViews): un
+   max-height enorme en los contenedores de texto lo desactiva. Solo Meta. */
+html.meta-inapp h1,
+html.meta-inapp h2,
+html.meta-inapp h3,
+html.meta-inapp h4,
+html.meta-inapp p,
+html.meta-inapp span,
+html.meta-inapp em,
+html.meta-inapp strong,
+html.meta-inapp a,
+html.meta-inapp li,
+html.meta-inapp button {
+  max-height: 999999px;
+}
+
 body {
   background-color: var(--background);
   color: var(--text-primary);
