@@ -49,7 +49,7 @@ html.meta-inapp body {
    bajada fina para igualar a Chrome (el script del layout la sustituye con
    la compensación medida cuando el texto del sistema está agrandado). */
 html.meta-inapp {
-  font-size: 85%;
+  font-size: 80%;
 }
 
 body {
