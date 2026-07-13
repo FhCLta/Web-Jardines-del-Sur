@@ -14,7 +14,7 @@
 // - En DEPARTAMENTOS el precio mostrado es el de la variante más barata
 //   (ver VARIANT_NOTE) — gancho: otros niveles/vistas se cotizan por WhatsApp.
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./MortgageCalculator.module.css";
 
 const PHONE_E164 = "529982059044";
@@ -23,7 +23,7 @@ const LTV_ON_APPRAISAL = 0.9; // el banco presta ~90% sobre el avalúo
 const CLOSING_COSTS_PCT = 0.085; // gastos de escrituración sobre el AVALÚO
 const LIFE_INSURANCE_FACTOR = 0.0006; // mensual, sobre el saldo del crédito
 const DAMAGE_INSURANCE_FACTOR = 0.0002; // mensual, sobre el avalúo
-const SUGGESTED_PAYMENT_TO_INCOME = 0.4; // mensualidad ≤ 40% del ingreso
+const SUGGESTED_PAYMENT_TO_INCOME = 0.5; // regla 50/50: mensualidad ≤ 50% del ingreso
 
 const TERMS = [5, 10, 15, 20];
 
@@ -43,7 +43,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       ? initialModelId
       : models[0]?.id
   );
-  const [extraDownPct, setExtraDownPct] = useState(0);
+  const [cash, setCash] = useState(0);
   const [years, setYears] = useState(20);
   const [rate, setRate] = useState(10.25);
   const [hasInfonavit, setHasInfonavit] = useState(false);
@@ -53,13 +53,23 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
   const appraisal = model?.avaluo || price;
   const variantNote = VARIANT_NOTE[model?.id];
 
+  // Mínimo de efectivo del modelo: lo que el crédito (90% del avalúo)
+  // no alcanza a cubrir de precio + gastos. La aportación no puede bajar
+  // de este piso; al cambiar de modelo se reinicia al mínimo.
+  const closingCosts = appraisal * CLOSING_COSTS_PCT;
+  const creditMax = appraisal * LTV_ON_APPRAISAL;
+  const totalCost = price + closingCosts;
+  const requiredCash = Math.max(0, Math.ceil(totalCost - creditMax));
+  const maxCash = Math.ceil(requiredCash + price * 0.3);
+
+  useEffect(() => {
+    setCash(requiredCash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [modelId]);
+
+  const cashTotal = Math.min(Math.max(cash, requiredCash), maxCash);
+
   const calc = useMemo(() => {
-    const creditMax = appraisal * LTV_ON_APPRAISAL;
-    const closingCosts = appraisal * CLOSING_COSTS_PCT;
-    const totalCost = price + closingCosts;
-    const requiredCash = Math.max(0, totalCost - creditMax);
-    const extraDown = price * (extraDownPct / 100);
-    const cashTotal = requiredCash + extraDown;
     const principal = Math.max(0, totalCost - cashTotal);
     const monthlyRate = rate / 100 / 12;
     const n = years * 12;
@@ -69,12 +79,6 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       principal * LIFE_INSURANCE_FACTOR + appraisal * DAMAGE_INSURANCE_FACTOR;
     const total = base + insurance;
     return {
-      creditMax,
-      closingCosts,
-      totalCost,
-      requiredCash,
-      extraDown,
-      cashTotal,
       principal,
       base,
       insurance,
@@ -82,9 +86,9 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       suggestedIncome: total / SUGGESTED_PAYMENT_TO_INCOME,
       noDownPayment: requiredCash === 0,
     };
-  }, [price, appraisal, extraDownPct, years, rate]);
+  }, [totalCost, cashTotal, appraisal, requiredCash, years, rate]);
 
-  const waMessage = `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${calc.noDownPayment && extraDownPct === 0 ? ", sin enganche (el crédito sobre avalúo cubre precio y gastos)" : ` con ${fmtMXN(calc.cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
+  const waMessage = `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${cashTotal === 0 ? ", sin enganche (el crédito sobre avalúo cubre precio y gastos)" : ` con ${fmtMXN(cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
   return (
@@ -113,22 +117,21 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
 
         <label className={styles.field}>
           <span className={styles.fieldLabel}>
-            Aportación voluntaria (opcional): <strong>{extraDownPct}%</strong>{" "}
-            <span className={styles.fieldValue}>({fmtMXN(calc.extraDown)})</span>
+            Aportación en efectivo: <strong>{fmtMXN(cashTotal)}</strong>
           </span>
           <input
             className={styles.slider}
             type="range"
-            min="0"
-            max="30"
-            step="1"
-            value={extraDownPct}
-            onChange={(e) => setExtraDownPct(Number(e.target.value))}
+            min={requiredCash}
+            max={maxCash}
+            step="5000"
+            value={cashTotal}
+            onChange={(e) => setCash(Number(e.target.value))}
           />
           <span className={styles.fieldHint}>
-            {calc.requiredCash === 0
+            {requiredCash === 0
               ? "Este modelo no la necesita: el crédito sobre avalúo cubre precio y gastos. Si aportas algo, tu mensualidad baja."
-              : `Este modelo requiere un mínimo de ${fmtMXN(calc.requiredCash)} de efectivo; lo que agregues aquí es adicional.`}
+              : `Mínimo para este modelo: ${fmtMXN(requiredCash)} (el crédito cubre el resto). Si aportas más, tu mensualidad baja.`}
           </span>
         </label>
 
@@ -226,7 +229,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           </li>
           <li>
             <span>Gastos de escrituración (~8.5% del avalúo)</span>
-            <strong>{fmtMXN(calc.closingCosts)}</strong>
+            <strong>{fmtMXN(closingCosts)}</strong>
           </li>
           <li>
             <span>Crédito bancario estimado</span>
@@ -235,12 +238,12 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           <li className={styles.breakdownDivider} aria-hidden="true" />
           <li>
             <span>Efectivo para estrenar</span>
-            <strong className={calc.cashTotal === 0 ? styles.zero : undefined}>
-              {calc.cashTotal === 0 ? "$0" : fmtMXN(calc.cashTotal)}
+            <strong className={cashTotal === 0 ? styles.zero : undefined}>
+              {cashTotal === 0 ? "$0" : fmtMXN(cashTotal)}
             </strong>
           </li>
           <li>
-            <span>Ingreso familiar sugerido</span>
+            <span>Ingreso sugerido</span>
             <strong>{fmtMXN(calc.suggestedIncome)}</strong>
           </li>
         </ul>
