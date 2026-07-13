@@ -1,5 +1,15 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **🔁 ACTUALIZACIÓN COTIZADOR (12 jul 2026, noche) — v3 con la LÓGICA REAL del cotizador interno de Florencio (sigue en LOCAL/noindex):**
+>
+> Florencio compartió su cotizador interno (`../Cotizador Automatico Nuevo/` — script.js con catálogo completo) y se calibró contra él. **Lógica v3 implementada:** (1) **precio de lista = AVALÚO; bono = descuento; neto = lo que paga el cliente** (verificado: los precios del inventario del sitio SON los netos de su catálogo); (2) **gastos de escrituración = 8.5% SOBRE EL AVALÚO** (el % más alto de su tabla real — infonavit 7%, fovissste 8%, cofinavit 8.5%, bancario 7.5-7.7%, contado 7.2% — decisión de Florencio: usar el más alto, simple y nunca prometer de menos; las variantes PROMO ya NO aplican); (3) **el crédito (90% del avalúo) cubre PRECIO + GASTOS** → efectivo para estrenar = max(0, neto+gastos−crédito) = **$0 en la mayoría de los modelos** → badge "Estrenas SIN enganche — el crédito cubre precio y gastos"; la aportación es "voluntaria (opcional)" para bajar mensualidad.
+>
+> **Departamentos (decisión de Florencio):** SIN selector de nivel/vista — cada depto usa su **variante más barata** con su avalúo CORRESPONDIENTE + nota "Precio correspondiente al [nivel/vista]… hay más niveles y vistas — cotízalos por WhatsApp" (gancho). **Se corrigió el `inventory.json`** para que precio↔avalúo sean pares consistentes de la MISMA variante: Capua → $1,758,830 / avalúo $2,230,000 (**Nivel 3 · vista estacionamiento** — ⚠️ esto BAJÓ el "desde" público de Capua, antes $1,777,640 del Nivel 2; se propaga a tarjetas/hero del silo/metadata); Cedro Plus JdS6 → $2,247,700 / avalúo $2,760,000 (Nivel 2 · alberca; antes tenía el avalúo del Nivel 3); Cedro Plus Lirios → $2,248,750 / avalúo $2,653,000 (Nivel 2; ídem). El mapa nivel↔etiqueta vive en `VARIANT_NOTE` de `MortgageCalculator.jsx` (actualizar si cambian precios). **Catálogo completo de variantes** (por si se necesita): en el script.js del cotizador interno de Florencio.
+>
+> **Nota Infonavit corregida (dato de Florencio verificado con fuentes):** solo **Cofinavit** suma crédito Infonavit al del banco; en **Apoyo Infonavit** el banco es el único que presta y las aportaciones patronales (5%) amortizan capital (termina años antes; SSV queda de garantía).
+>
+> ⚠️ Lo de abajo es la v1/v2 (histórico) — la lógica vigente es esta v3.
+
 > **🚧 EN PROGRESO sesión 39 (12 jul 2026) — CALCULADORA HIPOTECARIA construida en LOCAL (NO desplegada, en revisión de Florencio):**
 >
 > **Estado:** componente **`components/MortgageCalculator.jsx`** (+`.module.css`) y página **`app/calculadora-hipotecaria/page.tsx`** (+`calculadora.module.css`) ya construidos y commiteados. ⚠️ **NO está en producción a propósito:** la página tiene **`robots: index:false` TEMPORAL**, NO está en el sitemap ni enlazada en footers — si algún deploy de otra cosa la arrastra, no pasa nada (queda huérfana y no indexable). **Probar en local:** `npm run build` → `cd out && python3 -m http.server 8321` → `http://localhost:8321/calculadora-hipotecaria.html`.

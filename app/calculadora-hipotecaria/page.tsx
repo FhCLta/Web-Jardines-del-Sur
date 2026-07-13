@@ -151,19 +151,19 @@ export default function Page() {
               El banco presta sobre el <strong>avalúo bancario</strong> de la
               vivienda, y en la mayoría de nuestros modelos el avalúo es mayor
               que el precio de venta. Eso significa que el crédito puede cubrir
-              el 100% del precio — y tu ahorro se destina solo a los gastos de
-              escrituración. Es una de las razones por las que comprar en estos
-              desarrollos conviene tanto: estrenas con menos efectivo y con
-              plusvalía desde el día uno.
+              el 100% del precio <strong>y además los gastos de
+              escrituración</strong> — estrenas sin enganche y con plusvalía
+              desde el día uno. Es una de las grandes ventajas de comprar en
+              estos desarrollos.
             </p>
 
-            <h2>No olvides los gastos iniciales</h2>
+            <h2>Gastos de escrituración incluidos en el cálculo</h2>
             <p>
-              Además del enganche, comprar vivienda implica gastos de
-              escrituración, impuestos, avalúo y trámites que en la práctica
-              pueden llegar a ser hasta el 8% del valor del inmueble. La
-              calculadora te los muestra desde el inicio para que planees tu
-              compra completa, sin sorpresas.
+              Comprar vivienda implica gastos de escrituración, impuestos,
+              avalúo y trámites que en la práctica llegan a ser alrededor del
+              8.5% del valor de avalúo. Esta cotización ya los incluye — y en
+              la mayoría de nuestros modelos el propio crédito los cubre, para
+              que planees tu compra completa, sin sorpresas.
             </p>
 
             <h2>¿Y si tengo Infonavit?</h2>

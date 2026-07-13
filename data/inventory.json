@@ -5,15 +5,23 @@
       "development": "Jardines del Sur 6",
       "status": "Preventa 2026",
       "nombre_modelo": "Departamento Capua",
-      "precio": 1777640,
-      "valor_avaluo": 2330000,
+      "precio": 1758830,
+      "valor_avaluo": 2230000,
       "precio_variable": true,
       "metros_construccion": 85.34,
       "metros_terreno": null,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2 Baños", "Smart Home Ready", "Doble Filtro"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2 Baños",
+        "Smart Home Ready",
+        "Doble Filtro"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/capua",
       "images": [
         "/jardines/Modelo Capua/1.webp",
@@ -30,15 +38,22 @@
       "status": "Preventa 2026",
       "nombre_modelo": "Departamento Cedro Plus",
       "precio": 2247700,
-      "valor_avaluo": 2920000,
+      "valor_avaluo": 2760000,
       "precio_variable": true,
       "metros_construccion": 104.06,
       "metros_construccion_variable": true,
       "metros_terreno": null,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet, Roof garden N3 · 121.13 m²"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 1 auto, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet, Roof garden N3 · 121.13 m²"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2.5 Baños",
+        "Smart Home Ready"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/cedro-plus",
       "images": [
         "/jardines/Modelo Cedro Plus/1.webp",
@@ -56,13 +71,24 @@
       "nombre_modelo": "Casa Flamboyán",
       "precio": 2225850,
       "valor_avaluo": 2621000,
-      "metros_construccion": 89.00,
-      "metros_terreno": 90.00,
+      "metros_construccion": 89.0,
+      "metros_terreno": 90.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 1 auto, Sala, Comedor, Cocina, Patio posterior, Baño completo, Recámara"},
-        {"nivel": 2, "desc": "Estancia de TV, Recámara principal con baño completo y vestidor, Recámara secundaria con baño completo"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 1 auto, Sala, Comedor, Cocina, Patio posterior, Baño completo, Recámara"
+        },
+        {
+          "nivel": 2,
+          "desc": "Estancia de TV, Recámara principal con baño completo y vestidor, Recámara secundaria con baño completo"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "3 Baños", "Estancia TV", "Vestidor"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "3 Baños",
+        "Estancia TV",
+        "Vestidor"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/flamboyan",
       "images": [
         "/jardines/Modelo Flamboyan/1.webp",
@@ -79,14 +105,29 @@
       "nombre_modelo": "Casa Ceiba",
       "precio": 2602050,
       "valor_avaluo": 3230000,
-      "metros_construccion": 120.00,
-      "metros_terreno": 90.00,
+      "metros_construccion": 120.0,
+      "metros_terreno": 90.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 1 auto, Sala, 1/2 Baño, Comedor, Cocina, Patio posterior"},
-        {"nivel": 2, "desc": "Estancia de T.V., Recámara principal con baño completo y área para closet-vestidor integrado, Recámara secundaria con baño completo"},
-        {"nivel": 3, "desc": "Estancia de T.V., Recámara con baño completo, Roof Garden"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 1 auto, Sala, 1/2 Baño, Comedor, Cocina, Patio posterior"
+        },
+        {
+          "nivel": 2,
+          "desc": "Estancia de T.V., Recámara principal con baño completo y área para closet-vestidor integrado, Recámara secundaria con baño completo"
+        },
+        {
+          "nivel": 3,
+          "desc": "Estancia de T.V., Recámara con baño completo, Roof Garden"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "3 Niveles", "3.5 Baños", "Roof Garden", "Estancia TV"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "3 Niveles",
+        "3.5 Baños",
+        "Roof Garden",
+        "Estancia TV"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/ceiba-2",
       "images": [
         "/jardines/Modelo Ceiba/1.webp",
@@ -106,12 +147,22 @@
       "precio": 2664750,
       "valor_avaluo": 3300000,
       "metros_construccion": 116.04,
-      "metros_terreno": 120.00,
+      "metros_terreno": 120.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 2 autos, Sala, 1/2 Baño, Comedor, Cocina, Patio posterior"},
-        {"nivel": 2, "desc": "Recámara principal con baño completo independiente y área para closet-vestidor integrado, 2 Recámaras secundarias, Baño completo"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 2 autos, Sala, 1/2 Baño, Comedor, Cocina, Patio posterior"
+        },
+        {
+          "nivel": 2,
+          "desc": "Recámara principal con baño completo independiente y área para closet-vestidor integrado, 2 Recámaras secundarias, Baño completo"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2.5 Baños",
+        "Smart Home Ready"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/tabachin",
       "images": [
         "/jardines/Modelo Tabachin/1.webp",
@@ -129,13 +180,24 @@
       "nombre_modelo": "Casa Noni",
       "precio": 3161125,
       "valor_avaluo": 3850000,
-      "metros_construccion": 157.20,
-      "metros_terreno": 120.00,
+      "metros_construccion": 157.2,
+      "metros_terreno": 120.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento 2 autos, Sala, 1/2 Baño, Comedor, Cocina, Patio posterior"},
-        {"nivel": 2, "desc": "Recámara principal con baño completo independiente y área para closet-vestidor integrado, 2 Recámaras secundarias, Baño completo, Sala de T.V."}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 2 autos, Sala, 1/2 Baño, Comedor, Cocina, Patio posterior"
+        },
+        {
+          "nivel": 2,
+          "desc": "Recámara principal con baño completo independiente y área para closet-vestidor integrado, 2 Recámaras secundarias, Baño completo, Sala de T.V."
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Sala TV", "Estacionamiento 2 autos"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2.5 Baños",
+        "Sala TV",
+        "Estacionamiento 2 autos"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni",
       "images": [
         "/jardines/Modelo Noni/1.webp",
@@ -154,13 +216,26 @@
       "nombre_modelo": "Casa Fresno Elite",
       "precio": 4294950,
       "valor_avaluo": 5350000,
-      "metros_construccion": 191.70,
-      "metros_terreno": 150.00,
+      "metros_construccion": 191.7,
+      "metros_terreno": 150.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Recibidor con doble altura, Cocina con área de alacena, Sala-Comedor, Medio baño, Cuarto de lavado, Patio posterior con terraza"},
-        {"nivel": 2, "desc": "Estancia de TV, Baño completo, Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias con área para closet"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento para 2 autos, Recibidor con doble altura, Cocina con área de alacena, Sala-Comedor, Medio baño, Cuarto de lavado, Patio posterior con terraza"
+        },
+        {
+          "nivel": 2,
+          "desc": "Estancia de TV, Baño completo, Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias con área para closet"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Doble altura", "Vestidor", "Estacionamiento 2 autos", "Patio posterior con terraza"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2.5 Baños",
+        "Doble altura",
+        "Vestidor",
+        "Estacionamiento 2 autos",
+        "Patio posterior con terraza"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/fresno-elite",
       "images": [
         "/larioja2/Casa Fresno Elite/1.webp",
@@ -182,13 +257,26 @@
       "nombre_modelo": "Casa Modelo Alamo",
       "precio": 4436025,
       "valor_avaluo": 5820000,
-      "metros_construccion": 200.20,
-      "metros_terreno": 150.00,
+      "metros_construccion": 200.2,
+      "metros_terreno": 150.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Medio baño, Sala, Comedor, Cocina con área de alacena, Cuarto de lavado, Patio posterior con terraza"},
-        {"nivel": 2, "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias con baño privado y closet, Estancia de TV, Terraza"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento para 2 autos, Medio baño, Sala, Comedor, Cocina con área de alacena, Cuarto de lavado, Patio posterior con terraza"
+        },
+        {
+          "nivel": 2,
+          "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias con baño privado y closet, Estancia de TV, Terraza"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Vestidor", "Estacionamiento 2 autos", "Patio posterior", "Terraza superior"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "3.5 Baños",
+        "Vestidor",
+        "Estacionamiento 2 autos",
+        "Patio posterior",
+        "Terraza superior"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/alamo",
       "images": [
         "/larioja2/Casa Modelo Alamo/1.webp",
@@ -212,14 +300,30 @@
       "nombre_modelo": "Casa Noni Elite",
       "precio": 4446997.5,
       "valor_avaluo": 5980000,
-      "metros_construccion": 194.80,
-      "metros_terreno": 150.00,
+      "metros_construccion": 194.8,
+      "metros_terreno": 150.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Recibidor, Medio baño, Sala, Comedor, Cocina integral con barra de granito, Área de alacena bajo escaleras, Cuarto de lavado, Patio posterior"},
-        {"nivel": 2, "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias, Baño completo, Espacio para home office"},
-        {"nivel": 3, "desc": "Sala de TV, Baño completo, Terraza al frente"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento para 2 autos, Recibidor, Medio baño, Sala, Comedor, Cocina integral con barra de granito, Área de alacena bajo escaleras, Cuarto de lavado, Patio posterior"
+        },
+        {
+          "nivel": 2,
+          "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias, Baño completo, Espacio para home office"
+        },
+        {
+          "nivel": 3,
+          "desc": "Sala de TV, Baño completo, Terraza al frente"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "3.5 Baños", "Vestidor", "Home office", "Estacionamiento 2 autos", "Terraza al frente"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "3.5 Baños",
+        "Vestidor",
+        "Home office",
+        "Estacionamiento 2 autos",
+        "Terraza al frente"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni-elite",
       "images": [
         "/larioja2/Casa Noni Elite/1_new.png",
@@ -242,13 +346,25 @@
       "nombre_modelo": "Casa Noni",
       "precio": 4049375,
       "valor_avaluo": 4490000,
-      "metros_construccion": 156.70,
-      "metros_terreno": 120.00,
+      "metros_construccion": 156.7,
+      "metros_terreno": 120.0,
       "levels": [
-        {"nivel": 1, "desc": "Estacionamiento para 2 autos, Recibidor, Medio baño, Sala, Comedor, Cocina integral con barra de granito, Área de alacena bajo escaleras, Cuarto de lavado, Patio posterior"},
-        {"nivel": 2, "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias, Baño completo, Espacio para home office"}
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento para 2 autos, Recibidor, Medio baño, Sala, Comedor, Cocina integral con barra de granito, Área de alacena bajo escaleras, Cuarto de lavado, Patio posterior"
+        },
+        {
+          "nivel": 2,
+          "desc": "Recámara principal con baño privado y área para closet-vestidor, 2 Recámaras secundarias, Baño completo, Espacio para home office"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Vestidor", "Home office", "Estacionamiento 2 autos"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2.5 Baños",
+        "Vestidor",
+        "Home office",
+        "Estacionamiento 2 autos"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni",
       "images": [
         "/larioja2/Casa noni/1.webp",
@@ -266,15 +382,23 @@
       "status": "Preventa 2026",
       "nombre_modelo": "Departamento Cedro Plus",
       "precio": 2248750,
-      "valor_avaluo": 2915000,
+      "valor_avaluo": 2653000,
       "precio_variable": true,
       "metros_construccion": 104.06,
       "metros_construccion_variable": true,
       "metros_terreno": null,
       "levels": [
-        {"nivel": 1, "desc": "Sala, Cocina, Comedor, 1 medio baño, Área de lavado, Habitación principal con área para clóset y baño completo, 2 habitaciones secundarias con clóset y baño compartido, Estacionamiento para 2 autos, Roof garden N3 · 121.13 m²"}
+        {
+          "nivel": 1,
+          "desc": "Sala, Cocina, Comedor, 1 medio baño, Área de lavado, Habitación principal con área para clóset y baño completo, 2 habitaciones secundarias con clóset y baño compartido, Estacionamiento para 2 autos, Roof garden N3 · 121.13 m²"
+        }
       ],
-      "amenidades_key": ["3 Recámaras", "2.5 Baños", "Smart Home Ready", "Estacionamiento 2 autos"],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2.5 Baños",
+        "Smart Home Ready",
+        "Estacionamiento 2 autos"
+      ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/cedro-plus",
       "images": [
         "/lirios/cedro-plus/1.webp",
