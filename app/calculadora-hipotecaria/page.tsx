@@ -60,6 +60,8 @@ type InventoryItem = {
   development: string;
   nombre_modelo: string;
   precio: number;
+  valor_avaluo?: number;
+  precio_variable?: boolean;
   status?: string;
 };
 
@@ -73,6 +75,8 @@ export default function Page() {
       name: p.nombre_modelo,
       dev: p.development,
       price: p.precio,
+      avaluo: p.valor_avaluo,
+      variablePrice: p.precio_variable === true,
     }));
 
   const jsonLd = {
@@ -113,12 +117,13 @@ export default function Page() {
 
       <header className={styles.head}>
         <div className="container">
-          <span className={styles.eyebrow}>Calculadora · Altta Homes Cancún</span>
+          <span className={styles.eyebrow}>Cotización estimada · Altta Homes Cancún</span>
           <h1>¿Cuánto pagarías al mes por tu casa en Cancún?</h1>
           <p>
-            Elige el modelo, ajusta tu enganche, plazo y tasa, y conoce tu
-            mensualidad estimada en segundos. Gratis, sin registro y sin
-            compromiso.
+            Elige el modelo y conoce tu mensualidad estimada en segundos. La
+            mayoría de nuestros modelos aplican para estrenar{" "}
+            <strong>sin enganche</strong> gracias al crédito sobre avalúo.
+            Gratis, sin registro y sin compromiso.
           </p>
         </div>
       </header>
@@ -132,13 +137,24 @@ export default function Page() {
       <section className={styles.content}>
         <div className="container">
           <div className={styles.contentInner}>
-            <h2>¿Cómo funciona esta calculadora?</h2>
+            <h2>¿Cómo funciona esta cotización?</h2>
             <p>
               Usamos la misma fórmula de amortización que emplean los bancos en
               México y la calibramos con simuladores reales de la banca (2026).
               El resultado incluye el pago del crédito más una estimación de
               seguros y accesorios, para que el número que ves se parezca al que
               te dará el banco — no a uno de comercial.
+            </p>
+
+            <h2>¿Cómo es posible estrenar sin enganche?</h2>
+            <p>
+              El banco presta sobre el <strong>avalúo bancario</strong> de la
+              vivienda, y en la mayoría de nuestros modelos el avalúo es mayor
+              que el precio de venta. Eso significa que el crédito puede cubrir
+              el 100% del precio — y tu ahorro se destina solo a los gastos de
+              escrituración. Es una de las razones por las que comprar en estos
+              desarrollos conviene tanto: estrenas con menos efectivo y con
+              plusvalía desde el día uno.
             </p>
 
             <h2>No olvides los gastos iniciales</h2>

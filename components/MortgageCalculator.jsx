@@ -1,17 +1,23 @@
 "use client";
 
-// Calculadora de mensualidad hipotecaria estimada.
-// Fórmula calibrada contra los simuladores reales de la banca (jul 2026):
-// mensualidad base (amortización francesa, idéntica a la de los bancos)
-// + seguros/accesorios con factores reales (~0.6‰ vida sobre el crédito
-// + ~0.2‰ daños sobre el valor). Los gastos iniciales se estiman al 8%
-// del valor (escrituración, impuestos, avalúo — dato real de la plaza).
+// Ejercicio de cotización hipotecaria estimada.
+// Calibrado contra los simuladores reales de la banca (jul 2026):
+// - Amortización francesa (idéntica a la de los bancos, verificada al centavo
+//   contra la tabla de BBVA) + seguros con factores reales (~0.6‰ vida sobre
+//   el crédito + ~0.2‰ daños sobre el valor).
+// - CLAVE de la plaza: el banco presta ~90% SOBRE EL AVALÚO, que en estos
+//   desarrollos es MAYOR al precio de venta → en la mayoría de los modelos
+//   el cliente estrena SIN enganche. El enganche del cotizador es opcional
+//   (solo si el cliente quiere bajar su mensualidad).
+// - Gastos iniciales ~8% del precio (escrituración, impuestos, avalúo — dato
+//   real de la plaza).
 
 import React, { useMemo, useState } from "react";
 import styles from "./MortgageCalculator.module.css";
 
 const PHONE_E164 = "529982059044";
 
+const LTV_ON_APPRAISAL = 0.9; // el banco presta ~90% sobre el avalúo
 const LIFE_INSURANCE_FACTOR = 0.0006; // mensual, sobre el saldo del crédito
 const DAMAGE_INSURANCE_FACTOR = 0.0002; // mensual, sobre el valor de la vivienda
 const CLOSING_COSTS_PCT = 0.08; // gastos iniciales: escrituración, impuestos, avalúo
@@ -19,8 +25,7 @@ const SUGGESTED_PAYMENT_TO_INCOME = 0.4; // mensualidad ≤ 40% del ingreso
 
 const TERMS = [5, 10, 15, 20];
 
-const fmtMXN = (n) =>
-  `$${Math.round(n).toLocaleString("es-MX")}`;
+const fmtMXN = (n) => `$${Math.round(n).toLocaleString("es-MX")}`;
 
 export default function MortgageCalculator({ models, initialModelId = null }) {
   const [modelId, setModelId] = useState(
@@ -28,17 +33,21 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       ? initialModelId
       : models[0]?.id
   );
-  const [downPct, setDownPct] = useState(10);
+  const [extraDownPct, setExtraDownPct] = useState(0);
   const [years, setYears] = useState(20);
   const [rate, setRate] = useState(10.25);
   const [hasInfonavit, setHasInfonavit] = useState(false);
 
   const model = models.find((m) => m.id === modelId) || models[0];
   const price = model?.price || 0;
+  const appraisal = model?.avaluo || price;
 
   const calc = useMemo(() => {
-    const downPayment = price * (downPct / 100);
-    const principal = price - downPayment;
+    const creditMax = appraisal * LTV_ON_APPRAISAL;
+    const requiredDown = Math.max(0, price - creditMax);
+    const extraDown = price * (extraDownPct / 100);
+    const totalDown = requiredDown + extraDown;
+    const principal = Math.max(0, price - totalDown);
     const monthlyRate = rate / 100 / 12;
     const n = years * 12;
     const base =
@@ -46,18 +55,24 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
     const insurance =
       principal * LIFE_INSURANCE_FACTOR + price * DAMAGE_INSURANCE_FACTOR;
     const total = base + insurance;
+    const closingCosts = price * CLOSING_COSTS_PCT;
     return {
-      downPayment,
+      creditMax,
+      requiredDown,
+      extraDown,
+      totalDown,
       principal,
       base,
       insurance,
       total,
-      closingCosts: price * CLOSING_COSTS_PCT,
+      closingCosts,
+      cashToStart: totalDown + closingCosts,
       suggestedIncome: total / SUGGESTED_PAYMENT_TO_INCOME,
+      noDownPayment: requiredDown === 0,
     };
-  }, [price, downPct, years, rate]);
+  }, [price, appraisal, extraDownPct, years, rate]);
 
-  const waMessage = `Hola, usé la calculadora del sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev} (precio ${fmtMXN(price)}). Con enganche de ${fmtMXN(calc.downPayment)} (${downPct}%) a ${years} años me estimó ${fmtMXN(calc.total)} al mes.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
+  const waMessage = `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev} (precio ${fmtMXN(price)}). Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${calc.noDownPayment && extraDownPct === 0 ? ", sin enganche (crédito sobre avalúo)" : ` con enganche de ${fmtMXN(calc.totalDown)}`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
   return (
@@ -76,22 +91,34 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
               </option>
             ))}
           </select>
+          {model?.variablePrice && (
+            <span className={styles.fieldHint}>
+              Precio “desde”. En departamentos el precio final varía según el
+              nivel y la vista (alberca o estacionamiento) — confírmalo en tu
+              cotización por WhatsApp.
+            </span>
+          )}
         </label>
 
         <label className={styles.field}>
           <span className={styles.fieldLabel}>
-            Enganche: <strong>{downPct}%</strong>{" "}
-            <span className={styles.fieldValue}>({fmtMXN(calc.downPayment)})</span>
+            Enganche adicional (opcional): <strong>{extraDownPct}%</strong>{" "}
+            <span className={styles.fieldValue}>({fmtMXN(calc.extraDown)})</span>
           </span>
           <input
             className={styles.slider}
             type="range"
-            min="5"
-            max="50"
+            min="0"
+            max="30"
             step="1"
-            value={downPct}
-            onChange={(e) => setDownPct(Number(e.target.value))}
+            value={extraDownPct}
+            onChange={(e) => setExtraDownPct(Number(e.target.value))}
           />
+          <span className={styles.fieldHint}>
+            {calc.noDownPayment
+              ? "Este modelo no requiere enganche (el crédito sobre avalúo cubre el precio). Si aportas algo, tu mensualidad baja."
+              : `Este modelo requiere un enganche mínimo de ${fmtMXN(calc.requiredDown)}; lo que agregues aquí es adicional.`}
+          </span>
         </label>
 
         <div className={styles.field}>
@@ -153,14 +180,22 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           <div className={styles.infonavitNote}>
             <strong>Buena noticia:</strong> con esquemas como{" "}
             <strong>Cofinavit</strong> o <strong>Apoyo Infonavit</strong>, tu
-            crédito Infonavit se suma al del banco — necesitas menos efectivo
-            para estrenar y tu capacidad de compra sube. La cuenta exacta
-            depende de tu precalificación: te la hacemos gratis por WhatsApp.
+            crédito Infonavit se suma al del banco — necesitas aún menos
+            efectivo para estrenar y tu capacidad de compra sube. La cuenta
+            exacta depende de tu precalificación: te la hacemos gratis por
+            WhatsApp.
           </div>
         )}
       </div>
 
       <div className={styles.results}>
+        {calc.noDownPayment && (
+          <p className={styles.badge}>
+            <span aria-hidden="true">⭐</span> Este modelo aplica para estrenar{" "}
+            <strong>sin enganche</strong>
+          </p>
+        )}
+
         <p className={styles.resultsEyebrow}>Mensualidad estimada*</p>
         <p className={styles.resultsTotal}>
           {fmtMXN(calc.total)}
@@ -169,9 +204,25 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
 
         <ul className={styles.breakdown}>
           <li>
-            <span>Monto a financiar</span>
+            <span>Avalúo bancario del modelo</span>
+            <strong>{fmtMXN(appraisal)}</strong>
+          </li>
+          <li>
+            <span>Crédito bancario estimado (sobre el avalúo)</span>
             <strong>{fmtMXN(calc.principal)}</strong>
           </li>
+          <li>
+            <span>Enganche necesario</span>
+            <strong className={calc.requiredDown === 0 ? styles.zero : undefined}>
+              {calc.requiredDown === 0 ? "$0" : fmtMXN(calc.requiredDown)}
+            </strong>
+          </li>
+          {calc.extraDown > 0 && (
+            <li>
+              <span>Enganche adicional (tu aportación)</span>
+              <strong>{fmtMXN(calc.extraDown)}</strong>
+            </li>
+          )}
           <li>
             <span>Pago del crédito</span>
             <strong>{fmtMXN(calc.base)}</strong>
@@ -182,8 +233,12 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           </li>
           <li className={styles.breakdownDivider} aria-hidden="true" />
           <li>
-            <span>Presupuesta además para escrituración, impuestos y avalúo (~8%)</span>
+            <span>Presupuesta para escrituración, impuestos y avalúo (~8%)</span>
             <strong>{fmtMXN(calc.closingCosts)}</strong>
+          </li>
+          <li>
+            <span>Efectivo total estimado para estrenar</span>
+            <strong>{fmtMXN(calc.cashToStart)}</strong>
           </li>
           <li>
             <span>Ingreso familiar sugerido</span>
@@ -199,10 +254,11 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
         </a>
 
         <p className={styles.disclaimer}>
-          *Cálculo estimado con fines informativos, calibrado con simuladores de
-          la banca (2026). No constituye una oferta de crédito ni preaprobación.
-          La tasa, seguros, comisiones y condiciones finales las determina cada
-          institución según tu perfil. Aplican restricciones.
+          *Ejercicio de cotización estimado con fines informativos, calibrado
+          con simuladores de la banca (2026). No constituye una oferta de
+          crédito ni preaprobación. El crédito sobre avalúo, la tasa, seguros,
+          comisiones y condiciones finales los determina cada institución según
+          tu perfil y el proyecto. Aplican restricciones.
         </p>
       </div>
     </div>

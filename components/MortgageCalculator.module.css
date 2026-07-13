@@ -156,6 +156,32 @@
   flex-direction: column;
 }
 
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  margin: 0 0 0.9rem;
+  padding: 0.45rem 0.9rem;
+  background: var(--gradient-gold);
+  color: var(--primary-900);
+  border-radius: 999px;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  box-shadow: var(--shadow-gold);
+}
+
+.badge strong {
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.zero {
+  color: var(--accent-2) !important;
+  font-weight: 800;
+}
+
 .resultsEyebrow {
   font-family: var(--font-montserrat), sans-serif;
   font-weight: 700;
