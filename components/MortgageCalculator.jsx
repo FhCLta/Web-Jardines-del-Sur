@@ -178,12 +178,12 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
 
         {hasInfonavit && (
           <div className={styles.infonavitNote}>
-            <strong>Buena noticia:</strong> con esquemas como{" "}
-            <strong>Cofinavit</strong> o <strong>Apoyo Infonavit</strong>, tu
-            crédito Infonavit se suma al del banco — necesitas aún menos
-            efectivo para estrenar y tu capacidad de compra sube. La cuenta
-            exacta depende de tu precalificación: te la hacemos gratis por
-            WhatsApp.
+            <strong>Buena noticia:</strong> con <strong>Cofinavit</strong>, tu
+            crédito Infonavit se suma al del banco y tu capacidad de compra
+            sube. Y con <strong>Apoyo Infonavit</strong>, tus aportaciones
+            patronales se van directo a pagar tu crédito bancario — podrías
+            terminarlo años antes. Cuál te conviene depende de tu
+            precalificación: te la revisamos gratis por WhatsApp.
           </div>
         )}
       </div>
