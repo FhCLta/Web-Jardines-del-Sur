@@ -23,6 +23,7 @@ const LTV_ON_APPRAISAL = 0.9; // el banco presta ~90% sobre el avalúo
 const CLOSING_COSTS_PCT = 0.085; // gastos de escrituración sobre el AVALÚO
 const LIFE_INSURANCE_FACTOR = 0.0006; // mensual, sobre el saldo del crédito
 const DAMAGE_INSURANCE_FACTOR = 0.0002; // mensual, sobre el avalúo
+const ADMIN_FEE_FACTOR = 0.0003; // comisión de administración mensual (0.30‰ del crédito, como BBVA)
 const SUGGESTED_PAYMENT_TO_INCOME = 0.5; // regla 50/50: mensualidad ≤ 50% del ingreso
 
 const TERMS = [5, 10, 15, 20];
@@ -76,7 +77,9 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
     const base =
       (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
     const insurance =
-      principal * LIFE_INSURANCE_FACTOR + appraisal * DAMAGE_INSURANCE_FACTOR;
+      principal * LIFE_INSURANCE_FACTOR +
+      appraisal * DAMAGE_INSURANCE_FACTOR +
+      principal * ADMIN_FEE_FACTOR;
     const total = base + insurance;
     return {
       principal,
