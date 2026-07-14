@@ -57,6 +57,20 @@ function ensureFbc() {
   return getCookie("_fbc");
 }
 
+// Modo prueba: visitar el sitio con ?capi_test=TESTxxxx (código de la pestaña
+// "Probar eventos" de Meta) hace que TODA la sesión mande los eventos con ese
+// código → se ven en vivo en la pestaña de pruebas. Los visitantes normales
+// no llevan código y sus eventos van a producción.
+function getTestCode() {
+  try {
+    const qp = new URLSearchParams(window.location.search).get("capi_test");
+    if (qp) sessionStorage.setItem("capi_test", qp);
+    return sessionStorage.getItem("capi_test") || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 function sendEvent(eventName, eventId, fbp, fbc) {
   try {
     const payload = JSON.stringify({
@@ -65,6 +79,7 @@ function sendEvent(eventName, eventId, fbp, fbc) {
       event_source_url: window.location.href,
       fbp,
       fbc,
+      test_event_code: getTestCode(),
     });
     const blob = new Blob([payload], { type: "application/json" });
     if (!(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT, blob))) {
