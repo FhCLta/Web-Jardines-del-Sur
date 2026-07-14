@@ -1,5 +1,11 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **✅ COMPLETADO sesión 40 (14 jul 2026, parte 2) — FASE 2b: PIXEL DE META FUERA DEL NAVEGADOR (velocidad), tracking 100% server-side, verificado:**
+>
+> Continuación inmediata de la CAPI: (1) **`PageView` agregado a la whitelist** de la función y el tracker (`MetaContactTracker.jsx`) ahora manda un beacon de PageView en cada carga de página; (2) el tracker **genera/persiste `_fbp`** (cookie 90 días, mismo formato del Pixel `fb.1.<ms>.<random>`) y **construye `_fbc` del `fbclid`** de los anuncios → calidad de matching sin fbevents.js; (3) **Florencio PAUSÓ la etiqueta "Meta Pixel - Base Code" en GTM** (Pausar, NO eliminada — queda de respaldo) y publicó **v7 - "Pixel a CAPI server-side"**; el resto de etiquetas (AW, GA4, WhatsApp Click, Conversion Linker) intactas. También se le advirtió NO aceptar el banner de "pasarela de etiquetas de Google" (servicio de pago, recomendación-trampa).
+>
+> **Verificado en producción (puppeteer):** `connect.facebook.net/fbevents.js` **ya NO carga** (−~245 KB de JS de terceros); beacon PageView a `/api/meta-capi` dispara en cada carga; cookies `_fbp`/`_fbc` se crean correctamente (probado con `?fbclid=`). El evento **Contact ahora va solo por canal servidor** (el código aún llama a fbq si existiera — inofensivo). **Pendiente Florencio: medir PageSpeed móvil en pagespeed.web.dev** (baseline histórico 84-87; esperado ~90+). ⚠️ Si algún día se REACTIVA el Pixel en GTM, recordar que PageView se duplicaría (el tag viejo no manda event_id) — en ese caso avisar a Claude para ajustar.
+
 > **✅ COMPLETADO sesión 40 (14 jul 2026) — META CAPI FASE 2a EN PRODUCCIÓN (backend Firebase Functions + evento "Contact" dual con deduplicación), verificado end-to-end:**
 >
 > **Prerrequisitos hechos por Florencio guiado:** plan **Blaze** activado (alerta $50 MXN — es alarma, no tope; gasto esperado $0-5/mes) + **token CAPI** generado (vía Dataset Quality API, SOLO dataset Web 2016457592282966; gotcha: Meta exigió registrar correo de empresa en Config. del negocio). Token en `../meta-capi-token.txt` (fuera del repo) e instalado como **secret** `META_CAPI_TOKEN` (Secret Manager, versión 1) — NUNCA en código/GitHub.
