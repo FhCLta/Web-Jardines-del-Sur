@@ -20,7 +20,14 @@ export default function HeroBackground({
 }) {
   const [idx, setIdx] = useState(0);
   const [loadedCount, setLoadedCount] = useState(1);
-  const rotateSlides = !gradientOnly && slides.length > 1;
+  // En MÓVIL el hero es estático: no rotamos ni descargamos los slides
+  // extra (~300 KB de imágenes desktop) — ahorra datos y limpia el LCP.
+  const [isMobile, setIsMobile] = useState(true);
+  const rotateSlides = !gradientOnly && slides.length > 1 && !isMobile;
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+  }, []);
 
   useEffect(() => {
     if (!rotateSlides) return;
