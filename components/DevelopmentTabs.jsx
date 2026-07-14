@@ -55,17 +55,17 @@ export default function DevelopmentTabs({ inventoryData }) {
 
   const DEV_META = {
     "Jardines del Sur 6": {
-      logo: "/logos/jardines-6.png",
+      logo: "/logos/jardines-6.webp",
       tagline: "Casas y departamentos",
       short: "Jardines 6",
     },
     "La Rioja 2": {
-      logo: "/logos/la-rioja-2.png",
+      logo: "/logos/la-rioja-2.webp",
       tagline: "Casas de lujo",
       short: "La Rioja 2",
     },
     "Lirios Residencial 2": {
-      logo: "/logos/lirios-2.png",
+      logo: "/logos/lirios-2.webp",
       tagline: "Departamentos",
       short: "Lirios 2",
     },
