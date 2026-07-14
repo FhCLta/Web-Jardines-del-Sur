@@ -12,18 +12,30 @@ const DEFAULT_SLIDES = [
 
 const DEFAULT_MOBILE_IMAGE = "/optimized/hero/alberca-mobile.webp";
 
+// Carrusel LIGERO para móvil (home): variantes de ~600px (~35-40 KB c/u)
+// que se montan tarde (post-load) para no competir con el LCP.
+// Los silos no pasan mobileSlides → en móvil quedan con hero estático.
+const DEFAULT_MOBILE_SLIDES = [
+  DEFAULT_MOBILE_IMAGE,
+  "/optimized/hero/vista-aerea-mobile.webp",
+  "/optimized/hero/terraza-mobile.webp",
+];
+
 export default function HeroBackground({
   slides = DEFAULT_SLIDES,
   mobileImage = DEFAULT_MOBILE_IMAGE,
+  mobileSlides = null,
   gradientOnly = false,
   animationDuration,
 }) {
   const [idx, setIdx] = useState(0);
   const [loadedCount, setLoadedCount] = useState(1);
-  // En MÓVIL el hero es estático: no rotamos ni descargamos los slides
-  // extra (~300 KB de imágenes desktop) — ahorra datos y limpia el LCP.
   const [isMobile, setIsMobile] = useState(true);
-  const rotateSlides = !gradientOnly && slides.length > 1 && !isMobile;
+
+  const usingDefaults = slides === DEFAULT_SLIDES;
+  const mobileList = mobileSlides || (usingDefaults ? DEFAULT_MOBILE_SLIDES : null);
+  const activeSlides = isMobile ? mobileList || [mobileImage] : slides;
+  const rotateSlides = !gradientOnly && activeSlides.length > 1;
 
   useEffect(() => {
     setIsMobile(window.matchMedia("(max-width: 767px)").matches);
@@ -32,16 +44,16 @@ export default function HeroBackground({
   useEffect(() => {
     if (!rotateSlides) return;
     const t = setInterval(() => {
-      setIdx((i) => (i + 1) % slides.length);
+      setIdx((i) => (i + 1) % activeSlides.length);
     }, 6000);
     return () => clearInterval(t);
-  }, [rotateSlides, slides.length]);
+  }, [rotateSlides, activeSlides.length]);
 
   useEffect(() => {
     if (!rotateSlides) return;
-    const t = setTimeout(() => setLoadedCount(slides.length), 4200);
+    const t = setTimeout(() => setLoadedCount(activeSlides.length), 4200);
     return () => clearTimeout(t);
-  }, [rotateSlides, slides.length]);
+  }, [rotateSlides, activeSlides.length]);
 
   if (gradientOnly || slides.length === 0) {
     return (
@@ -76,7 +88,7 @@ export default function HeroBackground({
         />
       </picture>
 
-      {slides.map((src, i) =>
+      {activeSlides.map((src, i) =>
         i === 0 ? null : i < loadedCount ? (
           <div
             key={src}
