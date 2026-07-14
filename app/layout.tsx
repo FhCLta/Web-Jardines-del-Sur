@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, Lato, Playfair_Display } from "next/font/google";
 import Script from "next/script";
+import MetaContactTracker from "@/components/MetaContactTracker";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -130,6 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         <main>{children}</main>
+        <MetaContactTracker />
       </body>
     </html>
   );
