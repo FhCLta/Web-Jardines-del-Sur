@@ -56,16 +56,22 @@ export default function DevelopmentTabs({ inventoryData }) {
   const DEV_META = {
     "Jardines del Sur 6": {
       logo: "/logos/jardines-6.webp",
+      logoW: 400,
+      logoH: 128,
       tagline: "Casas y departamentos",
       short: "Jardines 6",
     },
     "La Rioja 2": {
       logo: "/logos/la-rioja-2.webp",
+      logoW: 190,
+      logoH: 128,
       tagline: "Casas de lujo",
       short: "La Rioja 2",
     },
     "Lirios Residencial 2": {
       logo: "/logos/lirios-2.webp",
+      logoW: 260,
+      logoH: 128,
       tagline: "Departamentos",
       short: "Lirios 2",
     },
@@ -102,6 +108,8 @@ export default function DevelopmentTabs({ inventoryData }) {
                 className={styles.devCardLogo}
                 src={meta.logo}
                 alt={dev}
+                width={meta.logoW}
+                height={meta.logoH}
                 loading="lazy"
                 decoding="async"
               />
