@@ -1,58 +1,105 @@
 "use client";
 
-// Evento "Contact" de Meta en cada clic a WhatsApp (wa.me), por DOS canales
-// con el MISMO event_id para que Meta deduplique:
-//   1. Navegador: fbq('track','Contact') — si el Pixel de GTM ya cargó.
-//   2. Servidor: sendBeacon a /api/meta-capi (Firebase Function → CAPI).
-// El canal de servidor esquiva bloqueadores de anuncios y las restricciones
-// de iOS; el de navegador aporta mejor matching. Juntos = mejor señal para
-// la optimización de campañas de Meta. No toca el tracking de Google (GTM).
+// Tracking de Meta SIN el script pesado del Pixel (fbevents.js ~245 KB):
+// el navegador solo manda mini-beacons (~1 KB) a /api/meta-capi y la
+// Firebase Function los reenvía a Meta por la Conversions API.
+//
+// - PageView: en cada carga de página (canal servidor únicamente).
+// - Contact: en cada clic a wa.me. Si el Pixel de GTM siguiera presente,
+//   también dispara fbq con el MISMO event_id (Meta deduplica); cuando el
+//   Pixel se pausa en GTM, queda solo el canal servidor.
+// - Matching: genera/persiste _fbp (mismo formato que el Pixel) y construye
+//   _fbc a partir del parámetro fbclid de los anuncios de Meta — así la
+//   calidad de coincidencia se mantiene sin cargar fbevents.js.
 
 import { useEffect } from "react";
 
 const ENDPOINT = "/api/meta-capi";
+const COOKIE_DAYS = 90;
 
 function getCookie(name) {
   const m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
   return m ? decodeURIComponent(m[1]) : undefined;
 }
 
+function setCookie(name, value) {
+  const exp = new Date(Date.now() + COOKIE_DAYS * 864e5).toUTCString();
+  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${exp}; path=/; SameSite=Lax`;
+}
+
+function newEventId() {
+  return (
+    (window.crypto && crypto.randomUUID && crypto.randomUUID()) ||
+    `ev-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
+  );
+}
+
+// _fbp con el mismo formato que crea el Pixel: fb.1.<ms>.<aleatorio>
+function ensureFbp() {
+  let fbp = getCookie("_fbp");
+  if (!fbp) {
+    fbp = `fb.1.${Date.now()}.${Math.floor(Math.random() * 1e10)}`;
+    setCookie("_fbp", fbp);
+  }
+  return fbp;
+}
+
+// _fbc a partir del fbclid que traen los clics de anuncios de Meta
+function ensureFbc() {
+  try {
+    const fbclid = new URLSearchParams(window.location.search).get("fbclid");
+    if (fbclid) {
+      const fbc = `fb.1.${Date.now()}.${fbclid}`;
+      setCookie("_fbc", fbc);
+      return fbc;
+    }
+  } catch {}
+  return getCookie("_fbc");
+}
+
+function sendEvent(eventName, eventId, fbp, fbc) {
+  try {
+    const payload = JSON.stringify({
+      event_name: eventName,
+      event_id: eventId,
+      event_source_url: window.location.href,
+      fbp,
+      fbc,
+    });
+    const blob = new Blob([payload], { type: "application/json" });
+    if (!(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT, blob))) {
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        keepalive: true,
+      }).catch(() => {});
+    }
+  } catch {}
+}
+
 export default function MetaContactTracker() {
   useEffect(() => {
+    const fbp = ensureFbp();
+    const fbc = ensureFbc();
+
+    // PageView por servidor en cada carga de página
+    sendEvent("PageView", newEventId(), fbp, fbc);
+
     const onClick = (e) => {
       const link = e.target && e.target.closest && e.target.closest("a[href]");
       if (!link || !/wa\.me/.test(link.href)) return;
 
-      const eventId =
-        (window.crypto && crypto.randomUUID && crypto.randomUUID()) ||
-        `wa-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      const eventId = newEventId();
 
-      // Canal navegador (si el Pixel de GTM está presente)
+      // Canal navegador solo si el Pixel de GTM sigue cargado (transición)
       try {
         if (typeof window.fbq === "function") {
           window.fbq("track", "Contact", {}, { eventID: eventId });
         }
       } catch {}
 
-      // Canal servidor (CAPI) — sendBeacon sobrevive a la navegación
-      try {
-        const payload = JSON.stringify({
-          event_name: "Contact",
-          event_id: eventId,
-          event_source_url: window.location.href,
-          fbp: getCookie("_fbp"),
-          fbc: getCookie("_fbc"),
-        });
-        const blob = new Blob([payload], { type: "application/json" });
-        if (!(navigator.sendBeacon && navigator.sendBeacon(ENDPOINT, blob))) {
-          fetch(ENDPOINT, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: payload,
-            keepalive: true,
-          }).catch(() => {});
-        }
-      } catch {}
+      sendEvent("Contact", eventId, getCookie("_fbp") || fbp, getCookie("_fbc") || fbc);
     };
 
     document.addEventListener("click", onClick, true);

@@ -16,7 +16,7 @@ const META_CAPI_TOKEN = defineSecret("META_CAPI_TOKEN");
 
 const PIXEL_ID = "2016457592282966";
 const GRAPH_URL = `https://graph.facebook.com/v21.0/${PIXEL_ID}/events`;
-const ALLOWED_EVENTS = new Set(["Contact", "Lead"]);
+const ALLOWED_EVENTS = new Set(["PageView", "Contact", "Lead"]);
 
 exports.metacapi = onRequest(
   {
