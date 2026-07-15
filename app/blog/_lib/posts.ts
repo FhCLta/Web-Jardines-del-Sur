@@ -589,6 +589,137 @@ export const POSTS: Post[] = [
       },
     ],
   },
+  {
+    slug: "comprar-casa-en-cancun-2026-mercado",
+    metaTitle:
+      "¿Conviene Comprar Casa en Cancún en 2026? Datos del Mercado | Altta Homes",
+    title:
+      "¿Conviene comprar casa en Cancún en 2026? Lo que dicen los datos del mercado",
+    description:
+      "El mercado inmobiliario de Cancún crece en 2026 impulsado por compradores mexicanos: plusvalía del 8-12% anual, demanda de renta y esquemas para estrenar sin enganche. Te explicamos qué significa para ti.",
+    excerpt:
+      "Los compradores mexicanos regresaron al mercado de Cancún: crecimiento, plusvalía del 8-12% anual y esquemas para estrenar sin enganche. Qué significa si estás pensando en comprar.",
+    date: "2026-07-15",
+    dateLabel: "15 de julio de 2026",
+    author: "Florencio Hurtado · Asesor inmobiliario",
+    readingMinutes: 6,
+    coverImage: "/optimized/hero/terraza.webp",
+    coverAlt:
+      "Áreas verdes y casa club de un desarrollo residencial en la Zona Sur de Cancún",
+    keywords: [
+      "comprar casa en cancún 2026",
+      "invertir en cancún 2026",
+      "mercado inmobiliario cancún",
+      "plusvalía cancún 2026",
+      "casas en cancún para mexicanos",
+    ],
+    body: [
+      {
+        type: "p",
+        text: "Si estás pensando en comprar casa o departamento en Cancún, 2026 trae una noticia que cambia el panorama: el mercado ya no lo dominan los compradores extranjeros. Los reportes del sector muestran que los compradores mexicanos ganaron terreno este año — familias que buscan patrimonio, segunda vivienda o una propiedad que genere renta. Aquí te explicamos qué está pasando y, sobre todo, qué significa para ti.",
+      },
+      {
+        type: "p",
+        text: "Nota: las cifras que verás son estimaciones publicadas por el sector inmobiliario y pueden variar; no constituyen una garantía de rendimiento. Úsalas como referencia para orientar tu decisión.",
+      },
+      {
+        type: "h2",
+        text: "El mercado de Cancún en 2026, en números",
+      },
+      {
+        type: "ul",
+        items: [
+          "El sector inmobiliario de la ciudad creció alrededor del 3% en el primer semestre, impulsado por la compra de vivienda y el fortalecimiento de la infraestructura.",
+          "La plusvalía se mantiene entre el 8% y el 12% anual según la zona — muy por encima de la mayoría de las ciudades del país.",
+          "El precio promedio ronda los $30,000 MXN por m² en la ciudad, y supera los $42,000 en la Zona Hotelera.",
+          "La demanda de renta (vacacional y de largo plazo) sigue al alza, alimentada por el turismo y el empleo de la región.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "La tendencia clave: los compradores mexicanos regresaron",
+      },
+      {
+        type: "p",
+        text: "Durante años, la narrativa fue que en Cancún solo compraban extranjeros frente al mar. Eso cambió: hoy el mercado nacional tiene una participación cada vez mayor, con familias mexicanas comprando su primera casa, su casa de descanso o una propiedad para rentar. ¿La razón? Cancún combina algo que pocas ciudades ofrecen: economía en crecimiento, turismo todo el año, conectividad (aeropuerto internacional y Tren Maya) y opciones de vivienda accesible con crédito.",
+      },
+      {
+        type: "h2",
+        text: "¿Dónde conviene entrar? La puerta inteligente es la Zona Sur",
+      },
+      {
+        type: "p",
+        text: "Con la Zona Hotelera arriba de $42,000 por m², el comprador nacional inteligente está mirando hacia la Zona Sur de Cancún: desarrollos nuevos con casa club, alberca y seguridad, a 10 minutos del aeropuerto, con precios de entrada desde $1.7M. Es la combinación que explica la plusvalía de la zona: precio accesible hoy + crecimiento urbano constante.",
+      },
+      {
+        type: "cta",
+        href: "/jardines-del-sur-6",
+        label: "Ver casas y departamentos en Jardines del Sur 6",
+      },
+      {
+        type: "h2",
+        text: "El dato que pocos conocen: puedes estrenar sin enganche",
+      },
+      {
+        type: "p",
+        text: "En varios desarrollos de la Zona Sur, el valor de avalúo bancario de la vivienda es mayor que su precio de venta. Como el banco presta sobre el avalúo, en muchos casos el crédito alcanza para cubrir el precio completo e incluso los gastos de escrituración — es decir, estrenas sin enganche. Es uno de los esquemas que más familias mexicanas está aprovechando este año, y pocas veces se publica: pregúntanos y te decimos exactamente qué modelos aplican.",
+      },
+      {
+        type: "cta",
+        href: "/whatsapp",
+        label: "Pregunta por el esquema sin enganche por WhatsApp",
+      },
+      {
+        type: "h2",
+        text: "¿Y si es para rentar?",
+      },
+      {
+        type: "p",
+        text: "La demanda de renta en Cancún viene de dos frentes: el turismo (renta vacacional) y los miles de trabajadores que llegan cada año a la ciudad (renta de largo plazo). Una casa o departamento en un desarrollo con amenidades y seguridad se renta bien en ambos mercados, lo que convierte a la Zona Sur en una opción atractiva también para el inversionista que busca flujo mensual además de plusvalía.",
+      },
+      {
+        type: "h2",
+        text: "Cómo empezar (sin enredarte)",
+      },
+      {
+        type: "ol",
+        items: [
+          "Define tu objetivo: vivir, descansar o rentar — de eso depende el modelo ideal.",
+          "Revisa tu crédito: bancario (el más flexible), Infonavit o cofinanciamiento. Tenemos guías de ambos.",
+          "Compara desarrollos y modelos con precios reales — no promesas.",
+          "Pide tu cotización exacta con un asesor autorizado: esquema, mensualidad y qué necesitas para arrancar.",
+        ],
+      },
+      {
+        type: "cta",
+        href: "/blog/comprar-casa-con-credito-bancario-en-cancun-2026",
+        label: "Guía: crédito bancario en Cancún",
+      },
+      {
+        type: "cta",
+        href: "/blog/comprar-casa-con-infonavit-en-cancun-2026",
+        label: "Guía: comprar con Infonavit en Cancún",
+      },
+      {
+        type: "h2",
+        text: "Conclusión",
+      },
+      {
+        type: "p",
+        text: "Los datos de 2026 apuntan en una dirección: Cancún sigue creciendo, los compradores mexicanos están aprovechando el momento, y la Zona Sur ofrece el mejor punto de entrada. Si quieres saber qué modelo se ajusta a tu presupuesto y a tu objetivo — vivir, descansar o invertir — lo revisamos juntos sin costo ni compromiso.",
+      },
+      {
+        type: "cta",
+        href: "/whatsapp",
+        label: "Habla con un asesor autorizado por WhatsApp",
+      },
+      {
+        type: "cta",
+        href: "/preguntas-frecuentes",
+        label: "Ver preguntas frecuentes",
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string): Post | undefined {
