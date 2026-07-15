@@ -1,5 +1,11 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **⏳ PENDIENTE Google Ads (apuntado 15 jul 2026) — SESIÓN DE "EXPRIMIDO" del presupuesto (campaña "Limitada por el presupuesto"):**
+>
+> Contexto: la campaña `Cancún - Search - Casas y Deptos - v1` aparece "LIMITADA POR EL PRESUPUESTO" (presupuesto actual **$150/día** — Florencio NO puede/quiere pagar más, y no hace falta: CPA ~$92, optimización 94.1%, la campaña está sana; solo hay más demanda que presupuesto). **NO tocar:** botón "Solucionar el problema" (= subir presupuesto) ni "Programar llamada con experto de Google" (vendedor que empuja amplia/PMax — vetado).
+>
+> **Plan de la sesión (Florencio baja el reporte de términos de búsqueda y lo hacemos juntos):** (1) revisar/ajustar el **horario de anuncios** a horario real de respuesta (~8:00-21:00) para no gastar de madrugada; (2) **poda de términos**: negativar fugas nuevas del reporte (última fuga conocida: "inmobiliarias", pendiente desde sesión 28); (3) **pausar keywords tibias** (CPA alto) para que los $150 fluyan a las MVPs (`jardines del sur 6`, `residencial jardines del sur`, etc.); (4) de paso revisar los stats del recurso de mensaje WhatsApp y si ya conviene comparar contra la línea base CPA $92.11 (pendiente desde ~12 jul).
+
 > **✅ COMPLETADO sesión 41 (15 jul 2026) — Blog artículo 5 (tema trending) + recompresión slides móviles + Soro descartado:**
 >
 > (1) **Artículo nuevo publicado e indexación solicitada:** `comprar-casa-en-cancun-2026-mercado` — "¿Conviene comprar casa en Cancún en 2026?" basado en tendencias REALES investigadas (regreso del comprador MEXICANO, crecimiento ~3% 1S, plusvalía 8-12%, $30k/m² vs $42k Zona Hotelera — como estimaciones con disclaimer). **Estrena públicamente el gancho "sin enganche por avalúo"** (sección propia + CTA a WhatsApp) — precalienta al público para el cotizador. Cross-links a las guías de bancario/Infonavit. Ya son **5 artículos**; siguiente sugerido del backlog: comparativa JdS6 vs La Rioja 2 vs Lirios por presupuesto. Ritmo acordado: 1-2 artículos/mes en sesiones.
