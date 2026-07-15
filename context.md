@@ -1,5 +1,13 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **✅ COMPLETADO sesión 41 (15 jul 2026) — Blog artículo 5 (tema trending) + recompresión slides móviles + Soro descartado:**
+>
+> (1) **Artículo nuevo publicado e indexación solicitada:** `comprar-casa-en-cancun-2026-mercado` — "¿Conviene comprar casa en Cancún en 2026?" basado en tendencias REALES investigadas (regreso del comprador MEXICANO, crecimiento ~3% 1S, plusvalía 8-12%, $30k/m² vs $42k Zona Hotelera — como estimaciones con disclaimer). **Estrena públicamente el gancho "sin enganche por avalúo"** (sección propia + CTA a WhatsApp) — precalienta al público para el cotizador. Cross-links a las guías de bancario/Infonavit. Ya son **5 artículos**; siguiente sugerido del backlog: comparativa JdS6 vs La Rioja 2 vs Lirios por presupuesto. Ritmo acordado: 1-2 artículos/mes en sesiones.
+>
+> (2) **Slides del carrusel móvil recomprimidos** (q62/effort6): 31.5 y 34.7 KB, calidad verificada visualmente antes de deploy. Performance CERRADO: PSI móvil se asienta ~69-93 según corrida (varianza de laboratorio); lo que manda es la barra de **usuarios reales (CrUX) que ya salió VERDE "Superada"** (LCP 1.1s, INP 82ms, CLS 0.05 reales).
+>
+> (3) **Soro (trysoro.com) DESCARTADO con análisis:** IA de contenido SEO automático ($39/mes, 30+ artículos/mes) — no conecta con Next.js propio, volumen genérico ≠ SEO local de marca, riesgo de castigo por "contenido escalado" en dominio joven, y riesgo legal (publicaría errores de créditos violando las reglas del proyecto). El valor real (constancia de contenido) se cubre con el ritmo mensual propio. **Regla reforzada: las recomendaciones/banners de GTM también se descartan** (tarjeta "Mida las compras en Google Ads" = para e-commerce, no aplica; banner "pasarela de etiquetas" = servicio de pago, cerrado).
+
 > **✅ COMPLETADO sesión 40 (14 jul 2026, parte 2) — FASE 2b: PIXEL DE META FUERA DEL NAVEGADOR (velocidad), tracking 100% server-side, verificado:**
 >
 > Continuación inmediata de la CAPI: (1) **`PageView` agregado a la whitelist** de la función y el tracker (`MetaContactTracker.jsx`) ahora manda un beacon de PageView en cada carga de página; (2) el tracker **genera/persiste `_fbp`** (cookie 90 días, mismo formato del Pixel `fb.1.<ms>.<random>`) y **construye `_fbc` del `fbclid`** de los anuncios → calidad de matching sin fbevents.js; (3) **Florencio PAUSÓ la etiqueta "Meta Pixel - Base Code" en GTM** (Pausar, NO eliminada — queda de respaldo) y publicó **v7 - "Pixel a CAPI server-side"**; el resto de etiquetas (AW, GA4, WhatsApp Click, Conversion Linker) intactas. También se le advirtió NO aceptar el banner de "pasarela de etiquetas de Google" (servicio de pago, recomendación-trampa).
