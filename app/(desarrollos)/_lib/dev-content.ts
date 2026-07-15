@@ -84,18 +84,6 @@ export const DEVS: Record<DevSlug, DevContent> = {
       nota: "Los minisplits no incluyen instalación. Promociones sujetas a disponibilidad y vigencia; consulta requisitos con tu asesor.",
       items: [
         {
-          titulo: "La Portería de JDS",
-          modelo: "Jardines del Sur 6",
-          ubicaciones: "⚽ Todos los modelos · elige tu zona y anota tu descuento",
-          beneficios: [
-            "Zona 1: 1 minisplit de 12,000 BTU",
-            "Zona 2: $5,000 de descuento",
-            "Zona 3: $8,000 de descuento",
-            "Zona 4: $10,000 de descuento",
-          ],
-          vigencia: "15 de julio de 2026",
-        },
-        {
           modelo: "Modelo Capua",
           modeloSlug: "departamento-capua",
           ubicaciones: "Jardines del Sur 6 · Ocelote y Antílope",
