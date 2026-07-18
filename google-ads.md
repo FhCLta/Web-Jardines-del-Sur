@@ -1454,3 +1454,69 @@ Florencio dejará correr ~15 días con el WhatsApp Click activo y volverá a pas
 2. ¿El recurso de WhatsApp pasó a "Apto" y está recibiendo clics? (ver stats del recurso de mensaje)
 3. ¿El logo óvalo ya está "Apto" + verificación de marca avanzó? (si sí, quitar definitivamente el "AH").
 4. ¿Conviene reactivar/reestructurar La Rioja premium?
+
+---
+
+## ✂️ SESIÓN 31 — PODA DE "EXPRIMIDO" ejecutada + anuncios afinados + sitelinks premium (18 jul 2026)
+
+Sesión guiada paso a paso con Florencio, con los reportes REALES descargados: **Informe de palabras clave (18 jun–17 jul)** e **Informe de términos de búsqueda (12 may–17 jul)**. Campaña sigue "Limitada por el presupuesto" ($150/día — se queda así a propósito).
+
+### A) Comparación vs línea base (cerrado el pendiente del ~12 jul)
+| Métrica | Línea base (12 may–1 jun) | Post-WhatsApp (18 jun–17 jul) |
+|---|---|---|
+| Conv/día | 0.52 | **1.0** (×2 🎉) |
+| CPA | $92.11 | **$122.31** (+33% ⚠️) |
+| CPC | $8.73 | $7.35 ✅ |
+| CTR | 8.84% | 9.29% ✅ |
+
+Diagnóstico: la campaña compra MÁS conversiones pero más caras en el margen (presupuesto $150 + Max. conversiones). La poda redirige el gasto muerto → CPA esperado ~$95-105 en 2-3 semanas. Período completo (12 may–17 jul): 67 conv, CPA $100.38, $6,725.79 gastados.
+
+### B) Poda ejecutada (por Florencio, guiado)
+1. **PAUSADAS — sadasi (todas):** `[sadasi cancun]` ($211, 0 conv, QS 4), `"grupo sadasi cancun"`, `[grupo sadasi cancun]`, `"casas sadasi cancun"`, `[casas sadasi cancun]`, `[sadasi cancun casas]`, `"sadasi cancun"`, y variantes sadasi+jardines. ~$240 en 2 meses con CERO conversiones — quien busca sadasi busca a la desarrolladora, no a un asesor (QS 4 por "Exp. página de destino inferior", lógico).
+2. **PAUSADAS — JdS3:** `[jardines del sur 3 cancun]` + `"jardines del sur 3 cancun"` (QS 3 = lastre de la cuenta, $69, 0 conv en la ventana).
+3. **⚠️ `[altta homes cancun]` SE QUEDA ACTIVA (decisión clave documentada):** CPA $435 ($609 gastados, 1.4 conv, CPC $14 por subasta competida). Se propuso pausarla PERO Florencio reveló el dato decisivo: **existe un competidor CLON con dominio `altahomescancun.com` (una sola T) que sale PRIMERO en la búsqueda de marca** → la keyword es defensa de marca justificada (~$600/mes de "seguro"). **REGLA: nunca volver a proponer pausarla sin este contexto.** Pendiente: investigar el clon (posible reclamo de marca ante Google Ads).
+4. **QUITADAS (no pausadas) — duplicados de La Rioja en Grupo de anuncios 1:** `[la rioja 2 cancun]`, `"la rioja 2"`, `[la rioja 2 altta homes]` ($100.21, 0 conv). Fin de la canibalización: toda búsqueda rioja la atiende el grupo **La Rioja 2 - Premium** (que SÍ convierte: $95-146 CPA). Nota: el grupo Premium está ACTIVO y con tráfico (la pausa de la sesión 30 quedó atrás).
+5. **COSECHADAS 3 exactas nuevas → Grupo de anuncios 1** (en revisión): `[oficina de ventas jardines del sur 6]` (⭐ 3 clics, 2 conv, **CPA $0.47** — la mejor búsqueda del reporte), `[jardines del sur casas en venta]` (1 conv, $10.08), `[jardines del sur 6 venta]` (CTR 25%).
+6. **~54 NEGATIVAS nuevas a NIVEL CAMPAÑA** (frase): inmobiliaria/s, renta/s, traspaso/s, administracion, opiniones, terrenos, casas baratas + competidores del reporte (sense, javer, ruba, vassari, ciudad natura, ciudad maderas, turquesa, balam, sacbe, punta ikal, izamal, monteverde, malibu, altai, jade, kusamil, calakmul, urbana park, lausana, santa fe, sarabi, terraquia, palmaris, villas del mar, villas del rey, las torres, wolf towers, gran via, ciudadela, isla diamante, real oasis, vista real, arbolada, cumbres, prado norte, urbi, cadu, trovit, kalam, lakin, sayab, mayakoba, los santos, las americas, aqua). **NO se negativó a propósito:** "cerca de mi", "fotos", "infonavit", JdS 1/2/4/5 (etapas viejas convierten a veces: JdS2 $27, JdS3 $66). La basura en concordancia amplia del reporte era HISTÓRICA (mayo); las keywords actuales son 100% exacta/frase.
+
+### C) RSA del Grupo de anuncios 1 — afinado
+- Desc 1: "Polígono Sur" → "**Zona Sur**" → `Casas y departamentos en la Zona Sur de Cancún. Cotiza tu modelo por WhatsApp.` (los anuncios por fin cumplen la regla Zona Sur).
+- Desc 4: → `Crédito bancario e Infonavit. Asesor autorizado de Altta Homes, listo para atenderte.` (bancario PRIMERO).
+- Título "Informes por whatsapp" → "Informes por **WhatsApp**".
+- FUERA (débiles/duplicados): "Hablar con un Asesor", "Depas en Jardines del Sur", "La Rioja 2". ENTRARON: `Precios desde $1.75M MXN` (verificado: Capua $1,758,830 — ⚠️ actualizar si cambia), `Recorrido Virtual 360°`, `Agenda tu Visita Hoy`.
+- **Las menciones de La Rioja en el TEXTO del anuncio general SE QUEDAN** (título "Casas en La Rioja 2", desc de los 3 devs): el anuncio general es el del PORTAFOLIO; lo que se separa son las keywords. Aclarado con Florencio.
+
+### D) RSA de La Rioja 2 - Premium — afinado
+- Desc 1: → `Residencial premium en la Zona Sur de Cancún. Casas con amplios espacios y alta plusvalía.`
+- "Residencial de Lujo" → `Casas desde $4.04M MXN` (**precalifica** al lead premium — quien no anda en ese rango no clica y no gasta).
+- "Casa Club y Amenidades" → `Casa Club, Alberca y Pádel` (amenidades reales de la ficha del sitio).
+- Título 15 (hueco) → `Hasta 3 Niveles con Terraza`. Reservas: `A 10 Min del Aeropuerto` / `Vive en La Rioja 2 Cancún` / `3 Recámaras · Hasta 3.5 Baños`.
+
+### E) ⭐ Sitelinks a NIVEL DE GRUPO para La Rioja 2 - Premium (pendiente desde sesión 30 — HECHO)
+Tapan los de campaña (que mezclaban "Depa Capua $1.7M" bajo el anuncio de lujo = diferencia de clase por sitelinks). URLs verificadas 200 en producción; precios del inventario real:
+| Texto | URL | Desc 1 | Desc 2 |
+|---|---|---|---|
+| La Rioja 2 Cancún | /la-rioja-2 | Casas de lujo en la Zona Sur | Modelos, precios y recorrido 360° |
+| Casa Fresno Elite | /la-rioja-2/casa-fresno-elite | Desde $4.29M · 3 recámaras | Recorrido virtual 360° |
+| Casa Modelo Álamo | /la-rioja-2/casa-modelo-alamo | Desde $4.43M · 3 recámaras | Agenda tu visita hoy |
+| Casa Noni Elite | /la-rioja-2/casa-noni-elite | Desde $4.44M · 3 recámaras | Cotiza por WhatsApp |
+| Casa Noni La Rioja 2 | /la-rioja-2/casa-noni | Desde $4.04M · 3 recámaras | Cotiza con un asesor |
+| Informes por WhatsApp | /whatsapp | Respuesta inmediata de un asesor | Sin costo · Cotiza hoy mismo |
+
+("Casa Noni La Rioja 2" lleva texto distinto porque a nivel campaña ya existe "Casa Noni" de JdS6 — Google no permite duplicados. ⚠️ Si suben precios en el sitio, actualizar estas descripciones.)
+
+### Trampas esquivadas en la sesión (para el archivo)
+- Banner "Cambiar las palabras clave a la concordancia amplia" al agregar las cosechadas → NO (amplia vetada).
+- "Ideas para palabras clave" sugiriendo `sadasi cancún` (recién pausada) y "Agregar todas las ideas" → NO.
+- Panel "Ask Advisor" (IA de Google) ofreciendo generar títulos → NO (mezcla desarrollos, lección sesión 28).
+- Aviso amarillo "agrega lead de llamada telefónica a los objetivos de conversión" (en ambos grupos) → NO (ensuciaría la optimización del WhatsApp Click).
+- Nivel de optimización bajó a 92.5% por nuestros propios cambios → se ignora (no es calificación).
+
+### ⏳ Pendientes para la próxima sesión
+1. **Horario:** bajar la vista **Programación de anuncios → Día y hora** (conversiones por hora) ANTES de recortar madrugada — recordar: leads de 11pm-12am SÍ cierran ventas.
+2. **Stats del recurso de mensaje WhatsApp** (Recursos → Mensaje): clics, estado, ¿aporta?
+3. Migrar las ~85 negativas viejas de nivel Grupo → nivel Campaña (5-10 min).
+4. Investigar `altahomescancun.com` (el clon de marca) — ¿reclamo ante Google?
+5. Re-revisar en ~2 semanas: CPA (esperado ~$95-105), aprobación de keywords cosechadas + sitelinks + anuncios ("Pendiente" → "Apto").
+6. Crédito $7,000: verificar progreso ~23 jul (vence 30 jul).
+7. Mini-formulario de leads (sitio): se estrena con la calculadora — detalles en context.md sesión 42.
