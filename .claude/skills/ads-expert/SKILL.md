@@ -31,7 +31,7 @@ Rol: asesor senior de performance marketing de Florencio (asesor inmobiliario in
 
 ## REGLAS DURAS — Meta Ads
 1. **NUNCA**: reglas de valor, "más destinos" (Messenger/IG — todo vive en WhatsApp), programación por horario comercial, catálogo Advantage+, pasarela/CAPI-vía-GTM de pago.
-2. **Retoques visuales de Advantage+ = OFF** (deforma renders y puede mochar los precios de la imagen).
+2. **Retoques visuales de Advantage+**: decisión de Florencio (19 jul 2026) = **ON** — los revisa A DIARIO y verificó que solo rellenan los espacios en Historias sin tocar precios ni deformar. Regla vigente: pueden quedar ON, pero REVISAR la vista previa con CADA creativo nuevo (cada imagen se adapta distinto); si algún día mochan un precio, apagar.
 3. Audiencia AMPLIA + **precio visible en el creativo** (el precio es el segmentador). Categoría especial: Vivienda.
 4. Seguimiento de eventos del sitio web = ON con el dataset (atribución), aunque el destino sea WhatsApp.
 5. **Era Andromeda (algoritmo 2026)**: el creativo pesa ~56% del rendimiento → renovar creativos cada 4-6 semanas; UNA campaña concentrada > varias fragmentadas; aprendizaje tarda 7-14 días — NO tocar campañas en aprendizaje; juzgar a 21 días; los reportes se ven 20-40% peores por atribución nueva (no es caída real).
