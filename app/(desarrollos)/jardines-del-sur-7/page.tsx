@@ -4,6 +4,8 @@ import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
 import ContactNavBtn from "@/components/ContactNavBtn";
+import ObraGallery from "@/components/ObraGallery";
+import MapEmbedCard from "@/components/MapEmbedCard";
 import pageStyles from "@/app/page.module.css";
 import styles from "./proximamente.module.css";
 import { SITE_URL } from "@/lib/site";
@@ -13,6 +15,86 @@ const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/jardines-del-sur-7`;
 
+/* ===== Perfil de Google Business de Jardines del Sur 7 =====
+   Perfil propio del desarrollo, distinto al de la oficina de JdS6.
+   Dirección, coordenadas y place id leídos del propio perfil (jul 2026):
+   no se inventa nada aquí — si el perfil cambia, actualizar estas constantes. */
+const JDS7_PLACE_NAME = "Jardines del Sur 7 | Altta Homes";
+const JDS7_MAPS_URL = "https://maps.app.goo.gl/gNUPBCHn2StkA6hB9";
+const JDS7_MAPS_PLACE_URL =
+  "https://www.google.com/maps/place/Jardines+del+Sur+7+%7C+Altta+Homes/@21.0835955,-86.8914348,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2d985cecc7db:0x39666beb394ecc4c!8m2!3d21.0835955!4d-86.8914348!16s%2Fg%2F11ntdw094n";
+const JDS7_STREET = "Josefa Ortiz de Domínguez";
+const JDS7_POSTAL = "77500";
+const JDS7_ADDRESS = `${JDS7_STREET}, ${JDS7_POSTAL} Cancún, Q.R.`;
+const JDS7_GEO = { lat: 21.0835955, lng: -86.8914348 };
+/* El embed debe buscar por NOMBRE (q) y centrarse con las coordenadas (ll).
+   Con `q=<lat,lng>` Google pinta un pin sin ficha y al tocarlo responde
+   "Error al cargar la información del lugar"; así resuelve el perfil real. */
+const JDS7_MAPS_EMBED = `https://maps.google.com/maps?q=${encodeURIComponent(
+  JDS7_PLACE_NAME
+)}&ll=${JDS7_GEO.lat},${JDS7_GEO.lng}&z=16&hl=es&output=embed`;
+
+/* ===== Avance de obra — fotos tomadas en sitio ===== */
+const OBRA_FECHA = "23 de julio de 2026";
+const OBRA_FECHA_ISO = "2026-07-23";
+const OBRA_DIR = "/jds7/obra";
+
+/* Criterio fijado por Florencio: NINGUNA foto con personas.
+   Al revisarlas en grande salieron trabajadores en azoteas y en cabinas de
+   maquinaria que no se notaban en miniatura — verificar siempre a tamaño
+   completo antes de publicar fotos nuevas de obra. */
+const OBRA_PHOTOS = [
+  {
+    slug: "obra-01-calle-casas",
+    caption: "Manzana en obra sobre la vialidad interior",
+    alt: "Fila de casas en construcción sobre una calle de Jardines del Sur 7, Cancún, en julio de 2026",
+  },
+  {
+    slug: "obra-10-fila-townhouses",
+    caption: "Estructura terminada",
+    alt: "Casas de dos niveles en obra negra en Jardines del Sur 7, nueva etapa de Altta Homes en Cancún",
+  },
+  {
+    slug: "obra-03-casa-dos-niveles",
+    caption: "Vivienda con material en sitio",
+    alt: "Casa de dos niveles en construcción con material de obra en Jardines del Sur 7, Cancún",
+  },
+  {
+    slug: "obra-04-avenida-interior",
+    caption: "Vialidades ya trazadas",
+    alt: "Vialidad interior trazada entre casas en construcción en Jardines del Sur 7, Cancún",
+  },
+  {
+    slug: "obra-11-bloque-en-sitio",
+    caption: "Bloque listo en obra",
+    alt: "Tarimas de bloque apiladas junto a las viviendas en construcción de Jardines del Sur 7, Cancún",
+  },
+  {
+    slug: "obra-12-frente-manzana",
+    caption: "Frente completo de una manzana",
+    alt: "Frente completo de una manzana de casas en obra en Jardines del Sur 7, Zona Sur de Cancún",
+  },
+  {
+    slug: "obra-13-vialidad-principal",
+    caption: "Calles amplias del residencial",
+    alt: "Calle amplia del residencial Jardines del Sur 7 con las manzanas en construcción al fondo, Cancún",
+  },
+  {
+    slug: "obra-09-material",
+    caption: "Llegada de material",
+    alt: "Maquinaria descargando bloques de construcción en Jardines del Sur 7, Cancún",
+  },
+  {
+    slug: "obra-08-urbanizacion",
+    caption: "Urbanización en proceso",
+    alt: "Trabajos de urbanización en Jardines del Sur 7 con viviendas ya entregadas de Jardines del Sur al fondo",
+  },
+].map((p) => ({
+  ...p,
+  src: `${OBRA_DIR}/${p.slug}.webp`,
+  full: `${OBRA_DIR}/${p.slug}-full.webp`,
+}));
+
 const WA_MESSAGE =
   "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.";
 const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(WA_MESSAGE)}`;
@@ -20,7 +102,7 @@ const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(WA_MESSAGE
 const metaTitle =
   "Jardines del Sur 7 Cancún | Próxima Apertura a la Venta";
 const metaDescription =
-  "Jardines del Sur 7, la nueva etapa del residencial más exitoso de la Zona Sur de Cancún. Próxima apertura a la venta. Chatea con un asesor autorizado de Altta Homes y sé de los primeros en conocer modelos, precios y fechas.";
+  "Jardines del Sur 7, la nueva etapa del residencial más exitoso de la Zona Sur de Cancún. Mira las fotos reales del avance de obra y su ubicación. Chatea con un asesor autorizado de Altta Homes y sé de los primeros en conocer modelos, precios y fechas.";
 
 export const metadata: Metadata = {
   title: { absolute: metaTitle },
@@ -100,15 +182,53 @@ const jsonLd = {
       "@type": "Residence",
       "@id": `${PAGE_URL}#residence`,
       name: "Jardines del Sur 7",
+      alternateName: JDS7_PLACE_NAME,
       description:
         "Nueva etapa del residencial Jardines del Sur en la Zona Sur de Cancún, desarrollada por Altta Homes con el respaldo de Grupo Sadasi. Actualmente en obra; preventa por anunciar.",
       url: PAGE_URL,
       address: {
         "@type": "PostalAddress",
+        streetAddress: JDS7_STREET,
         addressLocality: "Cancún",
         addressRegion: "Quintana Roo",
+        postalCode: JDS7_POSTAL,
         addressCountry: "MX",
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: JDS7_GEO.lat,
+        longitude: JDS7_GEO.lng,
+      },
+      telephone: `+${PHONE_E164}`,
+      hasMap: JDS7_MAPS_PLACE_URL,
+      sameAs: [JDS7_MAPS_PLACE_URL, JDS7_MAPS_URL],
+      image: OBRA_PHOTOS.map((p) => `${SITE_URL}${p.full}`),
+    },
+    {
+      "@type": "ImageGallery",
+      "@id": `${PAGE_URL}#avance-obra`,
+      name: `Avance de obra de Jardines del Sur 7 · ${OBRA_FECHA}`,
+      description: `Fotografías del avance de construcción de Jardines del Sur 7 en Cancún, tomadas en sitio el ${OBRA_FECHA}.`,
+      url: `${PAGE_URL}#avance-de-obra`,
+      isPartOf: { "@id": `${PAGE_URL}#webpage` },
+      about: { "@id": `${PAGE_URL}#residence` },
+      image: OBRA_PHOTOS.map((p) => ({
+        "@type": "ImageObject",
+        contentUrl: `${SITE_URL}${p.full}`,
+        thumbnailUrl: `${SITE_URL}${p.src}`,
+        caption: p.caption,
+        description: p.alt,
+        datePublished: OBRA_FECHA_ISO,
+        contentLocation: {
+          "@type": "Place",
+          name: "Jardines del Sur 7, Cancún",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: JDS7_GEO.lat,
+            longitude: JDS7_GEO.lng,
+          },
+        },
+      })),
     },
   ],
 };
@@ -171,7 +291,10 @@ export default function Page() {
             </a>
           </div>
           <p className={styles.illustrative}>
-            Imagen ilustrativa de un desarrollo Altta Homes by Grupo Sadasi.
+            Imagen ilustrativa de un desarrollo Altta Homes by Grupo Sadasi.{" "}
+            <a href="#avance-de-obra" className={styles.illustrativeLink}>
+              Ver fotos reales de la obra ↓
+            </a>
           </p>
         </div>
       </section>
@@ -201,6 +324,41 @@ export default function Page() {
               <em>50 años · 430,000 viviendas</em>
             </li>
           </ul>
+        </div>
+      </section>
+
+      {/* ===== AVANCE DE OBRA ===== */}
+      <section id="avance-de-obra" className={styles.obra}>
+        <div className="container">
+          <div className={styles.obraHead}>
+            <div>
+              <span className={styles.eyebrow2}>Así va la construcción</span>
+              <h2>Avance de obra de Jardines del Sur 7</h2>
+              <p className={styles.obraIntro}>
+                Fotos tomadas en sitio por tu asesor el{" "}
+                <strong>{OBRA_FECHA}</strong>. Las casas ya están levantadas y
+                las vialidades trazadas: esto no es un render, es el avance real
+                del desarrollo.
+              </p>
+            </div>
+            <a
+              href={waHref}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.obraCta}
+            >
+              ¿Quieres ver la obra en persona?
+              <strong>Agenda tu visita por WhatsApp</strong>
+            </a>
+          </div>
+
+          <ObraGallery photos={OBRA_PHOTOS} label="Avance de obra de Jardines del Sur 7" />
+
+          <p className={styles.obraNote}>
+            Fotografías del avance de construcción al {OBRA_FECHA}. La obra
+            continúa: modelos, precios y fechas de preventa se anunciarán
+            próximamente.
+          </p>
         </div>
       </section>
 
@@ -240,6 +398,79 @@ export default function Page() {
             <span className={styles.aboutNote}>
               Respuesta directa con un asesor · Sin costo
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== UBICACIÓN ===== */}
+      <section id="ubicacion" className={styles.ubicacion}>
+        <div className="container">
+          <span className={styles.eyebrow2}>Dónde está</span>
+          <h2>Ubicación de Jardines del Sur 7</h2>
+
+          <div className={styles.ubicacionGrid}>
+            <MapEmbedCard
+              embedSrc={JDS7_MAPS_EMBED}
+              title="Mapa de Jardines del Sur 7, Cancún"
+            />
+
+            <div className={styles.ubicacionInfo}>
+              <p className={styles.ubicacionLead}>
+                Jardines del Sur 7 continúa el residencial en la{" "}
+                <strong>Zona Sur de Cancún</strong>, la de mayor proyección de
+                la ciudad, junto a las etapas ya entregadas de Jardines del Sur.
+              </p>
+
+              <ul className={styles.ubicacionList}>
+                <li>
+                  <span aria-hidden="true">📍</span>
+                  <div>
+                    <strong>{JDS7_STREET}</strong>
+                    {JDS7_POSTAL} Cancún, Q.R.
+                  </div>
+                </li>
+                <li>
+                  <span aria-hidden="true">✈️</span>
+                  <div>
+                    <strong>A 10 minutos del aeropuerto</strong>
+                    Conexión directa por la Zona Sur
+                  </div>
+                </li>
+                <li>
+                  <span aria-hidden="true">🛣️</span>
+                  <div>
+                    <strong>Sobre el corredor de Av. Huayacán</strong>
+                    Escuelas, comercio y servicios consolidados
+                  </div>
+                </li>
+                <li>
+                  <span aria-hidden="true">🏘️</span>
+                  <div>
+                    <strong>Junto a Jardines del Sur 6</strong>
+                    La oficina de ventas ya opera en la zona
+                  </div>
+                </li>
+              </ul>
+
+              <div className={styles.ubicacionBtns}>
+                <a
+                  href={JDS7_MAPS_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-primary"
+                >
+                  Cómo llegar
+                </a>
+                <a
+                  href={JDS7_MAPS_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.ubicacionLink}
+                >
+                  Ver el perfil en Google →
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
