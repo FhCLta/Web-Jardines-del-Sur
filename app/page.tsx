@@ -120,6 +120,11 @@ export default async function Home() {
         '@id': `${siteUrl}/#website`,
         url: siteUrl,
         name: 'Altta Homes Cancún',
+        // Google lee `name` + `alternateName` del nodo WebSite para decidir el
+        // "Site Name" que muestra sobre el resultado (hoy sale la URL cruda
+        // porque el dominio .mx es nuevo y aún no consolida la marca). Se
+        // declaran las variantes con y sin acento y la forma corta.
+        alternateName: ['Altta Homes', 'Altta Homes Cancun', 'AlttaHomes'],
         inLanguage: 'es-MX',
         publisher: {
           '@id': `${siteUrl}/#business`,
@@ -231,6 +236,7 @@ export default async function Home() {
               <li><a href="/lirios-residencial-2">Lirios Residencial 2</a></li>
               <li><a href="/jardines-del-sur-7">Jardines del Sur 7 · Próximamente</a></li>
               <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
+              <li><a href="/calculadora-hipotecaria">Calculadora</a></li>
               <li><a href="/blog">Blog</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
               <li><ContactNavBtn /></li>

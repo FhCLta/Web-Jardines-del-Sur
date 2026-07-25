@@ -17,6 +17,12 @@
     gap: 2rem;
     padding: 2rem;
   }
+
+  /* En escritorio no existe el zoom de iOS: el selector vuelve a la escala
+     del diseño. En móvil se queda en 1rem (16px) — ver .select. */
+  .select {
+    font-size: 0.85rem;
+  }
 }
 
 /* ===== Controles ===== */
@@ -56,19 +62,136 @@
 
 .select {
   width: 100%;
+  max-width: 100%;
   padding: 0.7rem 0.85rem;
   border: 1.5px solid rgba(26, 54, 93, 0.25);
   border-radius: 0.6rem;
   font-family: var(--font-montserrat), sans-serif;
   font-weight: 600;
-  font-size: 0.85rem;
+  /* 16px EXACTOS en móvil: por debajo de 16px iOS hace zoom automático al
+     tocar el campo y deja la página descuadrada. En escritorio baja a 0.85rem
+     para respetar la escala del diseño (ver media query de abajo). */
+  font-size: 1rem;
   color: var(--primary);
   background: #fff;
+}
+
+.select optgroup {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.select option {
+  font-weight: 600;
+  color: var(--primary);
 }
 
 .select:focus {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
+}
+
+/* ===== Modo "otra propiedad" (valores manuales) ===== */
+.manualBox {
+  border: 1.5px dashed rgba(26, 54, 93, 0.28);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: rgba(26, 54, 93, 0.035);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.manualGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 520px) {
+  .manualGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.manualField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.manualInputWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1.5px solid rgba(26, 54, 93, 0.25);
+  border-radius: 0.6rem;
+  background: #fff;
+  padding: 0 0.7rem;
+}
+
+.manualInputWrap:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.manualPrefix {
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.manualInput {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 0.7rem 0;
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 600;
+  /* 16px en móvil por la misma razón que .select: por debajo, iOS hace zoom
+     al enfocar el campo. */
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+/* El placeholder tiene que verse INCONFUNDIBLEMENTE distinto de un valor
+   capturado: en peso normal y gris claro. Con el mismo peso que el texto real
+   se leía como un monto ya escrito y el cliente creía haber capturado el
+   avalúo cuando el campo seguía vacío. */
+.manualInput::placeholder {
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(26, 54, 93, 0.38);
+}
+
+@media (min-width: 860px) {
+  .manualInput {
+    font-size: 0.85rem;
+  }
+}
+
+.manualNote {
+  margin: 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.manualNote a {
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+/* Aviso en el panel de resultados mientras no hay precio capturado. */
+.awaitingInput {
+  margin: 0;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* Sliders */
@@ -232,6 +355,22 @@
   color: #fff;
   font-family: var(--font-montserrat), sans-serif;
   white-space: nowrap;
+}
+
+/* Etiqueta en dos renglones: el concepto arriba y una aclaración corta abajo
+   ("Su valor comercial", "90% del valor avalúo"). Explica cada número donde
+   el cliente lo está leyendo, sin mandarlo a buscar la letra chica. */
+.breakdownLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.breakdownSub {
+  font-style: normal;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .breakdownDivider {

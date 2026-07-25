@@ -36,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${SITE_URL}/calculadora-hipotecaria`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
       url: `${SITE_URL}/preguntas-frecuentes`,
       lastModified,
       changeFrequency: 'monthly' as const,

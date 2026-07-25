@@ -24,8 +24,13 @@ const JDS7_MAPS_URL = "https://maps.app.goo.gl/gNUPBCHn2StkA6hB9";
 const JDS7_MAPS_PLACE_URL =
   "https://www.google.com/maps/place/Jardines+del+Sur+7+%7C+Altta+Homes/@21.0835955,-86.8914348,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2d985cecc7db:0x39666beb394ecc4c!8m2!3d21.0835955!4d-86.8914348!16s%2Fg%2F11ntdw094n";
 const JDS7_STREET = "Josefa Ortiz de Domínguez";
+/* ⚠️ NO cambiar a 77536. El CP oficial del fraccionamiento Jardines del Sur es
+   77536, pero Google Business RECHAZA esa dirección ("dirección no encontrada"):
+   la calle es nueva y aún no está en su base con ese CP. El perfil quedó en
+   77500 y la web debe COINCIDIR con el perfil — la consistencia de NAP pesa más
+   en SEO local que el CP exacto, y quien posiciona el pin son las coordenadas.
+   Reintentar 77536 en ambos lados cuando Google reconozca la calle (jul 2026). */
 const JDS7_POSTAL = "77500";
-const JDS7_ADDRESS = `${JDS7_STREET}, ${JDS7_POSTAL} Cancún, Q.R.`;
 const JDS7_GEO = { lat: 21.0835955, lng: -86.8914348 };
 /* El embed debe buscar por NOMBRE (q) y centrarse con las coordenadas (ll).
    Con `q=<lat,lng>` Google pinta un pin sin ficha y al tocarlo responde
@@ -335,10 +340,9 @@ export default function Page() {
               <span className={styles.eyebrow2}>Así va la construcción</span>
               <h2>Avance de obra de Jardines del Sur 7</h2>
               <p className={styles.obraIntro}>
-                Fotos tomadas en sitio por tu asesor el{" "}
-                <strong>{OBRA_FECHA}</strong>. Las casas ya están levantadas y
-                las vialidades trazadas: esto no es un render, es el avance real
-                del desarrollo.
+                Fotos tomadas el <strong>{OBRA_FECHA}</strong>. Las casas ya
+                están levantadas y las vialidades trazadas: esto no es un
+                render, es el avance real del desarrollo.
               </p>
             </div>
             <a
@@ -347,8 +351,8 @@ export default function Page() {
               rel="noreferrer"
               className={styles.obraCta}
             >
-              ¿Quieres ver la obra en persona?
-              <strong>Agenda tu visita por WhatsApp</strong>
+              ¿Quieres ser de los primeros?
+              <strong>Pregunta por WhatsApp</strong>
             </a>
           </div>
 
@@ -562,6 +566,9 @@ export default function Page() {
                 <a href="/jardines-del-sur-7">
                   Jardines del Sur 7 · Próximamente
                 </a>
+              </li>
+              <li>
+                <a href="/calculadora-hipotecaria">Calculadora</a>
               </li>
               <li>
                 <ContactNavBtn />

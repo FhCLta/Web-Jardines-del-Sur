@@ -46,12 +46,15 @@ export const metadata: Metadata = {
     title: metaTitle,
     description: metaDescription,
   },
-  // ⚠️ TEMPORAL: noindex mientras la calculadora está en revisión (falta
-  // incorporar la lógica de avalúo > precio → "sin enganche"). Al aprobarla:
-  // cambiar a index:true + agregarla al sitemap + enlaces en footers.
   robots: {
-    index: false,
+    index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -146,15 +149,52 @@ export default function Page() {
               te dará el banco — no a uno de comercial.
             </p>
 
+            <h2>Valor de avalúo y precio neto: cuál es cuál</h2>
+            <p>
+              Son dos palabras que se usan todo el tiempo en una compra y casi
+              nadie explica. Con estas dos entiendes cualquier cotización:
+            </p>
+            <ul className={styles.glossary}>
+              <li>
+                <strong>Valor de avalúo</strong> — lo que la vivienda vale en el
+                mercado según un perito autorizado. Es un documento formal, y{" "}
+                <strong>
+                  es sobre este valor que el banco decide cuánto te presta
+                </strong>
+                . También se le dice valor comercial. No es lo que tú pagas.
+              </li>
+              <li>
+                <strong>Precio neto</strong> — lo que realmente te cuesta la
+                propiedad: el precio que te da el desarrollador, ya con
+                descuentos y promociones aplicados, o el que acuerdas en una
+                compra directa. Es el número que importa para tu bolsillo y el
+                que usamos en esta calculadora.
+              </li>
+            </ul>
+            <p>
+              ¿No conoces el avalúo de la vivienda que te interesa?{" "}
+              <strong>Es normal</strong>: el avalúo formal lo realiza un perito
+              durante el trámite del crédito. Para nuestros modelos, esta
+              calculadora usa valores de avalúo recientes de cada vivienda, para
+              que el ejercicio tenga coherencia y formalidad.
+            </p>
+
             <h2>¿Cómo es posible estrenar sin enganche?</h2>
             <p>
-              El banco presta sobre el <strong>avalúo bancario</strong> de la
-              vivienda, y en la mayoría de nuestros modelos el avalúo es mayor
-              que el precio de venta. Eso significa que el crédito puede cubrir
-              el 100% del precio <strong>y además los gastos de
-              escrituración</strong> — estrenas sin enganche y con plusvalía
-              desde el día uno. Es una de las grandes ventajas de comprar en
-              estos desarrollos.
+              El banco no presta sobre el precio que tú pagas: presta sobre el{" "}
+              <strong>valor avalúo</strong>, que es el{" "}
+              <strong>valor comercial</strong> de la vivienda — lo que la casa
+              realmente vale en el mercado, determinado por un perito
+              independiente, no por nosotros.
+            </p>
+            <p>
+              Y aquí está la clave: en nuestros desarrollos{" "}
+              <strong>ese valor comercial es mayor que el precio de venta</strong>.
+              Como el banco financia hasta el 90% del avalúo, ese 90% suele
+              alcanzar para cubrir el precio completo{" "}
+              <strong>y además los gastos de escrituración</strong>. Por eso
+              estrenas sin enganche — y con plusvalía desde el día que firmas,
+              porque tu casa vale más de lo que pagaste por ella.
             </p>
 
             <h2>Gastos de escrituración incluidos en el cálculo</h2>
@@ -180,13 +220,35 @@ export default function Page() {
               Guía: crédito bancario en Cancún
             </a>
 
+            <h2>¿Qué tan cerca está este número del real?</h2>
+            <p>
+              Cerca, pero conviene que sepas exactamente de qué depende. El{" "}
+              <strong>monto exacto de tu crédito no se define aquí ni te lo
+              puede prometer nadie</strong>: lo determina el banco cuando haces
+              tu trámite y te entrega tu{" "}
+              <strong>tabla de amortización real</strong>, ya con tu perfil, tus
+              ingresos, tu historial crediticio y la tasa que te autorice esa
+              institución.
+            </p>
+            <p>
+              Mientras llegas a ese punto, no tienes que quedarte con una
+              estimación:{" "}
+              <strong>
+                podemos compartirte tablas de amortización con las mensualidades
+                reales de los bancos
+              </strong>{" "}
+              para el modelo que te interesa. Vas a ver que se parecen mucho a
+              lo que acabas de calcular aquí — esta herramienta está construida
+              con las mismas fórmulas y los mismos factores que usa la banca.
+            </p>
+
             <h2>El siguiente paso</h2>
             <p>
-              La calculadora te da el panorama; un asesor autorizado de Altta
-              Homes te da el número exacto según tu perfil, el banco y las
-              promociones vigentes — sin costo ni compromiso. Escríbenos por
-              WhatsApp con tu resultado y te preparamos una cotización real el
-              mismo día.
+              Uno de nuestros ejecutivos te prepara una{" "}
+              <strong>cotización exacta</strong> con las tablas de los bancos
+              que apliquen a tu caso y las promociones vigentes, sin costo ni
+              compromiso. Escríbenos por WhatsApp con el resultado que te dio la
+              calculadora y te la preparamos el mismo día.
             </p>
           </div>
         </div>
@@ -220,6 +282,7 @@ export default function Page() {
               <li><a href="/lirios-residencial-2">Lirios Residencial 2</a></li>
               <li><a href="/jardines-del-sur-7">Jardines del Sur 7 · Próximamente</a></li>
               <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
+              <li><a href="/calculadora-hipotecaria">Calculadora</a></li>
               <li><a href="/blog">Blog</a></li>
               <li><ContactNavBtn /></li>
             </ul>

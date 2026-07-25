@@ -301,6 +301,9 @@ export default function Page() {
                 <a href="/preguntas-frecuentes">Preguntas Frecuentes</a>
               </li>
               <li>
+                <a href="/calculadora-hipotecaria">Calculadora</a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

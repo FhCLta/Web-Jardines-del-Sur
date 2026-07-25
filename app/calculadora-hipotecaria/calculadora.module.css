@@ -71,6 +71,31 @@
   margin-bottom: 0.4rem;
 }
 
+/* Glosario de términos (avalúo / precio de lista / precio neto). Cada término
+   en su propia tarjeta: son definiciones para quien NO conoce la palabra, y en
+   una lista con viñetas normales se leen como relleno. */
+.glossary {
+  list-style: none;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.glossary li {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 0.6rem 0.6rem 0;
+  background: rgba(26, 54, 93, 0.04);
+  line-height: 1.7;
+}
+
+.glossary li strong:first-child {
+  font-family: var(--font-montserrat), sans-serif;
+  color: var(--primary);
+}
+
 .inlineCta {
   display: inline-flex;
   align-items: center;

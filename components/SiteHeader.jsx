@@ -95,6 +95,7 @@ export default function SiteHeader() {
               <a href="/#top">Inicio</a>
               <a href="/#desarrollos">Modelos y Precios</a>
               <a href="/#amenidades">Amenidades</a>
+              <a href="/calculadora-hipotecaria">Calculadora</a>
               <a href="/#contacto">Contacto</a>
             </nav>
           )}
@@ -210,9 +211,15 @@ export default function SiteHeader() {
               </span>
               Amenidades
             </a>
-            <a href="#contacto" onClick={closeAndGo}>
+            <a href="/calculadora-hipotecaria" onClick={closeAndGo}>
               <span className={styles.drawerNum}>
                 {String(otherSilos.length + 2).padStart(2, "0")}
+              </span>
+              Calculadora
+            </a>
+            <a href="#contacto" onClick={closeAndGo}>
+              <span className={styles.drawerNum}>
+                {String(otherSilos.length + 3).padStart(2, "0")}
               </span>
               Contacto
             </a>
@@ -228,8 +235,11 @@ export default function SiteHeader() {
             <a href="/#amenidades" onClick={closeAndGo}>
               <span className={styles.drawerNum}>03</span>Amenidades
             </a>
+            <a href="/calculadora-hipotecaria" onClick={closeAndGo}>
+              <span className={styles.drawerNum}>04</span>Calculadora
+            </a>
             <a href="/#contacto" onClick={closeAndGo}>
-              <span className={styles.drawerNum}>04</span>Contacto
+              <span className={styles.drawerNum}>05</span>Contacto
             </a>
           </nav>
         )}

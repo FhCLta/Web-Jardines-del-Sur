@@ -28,6 +28,10 @@ const SUGGESTED_PAYMENT_TO_INCOME = 0.5; // regla 50/50: mensualidad ≤ 50% del
 
 const TERMS = [5, 10, 15, 20];
 
+// Valor centinela del selector para el modo "otra propiedad". No puede chocar
+// con ningún id del inventario (esos son tipo "jds6-capua").
+const MANUAL_ID = "__manual__";
+
 // Departamentos: a qué nivel/vista corresponde el precio publicado.
 // MANTENIMIENTO: si cambia el precio del inventario, actualizar la etiqueta.
 const VARIANT_NOTE = {
@@ -37,6 +41,22 @@ const VARIANT_NOTE = {
 };
 
 const fmtMXN = (n) => `$${Math.round(n).toLocaleString("es-MX")}`;
+
+// Campos de dinero del modo manual: por dentro se guardan SOLO dígitos y por
+// fuera se muestran agrupados ("2,500,000"). Por eso son type="text" con
+// inputMode="numeric" y no type="number": un input numérico no puede pintar
+// separadores de miles (y encima mete flechitas de spinner).
+const digitsOnly = (s) => String(s).replace(/\D/g, "");
+const fmtGrouped = (s) => {
+  const d = digitsOnly(s);
+  return d ? Number(d).toLocaleString("es-MX") : "";
+};
+
+// Porcentaje con DOS decimales, recortando los ceros de cola: 89.9384 → "89.94",
+// 90 → "90". Con dos decimales el rótulo cuadra al multiplicarlo por el avalúo
+// (diferencia máxima ~$270 en $5M); con uno se iba hasta $1,060 y con cero
+// —el "90%" original— hasta $1,700.
+const fmtPct = (n) => String(Number(n.toFixed(2)));
 
 export default function MortgageCalculator({ models, initialModelId = null }) {
   const [modelId, setModelId] = useState(
@@ -48,10 +68,42 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
   const [years, setYears] = useState(20);
   const [rate, setRate] = useState(10.25);
   const [hasInfonavit, setHasInfonavit] = useState(false);
+  // Modo manual: sirve para los departamentos cuyas variantes (nivel/vista) no
+  // están en el inventario y para cualquier otra propiedad. Además abre la
+  // página a búsquedas genéricas de "calculadora hipotecaria", muchas más que
+  // las de nuestros modelos.
+  const [customAppraisal, setCustomAppraisal] = useState("");
+  const [customPrice, setCustomPrice] = useState("");
+  const isManual = modelId === MANUAL_ID;
 
-  const model = models.find((m) => m.id === modelId) || models[0];
-  const price = model?.price || 0;
-  const appraisal = model?.avaluo || price;
+  // Modelos agrupados por desarrollo para los <optgroup> del selector.
+  // Conserva el orden en que vienen del inventario.
+  const modelsByDev = useMemo(() => {
+    const groups = new Map();
+    for (const m of models) {
+      if (!groups.has(m.dev)) groups.set(m.dev, []);
+      groups.get(m.dev).push(m);
+    }
+    return [...groups];
+  }, [models]);
+
+  const model = isManual ? null : models.find((m) => m.id === modelId) || models[0];
+  // ⚠️ SIN RESPALDO SILENCIOSO. Antes, con el avalúo vacío se usaba el precio de
+  // venta y la tabla calculaba igual — pero rotulaba esos números como "% del
+  // avalúo" y "8.5% del avalúo" cuando en realidad salían del precio. Como
+  // además el placeholder era un monto con formato ("2,800,000"), parecía un
+  // valor capturado y no había forma de notarlo. Ahora, sin avalúo no se
+  // calcula nada: se le pide al cliente que lo escriba (y si no lo conoce, el
+  // texto de ayuda le dice que ponga ahí el mismo precio de venta).
+  const manualPrice = Number(customPrice) || 0;
+  const manualAppraisal = Number(customAppraisal) || 0;
+  const manualReady = manualPrice > 0 && manualAppraisal > 0;
+  const price = isManual ? manualPrice : model?.price || 0;
+  const appraisal = isManual ? manualAppraisal : model?.avaluo || price;
+  // Hay descuento real solo si el avalúo supera al precio (mismo criterio que
+  // PropertyCard). Hoy los 11 modelos del inventario lo cumplen; el guard es
+  // para que un modelo nuevo sin avalúo no muestre un descuento inexistente.
+  const hasDiscount = appraisal > price;
   const variantNote = VARIANT_NOTE[model?.id];
 
   // Mínimo de efectivo del modelo: lo que el crédito (90% del avalúo)
@@ -88,10 +140,35 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       total,
       suggestedIncome: total / SUGGESTED_PAYMENT_TO_INCOME,
       noDownPayment: requiredCash === 0,
+      // Qué porcentaje del avalúo representa el crédito. Se calcula, no se
+      // escribe a mano: el tope es 90%, pero baja si el cliente aporta
+      // efectivo o si precio + gastos ya caben por debajo de ese 90%.
+      // ⚠️ CON UN DECIMAL, NO REDONDEADO A ENTERO. Redondeando, un crédito de
+      // 89.94% se rotulaba "90%" y al multiplicar 0.90 × avalúo el cliente
+      // encontraba $1,700 de diferencia — un rótulo que no cuadra tira la
+      // credibilidad de toda la tabla. El .0 sí se recorta ("90%", no "90.0%").
+      ltvPct: appraisal > 0 ? (principal / appraisal) * 100 : 0,
     };
   }, [totalCost, cashTotal, appraisal, requiredCash, years, rate]);
 
-  const waMessage = `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${cashTotal === 0 ? ", sin enganche (el crédito sobre avalúo cubre precio y gastos)" : ` con ${fmtMXN(cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
+  // Qué dice la línea chica bajo "Crédito bancario estimado". Tiene que decir
+  // la VERDAD en los tres escenarios; una sola frase mentía:
+  //  a) sin aportación  → el crédito sí cubre precio + gastos (sin enganche).
+  //  b) topado en 90%   → el crédito NO alcanza; el faltante lo pone el cliente
+  //     (Flamboyán, Casa Noni de ambos devs, Cedro Plus de Lirios).
+  //  c) aportación voluntaria → el crédito cubre lo que queda tras el efectivo.
+  // El % siempre con 2 decimales para que cuadre al multiplicarlo por el avalúo.
+  const atCap = calc.ltvPct >= 89.995;
+  const creditSub =
+    cashTotal === 0
+      ? `Cubre precio y gastos · ${fmtPct(calc.ltvPct)}% del avalúo (tope 90%)`
+      : atCap
+      ? "El máximo que presta el banco: 90% del avalúo · el resto lo cubre tu aportación"
+      : `Cubre el resto tras tu aportación · ${fmtPct(calc.ltvPct)}% del avalúo (tope 90%)`;
+
+  const waMessage = isManual
+    ? `Hola, hice el ejercicio de cotización en el sitio de Altta Homes con mis propios valores: precio ${fmtMXN(price)}${customAppraisal ? ` y avalúo ${fmtMXN(appraisal)}` : ""}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${cashTotal === 0 ? ", sin enganche" : ` con ${fmtMXN(cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`
+    : `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${cashTotal === 0 ? ", sin enganche (el crédito sobre avalúo cubre precio y gastos)" : ` con ${fmtMXN(cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
   return (
@@ -104,11 +181,24 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             value={modelId}
             onChange={(e) => setModelId(e.target.value)}
           >
-            {models.map((m) => (
-              <option key={m.id} value={m.id}>
-                {m.name} · {m.dev} — {fmtMXN(m.price)}
-              </option>
+            {/* Agrupado por desarrollo: un <select> nativo no envuelve texto,
+                lo CORTA. Con el desarrollo y el precio dentro de cada opción
+                ("Casa Ceiba · Jardines del Sur 6 — $2,150,000") se salía de la
+                pantalla en celular. El desarrollo va ahora en el <optgroup>
+                (se escribe una vez) y el precio ya se ve abajo, en el desglose
+                "Precio del modelo" — así la opción siempre cabe. */}
+            {modelsByDev.map(([dev, devModels]) => (
+              <optgroup key={dev} label={dev}>
+                {devModels.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.name}
+                  </option>
+                ))}
+              </optgroup>
             ))}
+            <optgroup label="Otra propiedad">
+              <option value={MANUAL_ID}>Ingresar mis propios valores</option>
+            </optgroup>
           </select>
           {variantNote && (
             <span className={styles.fieldHint}>
@@ -117,6 +207,72 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             </span>
           )}
         </label>
+
+        {isManual && (
+          <div className={styles.manualBox}>
+            <div className={styles.manualGrid}>
+              <label className={styles.manualField}>
+                <span className={styles.fieldLabel}>Precio de venta</span>
+                <div className={styles.manualInputWrap}>
+                  <span className={styles.manualPrefix}>$</span>
+                  <input
+                    className={styles.manualInput}
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="off"
+                    placeholder="Ej. 2,500,000"
+                    value={fmtGrouped(customPrice)}
+                    onChange={(e) => setCustomPrice(digitsOnly(e.target.value))}
+                  />
+                </div>
+                <span className={styles.fieldHint}>
+                  Lo que realmente pagas por la vivienda, ya con descuentos o
+                  promociones aplicados.
+                </span>
+              </label>
+
+              <label className={styles.manualField}>
+                <span className={styles.fieldLabel}>Valor de avalúo</span>
+                <div className={styles.manualInputWrap}>
+                  <span className={styles.manualPrefix}>$</span>
+                  <input
+                    className={styles.manualInput}
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="off"
+                    placeholder="Ej. 2,800,000"
+                    value={fmtGrouped(customAppraisal)}
+                    onChange={(e) =>
+                      setCustomAppraisal(digitsOnly(e.target.value))
+                    }
+                  />
+                </div>
+                {/* Antes decía "si no lo conoces, déjalo vacío" y por dentro se
+                    usaba el precio de venta — pero el desglose seguía rotulando
+                    ese número como "% del avalúo". Calculaba sobre el precio y
+                    lo llamaba avalúo. Ahora se le pide escribirlo explícito: lo
+                    que ve es lo que es. */}
+                <span className={styles.fieldHint}>
+                  Lo que un perito dice que vale en el mercado. Es sobre este
+                  valor que el banco presta.{" "}
+                  <strong>
+                    Si no lo conoces, escribe aquí el mismo precio de venta
+                  </strong>{" "}
+                  — el cálculo sale conservador.
+                </span>
+              </label>
+            </div>
+
+            <p className={styles.manualNote}>
+              ¿No conoces el avalúo? Escribe el mismo precio de venta para un
+              cálculo conservador, o{" "}
+              <a href={waHref} target="_blank" rel="noreferrer">
+                escríbenos por WhatsApp
+              </a>{" "}
+              y lo revisamos juntos.
+            </p>
+          </div>
+        )}
 
         <label className={styles.field}>
           <span className={styles.fieldLabel}>
@@ -206,6 +362,32 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       </div>
 
       <div className={styles.results}>
+        {/* En manual no se pinta una tabla hasta tener AMBOS datos: sin avalúo
+            los cálculos no existen (el banco presta sobre él). Se dice cuál
+            falta, no un genérico "llena los campos". */}
+        {isManual && !manualReady ? (
+          <p className={styles.awaitingInput}>
+            {manualPrice <= 0 && manualAppraisal <= 0 ? (
+              <>
+                Escribe el <strong>precio de venta</strong> y el{" "}
+                <strong>valor de avalúo</strong> de la propiedad, y aquí
+                aparecerá tu mensualidad estimada, el crédito que necesitas y
+                cuánto efectivo tendrías que aportar.
+              </>
+            ) : manualAppraisal <= 0 ? (
+              <>
+                Falta el <strong>valor de avalúo</strong>. El banco presta sobre
+                ese valor, así que sin él no se puede estimar tu crédito.{" "}
+                <strong>Si no lo conoces, escribe el mismo precio de venta.</strong>
+              </>
+            ) : (
+              <>
+                Falta el <strong>precio de venta</strong> de la propiedad.
+              </>
+            )}
+          </p>
+        ) : (
+        <>
         {calc.noDownPayment && (
           <p className={styles.badge}>
             <span aria-hidden="true">⭐</span>
@@ -222,20 +404,51 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
         </p>
 
         <ul className={styles.breakdown}>
+          {/* Mismo orden y mismos términos que las tarjetas de precio del sitio
+              (PropertyCard): primero "Valor avalúo", debajo "Precio con
+              descuento". El cliente ya los vio así en la ficha del modelo, y
+              leer cuánto VALE antes de cuánto PAGA hace evidente el ahorro.
+              Si un modelo no trae avalúo, se cae al label neutro y la fila del
+              avalúo no se pinta (si no, saldría el mismo número dos veces). */}
+          {/* En MANUAL siempre se pinta: el cliente acaba de escribir ese
+              número (y si no conocía el avalúo, le pedimos poner ahí el mismo
+              precio de venta). Ocultarlo cuando avalúo == precio hacía que su
+              dato se esfumara y pareciera que el cálculo lo ignoraba.
+              En los modelos del inventario se mantiene el criterio de
+              PropertyCard: sin descuento real, no hay fila que mostrar. */}
+          {(isManual || hasDiscount) && (
+            <li>
+              <span className={styles.breakdownLabel}>
+                Valor avalúo
+                <em className={styles.breakdownSub}>
+                  Su valor comercial: lo que realmente vale
+                </em>
+              </span>
+              <strong>{fmtMXN(appraisal)}</strong>
+            </li>
+          )}
           <li>
-            <span>Precio del modelo</span>
+            <span className={styles.breakdownLabel}>
+              {hasDiscount
+                ? "Precio con descuento"
+                : isManual
+                ? "Precio de venta"
+                : "Precio del modelo"}
+              {(isManual || hasDiscount) && (
+                <em className={styles.breakdownSub}>Lo que pagas por ella</em>
+              )}
+            </span>
             <strong>{fmtMXN(price)}</strong>
-          </li>
-          <li>
-            <span>Avalúo bancario</span>
-            <strong>{fmtMXN(appraisal)}</strong>
           </li>
           <li>
             <span>Gastos de escrituración (~8.5% del avalúo)</span>
             <strong>{fmtMXN(closingCosts)}</strong>
           </li>
           <li>
-            <span>Crédito bancario estimado</span>
+            <span className={styles.breakdownLabel}>
+              Crédito bancario estimado
+              <em className={styles.breakdownSub}>{creditSub}</em>
+            </span>
             <strong>{fmtMXN(calc.principal)}</strong>
           </li>
           <li className={styles.breakdownDivider} aria-hidden="true" />
@@ -266,6 +479,8 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           perfil y el proyecto. Precios y disponibilidad sujetos a cambio.
           Aplican restricciones.
         </p>
+        </>
+        )}
       </div>
     </div>
   );
