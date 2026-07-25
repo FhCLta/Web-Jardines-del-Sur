@@ -203,6 +203,18 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
             <p>
               Recorridos virtuales 360°, precios actualizados y atención directa por WhatsApp.
             </p>
+            {/* Enlace a la página-catálogo (comparte/descarga). Discreto, no en el navbar.
+                Se agregan más conforme existan (departamentos, etc.). */}
+            {dev.slug === "jardines-del-sur-6" && casasCount > 0 && (
+              <p style={{ marginTop: "0.85rem" }}>
+                <a
+                  href="/jardines-del-sur-6/casas"
+                  style={{ color: "var(--accent-deep)", fontWeight: 700, textDecoration: "none" }}
+                >
+                  Ver solo las casas de Jardines del Sur 6 →
+                </a>
+              </p>
+            )}
           </div>
 
           <div className={styles.modelsGrid}>

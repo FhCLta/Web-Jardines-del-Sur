@@ -12,6 +12,12 @@ const DEV_SLUG_BY_NAME: Record<string, DevSlug> = {
   'Lirios Residencial 2': 'lirios-residencial-2',
 };
 
+// Páginas-catálogo compartibles ya publicadas (/dev/casas, /dev/departamentos).
+// Agregar aquí cada nueva a medida que se publica.
+const CATALOG_PAGES: { slug: DevSlug; kind: 'casas' | 'departamentos' }[] = [
+  { slug: 'jardines-del-sur-6', kind: 'casas' },
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
@@ -85,5 +91,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     }));
 
-  return [...baseEntries, ...promoEntries, ...modelEntries, ...blogEntries];
+  const catalogEntries: MetadataRoute.Sitemap = CATALOG_PAGES.map(({ slug, kind }) => ({
+    url: `${SITE_URL}/${slug}/${kind}`,
+    lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  return [...baseEntries, ...promoEntries, ...catalogEntries, ...modelEntries, ...blogEntries];
 }
