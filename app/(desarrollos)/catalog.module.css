@@ -403,6 +403,28 @@
     color: rgba(255, 255, 255, 0.9);
   }
 
+  /* Amenidades destacadas en la portada: resaltan qué ofrece el desarrollo. */
+  .brCoverHighlights {
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 9px;
+    max-width: 62%;
+  }
+
+  .brCoverHighlights li {
+    font-family: var(--font-montserrat), sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    border: 1px solid rgba(232, 180, 58, 0.6);
+    background: rgba(10, 26, 45, 0.28);
+    border-radius: 999px;
+    padding: 5px 13px;
+  }
+
   .brCoverFoot {
     display: flex;
     justify-content: space-between;
@@ -446,58 +468,128 @@
     font-weight: 600;
   }
 
-  /* ---------- PÁGINA DE VIVIENDA ---------- */
+  /* ---------- PÁGINA DE VIVIENDA (estilo revista: foto a sangre) ---------- */
   .brPage {
-    padding: 14mm 15mm;
+    padding: 0;
   }
 
-  .brPhoto {
-    width: 100%;
-    height: 92mm;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-top: 10px;
-  }
-
-  .brBody {
-    flex: 1;
-    padding-top: 12px;
-  }
-
-  .brTitleRow {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .brTitleRow h2 {
-    font-family: var(--font-display), Georgia, serif;
-    font-size: 2rem;
-    color: #0a1a2d;
-    margin: 0;
-  }
-
-  /* Links dentro del brochure: se ven como el texto, pero son clicables en el PDF */
-  .brModelLink,
+  /* Foto grande a sangre; ocupa ~60% de la hoja. El nombre y el precio van
+     sobre la imagen (sobre un degradado), estilo portada de revista. */
   .brPhotoLink {
+    position: relative;
+    display: block;
+    height: 178mm;
+    overflow: hidden;
     color: inherit;
     text-decoration: none;
   }
 
-  .brPhotoLink {
-    display: block;
+  .brPhoto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .brPhotoOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 26, 45, 0.55) 0%,
+      rgba(10, 26, 45, 0) 26%,
+      rgba(10, 26, 45, 0) 46%,
+      rgba(10, 26, 45, 0.88) 100%
+    );
+  }
+
+  .brPhotoBrand {
+    position: absolute;
+    top: 12mm;
+    left: 15mm;
+    z-index: 2;
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: #fff;
+  }
+
+  .brPhotoBrand span {
+    color: #e8b43a;
+  }
+
+  .brPhotoDev {
+    position: absolute;
+    top: 12mm;
+    right: 15mm;
+    z-index: 2;
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .brPhotoTitle {
+    position: absolute;
+    left: 15mm;
+    right: 15mm;
+    bottom: 11mm;
+    z-index: 2;
+    color: #fff;
+  }
+
+  .brKicker {
+    font-family: var(--font-montserrat), sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    color: #e8b43a;
+    margin: 0 0 6px;
+  }
+
+  .brPhotoTitle h2 {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: 2.9rem;
+    line-height: 1.02;
+    margin: 0;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .brPrice {
+    font-family: var(--font-montserrat), sans-serif;
+    font-weight: 800;
+    font-size: 1.7rem;
+    color: #f0c04a;
+    margin: 8px 0 0;
+  }
+
+  /* Banda de contenido: llena el resto de la hoja, sin huecos blancos. */
+  .brBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 11mm 15mm 9mm;
+    background: #fff;
   }
 
   .brModelCta {
+    align-self: flex-start;
     display: inline-block;
     margin-top: 16px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #e8b43a 0%, #d19200 100%);
+    color: #1a1204;
     font-family: var(--font-montserrat), sans-serif;
-    font-weight: 700;
-    font-size: 0.86rem;
-    color: #a37200;
+    font-weight: 800;
+    font-size: 0.88rem;
     text-decoration: none;
+  }
+
+  .brFootText {
+    line-height: 1.4;
   }
 
   .brFootLink {
@@ -505,17 +597,16 @@
     text-decoration: none;
   }
 
-  .brPrice {
-    font-family: var(--font-montserrat), sans-serif;
-    font-weight: 800;
-    font-size: 1.5rem;
-    color: #a37200;
-    margin: 0;
+  .brFootWa {
+    color: #128c4b;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
   }
 
   .brSpecs {
     list-style: none;
-    margin: 12px 0 0;
+    margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
@@ -561,6 +652,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-top: auto;
     padding-top: 10px;
     border-top: 1px solid #e5e7eb;
     font-size: 0.72rem;
@@ -574,6 +666,14 @@
   }
 
   /* ---------- PÁGINA DE AMENIDADES ---------- */
+  /* Esta página SÍ lleva márgenes (a diferencia de las de casa, a sangre) y es
+     flex column para poder anclar el contacto al fondo. */
+  .brAmenPage {
+    padding: 14mm 15mm;
+    display: flex;
+    flex-direction: column;
+  }
+
   .brSectionTitle {
     font-family: var(--font-display), Georgia, serif;
     font-size: 1.9rem;
@@ -584,7 +684,7 @@
   .brAmenGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 9px;
+    gap: 10px;
   }
 
   .brAmenGrid figure {
@@ -597,9 +697,15 @@
 
   .brAmenGrid img {
     width: 100%;
-    height: 42mm;
+    height: 45mm;
     object-fit: cover;
     display: block;
+  }
+
+  /* Contacto + legal pegados al fondo: rellenan el sobrante sin dejar hueco. */
+  .brAmenFoot {
+    margin-top: auto;
+    padding-top: 16px;
   }
 
   .brAmenGrid figcaption {
@@ -632,7 +738,6 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-top: 26px;
     padding: 16px;
     background: #0a1a2d;
     border-radius: 10px;
@@ -655,19 +760,23 @@
   }
 
   .brContactUrl {
+    display: block;
     margin: 3px 0;
     font-family: var(--font-montserrat), sans-serif;
     font-weight: 800;
     font-size: 1.15rem;
     color: #e8b43a;
+    text-decoration: none;
     word-break: break-all;
   }
 
   .brContactWa {
+    display: block;
     margin: 3px 0 0;
     font-size: 0.85rem;
     font-weight: 700;
     color: #6ee7a8;
+    text-decoration: none;
   }
 
   .brContactAddr {

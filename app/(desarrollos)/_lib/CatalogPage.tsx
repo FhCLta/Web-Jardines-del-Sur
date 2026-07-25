@@ -5,7 +5,6 @@ import PropertyCard from "@/components/PropertyCard";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
 import ContactNavBtn from "@/components/ContactNavBtn";
-import PreviewGate from "@/components/PreviewGate";
 import pageStyles from "@/app/page.module.css";
 import styles from "../catalog.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
@@ -202,12 +201,21 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
                 Cancún, Quintana Roo · {count} {count === 1 ? "modelo" : "modelos"}
                 {minPrice && <> · Desde {formatPriceMxn(minPrice)}</>}
               </p>
+              {dev.amenitiesSection && dev.amenitiesSection.items.length > 0 && (
+                <ul className={styles.brCoverHighlights}>
+                  {dev.amenitiesSection.items.slice(0, 5).map((a) => (
+                    <li key={a.label}>{a.label}</li>
+                  ))}
+                </ul>
+              )}
             </div>
             <div className={styles.brCoverFoot}>
               <a href={pageUrl} className={styles.brCoverLink}>
                 {pageUrlShort}
               </a>
-              <span>WhatsApp 998 205 9044</span>
+              <a href={waHref} className={styles.brCoverLink}>
+                WhatsApp 998 205 9044
+              </a>
             </div>
           </div>
         </section>
@@ -223,32 +231,32 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             ban && `${ban} baños`,
           ].filter(Boolean) as string[];
           const modelUrl = `${SITE_URL}/${dev.slug}/${slugifyModel(property.nombre_modelo)}`;
+          // WhatsApp con el modelo ya escrito: al tocar el número del folleto se
+          // abre WhatsApp (no la web) con el mensaje listo para enviar.
+          const waModelMsg = `Hola, me interesa la ${property.nombre_modelo} en ${dev.name}, Cancún (${formatPriceMxn(property.precio)}). ¿Me pueden dar más información?`;
+          const waModelHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waModelMsg)}`;
           return (
             <section key={property.id} className={styles.brPage}>
-              <header className={styles.brHead}>
-                <span className={styles.brHeadBrand}>
-                  Altta<span>Homes</span> Cancún
-                </span>
-                <span className={styles.brHeadDev}>{dev.name} · Cancún</span>
-              </header>
-
+              {/* Foto a sangre completa con la marca arriba y el nombre+precio
+                  sobre la imagen: portada editorial por modelo, sin huecos. */}
               {property.images?.[0] && (
                 // eslint-disable-next-line @next/next/no-img-element
                 <a href={modelUrl} className={styles.brPhotoLink}>
                   <img src={brImg(property.images[0])} alt={property.nombre_modelo} className={styles.brPhoto} />
+                  <div className={styles.brPhotoOverlay} />
+                  <span className={styles.brPhotoBrand}>
+                    Altta<span>Homes</span> Cancún
+                  </span>
+                  <span className={styles.brPhotoDev}>{dev.name} · Cancún</span>
+                  <div className={styles.brPhotoTitle}>
+                    <p className={styles.brKicker}>Modelo</p>
+                    <h2>{property.nombre_modelo}</h2>
+                    <p className={styles.brPrice}>{formatPriceMxn(property.precio)}</p>
+                  </div>
                 </a>
               )}
 
               <div className={styles.brBody}>
-                <div className={styles.brTitleRow}>
-                  <h2>
-                    <a href={modelUrl} className={styles.brModelLink}>
-                      {property.nombre_modelo}
-                    </a>
-                  </h2>
-                  <p className={styles.brPrice}>{formatPriceMxn(property.precio)}</p>
-                </div>
-
                 <ul className={styles.brSpecs}>
                   {specs.map((s) => (
                     <li key={s}>{s}</li>
@@ -267,23 +275,30 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
                 )}
 
                 <a href={modelUrl} className={styles.brModelCta}>
-                  Ver ficha completa y recorrido virtual 360° de {property.nombre_modelo} →
+                  Ver ficha y recorrido virtual 360° →
                 </a>
-              </div>
 
-              <footer className={styles.brFoot}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/jds6/casas-qr.png" alt="" className={styles.brFootQr} />
-                <a href={modelUrl} className={styles.brFootLink}>
-                  Más fotos y recorrido virtual 360° en {pageUrlShort} · WhatsApp 998 205 9044
-                </a>
-              </footer>
+                <footer className={styles.brFoot}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/jds6/casas-qr.png" alt="" className={styles.brFootQr} />
+                  <span className={styles.brFootText}>
+                    Más fotos y recorrido virtual 360° en{" "}
+                    <a href={modelUrl} className={styles.brFootLink}>
+                      {pageUrlShort}
+                    </a>{" "}
+                    ·{" "}
+                    <a href={waModelHref} className={styles.brFootWa}>
+                      WhatsApp 998 205 9044
+                    </a>
+                  </span>
+                </footer>
+              </div>
             </section>
           );
         })}
 
         {/* --- AMENIDADES + CONTACTO --- */}
-        <section className={styles.brPage}>
+        <section className={`${styles.brPage} ${styles.brAmenPage}`}>
           <header className={styles.brHead}>
             <span className={styles.brHeadBrand}>
               Altta<span>Homes</span> Cancún
@@ -313,23 +328,31 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             </ul>
           )}
 
-          <a href={pageUrl} className={styles.brContact}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/jds6/casas-qr.png" alt="" className={styles.brContactQr} />
-            <div>
-              <p className={styles.brContactLead}>
-                Precios al día, más fotos y recorridos virtuales 360°:
-              </p>
-              <p className={styles.brContactUrl}>{pageUrlShort}</p>
-              <p className={styles.brContactWa}>WhatsApp 998 205 9044 · Altta Homes Cancún</p>
-              <p className={styles.brContactAddr}>{OFFICE_ADDRESS}</p>
+          {/* Contacto + legal anclados al fondo de la hoja (margin-top:auto):
+              rellena el espacio sobrante sea cual sea el nº de amenidades. */}
+          <div className={styles.brAmenFoot}>
+            <div className={styles.brContact}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/jds6/casas-qr.png" alt="" className={styles.brContactQr} />
+              <div>
+                <p className={styles.brContactLead}>
+                  Precios al día, más fotos y recorridos virtuales 360°:
+                </p>
+                <a href={pageUrl} className={styles.brContactUrl}>
+                  {pageUrlShort}
+                </a>
+                <a href={waHref} className={styles.brContactWa}>
+                  WhatsApp 998 205 9044 · Altta Homes Cancún
+                </a>
+                <p className={styles.brContactAddr}>{OFFICE_ADDRESS}</p>
+              </div>
             </div>
-          </a>
 
-          <p className={styles.brLegal}>
-            Precios en pesos mexicanos, no incluyen gastos de escrituración; sujetos a cambio sin
-            previo aviso. Documento informativo, no constituye oferta ni contrato. Impreso el {today}.
-          </p>
+            <p className={styles.brLegal}>
+              Precios en pesos mexicanos, no incluyen gastos de escrituración; sujetos a cambio sin
+              previo aviso. Documento informativo, no constituye oferta ni contrato. Impreso el {today}.
+            </p>
+          </div>
         </section>
       </div>
 
@@ -422,10 +445,7 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
         </div>
       )}
 
-      {/* ===== DESCARGAR FOLLETO PDF (banda, fuera del hero) =====
-          OCULTA temporalmente mientras se pule el brochure: solo aparece con
-          ?folleto en la URL (PreviewGate). Quitar el gate cuando esté listo. */}
-      <PreviewGate param="folleto">
+      {/* ===== DESCARGAR FOLLETO PDF (banda, fuera del hero) ===== */}
       <section className={styles.printCtaSection}>
         <div className="container">
           <div className={styles.printCtaInner}>
@@ -454,7 +474,6 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
           </div>
         </div>
       </section>
-      </PreviewGate>
 
       {/* ===== FOOTER ===== */}
       <footer id="contacto" className={pageStyles.footer}>
