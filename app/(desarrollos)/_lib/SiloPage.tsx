@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import PropertyCard from "@/components/PropertyCard";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
+import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import SiloHero from "@/components/SiloHero";
 import AmenitiesSection from "@/components/AmenitiesSection";
@@ -377,6 +378,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
           <p>
             &copy; 2026 Altta Homes by Grupo Sadasi. Todos los derechos reservados.
           </p>
+          <FooterSocial />
         </div>
       </footer>
 

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
+import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import ModelGallery from "./ModelGallery";
 import ModelTour from "./ModelTour";
@@ -511,6 +512,7 @@ export default async function ModelPage({
             &copy; 2026 Altta Homes by Grupo Sadasi. Todos los derechos
             reservados.
           </p>
+          <FooterSocial />
         </div>
       </footer>
 

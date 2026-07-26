@@ -4,6 +4,7 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import PropertyCard from "@/components/PropertyCard";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
+import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import pageStyles from "@/app/page.module.css";
 import styles from "../catalog.module.css";
@@ -528,6 +529,7 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
         </div>
         <div className={pageStyles.footerBottom}>
           <p>&copy; 2026 Altta Homes by Grupo Sadasi. Todos los derechos reservados.</p>
+          <FooterSocial />
         </div>
       </footer>
 

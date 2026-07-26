@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
+import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import MortgageCalculator from "@/components/MortgageCalculator";
 import pageStyles from "@/app/page.module.css";
@@ -301,6 +302,7 @@ export default function Page() {
         </div>
         <div className={pageStyles.footerBottom}>
           <p>&copy; 2026 Altta Homes by Grupo Sadasi. Todos los derechos reservados.</p>
+          <FooterSocial />
         </div>
       </footer>
 

@@ -6,6 +6,7 @@ import SiteHeader from '@/components/SiteHeader';
 import Hero from '@/components/Hero';
 import AmenitiesSection from '@/components/AmenitiesSection';
 import FooterPhoneContact from '@/components/FooterPhoneContact';
+import FooterSocial from '@/components/FooterSocial';
 import ContactNavBtn from '@/components/ContactNavBtn';
 import { SITE_URL } from '@/lib/site';
 import styles from './page.module.css';
@@ -262,6 +263,7 @@ export default async function Home() {
         </div>
         <div className={styles.footerBottom}>
           <p>&copy; 2026 Altta Homes by Grupo Sadasi. Todos los derechos reservados.</p>
+          <FooterSocial />
         </div>
       </footer>
 
