@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Se sirve en /cotizador SIN diagonal final (firebase.json: cleanUrls + trailingSlash:false),
+         asi que "Imagen/..." y "styles.css" resolverian contra la raiz del sitio y darian 404.
+         Con este <base> las rutas relativas del cotizador siguen funcionando TAL CUAL. -->
+    <base href="/cotizador/">
+    <!-- Herramienta interna: no debe indexarse ni aparecer en buscadores.
+         Va acompañado del disallow en app/robots.ts. -->
+    <meta name="robots" content="noindex, nofollow">
+    <title>Cotizacion Grupo Sadasi | Altta Homes</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header-fixed brand-header">
+        <div class="brand-logos">
+            <img class="brand-logo brand-logo-sadasi" src="Imagen/Logo Sadasi.webp" alt="Grupo Sadasi">
+            <div class="brand-title" aria-label="Presupuesto para tu hogar ideal">
+                <span>Presupuesto</span>
+                <strong>Para tu Hogar Ideal</strong>
+            </div>
+            <img class="brand-logo brand-logo-altta" src="Imagen/Logo Altta Homes.webp" alt="Altta Homes">
+        </div>
+        <!-- Logos de los 3 desarrollos, tomados del sitio (/logos/) para que sean
+             LOS MISMOS archivos que ve el cliente en la web. Rutas ABSOLUTAS a
+             proposito: con <base href="/cotizador/"> una ruta relativa buscaria
+             dentro de la carpeta del cotizador. -->
+        <div class="brand-devs" aria-label="Nuestros desarrollos">
+            <img class="brand-dev-logo" src="/logos/jardines-6.webp" alt="Jardines del Sur 6">
+            <img class="brand-dev-logo" src="/logos/la-rioja-2.webp" alt="La Rioja 2">
+            <img class="brand-dev-logo" src="/logos/lirios-2.webp" alt="Lirios Residencial 2">
+        </div>
+    </header>
+
+    <!-- Contenedor principal con nueva estructura de columnas -->
+    <div class="container" id="cotizacionContainer">
+        <!-- COLUMNA 1 -->
+        <div class="column-1">
+            <div id="datosGenerales" class="bloque" style="overflow: visible;">
+                <h2>Datos Generales</h2>
+
+                <div class="campo campo-horizontal">
+                    <label for="nombreCliente">Nombre del Cliente:</label>
+                    <input type="text" id="nombreCliente" placeholder="Ingrese el nombre del cliente">
+                </div>
+
+                <div class="campo campo-horizontal">
+                    <label for="Azular">Desarrollo:</label>
+                    <select id="Azular">
+                        <option value="">Seleccione...</option>
+                        <option value="Azular1">Jardines del Sur 6 Casas</option>
+                        <option value="Azular1-Depas">Jardines del Sur 6 Depas</option>
+                        <option value="Lirios2-Depas">Lirios Residencial 2</option>
+                        <option value="LaRioja2">La Rioja 2</option>
+                    </select>
+                </div>
+
+                <!-- Selector único de Departamento (Prototipo + Torre + Unidad) -->
+                <div id="departamentoContainer" class="campo campo-horizontal hidden">
+                    <label for="departamentoSelect">Departamento:</label>
+                    <select id="departamentoSelect">
+                        <option value="">Seleccione...</option>
+                    </select>
+                    <label class="label-unidad" for="letrasNumerosDepa"># de la Unidad:</label>
+                    <input type="text" id="letrasNumerosDepa" placeholder="# de la unidad">
+                </div>
+
+                <!-- INICIO: Grupo de campos horizontales para Casas -->
+                <div id="prototipoContainer" class="campo campo-horizontal">
+                    <label for="prototipo">Prototipo:</label>
+                    <select id="prototipo">
+                        <option value="">Seleccione...</option>
+                    </select>
+                    <label class="label-unidad" for="letrasNumeros"># de la Unidad:</label>
+                    <input type="text" id="letrasNumeros" placeholder="# de la unidad">
+                </div>
+                <!-- FIN: Grupo de campos horizontales para Casas -->
+
+                <div class="campo campo-horizontal">
+                    <label for="planVenta">Plan de Ventas:</label>
+                    <select id="planVenta">
+                        <option value="bancario">Bancario</option>
+                        <option value="infonavit">Infonavit</option>
+                        <option value="fovissste">Fovissste</option>
+                        <option value="cofinavit">Cofinavit</option>
+                        <option value="contado">Contado</option>
+                    </select>
+                </div>
+
+                <div class="campo campo-horizontal">
+                    <label for="fechaCotizacion">Fecha de Cotización:</label>
+                    <input type="date" id="fechaCotizacion">
+                </div>
+
+                <div class="campo campo-horizontal">
+                    <label for="fechaVigencia">Cotización Vigente Hasta:</label>
+                    <input type="date" id="fechaVigencia">
+                </div>
+            </div>
+            <div id="financiamiento" class="bloque" style="overflow: visible;">
+                <h2>Financiamiento</h2>
+                <div class="campo campo-horizontal valor-destacado">
+                    <label id="labelPrecioNetoCasa3">Total a Pagar por el Cliente<br><small class="formula-gastos">(Precio Neto + Gastos Totales)</small></label>
+                    <label id="labelPrecioNetoDepartamento3" class="hidden">Total a Pagar por el Cliente<br><small class="formula-gastos">(Precio Neto + Gastos Totales)</small></label>
+                    <input type="text" id="precioNetoCasa3" readonly>
+                </div>
+                <div id="creditoContainer">
+                    <div class="campo-credito campo-horizontal hidden" id="calculoCreditoBancarioContainer">
+                        <label for="tipoCredito">Cálculo Crédito Bancario:</label>
+                        <select id="tipoCredito">
+                            <option value="manual">Manual</option>
+                            <option value="95">95%</option>
+                            <option value="90">90%</option>
+                            <option value="80">80%</option>
+                            <option value="personalizado">Personalizado</option>
+                        </select>
+                        <input type="number" id="porcentajePersonalizado" class="hidden" placeholder="%">
+                    </div>
+                    <div class="campo campo-horizontal">
+                        <label for="creditoBancario">
+                            (-) Crédito Bancario:
+                            <span class="inline-percent-field">
+                                <input type="text" id="porcentajeCreditoBancario" class="input-inline-porcentaje-credito" placeholder="" inputmode="decimal" aria-label="Porcentaje Crédito Bancario" list="bancario-percent-options">
+                                <datalist id="bancario-percent-options">
+                                    <option value="80"></option>
+                                    <option value="90"></option>
+                                    <option value="95"></option>
+                                </datalist>
+                                <span class="percent-suffix">%</span>
+                            </span>
+                            <span id="porcentajeCreditoBancarioPrint" class="solo-print-inline"></span>
+                        </label>
+                        <input type="text" id="creditoBancario" placeholder="">
+                    </div>
+                    <div class="campo-credito campo-horizontal no-imprimir hidden" id="calculoCreditoInfonavitContainer"
+                        style="display: none;">
+                        <label for="tipoCreditoInfonavit">Cálculo Crédito Infonavit:</label>
+                        <select id="tipoCreditoInfonavit">
+                            <option value="manual">Manual</option>
+                            <option value="95">95%</option>
+                            <option value="90">90%</option>
+                            <option value="80">80%</option>
+                            <option value="personalizado">Personalizado</option>
+                        </select>
+                        <input type="number" id="porcentajePersonalizadoInfonavit" class="hidden" placeholder="%">
+                    </div>
+                    <div class="campo campo-horizontal">
+                        <label for="creditoInfonavit">
+                            <span id="labelTextoCreditoInfonavit">(-) Crédito Infonavit:</span>
+                            <span class="inline-percent-field">
+                                <input type="text" id="porcentajeCreditoInfonavit" class="input-inline-porcentaje-credito" placeholder="" inputmode="decimal" aria-label="Porcentaje Crédito Infonavit">
+                                <span class="percent-suffix">%</span>
+                            </span>
+                            <span id="porcentajeCreditoInfonavitPrint" class="solo-print-inline"></span>
+                        </label>
+                        <input type="text" id="creditoInfonavit" placeholder="">
+                    </div>
+                    <div class="campo campo-horizontal">
+                        <label for="subcuentaVivienda">(-) Subcuenta Vivienda:</label>
+                        <input type="text" id="subcuentaVivienda" placeholder="">
+                    </div>
+                </div>
+                <!-- Gastos ocultos: ahora se muestran en el recuadro de Gastos (columna 2).
+                     Se conservan como inputs (el cálculo de Gastos Totales los lee por id). -->
+                <div class="campo campo-horizontal gasto-oculto-financiamiento">
+                    <label for="gastosTitulacion">(+) Gastos de Escrituración (GE):</label>
+                    <input type="text" id="gastosTitulacion">
+                </div>
+                <div class="campo campo-horizontal gasto-oculto-financiamiento">
+                    <label for="otrosGastos">(+)Cuota de Contingencia (CC):</label>
+                    <input type="text" id="otrosGastos" value="$4,000.00" readonly>
+                </div>
+                <div class="campo campo-horizontal gasto-oculto-financiamiento">
+                    <label for="contratoAgua">(+)Contrato de Agua (CdA):</label>
+                    <input type="text" id="contratoAgua" value="$4,000.00" readonly>
+                </div>
+                <div class="campo campo-horizontal gasto-oculto-financiamiento">
+                    <label for="satQ">(+)Sat Q:</label>
+                    <input type="text" id="satQ" value="$3,800.00" readonly>
+                </div>
+                <div class="campo campo-horizontal gasto-oculto-financiamiento">
+                    <label for="certificadoLibertadGravamen">(+)Certificado Libertad de Gravamen(CLG):</label>
+                    <input type="text" id="certificadoLibertadGravamen" value="$2,500.00" readonly>
+                </div>
+            </div>
+            <div id="calculoFinal" class="bloque" style="overflow: visible;">
+                <h2>Cálculo Final</h2>
+                <!-- Enganche (Precio Neto - Crédito): intermedio oculto. -->
+                <div class="campo campo-horizontal campo-oculto-calculo">
+                    <label for="enganche">Enganche(Precio Neto - Crédito):</label>
+                    <input type="text" id="enganche" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="totalPagar">Enganche Total a Pagar<br><small class="formula-gastos">(Total a Pagar por el Cliente - Crédito)</small>:</label>
+                    <input type="text" id="totalPagar" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="apartado">(-) Apartado:</label>
+                    <input type="text" id="apartado" placeholder="" list="apartado-options">
+                    <datalist id="apartado-options">
+                        <option value="$15,000.00"></option>
+                        <option value="$20,000.00"></option>
+                        <option value="$30,000.00"></option>
+                    </datalist>
+                </div>
+                <div class="campo campo-horizontal valor-destacado">
+                    <label for="engancheTotalPagar">Enganche por Pagar:</label>
+                    <input type="text" id="engancheTotalPagar" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="mesesPagarEnganche">Meses Para Pagar Enganche:</label>
+                    <input type="number" id="mesesPagarEnganche" placeholder="" min="1">
+                </div>
+                <span id="mesesError" class="error-message"></span>
+            </div>
+        </div>
+
+        <!-- COLUMNA 2 -->
+        <div class="column-2">
+            <div id="detallesPrecio" class="bloque" style="overflow: visible;">
+                <div class="bloque-header-con-control">
+                    <h2>Detalles de Precio</h2>
+                    <div id="modoPrecioManualContainer" class="modo-manual-control no-imprimir hidden">
+                        <span>Modo manual</span>
+                        <label class="toggle-switch modo-manual-switch" for="togglePrecioManual" aria-label="Modo manual de precio">
+                            <input type="checkbox" id="togglePrecioManual">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div id="terrenoExcedenteContainer">
+                    <div class="campo campo-horizontal">
+                        <label for="metrosExcedentes">Metros Excedentes:</label>
+                        <input type="number" id="metrosExcedentes" placeholder="" min="0">
+                    </div>
+                    <span id="metrosExcedentesError" class="error-message"></span>
+                    <div class="campo campo-horizontal">
+                        <label for="precioMetrosExcedentes">Precio de Metros Excedentes:</label>
+                        <input type="text" id="precioMetrosExcedentes" readonly list="precio-metros-excedentes-options">
+                        <datalist id="precio-metros-excedentes-options"></datalist>
+                    </div>
+                    <div class="campo campo-horizontal">
+                        <label for="valorTerrenoExcedente">Valor del Terreno Excedente:</label>
+                        <input type="text" id="valorTerrenoExcedente" readonly>
+                    </div>
+                    <div id="esquinaContainer" class="campo campo-horizontal">
+                        <label for="esquina">Esquina:</label>
+                        <input type="text" id="esquina" placeholder="" list="esquina-options">
+                        <datalist id="esquina-options">
+                            <option value="$40,000.00"></option>
+                            <option value="$50,000.00"></option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label id="labelPrecioLista" for="precioLista">Valor Avalúo:</label>
+                    <label id="labelPrecioListaDepa" class="hidden" for="precioLista">Valor Avalúo del
+                        Departamento:</label>
+                    <input type="text" id="precioLista" readonly>
+                </div>
+                <!-- EQUIPAMIENTO - Solo para Departamentos -->
+                <div id="equipamientoContainer" class="campo campo-horizontal hidden">
+                    <div class="label-with-toggle">
+                        <label for="equipamiento">Equipamiento:</label>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggleEquipamiento" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <input type="text" id="equipamiento" value="$0.00" readonly>
+                </div>
+                <div id="precioTotalContainer" class="campo campo-horizontal hidden">
+                    <div class="label-container">
+                        <label id="labelPrecioTotalCasa" for="precioTotalCasa">Precio Total de la Casa</label>
+                        <label id="labelPrecioTotalDepartamento" class="hidden" for="precioTotalCasa">Precio Total del
+                            Departamento</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="precioTotalCasa" readonly>
+                        <button id="copiarBtn" class="copiar-btn">
+                            <img src="Imagen/copy_8241358.png" alt="Copiar">
+                        </button>
+                    </div>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="bono">Descuento:</label>
+                    <input type="text" id="bono" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label id="labelPrecioNetoCasa" for="precioNetoCasa">Precio Neto de la Casa</label>
+                    <label id="labelPrecioNetoDepartamento" class="hidden" for="precioNetoCasa">Precio Neto del
+                        Departamento</label>
+                    <input type="text" id="precioNetoCasa" readonly>
+                </div>
+            </div>
+            <div class="bloque leyenda-notarial">
+                <h2>Gastos</h2>
+                <div class="campo campo-horizontal">
+                    <label id="labelGastosEscrituracion" for="gastosEscrituracion">
+                        Gastos de Escrituración
+                        <select id="porcentajeGastosEscrituracion" class="select-inline-porcentaje" aria-label="Porcentaje gastos notariales">
+                            <option value="0.07">7%</option>
+                            <option value="0.072">7.2%</option>
+                            <option value="0.073">7.3%</option>
+                            <option value="0.075">7.5%</option>
+                            <option value="0.077">7.7%</option>
+                            <option value="0.08" selected>8%</option>
+                            <option value="0.085">8.5%</option>
+                        </select>
+                        <span id="porcentajeGastosPrint" class="solo-print-inline">(8%):</span>
+                    </label>
+                    <input type="text" id="gastosEscrituracion" readonly>
+                </div>
+                <div id="comisionAperturaContainer" class="campo campo-horizontal">
+                    <label for="comisionApertura">(+) Comisión de Apertura (CAP):</label>
+                    <input type="text" id="comisionApertura" placeholder="">
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="infoCuotaContingencia">(+) Cuota de Contingencia:</label>
+                    <input type="text" id="infoCuotaContingencia" value="$4,000.00" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="infoContratoAgua">(+) Contrato de Agua:</label>
+                    <input type="text" id="infoContratoAgua" value="$4,000.00" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="infoSatQ">(+) Sat Q:</label>
+                    <input type="text" id="infoSatQ" value="$3,800.00" readonly>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="infoCertificadoLibertadGravamen">(+) Certificado Libertad de Gravamen(CLG):</label>
+                    <input type="text" id="infoCertificadoLibertadGravamen" value="$2,500.00" readonly>
+                </div>
+                <div id="avaluoContainer" class="campo campo-horizontal">
+                    <label for="avaluo">(+) Avalúo(AV):</label>
+                    <input type="text" id="avaluo" readonly>
+                </div>
+                <div class="campo campo-horizontal campo-gastos-totales valor-destacado">
+                    <label for="gastosTotales">Gastos Totales:</label>
+                    <input type="text" id="gastosTotales" readonly>
+                </div>
+                <p>*Los gastos notariales y comisiones bancarias son aproximados por lo que pueden variar de acuerdo a
+                    condiciones financieras.*</p>
+            </div>
+        </div>
+
+        <!-- Plan de Enganche full-width (debajo de las dos columnas) -->
+        <div id="planEnganche" class="bloque" style="overflow: visible;">
+            <h2>Plan de Enganche</h2>
+            <div class="campo" id="modoCalculoContainer">
+                <label for="modoCalculoEnganche">Modo de Cálculo:</label>
+                <select id="modoCalculoEnganche">
+                    <option value="automatico">Automático</option>
+                    <option value="manual">Manual</option>
+                </select>
+            </div>
+            <table id="tablaEnganche">
+                <thead>
+                    <tr>
+                        <th>Pago</th>
+                        <th>Mensualidad</th>
+                        <th>Fecha de Pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Se generarán los pagos dinámicamente -->
+                </tbody>
+                <tfoot>
+                    <tr class="fila-total">
+                        <td><strong>Total</strong></td>
+                        <td class="total-numero"><strong id="totalPagos">$0.00</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Datos del Asesor full-width, después del Plan de Enganche -->
+        <div id="datosAsesor" class="bloque" style="overflow: visible;">
+            <h2>Datos del Asesor</h2>
+            <div class="datos-asesor-grid">
+                <div class="campo campo-horizontal">
+                    <label for="nombreAsesor">Nombre del Asesor:</label>
+                    <select id="nombreAsesor">
+                        <!-- Solo asesores vigentes. Si se agrega uno, va tambien
+                             en `datosAsesores` de script.js (autocompleta el telefono). -->
+                        <option value="Florencio Hurtado" selected>Florencio Hurtado</option>
+                        <option value="Eduardo Gonzalez Nuñez">Eduardo Gonzalez Nuñez</option>
+                    </select>
+                </div>
+                <div class="campo campo-horizontal">
+                    <label for="telefonoAsesor">Número de Teléfono:</label>
+                    <input type="tel" id="telefonoAsesor" value="+52 998 205 9044">
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón Imprimir, después de Datos del Asesor -->
+        <div class="botones-container">
+            <button id="imprimirBtn" type="button">Imprimir</button>
+            <button id="compartirImagenBtn" type="button">Compartir</button>
+            <button id="compartirPdfBtn" type="button">Compartir PDF</button>
+        </div>
+    </div>
+
+    <div id="final" class="final">
+        <h2>Hoy es el momento perfecto para invertir en tu nuevo hogar</h2>
+        <h2>Gracias por su visita</h2>
+        <p class="leyenda">
+            *Aplican restricciones. Información sujeta a cambios sin previo aviso. Información mostrada para fines
+            informativos y de comparación exclusivamente, no constituye obligación alguna para Grupo Sadasi o Altta Homes. Sujeto a
+            disponibilidad e inventario.*
+        </p>
+    </div>
+
+    <!-- Precios generados desde data/precios.json (la misma fuente que alimenta
+         el sitio web). DEBE ir antes de script.js. -->
+    <script src="./precios.js"></script>
+    <script src="./script.js"></script>
+    <script src="./validation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>

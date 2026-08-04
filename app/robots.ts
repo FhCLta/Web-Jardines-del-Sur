@@ -8,6 +8,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      // /cotizador es la herramienta interna del asesor (app estatica en
+      // public/cotizador). No es contenido para el cliente: sin enlaces desde
+      // el sitio, fuera del sitemap y con <meta robots="noindex"> propio.
+      disallow: '/cotizador',
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

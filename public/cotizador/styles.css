@@ -1,0 +1,3044 @@
+/* Import Google Fonts */
+/* Tipografias del sitio: Montserrat para titulos, Playfair Display para la
+   frase de cierre. El CUERPO sigue en Arial a proposito: cambiar la fuente
+   base mueve las metricas y el layout de impresion esta calibrado al milimetro. */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap');
+
+/* Paleta alineada con el sitio (app/globals.css) para que el cotizador se vea
+   a tono con alttahomescancun.mx. Los NOMBRES de las variables se conservan
+   (los usan ~85 reglas repartidas por todo el archivo, incluidas las de
+   impresion): solo cambia el valor al token equivalente del sitio.
+
+   Nota sobre --brand-orange: el sitio NO tiene naranja, su acento es DORADO.
+   Se remapea al dorado principal (--accent) y --brand-gold al dorado claro
+   (--accent-2), asi se conservan los dos tonos de acento del diseno original. */
+:root {
+    --brand-navy: #1A365D;        /* sitio: --primary      */
+    --brand-navy-deep: #0E2238;   /* sitio: --primary-900  */
+    --brand-blue: #16314F;        /* sitio: --primary-700  */
+    --brand-gold: #E8B43A;        /* sitio: --accent-2     */
+    --brand-orange: #D19200;      /* sitio: --accent       */
+    --brand-cream: #F7FAFC;       /* sitio: --background   */
+    --brand-paper: #FFFFFF;       /* sitio: --surface      */
+    --brand-line: #DDE4ED;        /* equivalente solido de --border-soft */
+    --brand-text: #1A202C;        /* sitio: --text-primary   */
+    --brand-muted: #6B7280;       /* sitio: --text-secondary */
+    --brand-shadow: rgba(15, 23, 42, 0.18);
+}
+
+/* Estilos para el Toggle Switch de Equipamiento */
+.label-with-toggle {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-right: auto;
+}
+
+.label-with-toggle label:first-child {
+    margin: 0;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.toggle-switch .slider {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--brand-navy);
+    border-radius: 3px;
+    background-color: white;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-switch .slider:before {
+    content: "\2713";
+    font-size: 11px;
+    font-weight: bold;
+    color: transparent;
+    transition: all 0.2s ease;
+}
+
+.toggle-switch input:checked+.slider {
+    background-color: var(--brand-navy);
+    border-color: var(--brand-navy);
+}
+
+.toggle-switch input:checked+.slider:before {
+    color: white;
+}
+
+.toggle-switch:hover .slider {
+    border-color: var(--brand-orange);
+    box-shadow: 0 0 3px rgba(232, 93, 37, 0.28);
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--brand-cream);
+    color: var(--brand-text);
+    margin: 0;
+    padding: 0;
+    /* Eliminamos el padding del body */
+    font-size: 14px;
+    /* AÃƒÂ±adido para establecer una base mÃƒÂ¡s pequeÃƒÂ±a */
+    /* Espacio para la cabecera fija. Debe ser >= al alto real del header, que
+       crecio al sumarle la tira de logos de desarrollos (medido: 194px). */
+    padding-top: 206px;
+}
+
+/* Aplicar negrita a todos los textos */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+input,
+select,
+button,
+table,
+th,
+td {
+    font-weight: bold;
+    height: auto;
+}
+
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff 0%, var(--brand-cream) 100%);
+    padding: 14px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 4px solid var(--brand-gold);
+    box-shadow: 0 8px 24px var(--brand-shadow);
+}
+
+.header-fixed img {
+    max-width: 800px;
+    height: auto;
+}
+
+.brand-logos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: min(980px, calc(100% - 40px));
+}
+
+.brand-logo {
+    display: block;
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-logo-sadasi {
+    height: 68px;
+}
+
+.brand-logo-altta {
+    height: 74px;
+}
+
+/* --- Tira de logos de desarrollos (los mismos archivos que usa el sitio) ---
+   OJO CON LA ESPECIFICIDAD: `.header-fixed img` (0,1,1) le gana a una clase
+   suelta (0,1,0) y su `height: auto` anularia la altura de abajo. Por eso todas
+   las reglas de estos logos van anidadas bajo .header-fixed. */
+.header-fixed {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brand-devs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    width: min(980px, calc(100% - 40px));
+    padding-top: 11px;
+    border-top: 1px solid var(--brand-line);
+}
+
+.header-fixed .brand-dev-logo {
+    height: 40px;
+    width: auto;
+    max-width: none;
+    margin-bottom: 0;
+    object-fit: contain;
+    opacity: 1;
+}
+
+.brand-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    flex: 0 0 auto;
+    line-height: 1.1;
+    text-align: center;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.brand-title span {
+    color: var(--brand-orange);
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.brand-title strong {
+    color: var(--brand-navy-deep);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Sin gaps: las secciones se separan con divisiones internas, no como
+       tarjetas sueltas. El conjunto se ve como UNA hoja. */
+    gap: 0;
+    padding: 0;
+    max-width: 1280px;
+    /* Aprovecha mejor el ancho de la laptop; los campos de valores respiran */
+    width: 95%;
+    margin: 18px auto;
+    box-sizing: border-box;
+    align-items: stretch;
+    /* Columnas a la misma altura para que el divisor central llegue completo */
+    background: var(--brand-paper);
+    border: 1px solid var(--brand-line);
+    border-radius: 8px;
+    box-shadow: 0 10px 34px var(--brand-shadow);
+    overflow: hidden;
+    /* Recorta las esquinas redondeadas de la hoja */
+}
+
+/* DefiniciÃƒÂ³n de las columnas */
+.column-1,
+.column-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* Sin gaps: las secciones se separan con líneas divisorias internas */
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* Divisor vertical central entre las dos columnas (como una hoja dividida) */
+.column-1 {
+    border-right: 1px solid var(--brand-line);
+}
+
+/* Solo pantalla: evitar desborde lateral y compactar fila de prototipo */
+@media screen {
+    .column-1,
+    .column-2 {
+        min-width: 0;
+    }
+
+    /* Labels más compactos en bloques de números para evitar deformación */
+    #financiamiento .campo-horizontal label,
+    #calculoFinal .campo-horizontal label {
+        font-size: 17px;
+    }
+
+    .formula-gastos {
+        font-size: 13px;
+        font-weight: normal;
+        opacity: 1;
+    }
+
+}
+
+/* Escritorio/tablet ancho: Prototipo/Departamento en dos filas — el selector
+   usa todo el ancho del cuadro y "# de la Unidad" queda abajo con su propia
+   etiqueta. (En móvil ≤768px la fila ya se apila en columna con las reglas
+   existentes, que también acomodan la etiqueta nueva.) */
+@media screen and (min-width: 769px) {
+    /* 260px = 250px de flex-basis + 10px de padding-right que ocupan las
+       etiquetas de las demás filas (flex, content-box); así los campos de
+       estas dos filas quedan alineados al píxel con el resto. */
+    #prototipoContainer,
+    #departamentoContainer {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        align-items: center;
+        row-gap: 8px;
+    }
+}
+
+/* Se elimina .column-3 ya que no existe en el nuevo layout */
+
+/* Estilos para cada bloque */
+.bloque {
+    background: transparent;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    /* División interna entre secciones apiladas */
+    border-bottom: 1px solid var(--brand-line);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* La última sección de cada columna no lleva línea inferior */
+.column-1 > .bloque:last-child,
+.column-2 > .bloque:last-child {
+    border-bottom: none;
+}
+
+.bloque:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Ajuste general para los campos para aÃƒÂ±adir espaciado vertical */
+.campo {
+    margin-bottom: 12px;
+    /* Espacio vertical entre cada campo */
+}
+
+/* TÃƒÂ­tulos */
+h2 {
+    text-align: center;
+    color: var(--brand-navy);
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.bloque h2 {
+    font-size: 14px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--brand-navy);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+/* Regla de acento corta bajo cada encabezado de sección (estilo sobrio) */
+.bloque h2::after {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 3px;
+    margin: 7px auto 0;
+    border-radius: 2px;
+    background: var(--brand-orange);
+}
+
+/* Totales clave: valor en acento, más grande y en negrita */
+.valor-destacado label {
+    color: var(--brand-navy);
+    font-weight: 700;
+}
+
+.valor-destacado input {
+    color: var(--brand-orange);
+    font-weight: 700;
+    font-size: 15px;
+    background: var(--brand-cream);
+    border-color: var(--brand-gold);
+}
+
+/* Gastos que ya solo viven en el recuadro de Gastos; se conservan como
+   inputs ocultos en Financiamiento porque el cálculo los lee por id. */
+.gasto-oculto-financiamiento {
+    display: none !important;
+}
+
+/* Filas intermedias de Cálculo Final ocultas (pantalla e impresión); se
+   conservan en el DOM porque el cálculo escribe sus valores. */
+.campo-oculto-calculo {
+    display: none !important;
+}
+
+/* Leyenda del total principal: más clara sin competir con el título. */
+#labelPrecioNetoCasa3 .formula-gastos,
+#labelPrecioNetoDepartamento3 .formula-gastos {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--brand-navy);
+}
+
+.campo-gastos-totales {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 2px solid var(--brand-orange);
+}
+
+.campo-gastos-totales label {
+    font-weight: bold;
+}
+
+.campo-gastos-totales input {
+    font-weight: bold;
+}
+
+.bloque-header-con-control {
+    position: relative;
+    min-height: 24px;
+    margin-bottom: 12px;
+}
+
+.bloque-header-con-control h2 {
+    margin: 0;
+    padding: 0 130px;
+}
+
+.modo-manual-control {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 7px;
+    border: 1px solid var(--brand-line);
+    border-radius: 5px;
+    background-color: #f7f9fb;
+    color: var(--brand-navy-deep);
+    font-size: 11px;
+    line-height: 1;
+    box-shadow: none;
+}
+
+.modo-manual-control>span {
+    white-space: nowrap;
+}
+
+.modo-manual-switch {
+    width: 18px;
+    height: 18px;
+}
+
+.modo-manual-switch .slider {
+    width: 14px;
+    height: 14px;
+}
+
+.modo-manual-switch .slider:before {
+    font-size: 10px;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Inputs y Selects */
+/* Estilos normales para pantalla */
+input,
+select {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid var(--brand-line);
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    height: 30px;
+    padding: 6px;
+    /* Reducido de 8px */
+    font-size: 13px;
+    /* Reducido de 14px */
+}
+
+/* Ajustes para campos sin sÃƒÂ­mbolo y selects */
+input.no-symbol,
+select {
+    padding-left: 6px;
+    /* Reducido de 8px */
+}
+
+/* Estilo para campos con etiqueta y input en la misma lÃƒÂ­nea */
+.campo-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Centra verticalmente los elementos */
+    margin-bottom: 5px;
+}
+
+.campo-horizontal label {
+    flex-grow: 1;
+    /* La etiqueta crece para ocupar el espacio */
+    flex-shrink: 0;
+    margin: 0;
+    text-align: left;
+    padding-right: 10px;
+    /* Espacio entre la etiqueta y el control */
+}
+
+.select-inline-porcentaje {
+    width: 64px;
+    height: 24px;
+    margin: 0 0 0 6px;
+    padding: 2px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+    .campo-horizontal input,
+    .campo-horizontal select {
+        flex-grow: 0;
+        /* El input/select no crece */
+        width: 180px;
+        /* Ancho fijo para el campo de entrada */
+        margin: 0;
+    }
+
+.campo-horizontal label .select-inline-porcentaje {
+    flex-grow: 0;
+    width: 64px;
+}
+
+.solo-print-inline {
+    display: none;
+}
+
+.input-inline-porcentaje-credito {
+    display: inline-block;
+    width: 70px !important;
+    height: 30px;
+    margin: 0 !important;
+    padding: 2px 17px 2px 4px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 6px;
+    background-color: #f7f9fb;
+}
+
+.inline-percent-field {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.percent-suffix {
+    position: absolute;
+    right: 6px;
+    color: var(--brand-muted);
+    font-size: 13px;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* Contenedor para alinear los campos horizontalmente (Prototipo y # Unidad) */
+.input-group-horizontal {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    /* Alinea los elementos por su base */
+}
+
+.input-group-horizontal .campo {
+    flex: 1;
+    /* Cada campo dentro del grupo ocupa el mismo espacio */
+    margin-bottom: 0;
+    /* Quitamos el margen inferior para este caso especÃƒÂ­fico */
+}
+
+.input-group-horizontal .campo label {
+    /* La etiqueta vuelve a su comportamiento normal (arriba del input) */
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilos especÃƒÂ­ficos para la impresiÃƒÂ³n */
+/* Aumentar tamaÃƒÂ±o de los valores en los inputs solo de lectura */
+/* Ã°Å¸â€Â¹ Aumentar tamaÃƒÂ±o de los valores numÃƒÂ©ricos en la pantalla */
+input[readonly],
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="date"] {
+    font-size: 18px;
+    /* Ã°Å¸â€œÅ’ Aumenta el tamaÃƒÂ±o del nÃƒÂºmero */
+    font-weight: bold;
+    /* Ã°Å¸â€œÅ’ Hace los nÃƒÂºmeros mÃƒÂ¡s visibles */
+    color: var(--brand-navy-deep);
+    /* Ã°Å¸â€œÅ’ Asegurar que sean negros */
+    background-color: #f7f9fb;
+    /* Ã°Å¸â€œÅ’ Fondo gris claro */
+
+    border: none;
+    /* Ã°Å¸â€œÅ’ Elimina bordes */
+}
+
+/* Ã°Å¸â€Â¹ Ajuste especial solo para la impresiÃƒÂ³n */
+@media print {
+    /* Ocultar elementos que no aplican según el plan de ventas - Mayor especificidad */
+    .ocultar-impresion,
+    .campo.ocultar-impresion,
+    .campo-horizontal.ocultar-impresion,
+    .campo.campo-horizontal.ocultar-impresion,
+    div.ocultar-impresion,
+    .gasto-oculto-financiamiento,
+    .campo.gasto-oculto-financiamiento,
+    .campo-horizontal.gasto-oculto-financiamiento,
+    .campo.campo-horizontal.gasto-oculto-financiamiento,
+    div.gasto-oculto-financiamiento,
+    .campo-oculto-calculo,
+    .campo.campo-oculto-calculo,
+    .campo-horizontal.campo-oculto-calculo,
+    .campo.campo-horizontal.campo-oculto-calculo,
+    div.campo-oculto-calculo {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .campo-horizontal {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        page-break-inside: avoid !important;
+        /* Evita que el campo se divida entre pÃƒÂ¡ginas */
+    }
+
+    .campo-horizontal label {
+        flex-basis: 200px !important;
+        flex-shrink: 0 !important;
+        text-align: left !important;
+        padding-right: 10px !important;
+    }
+
+    .campo-horizontal input,
+    .campo-horizontal select,
+    #mesesPagarEnganche {
+        flex-grow: 1 !important;
+        width: auto !important;
+        border: 1px solid #ccc !important;
+        /* Asegura que los bordes sean visibles en la impresiÃƒÂ³n */
+    }
+
+    input[readonly],
+    input[type="text"],
+    input[type="number"] {
+        font-size: 26px;
+        /* Ã°Å¸â€œÅ’ MÃƒÂ¡s grande en impresiÃƒÂ³n */
+        font-weight: bold;
+        color: #000;
+
+        border: none;
+        /* Ã°Å¸â€œÅ’ Sin bordes en impresiÃƒÂ³n */
+    }
+}
+
+/* Ã°Å¸â€Â¹ Estilos para la fila de total */
+/* Ã°Å¸â€Â¹ Estilo para toda la fila de total */
+/* Ã°Å¸â€Â¹ Hacer que la fila del total sea mÃƒÂ¡s visible */
+.fila-total {
+    font-size: 20px;
+    /* Aumentar el tamaÃƒÂ±o */
+    font-weight: bold;
+    /* Asegurar que la fila tenga negrita */
+    color: #000;
+    /* Color negro */
+}
+
+/* Ã°Å¸â€Â¹ Aplicar especÃƒÂ­ficamente al nÃƒÂºmero del total */
+.total-numero,
+#totalPagos {
+    font-size: 16px;
+    /* Hacerlo mÃƒÂ¡s grande */
+    font-weight: bold;
+    /* Asegurar que se vea en negrita */
+    color: #000;
+    /* Asegurar color negro */
+
+}
+
+/* Ã°Å¸â€Â¹ Ajustar el nÃƒÂºmero en la impresiÃƒÂ³n */
+@media print {
+    .fila-total {
+        font-size: 24px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .total-numero,
+    #totalPagos {
+        font-size: 15px;
+        /* MÃƒÂ¡s grande en la impresiÃƒÂ³n */
+        font-weight: bold;
+        color: #000;
+
+    }
+}
+
+/* Ã°Å¸â€Â¹ Aumentar el tamaÃƒÂ±o del texto en las columnas */
+.bloque {
+    font-size: 18px;
+    /* Ã°Å¸â€œÅ’ Hace que el texto sea mÃƒÂ¡s grande */
+}
+
+/* Ã°Å¸â€Â¹ Hacer que los tÃƒÂ­tulos sean mÃƒÂ¡s grandes y visibles */
+.bloque h2 {
+    font-size: 15px;
+    /* Reducido de 16px */
+    font-weight: bold;
+    text-align: center;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--brand-orange);
+    box-shadow: 0 0 0 3px rgba(232, 93, 37, 0.14);
+    outline: none;
+}
+
+/* Deshabilitar inputs de solo lectura con mejor apariencia */
+input[readonly] {
+    background-color: #eef3f8;
+    cursor: default;
+    /* Cambiar el cursor a default */
+}
+
+#terrenoExcedenteContainer {
+    display: block;
+    /* Para asegurar que estÃƒÂ© visible por defecto */
+}
+
+.hidden {
+    display: none !important;
+    /* Forzar que se oculte cuando sea necesario */
+}
+
+/* ===== Plan de Enganche: panel único con pagos en cuadrícula ===== */
+/* Ocupa el ancho de las dos columnas, debajo, con divisor superior (hoja) */
+#planEnganche {
+    flex: 1 1 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid var(--brand-line);
+    border-bottom: none;
+}
+
+#tablaEnganche {
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+}
+
+/* No se usa encabezado de columnas: cada celda rotula su propio pago */
+#tablaEnganche thead {
+    display: none;
+}
+
+/* Los pagos se reparten en columnas; las líneas internas se logran con el
+   gap de 1px sobre fondo de línea (cuadrícula limpia, no tarjetas sueltas) */
+/* Columnas automáticas (JS fija --cols): los pagos llenan SIEMPRE el ancho,
+   la última fila se estira para no dejar huecos. Las líneas internas se logran
+   con el gap de 1px sobre fondo de línea (no hay celdas vacías que muestren gris). */
+#tablaEnganche tbody {
+    --cols: 3;
+    --cols-print: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--brand-line);
+    border: 1px solid var(--brand-line);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#tablaEnganche tbody tr {
+    flex: 1 1 calc((100% - (var(--cols) - 1) * 1px) / var(--cols));
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 14px;
+    /* sin padding arriba: el encabezado de color va pegado al borde */
+    background: #fff;
+}
+
+/* Look uniforme: el color lo dan los encabezados de cada tarjeta */
+#tablaEnganche tbody tr:nth-child(even) {
+    background: #fff;
+}
+
+#tablaEnganche tbody td {
+    border: none;
+    padding: 0;
+    text-align: center;
+}
+
+/* "PAGO N": barra azul marino como encabezado de la mini-tarjeta */
+#tablaEnganche tbody td:first-child {
+    background: var(--brand-navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-align: center;
+    padding: 8px;
+    margin-bottom: 14px;
+}
+
+/* Monto y fecha con aire lateral */
+#tablaEnganche tbody td:nth-child(2) {
+    padding: 0 16px;
+    margin-bottom: 9px;
+}
+#tablaEnganche tbody td:nth-child(3) {
+    padding: 0 16px;
+}
+
+#tablaEnganche .monto-pago,
+#tablaEnganche .fecha-pago {
+    width: 100%;
+    margin-top: 0;
+    padding: 9px 10px;
+    border: 1px solid var(--brand-line);
+    border-radius: 6px;
+    background: #fff;
+    text-align: center;
+    height: 44px;
+}
+
+/* Monto destacado (el número importante de cada pago) */
+#tablaEnganche .monto-pago {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand-navy);
+    background: var(--brand-cream);
+    border-color: var(--brand-gold);
+}
+
+#tablaEnganche .fecha-pago {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brand-text);
+}
+
+/* Total: fila completa a la derecha, debajo de la cuadrícula */
+#tablaEnganche tfoot {
+    display: block;
+    margin-top: 10px;
+}
+
+#tablaEnganche tfoot tr.fila-total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    border-top: 2px solid var(--brand-orange);
+    padding-top: 8px;
+}
+
+#tablaEnganche tfoot tr.fila-total td {
+    border: none;
+    padding: 0;
+    font-weight: 700;
+    color: var(--brand-navy);
+    font-size: 16px;
+}
+
+#tablaEnganche tfoot tr.fila-total td:empty {
+    display: none;
+}
+
+#tablaEnganche tfoot #totalPagos {
+    color: var(--brand-orange);
+    font-weight: 800;
+    font-size: 20px;
+}
+
+/* ===== Datos del Asesor: full-width, después del Plan de Enganche ===== */
+#datosAsesor {
+    flex: 1 1 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid var(--brand-line);
+    border-bottom: none;
+}
+
+/* Los dos campos del asesor JUNTOS y CENTRADOS */
+.datos-asesor-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 48px;
+}
+
+/* Asesor: etiqueta ARRIBA del campo (vertical), no a un lado; ancho fijo */
+#datosAsesor .campo-horizontal {
+    display: block;
+    width: 300px;
+    max-width: 100%;
+}
+#datosAsesor .campo-horizontal label {
+    display: block;
+    margin: 0 0 5px;
+}
+#datosAsesor .campo-horizontal input,
+#datosAsesor .campo-horizontal select {
+    width: 100%;
+}
+
+/* Botón Imprimir: full-width, centrado, después de Datos del Asesor */
+.container > .botones-container {
+    flex: 1 1 100%;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 16px;
+    border-top: 1px solid var(--brand-line);
+}
+
+/* Diseño responsivo para pantallas pequeñas (solo pantalla, no impresión) */
+@media screen and (max-width: 768px) {
+    html {
+        overflow-x: clip;
+    }
+
+    body {
+        overflow-x: clip;
+    }
+
+    body {
+        padding-top: 112px; /* header movil medido: 101px */
+        font-size: 13px;
+    }
+
+    .header-fixed {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 1000 !important;
+        padding: 7px 0;
+    }
+
+    .brand-logos {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .brand-devs {
+        gap: 20px;
+        padding-top: 6px;
+    }
+
+    .header-fixed .brand-dev-logo {
+        height: 24px !important;
+    }
+
+    .brand-logo-sadasi {
+        height: auto !important;
+        max-height: 42px !important;
+        max-width: 82px !important;
+        width: auto !important;
+        flex-shrink: 0;
+        object-fit: contain;
+    }
+
+    .brand-logo-altta {
+        height: auto !important;
+        max-height: 42px !important;
+        max-width: 82px !important;
+        width: auto !important;
+        flex-shrink: 0;
+        object-fit: contain;
+    }
+
+    .brand-title {
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+        line-height: 1.15;
+        order: unset;
+        width: auto;
+    }
+
+    .brand-title span {
+        font-size: 12px;
+    }
+
+    .brand-title strong {
+        font-size: 14px;
+        line-height: 1.1;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 10px;
+        gap: 12px;
+        max-width: 100%;
+    }
+
+    .column-1,
+    .column-2 {
+        display: contents;
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #datosGenerales {
+        order: 1;
+    }
+
+    #detallesPrecio {
+        order: 2;
+    }
+
+    .leyenda-notarial {
+        order: 3;
+    }
+
+    #financiamiento {
+        order: 4;
+    }
+
+    #calculoFinal {
+        order: 5;
+    }
+
+    #planEnganche {
+        order: 6;
+    }
+
+    #datosAsesor {
+        order: 7;
+    }
+
+    .botones-container {
+        order: 8;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 16px 14px;
+    }
+
+    /* Botones apilados a lo ancho en cel; se anula el margin-left de escritorio */
+    #imprimirBtn,
+    #compartirImagenBtn,
+    #compartirPdfBtn {
+        width: 100%;
+        margin: 0;
+        padding: 13px 20px;
+        font-size: 16px;
+    }
+
+    .bloque {
+        padding: 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .bloque h2 {
+        font-size: 16px;
+    }
+
+    .bloque-header-con-control {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        min-height: 0;
+    }
+
+    .bloque-header-con-control .modo-manual-control {
+        order: 1;
+    }
+
+    .bloque-header-con-control h2 {
+        order: 2;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .modo-manual-control {
+        position: static;
+        transform: none;
+        flex-shrink: 0;
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+
+    .campo-horizontal {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 6px;
+    }
+
+    .campo-horizontal label {
+        padding-right: 0;
+        font-size: 13px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: auto !important;
+        margin-top: 0;
+        height: auto !important;
+    }
+
+    .campo-horizontal input,
+    .campo-horizontal select,
+    #datosGenerales .campo-horizontal input,
+    #datosGenerales .campo-horizontal select,
+    #datosAsesor .campo-horizontal input,
+    #datosAsesor .campo-horizontal select {
+        width: 100% !important;
+        flex-grow: 0;
+        font-size: 16px;
+        height: 38px;
+        box-sizing: border-box;
+    }
+
+    .campo-horizontal label .select-inline-porcentaje {
+        display: inline-block;
+        width: 66px !important;
+        height: 28px;
+        margin-left: 6px;
+        font-size: 12px;
+    }
+
+    .campo-horizontal label .input-inline-porcentaje-credito {
+        display: inline-block;
+        width: 90px !important;
+        height: 30px;
+        margin-left: 0 !important;
+        font-size: 15px;
+    }
+
+    .campo-horizontal label .inline-percent-field {
+        margin-left: 6px;
+    }
+
+    #datosGenerales .campo-horizontal label,
+    #datosAsesor .campo-horizontal label {
+        flex-basis: auto !important;
+        width: 100%;
+        height: auto !important;
+    }
+
+    /* Prototipo y Departamento: select + input a todo lo ancho apilados */
+    #prototipoContainer #prototipo,
+    #prototipoContainer #letrasNumeros,
+    #departamentoContainer #departamentoSelect,
+    #departamentoContainer #letrasNumerosDepa {
+        width: 100% !important;
+    }
+
+    #tablaEnganche {
+        min-width: 0;
+        width: 100%;
+    }
+
+    /* En móvil se conserva el mismo diseño de mini-tarjetas que en escritorio
+       (tbody flex con --cols, ancho completo y contenido centrado). No se fijan
+       anchos por columna porque romperían el centrado de las tarjetas. */
+
+    #tablaEnganche input.monto-pago,
+    #tablaEnganche input.fecha-pago {
+        width: 100%;
+        min-width: 0;
+        height: 34px;
+        font-size: 12px;
+        box-sizing: border-box;
+    }
+
+    #tablaEnganche tfoot .fila-total {
+        font-size: 14px;
+    }
+
+    #tablaEnganche tfoot .total-numero,
+    #tablaEnganche tfoot #totalPagos {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+    }
+
+    .final {
+        padding: 14px 12px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    .final h2:first-of-type,
+    .final h2:last-of-type {
+        font-size: 20px;
+        line-height: 1.25;
+        margin: 6px 0;
+        padding: 0 4px;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .final p,
+    .final .leyenda {
+        font-size: 11px;
+        line-height: 1.35;
+        margin: 8px 4px 0 4px;
+        padding: 0;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
+/* Estilos para impresiÃƒÂ³n */
+@media print {
+    body {
+        background-color: #fff;
+        /* Fondo blanco para impresiÃƒÂ³n */
+        font-size: 10pt;
+        /* TamaÃƒÂ±o de fuente adecuado para papel */
+    }
+
+    .header-fixed,
+    .no-imprimir,
+    .botones-container {
+        display: none !important;
+        /* Ocultar el encabezado, el botÃƒÂ³n de imprimir y la barra de botones */
+    }
+
+    .container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .column-1,
+    .column-2 {
+        flex: 1 1 0 !important;
+        /* Base 0 para que ambas columnas quepan lado a lado (con flex-wrap)
+           y solo el Plan de Enganche baje a una fila completa */
+        min-width: 0 !important;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Plan de Enganche full-width debajo de las columnas (tabla clásica).
+       Pendiente: rediseño de impresión a tarjetas en un paso posterior. */
+    #planEnganche {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        order: 99 !important;
+        box-sizing: border-box;
+        padding: 10px;
+    }
+
+    .bloque {
+        box-shadow: none;
+        /* Sin sombras */
+        border: 1px solid #ccc;
+        /* Borde simple */
+        page-break-inside: avoid;
+        /* Evitar que los bloques se corten entre pÃƒÂ¡ginas */
+    }
+
+    input,
+    select {
+        border: 1px solid #ccc !important;
+        background-color: #f9f9f9 !important;
+        -webkit-print-color-adjust: exact;
+        /* Forzar la impresiÃƒÂ³n de colores de fondo en Chrome/Safari */
+        print-color-adjust: exact;
+    }
+
+    /* Ocultar el botÃƒÂ³n de copiar en la impresiÃƒÂ³n */
+    #copiarBtn {
+        display: none;
+    }
+
+    .leyenda,
+    .leyenda-notarial p {
+        font-size: 8pt;
+    }
+}
+
+/* --- ESTILOS DE IMPRESIÃƒâ€œN DEFINITIVOS (COMPACTOS) --- */
+@media print {
+    @page {
+        /* Cambiado de A4 a Letter (tamaÃƒÂ±o carta) */
+        size: Letter;
+        /* Alternativamente: size: letter portrait; */
+        margin: 0.5cm;
+        /* MÃƒÂ¡rgenes de pÃƒÂ¡gina reducidos */
+    }
+
+    body {
+        background-color: #fff !important;
+        font-size: 13pt !important;
+        /* Fuente base intermedia */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding-top: 4px !important;
+        /* Elimina el espacio extra en la parte superior */
+    }
+
+    /* Mostrar header y final, ocultar botones */
+    .header-fixed,
+    .final {
+        display: block !important;
+    }
+
+    .botones-container,
+    .no-imprimir {
+        display: none !important;
+    }
+
+    /* Reducir tamaÃƒÂ±o del logo y su espacio */
+    .header-fixed {
+        position: static !important;
+        /* Cambia la posiciÃƒÂ³n para que no sea fija en impresiÃƒÂ³n */
+        padding: 8px 0 !important;
+        margin-bottom: 20px;
+        /* AÃƒÂ±ade espacio debajo del logo */
+    }
+
+    .header-fixed img {
+        max-width: 650px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .brand-logos {
+        justify-content: center !important;
+        gap: 86px !important;
+        width: 100% !important;
+    }
+
+    .brand-logo-sadasi {
+        height: 52px !important;
+    }
+
+    .brand-devs {
+        gap: 46px !important;
+        padding-top: 6px !important;
+    }
+
+    .header-fixed .brand-dev-logo {
+        height: 32px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .brand-logo-altta {
+        height: 58px !important;
+    }
+
+    .brand-title {
+        min-width: 230px !important;
+    }
+
+    .brand-title span {
+        font-size: 18pt !important;
+    }
+
+    .brand-title strong {
+        font-size: 20pt !important;
+    }
+
+    /* Ajustar contenedor principal */
+    .container {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 15px !important;
+        padding: 0 !important;
+        margin: 15px auto 0 !important;
+        /* Añade un margen superior */
+        max-width: 100% !important;
+    }
+
+    .column-1,
+    .column-2 {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+        gap: 10px !important;
+        /* Base 0 para que ambas columnas queden lado a lado; el Plan de
+           Enganche (flex-basis 100%) es el único que baja completo */
+    }
+
+    /* Plan de Enganche full-width debajo de las columnas (tabla clásica). */
+    #planEnganche {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        order: 99 !important;
+    }
+
+    /* Bloques más compactos */
+    .bloque {
+        padding: 8px !important;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        background: white !important;
+        page-break-inside: avoid;
+    }
+
+    .bloque h2 {
+        font-size: 11pt !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* CorrecciÃƒÂ³n de alineaciÃƒÂ³n vertical */
+    .campo-horizontal {
+        align-items: center !important;
+    }
+
+    /* --- INICIO: CÃƒâ€œDIGO A AGREGAR --- */
+    #datosAsesor .campo-horizontal select,
+    #datosAsesor .campo-horizontal input {
+        width: 250px !important;
+        /* Ancho fijo */
+        flex-grow: 0 !important;
+        /* No expandir */
+        box-sizing: border-box !important;
+        /* Normaliza el cÃƒÂ¡lculo del ancho (incluye borde y padding) */
+    }
+
+    /* --- FIN: CÃƒâ€œDIGO A AGREGAR --- */
+
+    #mesesPagarEnganche {
+        flex-grow: 1 !important;
+        width: auto !important;
+    }
+
+    label {
+        margin-top: 3px !important;
+        font-size: 9.5pt !important;
+    }
+
+    /* Inputs y selects mÃƒÂ¡s compactos */
+    input,
+    select {
+        height: 22px !important;
+        margin-top: 3px !important;
+        font-size: 9.5pt !important;
+        padding: 3px !important;
+        background-color: #f8f9fa !important;
+        border: 1px solid #ccc !important;
+        color: #000 !important;
+        flex-grow: 1 !important;
+        /* AÃƒÂ±adido para que se expanda */
+        width: auto !important;
+        /* AÃƒÂ±adido para permitir la expansiÃƒÂ³n */
+    }
+
+    .campo-horizontal label .select-inline-porcentaje {
+        width: 56px !important;
+        height: 20px !important;
+        margin: 0 0 0 4px !important;
+        font-size: 8pt !important;
+        padding: 1px 2px !important;
+        flex-grow: 0 !important;
+    }
+
+    #labelGastosEscrituracion .select-inline-porcentaje {
+        display: none !important;
+    }
+
+    #labelGastosEscrituracion .solo-print-inline {
+        display: inline !important;
+        margin-left: 2px !important;
+    }
+
+    label[for="creditoBancario"] .inline-percent-field,
+    label[for="creditoInfonavit"] .inline-percent-field {
+        display: none !important;
+    }
+
+    label[for="creditoBancario"] .solo-print-inline,
+    label[for="creditoInfonavit"] .solo-print-inline {
+        display: inline !important;
+        margin-left: 2px !important;
+    }
+
+    .campo-horizontal label .input-inline-porcentaje-credito {
+        width: 44px !important;
+        height: 20px !important;
+        margin: 0 !important;
+        font-size: 8.5pt !important;
+        padding: 1px 11px 1px 2px !important;
+        flex-grow: 0 !important;
+    }
+
+    .campo-horizontal label .inline-percent-field {
+        margin-left: 4px !important;
+    }
+
+    .campo-horizontal label .percent-suffix {
+        right: 4px !important;
+        font-size: 8.5pt !important;
+    }
+
+    .campo {
+        margin-bottom: 3px !important;
+    }
+
+    input[readonly] {
+        background-color: #e9ecef !important;
+    }
+
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    /* Tabla más compacta */
+    #tablaEnganche th,
+    #tablaEnganche td {
+        padding: 4px !important;
+        font-size: 9pt;
+    }
+
+    /* Estilos para el bloque final */
+    .final {
+        padding: 5px 0 0 0 !important;
+        text-align: center;
+        page-break-before: avoid;
+        /* Evitar que empiece en una nueva pÃƒÂ¡gina */
+    }
+
+    .final h2 {
+        font-size: 16pt !important;
+        margin: 0 !important;
+    }
+
+    .final p,
+    .leyenda-notarial p {
+        font-size: 9.5pt !important;
+        /* Texto de "Aplican restricciones" */
+        margin: 5px 10px 0 10px !important;
+        /* Añade margen horizontal para evitar desbordamiento */
+        font-weight: bold !important;
+    }
+
+    /* Ocultar elementos especÃƒÂ­ficos */
+    #modoCalculoContainer,
+    #calculoCreditoBancarioContainer {
+        display: none !important;
+    }
+}
+
+
+.imprimir-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--brand-navy);
+    /* Azul principal de marca */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.imprimir-btn:hover {
+    background-color: var(--brand-navy-deep);
+    /* Un verde un poco mÃƒÂ¡s oscuro al pasar el mouse */
+}
+
+/* Remove custom styles for the "Copiar" button */
+.copiar-btn {
+    display: none;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos generales para los botones */
+#guardarBtn,
+#imprimirBtn,
+#compartirImagenBtn,
+#compartirPdfBtn {
+    background: linear-gradient(135deg, var(--brand-navy), var(--brand-blue));
+    /* Azul de marca */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(9, 47, 87, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease-in-out;
+}
+
+/* Efecto hover */
+#guardarBtn:hover,
+#imprimirBtn:hover,
+#compartirImagenBtn:hover,
+#compartirPdfBtn:hover {
+    background: linear-gradient(135deg, var(--brand-navy-deep), var(--brand-navy));
+    box-shadow: 0 10px 24px rgba(9, 47, 87, 0.24);
+    transform: translateY(-1px);
+    /* Verde mÃƒÂ¡s oscuro al pasar el mouse */
+}
+
+#compartirImagenBtn,
+#compartirPdfBtn {
+    margin-left: 10px;
+}
+
+#compartirImagenBtn:disabled,
+#compartirPdfBtn:disabled {
+    cursor: wait;
+    opacity: 0.78;
+    transform: none;
+}
+
+body.generando-imagen {
+    width: 1200px !important;
+    min-width: 1200px !important;
+    max-width: 1200px !important;
+    padding-top: 0 !important;
+    overflow: visible !important;
+    background: var(--brand-cream) !important;
+}
+
+body.generando-imagen .header-fixed {
+    position: static !important;
+    width: 100% !important;
+}
+
+/* En la imagen/PDF compartidos los logos de desarrollo se ven un punto mas
+   grandes y solidos: la captura se manda por WhatsApp y a 26px con opacidad
+   se leian apretados. */
+body.generando-imagen .brand-devs {
+    gap: 56px !important;
+    padding-top: 12px !important;
+}
+
+body.generando-imagen .header-fixed .brand-dev-logo {
+    height: 48px !important;
+    opacity: 1 !important;
+}
+
+body.generando-imagen .container {
+    width: 96% !important;
+    margin: 12px auto 0 !important;
+}
+
+body.generando-imagen .final {
+    padding: 14px 12px 12px !important;
+}
+
+body.generando-imagen .botones-container,
+body.generando-imagen .no-imprimir,
+body.generando-imagen .error-message {
+    display: none !important;
+}
+
+body.generando-imagen input,
+body.generando-imagen select {
+    color: var(--brand-navy-deep) !important;
+    font-weight: 750 !important;
+}
+
+/* Nombre del desarrollo y plan de ventas un poco más grandes en la
+   imagen/PDF compartidos */
+body.generando-imagen #Azular,
+body.generando-imagen #planVenta {
+    font-size: 18px !important;
+}
+
+/* Prototipo/modelo y nombre del asesor: un poco más grandes en la captura,
+   sin llegar a 18px porque sus textos son más largos y podrían desbordarse */
+body.generando-imagen #prototipo,
+body.generando-imagen #departamentoSelect,
+body.generando-imagen #nombreAsesor {
+    font-size: 17.5px !important;
+}
+
+body.generando-imagen .campo-horizontal input,
+body.generando-imagen .campo-horizontal select,
+body.generando-imagen #mesesPagarEnganche {
+    height: 34px !important;
+    min-height: 34px !important;
+    box-sizing: border-box !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: 34px !important;
+}
+
+body.generando-imagen input[readonly],
+body.generando-imagen #gastosEscrituracion,
+body.generando-imagen #comisionApertura,
+body.generando-imagen #apartado,
+body.generando-imagen #mesesPagarEnganche {
+    font-size: 18.2px !important;
+    font-weight: 850 !important;
+    color: var(--brand-navy-deep) !important;
+    line-height: 1.05 !important;
+}
+
+body.generando-imagen .campo-horizontal input[readonly],
+body.generando-imagen .campo-horizontal input[type="date"],
+body.generando-imagen .campo-horizontal input[type="number"],
+body.generando-imagen #mesesPagarEnganche {
+    line-height: 34px !important;
+}
+
+body.generando-imagen input[type="date"]::-webkit-date-and-time-value {
+    line-height: 34px !important;
+    margin: 0 !important;
+}
+
+body.generando-imagen .valor-destacado input,
+body.generando-imagen #totalPagos {
+    font-size: 19px !important;
+    font-weight: 900 !important;
+    color: var(--brand-navy-deep) !important;
+    background: #FDF6E3 !important;
+    border-color: var(--brand-gold) !important;
+    line-height: 1.05 !important;
+}
+
+body.generando-imagen #tablaEnganche .monto-pago {
+    font-size: 19.5px !important;
+    font-weight: 850 !important;
+    color: var(--brand-navy-deep) !important;
+    line-height: 44px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+body.generando-imagen #tablaEnganche .fecha-pago {
+    font-size: 19.5px !important;
+    font-weight: 750 !important;
+    color: #101820 !important;
+    line-height: 44px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* La fila "# de la Unidad" sí aparece en la imagen compartida: al tener fila
+   propia ya no se encima con el selector como cuando iba a su lado. */
+
+body.generando-imagen #prototipoContainer #prototipo,
+body.generando-imagen #departamentoContainer #departamentoSelect {
+    width: 100% !important;
+    flex-grow: 1 !important;
+}
+
+body.generando-imagen label[for="infoCertificadoLibertadGravamen"] {
+    font-size: 15px !important;
+    line-height: 1.05 !important;
+    padding-right: 4px !important;
+}
+
+body.generando-imagen label[for="creditoBancario"] .inline-percent-field,
+body.generando-imagen label[for="creditoInfonavit"] .inline-percent-field {
+    display: none !important;
+}
+
+body.generando-imagen label[for="creditoBancario"] .solo-print-inline,
+body.generando-imagen label[for="creditoInfonavit"] .solo-print-inline {
+    display: inline !important;
+    margin-left: 2px !important;
+}
+
+body.generando-imagen #labelGastosEscrituracion .select-inline-porcentaje {
+    display: none !important;
+}
+
+body.generando-imagen #labelGastosEscrituracion .solo-print-inline {
+    display: inline !important;
+    margin-left: 2px !important;
+}
+
+body.generando-imagen .titulo-canvas-wrap {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 16px !important;
+    padding: 0 !important;
+    text-align: center !important;
+    line-height: 1 !important;
+}
+
+body.generando-imagen .bloque-header-con-control {
+    margin-bottom: 0 !important;
+}
+
+body.generando-imagen .titulo-canvas-texto {
+    display: inline-block !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 10px !important;
+    text-align: center !important;
+    color: var(--brand-navy) !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.6px !important;
+    line-height: 1.1 !important;
+    text-transform: uppercase !important;
+    background-image: linear-gradient(var(--brand-orange), var(--brand-orange)) !important;
+    background-position: center bottom !important;
+    background-repeat: no-repeat !important;
+    background-size: 44px 3px !important;
+}
+
+body.generando-imagen .bloque h2::after {
+    content: "" !important;
+    display: block !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    overflow: hidden !important;
+}
+
+/* Contenedor de los botones */
+.botones-container {
+    text-align: center;
+    /* Centrar los botones */
+    margin-top: 20px;
+}
+
+/* SeparaciÃƒÂ³n entre los botones */
+#guardarBtn {
+    margin-right: 10px;
+}
+
+/* Estilo general del bloque */
+.final {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centrar verticalmente el contenido dentro del bloque */
+    align-items: center;
+    /* Centrar horizontalmente el contenido */
+    text-align: center;
+    width: 100%;
+    /* Se adapta al contenedor sin expandirse innecesariamente */
+    box-sizing: border-box;
+    /* El padding queda dentro del 100% (evita desborde lateral) */
+    max-width: 100%;
+    overflow-x: hidden;
+    height: auto;
+    /* Mantiene solo el espacio necesario */
+    padding: 20px;
+    /* Espaciado interno para mejor visualizaciÃƒÂ³n */
+}
+
+/* Limitar el ancho de línea de la leyenda final para que el texto baje
+   en más renglones y no se sienta tan largo de lado a lado. */
+.final .leyenda,
+.final p {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-wrap: break-word;
+}
+
+/* Estilo para la primera frase */
+.final h2:first-of-type {
+    font-family: 'Montserrat', sans-serif;
+    /* Fuente moderna */
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--brand-navy);
+    /* Azul de marca */
+    margin: 10px 0;
+    /* Espaciado para evitar que se pegue a otros elementos */
+}
+
+/* Estilo para la segunda frase */
+.final h2:last-of-type {
+    font-family: 'Playfair Display', Georgia, serif;
+    /* Fuente elegante */
+    font-size: 30px;
+    font-weight: normal;
+    color: var(--brand-orange);
+    /* Acento naranja de marca */
+    margin: 10px 0;
+    /* Mantiene espacio entre las frases */
+}
+
+/* --- INICIO: Ajustes especÃƒÂ­ficos para el bloque de Datos Generales --- */
+
+/* Ancho fijo para las etiquetas en Datos Generales para alinear los campos de entrada */
+#datosGenerales .campo-horizontal label {
+    flex-grow: 0;
+    /* No permite que la etiqueta crezca */
+    flex-basis: 250px;
+    /* Establece un ancho base fijo para la etiqueta */
+    flex-shrink: 0;
+}
+
+/* Permitir que los inputs y selects en Datos Generales crezcan para llenar el espacio */
+#datosGenerales .campo-horizontal input,
+#datosGenerales .campo-horizontal select {
+    flex-grow: 1;
+    /* Permite que el campo de entrada crezca */
+    width: auto;
+    /* El ancho se ajustarÃƒÂ¡ al espacio disponible */
+}
+
+/* Ajuste especÃƒÂ­fico para la fila de prototipo para que los elementos compartan el espacio del input */
+#datosGenerales .campo-horizontal select#prototipo {
+    flex-grow: 1;
+    /* Dar mÃƒÂ¡s espacio al selector de prototipo */
+}
+
+#datosGenerales .campo-horizontal input#letrasNumeros {
+    flex-grow: 1;
+}
+
+/* --- INICIO: Ajustes especÃƒÂ­ficos para el bloque de Datos del Asesor --- */
+
+/* Ajustar la etiqueta para que tenga un ancho base y alinear los campos */
+#datosAsesor .campo-horizontal label {
+    flex-grow: 0;
+    /* No permite que la etiqueta crezca */
+    flex-basis: 200px;
+    /* Ancho base para la etiqueta */
+    flex-shrink: 0;
+}
+
+/* Permitir que los inputs y selects en Datos del Asesor crezcan para llenar el espacio */
+#datosAsesor .campo-horizontal input,
+#datosAsesor .campo-horizontal select {
+    flex-grow: 1;
+    /* Permite que el campo de entrada crezca */
+    width: auto;
+    /* El ancho se ajustarÃƒÂ¡ al espacio disponible */
+}
+
+/* MODO COMPACTO IMPRESIÃƒâ€œN (se activa con body.print-compacto cuando meses > 8) */
+@media print {
+    body {
+        zoom: var(--print-scale, 1);
+        transform-origin: top center;
+    }
+
+    /* Evita que los inputs de la tabla se salgan de sus celdas al imprimir */
+    #tablaEnganche input.monto-pago,
+    #tablaEnganche input.fecha-pago {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+        overflow: hidden !important;
+        text-overflow: clip !important;
+    }
+
+    #tablaEnganche {
+        table-layout: fixed;
+        width: 100% !important;
+    }
+
+    #tablaEnganche th:nth-child(1),
+    #tablaEnganche td:nth-child(1) {
+        width: 22%;
+        white-space: nowrap;
+    }
+
+    #tablaEnganche th:nth-child(2),
+    #tablaEnganche td:nth-child(2) {
+        width: 32%;
+    }
+
+    #tablaEnganche th:nth-child(3),
+    #tablaEnganche td:nth-child(3) {
+        width: 46%;
+    }
+
+    body.print-compacto #planEnganche {
+        padding: 6px !important;
+    }
+
+    body.print-compacto #planEnganche h2 {
+        font-size: 10pt !important;
+        margin: 2px 0 4px 0 !important;
+    }
+
+    body.print-compacto #tablaEnganche th,
+    body.print-compacto #tablaEnganche td {
+        padding: 3px 5px !important;
+        font-size: 8.5pt !important;
+        line-height: 1.2 !important;
+    }
+
+    body.print-compacto #tablaEnganche input.monto-pago,
+    body.print-compacto #tablaEnganche input.fecha-pago {
+        height: 20px !important;
+        padding: 0 2.5px !important;
+        font-size: 8.5pt !important;
+    }
+
+    body.print-compacto #planEnganche .fila-total,
+    body.print-compacto #planEnganche .total-numero,
+    body.print-compacto #planEnganche #totalPagos {
+        font-size: 10pt !important;
+    }
+
+    body.print-compacto #tablaEnganche input.monto-pago,
+    body.print-compacto #tablaEnganche input.fecha-pago {
+        line-height: 1 !important;
+    }
+
+    /* Ultra compacto para planes largos (más de 12 meses) */
+    body.print-ultra #planEnganche {
+        padding: 4px !important;
+    }
+
+    body.print-ultra #planEnganche h2 {
+        font-size: 9pt !important;
+        margin: 1px 0 3px 0 !important;
+    }
+
+    body.print-ultra #tablaEnganche th,
+    body.print-ultra #tablaEnganche td {
+        padding: 2px 3px !important;
+        font-size: 7.5pt !important;
+        line-height: 1.1 !important;
+    }
+
+    body.print-ultra #tablaEnganche input.monto-pago,
+    body.print-ultra #tablaEnganche input.fecha-pago {
+        height: 16px !important;
+        font-size: 7.2pt !important;
+        padding: 0 1px !important;
+    }
+
+    body.print-ultra #planEnganche .fila-total,
+    body.print-ultra #planEnganche .total-numero,
+    body.print-ultra #planEnganche #totalPagos {
+        font-size: 8pt !important;
+    }
+}
+
+/* === FIX DEPARTAMENTOS: Solo afecta cuando body tiene clase es-departamento === */
+@media print {
+
+    /* CAUSA RAIZ: .campo-horizontal tiene display:flex !important que anula
+       el display:none de JS. Forzamos ocultar los contenedores que JS esconde */
+    body.es-departamento:not(.es-bakab) #terrenoExcedenteContainer {
+        display: none !important;
+    }
+
+    body.es-departamento:not(.es-bakab) #precioTotalContainer {
+        display: none !important;
+    }
+
+    /* En Depas-Preventa (Bakab) no se cobra esquina */
+    body.es-bakab #esquinaContainer {
+        display: none !important;
+    }
+
+    /* Ocultar el toggle visual del checkbox en impresion */
+    body.es-departamento .toggle-switch {
+        display: none !important;
+    }
+
+    /* El div .label-with-toggle debe comportarse como un label normal */
+    body.es-departamento .label-with-toggle {
+        flex-basis: 200px !important;
+        flex-shrink: 0 !important;
+        flex-grow: 1 !important;
+        text-align: left !important;
+        padding-right: 10px !important;
+    }
+
+    /* Input de equipamiento: expandirse normalmente */
+    body.es-departamento #equipamientoContainer>input {
+        flex-grow: 1 !important;
+        width: auto !important;
+    }
+
+    /* NOTA [2026-07-05]: aquí existía el bloque "COMPACTO PARA DEPARTAMENTOS"
+       que agrandaba fuentes/campos solo para depas en impresión (labels 9pt,
+       h2 11pt, inputs 20px, etc.). Se eliminó porque hacía que departamentos
+       se desbordara a una segunda hoja; ahora depas hereda el mismo formato
+       de impresión que casas (bloque final @media print). */
+}
+
+/* === REGLA FINAL: Ocultar campos según plan de ventas en impresión === */
+/* Esta regla debe estar al final para tener máxima prioridad */
+@media print {
+    .ocultar-impresion {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+}
+
+/* === PULIDO FINAL DE LEGIBILIDAD EN IMPRESION === */
+@media print {
+    input,
+    select {
+        height: 23px !important;
+        line-height: 1.15 !important;
+        padding: 2px 5px !important;
+    }
+
+    input[readonly] {
+        font-weight: 750 !important;
+    }
+
+    #calculoFinal input,
+    #financiamiento #precioNetoCasa3,
+    #detallesPrecio #precioTotalCasa,
+    #detallesPrecio #precioNetoCasa {
+        font-size: 10pt !important;
+        line-height: 1.1 !important;
+    }
+
+    #tablaEnganche input,
+    #tablaEnganche select,
+    #tablaEnganche th,
+    #tablaEnganche td {
+        font-size: inherit;
+    }
+}
+
+/* ============================================================
+   IMPRESIÓN DEFINITIVA — la hoja en pantalla, idéntica y a escala
+   para caber en 1 hoja carta. Va al final para sobrescribir el CSS
+   de impresión legacy. Solo presentación; no cambia cálculos.
+   ============================================================ */
+@media print {
+    @page {
+        size: Letter portrait;
+        margin: 0.4in;
+    }
+
+    /* Forzar que TODOS los elementos impriman sus colores de fondo
+       (barra azul de los pagos, monto en crema, etc.). Aun así, en el
+       diálogo de impresión debe estar activo "Gráficos de fondo". */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    body {
+        background: #fff !important;
+        font-size: 8pt !important;
+        padding-top: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Encabezado de marca: estático arriba de la hoja */
+    .header-fixed {
+        position: static !important;
+        display: block !important;
+        padding: 2px 0 4px !important;
+        margin: 0 0 6px !important;
+        box-shadow: none !important;
+    }
+    .brand-logos { gap: 50px !important; }
+    .brand-logo-sadasi { height: 38px !important; }
+    .brand-logo-altta { height: 38px !important; }
+    .brand-devs { gap: 34px !important; padding-top: 3px !important; }
+    .header-fixed .brand-dev-logo { height: 22px !important; margin-bottom: 0 !important; }
+    .brand-title span { font-size: 11pt !important; }
+    .brand-title strong { font-size: 14pt !important; }
+
+    /* Ocultar lo no imprimible */
+    .no-imprimir,
+    .botones-container,
+    #copiarBtn,
+    .modo-manual-control,
+    .error-message {
+        display: none !important;
+    }
+
+    /* La HOJA: ocupa todo el ancho, sin sombra, con divisiones internas */
+    .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        border: 1px solid var(--brand-line) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: stretch !important;
+        gap: 0 !important;
+    }
+
+    .column-1,
+    .column-2 {
+        min-width: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
+    }
+    /* Izquierda 55% / derecha 45% (la derecha tiene etiquetas largas) */
+    .column-1 {
+        flex: 55 1 0 !important;
+        border-right: 1px solid var(--brand-line) !important;
+    }
+    .column-2 {
+        flex: 45 1 0 !important;
+    }
+
+    /* Secciones planas con línea divisoria (no tarjetas) */
+    .bloque {
+        background: transparent !important;
+        border: none !important;
+        border-bottom: 1px solid var(--brand-line) !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 5px 9px !important;
+        margin: 0 !important;
+        page-break-inside: avoid !important;
+    }
+    .column-1 > .bloque:last-child,
+    .column-2 > .bloque:last-child {
+        border-bottom: none !important;
+    }
+
+    .bloque h2 {
+        font-size: 8.5pt !important;
+        margin-bottom: 4px !important;
+        letter-spacing: 0.2px !important;
+    }
+    .bloque h2::after {
+        width: 28px !important;
+        height: 2px !important;
+        margin-top: 3px !important;
+    }
+    /* El encabezado de Detalles de Precio trae padding del control "modo
+       manual"; en columna angosta parte el título en 3 líneas. Se quita. */
+    .bloque-header-con-control h2 {
+        padding: 0 !important;
+    }
+
+    /* Filas campo/valor compactas */
+    .campo {
+        margin-bottom: 2px !important;
+    }
+    /* GRID con columna de etiqueta FIJA → todas las cajas de valor quedan en
+       una rejilla exacta (alineación perfecta, no importa el largo del texto). */
+    .campo-horizontal {
+        display: grid !important;
+        grid-template-columns: 152px 1fr !important;
+        align-items: center !important;
+        column-gap: 8px !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+    }
+    /* Columna derecha (más angosta): etiqueta un poco más corta */
+    .column-2 .campo-horizontal {
+        grid-template-columns: 116px 1fr !important;
+    }
+    /* El grid no debe mostrar los campos ocultos (p.ej. Departamento cuando
+       el desarrollo es Casas). La clase .hidden vuelve a ganar. */
+    .campo-horizontal.hidden,
+    .bloque.hidden,
+    .campo.hidden,
+    .hidden {
+        display: none !important;
+    }
+    .campo-horizontal label {
+        font-size: 7.5pt !important;
+        font-weight: 700 !important;
+        text-align: left !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1.1 !important;
+        align-self: center !important;
+    }
+    .campo-horizontal input,
+    .campo-horizontal select,
+    #mesesPagarEnganche {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        height: auto !important;
+        margin: 0 !important;
+        font-size: 8.5pt !important;
+        font-weight: 600 !important;
+        color: var(--brand-text) !important;
+        background: #f4f7fb !important;
+        border: 1px solid var(--brand-line) !important;
+        border-radius: 4px !important;
+        padding: 2px 5px !important;
+        line-height: 1.1 !important;
+    }
+    .formula-gastos {
+        font-size: 6.5pt !important;
+        font-weight: 400 !important;
+    }
+
+    /* Filas de Prototipo/Departamento (Datos Generales, col. izquierda):
+       2 columnas → etiqueta | campo; "# de la Unidad" cae a la segunda fila. */
+    #prototipoContainer,
+    #departamentoContainer {
+        grid-template-columns: 152px 1fr !important;
+    }
+    #prototipoContainer #prototipo,
+    #departamentoContainer #departamentoSelect,
+    #letrasNumeros,
+    #letrasNumerosDepa {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    #letrasNumeros,
+    #letrasNumerosDepa {
+        font-size: 7pt !important;
+        padding: 2px 3px !important;
+    }
+
+    /* Equipamiento: etiqueta + toggle dentro de la celda de etiqueta */
+    #equipamientoContainer .label-with-toggle {
+        display: flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+    }
+
+    /* Totales clave: acento naranja, un poco más grandes */
+    .valor-destacado input {
+        color: var(--brand-orange) !important;
+        font-weight: 800 !important;
+        font-size: 9.5pt !important;
+        background: var(--brand-cream) !important;
+        border-color: var(--brand-gold) !important;
+    }
+
+    /* ----- Plan de Enganche y Datos del Asesor: full-width, en orden ----- */
+    #planEnganche {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        order: 90 !important;
+        border-top: 1px solid var(--brand-line) !important;
+        border-bottom: none !important;
+        page-break-inside: avoid !important;
+    }
+    #datosAsesor {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        order: 91 !important;
+        border-top: 1px solid var(--brand-line) !important;
+        border-bottom: none !important;
+    }
+
+    /* Cuadrícula de pagos COMPACTA en impresión: mini-tarjetas con encabezado
+       azul marino + monto destacado, apretadas para no crecer de alto. */
+    #tablaEnganche { margin-top: 5px !important; }
+    /* MISMA distribución que en pantalla (--cols, hasta 6 por fila). Las celdas
+       se comprimen lo suficiente para que quepan sin cortarse. */
+    #tablaEnganche tbody tr {
+        flex-basis: calc((100% - (var(--cols) - 1) * 1px) / var(--cols)) !important;
+        padding: 0 0 5px !important;
+    }
+    #tablaEnganche tbody td:first-child {
+        background: var(--brand-navy) !important;
+        color: #fff !important;
+        font-size: 6.5pt !important;
+        letter-spacing: 0.3px !important;
+        padding: 2px 3px !important;
+        margin-bottom: 4px !important;
+    }
+    #tablaEnganche tbody td:nth-child(2) {
+        padding: 0 5px !important;
+        margin-bottom: 3px !important;
+    }
+    #tablaEnganche tbody td:nth-child(3) {
+        padding: 0 5px !important;
+    }
+    #tablaEnganche .monto-pago,
+    #tablaEnganche .fecha-pago {
+        height: auto !important;
+        min-width: 0 !important;
+        padding: 1px 2px !important;
+        border-radius: 3px !important;
+    }
+    #tablaEnganche .monto-pago {
+        font-size: 8pt !important;
+        font-weight: 700 !important;
+        color: var(--brand-navy) !important;
+        background: var(--brand-cream) !important;
+        border-color: var(--brand-gold) !important;
+    }
+    #tablaEnganche .fecha-pago {
+        font-size: 6.5pt !important;
+        background: #fff !important;
+    }
+    #tablaEnganche tfoot tr.fila-total {
+        padding-top: 5px !important;
+    }
+    #tablaEnganche tfoot tr.fila-total td {
+        font-size: 10pt !important;
+        color: var(--brand-navy) !important;
+    }
+    #tablaEnganche tfoot #totalPagos {
+        font-size: 12pt !important;
+        color: var(--brand-orange) !important;
+    }
+
+    /* === Robustez: que NUNCA se desborde. Más pagos = más comprimido === */
+    /* >10 meses (JS activa body.print-compacto) */
+    body.print-compacto #tablaEnganche tbody tr {
+        padding-bottom: 3px !important;
+    }
+    body.print-compacto #tablaEnganche tbody td:first-child {
+        font-size: 6.5pt !important;
+        padding: 2px 4px !important;
+        margin-bottom: 3px !important;
+    }
+    body.print-compacto #tablaEnganche tbody td:nth-child(2) {
+        margin-bottom: 2px !important;
+    }
+    body.print-compacto #tablaEnganche .monto-pago {
+        font-size: 8pt !important;
+        padding: 1px 3px !important;
+    }
+    body.print-compacto #tablaEnganche .fecha-pago {
+        font-size: 6.5pt !important;
+        padding: 1px 3px !important;
+    }
+
+    /* >16 meses (body.print-ultra): aún más compacto */
+    body.print-ultra #tablaEnganche tbody td:first-child {
+        font-size: 6pt !important;
+        padding: 1px 3px !important;
+        margin-bottom: 2px !important;
+    }
+    body.print-ultra #tablaEnganche tbody td:nth-child(2) {
+        margin-bottom: 1px !important;
+    }
+    body.print-ultra #tablaEnganche .monto-pago {
+        font-size: 7pt !important;
+    }
+    body.print-ultra #tablaEnganche .fecha-pago {
+        font-size: 6pt !important;
+    }
+
+    .datos-asesor-grid {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 6px 44px !important;
+    }
+    /* Asesor: etiqueta arriba del campo, juntos y centrados, en impresión */
+    #datosAsesor .campo-horizontal {
+        display: block !important;
+        grid-template-columns: none !important;
+        width: 240px !important;
+        max-width: 46% !important;
+    }
+    #datosAsesor .campo-horizontal label {
+        display: block !important;
+        margin: 0 0 2px !important;
+    }
+    #datosAsesor .campo-horizontal input {
+        width: 100% !important;
+    }
+
+    /* Bloque final compacto */
+    .final {
+        display: block !important;
+        padding: 4px 8px !important;
+        margin-top: 4px !important;
+    }
+    .final h2 { font-size: 10pt !important; margin: 2px 0 !important; }
+    .final .leyenda,
+    .final p,
+    .leyenda-notarial p {
+        font-size: 6pt !important;
+    }
+}
+
+/* ============================================================
+   AJUSTE FINO DE IMPRESIÓN — más denso y estable en hoja carta.
+   Va al final para ganar a todos los bloques print legacy.
+   ============================================================ */
+@media print {
+    @page {
+        size: Letter portrait;
+        margin: 0.34in;
+    }
+
+    html,
+    body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    body {
+        zoom: 1.04 !important;
+        font-size: 8.2pt !important;
+        line-height: 1.14 !important;
+    }
+
+    body.print-compacto {
+        zoom: 0.99 !important;
+    }
+
+    body.print-ultra {
+        zoom: 0.94 !important;
+    }
+
+    .header-fixed {
+        padding: 4px 0 7px !important;
+        margin: 0 0 6px !important;
+        border-bottom: 2px solid var(--brand-gold) !important;
+    }
+
+    .brand-logos {
+        gap: 78px !important;
+        width: 100% !important;
+        justify-content: center !important;
+    }
+
+    .brand-logo-sadasi,
+    .brand-logo-altta {
+        height: 44px !important;
+    }
+
+    .brand-devs { gap: 42px !important; padding-top: 4px !important; }
+    .header-fixed .brand-dev-logo { height: 26px !important; margin-bottom: 0 !important; }
+
+    .brand-title span {
+        color: var(--brand-orange) !important;
+        font-size: 12pt !important;
+        line-height: 1 !important;
+    }
+
+    .brand-title strong {
+        color: var(--brand-navy-deep) !important;
+        font-size: 14pt !important;
+        line-height: 1 !important;
+    }
+
+    .container {
+        border-color: #cfd4db !important;
+    }
+
+    .bloque {
+        padding: 7px 10px !important;
+    }
+
+    .bloque h2 {
+        color: var(--brand-navy) !important;
+        font-size: 9.2pt !important;
+        line-height: 1.12 !important;
+        margin-bottom: 5px !important;
+    }
+
+    .bloque h2::after {
+        width: 30px !important;
+        height: 2px !important;
+        margin-top: 3px !important;
+        background: var(--brand-orange) !important;
+    }
+
+    .campo {
+        margin-bottom: 3px !important;
+    }
+
+    .campo-horizontal {
+        grid-template-columns: 184px minmax(0, 1fr) !important;
+        column-gap: 8px !important;
+        min-height: 20px !important;
+    }
+
+    .column-2 .campo-horizontal {
+        grid-template-columns: 170px minmax(0, 1fr) !important;
+    }
+
+    #detallesPrecio .campo-horizontal {
+        grid-template-columns: 182px minmax(0, 1fr) !important;
+    }
+
+    .campo-horizontal label {
+        color: var(--brand-text) !important;
+        font-size: 8.1pt !important;
+        line-height: 1.1 !important;
+    }
+
+    .campo-horizontal input,
+    .campo-horizontal select,
+    #mesesPagarEnganche {
+        min-height: 20px !important;
+        padding: 2px 5px !important;
+        font-size: 9.1pt !important;
+        line-height: 1.12 !important;
+        border-radius: 4px !important;
+        background: #f4f7fb !important;
+        color: var(--brand-text) !important;
+    }
+
+    #Azular,
+    #prototipo,
+    #departamentoSelect {
+        font-size: 7.4pt !important;
+        line-height: 1.05 !important;
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+    }
+
+    .valor-destacado input {
+        background: var(--brand-cream) !important;
+        border-color: var(--brand-gold) !important;
+        color: #111 !important;
+        font-weight: 900 !important;
+        font-size: 10pt !important;
+        text-shadow: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .formula-gastos {
+        font-size: 6.8pt !important;
+        line-height: 1.08 !important;
+    }
+
+    #labelPrecioNetoCasa3 .formula-gastos,
+    #labelPrecioNetoDepartamento3 .formula-gastos {
+        font-size: 7.4pt !important;
+        font-weight: 700 !important;
+        line-height: 1.08 !important;
+    }
+
+    /* Impresión: el selector de Prototipo/Departamento usa todo el ancho del
+       cuadro (para que el nombre no se corte) y "# de la Unidad" es una segunda
+       fila con su propia etiqueta, alineada como las demás. */
+    #prototipoContainer,
+    #departamentoContainer {
+        grid-template-columns: 184px minmax(0, 1fr) !important;
+        row-gap: 3px !important;
+    }
+
+    .leyenda-notarial p {
+        font-size: 5.8pt !important;
+        line-height: 1.1 !important;
+        margin: 3px 0 0 !important;
+    }
+
+    #planEnganche {
+        padding: 8px 10px !important;
+    }
+
+    #tablaEnganche {
+        margin-top: 5px !important;
+    }
+
+    #tablaEnganche tbody {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0 !important;
+        background: #fff !important;
+        border-radius: 5px !important;
+    }
+
+    #tablaEnganche tbody tr {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        flex: 1 1 calc(100% / var(--cols-print, var(--cols))) !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        padding: 0 0 7px !important;
+        border-right: 1px solid var(--brand-line) !important;
+        border-bottom: 1px solid var(--brand-line) !important;
+    }
+
+    #tablaEnganche tbody td:first-child {
+        align-self: center !important;
+        background: var(--brand-navy) !important;
+        color: #fff !important;
+        font-size: 6.8pt !important;
+        line-height: 1.05 !important;
+        padding: 2px 3px !important;
+        margin-bottom: 5px !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    #tablaEnganche tbody td:nth-child(2) {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0 6px !important;
+        margin-bottom: 3px !important;
+    }
+
+    #tablaEnganche tbody td:nth-child(3) {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0 6px !important;
+    }
+
+    #tablaEnganche .monto-pago,
+    #tablaEnganche .fecha-pago {
+        min-height: 19px !important;
+        padding: 2px 3px !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+
+    #tablaEnganche .monto-pago {
+        width: 94px !important;
+        max-width: calc(100% - 6px) !important;
+        background: var(--brand-cream) !important;
+        border-color: var(--brand-gold) !important;
+        color: var(--brand-navy) !important;
+        font-size: 8.5pt !important;
+    }
+
+    #tablaEnganche .fecha-pago {
+        width: 104px !important;
+        max-width: calc(100% - 6px) !important;
+        background: #fff !important;
+        color: var(--brand-text) !important;
+        font-size: 7.4pt !important;
+    }
+
+    #tablaEnganche tfoot {
+        margin-top: 6px !important;
+    }
+
+    #tablaEnganche tfoot tr.fila-total {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        column-gap: 18px !important;
+        justify-content: stretch !important;
+        border-top: 2px solid var(--brand-orange) !important;
+        padding-top: 5px !important;
+    }
+
+    #tablaEnganche tfoot tr.fila-total td {
+        font-size: 10pt !important;
+    }
+
+    #tablaEnganche tfoot tr.fila-total td:first-child {
+        text-align: right !important;
+    }
+
+    #tablaEnganche tfoot tr.fila-total .total-numero {
+        text-align: left !important;
+    }
+
+    #tablaEnganche tfoot #totalPagos {
+        color: #111 !important;
+        font-weight: 900 !important;
+        font-size: 11.5pt !important;
+        text-shadow: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .datos-asesor-grid {
+        gap: 6px 44px !important;
+    }
+
+    #datosAsesor .campo-horizontal {
+        width: 240px !important;
+    }
+
+    .final {
+        padding: 5px 8px !important;
+        margin-top: 4px !important;
+    }
+
+    .final h2 {
+        font-size: 10.4pt !important;
+        line-height: 1.08 !important;
+        margin: 2px 0 !important;
+    }
+
+    .final .leyenda,
+    .final p {
+        font-size: 6pt !important;
+        line-height: 1.1 !important;
+        margin: 2px auto 0 !important;
+    }
+
+    .final .leyenda {
+        display: block !important;
+        width: 100% !important;
+        max-width: 7.55in !important;
+        padding: 0 0.04in !important;
+        text-align: center !important;
+        font-size: 6.1pt !important;
+        line-height: 1.1 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Departamentos hereda el mismo formato compacto de casas. Solo se
+       conserva una etiqueta un poco más ancha en Detalles de Precio porque
+       sus textos son más largos ("Valor Avalúo del Departamento:"). */
+    body.es-departamento #detallesPrecio .campo-horizontal {
+        grid-template-columns: 188px minmax(0, 1fr) !important;
+    }
+
+    /* Departamentos con 7+ pagos: antes de llegar al modo compacto general
+       (>10 meses), ya necesitan comprimir para no cortarse abajo. */
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) {
+        zoom: 0.97 !important;
+    }
+
+    body.es-departamento.print-compacto {
+        zoom: 0.92 !important;
+    }
+
+    body.es-departamento.print-ultra {
+        zoom: 0.88 !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #detallesPrecio,
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .leyenda-notarial {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .column-2 .campo {
+        margin-bottom: 2px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .column-2 .campo-horizontal {
+        min-height: 18px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #planEnganche {
+        padding: 4px 8px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #tablaEnganche tbody tr {
+        padding-bottom: 3px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #tablaEnganche tbody td:first-child {
+        margin-bottom: 2px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #tablaEnganche .monto-pago,
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #tablaEnganche .fecha-pago {
+        min-height: 15px !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #datosAsesor,
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .final {
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+    }
+
+    body.es-departamento:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .final h2 {
+        font-size: 9pt !important;
+    }
+
+    /* Desde 6 pagos puede tocar una fila de 6 columnas. Las columnas las
+       decide --cols-print; aquí solo se compacta el interior para no cortar
+       montos ni fechas. */
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche tbody tr {
+        padding-bottom: 4px !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche tbody td:first-child {
+        font-size: 6.2pt !important;
+        padding: 1px 2px !important;
+        margin-bottom: 2px !important;
+        min-width: 42px !important;
+        white-space: nowrap !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche tbody td:nth-child(2),
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche tbody td:nth-child(3) {
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche .monto-pago,
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche .fecha-pago {
+        min-height: 16px !important;
+        padding: 1px 2px !important;
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche .monto-pago {
+        font-size: 7.1pt !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(6)) #tablaEnganche .fecha-pago {
+        font-size: 6.4pt !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche tbody tr {
+        padding-bottom: 3px !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche tbody td:nth-child(2),
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche tbody td:nth-child(3) {
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche .monto-pago,
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche .fecha-pago {
+        min-height: 15px !important;
+        padding: 0 1px !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche .monto-pago {
+        font-size: 6.5pt !important;
+    }
+
+    body:has(#tablaEnganche tbody tr:nth-child(11)) #tablaEnganche .fecha-pago {
+        font-size: 5.8pt !important;
+    }
+
+    /* Ajuste final: Departamentos + Cofinavit en impresión.
+       Evita que el documento se cargue a un lado por zoom agresivo y
+       compacta solo lo necesario para mantener una hoja limpia. */
+    body.es-departamento.plan-cofinavit {
+        zoom: 1 !important;
+        transform-origin: top center !important;
+    }
+
+    body.es-departamento.plan-cofinavit .container {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    body.es-departamento.plan-cofinavit #datosAsesor {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+
+    body.es-departamento.plan-cofinavit .final {
+        margin-top: 2px !important;
+        padding-top: 3px !important;
+        padding-bottom: 3px !important;
+    }
+
+    body.es-departamento.plan-cofinavit .final h2 {
+        margin: 1px 0 !important;
+        line-height: 1.03 !important;
+    }
+
+    body.es-departamento.plan-bancario .final .leyenda,
+    body.es-departamento.plan-infonavit .final .leyenda,
+    body.es-departamento.plan-fovissste .final .leyenda,
+    body.es-departamento.plan-cofinavit .final .leyenda {
+        width: 100% !important;
+        max-width: 7.62in !important;
+        padding-left: 0.04in !important;
+        padding-right: 0.04in !important;
+        text-wrap: balance !important;
+        font-size: 5.9pt !important;
+        line-height: 1.07 !important;
+        margin-top: 1px !important;
+    }
+
+    body.es-departamento.plan-cofinavit:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) {
+        zoom: 0.97 !important;
+    }
+
+    body.es-departamento.plan-cofinavit.print-compacto {
+        zoom: 0.94 !important;
+    }
+
+    body.es-departamento.plan-cofinavit.print-ultra {
+        zoom: 0.90 !important;
+    }
+
+    body.es-departamento.plan-cofinavit:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) #detallesPrecio,
+    body.es-departamento.plan-cofinavit:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .leyenda-notarial {
+        padding-top: 7px !important;
+        padding-bottom: 7px !important;
+    }
+
+    body.es-departamento.plan-cofinavit:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .column-2 .campo {
+        margin-bottom: 3px !important;
+    }
+
+    body.es-departamento.plan-cofinavit:not(.print-compacto):has(#tablaEnganche tbody tr:nth-child(7)) .column-2 .campo-horizontal {
+        min-height: 20px !important;
+    }
+
+    body.es-departamento.plan-cofinavit #tablaEnganche .fecha-pago {
+        width: 108px !important;
+        max-width: calc(100% - 4px) !important;
+    }
+}

@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getPrecioPublicado } from "@/lib/precios";
 
 export type InventoryProperty = {
   id: string;
@@ -31,7 +32,14 @@ export function getInventory(): InventoryProperty[] {
   const filePath = path.join(process.cwd(), "data", "inventory.json");
   const fileContents = fs.readFileSync(filePath, "utf8");
   const data = JSON.parse(fileContents);
-  return data.inventory_stitch_2026;
+  // inventory.json manda el CONTENIDO (fotos, niveles, amenidades, recorrido);
+  // los PRECIOS los manda data/precios.json, que es la misma fuente que come el
+  // cotizador. Asi un cambio de precio se hace en un solo lugar y la web y la
+  // cotizacion formal no pueden contradecirse. Ver lib/precios.ts.
+  return (data.inventory_stitch_2026 as InventoryProperty[]).map((p) => ({
+    ...p,
+    ...getPrecioPublicado(p.id),
+  }));
 }
 
 export function getPropertiesByDev(devName: string): InventoryProperty[] {

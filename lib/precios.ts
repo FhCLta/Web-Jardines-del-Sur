@@ -1,0 +1,102 @@
+// Fuente unica de precios: data/precios.json.
+//
+// El MISMO archivo alimenta al cotizador interno (via
+// scripts/gen-cotizador-precios.mjs -> public/cotizador/precios.js) y al sitio
+// publico (aqui). Antes cada uno tenia su propia copia de los precios y podian
+// desincronizarse: el cliente veia un precio en la web y recibia otro en la
+// cotizacion formal por WhatsApp.
+//
+// PARA CAMBIAR PRECIOS: editar data/precios.json y correr
+//   node scripts/gen-cotizador-precios.mjs
+//
+// QUE PUBLICA LA WEB: solo las variantes con `web: "<id del inventario>"`. Hoy
+// son 11 de 31 — de los departamentos se publica una variante de nivel/vista por
+// modelo (la etiqueta la pone VARIANT_NOTE en MortgageCalculator). Publicar otra
+// variante = mover esa marca en precios.json, no tocar codigo.
+
+import preciosData from "@/data/precios.json";
+
+type Escrituracion = Record<string, number>;
+
+type EntradaBase = {
+  dev: string;
+  modelo: string;
+  precio_lista: number;
+  bono: number;
+  avaluo_tramite: number;
+  escrituracion: Escrituracion;
+  web?: string;
+};
+
+type Casa = EntradaBase & { promocion?: { bono_extra: number } };
+type Departamento = EntradaBase & {
+  nivel: string;
+  vista: string | null;
+  prototipo: string;
+};
+
+type Precios = {
+  actualizado: string;
+  desarrollos: Record<
+    string,
+    { precio_terreno_excedente: number; cuota_contingencia: number }
+  >;
+  casas: Casa[];
+  departamentos: Departamento[];
+};
+
+const precios = preciosData as unknown as Precios;
+
+export type PrecioPublicado = {
+  /** Lo que paga el cliente: precio de lista menos el bono. */
+  precio: number;
+  /** Valor comercial del perito; es sobre este que presta el banco. */
+  valor_avaluo: number;
+};
+
+/**
+ * Precio publicable por id del inventario. El NETO es `precio_lista - bono`;
+ * la promocion de casas NO se aplica (es una variante aparte, no el precio
+ * de lista vigente).
+ */
+function construirMapa(): Map<string, PrecioPublicado> {
+  const mapa = new Map<string, PrecioPublicado>();
+  const todas: EntradaBase[] = [...precios.casas, ...precios.departamentos];
+
+  for (const entrada of todas) {
+    if (!entrada.web) continue;
+    if (mapa.has(entrada.web)) {
+      throw new Error(
+        `data/precios.json: el id "${entrada.web}" esta marcado como publicable en mas de una variante. Solo una puede alimentar la web.`
+      );
+    }
+    mapa.set(entrada.web, {
+      precio: entrada.precio_lista - entrada.bono,
+      valor_avaluo: entrada.precio_lista,
+    });
+  }
+  return mapa;
+}
+
+const PRECIOS_POR_ID = construirMapa();
+
+/**
+ * Devuelve el precio publicado de un modelo del inventario.
+ *
+ * Si un id no esta en precios.json revienta a proposito, en build: un modelo
+ * publicado sin precio en la fuente unica saldria en $0 o con el precio viejo
+ * congelado en inventory.json, y nadie lo notaria hasta que un cliente lo viera.
+ */
+export function getPrecioPublicado(id: string): PrecioPublicado {
+  const p = PRECIOS_POR_ID.get(id);
+  if (!p) {
+    throw new Error(
+      `data/precios.json no tiene precio para el modelo "${id}". Agrega la variante y marcala con "web": "${id}".`
+    );
+  }
+  return p;
+}
+
+export function getFechaPrecios(): string {
+  return precios.actualizado;
+}

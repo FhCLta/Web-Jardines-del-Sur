@@ -7,7 +7,9 @@ import ContactNavBtn from "@/components/ContactNavBtn";
 import MortgageCalculator from "@/components/MortgageCalculator";
 import pageStyles from "@/app/page.module.css";
 import styles from "./calculadora.module.css";
-import inventoryData from "@/data/inventory.json";
+// Via getInventory (no leyendo inventory.json directo) para que los precios
+// salgan de data/precios.json, la misma fuente que alimenta al cotizador.
+import { getInventory } from "@/app/(desarrollos)/_lib/model-utils";
 import { SITE_URL } from "@/lib/site";
 
 const PHONE_E164 = "529982059044";
@@ -70,9 +72,7 @@ type InventoryItem = {
 };
 
 export default function Page() {
-  const models = (
-    inventoryData.inventory_stitch_2026 as InventoryItem[]
-  )
+  const models = (getInventory() as unknown as InventoryItem[])
     .filter((p) => typeof p.precio === "number" && p.precio > 0)
     .map((p) => ({
       id: p.id,
