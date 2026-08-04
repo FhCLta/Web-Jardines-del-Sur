@@ -188,6 +188,39 @@
   justify-self: center;
 }
 
+/* Última fila centrada cuando queda incompleta (mismo criterio que la rejilla
+   del home en DevelopmentTabs.module.css). Sin esto, un desarrollo de 4 modelos
+   —La Rioja 2— mostraba 3 arriba y 1 huérfana pegada a la izquierda.
+
+   Rejilla de 6 columnas con tarjetas de span 2: da EXACTAMENTE el mismo ancho
+   que 3 columnas, (W − 2·gap)/3, pero permite arrancar una fila a media columna.
+
+   Desde 1100px, que es donde `auto-fit` empieza a dar 3 columnas (medido). Por
+   debajo entrega 2, donde 4 modelos ya caen 2+2 y no hay huérfanas. */
+@media (min-width: 1100px) {
+  .modelsGrid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .modelsGrid > * {
+    grid-column: span 2;
+  }
+
+  /* Sobra UNA (4, 7, 10... modelos) */
+  .modelsGrid > :last-child:nth-child(3n - 2) {
+    grid-column: 3 / span 2;
+  }
+
+  /* Sobran DOS (5, 8, 11... modelos) */
+  .modelsGrid > :nth-last-child(2):nth-child(3n - 2) {
+    grid-column: 2 / span 2;
+  }
+
+  .modelsGrid > :nth-last-child(2):nth-child(3n - 2) ~ * {
+    grid-column: 4 / span 2;
+  }
+}
+
 .modelLinks {
   margin: 2.75rem 0 0;
   padding: 1.5rem 0 0;

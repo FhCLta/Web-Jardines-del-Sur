@@ -215,9 +215,40 @@
   }
 }
 
+/* Escritorio: 3 tarjetas por fila, pero con la ÚLTIMA FILA CENTRADA cuando
+   queda incompleta. Sin esto, La Rioja 2 (4 modelos) se veía 3 arriba y 1
+   huérfana pegada a la izquierda, y Lirios 2 (1 modelo) quedaba una tarjeta
+   sola en la esquina.
+
+   El truco: la rejilla es de 6 columnas y cada tarjeta ocupa 2. El ancho
+   resultante es IDÉNTICO al de 3 columnas —(W − 2·gap)/3 en ambos casos—, así
+   que las tarjetas no cambian de tamaño; lo único que se gana es poder
+   arrancar una fila a media columna para centrarla.
+
+   Solo aplica de 1024px hacia arriba: en móvil (1 col) y tablet (2 col) no
+   quedan huérfanas, y no se toca nada. */
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .grid > * {
+    grid-column: span 2;
+  }
+
+  /* Sobra UNA (4, 7, 10... modelos): va al centro. */
+  .grid > :last-child:nth-child(3n - 2) {
+    grid-column: 3 / span 2;
+  }
+
+  /* Sobran DOS (5, 8, 11... modelos): se corren media columna cada una para
+     quedar centradas como par. */
+  .grid > :nth-last-child(2):nth-child(3n - 2) {
+    grid-column: 2 / span 2;
+  }
+
+  .grid > :nth-last-child(2):nth-child(3n - 2) ~ * {
+    grid-column: 4 / span 2;
   }
 }
 
