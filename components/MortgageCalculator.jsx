@@ -28,6 +28,9 @@ const SUGGESTED_PAYMENT_TO_INCOME = 0.5; // regla 50/50: mensualidad ≤ 50% del
 
 const TERMS = [5, 10, 15, 20];
 
+// Cuánto avanza el slider de aportación por escalón.
+const CASH_STEP = 5000;
+
 // Valor centinela del selector para el modo "otra propiedad". No puede chocar
 // con ningún id del inventario (esos son tipo "jds6-capua").
 const MANUAL_ID = "__manual__";
@@ -113,7 +116,21 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
   const creditMax = appraisal * LTV_ON_APPRAISAL;
   const totalCost = price + closingCosts;
   const requiredCash = Math.max(0, Math.ceil(totalCost - creditMax));
-  const maxCash = Math.ceil(requiredCash + price * 0.3);
+  // SIN TOPE ARTIFICIAL: el máximo es cubrirlo TODO (precio + gastos), o sea
+  // pago de contado. Antes el techo era "el mínimo + 30% del precio", un
+  // número puesto a ojo y sin regla de negocio detrás: al cliente que traía
+  // más ahorro se le recortaba la aportación EN SILENCIO (`Math.min` de
+  // abajo) y nunca se le decía por qué. En la vida real puedes poner desde el
+  // mínimo hasta el último peso, y la calculadora tiene que poder hacer lo
+  // mismo.
+  const maxCash = Math.ceil(totalCost);
+  // El slider avanza de CASH_STEP en CASH_STEP desde el mínimo, así que el
+  // último escalón casi nunca cae justo sobre el total ($1,945,000 de
+  // $1,948,380). Se estira la barra al siguiente múltiplo y el VALOR se limita
+  // a `maxCash` → el final del slider siempre es el total exacto y nunca
+  // quedan unos miles "faltando" para completar.
+  const sliderMax =
+    requiredCash + Math.ceil((maxCash - requiredCash) / CASH_STEP) * CASH_STEP;
 
   useEffect(() => {
     setCash(requiredCash);
@@ -124,20 +141,34 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
 
   const calc = useMemo(() => {
     const principal = Math.max(0, totalCost - cashTotal);
+    // Pago de contado: la aportación cubre precio + gastos y no queda crédito.
+    // Sin crédito NO hay mensualidad ni seguros: el de vida, el de daños y la
+    // comisión de administración los exige el banco como condición del
+    // préstamo, así que sin préstamo no existen. Calcularlos igual pintaría
+    // una "mensualidad" de ~$357 (el seguro de daños sobre el avalúo) a quien
+    // ya pagó la casa completa.
+    // El `totalCost > 0` no es decorativo: en modo manual, con los campos
+    // vacíos, el principal también es 0 — sin el guard la calculadora
+    // anunciaría un "pago de contado" de $0 antes de que el cliente escriba
+    // un solo número.
+    const isCash = totalCost > 0 && principal <= 0;
     const monthlyRate = rate / 100 / 12;
     const n = years * 12;
-    const base =
-      (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
-    const insurance =
-      principal * LIFE_INSURANCE_FACTOR +
-      appraisal * DAMAGE_INSURANCE_FACTOR +
-      principal * ADMIN_FEE_FACTOR;
+    const base = isCash
+      ? 0
+      : (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -n));
+    const insurance = isCash
+      ? 0
+      : principal * LIFE_INSURANCE_FACTOR +
+        appraisal * DAMAGE_INSURANCE_FACTOR +
+        principal * ADMIN_FEE_FACTOR;
     const total = base + insurance;
     return {
       principal,
       base,
       insurance,
       total,
+      isCash,
       suggestedIncome: total / SUGGESTED_PAYMENT_TO_INCOME,
       noDownPayment: requiredCash === 0,
       // Qué porcentaje del avalúo representa el crédito. Se calcula, no se
@@ -157,18 +188,40 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
   //  b) topado en 90%   → el crédito NO alcanza; el faltante lo pone el cliente
   //     (Flamboyán, Casa Noni de ambos devs, Cedro Plus de Lirios).
   //  c) aportación voluntaria → el crédito cubre lo que queda tras el efectivo.
+  //  d) contado → no hay crédito; el % del avalúo sería 0 y "cubre el resto"
+  //     no significaría nada.
   // El % siempre con 2 decimales para que cuadre al multiplicarlo por el avalúo.
   const atCap = calc.ltvPct >= 89.995;
-  const creditSub =
-    cashTotal === 0
+  const creditSub = calc.isCash
+    ? "No necesitas crédito: tu aportación cubre precio y gastos"
+    : cashTotal === 0
       ? `Cubre precio y gastos · ${fmtPct(calc.ltvPct)}% del avalúo (tope 90%)`
       : atCap
-      ? "El máximo que presta el banco: 90% del avalúo · el resto lo cubre tu aportación"
-      : `Cubre el resto tras tu aportación · ${fmtPct(calc.ltvPct)}% del avalúo (tope 90%)`;
+        ? "El máximo que presta el banco: 90% del avalúo · el resto lo cubre tu aportación"
+        : `Cubre el resto tras tu aportación · ${fmtPct(calc.ltvPct)}% del avalúo (tope 90%)`;
 
+  // Qué le llega a Florencio por WhatsApp. En contado NO aplica el "X al mes a
+  // N años" (no hay mensualidad ni plazo): ese caso manda el monto total.
+  const waInfonavit = hasInfonavit
+    ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit."
+    : "";
+  const waResultado = calc.isCash
+    ? `Lo hice pagando de CONTADO: ${fmtMXN(totalCost)} en total (precio + gastos de escrituración), sin crédito.`
+    : `Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${
+        cashTotal === 0
+          ? isManual
+            ? ", sin enganche"
+            : ", sin enganche (el crédito sobre avalúo cubre precio y gastos)"
+          : ` con ${fmtMXN(cashTotal)} de efectivo inicial`
+      }.`;
   const waMessage = isManual
-    ? `Hola, hice el ejercicio de cotización en el sitio de Altta Homes con mis propios valores: precio ${fmtMXN(price)}${customAppraisal ? ` y avalúo ${fmtMXN(appraisal)}` : ""}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${cashTotal === 0 ? ", sin enganche" : ` con ${fmtMXN(cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`
-    : `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. Me estimó ${fmtMXN(calc.total)} al mes a ${years} años${cashTotal === 0 ? ", sin enganche (el crédito sobre avalúo cubre precio y gastos)" : ` con ${fmtMXN(cashTotal)} de efectivo inicial`}.${hasInfonavit ? " Tengo crédito Infonavit y me interesa saber si me conviene Cofinavit o Apoyo Infonavit." : ""} ¿Me ayudas con una cotización exacta?`;
+    ? // El link de WhatsApp de la caja manual está visible ANTES de que el
+      // cliente escriba nada ("¿No conoces el avalúo? … escríbenos"). Sin este
+      // caso el mensaje salía con "precio $0 … $0 al mes".
+      !manualReady
+      ? `Hola, quiero cotizar una propiedad en el sitio de Altta Homes pero no tengo a la mano el valor de avalúo.${waInfonavit} ¿Me ayudas?`
+      : `Hola, hice el ejercicio de cotización en el sitio de Altta Homes con mis propios valores: precio ${fmtMXN(price)} y avalúo ${fmtMXN(appraisal)}. ${waResultado}${waInfonavit} ¿Me ayudas con una cotización exacta?`
+    : `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. ${waResultado}${waInfonavit} ¿Me ayudas con una cotización exacta?`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
   return (
@@ -282,15 +335,18 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             className={styles.slider}
             type="range"
             min={requiredCash}
-            max={maxCash}
-            step="5000"
+            max={sliderMax}
+            step={CASH_STEP}
             value={cashTotal}
-            onChange={(e) => setCash(Number(e.target.value))}
+            /* El clamp a `maxCash` es lo que hace que el final de la barra
+               caiga en el total EXACTO y no en el último múltiplo de 5,000. */
+            onChange={(e) => setCash(Math.min(Number(e.target.value), maxCash))}
           />
           <span className={styles.fieldHint}>
             {requiredCash === 0
               ? "Este modelo no la necesita: el crédito sobre avalúo cubre precio y gastos. Si aportas algo, tu mensualidad baja."
-              : `Mínimo para este modelo: ${fmtMXN(requiredCash)} (el crédito cubre el resto). Si aportas más, tu mensualidad baja.`}
+              : `Mínimo para este modelo: ${fmtMXN(requiredCash)} (el crédito cubre el resto). Si aportas más, tu mensualidad baja.`}{" "}
+            Puedes subirla hasta cubrir el total y comprar de contado.
           </span>
         </label>
 
@@ -388,19 +444,37 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           </p>
         ) : (
         <>
-        {calc.noDownPayment && (
+        {/* En contado el badge de "sin enganche" se contradice solo: no hay
+            crédito que cubra nada porque ya pagaste todo. */}
+        {calc.isCash ? (
           <p className={styles.badge}>
             <span aria-hidden="true">⭐</span>
             <span>
-              Estrenas <strong>sin enganche</strong> — el crédito cubre precio y gastos
+              Pago de <strong>contado</strong> — sin crédito y sin mensualidad
             </span>
           </p>
+        ) : (
+          calc.noDownPayment && (
+            <p className={styles.badge}>
+              <span aria-hidden="true">⭐</span>
+              <span>
+                Estrenas <strong>sin enganche</strong> — el crédito cubre precio y gastos
+              </span>
+            </p>
+          )
         )}
 
-        <p className={styles.resultsEyebrow}>Mensualidad estimada*</p>
+        {/* En contado el número grande deja de ser la mensualidad (sería "$0
+            /mes", que no informa nada) y pasa a ser lo que de verdad
+            desembolsas: precio + gastos de escrituración. */}
+        <p className={styles.resultsEyebrow}>
+          {calc.isCash ? "Pago único de contado*" : "Mensualidad estimada*"}
+        </p>
         <p className={styles.resultsTotal}>
-          {fmtMXN(calc.total)}
-          <span className={styles.resultsPerMonth}> /mes</span>
+          {calc.isCash ? fmtMXN(totalCost) : fmtMXN(calc.total)}
+          <span className={styles.resultsPerMonth}>
+            {calc.isCash ? " en total" : " /mes"}
+          </span>
         </p>
 
         <ul className={styles.breakdown}>
@@ -458,10 +532,14 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
               {cashTotal === 0 ? "$0" : fmtMXN(cashTotal)}
             </strong>
           </li>
-          <li>
-            <span>Ingreso sugerido</span>
-            <strong>{fmtMXN(calc.suggestedIncome)}</strong>
-          </li>
+          {/* Sin mensualidad no hay ingreso que sugerir (saldría "$0" y el
+              cliente lo leería como "no necesitas ingresos"). */}
+          {!calc.isCash && (
+            <li>
+              <span>Ingreso sugerido</span>
+              <strong>{fmtMXN(calc.suggestedIncome)}</strong>
+            </li>
+          )}
         </ul>
 
         <a className={`btn btn-primary ${styles.cta}`} href={waHref} target="_blank" rel="noreferrer">
