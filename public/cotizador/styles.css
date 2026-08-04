@@ -2,7 +2,7 @@
 /* Tipografias del sitio: Montserrat para titulos, Playfair Display para la
    frase de cierre. El CUERPO sigue en Arial a proposito: cambiar la fuente
    base mueve las metricas y el layout de impresion esta calibrado al milimetro. */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 /* Paleta alineada con el sitio (app/globals.css) para que el cotizador se vea
    a tono con alttahomescancun.mx. Los NOMBRES de las variables se conservan
@@ -211,16 +211,22 @@ td {
     font-family: 'Montserrat', Arial, sans-serif;
 }
 
+/* "Presupuesto" en italica serif contra "Para tu Hogar Ideal" en sans solido:
+   el contraste entre las dos tipografias del sitio. Los @media de abajo solo
+   redefinen tamano/color, asi que la familia y la italica salen de aqui. */
 .brand-title span {
     color: var(--brand-orange);
-    font-size: 23px;
-    font-weight: 700;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 25px;
+    font-weight: 400;
 }
 
 .brand-title strong {
     color: var(--brand-navy-deep);
-    font-size: 26px;
-    font-weight: 800;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 700;
     letter-spacing: 0;
 }
 
