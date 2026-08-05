@@ -400,3 +400,48 @@
     text-align: center;
   }
 }
+
+/* ── Composición centrada (SOLO escritorio) ──────────────────────────────────
+   Pedido de Florencio: la página se veía descuadrada porque el hero iba
+   alineado a la izquierda y `.promoGrid` usaba `auto-fill`, que crea tantas
+   columnas como quepan (4 en pantalla ancha) y solo llenaba 2 → las tarjetas
+   quedaban arrimadas a la izquierda con un hueco grande a la derecha.
+
+   Va de 701px hacia arriba porque el bloque móvil de este archivo corta en
+   700px: así el celular no se toca. El texto DENTRO de cada tarjeta se queda
+   alineado a la izquierda, que es como mejor se leen las listas de beneficios. */
+@media (min-width: 701px) {
+  .hero {
+    text-align: center;
+  }
+
+  /* .crumbs es flex, no lo centra `text-align` */
+  .crumbs {
+    justify-content: center;
+  }
+
+  /* Traen `max-width`, así que necesitan márgenes automáticos para centrarse */
+  .hero h1,
+  .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* `auto-fit` colapsa las columnas vacías y el tope de 360px evita que con
+     pocas promos las tarjetas se estiren a lo ancho de toda la página. */
+  .promoGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+    justify-content: center;
+  }
+
+  .nota {
+    text-align: center;
+    max-width: 62ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .evergreenTitle {
+    text-align: center;
+  }
+}
