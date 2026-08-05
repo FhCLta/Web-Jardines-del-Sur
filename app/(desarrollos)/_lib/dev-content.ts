@@ -80,22 +80,23 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · julio 2026",
-      nota: "Los minisplits no incluyen instalación. Promociones sujetas a disponibilidad y vigencia; consulta requisitos con tu asesor.",
+      updatedLabel: "Promociones vigentes · agosto 2026",
+      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y para compras firmadas dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
       items: [
         {
           modelo: "Modelo Capua",
           modeloSlug: "departamento-capua",
-          ubicaciones: "Jardines del Sur 6 · Ocelote y Antílope",
+          ubicaciones:
+            "Jardines del Sur 6 · Ocelote N, O, P y Q · Antílope N, O, P y Q",
           beneficios: ["2 minisplits de 12,000 BTU"],
-          vigencia: "31 de julio de 2026",
+          vigencia: "31 de agosto de 2026",
         },
         {
           modelo: "Modelo Noni",
           modeloSlug: "casa-noni",
           ubicaciones: "Jardines del Sur 6 · Jabalí Mz 30 L14",
           beneficios: ["2 minisplits de 12,000 BTU"],
-          vigencia: "31 de julio de 2026",
+          vigencia: "31 de agosto de 2026",
         },
       ],
     },
@@ -207,6 +208,30 @@ export const DEVS: Record<DevSlug, DevContent> = {
     location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
+    promos: {
+      updatedLabel: "Promociones vigentes · agosto 2026",
+      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y para compras firmadas dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
+      items: [
+        {
+          modelo: "Casa Modelo Álamo",
+          modeloSlug: "casa-modelo-alamo",
+          ubicaciones: "La Rioja 2 · Osos casa 15",
+          beneficios: ["Paquete de paneles"],
+          vigencia: "31 de agosto de 2026",
+        },
+        {
+          modelo: "Casa Noni Elite",
+          modeloSlug: "casa-noni-elite",
+          ubicaciones: "La Rioja 2 · Oso casas 05 y 07",
+          beneficios: [
+            "Descuento de $50,000",
+            "1 minisplit de 18,000 BTU",
+            "2 minisplits de 12,000 BTU",
+          ],
+          vigencia: "31 de agosto de 2026",
+        },
+      ],
+    },
     hero: {
       slides: [
         "/optimized/hero/vista-aerea.webp",

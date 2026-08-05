@@ -6,6 +6,7 @@ import ContactNavBtn from "@/components/ContactNavBtn";
 import pageStyles from "@/app/page.module.css";
 import styles from "../promos.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
+import { getPropertiesByDev, getModelType } from "./model-utils";
 import { SITE_URL } from "@/lib/site";
 
 const PHONE_E164 = "529982059044";
@@ -30,6 +31,21 @@ const EVERGREEN = [
 export default function PromosPage({ slug }: { slug: DevSlug }) {
   const dev = DEVS[slug];
   const promos = dev.promos;
+
+  // Qué vende realmente este desarrollo, leído del inventario y no escrito a
+  // mano: La Rioja 2 solo tiene casas y Lirios solo departamentos, así que el
+  // texto fijo "casas y departamentos" era falso en dos de los tres silos.
+  const tipos = new Set(
+    getPropertiesByDev(dev.name)
+      .map((p) => getModelType(p.nombre_modelo))
+      .filter(Boolean)
+  );
+  const queVende =
+    tipos.has("Casa") && tipos.has("Departamento")
+      ? "casas y departamentos"
+      : tipos.has("Departamento")
+        ? "departamentos"
+        : "casas";
   const waMsg = `Hola, vi las promociones de ${dev.name} en Cancún y quiero más información y disponibilidad.`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMsg)}`;
   const pageUrl = `${SITE_URL}/${dev.slug}/promociones`;
@@ -79,9 +95,9 @@ export default function PromosPage({ slug }: { slug: DevSlug }) {
             <p className={styles.updated}>{promos.updatedLabel}</p>
           )}
           <p className={styles.lead}>
-            Aprovecha las promociones y descuentos vigentes en casas y
-            departamentos de {dev.name}, en la Zona Sur de Cancún. Consulta
-            disponibilidad y requisitos con tu asesor autorizado de Altta Homes.
+            Aprovecha las promociones y descuentos vigentes en {queVende} de{" "}
+            {dev.name}, en la Zona Sur de Cancún. Consulta disponibilidad y
+            requisitos con tu asesor autorizado de Altta Homes.
           </p>
           <a
             href={waHref}
