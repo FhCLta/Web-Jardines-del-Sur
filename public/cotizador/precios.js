@@ -2,7 +2,7 @@
 // Fuente: data/precios.json  |  Generador: scripts/gen-cotizador-precios.mjs
 // Para cambiar precios: edita data/precios.json y corre
 //   node scripts/gen-cotizador-precios.mjs
-// Precios actualizados al 2026-08-04.
+// Precios actualizados al 2026-08-05.
 window.COTIZADOR_PRECIOS = {
   "datosAzular": {
     "Azular1": {
@@ -10,8 +10,7 @@ window.COTIZADOR_PRECIOS = {
         "FLAMBOYAN",
         "CEIBA",
         "TABACHIN",
-        "NONI",
-        "NONI PROMO"
+        "NONI"
       ],
       "precioTerrenoExcedente": 5750
     },
@@ -79,19 +78,6 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 3850000,
       "valorAvaluo": 3850000,
       "bono": 688875,
-      "avaluo": 14000,
-      "porcentajesEscrituracion": {
-        "infonavit": 0.07,
-        "fovissste": 0.08,
-        "cofinavit": 0.085,
-        "bancario": 0.075,
-        "contado": 0.072
-      }
-    },
-    "NONI PROMO": {
-      "precioLista": 3850000,
-      "valorAvaluo": 3850000,
-      "bono": 738875,
       "avaluo": 14000,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,
