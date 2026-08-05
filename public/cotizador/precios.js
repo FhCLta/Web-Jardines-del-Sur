@@ -28,8 +28,7 @@ window.COTIZADOR_PRECIOS = {
         "NONI ELITE PROMO",
         "NONI",
         "ALAMO",
-        "FRESNO ELITE",
-        "FRESNO ELITE PROMO"
+        "FRESNO ELITE"
       ],
       "precioTerrenoExcedente": 7500
     }
@@ -145,19 +144,6 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 5350000,
       "valorAvaluo": 5350000,
       "bono": 1055050,
-      "avaluo": 18500,
-      "porcentajesEscrituracion": {
-        "infonavit": 0.07,
-        "fovissste": 0.08,
-        "cofinavit": 0.085,
-        "bancario": 0.075,
-        "contado": 0.072
-      }
-    },
-    "FRESNO ELITE PROMO": {
-      "precioLista": 5350000,
-      "valorAvaluo": 5350000,
-      "bono": 1105050,
       "avaluo": 18500,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,

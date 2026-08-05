@@ -146,9 +146,6 @@
         "bancario": 0.075,
         "contado": 0.072
       },
-      "promocion": {
-        "bono_extra": 50000
-      },
       "web": "larioja2-fresno"
     }
   ],
