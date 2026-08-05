@@ -224,6 +224,24 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
     : `Hola, hice el ejercicio de cotización en el sitio de Altta Homes. Me interesa ${model?.name} en ${model?.dev}${variantNote ? ` (${variantNote})` : ""} — precio ${fmtMXN(price)}. ${waResultado}${waInfonavit} ¿Me ayudas con una cotización exacta?`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
+  // ⚠️ EN CELULAR: soltar el foco del campo de texto antes de arrastrar un slider.
+  //
+  // En el modo manual el cliente escribe precio y avalúo, y al terminar ese campo
+  // SIGUE ENFOCADO con el teclado abierto. El navegador móvil se encarga de
+  // mantener a la vista el elemento enfocado; como cada paso del slider vuelve a
+  // renderizar y el panel de resultados —que en celular va DEBAJO— cambia de
+  // alto, el navegador re-centraba el campo y la página saltaba hacia arriba,
+  // hasta el precio. En escritorio no pasa: el clic ya mueve el foco al slider y
+  // las dos columnas van lado a lado, así que no hay reflujo.
+  //
+  // Va en `onPointerDown` (no en onChange): hay que quitar el foco ANTES de que
+  // empiece el arrastre, si no el salto ya ocurrió. Solo toca inputs de texto,
+  // así que no interfiere con el slider ni con nada más.
+  const blurTextFieldOnDrag = () => {
+    const el = typeof document !== "undefined" ? document.activeElement : null;
+    if (el instanceof HTMLInputElement && el.type === "text") el.blur();
+  };
+
   return (
     <div className={styles.calculator}>
       <div className={styles.controls}>
@@ -338,6 +356,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             max={sliderMax}
             step={CASH_STEP}
             value={cashTotal}
+            onPointerDown={blurTextFieldOnDrag}
             /* El clamp a `maxCash` es lo que hace que el final de la barra
                caiga en el total EXACTO y no en el último múltiplo de 5,000. */
             onChange={(e) => setCash(Math.min(Number(e.target.value), maxCash))}
@@ -377,6 +396,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             max="12"
             step="0.05"
             value={rate}
+            onPointerDown={blurTextFieldOnDrag}
             onChange={(e) => setRate(Number(e.target.value))}
           />
           <span className={styles.fieldHint}>
@@ -521,7 +541,9 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           <li>
             <span className={styles.breakdownLabel}>
               Crédito bancario estimado
-              <em className={styles.breakdownSub}>{creditSub}</em>
+              <em className={`${styles.breakdownSub} ${styles.creditSub}`}>
+                {creditSub}
+              </em>
             </span>
             <strong>{fmtMXN(calc.principal)}</strong>
           </li>

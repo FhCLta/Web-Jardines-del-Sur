@@ -373,6 +373,19 @@
   color: rgba(255, 255, 255, 0.58);
 }
 
+/* Subtítulo del renglón "Crédito bancario estimado". Su texto cambia según el
+   escenario (sin aportación / topado al 90% / aportación voluntaria / contado) y
+   en celular esas frases ocupan 2 o 3 líneas, así que el panel cambiaba de alto
+   al mover el slider.
+   Se reserva el alto de 3 líneas para que NUNCA reflote. Importa más de lo que
+   parece: en celular el panel va debajo de los controles y, con un campo de
+   texto aún enfocado, cada reflujo hacía que el navegador re-centrara ese campo
+   y la página saltara hacia arriba (ver blurTextFieldOnDrag en el .jsx). */
+.creditSub {
+  display: block;
+  min-height: calc(3 * 0.7rem * 1.35);
+}
+
 .breakdownDivider {
   border-top: 1px dashed rgba(255, 255, 255, 0.25);
   margin: 0.3rem 0;
