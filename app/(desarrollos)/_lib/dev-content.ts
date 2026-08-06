@@ -46,8 +46,14 @@ export type DevContent = {
     equipment?: string[];
     trustItems?: Array<{ num: string; label: string }>;
   };
-  // Promociones del mes (editable). Se muestran en /[silo]/promociones.
-  // Para actualizar: cambia el texto, agrega/borra items y actualiza `updatedLabel`.
+  // Promociones del mes. ESTE ES EL UNICO LUGAR QUE SE EDITA: de aqui se
+  // alimentan a la vez /promociones (el hub), /[silo]/promociones, el sitemap y
+  // el enlace "Ver promociones" del silo. Un desarrollo entra o sale de todos
+  // lados con solo agregar o quitar este bloque.
+  //
+  // 📄 Instructivo completo: docs/actualizar-promociones.md
+  //    (incluye que hacer cuando la promocion cambia el PRECIO: eso ademas va
+  //     en data/precios.json, que es lo que come el cotizador)
   promos?: {
     updatedLabel: string; // ej. "Promociones vigentes · julio 2026"
     nota?: string;
@@ -81,7 +87,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
     promos: {
       updatedLabel: "Promociones vigentes · agosto 2026",
-      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y para compras firmadas dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
+      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y al firmar tu expediente de venta dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
       items: [
         {
           modelo: "Modelo Capua",
@@ -210,7 +216,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     promos: {
       updatedLabel: "Promociones vigentes · agosto 2026",
-      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y para compras firmadas dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
+      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y al firmar tu expediente de venta dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
       items: [
         {
           modelo: "Casa Modelo Álamo",

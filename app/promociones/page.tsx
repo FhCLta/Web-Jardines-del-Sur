@@ -77,7 +77,7 @@ const FAQS = [
   },
   {
     q: "¿Hasta cuándo aplican?",
-    a: "Cada promoción tiene su fecha de vigencia indicada en su tarjeta y aplica para compras firmadas dentro de ese mes. Las promociones cambian mes con mes, así que conviene confirmar la vigente antes de decidir.",
+    a: "Cada promoción tiene su fecha de vigencia indicada en su tarjeta y aplica al firmar tu expediente de venta dentro de ese mes. Las promociones cambian mes con mes, así que conviene confirmar la vigente antes de decidir.",
   },
   {
     q: "¿Aplican a cualquier casa o departamento del desarrollo?",
