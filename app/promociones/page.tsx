@@ -23,10 +23,16 @@ const PAGE_URL = `${SITE_URL}/promociones`;
 // Las tarjetas SI se reusan, pero agrupadas por desarrollo y con enlace a cada
 // pagina especifica (estructura hub-and-spoke).
 
-const metaTitle =
-  "Promociones de Casas y Departamentos en Cancún | Altta Homes";
+// Las dos frases a posicionar, completas y exactas: "promociones de casas y
+// departamentos" + la marca "Altta Homes Cancún". "Cancún" va UNA sola vez,
+// dentro de la marca: ponerlo tambien en la primera mitad dejaba el titulo en
+// 67 caracteres y Google corta alrededor de 60. Asi cabe entero (57) y queda
+// consistente con /[dev]/promociones, que ya cierran con "| Altta Homes Cancún".
+const metaTitle = "Promociones de Casas y Departamentos | Altta Homes Cancún";
+// Recortada para que lo importante caiga ANTES del corte de Google (~155):
+// antes eran 243 caracteres y la mitad final nunca se mostraba.
 const metaDescription =
-  "Promociones y descuentos vigentes en casas y departamentos de Cancún: minisplits sin costo, descuentos directos y paquetes en Jardines del Sur 6 y La Rioja 2. Consulta vigencia y requisitos con un asesor autorizado de Altta Homes por WhatsApp.";
+  "Promociones y descuentos vigentes en casas y departamentos de Cancún: minisplits, descuentos directos y paquetes en Jardines del Sur 6 y La Rioja 2.";
 
 export const metadata: Metadata = {
   title: { absolute: metaTitle },
