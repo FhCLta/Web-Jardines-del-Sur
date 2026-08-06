@@ -57,6 +57,15 @@
   max-width: 640px;
 }
 
+/* El nombre del desarrollo, en su propio renglon del <h1>. Evita cortes a
+   media frase como "Promociones en La / Rioja 2" o "Jardines del / Sur 6".
+   `text-wrap: balance` reparte el nombre en lineas parejas si aun asi no cabe
+   (caso de "Jardines del Sur 6" en pantallas angostas). */
+.heroDevName {
+  display: block;
+  text-wrap: balance;
+}
+
 .updated {
   display: inline-block;
   background: rgba(232, 180, 58, 0.16);
@@ -443,5 +452,14 @@
 
   .evergreenTitle {
     text-align: center;
+  }
+}
+
+/* Pantallas muy angostas (iPhone SE y similares): con el piso de 2rem el titulo
+   no alcanzaba a meter "Promociones en" en un renglon y dejaba un "en" suelto.
+   Bajar el piso a 1.7rem lo acomoda sin afectar a ningun telefono moderno. */
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.7rem;
   }
 }

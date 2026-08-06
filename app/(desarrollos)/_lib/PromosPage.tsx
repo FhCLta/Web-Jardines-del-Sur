@@ -90,7 +90,11 @@ export default function PromosPage({ slug }: { slug: DevSlug }) {
             <strong>Promociones</strong>
           </nav>
           <span className={styles.eyebrow}>Promociones</span>
-          <h1>Promociones en {dev.name}</h1>
+          {/* El nombre del desarrollo va en su propio renglón: si no, el título
+              rompía a media frase ("Promociones en La / Rioja 2"). */}
+          <h1>
+            Promociones en <span className={styles.heroDevName}>{dev.name}</span>
+          </h1>
           {promos?.updatedLabel && (
             <p className={styles.updated}>{promos.updatedLabel}</p>
           )}
