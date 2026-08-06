@@ -463,3 +463,93 @@
     font-size: 1.7rem;
   }
 }
+
+/* ── Hub /promociones ────────────────────────────────────────────────────────
+   Agrupa las promociones de TODOS los desarrollos. Reusa las tarjetas de las
+   paginas por desarrollo; lo unico propio es el encabezado de cada grupo y el
+   bloque de preguntas frecuentes. */
+.devGroup {
+  margin-bottom: 3rem;
+}
+
+.devGroupHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem 1.25rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.devGroupTitle {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0;
+}
+
+.devGroupLink {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.devGroupLink:hover {
+  text-decoration: underline;
+}
+
+.intro {
+  max-width: 68ch;
+  margin: 0 auto 2.75rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.intro p {
+  margin: 0 0 0.9rem;
+}
+
+.faq {
+  margin-bottom: 3rem;
+}
+
+.faqItem {
+  border-top: 1px solid var(--border-soft);
+  padding: 1.15rem 0;
+}
+
+.faqItem h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 0 0.4rem;
+}
+
+.faqItem p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 0.94rem;
+}
+
+@media (min-width: 701px) {
+  .devGroupTitle,
+  .intro {
+    text-align: center;
+  }
+
+  .devGroupHead {
+    justify-content: center;
+    gap: 0.4rem 1rem;
+  }
+
+  .faq {
+    max-width: 72ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

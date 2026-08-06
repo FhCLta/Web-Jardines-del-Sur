@@ -42,6 +42,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // Hub que reune las promociones de todos los desarrollos. Prioridad alta
+      // (0.9): es la que ataca las busquedas genericas de ciudad y la que
+      // enlazan los footers de todo el sitio.
+      url: `${SITE_URL}/promociones`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/calculadora-hipotecaria`,
       lastModified,
       changeFrequency: 'monthly' as const,
