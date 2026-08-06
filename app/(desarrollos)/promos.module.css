@@ -553,3 +553,38 @@
     margin-right: auto;
   }
 }
+
+/* ── Hub /promociones en celular ─────────────────────────────────────────────
+   El bloque movil de este archivo ya centraba las tarjetas y las notas, pero la
+   entradilla, los encabezados de grupo y las preguntas frecuentes —que son
+   propios del hub— se quedaban alineados a la izquierda y rompian la lectura.
+   Aqui se alinean con el resto. */
+@media (max-width: 700px) {
+  .intro,
+  .devGroupTitle,
+  .faqItem {
+    text-align: center;
+  }
+
+  .devGroupHead {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.15rem;
+  }
+
+  /* El enlace medía 17px de alto: por debajo de los 44px que se recomiendan
+     para tocar con el dedo. Con padding se vuelve un area comoda sin cambiar
+     como se ve. Y sin `nowrap`, que a 320px se salia de la pantalla. */
+  .devGroupLink {
+    display: inline-block;
+    padding: 0.85rem 0.6rem;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .intro {
+    margin-bottom: 2.25rem;
+  }
+}
