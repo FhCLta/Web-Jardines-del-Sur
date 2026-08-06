@@ -105,8 +105,14 @@
 }
 
 /* ---- Main ---- */
+/* ⚠️ Solo padding VERTICAL. El atajo `padding: 2.75rem 0 3.5rem` que habia aqui
+   ponia el horizontal en 0 y con eso anulaba el `padding: 0 1.5rem` que trae
+   `.container` de globals.css (este elemento lleva las dos clases). En
+   escritorio no se notaba —el contenedor va centrado y le sobran margenes—,
+   pero en celular el texto quedaba pegado al borde de la pantalla. */
 .main {
-  padding: 2.75rem 0 3.5rem;
+  padding-top: 2.75rem;
+  padding-bottom: 3.5rem;
 }
 
 .promosSection {
@@ -587,4 +593,21 @@
   .intro {
     margin-bottom: 2.25rem;
   }
+}
+
+/* Reparto de renglones en los textos que se cortaban feo: la ubicación dejaba
+   una "Q" sola en el segundo renglón ("…Antílope N, O, P y" / "Q") y los
+   nombres largos de modelo o desarrollo se partían a media palabra.
+   `balance` reparte las líneas parejas en textos cortos (títulos y nombres);
+   `pretty` evita dejar una palabra huérfana al final de un párrafo. */
+.promoUbic,
+.promoModel,
+.devGroupTitle {
+  text-wrap: balance;
+}
+
+.intro p,
+.faqItem p,
+.nota {
+  text-wrap: pretty;
 }
