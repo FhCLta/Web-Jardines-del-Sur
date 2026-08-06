@@ -95,9 +95,38 @@ node scripts/gen-cotizador-precios.mjs
 node scripts/check-precios.mjs
 ```
 
-**Cuando una promoción de descuento vence, hay que quitar esa variante del
-cotizador.** Si no, sigue ofreciendo un precio que ya no existe. Fue justo lo
-que pasó con `NONI PROMO` y `FRESNO ELITE PROMO`.
+### ⚠️ REGLA: cuando un descuento vence, hay que quitarlo del cotizador
+
+**Publicar un descuento es la mitad del trabajo. La otra mitad es retirarlo el
+día que vence.** Si no se quita, el cotizador sigue ofreciendo esa variante y le
+cotizas a un cliente **un precio que ya no existe** — y lo peor es que nadie se
+entera hasta que hay que sostener ese número frente a él.
+
+No es hipotético: en agosto de 2026 el cotizador todavía traía `NONI PROMO`
+(Jardines 6) y `FRESNO ELITE PROMO` (La Rioja 2), ambas con −$50,000, cuando
+ninguna de las dos seguía en la hoja del mes. Se detectaron al comparar la hoja
+contra el catálogo.
+
+**Cómo se retira:**
+
+```bash
+# 1. en data/precios.json, borrar el campo `promocion` de ese modelo
+# 2. regenerar y verificar
+node scripts/gen-cotizador-precios.mjs
+node scripts/check-precios.mjs
+```
+
+Quitar la variante **no mueve el precio público**: la web siempre publica la
+variante base, así que `check-precios.mjs` debe seguir dando "TODO EN ORDEN" y
+los precios del sitio no deben cambiar ni un peso. Si cambian, algo se hizo mal.
+
+**Al revés también aplica:** el descuento que aparece nuevo en la hoja del mes
+hay que darlo de alta en `precios.json`, no solo en la tarjeta de la web. Si no,
+la página promete un descuento que el cotizador no aplica.
+
+> **Regla corta:** cada mes, antes de publicar, compara la hoja de promociones
+> contra las variantes `promocion` de `data/precios.json`. Lo que no esté en la
+> hoja, se quita. Lo que esté y falte, se agrega.
 
 ---
 
@@ -115,6 +144,9 @@ firebase deploy --only hosting
 - Revisa que la insignia del mes diga el mes correcto.
 - Prueba un botón "Cotizar ahora" (que abra WhatsApp con el mensaje correcto) y
   uno de "Ver el modelo" (que no dé 404).
+- **Compara la hoja del mes contra las variantes `promocion` de
+  `data/precios.json`**: lo que ya no esté en la hoja hay que retirarlo, o el
+  cotizador seguirá ofreciendo un precio vencido (ver la regla de la sección 3).
 - Si hubo cambios de precio, corre `node scripts/check-precios.mjs`.
 
 ### Search Console
