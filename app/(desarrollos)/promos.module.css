@@ -611,3 +611,37 @@
 .nota {
   text-wrap: pretty;
 }
+
+/* ── Beneficios ("evergreen") en escritorio ──────────────────────────────────
+   Le faltaba el mismo trato que a la rejilla de promociones: `auto-fill` creaba
+   4 columnas y solo llenaba 3, dejando 292px de hueco a la derecha a 1440px, y
+   el texto de las tarjetas seguia alineado a la izquierda mientras el titulo
+   iba centrado. En celular ya estaban centradas. */
+@media (min-width: 701px) {
+  .evergreenItem {
+    text-align: center;
+  }
+}
+
+/* Son 3 beneficios FIJOS (la constante EVERGREEN), asi que en vez de dejar que
+   `auto-fill` decida —y deje huecos— se fija el numero de columnas por rango. */
+@media (min-width: 1024px) {
+  .evergreenGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablet: caben 2 comodas, y la tercera se centra abajo en vez de quedar
+   arrimada a la izquierda. */
+@media (min-width: 701px) and (max-width: 1023px) {
+  .evergreenGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .evergreenGrid > :last-child {
+    grid-column: 1 / -1;
+    width: calc(50% - 0.5rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
