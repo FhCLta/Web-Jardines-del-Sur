@@ -645,3 +645,60 @@
     margin-right: auto;
   }
 }
+
+/* ── Accesos por desarrollo en el hero del hub ───────────────────────────────
+   Un indice rapido: en celular la pagina es larga y sin esto hay que scrollear
+   a ciegas hasta encontrar el desarrollo que interesa. Saltan a su seccion
+   dentro de la misma pagina (el enlace a la pagina propia del desarrollo ya
+   vive en el encabezado de cada grupo, no se duplica aqui). */
+.heroDevs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.heroDevChip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.heroDevChip:hover {
+  border-color: var(--accent-2);
+  background: rgba(232, 180, 58, 0.16);
+  transform: translateY(-2px);
+}
+
+.heroDevChipCount {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--accent-2);
+}
+
+/* El header es fijo: sin esto el salto deja el titulo del grupo debajo de la
+   barra. */
+.devGroup {
+  scroll-margin-top: 6.5rem;
+}
+
+@media (max-width: 700px) {
+  .heroDevs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .heroDevChip {
+    justify-content: center;
+  }
+}

@@ -174,16 +174,18 @@ export default function Page() {
             <span aria-hidden="true">/</span>
             <strong>Promociones</strong>
           </nav>
-          <span className={styles.eyebrow}>Promociones</span>
+          {/* "Casas y departamentos" baja al antetitulo para que el H1 pueda
+              llevar la marca al frente sin perder la palabra clave. */}
+          <span className={styles.eyebrow}>Casas y departamentos · Cancún</span>
           <h1>
-            Promociones de casas y departamentos{" "}
-            <span className={styles.heroDevName}>en Cancún</span>
+            Promociones en{" "}
+            <span className={styles.heroDevName}>Altta Homes Cancún</span>
           </h1>
           {updatedLabel && <p className={styles.updated}>{updatedLabel}</p>}
           <p className={styles.lead}>
-            Todas las promociones vigentes de Altta Homes en la Zona Sur de
-            Cancún, reunidas en un solo lugar: descuentos directos, minisplits y
-            paquetes de equipamiento en Jardines del Sur 6 y La Rioja 2.
+            Todas las promociones vigentes en casas y departamentos de la Zona
+            Sur de Cancún, reunidas en un solo lugar: descuentos directos,
+            minisplits y paquetes de equipamiento.
           </p>
           <a
             href={waHref}
@@ -193,6 +195,22 @@ export default function Page() {
           >
             Pregunta por las promociones vigentes
           </a>
+
+          {/* Indice por desarrollo. Sale de `slugs`, asi que si Lirios estrena
+              promociones aparece su boton solo. */}
+          <div className={styles.heroDevs}>
+            {slugs.map((slug) => {
+              const n = DEVS[slug].promos!.items.length;
+              return (
+                <a key={slug} href={`#${slug}`} className={styles.heroDevChip}>
+                  <span>Ver promociones en {DEVS[slug].shortName}</span>
+                  <span className={styles.heroDevChipCount}>
+                    · {n} {n === 1 ? "promoción" : "promociones"}
+                  </span>
+                </a>
+              );
+            })}
+          </div>
         </div>
       </header>
 
@@ -220,6 +238,7 @@ export default function Page() {
           return (
             <section
               key={slug}
+              id={slug}
               className={styles.devGroup}
               aria-label={`Promociones de ${dev.name}`}
             >
