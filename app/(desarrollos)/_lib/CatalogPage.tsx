@@ -460,10 +460,16 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             <h2 className={styles.nivelesTitle}>
               Precios por nivel y vista
             </h2>
+            {/* ⚠️ NO escribir aquí "sin tener que preguntar" ni equivalentes.
+                Decía eso y le quitaba al cliente el motivo para escribir, que
+                es justo para lo que existe esta página. La transparencia va en
+                el PRECIO; el motivo de contacto es la DISPONIBILIDAD, que sí
+                cambia y solo se confirma con el asesor. */}
             <p className={styles.nivelesLead}>
               En los departamentos el precio cambia según el piso y hacia dónde
-              da la vista. Estos son todos los precios disponibles hoy, sin
-              tener que preguntar.
+              da la vista. Aquí están todos, para que compares con calma. Lo que
+              cambia cada semana es <strong>qué unidades siguen libres</strong> —
+              eso te lo confirmamos al momento.
             </p>
 
             {modelosVariantes.map((modelo) => {
