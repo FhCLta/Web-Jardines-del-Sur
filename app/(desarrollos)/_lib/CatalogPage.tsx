@@ -27,6 +27,20 @@ const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 
 /**
+ * FOLLETO PDF RETIRADO (decisión de Florencio, 11 ago 2026).
+ *
+ * El flujo pasó a ser compartir el LINK de esta página: siempre está al día,
+ * mientras que el PDF hay que regenerarlo a mano cada vez que cambian precios
+ * o fotos — y si no se regenera, el cliente recibe un documento que miente
+ * mientras la web dice otra cosa.
+ *
+ * Se deja solo esta bandera en false: el markup del brochure, los estilos de
+ * `@media print` y los scripts `gen-brochure-*` quedan dormidos por si algún
+ * día se retoma. Volver a activarlo es cambiar esta palabra.
+ */
+const MOSTRAR_FOLLETO_PDF = false;
+
+/**
  * Versión LIGERA (JPEG ~1000-1600px) de una imagen del sitio, para el brochure
  * imprimible: mantiene el PDF por debajo de ~2 MB (compartible por WhatsApp).
  * Las genera scripts/gen-brochure-img — la misma regla de slug debe coincidir.
@@ -73,11 +87,14 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
   // scripts/gen-brochure-img + puppeteer al cambiar precios/fotos.
   const brochurePdf = `/brochure-pdf/${dev.slug}-${kind}.pdf`;
   const brochureName = `${productoPlural}-${dev.name.replace(/\s+/g, "-")}-Altta-Homes.pdf`;
-  // El PDF se genera a mano y no existe para todos los catálogos: sin este
-  // guard, un catálogo nuevo publicaba un botón de descarga que daba 404.
-  const hayBrochure = fs.existsSync(
-    path.join(process.cwd(), "public", "brochure-pdf", `${dev.slug}-${kind}.pdf`)
-  );
+  // El PDF se genera a mano y no existe para todos los catálogos: sin el
+  // `existsSync`, un catálogo nuevo publicaba un botón de descarga que daba 404.
+  // Hoy además está apagado por bandera (ver MOSTRAR_FOLLETO_PDF).
+  const hayBrochure =
+    MOSTRAR_FOLLETO_PDF &&
+    fs.existsSync(
+      path.join(process.cwd(), "public", "brochure-pdf", `${dev.slug}-${kind}.pdf`)
+    );
 
   // Departamentos: el precio cambia por nivel y por vista. La ficha de cada
   // modelo publica una sola variante, así que esta tabla es lo único en el
