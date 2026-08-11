@@ -1588,10 +1588,21 @@ ocurre y se ve en WhatsApp; lo que se pierde es que Meta sepa **qué anuncio** l
 produjo → la campaña se ve algo peor de lo que es y el algoritmo optimiza con una
 señal ligeramente sucia. No es emergencia; se arregló porque son 3 líneas.
 
-### ⏳ Pendiente
+### ✅ Desplegado y verificado
 
-- **Desplegar:** `firebase deploy --only functions` — deploy **distinto** al del
-  hosting; el sitio no cambió.
+`firebase deploy --only functions` — deploy **distinto** al del hosting; el sitio
+no cambió. Función `metacapi(us-central1)` actualizada.
+
+Verificado contra **producción**, mandando eventos reales al endpoint:
+
+| caso | `fbc` | resultado |
+|---|---|---|
+| fbclid normal | 139 chars | HTTP 200, `events_received: 1` ✓ |
+| **fbclid largo** | **419 chars** | **HTTP 200 ✓ — antes se cortaba a 256** |
+| absurdo (anti-abuso) | 1119 chars | HTTP 200 ✓ (se descarta el `fbc`, el evento pasa) |
+| sin `fbc` | — | HTTP 200 ✓ |
+
+### ⏳ Pendiente
 - El error tarda **hasta 3 días** en desaparecer del panel aunque el arreglo ya
   esté arriba: Meta muestra lo detectado en las últimas 72 horas. No alarmarse ni
   "volver a arreglarlo" en ese plazo.

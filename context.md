@@ -1,6 +1,6 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
-> **🐛 CORREGIDO sesión 50 (11 ago 2026) — META CAPI: el servidor mutilaba el `fbc` de los `fbclid` largos. Bug real de código, arreglado; PENDIENTE desplegar la Function.**
+> **✅ RESUELTO Y DESPLEGADO sesión 50 (11 ago 2026) — META CAPI: el servidor mutilaba el `fbc` de los `fbclid` largos. Bug real de código, corregido y en producción.**
 >
 > **El síntoma (lo trajo Florencio):** Events Manager → Diagnóstico mostraba *"El servidor está enviando un valor fbclid modificado en el parámetro fbc"*, afectando **Contact y PageView**, con **1% de eventos Contact** tocados. Detectado por Meta el 24 jul 2026.
 >
@@ -17,7 +17,9 @@
 >
 > **Impacto real (sin inflarlo):** ese 1% de clics no se puede atribuir al anuncio que lo generó. La conversación ocurre y se ve en WhatsApp; lo que se pierde es que Meta sepa qué anuncio la produjo → la campaña se ve algo peor de lo que es y el algoritmo optimiza con señal ligeramente sucia. No es emergencia; se arregla porque son 3 líneas.
 >
-> **⏳ PENDIENTE:** desplegar con **`firebase deploy --only functions`** (es un deploy DISTINTO al del hosting; el sitio no cambió). Y ojo: el error tarda **hasta 3 días** en desaparecer del panel aunque el arreglo ya esté arriba — Meta muestra lo detectado en las últimas 72 horas.
+> **✅ DESPLEGADO** con `firebase deploy --only functions` (deploy DISTINTO al del hosting; el sitio no cambió). **Verificado contra producción de punta a punta**, mandando eventos reales al endpoint: `fbc` de 139 / 419 / 1119 caracteres y sin `fbc` → los cuatro devuelven `HTTP 200` con `events_received: 1`, y el de **419 caracteres —que antes se cortaba a 256— ahora lo acepta Meta completo**.
+>
+> **⏳ Único pendiente:** el error tarda **hasta 3 días** en desaparecer del panel de Diagnóstico aunque el arreglo ya esté arriba — Meta muestra lo detectado en las últimas 72 horas. **No "volver a arreglarlo" en ese plazo.** Si sigue ahí después del 14 ago, entonces sí revisar.
 
 
 > **✅ COMPLETADO sesión 49 (3 ago 2026) — CALCULADORA: se QUITÓ el tope de la aportación en efectivo; ahora llega hasta pago de CONTADO.**
