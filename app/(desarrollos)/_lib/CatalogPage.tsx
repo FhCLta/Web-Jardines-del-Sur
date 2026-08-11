@@ -401,10 +401,13 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
               ? `Un ${productoSingular} disponible`
               : `${count} ${productoPlural.toLowerCase()} disponibles`}
             {minPrice && (
-              <>
-                {" "}
-                · Desde <strong>{formatPriceMxn(minPrice)}</strong>
-              </>
+              /* En celular baja a su propio renglón: en una sola línea el
+                 importe se partía ("$1,758,830" / "MXN") y se veía desalineado.
+                 En escritorio sigue en la misma línea, con el separador. */
+              <span className={styles.subtitleDesde}>
+                <span className={styles.subtitleSep} aria-hidden="true"> · </span>
+                Desde <strong>{formatPriceMxn(minPrice)}</strong>
+              </span>
             )}
           </p>
 
