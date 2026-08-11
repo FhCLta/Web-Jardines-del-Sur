@@ -453,6 +453,111 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
         </div>
       </section>
 
+      {/* ===== PRECIOS POR NIVEL Y VISTA (solo departamentos) ===== */}
+      {variantes.length > 0 && (
+        <section className={styles.nivelesSection} id="precios-por-nivel">
+          <div className="container">
+            <h2 className={styles.nivelesTitle}>
+              Precios por nivel y vista
+            </h2>
+            <p className={styles.nivelesLead}>
+              En los departamentos el precio cambia según el piso y hacia dónde
+              da la vista. Estos son todos los precios disponibles hoy, sin
+              tener que preguntar.
+            </p>
+
+            {modelosVariantes.map((modelo) => {
+              const delModelo = variantes.filter((v) => v.modelo === modelo);
+              const niveles = [...new Set(delModelo.map((v) => v.nivel))];
+              const desde = Math.min(...delModelo.map((v) => v.precio));
+              const avaluoTope = Math.max(...delModelo.map((v) => v.avaluo));
+              // Las vistas se calculan POR MODELO: Capua da al parque o al
+              // estacionamiento y Cedro Plus a la alberca o al estacionamiento.
+              // Con una lista global, cada tabla pintaba una columna vacía de
+              // la vista que no le corresponde.
+              const vistas = [
+                ...new Set(delModelo.map((v) => v.vista).filter(Boolean)),
+              ] as string[];
+              return (
+                <div key={modelo} className={styles.nivelesBlock}>
+                  <h3 className={styles.nivelesModelo}>
+                    {modelo}
+                    <span className={styles.nivelesRef}>
+                      Valor avalúo hasta{" "}
+                      <strong>{formatPriceMxn(avaluoTope)}</strong>
+                    </span>
+                    <span className={styles.nivelesDesde}>
+                      desde {formatPriceMxn(desde)}
+                    </span>
+                  </h3>
+                  <div className={styles.nivelesTableWrap}>
+                    <table className={styles.nivelesTable}>
+                      <thead>
+                        <tr>
+                          <th scope="col">Nivel</th>
+                          {/* El avalúo es del NIVEL: las dos vistas del mismo
+                              piso comparten valor comercial. */}
+                          <th scope="col">Valor avalúo</th>
+                          {vistas.length > 0 ? (
+                            vistas.map((v) => (
+                              <th key={v} scope="col">
+                                Vista a{v === "alberca" ? " la" : "l"} {v}
+                              </th>
+                            ))
+                          ) : (
+                            <th scope="col">Precio</th>
+                          )}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {niveles.map((nivel) => {
+                          const enNivel = delModelo.filter((v) => v.nivel === nivel);
+                          const roof = enNivel.some((v) => /ROOF/i.test(v.prototipo));
+                          return (
+                            <tr key={nivel}>
+                              <th scope="row">
+                                {NIVEL_LABEL[nivel] ?? nivel}
+                                {roof && (
+                                  <span className={styles.nivelesRoof}>Roof garden</span>
+                                )}
+                              </th>
+                              <td className={styles.nivelesAvaluo}>
+                                {formatPriceMxn(enNivel[0].avaluo)}
+                              </td>
+                              {vistas.length > 0 ? (
+                                vistas.map((vista) => {
+                                  const v = enNivel.find((x) => x.vista === vista);
+                                  return (
+                                    <td key={vista}>
+                                      {v ? formatPriceMxn(v.precio) : "—"}
+                                    </td>
+                                  );
+                                })
+                              ) : (
+                                <td>{formatPriceMxn(enNivel[0].precio)}</td>
+                              )}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              );
+            })}
+
+            <p className={styles.nivelesNota}>
+              Precios netos con descuento aplicado, sujetos a disponibilidad y a
+              cambio sin previo aviso. No incluyen gastos de escrituración.{" "}
+              <a href={waHref} target="_blank" rel="noreferrer">
+                Consulta qué unidades siguen disponibles por WhatsApp
+              </a>
+              .
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* ===== AMENIDADES (excepción deliberada: aquí SÍ van, es una presentación) ===== */}
       {dev.amenitiesSection && (
         <div id="amenidades" style={{ scrollMarginTop: "90px" }}>
@@ -496,100 +601,6 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
           </div>
         </div>
       </section>
-      )}
-
-      {/* ===== PRECIOS POR NIVEL Y VISTA (solo departamentos) ===== */}
-      {variantes.length > 0 && (
-        <section className={styles.nivelesSection} id="precios-por-nivel">
-          <div className="container">
-            <h2 className={styles.nivelesTitle}>
-              Precios por nivel y vista
-            </h2>
-            <p className={styles.nivelesLead}>
-              En los departamentos el precio cambia según el piso y hacia dónde
-              da la vista. Estos son todos los precios disponibles hoy, sin
-              tener que preguntar.
-            </p>
-
-            {modelosVariantes.map((modelo) => {
-              const delModelo = variantes.filter((v) => v.modelo === modelo);
-              const niveles = [...new Set(delModelo.map((v) => v.nivel))];
-              const desde = Math.min(...delModelo.map((v) => v.precio));
-              // Las vistas se calculan POR MODELO: Capua da al parque o al
-              // estacionamiento y Cedro Plus a la alberca o al estacionamiento.
-              // Con una lista global, cada tabla pintaba una columna vacía de
-              // la vista que no le corresponde.
-              const vistas = [
-                ...new Set(delModelo.map((v) => v.vista).filter(Boolean)),
-              ] as string[];
-              return (
-                <div key={modelo} className={styles.nivelesBlock}>
-                  <h3 className={styles.nivelesModelo}>
-                    {modelo}
-                    <span className={styles.nivelesDesde}>
-                      desde {formatPriceMxn(desde)}
-                    </span>
-                  </h3>
-                  <div className={styles.nivelesTableWrap}>
-                    <table className={styles.nivelesTable}>
-                      <thead>
-                        <tr>
-                          <th scope="col">Nivel</th>
-                          {vistas.length > 0 ? (
-                            vistas.map((v) => (
-                              <th key={v} scope="col">
-                                Vista a{v === "alberca" ? " la" : "l"} {v}
-                              </th>
-                            ))
-                          ) : (
-                            <th scope="col">Precio</th>
-                          )}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {niveles.map((nivel) => {
-                          const enNivel = delModelo.filter((v) => v.nivel === nivel);
-                          const roof = enNivel.some((v) => /ROOF/i.test(v.prototipo));
-                          return (
-                            <tr key={nivel}>
-                              <th scope="row">
-                                {NIVEL_LABEL[nivel] ?? nivel}
-                                {roof && (
-                                  <span className={styles.nivelesRoof}>Roof garden</span>
-                                )}
-                              </th>
-                              {vistas.length > 0 ? (
-                                vistas.map((vista) => {
-                                  const v = enNivel.find((x) => x.vista === vista);
-                                  return (
-                                    <td key={vista}>
-                                      {v ? formatPriceMxn(v.precio) : "—"}
-                                    </td>
-                                  );
-                                })
-                              ) : (
-                                <td>{formatPriceMxn(enNivel[0].precio)}</td>
-                              )}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              );
-            })}
-
-            <p className={styles.nivelesNota}>
-              Precios netos con descuento aplicado, sujetos a disponibilidad y a
-              cambio sin previo aviso. No incluyen gastos de escrituración.{" "}
-              <a href={waHref} target="_blank" rel="noreferrer">
-                Consulta qué unidades siguen disponibles por WhatsApp
-              </a>
-              .
-            </p>
-          </div>
-        </section>
       )}
 
       {/* ===== FOOTER ===== */}

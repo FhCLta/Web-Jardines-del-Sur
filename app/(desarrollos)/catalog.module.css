@@ -955,3 +955,22 @@
   color: var(--accent-deep);
   font-weight: 600;
 }
+
+/* El avalúo es la referencia (lo que vale), no lo que se paga: se pinta más
+   discreto para que el precio con descuento siga siendo el protagonista. */
+.nivelesAvaluo {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+.nivelesRef {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0;
+}
+
+.nivelesRef strong {
+  color: var(--primary);
+  font-weight: 700;
+}

@@ -127,6 +127,12 @@ export type VarianteDepartamento = {
   prototipo: string;
   /** Lo que paga el cliente: precio de lista menos el bono. */
   precio: number;
+  /**
+   * Valor comercial del perito. Depende SOLO del nivel, no de la vista: las dos
+   * vistas de un mismo piso comparten avalúo y lo que cambia entre ellas es el
+   * bono. Por eso en la tabla basta una columna de avalúo por renglón.
+   */
+  avaluo: number;
 };
 
 /**
@@ -147,6 +153,7 @@ export function getVariantesDepartamentos(slug: string): VarianteDepartamento[] 
       vista: d.vista,
       prototipo: d.prototipo,
       precio: d.precio_lista - d.bono,
+      avaluo: d.precio_lista,
     }))
     .sort(
       (a, b) =>
