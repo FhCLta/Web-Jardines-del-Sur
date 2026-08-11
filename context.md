@@ -1,5 +1,25 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **🐛 CORREGIDO sesión 50 (11 ago 2026) — META CAPI: el servidor mutilaba el `fbc` de los `fbclid` largos. Bug real de código, arreglado; PENDIENTE desplegar la Function.**
+>
+> **El síntoma (lo trajo Florencio):** Events Manager → Diagnóstico mostraba *"El servidor está enviando un valor fbclid modificado en el parámetro fbc"*, afectando **Contact y PageView**, con **1% de eventos Contact** tocados. Detectado por Meta el 24 jul 2026.
+>
+> **La causa, encontrada y reproducida:** en `functions/index.js` los identificadores pasaban por `clamp(v, max)`, que hace `v.slice(0, max)` — o sea **TRUNCA**. Con `fbc: clamp(body.fbc, 256)` y un prefijo `fb.1.<ms>.` de **19 caracteres**, **cualquier `fbclid` de más de 237 caracteres salía mutilado**:
+> - fbclid de 237 → fbc de 256 → intacto ✓
+> - fbclid de 260 → fbc de 279 → se enviaban 256 (perdía 23) ✗
+> - fbclid de 400 → fbc de 419 → se enviaban 256 (perdía 163) ✗
+>
+> Por eso solo era el 1%: son los `fbclid` largos, no todos. **El lado del navegador estaba BIEN** — `MetaContactTracker.jsx` codifica/decodifica la cookie de forma simétrica (`encodeURIComponent`/`decodeURIComponent`) y arma `fb.1.<ms>.<fbclid>` con el valor exacto, sin minúsculas ni recortes. El daño era solo del servidor.
+>
+> **El arreglo:** función nueva `exact(v, max)` que **descarta** el valor si excede el tope, en vez de recortarlo. `fbp: exact(body.fbp, 256)` · `fbc: exact(body.fbc, 1024)`. Criterio: `fbp`/`fbc` son **identificadores, no texto libre** — o llegan byte por byte o no se mandan. Sin `fbc` Meta cae a IP + user-agent; con un `fbc` roto la atribución se corrompe **y** ensucia el diagnóstico de la cuenta. El tope se conserva solo como defensa anti-abuso (verificado: fbclid de 400 pasa intacto, uno de 1100 se descarta).
+>
+> **⚠️ Se DESCARTÓ la solución que sugiere Meta** (instalar su "generador de parámetros", complemento del SDK ligero): ya se había evaluado el 18 jul 2026 y sigue siendo redundante — implicaría volver a cargar código de Meta en el sitio, que es exactamente lo que se quitó al pasar a CAPI propia (245 KB de `fbevents.js` ahorrados). **El bug era nuestro y se arregla en nuestro código.** No re-litigar.
+>
+> **Impacto real (sin inflarlo):** ese 1% de clics no se puede atribuir al anuncio que lo generó. La conversación ocurre y se ve en WhatsApp; lo que se pierde es que Meta sepa qué anuncio la produjo → la campaña se ve algo peor de lo que es y el algoritmo optimiza con señal ligeramente sucia. No es emergencia; se arregla porque son 3 líneas.
+>
+> **⏳ PENDIENTE:** desplegar con **`firebase deploy --only functions`** (es un deploy DISTINTO al del hosting; el sitio no cambió). Y ojo: el error tarda **hasta 3 días** en desaparecer del panel aunque el arreglo ya esté arriba — Meta muestra lo detectado en las últimas 72 horas.
+
+
 > **✅ COMPLETADO sesión 49 (3 ago 2026) — CALCULADORA: se QUITÓ el tope de la aportación en efectivo; ahora llega hasta pago de CONTADO.**
 >
 > **El hallazgo (pregunta de Florencio: "¿por qué hay un tope de efectivo?"):** el slider de aportación estaba topado en `requiredCash + precio × 0.30` — un número puesto a ojo, **sin regla de negocio detrás** y sin documentar en ninguna sesión. En Capua eso daba $527,649 (último escalón alcanzable de $5,000: **$525,000**). Peor: el clamp `Math.min(cash, maxCash)` **recortaba en silencio** — un cliente con $800,000 de ahorro no podía pasar de $525,000 y la página nunca le decía por qué. **Criterio de Florencio: "debe poder hacerlo completo, que no falte ni un peso para completar, porque así funciona en la vida real".**

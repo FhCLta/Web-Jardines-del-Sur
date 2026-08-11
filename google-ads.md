@@ -1520,3 +1520,78 @@ Tapan los de campaña (que mezclaban "Depa Capua $1.7M" bajo el anuncio de lujo 
 5. Re-revisar en ~2 semanas: CPA (esperado ~$95-105), aprobación de keywords cosechadas + sitelinks + anuncios ("Pendiente" → "Apto").
 6. Crédito $7,000: verificar progreso ~23 jul (vence 30 jul).
 7. Mini-formulario de leads (sitio): se estrena con la calculadora — detalles en context.md sesión 42.
+
+---
+
+## 🐛 SESIÓN 32 — META CAPI: `fbc` truncado en los `fbclid` largos (11 ago 2026)
+
+**Origen:** Florencio trajo el Diagnóstico de Events Manager (dataset `2016457592282966`):
+*"El servidor está enviando un valor fbclid modificado en el parámetro fbc"* —
+eventos afectados **Contact** y **PageView**, **1% del total de Contact**.
+Detectado por Meta el 24 jul 2026.
+
+### Causa (reproducida, no supuesta)
+
+En `functions/index.js`, los identificadores pasaban por:
+
+```js
+const clamp = (v, max) => typeof v === "string" && v.length > 0 ? v.slice(0, max) : undefined;
+...
+fbp: clamp(body.fbp, 128),
+fbc: clamp(body.fbc, 256),   // ← TRUNCA
+```
+
+El `fbc` se arma como `fb.1.<ms>.<fbclid>`; el prefijo mide **19 caracteres**, así
+que **todo `fbclid` de más de 237 caracteres salía mutilado**:
+
+| fbclid | fbc completo | se enviaba | resultado |
+|---|---|---|---|
+| 237 | 256 | 256 | intacto ✓ |
+| 260 | 279 | 256 | truncado ✗ (−23) |
+| 400 | 419 | 256 | truncado ✗ (−163) |
+
+Por eso solo era el 1%: son los `fbclid` largos, no todos.
+
+**El cliente estaba BIEN.** `components/MetaContactTracker.jsx` codifica y
+decodifica la cookie de forma simétrica y construye el `fbc` con el `fbclid`
+exacto — sin minúsculas, sin recortes. El daño era exclusivamente del servidor.
+
+### Arreglo aplicado
+
+```js
+// o llega byte por byte, o no se manda
+const exact = (v, max) =>
+  typeof v === "string" && v.length > 0 && v.length <= max ? v : undefined;
+...
+fbp: exact(body.fbp, 256),
+fbc: exact(body.fbc, 1024),
+```
+
+**Criterio:** `fbp` y `fbc` son **identificadores, no texto libre**. Si superan
+el tope se **descartan** en vez de recortarse: sin `fbc` Meta cae a IP +
+user-agent, mientras que con un `fbc` roto la atribución se corrompe **y** ensucia
+el diagnóstico de la cuenta. El tope queda solo como defensa anti-abuso
+(verificado: `fbclid` de 400 pasa intacto; uno de 1100 se descarta).
+
+### ⚠️ Descartado: el "generador de parámetros" que sugiere Meta
+
+El propio aviso propone instalar el *parameter builder* (complemento del SDK
+ligero). **NO se hace** — ya se evaluó el 18 jul 2026 y sigue siendo redundante:
+implicaría volver a cargar código de Meta en el sitio, justo lo que se eliminó al
+pasar a CAPI propia (245 KB de `fbevents.js` ahorrados). El bug era nuestro y se
+arregla en nuestro código. **No re-litigar.**
+
+### Impacto (medido, sin inflar)
+
+Ese **1%** de clics no se puede atribuir al anuncio que lo generó. La conversación
+ocurre y se ve en WhatsApp; lo que se pierde es que Meta sepa **qué anuncio** la
+produjo → la campaña se ve algo peor de lo que es y el algoritmo optimiza con una
+señal ligeramente sucia. No es emergencia; se arregló porque son 3 líneas.
+
+### ⏳ Pendiente
+
+- **Desplegar:** `firebase deploy --only functions` — deploy **distinto** al del
+  hosting; el sitio no cambió.
+- El error tarda **hasta 3 días** en desaparecer del panel aunque el arreglo ya
+  esté arriba: Meta muestra lo detectado en las últimas 72 horas. No alarmarse ni
+  "volver a arreglarlo" en ese plazo.

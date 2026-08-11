@@ -54,6 +54,19 @@ exports.metacapi = onRequest(
     const clamp = (v, max) =>
       typeof v === "string" && v.length > 0 ? v.slice(0, max) : undefined;
 
+    // ⚠️ fbp y fbc son IDENTIFICADORES: tienen que llegar a Meta byte por byte.
+    // Con `clamp` se recortaban (fbc a 256) y, como el prefijo "fb.1.<ms>." mide
+    // 19 caracteres, cualquier fbclid de más de 237 salía MUTILADO. Meta lo
+    // detecta y lo reporta como "el servidor está enviando un valor fbclid
+    // modificado en el parámetro fbc": ese clic deja de poder atribuirse.
+    //
+    // El tope se conserva solo como defensa ante un payload absurdo, pero al
+    // excederlo el valor se DESCARTA en vez de recortarse: sin fbc Meta usa IP
+    // y user-agent, mientras que con un fbc roto la atribución se corrompe y
+    // encima ensucia el diagnóstico de la cuenta.
+    const exact = (v, max) =>
+      typeof v === "string" && v.length > 0 && v.length <= max ? v : undefined;
+
     const ip =
       (req.headers["x-forwarded-for"] || "").split(",")[0].trim() ||
       req.ip ||
@@ -68,8 +81,8 @@ exports.metacapi = onRequest(
       user_data: {
         client_ip_address: ip,
         client_user_agent: clamp(req.headers["user-agent"], 512),
-        fbp: clamp(body.fbp, 128),
-        fbc: clamp(body.fbc, 256),
+        fbp: exact(body.fbp, 256),
+        fbc: exact(body.fbc, 1024),
       },
     };
 
