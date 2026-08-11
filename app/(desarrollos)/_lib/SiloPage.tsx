@@ -204,16 +204,27 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
             <p>
               Recorridos virtuales 360°, precios actualizados y atención directa por WhatsApp.
             </p>
-            {/* Enlace a la página-catálogo (comparte/descarga). Discreto, no en el navbar.
-                Se agregan más conforme existan (departamentos, etc.). */}
-            {dev.slug === "jardines-del-sur-6" && casasCount > 0 && (
-              <p style={{ marginTop: "0.85rem" }}>
-                <a
-                  href="/jardines-del-sur-6/casas"
-                  style={{ color: "var(--accent-deep)", fontWeight: 700, textDecoration: "none" }}
-                >
-                  Ver solo las casas de Jardines del Sur 6 →
-                </a>
+            {/* Enlaces a las páginas-catálogo (comparte/descarga). Discretos, no
+                en el navbar. Jardines 6 es el único desarrollo con los dos tipos,
+                así que es el único que muestra los dos enlaces. */}
+            {dev.slug === "jardines-del-sur-6" && (
+              <p style={{ marginTop: "0.85rem", display: "flex", flexWrap: "wrap", gap: "0.4rem 1.5rem" }}>
+                {casasCount > 0 && (
+                  <a
+                    href="/jardines-del-sur-6/casas"
+                    style={{ color: "var(--accent-deep)", fontWeight: 700, textDecoration: "none" }}
+                  >
+                    Ver solo las casas de Jardines del Sur 6 →
+                  </a>
+                )}
+                {deptosCount > 0 && (
+                  <a
+                    href="/jardines-del-sur-6/departamentos"
+                    style={{ color: "var(--accent-deep)", fontWeight: 700, textDecoration: "none" }}
+                  >
+                    Ver solo los departamentos de Jardines del Sur 6 →
+                  </a>
+                )}
               </p>
             )}
           </div>

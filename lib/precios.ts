@@ -100,3 +100,57 @@ export function getPrecioPublicado(id: string): PrecioPublicado {
 export function getFechaPrecios(): string {
   return precios.actualizado;
 }
+
+// ── Matriz de nivel × vista de los departamentos ────────────────────────────
+//
+// En departamentos el precio cambia por NIVEL y por VISTA (Capua: parque o
+// estacionamiento; Cedro Plus: alberca o estacionamiento; Lirios no tiene
+// variante de vista). La ficha del modelo publica una sola variante —la del
+// gancho— y el resto se cotizaba por WhatsApp; esto permite mostrar la tabla
+// completa en la página-catálogo de departamentos.
+//
+// Los desarrollos en precios.json usan las claves del cotizador, no los slugs
+// del sitio, así que hay que traducir.
+const DEV_PRECIOS_POR_SLUG: Record<string, { casas?: string; departamentos?: string }> = {
+  "jardines-del-sur-6": { casas: "Azular1", departamentos: "Azular1-Depas" },
+  "la-rioja-2": { casas: "LaRioja2" },
+  "lirios-residencial-2": { departamentos: "Lirios2-Depas" },
+};
+
+export type VarianteDepartamento = {
+  modelo: string;
+  /** "PB" | "1" | "2" | "3" */
+  nivel: string;
+  /** null en los desarrollos sin variante de vista (Lirios) */
+  vista: string | null;
+  /** Nombre comercial exacto, ej. "CEDRO PLUS 3N (ROOF)" */
+  prototipo: string;
+  /** Lo que paga el cliente: precio de lista menos el bono. */
+  precio: number;
+};
+
+/**
+ * Todas las variantes de departamento de un desarrollo, en el orden de niveles
+ * en que se presentan al cliente (planta baja primero). Devuelve [] si el
+ * desarrollo no tiene departamentos.
+ */
+export function getVariantesDepartamentos(slug: string): VarianteDepartamento[] {
+  const devKey = DEV_PRECIOS_POR_SLUG[slug]?.departamentos;
+  if (!devKey) return [];
+
+  const orden = ["PB", "1", "2", "3"];
+  return precios.departamentos
+    .filter((d) => d.dev === devKey)
+    .map((d) => ({
+      modelo: d.modelo,
+      nivel: d.nivel,
+      vista: d.vista,
+      prototipo: d.prototipo,
+      precio: d.precio_lista - d.bono,
+    }))
+    .sort(
+      (a, b) =>
+        a.modelo.localeCompare(b.modelo) ||
+        orden.indexOf(a.nivel) - orden.indexOf(b.nivel)
+    );
+}

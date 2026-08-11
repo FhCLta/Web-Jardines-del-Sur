@@ -16,6 +16,7 @@ const DEV_SLUG_BY_NAME: Record<string, DevSlug> = {
 // Agregar aquí cada nueva a medida que se publica.
 const CATALOG_PAGES: { slug: DevSlug; kind: 'casas' | 'departamentos' }[] = [
   { slug: 'jardines-del-sur-6', kind: 'casas' },
+  { slug: 'jardines-del-sur-6', kind: 'departamentos' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

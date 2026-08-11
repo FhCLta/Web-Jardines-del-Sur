@@ -830,3 +830,128 @@
     margin: 0;
   }
 }
+
+/* ── Precios por nivel y vista (solo catálogo de departamentos) ──────────────
+   Es la única parte del sitio que muestra el abanico completo: la ficha de
+   cada modelo publica una sola variante. La tabla scrollea dentro de su caja
+   para no romper el ancho de la página en celular. */
+.nivelesSection {
+  padding: 3.5rem 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border-soft);
+}
+
+.nivelesTitle {
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0 0 0.6rem;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.nivelesLead {
+  max-width: 60ch;
+  margin: 0 auto 2.25rem;
+  text-align: center;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.nivelesBlock {
+  max-width: 720px;
+  margin: 0 auto 2.25rem;
+}
+
+.nivelesModelo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.3rem 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: 0 0 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.nivelesDesde {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+  letter-spacing: 0;
+}
+
+/* La tabla puede no caber en pantallas angostas: scrollea ella sola en vez de
+   empujar el ancho de toda la página. */
+.nivelesTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+}
+
+.nivelesTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  min-width: 340px;
+}
+
+.nivelesTable th,
+.nivelesTable td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.nivelesTable thead th {
+  background: var(--background);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.nivelesTable tbody th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.nivelesTable tbody td {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.nivelesTable tbody tr:last-child th,
+.nivelesTable tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.nivelesRoof {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+.nivelesNota {
+  max-width: 60ch;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.nivelesNota a {
+  color: var(--accent-deep);
+  font-weight: 600;
+}
