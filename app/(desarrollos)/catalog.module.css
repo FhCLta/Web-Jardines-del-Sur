@@ -974,3 +974,89 @@
   color: var(--primary);
   font-weight: 700;
 }
+
+/* ── La tabla de niveles se vuelve TARJETAS en celular ───────────────────────
+   Con 4 columnas no cabe en una pantalla de teléfono: se quedaba con scroll
+   horizontal, el cliente solo veía las dos primeras columnas y ni siquiera es
+   evidente que se pueda arrastrar. Además los importes partían en dos renglones
+   ("$2,330,000" / "MXN").
+
+   Aquí cada NIVEL pasa a ser una tarjeta con sus valores en renglones
+   etiquetados. Se ve todo de golpe, sin arrastrar nada. El encabezado de la
+   tabla se oculta a la vista pero SIGUE en el DOM para lectores de pantalla; la
+   etiqueta visible sale del `data-label` de cada celda. */
+@media (max-width: 640px) {
+  .nivelesTableWrap {
+    overflow-x: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .nivelesTable {
+    min-width: 0;
+  }
+
+  /* Oculto visualmente, no para lectores de pantalla. */
+  .nivelesTable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .nivelesTable,
+  .nivelesTable tbody,
+  .nivelesTable tr,
+  .nivelesTable tbody th,
+  .nivelesTable tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  .nivelesTable tbody tr {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 0.85rem;
+  }
+
+  .nivelesTable tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .nivelesTable tbody th {
+    background: var(--background);
+    text-align: center;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .nivelesTable tbody td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    text-align: right;
+    padding: 0.6rem 1rem;
+    white-space: nowrap;
+  }
+
+  .nivelesTable tbody td::before {
+    content: attr(data-label);
+    flex: 0 1 auto;
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    white-space: normal;
+  }
+
+  .nivelesRoof {
+    display: inline;
+    margin-left: 0.4rem;
+  }
+}

@@ -521,20 +521,31 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
                                   <span className={styles.nivelesRoof}>Roof garden</span>
                                 )}
                               </th>
-                              <td className={styles.nivelesAvaluo}>
+                              {/* data-label alimenta la vista de TARJETAS en
+                                  celular, donde esto deja de ser tabla y cada
+                                  nivel se apila (ver catalog.module.css). */}
+                              <td
+                                className={styles.nivelesAvaluo}
+                                data-label="Valor avalúo"
+                              >
                                 {formatPriceMxn(enNivel[0].avaluo)}
                               </td>
                               {vistas.length > 0 ? (
                                 vistas.map((vista) => {
                                   const v = enNivel.find((x) => x.vista === vista);
                                   return (
-                                    <td key={vista}>
+                                    <td
+                                      key={vista}
+                                      data-label={`Vista a${vista === "alberca" ? " la" : "l"} ${vista}`}
+                                    >
                                       {v ? formatPriceMxn(v.precio) : "—"}
                                     </td>
                                   );
                                 })
                               ) : (
-                                <td>{formatPriceMxn(enNivel[0].precio)}</td>
+                                <td data-label="Precio">
+                                  {formatPriceMxn(enNivel[0].precio)}
+                                </td>
                               )}
                             </tr>
                           );
