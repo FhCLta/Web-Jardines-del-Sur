@@ -466,10 +466,10 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
                 el PRECIO; el motivo de contacto es la DISPONIBILIDAD, que sí
                 cambia y solo se confirma con el asesor. */}
             <p className={styles.nivelesLead}>
-              En los departamentos el precio cambia según el piso y hacia dónde
-              da la vista. Aquí están todos, para que compares con calma. Lo que
-              cambia cada semana es <strong>qué unidades siguen libres</strong> —
-              eso te lo confirmamos al momento.
+              En los departamentos el precio cambia según el nivel y la vista.
+              Aquí están todos, para que compares con calma. Lo que cambia cada
+              semana es <strong>qué unidades siguen libres</strong> — eso te lo
+              confirmamos al momento.
             </p>
 
             {modelosVariantes.map((modelo) => {
