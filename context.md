@@ -1,5 +1,44 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+> **📊 ANÁLISIS SEO POST-MIGRACIÓN (12 ago 2026) — Florencio dudaba si cambiar de dominio fue mala idea. LOS DATOS DICEN QUE NO. Conclusión: NO mover el dominio.**
+>
+> **Contexto:** sentía que el dominio viejo (`jardinesdelsurcancun.mx`) rendía mejor — "de aquel me escribieron clientes listos para comprar y de aquí no tanto, son más curiosos". Se compararon los dos Search Console con la misma ventana de 3 meses.
+>
+> | | Viejo `jardinesdelsurcancun.mx` | Nuevo `alttahomescancun.mx` |
+> |---|---|---|
+> | Clics | 149 | **265** |
+> | Impresiones | 8,260 | 6,710 |
+> | **CTR** | 1.8% | **4.0%** |
+> | Posición media | 8.2 | 8.4 |
+>
+> El nuevo hizo **265 clics en ~8 semanas**; el viejo 149 en toda su vida (~6 semanas activas antes de la mudanza). **El CTR se duplicó y la posición no se movió** → la migración NO costó posiciones. **⚠️ No re-litigar el cambio de dominio: los números lo respaldan.** Y volver costaría pagar la migración por tercera vez, además de que `jardinesdelsurcancun.mx` nombra 1 de sus 4 desarrollos (La Rioja y Lirios nunca cupieron ahí).
+>
+> **⭐ EL HALLAZGO QUE EXPLICA LO DE LOS "CURIOSOS":** cambió cuál desarrollo le trae la gente.
+> - **Antes** la consulta #1 era `jardines del sur 6` (27 clics) — un desarrollo **que está vendiendo**.
+> - **Ahora** es `jardines del sur 7`: **51 clics con 107 impresiones = 47.7% de CTR** (y `jardines del sur 7 cancun` al 66.7%). **JdS7 es PREVENTA, todavía no se vende.**
+>
+> O sea: su principal fuente orgánica es gente preguntando por algo que aún no puede comprar. **No es el dominio ni es suerte — se resuelve solo cuando JdS7 abra venta (sep-oct 2026).**
+>
+> **Lo que SÍ se perdió en la mudanza (y es recuperable con páginas, no con dominios):**
+> - `jardines del sur 6`: **584 impresiones vs 1,476** antes. Pero su CTR MEJORÓ (2.4% vs 1.8%) → **falta visibilidad, no atractivo**.
+> - Lirios + La Rioja: **18 clics → 6**. Ojo con la contradicción: el dominio viejo no tenía nada que ver con esos desarrollos y aun así traía más → **no es efecto del nombre del dominio**, es visibilidad acumulada.
+>
+> **Prueba definitiva de que el nombre del dominio no manda:** domina `jardines del sur 7` con ~48% de CTR **sin tener "jardines del sur" en el dominio**. Los dominios de coincidencia exacta dejaron de pesar hace más de una década; posicionan las PÁGINAS.
+>
+> **Confirmación cruzada con Google Ads** (poda de julio): las búsquedas con nombre de desarrollo convierten muchísimo mejor que la de marca — `[oficina de ventas jardines del sur 6]` $0.47 de CPA, `[jardines del sur 6]` $87, contra `[altta homes cancun]` $435. La observación cualitativa de Florencio coincide con su dato pagado.
+>
+> **⏳ Trabajo pendiente que sale de aquí:** recuperar visibilidad de `jardines del sur 6` (hacia las 1,476 impresiones) y de Lirios/La Rioja. Las 3 páginas nuevas ya indexadas atacan justo eso.
+
+
+> **✅ INDEXACIÓN AL CORRIENTE (12 ago 2026) — Florencio confirmó que las páginas que estaban pendientes YA SE INDEXARON. Cierra un pendiente que venía arrastrándose desde julio.**
+>
+> Quedan indexadas las tres últimas que se publicaron y se venían siguiendo en sesión: **`/promociones`** (el hub), **`/la-rioja-2/promociones`** y **`/jardines-del-sur-6/departamentos`**.
+>
+> **⚠️ NOTA PARA SESIONES FUTURAS: dejar de pedirle indexación de páginas viejas.** Más abajo en este documento hay varios "⏳ Pendiente Florencio: solicitar indexación de X" de julio (calculadora, casas JdS6, los 3 silos, artículos de blog, promociones JdS6). **Todos esos quedan superados por esta entrada** — no volver a levantarlos. Solo se pide indexación cuando se publica una página NUEVA; para cambios de contenido en páginas ya indexadas, Google las revisita solo.
+>
+> **Por qué importaba:** las tres atacan justo los dos frentes donde el sitio había perdido terreno tras la migración de dominio — Jardines del Sur 6 y La Rioja 2 (ver el análisis de Search Console de esta misma sesión).
+
+
 > **✅ RESUELTO Y DESPLEGADO sesión 50 (11 ago 2026) — META CAPI: el servidor mutilaba el `fbc` de los `fbclid` largos. Bug real de código, corregido y en producción.**
 >
 > **El síntoma (lo trajo Florencio):** Events Manager → Diagnóstico mostraba *"El servidor está enviando un valor fbclid modificado en el parámetro fbc"*, afectando **Contact y PageView**, con **1% de eventos Contact** tocados. Detectado por Meta el 24 jul 2026.
