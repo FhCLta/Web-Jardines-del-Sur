@@ -39,11 +39,12 @@ import {
      /jardines-del-sur-6      → "jardines del sur 6"
      /jardines-del-sur-7      → "jardines del sur 7"   ⭐ intocable
 
-   ⚠️ NO SON "ETAPAS" DE UN MISMO RESIDENCIAL. Jardines del Sur 6 y Jardines
-   del Sur 7 son DOS RESIDENCIALES DISTINTOS que comparten el nombre: acceso
-   propio, obra propia y precios propios. Corregido por Florencio el 18 ago
-   2026 — la redacción anterior decía "dos etapas del mismo residencial" y era
-   falsa. Tampoco se promete "entrega inmediata": se dice "modelos disponibles".
+   ⚠️ LA DISTINCIÓN EXACTA (precisada por Florencio, 18 ago 2026):
+   Jardines del Sur SÍ se desarrolla POR ETAPAS — el 6 y el 7 son etapas. Lo
+   que NO es cierto es que sean etapas DENTRO de un mismo residencial: cada
+   etapa es un RESIDENCIAL PROPIO, con su acceso, su obra y sus precios.
+   Se dice "la etapa 7 es un residencial aparte", nunca "otra sección del 6".
+   Tampoco se promete "entrega inmediata": se dice "modelos disponibles".
 
    Los precios salen del inventario (fuente única). Al actualizar
    data/precios.json esta página se mueve sola — no hay cifras a mano.
@@ -146,7 +147,11 @@ export const metadata: Metadata = {
 const FAQS = [
   {
     q: "¿Qué es Jardines del Sur y dónde está en Cancún?",
-    a: `Jardines del Sur es el nombre que comparten varios residenciales de Altta Homes, la marca de vivienda de Grupo Sadasi, en la Zona Sur de Cancún (Polígono Sur), a unos 10 minutos del aeropuerto y a 500 metros de la Avenida Huayacán. Cada número es un residencial distinto, con su propio acceso y su propia obra. Los dos vigentes hoy son Jardines del Sur 6, con modelos disponibles, y Jardines del Sur 7, en obra.`,
+    a: `Jardines del Sur es un desarrollo de Altta Homes, la marca de vivienda de Grupo Sadasi, en la Zona Sur de Cancún (Polígono Sur), a unos 10 minutos del aeropuerto y a 500 metros de la Avenida Huayacán. Se ha construido por etapas, y por eso los nombres llevan número. Los dos vigentes hoy son Jardines del Sur 6, con modelos disponibles, y Jardines del Sur 7, en obra.`,
+  },
+  {
+    q: "¿Jardines del Sur 7 está dentro de Jardines del Sur 6?",
+    a: "No. Son dos residenciales distintos. Jardines del Sur se ha construido por etapas, y cada etapa es un residencial propio: tiene su acceso, su obra y sus precios. Están en la misma zona y los desarrolla la misma empresa, pero no es que el 7 sea una sección nueva del 6 — son desarrollos independientes.",
   },
   {
     q: "¿Cuál me conviene, Jardines del Sur 6 o el 7?",
@@ -338,12 +343,18 @@ export default function Page() {
               <p className={styles.introEyebrow}>El residencial</p>
               <h2>Jardines del Sur 6 y Jardines del Sur 7: qué los diferencia</h2>
               <p>
-                <strong>Jardines del Sur</strong> es el nombre que comparten
-                varios residenciales de <strong>Altta Homes</strong>, la marca de
-                vivienda de <strong>Grupo Sadasi</strong>, en la Zona Sur de
-                Cancún — el Polígono Sur. Cada número es un{" "}
-                <strong>residencial distinto</strong>: acceso propio, obra propia
-                y precios propios.
+                <strong>Jardines del Sur</strong> se ha construido{" "}
+                <strong>por etapas</strong> en la Zona Sur de Cancún — el
+                Polígono Sur — de la mano de <strong>Altta Homes</strong>, la
+                marca de vivienda de <strong>Grupo Sadasi</strong>. Por eso los
+                nombres llevan número.
+              </p>
+              <p>
+                Y aquí está lo que conviene tener claro:{" "}
+                <strong>cada etapa es un residencial propio</strong>, con su
+                acceso, su obra y sus precios. Jardines del Sur 6 y Jardines del
+                Sur 7 no son dos secciones de lo mismo — son{" "}
+                <strong>dos residenciales distintos</strong>.
               </p>
               <p>
                 Hoy hay dos vigentes. En <strong>Jardines del Sur 6</strong> hay
@@ -412,8 +423,9 @@ export default function Page() {
             <span>Comparación</span>
             <h2>Los dos, lado a lado</h2>
             <p>
-              Misma zona y mismo desarrollador. Lo que cambia es si puedes
-              elegir hoy o si estás dispuesto a esperar.
+              Dos etapas, dos residenciales independientes, misma zona y mismo
+              desarrollador. Lo que cambia es si puedes elegir hoy o si estás
+              dispuesto a esperar.
             </p>
           </header>
 
@@ -486,8 +498,8 @@ export default function Page() {
               <div className={styles.etapaBody}>
                 <h3 className={styles.etapaName}>Jardines del Sur 7</h3>
                 <p className={styles.etapaLead}>
-                  El residencial nuevo, con obra ya iniciada. Arranca con los
-                  modelos Tabachín y Noni; los demás se abren después.
+                  La etapa nueva — un residencial aparte, no una sección del 6 —
+                  con obra ya iniciada. Arranca con los modelos Tabachín y Noni.
                 </p>
                 <ul className={styles.etapaSpecs}>
                   <li>Obra iniciada · fotos reales del avance</li>
