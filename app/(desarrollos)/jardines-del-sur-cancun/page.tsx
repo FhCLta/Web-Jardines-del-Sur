@@ -347,12 +347,11 @@ export default function Page() {
               <p className={styles.introEyebrow}>El residencial</p>
               <h2>Jardines del Sur 6 y Jardines del Sur 7: qué los diferencia</h2>
               <p>
-                <strong>Jardines del Sur</strong> se ha construido{" "}
+                <strong>Jardines del Sur</strong> es un desarrollo de{" "}
+                <strong>Altta Homes</strong>, la marca de vivienda de{" "}
+                <strong>Grupo Sadasi</strong>, construido{" "}
                 <strong>por etapas</strong> en la Zona Sur de Cancún — el
-                Polígono Sur — por <strong>Altta Homes</strong>, la marca de
-                vivienda de <strong>Grupo Sadasi</strong>. Y cada etapa es un{" "}
-                <strong>residencial propio</strong>: el 6 y el 7 son desarrollos
-                distintos, no dos partes de lo mismo.
+                Polígono Sur.
               </p>
               <p>
                 Hoy en <strong>Jardines del Sur 6</strong> hay modelos
