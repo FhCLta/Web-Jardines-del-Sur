@@ -152,6 +152,7 @@ export default function Page() {
             <h3>Navegación</h3>
             <ul>
               <li><a href="/">Inicio</a></li>
+              <li><a href="/jardines-del-sur-cancun">Jardines del Sur Cancún</a></li>
               <li><a href="/jardines-del-sur-6">Jardines del Sur 6</a></li>
               <li><a href="/promociones">Promociones</a></li>
               <li><a href="/la-rioja-2">La Rioja 2</a></li>

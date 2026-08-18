@@ -35,6 +35,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     })),
+    {
+      // Hub de la familia "Jardines del Sur": recupera el término que el sitio
+      // perdió el 20 jun 2026 al cambiar los títulos a marca. Prioridad 0.9,
+      // igual que /promociones: es página de entrada, no una ficha más.
+      url: `${SITE_URL}/jardines-del-sur-cancun`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
     // Próximo desarrollo (página "Próximamente", aún sin inventario en DEVS).
     {
       url: `${SITE_URL}/jardines-del-sur-7`,

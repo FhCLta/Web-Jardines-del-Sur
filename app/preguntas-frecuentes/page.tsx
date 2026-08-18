@@ -277,6 +277,7 @@ export default function Page() {
               <li>
                 <a href="/">Inicio</a>
               </li>
+              <li><a href="/jardines-del-sur-cancun">Jardines del Sur Cancún</a></li>
               <li>
                 <a href="/jardines-del-sur-6">
                   Jardines del Sur 6

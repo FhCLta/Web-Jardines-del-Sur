@@ -32,6 +32,10 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
+    // El home es la página de MARCA: cubre los cuatro desarrollos. No debe
+    // nombrar a uno solo en el título — hacerlo se lleva entre las patas a
+    // La Rioja y Lirios, y le compite al hub por la misma frase.
+    // El término "Jardines del Sur" lo trabaja /jardines-del-sur-cancun.
     default: "Altta Homes Cancún | Casas y Departamentos en Venta",
     template: "%s | Altta Homes Cancún",
   },
