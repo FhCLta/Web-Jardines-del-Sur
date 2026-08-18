@@ -349,28 +349,17 @@ export default function Page() {
               <p>
                 <strong>Jardines del Sur</strong> se ha construido{" "}
                 <strong>por etapas</strong> en la Zona Sur de Cancún — el
-                Polígono Sur — de la mano de <strong>Altta Homes</strong>, la
-                marca de vivienda de <strong>Grupo Sadasi</strong>. Por eso los
-                nombres llevan número.
+                Polígono Sur — por <strong>Altta Homes</strong>, la marca de
+                vivienda de <strong>Grupo Sadasi</strong>. Y cada etapa es un{" "}
+                <strong>residencial propio</strong>: el 6 y el 7 son desarrollos
+                distintos, no dos partes de lo mismo.
               </p>
               <p>
-                Y aquí está lo que conviene tener claro:{" "}
-                <strong>cada etapa es un residencial propio</strong>, con su
-                acceso, su obra y sus precios. Jardines del Sur 6 y Jardines del
-                Sur 7 no son dos secciones de lo mismo — son{" "}
-                <strong>dos residenciales distintos</strong>.
-              </p>
-              <p>
-                Hoy hay dos vigentes. En <strong>Jardines del Sur 6</strong> hay
-                casas y departamentos disponibles, ya construidos y con precio
-                publicado. <strong>Jardines del Sur 7</strong> está en obra y
-                todavía no abre venta.
-              </p>
-              <p>
-                Lo importante de saberlo:{" "}
-                <strong>varios modelos se repiten entre uno y otro</strong>. Si
-                te gustó una casa del 7, es muy probable que esa misma casa ya
-                exista, construida, en el 6.
+                Hoy en <strong>Jardines del Sur 6</strong> hay modelos
+                disponibles y con precio publicado;{" "}
+                <strong>Jardines del Sur 7</strong> está en obra. Varios modelos
+                se repiten entre los dos, así que si te gustó una casa del 7, es
+                probable que ya exista construida en el 6.
               </p>
             </div>
 
