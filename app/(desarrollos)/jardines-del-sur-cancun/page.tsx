@@ -320,9 +320,13 @@ export default function Page() {
             <strong>2 residenciales</strong>
             <em>El 6 y el 7</em>
           </li>
+          {/* Aquí iba "desde $X". Se quitó: junto a "2 residenciales" se leía
+              como si fuera el precio de los dos, y Jardines del Sur 7 todavía
+              no tiene precio. El "desde" va donde queda claro de quién es:
+              en la tarjeta de Jardines del Sur 6. */}
           <li>
-            <strong>{minPrice6 ? formatPriceShort(minPrice6) : "—"}</strong>
-            <em>Precio desde</em>
+            <strong>Grupo Sadasi</strong>
+            <em>50 años de respaldo</em>
           </li>
           <li>
             <strong>{propiedades6.length} modelos</strong>
