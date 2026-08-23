@@ -77,6 +77,50 @@ hasta ~mediados de diciembre).
 **Conclusión (12 ago 2026): la migración salió bien.** Más clics en menos tiempo,
 CTR duplicado, misma posición. **No re-litigar el cambio de dominio.**
 
+### ⭐ Corrección (23 ago 2026): la conclusión de arriba estaba incompleta
+
+Los totales mejoraron, sí. Pero **el mismo día de la migración pasaron tres
+cosas, no una**, y durante dos meses se le echó la culpa a la equivocada:
+
+| Fecha | Qué pasó | Commit |
+|---|---|---|
+| **9 jun** | Nace la página de Jardines del Sur 7 | `a49b599` |
+| **20 jun** | Migración a `alttahomescancun.mx` | `921d6f8` |
+| **20 jun** | **Los títulos pasan a marca** | `0e6c60a` |
+
+Ese tercer cambio es el que de verdad costó:
+
+```
+ANTES:      "Jardines del Sur Cancún | Casas y Departamentos en Polígono Sur"
+plantilla:  "%s | Jardines del Sur Cancún"
+
+DESPUÉS:    "Altta Homes Cancún | Casas y Departamentos en Venta"
+plantilla:  "%s | Altta Homes Cancún"
+```
+
+**"Jardines del Sur Cancún" desapareció del sitio entero** — era literalmente el
+título de la página principal y el sufijo de todas las demás. Google lee títulos;
+los dominios de nombre exacto pesan poco desde hace años. Los silos sí
+conservaron su nombre, así que el daño no fue parejo.
+
+**Verificado además:** la migración está **bien ejecutada** — cada URL vieja cae
+en su equivalente nueva y los 404 siguen siendo 404. No hay bug de redirects que
+culpar.
+
+**Y la caída de calidad de leads** ("de aquel me escribían listos para comprar")
+se explica por la página de JdS7: nació 11 días antes y hoy es la consulta #1,
+pero **JdS7 todavía no se vende**. Cambió qué desarrollo trae la gente, no el
+dominio.
+
+**Corregido el 18 ago 2026** con la página `/jardines-del-sur-cancun`, que
+recupera el término sin tocar dominios. El home se queda con título de marca a
+propósito: nombrar un solo desarrollo ahí perjudica a La Rioja y Lirios, que ya
+vienen de 18 a 6 clics.
+
+> La hipótesis que queda abierta —si el nombre viejo además genera más
+> confianza— está documentada con su plan de prueba en `prueba-dominio.md`.
+> **En pausa, sin nada que ejecutar.**
+
 ### Consultas clave
 
 | Consulta | Clics | Impresiones | CTR | Posición |
