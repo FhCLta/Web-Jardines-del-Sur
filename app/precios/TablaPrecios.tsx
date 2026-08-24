@@ -67,14 +67,16 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
                     {p.nombre_modelo}
                   </a>
                   <span className={styles.acciones}>
-                    <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
-                      Ver fotos y recorrido 360° →
-                    </a>
-                    {p.precio_variable && (
-                      <a href={`#precios-por-nivel-${slug}`}>
-                        Ver lista de precios completa →
+                    <span className={styles.accionesVer}>
+                      <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
+                        Ver fotos y recorrido 360° →
                       </a>
-                    )}
+                      {p.precio_variable && (
+                        <a href={`#precios-por-nivel-${slug}`}>
+                          Ver lista de precios completa →
+                        </a>
+                      )}
+                    </span>
                     <a
                       className={styles.cotizar}
                       href={waHref}

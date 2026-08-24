@@ -171,10 +171,20 @@
 
 .acciones {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+}
+
+/* Los enlaces de "ver" comparten renglon; el boton de cotizar va SIEMPRE en el
+   suyo, debajo. Asi queda a la misma altura en todas las filas, lleve el modelo
+   uno o dos enlaces. */
+.accionesVer {
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.35rem 0.9rem;
-  margin-top: 0.4rem;
+  gap: 0.3rem 0.9rem;
 }
 
 .tabla tbody th .acciones a {
