@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Shell from "./Shell";
 import TablaPrecios from "./TablaPrecios";
+import NivelesTable from "@/app/(desarrollos)/_lib/NivelesTable";
 import styles from "./precios.module.css";
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
 import {
@@ -8,7 +9,7 @@ import {
   formatPriceMxn,
   formatPriceShort,
 } from "@/app/(desarrollos)/_lib/model-utils";
-import { getFechaPrecios } from "@/lib/precios";
+import { getFechaPrecios, getVariantesDepartamentos } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 
 const PHONE_E164 = "529982059044";
@@ -154,6 +155,7 @@ export default function Page() {
         const dev = DEVS[slug];
         const props = getPropertiesByDev(dev.name);
         const min = Math.min(...props.map((p) => p.precio));
+        const variantes = getVariantesDepartamentos(slug);
         return (
           <section key={slug} className={styles.bloque}>
             <div className="container">
@@ -161,12 +163,18 @@ export default function Page() {
                 <h2>
                   {dev.name} — desde {formatPriceMxn(min)}
                 </h2>
-                <a className={styles.bloqueLink} href={`/${slug}/precios`}>
-                  Ver la lista completa de {dev.name} →
-                </a>
               </div>
               <TablaPrecios slug={slug} />
             </div>
+            {/* Un id por desarrollo: aqui se pintan varias tablas de nivel en
+                la misma pagina y repetir el id rompe el anclaje. */}
+            {variantes.length > 0 && (
+              <NivelesTable
+                variantes={variantes}
+                waHref={waHref}
+                id={`precios-por-nivel-${slug}`}
+              />
+            )}
           </section>
         );
       })}

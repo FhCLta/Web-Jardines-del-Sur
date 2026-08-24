@@ -21,6 +21,13 @@ type Props = {
    * <h1> de la página y repetirlo sobra.
    */
   showModelName?: boolean;
+  /**
+   * Ancla de la seccion. Por defecto "precios-por-nivel", que es a donde apunta
+   * la nota del hero de las fichas. El hub /precios pinta VARIAS tablas en la
+   * misma pagina —una por desarrollo— y ahi hay que darle un id distinto a cada
+   * una: dos elementos con el mismo id rompen el anclaje y el HTML.
+   */
+  id?: string;
 };
 
 /**
@@ -40,6 +47,7 @@ export default function NivelesTable({
   modelo,
   waHref,
   showModelName = true,
+  id = "precios-por-nivel",
 }: Props) {
   const filas = modelo ? variantes.filter((v) => v.modelo === modelo) : variantes;
   if (filas.length === 0) return null;
@@ -48,7 +56,7 @@ export default function NivelesTable({
   const hayVistas = filas.some((v) => v.vista);
 
   return (
-    <section className={styles.nivelesSection} id="precios-por-nivel">
+    <section className={styles.nivelesSection} id={id}>
       <div className="container">
         <h2 className={styles.nivelesTitle}>
           {hayVistas ? "Precios por nivel y vista" : "Precios por nivel"}
