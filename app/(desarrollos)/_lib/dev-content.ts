@@ -13,6 +13,12 @@ export type DevContent = {
   heroSubtitle: string;
   heroImage: string;
   ogImage: string;
+  /**
+   * Logo del desarrollo (los tres miden 128px de alto). Lo usan las pestañas
+   * del home y el silo de precios, que lo pone al frente de cada tabla para
+   * que la lista se reconozca de un vistazo al compartirla por WhatsApp.
+   */
+  logo: string;
   location?: { label: string; value: string };
   whatsappMessage: string;
   hero: {
@@ -82,6 +88,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "El sexto desarrollo de Jardines del Sur en la Zona Sur de Cancún, con seis modelos de casas y departamentos de tres recámaras y el respaldo de 50 años de Grupo Sadasi.",
     heroImage: "/optimized/dev-tabs/jardines-6.webp",
     ogImage: "/jardines/Imagnes de amenidades y hero/alberca.webp",
+    logo: "/logos/jardines-6.webp",
     location: { label: "Ubicación", value: "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
@@ -211,6 +218,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Cuatro modelos de casas premium con tres recámaras, baños completos y terraza al frente, en el desarrollo más exclusivo de Altta Homes en Cancún.",
     heroImage: "/optimized/dev-tabs/la-rioja-2.webp",
     ogImage: "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
+    logo: "/logos/la-rioja-2.webp",
     location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
@@ -344,6 +352,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
     heroImage: "/optimized/dev-tabs/lirios-2.webp",
     ogImage: "/jardines/Modelo Cedro Plus/1.webp",
+    logo: "/logos/lirios-2.webp",
     location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre los departamentos de Lirios Residencial 2 en Cancún.",

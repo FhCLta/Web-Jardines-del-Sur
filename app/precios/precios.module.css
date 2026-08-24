@@ -110,6 +110,36 @@
   text-align: center;
 }
 
+/* ── Logo del desarrollo y agrupacion por tipo ────────────────────────────── */
+
+.logoWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+/* Alto fijo y ancho automatico: los tres logos miden 128px de alto pero
+   distinto ancho (400, 260 y 190), asi que fijar el ancho los deformaria. */
+.logo {
+  height: 52px;
+  width: auto;
+}
+
+.grupo + .grupo {
+  margin-top: 2rem;
+}
+
+.grupoTitulo {
+  font-family: var(--font-montserrat);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
 /* ── La tabla ─────────────────────────────────────────────────────────────── */
 
 .tablaWrap {
@@ -119,10 +149,36 @@
   background: #fff;
 }
 
+/* `table-layout: fixed` con anchos declarados: al separar casas de
+   departamentos quedaron DOS tablas apiladas, y cada una calculaba sus columnas
+   por su cuenta segun su contenido. Resultado: "Modelo" arrancaba en distinto
+   sitio en cada una y las cifras no formaban columna. Con anchos fijos las dos
+   quedan calcadas. */
 .tabla {
   width: 100%;
   border-collapse: collapse;
   min-width: 680px;
+  table-layout: fixed;
+}
+
+.tabla th:nth-child(1) {
+  width: 32%;
+}
+
+.tabla th:nth-child(2) {
+  width: 13%;
+}
+
+.tabla th:nth-child(3) {
+  width: 18%;
+}
+
+.tabla th:nth-child(4) {
+  width: 21%;
+}
+
+.tabla th:nth-child(5) {
+  width: 16%;
 }
 
 .tabla th,

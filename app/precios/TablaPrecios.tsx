@@ -1,5 +1,7 @@
+import Image from "next/image";
 import {
   getPropertiesByDev,
+  getModelType,
   slugifyModel,
   formatPriceMxn,
   getWhatsAppMessageForModel,
@@ -41,7 +43,52 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
     .sort((a, b) => a.precio - b.precio);
   if (props.length === 0) return null;
 
+  // Casas y departamentos se listan por separado: son productos distintos y
+  // mezclarlos obliga a leer fila por fila para saber cual es cual. Solo
+  // Jardines del Sur 6 tiene los dos; donde hay un solo tipo el subtitulo
+  // sobra y no se pinta.
+  const grupos = (["Casa", "Departamento"] as const)
+    .map((tipo) => ({
+      titulo: tipo === "Casa" ? "Casas" : "Departamentos",
+      items: props.filter((p) => getModelType(p.nombre_modelo) === tipo),
+    }))
+    .filter((g) => g.items.length > 0);
 
+  // Red de seguridad: si algun dia un modelo no cae en ninguno de los dos tipos,
+  // aparece en su propio grupo en vez de desaparecer de la lista sin avisar.
+  const sueltos = props.filter((p) => getModelType(p.nombre_modelo) === null);
+  if (sueltos.length > 0) grupos.push({ titulo: "Otros modelos", items: sueltos });
+
+  return (
+    <>
+      {/* El logo encabeza la lista para que se reconozca de un vistazo cuando
+          Florencio la comparte por WhatsApp. Los tres miden 128px de alto. */}
+      <div className={styles.logoWrap}>
+        <Image
+          src={dev.logo}
+          alt={dev.name}
+          width={400}
+          height={128}
+          className={styles.logo}
+        />
+      </div>
+      {grupos.map((g) => (
+        <div key={g.titulo} className={styles.grupo}>
+          {grupos.length > 1 && <h3 className={styles.grupoTitulo}>{g.titulo}</h3>}
+          <TablaDeGrupo slug={slug} items={g.items} />
+        </div>
+      ))}
+    </>
+  );
+}
+
+function TablaDeGrupo({
+  slug,
+  items,
+}: {
+  slug: DevSlug;
+  items: ReturnType<typeof getPropertiesByDev>;
+}) {
   return (
     <div className={styles.tablaWrap}>
       <table className={styles.tabla}>
@@ -55,7 +102,7 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
           </tr>
         </thead>
         <tbody>
-          {props.map((p) => {
+          {items.map((p) => {
             const ahorro = p.valor_avaluo ? p.valor_avaluo - p.precio : null;
             const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
               getWhatsAppMessageForModel(p)
