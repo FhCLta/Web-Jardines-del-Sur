@@ -283,13 +283,25 @@
   );
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* ⚠️ NO usar `justify-content: center` aquí. Con overflow-y, centrar reparte
+     el sobrante hacia ARRIBA y hacia abajo, así que en cuanto el menú es más
+     alto que la pantalla el contenido se sale por arriba, se mete debajo del
+     encabezado (que va en z-index 120, encima del drawer) y ademas queda
+     inalcanzable al scrollear. Pasaba en las paginas dentro de un silo —ficha,
+     catalogo y promociones, las de mas items— por debajo de ~700px de alto:
+     tipico del navegador dentro de WhatsApp o Instagram, que come pantalla con
+     su propia barra. Medido: a 390x620 el menu arrancaba en -9px.
+
+     El centrado se hace ahora con margenes automaticos: cuando sobra espacio se
+     reparte y el menu queda centrado igual que antes; cuando no sobra, los
+     `auto` valen 0, el contenido arranca en el padding y el sobrante se va solo
+     hacia abajo, donde si se puede scrollear. */
+  justify-content: flex-start;
   align-items: center;
-  /* padding-bottom amplio: deja sitio al .drawerFoot (absolute, bottom:2rem)
-     para que el contenido centrado nunca se encime con él en páginas de
-     desarrollo (más items en el menú). overflow-y por si en pantallas muy
-     chicas el contenido excede el alto: scroll en vez de recorte. */
-  padding: 5rem 2rem 6.5rem;
+  /* padding-top despeja el logo del encabezado, que mide 57px. El
+     padding-bottom ya no necesita ser amplio: el .drawerFoot dejo de estar en
+     absolute y ahora ocupa su propio sitio al final del flujo. */
+  padding: 5rem 2rem 2rem;
   overflow-y: auto;
   opacity: 0;
   pointer-events: none;
@@ -326,6 +338,9 @@
   gap: 1.4rem;
   text-align: center;
   position: relative;
+  /* Junto con el margin-bottom de .drawerCta, centra el bloque cuando cabe y lo
+     deja pegado arriba cuando no. Ver la nota de .drawer. */
+  margin-top: auto;
 }
 
 .drawerNav a {
@@ -394,6 +409,7 @@
 
 .drawerCta {
   margin-top: 2.5rem;
+  margin-bottom: auto;
   padding: 1rem 2.2rem;
   font-size: 1rem;
   position: relative;
@@ -401,8 +417,14 @@
 }
 
 .drawerFoot {
-  position: absolute;
-  bottom: 2rem;
+  /* ⚠️ En FLUJO, no `position: absolute`. Estaba clavado a bottom:2rem del
+     recuadro fijo del drawer, asi que al scrollear el menu el contenido le
+     pasaba POR DEBAJO y el pie se encimaba con los ultimos renglones
+     (Calculadora y Contacto). Con margin-top:auto queda pegado abajo cuando
+     sobra espacio —igual que antes— y baja con el resto cuando hay que
+     scrollear. Ver la nota de .drawer. */
+  margin-top: auto;
+  padding-top: 2rem;
   text-align: center;
   font-family: var(--font-montserrat);
   font-size: 0.7rem;
