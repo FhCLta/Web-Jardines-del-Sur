@@ -1,11 +1,13 @@
 import {
   getPropertiesByDev,
-  getModelType,
   slugifyModel,
   formatPriceMxn,
+  getWhatsAppMessageForModel,
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
 import styles from "./precios.module.css";
+
+const PHONE_E164 = "529982059044";
 
 /**
  * Tabla comparativa de precios de un desarrollo.
@@ -54,21 +56,29 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
         </thead>
         <tbody>
           {props.map((p) => {
-            const tipo = getModelType(p.nombre_modelo);
             const ahorro = p.valor_avaluo ? p.valor_avaluo - p.precio : null;
+            const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
+              getWhatsAppMessageForModel(p)
+            )}`;
             return (
               <tr key={p.id}>
                 <th scope="row">
                   <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                     {p.nombre_modelo}
                   </a>
-                  {tipo && <span className={styles.tipo}>{tipo}</span>}
-                  <a
-                    className={styles.verLista}
-                    href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}
-                  >
-                    Ver fotos y recorrido 360° →
-                  </a>
+                  <span className={styles.acciones}>
+                    <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
+                      Ver fotos y recorrido 360° →
+                    </a>
+                    <a
+                      className={styles.cotizar}
+                      href={waHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Cotizar ahora
+                    </a>
+                  </span>
                 </th>
                 {/* Los data-label alimentan la vista de TARJETAS en celular,
                     donde la tabla se apila (ver el @media de precios.module.css). */}

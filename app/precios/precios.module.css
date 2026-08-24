@@ -169,20 +169,15 @@
   color: var(--text-primary);
 }
 
-.tipo {
-  display: block;
-  font-family: var(--font-montserrat);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  margin-top: 0.18rem;
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  margin-top: 0.4rem;
 }
 
-.tabla tbody th a.verLista {
-  display: block;
-  margin-top: 0.3rem;
+.tabla tbody th .acciones a {
   font-family: var(--font-montserrat);
   font-size: 0.72rem;
   font-weight: 700;
@@ -190,9 +185,24 @@
   white-space: nowrap;
 }
 
-.tabla tbody th a.verLista:hover {
+.tabla tbody th .acciones a:hover {
   color: var(--accent-deep);
   text-decoration: underline;
+}
+
+/* "Cotizar ahora" es la accion que cierra, asi que se distingue de la de mirar:
+   va en pildora rellena en vez de enlace suelto. */
+.tabla tbody th .acciones a.cotizar {
+  background: var(--accent-deep);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+}
+
+.tabla tbody th .acciones a.cotizar:hover {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
 }
 
 .avaluo {
@@ -404,8 +414,4 @@
     margin-right: 0.35rem;
   }
 
-  .tipo {
-    display: inline;
-    margin-left: 0.5rem;
-  }
 }
