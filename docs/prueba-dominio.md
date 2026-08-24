@@ -1,10 +1,15 @@
-# La corazonada del dominio — y cómo probarla cuando haya tiempo
+# La corazonada del dominio — por qué no se puede medir y qué sí se puede probar
 
-> **Estado: EN PAUSA, documentado a propósito.** No hay nada que ejecutar hoy.
-> Este documento existe para que la pregunta no se vuelva a discutir desde cero
-> dentro de tres meses. Escrito el **23 ago 2026**.
+> **Estado: la pregunta del dominio queda CERRADA por no ser medible; lo único
+> que sigue vivo es una prueba de PALABRAS en Google Ads (§4).** Escrito el
+> **23 ago 2026**, corregido el **24 ago 2026**.
 >
-> Versión visual del plan (misma información, más fácil de seguir paso a paso):
+> **Qué cambió el 24 ago:** el plan original suponía que la prueba se corría en
+> Meta con una landing. Los anuncios de Meta abren **WhatsApp directo**, así que
+> el cliente **nunca ve el dominio** — se caen las fases 1, 2 y 3. Ver §3.
+>
+> ⚠️ **Versión visual DESACTUALIZADA** (describe el plan de 5 fases, anterior a
+> esta corrección — no seguirla):
 > https://claude.ai/code/artifact/97e883b7-55f0-4277-a6ac-108220634627
 
 ---
@@ -52,120 +57,144 @@ dominio. Lo que queda sin probar es si el nombre, además, genera más confianza
 
 ---
 
-## 3. El plan, para cuando haya tiempo
+## 3. ⛔ Corrección (24 ago 2026): las fases 1, 2 y 3 se caen
 
-Cinco fases **con compuerta**: si una contesta la pregunta, el plan termina ahí.
+La versión original de este plan asumía que la prueba se corría **en Meta, con
+una landing**. **No aplica.**
 
-### Fase 0 · La prueba que no cuesta nada ← EMPEZAR AQUÍ
+**El motivo:** los anuncios de Meta de Florencio son de **clic para enviar
+mensaje** — abren WhatsApp directo. **Nunca hay página de aterrizaje, así que el
+cliente nunca ve el dominio.** Todo el tráfico de Meta es ciego al dominio: da
+exactamente igual cuál esté conectado.
 
-Riesgo cero. Una tarde. No toca ningún dominio.
+Eso tumba las tres fases que dependían de Meta:
 
-1. Del CRM, de los 3 clientes del dominio viejo: **qué compró cada uno**,
-   **cuándo escribió por primera vez** (no cuándo firmó) y **si ya lo conocía**.
-   Si los tres compraron JdS6, era el producto y no el dominio.
-2. En Google Ads, **en la misma campaña y el mismo grupo de anuncios**, crear un
-   segundo anuncio. Mismo grupo para que compita por las mismas palabras clave,
-   el mismo público y el mismo presupuesto — campaña aparte cambia la subasta y
-   ya no se mide lo mismo.
-
-   | | Anuncio A (el actual) | Anuncio B (el nuevo) |
-   |---|---|---|
-   | Título 1 | Altta Homes Cancún | **Jardines del Sur Cancún** 📌 |
-   | Ruta visible | la actual | `JardinesDelSur` / `Cancun` |
-   | Todo lo demás | — | idéntico |
-
-   ⚠️ **Hay que FIJAR el título en la posición 1** (el ícono del alfiler). Los
-   anuncios adaptables mezclan los títulos solos; sin fijarlo, Google revuelve y
-   nunca se sabe cuál se mostró. Sin ese paso la prueba no vale.
-
-   ⚠️ **Límites reales de Google Ads:** cada tramo de la ruta visible tope
-   **15 caracteres**. `Jardines-del-Sur` son 16 y lo rechaza; `JardinesDelSur`
-   son 14 y pasa. El título `Jardines del Sur Cancún` son 23, dentro del tope
-   de 30. Se vería: `alttahomescancun.mx/JardinesDelSur/Cancun`
-
-3. Dejarlo correr **dos semanas mínimo**, y hasta que el anuncio nuevo junte al
-   menos **500 impresiones**. Con menos, cualquier diferencia es azar.
-
-4. **Comparar TASAS, no totales.** Google no reparte las impresiones mitad y
-   mitad: le da más al que cree mejor, así que el ganador tendrá más de todo y
-   eso solo no prueba nada. Lo comparable es:
-   - **CTR** — de los que lo vieron, cuántos le picaron
-   - **Tasa de conversión** — de los que entraron, cuántos escribieron
-
-> **Compuerta:** si el anuncio con el nombre gana, **nunca fue el dominio — eran
-> las palabras**, y ya se pueden usar hoy sin comprar ni mover nada. El plan
-> termina aquí y se ahorran las otras cuatro fases.
-
-### Fase 1 · La landing, todavía sin dominio
-Riesgo cero. Vive en la URL `.web.app`.
-- Segundo sitio de Firebase **en el mismo proyecto** (`firebase hosting:sites:create`),
-  para que pueda usar la misma función de Meta CAPI. Proyecto aparte obligaría a
-  redesplegar la función — riesgo R4 de `sites/RIESGOS.md`.
-- **Una sola página en su propia carpeta.** Nunca apuntando a `out/`, o se
-  publica el sitio completo con `/cotizador` dentro.
-- **Verificar la CAPI con una llamada real.** No asumir.
-
-### Fase 2 · Conectar el dominio
-Riesgo **bajo y reversible** — la única fase del plan que no es riesgo cero.
-- Apuntar `jardinesdelsurcancun.mx` a la landing y quitar el 301.
-- `noindex` en la página **y** `Disallow: /` en su robots.txt. Las dos cosas.
-- Verificar el dominio nuevo en Meta Business Manager.
-- **Qué cuesta:** ese dominio hoy alimenta la consolidación del principal; al
-  servir contenido propio deja de hacerlo. Se revierte poniendo el redirect.
-
-### Fase 3 · El A/B **dentro de Meta**
-Riesgo cero. 2–3 semanas o 60 conversaciones.
-- Prueba A/B nativa: mismo público, mismo presupuesto, misma creatividad.
-- **Lo único distinto es el dominio de destino.**
-
-> ⚠️ **No comparar contra Google Ads.** Quien busca y quien es interrumpido
-> convierten distinto siempre. Comparar canales mide el canal, no el dominio.
-> Ese fue el error de diseño de la primera versión de esta prueba.
-
-### Fase 4 · Leer el resultado
-Se compara **costo por conversación de WhatsApp**, no clics.
-
----
-
-## 4. Los umbrales — escritos ANTES de ver los números
-
-Esto es lo que evita que el resultado se interprete a conveniencia.
-
-| Diferencia a favor del nombre viejo | Qué significa | Qué se hace |
+| Fase | Qué era | Por qué se cae |
 |---|---|---|
-| **< 15%** | Ruido | Se revierte el dominio al 301 y **el tema queda cerrado** |
-| **15 – 40%** | Efecto real | Todo Meta a la landing. **El orgánico no se toca** |
-| **> 40%** | Efecto grande | Igual no se migra. **Reevaluar en enero**, con la preventa corrida |
+| **1** · La landing en `.web.app` | Construir la página de destino | Se construía **para Meta**. Sin anuncios que la abran, no tiene a quién recibir |
+| **2** · Conectar el dominio | Apuntar `jardinesdelsurcancun.mx` a la landing | Se conectaba **para que Meta lo mostrara**. Nadie lo vería |
+| **3** · El A/B dentro de Meta | La medición misma | **No hay nada que medir**: el dominio no aparece en ningún punto del recorrido |
+
+> ⚠️ **Meta y Google son canales distintos y no se mezclan.** Lo de arriba aplica
+> **solo a Meta**, por cómo están armados esos anuncios. Google Ads sí manda a la
+> web y sí muestra el dominio — por eso es el único lugar donde queda algo que
+> probar. Cualquier conclusión de un canal **no se traslada al otro**.
+
+**Lo que sobrevive: la fase 0, y solo en Google.**
 
 ---
 
-## 5. Lo que falla en silencio
+## 4. Lo que queda por hacer
 
-Estas cuatro no avisan cuando se rompen. El sitio se ve perfecto mientras no
-registra nada.
+Dos tareas independientes. Ninguna toca un dominio, ninguna cuesta dinero
+adicional, y **cada una contesta una pregunta distinta**.
 
-- [ ] **El `rewrite` de `/api/meta-capi`** en el sitio nuevo. Sin él los eventos
-      van a un 404 y el componente se traga el error por diseño (`.catch(() => {})`).
-      Se comprueba con una llamada real, viéndola llegar a Meta.
-- [ ] **Verificación del dominio nuevo en Meta.** Hoy solo está verificado
-      `alttahomescancun.mx`; sin el otro se cae la atribución en iOS.
-- [ ] **El `noindex`, comprobado en el HTML ya publicado.** No basta con haberlo
-      escrito en el código.
-- [ ] **La carpeta que publica el segundo sitio.** Si apunta a `out/`, publica el
-      sitio entero incluido el cotizador con la lista de precios y bonos.
+### 4.1 · El repaso del CRM — media hora, riesgo cero
+
+De los **3 clientes del dominio viejo**, sacar: **qué compró cada uno**, **cuándo
+escribió por primera vez** (no cuándo firmó) y **si ya conocía el desarrollo**.
+
+> **Qué contesta:** si los tres compraron Jardines del Sur 6, **era el producto,
+> no el dominio** — y la corazonada queda explicada sin gastar nada más.
+
+Es la única pieza que mira a los 3 casos de frente en vez de teorizar sobre
+ellos. Hacerla primero.
+
+### 4.2 · El segundo anuncio en Google Ads — parte de la campaña de septiembre
+
+**Ojo con lo que este anuncio prueba de verdad:** el dominio que Google muestra
+es `alttahomescancun.mx` **en los dos anuncios**. Lo único distinto son **el
+título y la ruta visible**. Entonces esto **no prueba el dominio: prueba las
+palabras**. Y eso está bien — es justo la pregunta accionable, porque las
+palabras se pueden usar hoy sin comprar ni mover nada.
+
+En la **misma campaña y el mismo grupo de anuncios** (mismo grupo para que
+compita por las mismas palabras clave, el mismo público y el mismo presupuesto —
+campaña aparte cambia la subasta y ya no se mide lo mismo):
+
+| | Anuncio A (el actual) | Anuncio B (el nuevo) |
+|---|---|---|
+| Título 1 | Altta Homes Cancún | **Jardines del Sur Cancún** 📌 |
+| Ruta visible | la actual | `JardinesDelSur` / `Cancun` |
+| Todo lo demás | — | idéntico |
+
+⚠️ **Hay que FIJAR el título en la posición 1** (el ícono del alfiler). Los
+anuncios adaptables mezclan los títulos solos; sin fijarlo, Google revuelve y
+nunca se sabe cuál se mostró. **Sin ese paso la prueba no vale.**
+
+⚠️ **Límites reales de Google Ads:** cada tramo de la ruta visible tope **15
+caracteres**. `Jardines-del-Sur` son 16 y lo rechaza; `JardinesDelSur` son 14 y
+pasa. El título `Jardines del Sur Cancún` son 23, dentro del tope de 30. Se
+vería: `alttahomescancun.mx/JardinesDelSur/Cancun`
+
+**Cuánto dejarlo correr:** dos semanas mínimo, y hasta que el anuncio nuevo junte
+al menos **500 impresiones**. Con menos, cualquier diferencia es azar.
+
+**Cómo leerlo — TASAS, no totales.** Google no reparte las impresiones mitad y
+mitad: le da más al que cree mejor, así que el ganador tendrá más de todo y eso
+solo no prueba nada. Lo comparable es:
+
+- **CTR** — de los que lo vieron, cuántos le picaron
+- **Tasa de conversión** — de los que entraron, cuántos escribieron
+
+| Diferencia a favor del título con el nombre | Qué significa | Qué se hace |
+|---|---|---|
+| **< 15%** | Ruido | Se deja el anuncio actual y **el tema queda cerrado** |
+| **≥ 15%** | Las palabras sí pesan | Meter "Jardines del Sur Cancún" en más títulos y anuncios. **No se toca ningún dominio** |
+
+> **La compuerta, sin cambios:** si el anuncio con el nombre gana, **nunca fue el
+> dominio — eran las palabras**, y ya se pueden usar hoy.
+
+**Dónde vive esta tarea:** ya no es un proyecto aparte. Es **un renglón del
+montaje de la campaña de Google de septiembre** ($200/día, desarrollos como
+grupos de anuncios). Va en el grupo de **más volumen**, que es donde 500
+impresiones llegan rápido.
 
 ---
 
-## 6. Tres reglas que ningún dato cambia
+## 5. ¿Y el dominio? En la práctica, ya no es medible
+
+Sin Meta, la única forma de que un cliente **vea** un dominio distinto sería
+construir la landing (fase 1), conectarle el dominio (fase 2) y mandarle **tráfico
+de Google Ads**. Técnicamente se puede: ahí el dominio de destino sí se muestra.
+Pero la aritmética no da:
+
+- Google va a **$200 MXN/día** con CPA histórico de **$87–105** → alrededor de
+  **2 conversaciones al día** en toda la cuenta.
+- Partido en dos brazos, y usando solo el grupo con volumen, quedan **menos de
+  una conversación diaria por brazo**.
+- Para distinguir una diferencia del 15% en tasa de conversión hacen falta
+  **cientos de conversiones por brazo**. A ese ritmo son **meses** — corriendo
+  justo encima de la preventa de Jardines del Sur 7.
+
+**Conclusión honesta:** la pregunta del dominio **no se puede contestar con el
+volumen que hay hoy**. No es que la respuesta sea "no"; es que **medirla cuesta
+más de lo que vale saberla**. Lo que sí se puede contestar, barato y esta misma
+semana, es si **las palabras** ayudan — y eso es §4.2.
+
+Si algún día el volumen de Google sube mucho, o si los anuncios de Meta dejan de
+ir directo a WhatsApp, este documento se reabre. Mientras tanto: **cerrado por
+falta de forma de medirlo, no por falta de interés.**
+
+---
+
+## 6. Las reglas que siguen en pie
 
 1. **El dominio principal no se mueve antes de que abra Jardines del Sur 7.**
-   Es el único error de esta lista que no se puede deshacer.
-2. **La landing va con `noindex`, sin excepción.** Es lo único que garantiza que
-   no compita contra el sitio propio. Sin `noindex` deja de ser prueba y pasa a
-   ser apuesta.
-3. **La CAPI se verifica con una llamada real, no se asume.** Es la que falla
-   callada; sin ese evento confirmado la prueba entera puede correr semanas
-   midiendo nada.
+   Es el único error de esta lista que no se puede deshacer. **Vigente siempre.**
+2. **Los dominios defensivos se quedan estacionados.** Ser el dueño es lo que
+   bloquea a los demás; construir encima no agrega defensa. Ver §7.
+
+**Y si algún día se retoma la landing** (solo tendría sentido con un canal que sí
+muestre el dominio), estas dos vuelven a aplicar tal cual:
+
+- **`noindex` sin excepción**, comprobado en el HTML ya publicado — no basta con
+  haberlo escrito en el código. Es lo único que garantiza que no compita contra
+  el sitio propio.
+- **La CAPI se verifica con una llamada real, no se asume.** Es la que falla
+  callada (`.catch(() => {})` por diseño): el sitio se ve perfecto mientras no
+  registra nada. Sin ese evento confirmado, la prueba entera puede correr semanas
+  midiendo nada. Ver `sites/RIESGOS.md` R4.
 
 ---
 

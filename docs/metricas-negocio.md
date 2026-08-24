@@ -117,9 +117,13 @@ recupera el término sin tocar dominios. El home se queda con título de marca a
 propósito: nombrar un solo desarrollo ahí perjudica a La Rioja y Lirios, que ya
 vienen de 18 a 6 clics.
 
-> La hipótesis que queda abierta —si el nombre viejo además genera más
-> confianza— está documentada con su plan de prueba en `prueba-dominio.md`.
-> **En pausa, sin nada que ejecutar.**
+> La hipótesis de que el nombre viejo además genera más confianza está en
+> `prueba-dominio.md`. **Corregida el 24 ago 2026 y cerrada: no es medible.**
+> Los anuncios de Meta abren WhatsApp directo, así que el cliente nunca ve el
+> dominio; y en Google el volumen ($200/día, ~2 conversaciones diarias) no
+> alcanza para separar dos brazos en menos de meses. Lo único que sigue vivo es
+> una prueba de **palabras** —no de dominio— dentro de la campaña de Google de
+> septiembre.
 
 ### Consultas clave
 
