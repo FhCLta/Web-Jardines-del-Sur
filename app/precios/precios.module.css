@@ -381,7 +381,15 @@
     width: 100%;
   }
 
+  /* La tarjeta se ordena: nombre arriba, cifras en medio, acciones abajo.
+     El <th> lleva dentro el nombre Y las acciones, y en una tabla no se pueden
+     sacar a otro sitio del <tr>. Con `display: contents` el <th> desaparece
+     como caja y sus dos hijos pasan a ser hermanos de las celdas, asi que se
+     pueden reordenar: el nombre a -1 (arriba) y las acciones a 10 (abajo).
+     Las celdas se quedan en 0, en medio. En escritorio nada de esto aplica. */
   .tabla tbody tr {
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--border-soft);
     border-radius: 14px;
     background: #fff;
@@ -390,9 +398,23 @@
   }
 
   .tabla tbody th {
+    display: contents;
+  }
+
+  /* El nombre del modelo pasa a ser el encabezado de la tarjeta. */
+  .tabla tbody th > a {
+    order: -1;
+    display: block;
     background: var(--surface);
     padding: 0.9rem 1rem;
     border-bottom: 1px solid var(--border-soft);
+  }
+
+  /* Los metros no entran en la tarjeta: quien abre una lista de PRECIOS viene
+     por el precio, y en el ancho de un celular cada renglon de mas empuja las
+     cifras fuera de pantalla. Siguen en la tabla de escritorio. */
+  .tabla tbody td[data-label="Construcción"] {
+    display: none;
   }
 
   .tabla tbody td {
@@ -420,6 +442,21 @@
     white-space: normal;
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  .acciones {
+    order: 10;
+    margin-top: 0;
+    padding: 0.9rem 1rem;
+    border-top: 1px solid var(--border-soft);
+    background: var(--surface);
+    gap: 0.6rem;
+  }
+
+  .accionesVer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
   .desde {
