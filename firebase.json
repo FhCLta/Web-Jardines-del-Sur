@@ -80,7 +80,19 @@
       { "source": "/tour-alamo",         "destination": "/la-rioja-2/casa-modelo-alamo#recorrido",            "type": 301 },
       { "source": "/tour-noni-elite",    "destination": "/la-rioja-2/casa-noni-elite#recorrido",              "type": 301 },
       { "source": "/tour-noni-la-rioja", "destination": "/la-rioja-2/casa-noni#recorrido",                    "type": 301 },
-      { "source": "/tour-lirios-cedro",  "destination": "/lirios-residencial-2/departamento-cedro-plus#recorrido", "type": 301 }
+      { "source": "/tour-lirios-cedro",  "destination": "/lirios-residencial-2/departamento-cedro-plus#recorrido", "type": 301 },
+
+      { "source": "/precios-capua",         "destination": "/jardines-del-sur-6/departamento-capua#precios-por-nivel",  "type": 301 },
+      { "source": "/precios-cedro-plus",    "destination": "/jardines-del-sur-6/departamento-cedro-plus#precios-por-nivel", "type": 301 },
+      { "source": "/precios-lirios-cedro",  "destination": "/lirios-residencial-2/departamento-cedro-plus#precios-por-nivel", "type": 301 },
+      { "source": "/precios-flamboyan",     "destination": "/jardines-del-sur-6/casa-flamboyan",       "type": 301 },
+      { "source": "/precios-ceiba",         "destination": "/jardines-del-sur-6/casa-ceiba",           "type": 301 },
+      { "source": "/precios-tabachin",      "destination": "/jardines-del-sur-6/casa-tabachin",        "type": 301 },
+      { "source": "/precios-noni",          "destination": "/jardines-del-sur-6/casa-noni",            "type": 301 },
+      { "source": "/precios-fresno-elite",  "destination": "/la-rioja-2/casa-fresno-elite",            "type": 301 },
+      { "source": "/precios-alamo",         "destination": "/la-rioja-2/casa-modelo-alamo",            "type": 301 },
+      { "source": "/precios-noni-elite",    "destination": "/la-rioja-2/casa-noni-elite",              "type": 301 },
+      { "source": "/precios-noni-la-rioja", "destination": "/la-rioja-2/casa-noni",                    "type": 301 }
     ]
   }
 }

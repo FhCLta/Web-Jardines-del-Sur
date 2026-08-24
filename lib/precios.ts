@@ -161,3 +161,21 @@ export function getVariantesDepartamentos(slug: string): VarianteDepartamento[] 
         orden.indexOf(a.nivel) - orden.indexOf(b.nivel)
     );
 }
+
+/**
+ * Traduce el id del inventario ("jds6-capua") al nombre del modelo en
+ * precios.json ("CAPUA").
+ *
+ * Es el puente que necesita la FICHA para pintar la tabla de sus propias
+ * variantes: el inventario llama al modelo "Departamento Capua" y la lista de
+ * precios lo llama "CAPUA", y emparejarlos por texto sería frágil. El campo
+ * `web` ya marca cuál variante alimenta a esa ficha, así que se usa ese vínculo
+ * —el mismo que decide el precio publicado— en lugar de inventar otro.
+ *
+ * Devuelve null si el id no está en la lista; quien llama decide si eso es un
+ * error o simplemente un modelo sin variantes que mostrar.
+ */
+export function getModeloPrecios(id: string): string | null {
+  const todas: EntradaBase[] = [...precios.casas, ...precios.departamentos];
+  return todas.find((e) => e.web === id)?.modelo ?? null;
+}

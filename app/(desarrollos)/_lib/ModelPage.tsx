@@ -18,6 +18,8 @@ import {
   getWhatsAppMessageForModel,
 } from "./model-utils";
 import { SITE_URL } from "@/lib/site";
+import NivelesTable from "./NivelesTable";
+import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
@@ -72,6 +74,14 @@ export default async function ModelPage({
   const pageUrl = `${SITE_URL}/${dev.slug}/${modeloSlug}`;
   const waMessage = getWhatsAppMessageForModel(property);
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
+
+  // Tabla de precios por nivel: solo los modelos de precio variable (hoy, los
+  // departamentos) tienen algo que mostrar. `getModeloPrecios` traduce el id
+  // del inventario al nombre que usa la lista de precios.
+  const modeloPrecios = property.precio_variable ? getModeloPrecios(property.id) : null;
+  const variantes = modeloPrecios ? getVariantesDepartamentos(dev.slug) : [];
+  const tieneTablaNiveles =
+    modeloPrecios !== null && variantes.some((v) => v.modelo === modeloPrecios);
 
   // JSON-LD: WebPage + BreadcrumbList + Residence + Offer
   const residenceType =
@@ -224,7 +234,15 @@ export default async function ModelPage({
                 </span>
                 {property.precio_variable && (
                   <span className={styles.heroPriceNote}>
-                    ** El precio puede variar según nivel y ubicación
+                    {/* Con la tabla en la página, la nota deja de abrir una
+                        pregunta sin contestarla y baja a la respuesta. */}
+                    {tieneTablaNiveles ? (
+                      <a href="#precios-por-nivel">
+                        ** El precio cambia según el nivel — ver todos los precios
+                      </a>
+                    ) : (
+                      "** El precio puede variar según nivel y ubicación"
+                    )}
                   </span>
                 )}
               </div>
@@ -357,6 +375,16 @@ export default async function ModelPage({
             </div>
           </div>
         </section>
+      )}
+
+      {/* PRECIOS POR NIVEL — el abanico completo del modelo, no solo el gancho */}
+      {tieneTablaNiveles && (
+        <NivelesTable
+          variantes={variantes}
+          modelo={modeloPrecios!}
+          waHref={waHref}
+          showModelName={false}
+        />
       )}
 
       {/* TOUR VIRTUAL */}

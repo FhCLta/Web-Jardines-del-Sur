@@ -17,6 +17,7 @@ import {
   parseStat,
 } from "./model-utils";
 import { type CatalogKind } from "./dev-meta";
+import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 import fs from "node:fs";
@@ -100,13 +101,6 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
   // modelo publica una sola variante, así que esta tabla es lo único en el
   // sitio que muestra el abanico completo.
   const variantes = kind === "departamentos" ? getVariantesDepartamentos(slug) : [];
-  const modelosVariantes = [...new Set(variantes.map((v) => v.modelo))];
-  const NIVEL_LABEL: Record<string, string> = {
-    PB: "Planta baja",
-    "1": "Nivel 1",
-    "2": "Nivel 2",
-    "3": "Nivel 3",
-  };
   const heroImage = dev.hero.preloadImage || dev.ogImage;
   const heroMobile = dev.hero.mobileImage || heroImage;
 
@@ -475,124 +469,7 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
 
       {/* ===== PRECIOS POR NIVEL Y VISTA (solo departamentos) ===== */}
       {variantes.length > 0 && (
-        <section className={styles.nivelesSection} id="precios-por-nivel">
-          <div className="container">
-            <h2 className={styles.nivelesTitle}>
-              Precios por nivel y vista
-            </h2>
-            {/* ⚠️ NO escribir aquí "sin tener que preguntar" ni equivalentes.
-                Decía eso y le quitaba al cliente el motivo para escribir, que
-                es justo para lo que existe esta página. La transparencia va en
-                el PRECIO; el motivo de contacto es la DISPONIBILIDAD, que sí
-                cambia y solo se confirma con el asesor. */}
-            <p className={styles.nivelesLead}>
-              En los departamentos el precio cambia según el nivel y la vista.
-              Aquí están todos, para que compares con calma. Lo que cambia cada
-              semana es <strong>qué unidades siguen libres</strong> — eso te lo
-              confirmamos al momento.
-            </p>
-
-            {modelosVariantes.map((modelo) => {
-              const delModelo = variantes.filter((v) => v.modelo === modelo);
-              const niveles = [...new Set(delModelo.map((v) => v.nivel))];
-              const desde = Math.min(...delModelo.map((v) => v.precio));
-              const avaluoTope = Math.max(...delModelo.map((v) => v.avaluo));
-              // Las vistas se calculan POR MODELO: Capua da al parque o al
-              // estacionamiento y Cedro Plus a la alberca o al estacionamiento.
-              // Con una lista global, cada tabla pintaba una columna vacía de
-              // la vista que no le corresponde.
-              const vistas = [
-                ...new Set(delModelo.map((v) => v.vista).filter(Boolean)),
-              ] as string[];
-              return (
-                <div key={modelo} className={styles.nivelesBlock}>
-                  <h3 className={styles.nivelesModelo}>
-                    {modelo}
-                    <span className={styles.nivelesRef}>
-                      Valor avalúo hasta{" "}
-                      <strong>{formatPriceMxn(avaluoTope)}</strong>
-                    </span>
-                    <span className={styles.nivelesDesde}>
-                      desde {formatPriceMxn(desde)}
-                    </span>
-                  </h3>
-                  <div className={styles.nivelesTableWrap}>
-                    <table className={styles.nivelesTable}>
-                      <thead>
-                        <tr>
-                          <th scope="col">Nivel</th>
-                          {/* El avalúo es del NIVEL: las dos vistas del mismo
-                              piso comparten valor comercial. */}
-                          <th scope="col">Valor avalúo</th>
-                          {vistas.length > 0 ? (
-                            vistas.map((v) => (
-                              <th key={v} scope="col">
-                                Vista a{v === "alberca" ? " la" : "l"} {v}
-                              </th>
-                            ))
-                          ) : (
-                            <th scope="col">Precio</th>
-                          )}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {niveles.map((nivel) => {
-                          const enNivel = delModelo.filter((v) => v.nivel === nivel);
-                          const roof = enNivel.some((v) => /ROOF/i.test(v.prototipo));
-                          return (
-                            <tr key={nivel}>
-                              <th scope="row">
-                                {NIVEL_LABEL[nivel] ?? nivel}
-                                {roof && (
-                                  <span className={styles.nivelesRoof}>Roof garden</span>
-                                )}
-                              </th>
-                              {/* data-label alimenta la vista de TARJETAS en
-                                  celular, donde esto deja de ser tabla y cada
-                                  nivel se apila (ver catalog.module.css). */}
-                              <td
-                                className={styles.nivelesAvaluo}
-                                data-label="Valor avalúo"
-                              >
-                                {formatPriceMxn(enNivel[0].avaluo)}
-                              </td>
-                              {vistas.length > 0 ? (
-                                vistas.map((vista) => {
-                                  const v = enNivel.find((x) => x.vista === vista);
-                                  return (
-                                    <td
-                                      key={vista}
-                                      data-label={`Vista a${vista === "alberca" ? " la" : "l"} ${vista}`}
-                                    >
-                                      {v ? formatPriceMxn(v.precio) : "—"}
-                                    </td>
-                                  );
-                                })
-                              ) : (
-                                <td data-label="Precio">
-                                  {formatPriceMxn(enNivel[0].precio)}
-                                </td>
-                              )}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              );
-            })}
-
-            <p className={styles.nivelesNota}>
-              Precios netos con descuento aplicado, sujetos a disponibilidad y a
-              cambio sin previo aviso. No incluyen gastos de escrituración.{" "}
-              <a href={waHref} target="_blank" rel="noreferrer">
-                Consulta qué unidades siguen disponibles por WhatsApp
-              </a>
-              .
-            </p>
-          </div>
-        </section>
+        <NivelesTable variantes={variantes} waHref={waHref} />
       )}
 
       {/* ===== AMENIDADES (excepción deliberada: aquí SÍ van, es una presentación) ===== */}
