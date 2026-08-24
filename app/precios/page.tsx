@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Shell from "./Shell";
 import TablaPrecios from "./TablaPrecios";
+import LogoDev from "./LogoDev";
 import NivelesTable from "@/app/(desarrollos)/_lib/NivelesTable";
 import styles from "./precios.module.css";
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
@@ -159,6 +160,7 @@ export default function Page() {
         return (
           <section key={slug} className={styles.bloque}>
             <div className="container">
+              <LogoDev slug={slug} />
               <div className={styles.bloqueHead}>
                 <h2>
                   {dev.name} — desde {formatPriceMxn(min)}

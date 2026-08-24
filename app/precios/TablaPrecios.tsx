@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   getPropertiesByDev,
   getModelType,
@@ -61,17 +60,6 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
 
   return (
     <>
-      {/* El logo encabeza la lista para que se reconozca de un vistazo cuando
-          Florencio la comparte por WhatsApp. Los tres miden 128px de alto. */}
-      <div className={styles.logoWrap}>
-        <Image
-          src={dev.logo}
-          alt={dev.name}
-          width={400}
-          height={128}
-          className={styles.logo}
-        />
-      </div>
       {grupos.map((g) => (
         <div key={g.titulo} className={styles.grupo}>
           {grupos.length > 1 && <h3 className={styles.grupoTitulo}>{g.titulo}</h3>}

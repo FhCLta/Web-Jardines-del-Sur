@@ -1,5 +1,6 @@
 import Shell from "@/app/precios/Shell";
 import TablaPrecios from "@/app/precios/TablaPrecios";
+import LogoDev from "@/app/precios/LogoDev";
 import NivelesTable from "./NivelesTable";
 import styles from "@/app/precios/precios.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
@@ -106,6 +107,7 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
 
       <section className={styles.bloque}>
         <div className="container">
+          <LogoDev slug={slug} />
           <div className={styles.bloqueHead}>
             <h2>Todos los modelos, desde {formatPriceMxn(desde)}</h2>
             <a className={styles.bloqueLink} href={`/${slug}`}>

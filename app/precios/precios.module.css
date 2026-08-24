@@ -115,7 +115,7 @@
 .logoWrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1rem;
 }
 
 /* Alto fijo y ancho automatico: los tres logos miden 128px de alto pero
@@ -198,6 +198,10 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-secondary);
+}
+
+.tabla thead th:first-child {
+  text-align: left;
 }
 
 .tabla tbody th {
