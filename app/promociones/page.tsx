@@ -371,6 +371,9 @@ export default function Page() {
                 <a href="/#desarrollos">Desarrollos</a>
               </li>
               <li>
+                <a href="/precios">Precios</a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

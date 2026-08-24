@@ -243,6 +243,9 @@ export default function PromosPage({ slug }: { slug: DevSlug }) {
                 <a href="/#desarrollos">Desarrollos</a>
               </li>
               <li>
+                <a href="/precios">Precios</a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

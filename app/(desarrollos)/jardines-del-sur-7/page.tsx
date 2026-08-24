@@ -573,6 +573,9 @@ export default function Page() {
                 <a href="/calculadora-hipotecaria">Calculadora</a>
               </li>
               <li>
+                <a href="/precios">Precios</a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

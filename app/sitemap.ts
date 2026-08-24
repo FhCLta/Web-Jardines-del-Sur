@@ -61,6 +61,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      // Hub del silo de precios. Misma logica que /promociones: ataca las
+      // busquedas genericas de ciudad ("precios de casas en Cancun") mientras
+      // que /precios/[dev] atacan las de marca.
+      url: `${SITE_URL}/precios`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/calculadora-hipotecaria`,
       lastModified,
       changeFrequency: 'monthly' as const,
@@ -117,5 +126,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...baseEntries, ...promoEntries, ...catalogEntries, ...modelEntries, ...blogEntries];
+  // Silo de precios por desarrollo. Solo los que tienen precios publicados:
+  // Jardines del Sur 7 esta en preventa y entra el dia que los tenga.
+  const precioEntries: MetadataRoute.Sitemap = (
+    ['jardines-del-sur-6', 'la-rioja-2', 'lirios-residencial-2'] as DevSlug[]
+  ).map((slug) => ({
+    url: `${SITE_URL}/precios/${slug}`,
+    lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  return [
+    ...baseEntries,
+    ...promoEntries,
+    ...precioEntries,
+    ...catalogEntries,
+    ...modelEntries,
+    ...blogEntries,
+  ];
 }

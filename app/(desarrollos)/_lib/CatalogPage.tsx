@@ -550,6 +550,9 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
                 <a href="/#desarrollos">Desarrollos</a>
               </li>
               <li>
+                <a href="/precios">Precios</a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

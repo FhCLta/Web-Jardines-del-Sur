@@ -517,6 +517,9 @@ export default async function ModelPage({
                 <a href="/#modelos">Modelos y Precios</a>
               </li>
               <li>
+                <a href="/precios">Precios</a>
+              </li>
+              <li>
                 <ContactNavBtn />
               </li>
             </ul>

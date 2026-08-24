@@ -217,6 +217,7 @@ export default async function Page({
               <li><a href="/preguntas-frecuentes">Preguntas Frecuentes</a></li>
               <li><a href="/calculadora-hipotecaria">Calculadora</a></li>
               <li><a href="/blog">Blog</a></li>
+              <li><a href="/precios">Precios</a></li>
               <li><ContactNavBtn /></li>
             </ul>
           </div>

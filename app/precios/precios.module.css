@@ -1,0 +1,411 @@
+/* ── Silo de precios ─────────────────────────────────────────────────────────
+   Estilos de /precios y /precios/[dev]. La tabla toma prestado el lenguaje
+   visual de la de niveles (superficie clara, bordes suaves, dorado para el
+   dato que importa) para que el sitio se sienta uno solo, pero es un modulo
+   aparte: son pantallas distintas y un modulo CSS solo alcanza a quien lo
+   importa. */
+
+/* ⚠️ El hero va OSCURO a proposito, no por gusto: la barra de navegacion es
+   transparente hasta que se hace scroll, asi que sobre un fondo claro su texto
+   blanco y el logo desaparecen. Es el mismo tratamiento que usa /promociones.
+   Si algun dia se aclara este hero, hay que resolver antes el contraste de la
+   barra. */
+.hero {
+  padding: 8.5rem 0 3rem;
+  background-color: #0a1a2b;
+  background-image: linear-gradient(
+      180deg,
+      rgba(10, 26, 43, 0.78) 0%,
+      rgba(10, 26, 43, 0.93) 100%
+    ),
+    url("/optimized/hero/alberca-desktop.webp");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+}
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-montserrat);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.lead {
+  /* Centrado como bloque: el max-width evita renglones larguisimos y el
+     margin auto lo deja al centro. Sin el max-width, el texto centrado en
+     pantalla ancha se vuelve ilegible. */
+  max-width: 62ch;
+  margin-inline: auto;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.75;
+  font-size: 1.02rem;
+}
+
+.actualizado {
+  display: inline-block;
+  margin-top: 1.3rem;
+  font-family: var(--font-montserrat);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(209, 146, 0, 0.5);
+  border-radius: 999px;
+  padding: 0.42rem 0.95rem;
+}
+
+.bloque {
+  padding: 3.2rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.bloqueHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem 1.1rem;
+  margin-bottom: 1.4rem;
+}
+
+.bloqueHead h2 {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.bloqueLink {
+  font-family: var(--font-montserrat);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+}
+
+.bloqueLink:hover {
+  text-decoration: underline;
+}
+
+.bloqueNota {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 auto 1.4rem;
+  max-width: 62ch;
+  text-align: center;
+}
+
+/* ── La tabla ─────────────────────────────────────────────────────────────── */
+
+.tablaWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 0.95rem 1.1rem;
+  text-align: right;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.tabla thead th {
+  background: var(--surface);
+  font-family: var(--font-montserrat);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.tabla tbody th {
+  text-align: left;
+  font-weight: 700;
+}
+
+.tabla tbody th a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.tabla tbody th a:hover {
+  color: var(--accent-deep);
+  text-decoration: underline;
+}
+
+.tabla tbody tr:last-child th,
+.tabla tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.tabla tbody td {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.tipo {
+  display: block;
+  font-family: var(--font-montserrat);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 0.18rem;
+}
+
+.tabla tbody th a.verLista {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--font-montserrat);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  white-space: nowrap;
+}
+
+.tabla tbody th a.verLista:hover {
+  color: var(--accent-deep);
+  text-decoration: underline;
+}
+
+.avaluo {
+  color: var(--text-secondary) !important;
+}
+
+.precio {
+  font-weight: 800;
+}
+
+.desde {
+  display: block;
+  font-family: var(--font-montserrat);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ahorro {
+  color: var(--accent-deep) !important;
+  font-weight: 700;
+}
+
+/* ── Cierre y llamadas a la accion ────────────────────────────────────────── */
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+}
+
+.notaLegal {
+  margin-top: 1.4rem;
+  margin-inline: auto;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 68ch;
+}
+
+.notaLegal a {
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.faq {
+  padding: 3.2rem 0 4rem;
+}
+
+.faq h2 {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  margin-bottom: 1.5rem;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.faqList {
+  max-width: 74ch;
+  margin-inline: auto;
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 1.15rem 0;
+}
+
+.faqItem h3 {
+  font-size: 1.02rem;
+  margin-bottom: 0.5rem;
+}
+
+.faqItem p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* ── Celular ─────────────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  /* El hero se comia media pantalla antes de que se viera un solo precio, que
+     es a lo que la gente viene. Menos aire, titulo mas chico y entradilla mas
+     corta de renglon. */
+  .hero {
+    padding: 6.5rem 0 2.2rem;
+  }
+
+  .lead {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  /* La insignia partia en dos renglones dentro de la pildora y se veia rota.
+     Con menos letra y menos espaciado entre letras cabe de una. */
+  .actualizado {
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 0.8rem;
+    margin-top: 1.1rem;
+  }
+
+  .bloque {
+    padding: 2.4rem 0;
+  }
+
+  /* El enlace "Ver la lista completa" iba pegado al h2 y se leia como parte
+     del titulo. En columna y centrado se separa. */
+  .bloqueHead {
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .notaLegal {
+    font-size: 0.82rem;
+  }
+
+  /* Los botones al ancho completo: en celular un boton a medias invita menos
+     a picarle y deja un hueco raro al centro. */
+  .cta {
+    flex-direction: column;
+  }
+
+  .cta a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .faq {
+    padding: 2.4rem 0 3rem;
+  }
+
+  .tablaWrap {
+    overflow-x: visible;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .tabla {
+    min-width: 0;
+  }
+
+  .tabla thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .tabla,
+  .tabla tbody,
+  .tabla tr,
+  .tabla tbody th,
+  .tabla tbody td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabla tbody tr {
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    background: #fff;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .tabla tbody th {
+    background: var(--surface);
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .tabla tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.9rem;
+    text-align: right;
+    padding: 0.7rem 1rem;
+    /* El importe NO se parte: sin esto "$1,758,830 MXN" caia en dos renglones
+       y la tarjeta se veia rota. El que cede es el rotulo, no la cifra. */
+    white-space: nowrap;
+  }
+
+  .tabla tbody td::before {
+    content: attr(data-label);
+    font-family: var(--font-montserrat);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-align: left;
+    /* Es el que absorbe la falta de espacio y se parte en dos si hace falta. */
+    white-space: normal;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .desde {
+    display: inline;
+    margin-right: 0.35rem;
+  }
+
+  .tipo {
+    display: inline;
+    margin-left: 0.5rem;
+  }
+}
