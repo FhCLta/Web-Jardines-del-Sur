@@ -5,7 +5,6 @@ import {
   formatPriceMxn,
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
-import { getVariantesDepartamentos } from "@/lib/precios";
 import styles from "./precios.module.css";
 
 /**
@@ -40,13 +39,6 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
     .sort((a, b) => a.precio - b.precio);
   if (props.length === 0) return null;
 
-  // Cuantas variantes de nivel/vista tiene cada modelo, para poder decirlo en
-  // el enlace ("ver los 8 precios") en vez de mandar a ciegas.
-  const variantes = getVariantesDepartamentos(slug);
-  const cuantas = (modelo: string) =>
-    variantes.filter(
-      (v) => v.modelo === modelo.replace(/^Departamento /i, "").toUpperCase()
-    ).length;
 
   return (
     <div className={styles.tablaWrap}>
@@ -71,17 +63,12 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
                     {p.nombre_modelo}
                   </a>
                   {tipo && <span className={styles.tipo}>{tipo}</span>}
-                  {/* En los departamentos el precio de la fila es un "desde":
-                      sin esta salida, el que quiere el precio de SU nivel se
-                      queda atorado. */}
-                  {p.precio_variable && cuantas(p.nombre_modelo) > 0 && (
-                    <a
-                      className={styles.verLista}
-                      href={`/precios/${slug}#precios-por-nivel`}
-                    >
-                      Ver los {cuantas(p.nombre_modelo)} precios por nivel →
-                    </a>
-                  )}
+                  <a
+                    className={styles.verLista}
+                    href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}
+                  >
+                    Ver fotos y recorrido 360° →
+                  </a>
                 </th>
                 {/* Los data-label alimentan la vista de TARJETAS en celular,
                     donde la tabla se apila (ver el @media de precios.module.css). */}

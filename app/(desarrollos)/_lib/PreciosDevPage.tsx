@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Shell from "../Shell";
-import TablaPrecios from "../TablaPrecios";
-import NivelesTable from "@/app/(desarrollos)/_lib/NivelesTable";
-import styles from "../precios.module.css";
-import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
-import { getPropertiesByDev, formatPriceMxn } from "@/app/(desarrollos)/_lib/model-utils";
+import Shell from "@/app/precios/Shell";
+import TablaPrecios from "@/app/precios/TablaPrecios";
+import NivelesTable from "./NivelesTable";
+import styles from "@/app/precios/precios.module.css";
+import { DEVS, type DevSlug } from "./dev-content";
+import { getPropertiesByDev, formatPriceMxn } from "./model-utils";
 import { getVariantesDepartamentos, getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 
@@ -30,79 +28,20 @@ function fechaLarga(iso: string): string {
 }
 
 /**
- * Desarrollos con lista de precios publicada.
+ * Lista de precios de un desarrollo.
  *
- * ⚠️ Jardines del Sur 7 NO entra: esta en preventa y todavia no tiene precios.
- * El dia que los tenga se agrega aqui y la pagina aparece sola — pero OJO con
- * la regla del proyecto: ninguna pagina fuera de /jardines-del-sur-7 puede
- * llevar "Jardines del Sur 7" en su <title> ni en su <h1>, o competiria contra
- * la que hoy va en posicion 1.32 para ese termino.
+ * ⚠️ La URL es /<desarrollo>/precios, NO /precios/<desarrollo>. Todo lo que
+ * pertenece a un desarrollo cuelga del desarrollo — igual que /<dev>/promociones,
+ * /<dev>/casas y /<dev>/departamentos. El hub /precios vive en la raiz, como
+ * /promociones. Nacieron al reves y se movieron el mismo dia, antes de que
+ * Google las conociera; las viejas quedaron redirigidas en firebase.json.
  */
-const SLUGS: DevSlug[] = [
-  "jardines-del-sur-6",
-  "la-rioja-2",
-  "lirios-residencial-2",
-];
-
-export function generateStaticParams() {
-  return SLUGS.map((dev) => ({ dev }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ dev: string }>;
-}): Promise<Metadata> {
-  const { dev: slug } = await params;
-  if (!SLUGS.includes(slug as DevSlug)) return {};
-  const dev = DEVS[slug as DevSlug];
+export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
+  const dev = DEVS[slug];
   const props = getPropertiesByDev(dev.name);
   const desde = Math.min(...props.map((p) => p.precio));
-
-  // El titulo ataca "precios de <desarrollo>", que es una consulta distinta de
-  // "<desarrollo>" —la que ya trabaja el silo—. Si algun dia este titulo se
-  // parece al del silo, las dos paginas pelean por lo mismo.
-  // ⚠️ Tope practico ~60 caracteres: Google corta ahi. Con "· Lista completa"
-  // el de Lirios llegaba a 76 y la marca nunca se mostraba. Asi el mas largo
-  // (Lirios Residencial 2) queda en 57 y cabe entero.
-  const title = `Precios de ${dev.name} 2026 | Altta Homes Cancún`;
-  const description = `Lista de precios actualizada de ${dev.name}, Cancún: ${props.length} modelos desde ${formatPriceMxn(desde)}. Valor de avalúo, precio con descuento y cuánto ahorras en cada modelo.`;
-
-  return {
-    title: { absolute: title },
-    description,
-    alternates: { canonical: `/precios/${slug}` },
-    openGraph: {
-      type: "website",
-      locale: "es_MX",
-      url: `/precios/${slug}`,
-      siteName: "Altta Homes Cancún",
-      title,
-      description,
-      images: [dev.ogImage],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true, "max-image-preview": "large" },
-    },
-  };
-}
-
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ dev: string }>;
-}) {
-  const { dev: slug } = await params;
-  if (!SLUGS.includes(slug as DevSlug)) notFound();
-
-  const devSlug = slug as DevSlug;
-  const dev = DEVS[devSlug];
-  const props = getPropertiesByDev(dev.name);
-  const desde = Math.min(...props.map((p) => p.precio));
-  const variantes = getVariantesDepartamentos(devSlug);
-  const pageUrl = `${SITE_URL}/precios/${devSlug}`;
+  const variantes = getVariantesDepartamentos(slug);
+  const pageUrl = `${SITE_URL}/${slug}/precios`;
 
   const waMsg = `Hola, vi la lista de precios de ${dev.name} en el sitio y quiero información y disponibilidad.`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMsg)}`;
@@ -129,7 +68,7 @@ export default async function Page({
           name: p.nombre_modelo,
           price: p.precio,
           priceCurrency: "MXN",
-          url: `${SITE_URL}/${devSlug}/${p.nombre_modelo
+          url: `${SITE_URL}/${slug}/${p.nombre_modelo
             .toLowerCase()
             .normalize("NFD")
             .replace(/[̀-ͯ]/g, "")
@@ -169,11 +108,11 @@ export default async function Page({
         <div className="container">
           <div className={styles.bloqueHead}>
             <h2>Todos los modelos, desde {formatPriceMxn(desde)}</h2>
-            <a className={styles.bloqueLink} href={`/${devSlug}`}>
+            <a className={styles.bloqueLink} href={`/${slug}`}>
               Ver {dev.name} con fotos y amenidades →
             </a>
           </div>
-          <TablaPrecios slug={devSlug} />
+          <TablaPrecios slug={slug} />
           <p className={styles.notaLegal}>
             El <strong>precio con descuento</strong> es lo que pagas; el{" "}
             <strong>valor de avalúo</strong> es lo que la vivienda vale

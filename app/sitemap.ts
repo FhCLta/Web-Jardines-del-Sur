@@ -131,7 +131,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const precioEntries: MetadataRoute.Sitemap = (
     ['jardines-del-sur-6', 'la-rioja-2', 'lirios-residencial-2'] as DevSlug[]
   ).map((slug) => ({
-    url: `${SITE_URL}/precios/${slug}`,
+    url: `${SITE_URL}/${slug}/precios`,
     lastModified,
     changeFrequency: 'weekly' as const,
     priority: 0.8,

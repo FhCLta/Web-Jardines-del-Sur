@@ -94,9 +94,13 @@
       { "source": "/precios-noni-elite",    "destination": "/la-rioja-2/casa-noni-elite",              "type": 301 },
       { "source": "/precios-noni-la-rioja", "destination": "/la-rioja-2/casa-noni",                    "type": 301 },
 
-      { "source": "/precios-jardines",      "destination": "/precios/jardines-del-sur-6",     "type": 301 },
-      { "source": "/precios-rioja",         "destination": "/precios/la-rioja-2",             "type": 301 },
-      { "source": "/precios-lirios",        "destination": "/precios/lirios-residencial-2",   "type": 301 }
+      { "source": "/precios-jardines",      "destination": "/jardines-del-sur-6/precios",     "type": 301 },
+      { "source": "/precios-rioja",         "destination": "/la-rioja-2/precios",             "type": 301 },
+      { "source": "/precios-lirios",        "destination": "/lirios-residencial-2/precios",   "type": 301 },
+
+      { "source": "/precios/jardines-del-sur-6",     "destination": "/jardines-del-sur-6/precios",     "type": 301 },
+      { "source": "/precios/la-rioja-2",             "destination": "/la-rioja-2/precios",             "type": 301 },
+      { "source": "/precios/lirios-residencial-2",   "destination": "/lirios-residencial-2/precios",   "type": 301 }
     ]
   }
 }

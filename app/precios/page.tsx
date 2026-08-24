@@ -161,7 +161,7 @@ export default function Page() {
                 <h2>
                   {dev.name} — desde {formatPriceMxn(min)}
                 </h2>
-                <a className={styles.bloqueLink} href={`/precios/${slug}`}>
+                <a className={styles.bloqueLink} href={`/${slug}/precios`}>
                   Ver la lista completa de {dev.name} →
                 </a>
               </div>
