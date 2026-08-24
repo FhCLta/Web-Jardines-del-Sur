@@ -70,6 +70,11 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
                     <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                       Ver fotos y recorrido 360° →
                     </a>
+                    {p.precio_variable && (
+                      <a href={`#precios-por-nivel-${slug}`}>
+                        Ver lista de precios completa →
+                      </a>
+                    )}
                     <a
                       className={styles.cotizar}
                       href={waHref}

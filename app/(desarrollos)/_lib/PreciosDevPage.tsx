@@ -132,7 +132,11 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
       </section>
 
       {variantes.length > 0 && (
-        <NivelesTable variantes={variantes} waHref={waHref} />
+        <NivelesTable
+          variantes={variantes}
+          waHref={waHref}
+          id={`precios-por-nivel-${slug}`}
+        />
       )}
     </Shell>
   );
