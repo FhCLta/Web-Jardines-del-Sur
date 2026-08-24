@@ -96,6 +96,27 @@
   white-space: nowrap;
 }
 
+/* Fila de grupo sobre las columnas de vista: nombra UNA vez lo que son esos
+   numeros, con las mismas palabras que las tarjetas y la calculadora ("precio
+   con descuento"). Va en dorado y con una linea que abarca solo esas columnas,
+   para que se lea como un techo sobre ellas y no como una fila mas de la tabla.
+   En celular el thead entero se oculta y el mensaje lo lleva la entradilla. */
+.nivelesTable thead .nivelesGroupRow th {
+  background: transparent;
+  border: 0;
+  padding-bottom: 0.2rem;
+}
+
+.nivelesTable thead .nivelesGroupRow th.nivelesGroupHead {
+  text-align: center;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  border-bottom: 1.5px solid rgba(209, 146, 0, 0.5);
+}
+
 .nivelesTable tbody th {
   text-align: left;
   font-weight: 700;

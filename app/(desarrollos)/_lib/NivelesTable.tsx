@@ -61,7 +61,8 @@ export default function NivelesTable({
         <p className={styles.nivelesLead}>
           En los departamentos el precio cambia según el nivel
           {hayVistas ? " y la vista" : ""}. Aquí están todos, para que compares
-          con calma. Lo que cambia cada semana es{" "}
+          con calma: <strong>todos ya traen el descuento aplicado</strong>, no
+          hay que restarle nada. Lo que cambia cada semana es{" "}
           <strong>qué unidades siguen libres</strong> — eso te lo confirmamos al
           momento.
         </p>
@@ -86,12 +87,29 @@ export default function NivelesTable({
                   Valor avalúo hasta <strong>{formatPriceMxn(avaluoTope)}</strong>
                 </span>
                 <span className={styles.nivelesDesde}>
-                  desde {formatPriceMxn(desde)}
+                  precio con descuento desde {formatPriceMxn(desde)}
                 </span>
               </h3>
               <div className={styles.nivelesTableWrap}>
                 <table className={styles.nivelesTable}>
                   <thead>
+                    {/* Fila de grupo: dice UNA vez que las columnas de vista
+                        son precios con descuento, en lugar de alargar cada
+                        encabezado. Solo cuando hay mas de una vista; con una
+                        sola columna el rotulo va directo en ella. */}
+                    {vistas.length > 1 && (
+                      <tr className={styles.nivelesGroupRow}>
+                        <th />
+                        <th />
+                        <th
+                          scope="colgroup"
+                          colSpan={vistas.length}
+                          className={styles.nivelesGroupHead}
+                        >
+                          Precio con descuento
+                        </th>
+                      </tr>
+                    )}
                     <tr>
                       <th scope="col">Nivel</th>
                       {/* El avalúo es del NIVEL: las dos vistas del mismo
@@ -104,7 +122,7 @@ export default function NivelesTable({
                           </th>
                         ))
                       ) : (
-                        <th scope="col">Precio</th>
+                        <th scope="col">Precio con descuento</th>
                       )}
                     </tr>
                   </thead>
@@ -139,7 +157,7 @@ export default function NivelesTable({
                               );
                             })
                           ) : (
-                            <td data-label="Precio">
+                            <td data-label="Precio con descuento">
                               {formatPriceMxn(enNivel[0].precio)}
                             </td>
                           )}
