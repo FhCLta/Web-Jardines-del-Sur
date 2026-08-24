@@ -29,6 +29,22 @@ Alternativa: canónica cruzada apuntando al sitio 1 (consolida en vez de
 competir), pero es una *sugerencia* para Google, no una orden — `noindex` sí es
 vinculante.
 
+> ### ⚠️ Este riesgo es de DOMINIOS, no de páginas — aclarado el 24 ago 2026
+>
+> R1 habla de **dos sitios** del mismo dueño publicando lo mismo. **No dice nada
+> sobre las páginas dentro de un mismo sitio**, y ahí no aplica.
+>
+> Se leyó mal y de esa mala lectura salió una regla inventada —*"ninguna página
+> puede llevar 'Jardines del Sur 7' en su título"*— que estuvo a punto de
+> impedir la página de precios de JdS7. La cazó Florencio.
+>
+> Dentro de un mismo sitio, dos páginas compiten cuando **responden la misma
+> pregunta**, no cuando comparten palabras: hoy **11 páginas** llevan "Jardines
+> del Sur 6" en el `<title>` y ese desarrollo no se hundió.
+>
+> El reparto de términos y la única restricción que sí existe están en
+> `docs/jds7-lanzamiento.md` §4. **Esa es la referencia; R1 no.**
+
 ---
 
 ### R2 · Sitemap y robots del sitio 2 apuntando al sitio 1

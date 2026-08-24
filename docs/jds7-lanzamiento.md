@@ -84,9 +84,77 @@ los dos desarrollos se cierra, no si se cierra.
 
 ---
 
-## 4. ⚠️ Nombres de modelo repetidos — decidir ANTES de crear páginas
+## 4. ⚠️ Qué es y qué NO es competir contra uno mismo
 
-Los nombres se repiten entre desarrollos, y con JdS7 se agrava:
+> **Corregido el 24 ago 2026.** Esta sección se contradecía con el comentario de
+> `jardines-del-sur-cancun/page.tsx` y la contradicción ya había producido una
+> decisión equivocada: se estuvo a punto de NO hacer la página de precios de
+> JdS7 creyendo que cualquier página con ese nombre en el título canibalizaba.
+> **Lo detectó Florencio**, que insistió en que no cuadraba. Tenía razón.
+
+### La regla, en una línea
+
+**Dos páginas compiten cuando responden la MISMA pregunta, no cuando comparten
+palabras.**
+
+`/jardines-del-sur-6` y `/jardines-del-sur-6/precios` comparten el nombre entero
+del desarrollo en el título y no compiten: una contesta *"qué es"* y la otra
+*"cuánto cuesta"*. Son búsquedas distintas y Google las separa sin problema.
+
+### La prueba está en este mismo sitio
+
+Al 24 ago 2026, las páginas que llevan **"Jardines del Sur 6"**:
+
+| Dónde | Cuántas |
+|---|---|
+| En el `<title>` | **11** — el silo, las 6 fichas, casas, departamentos, promociones, precios |
+| En el `<h1>` | **5** |
+
+Y Jardines del Sur 6 **no se hundió**. Lo que le costó visibilidad fue **quitar**
+un término el 20 jun (los títulos, commit `0e6c60a`), no repetirlo; su CTR
+incluso mejoró de 1.8% a 2.4%. Ver `metricas-negocio.md`.
+
+Si repetir el nombre canibalizara, el desarrollo que más vende llevaría meses
+destruido.
+
+### El reparto de términos — esto es lo que sí hay que respetar
+
+Cada página es dueña de UN término. Eso no impide que varias lleven el nombre
+del desarrollo; impide que dos peleen por la MISMA frase con el mismo tipo de
+contenido.
+
+| Página | Término que le toca |
+|---|---|
+| `/` | `altta homes cancun` (marca) |
+| `/jardines-del-sur-cancun` | `jardines del sur cancun`, `jardines del sur` |
+| `/jardines-del-sur-6` | `jardines del sur 6` |
+| `/jardines-del-sur-7` | `jardines del sur 7` ⭐ **posición 1.32, intocable** |
+| `/<dev>/precios` | `precios <desarrollo>` |
+| `/<dev>/promociones` | `promociones <desarrollo>` |
+| `/<dev>/<modelo>` | `<modelo> <desarrollo>` |
+
+### La única restricción real sobre "Jardines del Sur 7"
+
+**El hub `/jardines-del-sur-cancun` no debe reclamar `jardines del sur 7` en su
+`<title>` ni en su `<h1>`.** Ahí sí hay choque: el hub y `/jardines-del-sur-7`
+son el mismo tipo de página —panorama del desarrollo— y pelearían la misma
+frase. Mencionarlo en el cuerpo y enlazarlo **suma**, no resta.
+
+**Fuera de esa página, no hay restricción.** Cuando JdS7 abra venta, sus fichas,
+sus promociones y su lista de precios llevan el nombre en título y H1 igual que
+las del 6. Sus títulos atacan `casa tabachin jardines del sur 7` o
+`precios jardines del sur 7`, que no son la frase que defiende el silo.
+
+### De dónde salió el malentendido
+
+De **R1 de `sites/RIESGOS.md`**, que dice —correctamente— que dos SITIOS del
+mismo dueño con el mismo contenido se canibalizan. Es un riesgo de **dominios**,
+de cuando se evaluó publicar un segundo sitio. Se aplicó a páginas dentro del
+mismo sitio, donde no aplica.
+
+### Nombres de modelo repetidos (el problema original de esta sección)
+
+Los nombres sí se repiten entre desarrollos:
 
 | Modelo | Aparece en |
 |---|---|
@@ -94,13 +162,12 @@ Los nombres se repiten entre desarrollos, y con JdS7 se agrava:
 | **Tabachín** | JdS6 · **y ahora JdS7** |
 | Cedro Plus | JdS6 · Lirios Residencial 2 |
 
-**El riesgo:** las páginas de "Casa Noni" de JdS6, La Rioja y JdS7 compiten entre
-sí en Google. Es el mismo problema de competir contra uno mismo que ya se
-documentó en `sites/RIESGOS.md`.
-
-**Qué hacer:** títulos, H1, URLs y JSON-LD **siempre con el desarrollo
-explícito** ("Casa Noni en Jardines del Sur 7"), nunca "Casa Noni" a secas. El
-patrón ya existe y funciona — las fichas actuales lo hacen así.
+**Aquí el riesgo sí es real**, porque son páginas del mismo tipo contestando lo
+mismo. Y por eso la solución es **al revés de lo que se creía**: hay que poner el
+desarrollo explícito en títulos, H1, URLs y JSON-LD —"Casa Noni en Jardines del
+Sur 7", nunca "Casa Noni" a secas— **justamente para que dejen de ser la misma
+página a ojos de Google.** Repetir el nombre del desarrollo es la cura, no la
+enfermedad.
 
 ---
 

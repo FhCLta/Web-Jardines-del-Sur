@@ -26,12 +26,23 @@ import {
    y el término dejó de aparecer en TODO el sitio. Esta página lo recupera sin
    tocar dominios ni migraciones.
 
-   ⚠️ REGLA INTOCABLE — NO PONER "Jardines del Sur 7" EN EL <title> NI EN EL <h1>
+   ⚠️ REGLA DE **ESTA** PÁGINA — NO PONER "Jardines del Sur 7" EN SU <title>
+   NI EN SU <h1>
    `/jardines-del-sur-7` está en posición 1.32 de Google para ese término exacto
    (47.7% de CTR) ANTES de que el desarrollo abra venta. Es el activo orgánico
-   más valioso del negocio. Si esta página compite por la misma frase en título
-   o H1, Google elige una sola y puede hundir la que ya gana.
+   más valioso del negocio. ESTA página es del MISMO TIPO que aquella —panorama
+   del desarrollo—, así que si reclama la misma frase en título o H1, Google
+   elige una sola y puede hundir la que ya gana.
    Mencionar Jardines del Sur 7 en el CUERPO y enlazarlo sí: eso le SUMA.
+
+   ⚠️⚠️ OJO AL LEER ESTO: la regla es de esta página, NO del sitio entero.
+   Se generalizó por error a "ninguna página puede llevar Jardines del Sur 7 en
+   su título", y esa versión inventada estuvo a punto de impedir la página de
+   precios de JdS7 (lo cazó Florencio el 24 ago 2026). Las fichas, promociones y
+   precios de un desarrollo SÍ deben llevar su nombre en título y H1 — hoy 11
+   páginas lo hacen con "Jardines del Sur 6" y ese desarrollo no se hundió.
+   Dos páginas compiten cuando contestan la MISMA pregunta, no cuando comparten
+   palabras. El reparto completo, con su evidencia, en docs/jds7-lanzamiento.md §4.
 
    REPARTO DE TÉRMINOS (ver docs/jds7-lanzamiento.md §4):
      /                        → "altta homes cancun"  (marca)
