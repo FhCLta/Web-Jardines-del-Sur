@@ -191,16 +191,19 @@
 }
 
 /* "Cotizar ahora" es la accion que cierra, asi que se distingue de la de mirar:
-   va en pildora rellena en vez de enlace suelto. */
+   va en pildora rellena en vez de enlace suelto. Colores calcados de
+   .btn-primary (globals.css) para que sea el MISMO boton que el de las
+   tarjetas: --accent de base, --accent-deep al pasar el raton. */
 .tabla tbody th .acciones a.cotizar {
-  background: var(--accent-deep);
+  background: var(--accent);
   color: #fff;
   border-radius: 999px;
-  padding: 0.3rem 0.8rem;
+  padding: 0.32rem 0.85rem;
+  box-shadow: 0 6px 16px -8px rgba(209, 146, 0, 0.55);
 }
 
 .tabla tbody th .acciones a.cotizar:hover {
-  background: var(--accent);
+  background: var(--accent-deep);
   color: #fff;
   text-decoration: none;
 }
