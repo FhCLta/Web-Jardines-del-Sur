@@ -301,6 +301,21 @@
   font-weight: 700;
 }
 
+.leyenda {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.leyenda p {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.leyenda strong {
+  color: var(--accent-deep);
+}
+
 /* ── Cierre y llamadas a la accion ────────────────────────────────────────── */
 
 .cta {

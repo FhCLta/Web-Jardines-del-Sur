@@ -64,9 +64,39 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
         <div key={g.titulo} className={styles.grupo}>
           {grupos.length > 1 && <h3 className={styles.grupoTitulo}>{g.titulo}</h3>}
           <TablaDeGrupo slug={slug} items={g.items} />
+          <Leyenda items={g.items} />
         </div>
       ))}
     </>
+  );
+}
+
+/**
+ * Letra chica al pie de cada tabla, con el MISMO texto que la de las tarjetas
+ * (components/PropertyCard.jsx). Se decide por grupo, no por modelo: la nota
+ * del lote solo aplica donde hay terreno —las casas— y la del nivel solo donde
+ * el precio varia —los departamentos—, asi que cada tabla muestra la suya y
+ * ninguna muestra la que no le toca.
+ */
+function Leyenda({ items }: { items: ReturnType<typeof getPropertiesByDev> }) {
+  const hayTerreno = items.some((p) => p.metros_terreno);
+  const hayVariable = items.some((p) => p.precio_variable);
+  return (
+    <div className={styles.leyenda}>
+      <p>
+        <strong>*</strong> Precio no incluye gastos de escrituración
+      </p>
+      {hayTerreno && (
+        <p>
+          <strong>**</strong> Lote tipo. Esquina o excedente varía el costo.
+        </p>
+      )}
+      {hayVariable && (
+        <p>
+          <strong>**</strong> El precio puede variar según nivel y ubicación
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -88,7 +118,7 @@ function TablaDeGrupo({
             <th scope="col">Modelo</th>
             <th scope="col">Valor avalúo</th>
             <th scope="col">Ahorro</th>
-            <th scope="col">Precio con descuento</th>
+            <th scope="col">Precio con descuento *</th>
           </tr>
         </thead>
         <tbody>

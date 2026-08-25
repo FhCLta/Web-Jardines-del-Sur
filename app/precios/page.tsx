@@ -187,7 +187,7 @@ export default function Page() {
             El <strong>precio con descuento</strong> es lo que pagas; el{" "}
             <strong>valor de avalúo</strong> es lo que la vivienda vale
             comercialmente. Precios sujetos a disponibilidad y a cambio sin
-            previo aviso; no incluyen gastos de escrituración.{" "}
+            previo aviso.{" "}
             <a href={waHref} target="_blank" rel="noreferrer">
               Confirma disponibilidad por WhatsApp
             </a>

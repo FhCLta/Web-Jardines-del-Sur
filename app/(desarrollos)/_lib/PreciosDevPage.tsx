@@ -128,8 +128,7 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
             El <strong>precio con descuento</strong> es lo que pagas; el{" "}
             <strong>valor de avalúo</strong> es lo que la vivienda vale
             comercialmente, y la diferencia entre los dos es tu ahorro. Precios
-            sujetos a disponibilidad y a cambio sin previo aviso. No incluyen
-            gastos de escrituración.
+            sujetos a disponibilidad y a cambio sin previo aviso.
           </p>
           <div className={styles.cta}>
             <a className="btn btn-primary" href={waHref} target="_blank" rel="noreferrer">
