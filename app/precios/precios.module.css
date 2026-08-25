@@ -125,6 +125,42 @@
   width: auto;
 }
 
+/* Cada departamento lleva su propia tabla, encabezada por el nombre del modelo:
+   sus filas son niveles, asi que sin ese encabezado no se sabria de cual es. */
+.bloqueModelo + .bloqueModelo {
+  margin-top: 1.8rem;
+}
+
+.modeloTitulo {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+/* La vista y el roof, bajo el nivel: son lo que distingue una unidad de otra. */
+.vista {
+  display: block;
+  font-family: var(--font-montserrat);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  margin-top: 0.12rem;
+}
+
+.roof {
+  display: block;
+  font-family: var(--font-montserrat);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin-top: 0.12rem;
+}
+
 .grupo + .grupo {
   margin-top: 2rem;
 }
@@ -252,17 +288,6 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.4rem 0.5rem;
-}
-
-/* Tres botones: los dos de mirar arriba y el que cierra centrado debajo. Sin
-   esto el reparto caia 1+2 y "Cotizar ahora" quedaba pegado a uno de mirar. */
-.accionesTri {
-  justify-content: center;
-}
-
-.salto {
-  flex-basis: 100%;
-  height: 0;
 }
 
 /* Rotulo solo para lectores de pantalla. */
@@ -536,8 +561,10 @@
     display: contents;
   }
 
-  /* El nombre del modelo pasa a ser el encabezado de la tarjeta. */
-  .tabla tbody th > a {
+  /* El encabezado de la tarjeta: el nombre del modelo en casas, el nivel con su
+     vista en departamentos. */
+  .tabla tbody th > a,
+  .tabla tbody th > .nivelCab {
     order: -1;
     display: block;
     background: var(--surface);

@@ -6,9 +6,27 @@ import {
   getWhatsAppMessageForModel,
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
+import {
+  getVariantesDepartamentos,
+  type VarianteDepartamento,
+} from "@/lib/precios";
 import styles from "./precios.module.css";
 
 const PHONE_E164 = "529982059044";
+
+const NIVEL_LABEL: Record<string, string> = {
+  PB: "Planta baja",
+  "1": "Nivel 1",
+  "2": "Nivel 2",
+  "3": "Nivel 3",
+};
+
+const ORDEN_NIVEL = ["PB", "1", "2", "3"];
+
+/** "vista al parque", "vista a la alberca", "vista al estacionamiento". */
+function etiquetaVista(vista: string): string {
+  return `vista a${vista === "alberca" ? " la" : "l"} ${vista}`;
+}
 
 /**
  * Tabla comparativa de precios de un desarrollo.
@@ -63,7 +81,13 @@ export default function TablaPrecios({ slug }: { slug: DevSlug }) {
       {grupos.map((g) => (
         <div key={g.titulo} className={styles.grupo}>
           {grupos.length > 1 && <h3 className={styles.grupoTitulo}>{g.titulo}</h3>}
-          <TablaDeGrupo slug={slug} items={g.items} />
+          {g.titulo === "Departamentos" ? (
+            g.items.map((p) => (
+              <TablaDeVariantes key={p.id} slug={slug} p={p} />
+            ))
+          ) : (
+            <TablaDeGrupo slug={slug} items={g.items} />
+          )}
           <Leyenda items={g.items} />
         </div>
       ))}
@@ -96,6 +120,109 @@ function Leyenda({ items }: { items: ReturnType<typeof getPropertiesByDev> }) {
           <strong>**</strong> El precio puede variar según nivel y ubicación
         </p>
       )}
+    </div>
+  );
+}
+
+/**
+ * Lista de un departamento: UNA FILA POR NIVEL Y VISTA.
+ *
+ * Mismas columnas y mismos botones que la tabla de casas — la unica diferencia
+ * es que en casas una fila es un modelo y aqui es una unidad concreta. Cada
+ * fila lleva un precio que SI se puede comprar, en vez de un "desde" que era el
+ * mas barato de ocho y que ademas contradecia a la tabla de niveles.
+ */
+function TablaDeVariantes({
+  slug,
+  p,
+}: {
+  slug: DevSlug;
+  p: ReturnType<typeof getPropertiesByDev>[number];
+}) {
+  const clave = p.nombre_modelo.replace(/^Departamento /i, "").toUpperCase();
+  const filas: VarianteDepartamento[] = getVariantesDepartamentos(slug)
+    .filter((v) => v.modelo === clave)
+    .slice()
+    .sort(
+      (a, b) =>
+        ORDEN_NIVEL.indexOf(a.nivel) - ORDEN_NIVEL.indexOf(b.nivel) ||
+        b.precio - a.precio
+    );
+  if (filas.length === 0) return null;
+
+  const fichaHref = `/${slug}/${slugifyModel(p.nombre_modelo)}`;
+
+  return (
+    <div className={styles.bloqueModelo}>
+      <h4 className={styles.modeloTitulo}>{p.nombre_modelo}</h4>
+      <div className={styles.tablaWrap}>
+        <table className={styles.tabla}>
+          <thead>
+            <tr>
+              <th scope="col">Nivel</th>
+              <th scope="col">Valor avalúo</th>
+              <th scope="col">Ahorro</th>
+              <th scope="col">Precio con descuento *</th>
+              <th scope="col">
+                <span className={styles.soloLectores}>Acciones</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {filas.map((v) => {
+              const nivel = NIVEL_LABEL[v.nivel] ?? v.nivel;
+              const roof = /ROOF/i.test(v.prototipo);
+              const detalle = v.vista
+                ? `${nivel.toLowerCase()} con ${etiquetaVista(v.vista)}`
+                : nivel.toLowerCase();
+              // El mensaje nombra la UNIDAD, no solo el modelo: asi Florencio
+              // sabe el nivel y la vista antes de contestar.
+              const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
+                `${getWhatsAppMessageForModel(p).replace(/\.$/, "")}, ${detalle}.`
+              )}`;
+              return (
+                <tr key={v.prototipo + (v.vista ?? "")}>
+                  <th scope="row">
+                    <span className={styles.nivelCab}>
+                      {nivel}
+                      {v.vista && (
+                        <span className={styles.vista}>
+                          {etiquetaVista(v.vista)}
+                        </span>
+                      )}
+                      {roof && <span className={styles.roof}>Roof garden</span>}
+                    </span>
+                  </th>
+                  <td data-label="Valor avalúo" className={styles.avaluo}>
+                    {formatPriceMxn(v.avaluo)}
+                  </td>
+                  <td data-label="Ahorro" className={styles.ahorro}>
+                    −{formatPriceMxn(v.avaluo - v.precio)}
+                  </td>
+                  <td data-label="Precio con descuento" className={styles.precio}>
+                    <span className={styles.precioValor}>
+                      {formatPriceMxn(v.precio)}
+                    </span>
+                  </td>
+                  <td className={styles.celdaAcciones}>
+                    <span className={styles.acciones}>
+                      <a href={fichaHref}>Ver fotos y recorrido 360°</a>
+                      <a
+                        className={styles.cotizar}
+                        href={waHref}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Cotizar ahora
+                      </a>
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -161,24 +288,10 @@ function TablaDeGrupo({
                   </span>
                 </td>
                 <td className={styles.celdaAcciones}>
-                  <span
-                    className={`${styles.acciones} ${
-                      p.precio_variable ? styles.accionesTri : ""
-                    }`}
-                  >
+                  <span className={styles.acciones}>
                     <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                       Ver fotos y recorrido 360°
                     </a>
-                    {p.precio_variable && (
-                      <a href={`#precios-por-nivel-${slug}`}>
-                        Ver lista de precios completa
-                      </a>
-                    )}
-                    {/* Salto de linea invisible: empuja "Cotizar ahora" a su
-                        propio renglon para formar el triangulo. */}
-                    {p.precio_variable && (
-                      <span className={styles.salto} aria-hidden="true" />
-                    )}
                     <a
                       className={styles.cotizar}
                       href={waHref}

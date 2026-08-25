@@ -1,11 +1,10 @@
 import Shell from "@/app/precios/Shell";
 import TablaPrecios from "@/app/precios/TablaPrecios";
 import LogoDev from "@/app/precios/LogoDev";
-import NivelesTable from "./NivelesTable";
 import styles from "@/app/precios/precios.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
 import { getPropertiesByDev, formatPriceMxn } from "./model-utils";
-import { getVariantesDepartamentos, getFechaPrecios } from "@/lib/precios";
+import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 
 const PHONE_E164 = "529982059044";
@@ -41,7 +40,6 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
   const dev = DEVS[slug];
   const props = getPropertiesByDev(dev.name);
   const desde = Math.min(...props.map((p) => p.precio));
-  const variantes = getVariantesDepartamentos(slug);
   const pageUrl = `${SITE_URL}/${slug}/precios`;
 
   const waMsg = `Hola, vi la lista de precios de ${dev.name} en el sitio y quiero información y disponibilidad.`;
@@ -141,13 +139,6 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
         </div>
       </section>
 
-      {variantes.length > 0 && (
-        <NivelesTable
-          variantes={variantes}
-          waHref={waHref}
-          id={`precios-por-nivel-${slug}`}
-        />
-      )}
     </Shell>
   );
 }
