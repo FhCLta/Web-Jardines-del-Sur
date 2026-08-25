@@ -365,7 +365,11 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
                 <a href="/#modelos">Modelos y Precios</a>
               </li>
               <li>
-                <a href="/precios">Precios</a>
+                {/* Dentro de un desarrollo, el pie lleva a SUS precios, no a
+                    la lista general: el que esta viendo Jardines del Sur 6 no
+                    quiere aterrizar en los cuatro desarrollos. Los tres
+                    desarrollos de DEVS tienen su pagina de precios. */}
+                <a href={`/${dev.slug}/precios`}>Precios</a>
               </li>
               <li>
                 <ContactNavBtn />
