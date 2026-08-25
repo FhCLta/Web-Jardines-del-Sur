@@ -162,21 +162,21 @@
 }
 
 .tabla th:nth-child(1) {
-  width: 34%;
+  width: 41%;
 }
 
 .tabla th:nth-child(2) {
-  width: 20%;
+  width: 17%;
 }
 
 .tabla th:nth-child(3) {
-  width: 20%;
+  width: 17%;
 }
 
 /* El precio va al final y es el resultado de la resta, asi que pesa mas que las
    dos columnas de referencia que lo preceden. */
 .tabla th:nth-child(4) {
-  width: 26%;
+  width: 25%;
 }
 
 .tabla th,
@@ -229,10 +229,9 @@
 
 .acciones {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: fit-content;
-  gap: 0.4rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.5rem;
   margin-top: 0.5rem;
 }
 
@@ -531,7 +530,10 @@
   }
 
   .acciones {
+    flex-direction: column;
+    align-items: stretch;
     width: auto;
+    gap: 0.5rem;
   }
 
   /* ── La tarjeta se lee como la resta que es ───────────────────────────────
