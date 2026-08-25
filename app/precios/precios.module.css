@@ -519,6 +519,57 @@
     gap: 0.5rem;
   }
 
+  /* ── La tarjeta se lee como la resta que es ───────────────────────────────
+     El cotizador lo presenta asi —Valor Avalúo → Descuento → Precio Neto— y en
+     la tarjeta el precio caia EN MEDIO, antes del ahorro, con lo que el
+     resultado aparecia antes que el operando y la resta no se veia. Se
+     reordena con `order` (el <tr> ya es columna) y el precio pasa a leerse como
+     el total de un recibo: linea dorada arriba, rotulo chico y la cifra grande
+     debajo, no apretada contra su etiqueta.
+     En escritorio no aplica: ahi son columnas y el orden es el del encabezado. */
+  .tabla tbody td[data-label="Valor avalúo"] {
+    order: 1;
+  }
+
+  .tabla tbody td[data-label="Ahorro"] {
+    order: 2;
+  }
+
+  .tabla tbody td[data-label="Precio con descuento"] {
+    order: 3;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    padding: 0.85rem 1rem 0.95rem;
+    background: rgba(209, 146, 0, 0.06);
+    border-top: 1.5px solid rgba(209, 146, 0, 0.45);
+    border-bottom: 0;
+    font-size: 1.32rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.15;
+  }
+
+  .tabla tbody td[data-label="Precio con descuento"]::before {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    color: var(--accent-deep);
+  }
+
+  /* El "desde" va en la misma linea que la cifra, no como rotulo aparte. */
+  .tabla tbody td[data-label="Precio con descuento"] .precioValor {
+    display: block;
+  }
+
+  .tabla tbody td[data-label="Precio con descuento"] .desde {
+    display: inline;
+    margin: 0 0.4rem 0 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent-deep);
+  }
+
   .desde {
     display: inline;
     margin-right: 0.35rem;

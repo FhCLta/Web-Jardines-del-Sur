@@ -131,11 +131,14 @@ function TablaDeGrupo({
                   {formatPriceMxn(p.valor_avaluo ?? null)}
                 </td>
                 <td data-label="Precio con descuento" className={styles.precio}>
-                  {/* "desde" va ANTES del importe: en celular la celda se
-                      vuelve una sola linea y detras se leia "$1,758,830 MXN
-                      desde", al reves de como se dice en español. */}
-                  {p.precio_variable && <span className={styles.desde}>desde</span>}
-                  {formatPriceMxn(p.precio)}
+                  <span className={styles.precioValor}>
+                    {/* "desde" va ANTES del importe: en español se dice "desde
+                        $1,758,830", no al reves. */}
+                    {p.precio_variable && (
+                      <span className={styles.desde}>desde</span>
+                    )}
+                    {formatPriceMxn(p.precio)}
+                  </span>
                 </td>
                 <td data-label="Ahorro" className={styles.ahorro}>
                   {ahorro ? `−${formatPriceMxn(ahorro)}` : "—"}
