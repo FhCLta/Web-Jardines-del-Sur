@@ -230,48 +230,55 @@
 .acciones {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.45rem;
-  margin-top: 0.4rem;
-}
-
-/* Los enlaces de "ver" comparten renglon; el boton de cotizar va SIEMPRE en el
-   suyo, debajo. Asi queda a la misma altura en todas las filas, lleve el modelo
-   uno o dos enlaces. */
-.accionesVer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.3rem 0.9rem;
+  align-items: stretch;
+  width: fit-content;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
 }
 
 .tabla tbody th .acciones a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-montserrat);
-  font-size: 0.72rem;
+  font-size: 0.73rem;
   font-weight: 700;
-  color: var(--accent-deep);
+  line-height: 1;
+  padding: 0.44rem 0.95rem;
+  border-radius: 999px;
   white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tabla tbody th .acciones a:hover {
-  color: var(--accent-deep);
-  text-decoration: underline;
+/* Las de mirar: contorno, como .btn-secondary del sitio. El borde va de 1.5px
+   —no de 2 como el grande— porque a este tamaño 2px se ve tosco. */
+.tabla tbody th .acciones a:not(.cotizar) {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid rgba(10, 26, 43, 0.28);
 }
 
-/* "Cotizar ahora" es la accion que cierra, asi que se distingue de la de mirar:
-   va en pildora rellena en vez de enlace suelto. Colores calcados de
+.tabla tbody th .acciones a:not(.cotizar):hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* "Cotizar ahora" es la que cierra, asi que va rellena. Colores calcados de
    .btn-primary (globals.css) para que sea el MISMO boton que el de las
    tarjetas: --accent de base, --accent-deep al pasar el raton. */
 .tabla tbody th .acciones a.cotizar {
   background: var(--accent);
   color: #fff;
-  border-radius: 999px;
-  padding: 0.32rem 0.85rem;
+  border: 1.5px solid var(--accent);
   box-shadow: 0 6px 16px -8px rgba(209, 146, 0, 0.55);
 }
 
 .tabla tbody th .acciones a.cotizar:hover {
   background: var(--accent-deep);
+  border-color: var(--accent-deep);
   color: #fff;
   text-decoration: none;
 }
@@ -523,10 +530,8 @@
     gap: 0.6rem;
   }
 
-  .accionesVer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .acciones {
+    width: auto;
   }
 
   /* ── La tarjeta se lee como la resta que es ───────────────────────────────

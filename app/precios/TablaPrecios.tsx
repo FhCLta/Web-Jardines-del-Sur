@@ -134,16 +134,14 @@ function TablaDeGrupo({
                     {p.nombre_modelo}
                   </a>
                   <span className={styles.acciones}>
-                    <span className={styles.accionesVer}>
-                      <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
-                        Ver fotos y recorrido 360° →
+                    <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
+                      Ver fotos y recorrido 360°
+                    </a>
+                    {p.precio_variable && (
+                      <a href={`#precios-por-nivel-${slug}`}>
+                        Ver lista de precios completa
                       </a>
-                      {p.precio_variable && (
-                        <a href={`#precios-por-nivel-${slug}`}>
-                          Ver lista de precios completa →
-                        </a>
-                      )}
-                    </span>
+                    )}
                     <a
                       className={styles.cotizar}
                       href={waHref}
