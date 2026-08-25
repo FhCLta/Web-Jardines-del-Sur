@@ -28,6 +28,16 @@ const MODEL_NAMES_BY_SLUG = {
   "departamento-cedro-plus": "Departamento Cedro Plus",
 };
 
+// Secciones que cuelgan de un desarrollo y NO son modelos. Sin este mapa el
+// breadcrumb caia al segmento crudo de la URL y mostraba "precios", "casas",
+// "departamentos" o "promociones" en minuscula. Pasaba desde julio.
+const SECTION_NAMES_BY_SLUG = {
+  casas: "Casas",
+  departamentos: "Departamentos",
+  promociones: "Promociones",
+  precios: "Precios",
+};
+
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -53,8 +63,12 @@ export default function SiteHeader() {
   const currentDev = isInSiloContext
     ? SILO_LINKS.find((s) => s.slug === currentSlug)
     : null;
+  // Primero modelo, luego seccion, y de ultimo recurso el segmento crudo — que
+  // ya solo apareceria en una subpagina nueva sin dar de alta aqui.
   const currentModelName = currentModelSlug
-    ? MODEL_NAMES_BY_SLUG[currentModelSlug] || currentModelSlug
+    ? MODEL_NAMES_BY_SLUG[currentModelSlug] ||
+      SECTION_NAMES_BY_SLUG[currentModelSlug] ||
+      currentModelSlug
     : null;
   const otherSilos = isInSiloContext
     ? SILO_LINKS.filter((s) => s.slug !== currentSlug)
@@ -106,10 +120,11 @@ export default function SiteHeader() {
               aria-label="Breadcrumb"
             >
               <a href="/">Inicio</a>
-              <span className={styles.headerBreadcrumbSep} aria-hidden="true">
-                ›
-              </span>
-              <a href="/#desarrollos">Desarrollos</a>
+              {/* ⚠️ Aqui iba un nivel "Desarrollos" que apuntaba a
+                  /#desarrollos: la MISMA pagina que "Inicio" con un ancla, o
+                  sea dos escalones al mismo documento. Se quito el 25 ago 2026
+                  junto con su equivalente del JSON-LD, porque Google pide que
+                  la migaja visible y la marcada digan lo mismo. */}
               <span className={styles.headerBreadcrumbSep} aria-hidden="true">
                 ›
               </span>

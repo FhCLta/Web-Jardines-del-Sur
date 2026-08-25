@@ -53,9 +53,18 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
+          // El orden sigue la direccion: /<desarrollo>/precios. Estuvo al reves
+          // —"Precios › <desarrollo>"— porque quedo del cambio de URL, cuando
+          // la pagina vivia en /precios/<desarrollo>. Es como lo hace
+          // /<dev>/promociones, que tiene la misma forma.
           { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Precios", item: `${SITE_URL}/precios` },
-          { "@type": "ListItem", position: 3, name: dev.name, item: pageUrl },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: dev.name,
+            item: `${SITE_URL}/${slug}`,
+          },
+          { "@type": "ListItem", position: 3, name: "Precios", item: pageUrl },
         ],
       },
       {

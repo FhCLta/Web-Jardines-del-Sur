@@ -141,15 +141,13 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
         "@type": "BreadcrumbList",
         "@id": `${pageUrl}#breadcrumbs`,
         itemListElement: [
+          // ⚠️ NO reponer aqui un nivel "Desarrollos en Cancún": apuntaba a
+          // /#desarrollos, que es la MISMA pagina que "Inicio" con un ancla, asi
+          // que la ruta llevaba dos escalones al mismo documento. Quitado el
+          // 25 ago 2026 por decision de Florencio.
           { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Desarrollos en Cancún",
-            item: `${SITE_URL}/#desarrollos`,
-          },
-          { "@type": "ListItem", position: 3, name: dev.name, item: `${SITE_URL}/${dev.slug}` },
-          { "@type": "ListItem", position: 4, name: productoPlural, item: pageUrl },
+          { "@type": "ListItem", position: 2, name: dev.name, item: `${SITE_URL}/${dev.slug}` },
+          { "@type": "ListItem", position: 3, name: productoPlural, item: pageUrl },
         ],
       },
       {

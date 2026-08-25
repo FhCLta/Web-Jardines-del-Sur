@@ -169,16 +169,14 @@ const jsonLd = {
       "@type": "BreadcrumbList",
       "@id": `${PAGE_URL}#breadcrumbs`,
       itemListElement: [
+        // ⚠️ NO reponer aqui un nivel "Desarrollos en Cancún": apuntaba a
+        // /#desarrollos, que es la MISMA pagina que "Inicio" con un ancla, asi
+        // que la ruta llevaba dos escalones al mismo documento. Quitado el
+        // 25 ago 2026 por decision de Florencio.
         { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
         {
           "@type": "ListItem",
           position: 2,
-          name: "Desarrollos en Cancún",
-          item: `${SITE_URL}/#desarrollos`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
           name: "Jardines del Sur 7",
           item: PAGE_URL,
         },
