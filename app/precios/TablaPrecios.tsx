@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   getPropertiesByDev,
   getModelType,
@@ -128,29 +129,12 @@ function TablaDeGrupo({
               getWhatsAppMessageForModel(p)
             )}`;
             return (
-              <tr key={p.id}>
+              <Fragment key={p.id}>
+              <tr className={styles.filaDatos}>
                 <th scope="row">
                   <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                     {p.nombre_modelo}
                   </a>
-                  <span className={styles.acciones}>
-                    <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
-                      Ver fotos y recorrido 360°
-                    </a>
-                    {p.precio_variable && (
-                      <a href={`#precios-por-nivel-${slug}`}>
-                        Ver lista de precios completa
-                      </a>
-                    )}
-                    <a
-                      className={styles.cotizar}
-                      href={waHref}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Cotizar ahora
-                    </a>
-                  </span>
                 </th>
                 {/* Los data-label alimentan la vista de TARJETAS en celular,
                     donde la tabla se apila (ver el @media de precios.module.css).
@@ -174,6 +158,29 @@ function TablaDeGrupo({
                   </span>
                 </td>
               </tr>
+              <tr className={styles.filaAcciones}>
+                <td colSpan={4}>
+                  <span className={styles.acciones}>
+                    <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
+                      Ver fotos y recorrido 360°
+                    </a>
+                    {p.precio_variable && (
+                      <a href={`#precios-por-nivel-${slug}`}>
+                        Ver lista de precios completa
+                      </a>
+                    )}
+                    <a
+                      className={styles.cotizar}
+                      href={waHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Cotizar ahora
+                    </a>
+                  </span>
+                </td>
+              </tr>
+              </Fragment>
             );
           })}
         </tbody>
