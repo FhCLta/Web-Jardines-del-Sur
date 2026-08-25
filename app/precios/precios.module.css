@@ -145,7 +145,7 @@
 /* No ocupa todo el ancho: con cuatro columnas de cifras, estirarla a 1600px
    dejaba huecos enormes entre el nombre y los numeros. */
 .tablaWrap {
-  max-width: 940px;
+  max-width: 1180px;
   margin-inline: auto;
   overflow-x: auto;
   border: 1px solid var(--border-soft);
@@ -166,21 +166,29 @@
 }
 
 .tabla th:nth-child(1) {
-  width: 28%;
+  width: 17%;
 }
 
 .tabla th:nth-child(2) {
-  width: 22%;
+  width: 14%;
 }
 
 .tabla th:nth-child(3) {
-  width: 22%;
+  width: 14%;
 }
 
 /* El precio va al final y es el resultado de la resta, asi que pesa mas que las
    dos columnas de referencia que lo preceden. */
 .tabla th:nth-child(4) {
-  width: 28%;
+  width: 17%;
+}
+
+/* La de acciones. En casas los dos botones caben en un renglon, asi que el
+   modelo entero ocupa una sola linea. En departamentos hay un tercero: con 33%
+   caia 1+2 y "Cotizar ahora" quedaba pegado a uno de mirar; con 38% caben los
+   dos de "ver" juntos y la accion que cierra baja sola. */
+.tabla th:nth-child(5) {
+  width: 38%;
 }
 
 .tabla th,
@@ -222,20 +230,6 @@
   text-decoration: underline;
 }
 
-/* Cada modelo son dos filas: la de datos y la de acciones. La linea divisoria
-   va SOLO al final del par, para que se lean como un bloque y no como dos
-   registros distintos. */
-.filaDatos th,
-.filaDatos td {
-  border-bottom: 0;
-  padding-bottom: 0.35rem;
-}
-
-.filaAcciones td {
-  padding: 0.15rem 1.1rem 1rem;
-  text-align: center;
-}
-
 .tabla tbody tr:last-child th,
 .tabla tbody tr:last-child td {
   border-bottom: 0;
@@ -246,12 +240,26 @@
   color: var(--text-primary);
 }
 
+.celdaAcciones {
+  text-align: right;
+}
+
 .acciones {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 0.4rem 0.5rem;
+}
+
+/* Rotulo solo para lectores de pantalla. */
+.soloLectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .tabla tbody .acciones a {
@@ -497,27 +505,17 @@
     overflow: hidden;
   }
 
-  .tabla tbody tr.filaDatos {
-    margin-bottom: 0;
-    border-bottom: 0;
-    border-radius: 14px 14px 0 0;
-  }
-
-  .tabla tbody tr.filaAcciones {
-    border-top: 0;
-    border-radius: 0 0 14px 14px;
-    background: var(--surface);
-  }
-
-  .tabla tbody tr.filaAcciones td {
+  .tabla tbody td.celdaAcciones {
     display: block;
     padding: 0.9rem 1rem;
+    text-align: left;
     white-space: normal;
+    border-bottom: 0;
   }
 
   /* Esta celda no tiene data-label; sin esto el ::before pintaba un item vacio
      que abria un hueco antes de los botones. */
-  .tabla tbody tr.filaAcciones td::before {
+  .tabla tbody td.celdaAcciones::before {
     content: none;
   }
 
@@ -566,6 +564,7 @@
   .acciones {
     flex-direction: column;
     align-items: stretch;
+    justify-content: flex-start;
     width: auto;
     gap: 0.5rem;
   }

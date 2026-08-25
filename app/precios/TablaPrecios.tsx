@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import {
   getPropertiesByDev,
   getModelType,
@@ -120,6 +119,11 @@ function TablaDeGrupo({
             <th scope="col">Valor avalúo</th>
             <th scope="col">Ahorro</th>
             <th scope="col">Precio con descuento *</th>
+            {/* Columna de acciones: sin rotulo visible —los botones se explican
+                solos— pero con nombre para quien navega con lector de pantalla. */}
+            <th scope="col">
+              <span className={styles.soloLectores}>Acciones</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -129,8 +133,7 @@ function TablaDeGrupo({
               getWhatsAppMessageForModel(p)
             )}`;
             return (
-              <Fragment key={p.id}>
-              <tr className={styles.filaDatos}>
+              <tr key={p.id}>
                 <th scope="row">
                   <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                     {p.nombre_modelo}
@@ -157,9 +160,7 @@ function TablaDeGrupo({
                     {formatPriceMxn(p.precio)}
                   </span>
                 </td>
-              </tr>
-              <tr className={styles.filaAcciones}>
-                <td colSpan={4}>
+                <td className={styles.celdaAcciones}>
                   <span className={styles.acciones}>
                     <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                       Ver fotos y recorrido 360°
@@ -180,7 +181,6 @@ function TablaDeGrupo({
                   </span>
                 </td>
               </tr>
-              </Fragment>
             );
           })}
         </tbody>
