@@ -161,7 +161,11 @@ function TablaDeGrupo({
                   </span>
                 </td>
                 <td className={styles.celdaAcciones}>
-                  <span className={styles.acciones}>
+                  <span
+                    className={`${styles.acciones} ${
+                      p.precio_variable ? styles.accionesTri : ""
+                    }`}
+                  >
                     <a href={`/${slug}/${slugifyModel(p.nombre_modelo)}`}>
                       Ver fotos y recorrido 360°
                     </a>
@@ -169,6 +173,11 @@ function TablaDeGrupo({
                       <a href={`#precios-por-nivel-${slug}`}>
                         Ver lista de precios completa
                       </a>
+                    )}
+                    {/* Salto de linea invisible: empuja "Cotizar ahora" a su
+                        propio renglon para formar el triangulo. */}
+                    {p.precio_variable && (
+                      <span className={styles.salto} aria-hidden="true" />
                     )}
                     <a
                       className={styles.cotizar}

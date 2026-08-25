@@ -166,7 +166,7 @@
 }
 
 .tabla th:nth-child(1) {
-  width: 17%;
+  width: 16%;
 }
 
 .tabla th:nth-child(2) {
@@ -180,15 +180,17 @@
 /* El precio va al final y es el resultado de la resta, asi que pesa mas que las
    dos columnas de referencia que lo preceden. */
 .tabla th:nth-child(4) {
-  width: 17%;
+  width: 16%;
 }
 
 /* La de acciones. En casas los dos botones caben en un renglon, asi que el
-   modelo entero ocupa una sola linea. En departamentos hay un tercero: con 33%
-   caia 1+2 y "Cotizar ahora" quedaba pegado a uno de mirar; con 38% caben los
-   dos de "ver" juntos y la accion que cierra baja sola. */
+   modelo entero ocupa una sola linea. En departamentos hay un tercero y forman
+   triangulo: los dos de mirar arriba y el que cierra centrado debajo.
+   ⚠️ El 40% esta medido, no elegido a ojo: los dos botones de "ver" piden 406px
+   y con 38% quedaban 402 utiles — por CUATRO pixeles caian en renglones
+   distintos. Con 40% quedan 437, con holgura por si cambia una etiqueta. */
 .tabla th:nth-child(5) {
-  width: 38%;
+  width: 40%;
 }
 
 .tabla th,
@@ -250,6 +252,17 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.4rem 0.5rem;
+}
+
+/* Tres botones: los dos de mirar arriba y el que cierra centrado debajo. Sin
+   esto el reparto caia 1+2 y "Cotizar ahora" quedaba pegado a uno de mirar. */
+.accionesTri {
+  justify-content: center;
+}
+
+.salto {
+  flex-basis: 100%;
+  height: 0;
 }
 
 /* Rotulo solo para lectores de pantalla. */
@@ -559,6 +572,10 @@
     white-space: normal;
     flex: 1 1 auto;
     min-width: 0;
+  }
+
+  .salto {
+    display: none;
   }
 
   .acciones {
