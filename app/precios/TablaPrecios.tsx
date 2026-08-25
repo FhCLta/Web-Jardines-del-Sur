@@ -82,11 +82,13 @@ function TablaDeGrupo({
       <table className={styles.tabla}>
         <thead>
           <tr>
+            {/* El orden es la RESTA: lo que vale, lo que te descuentan, lo
+                que pagas. El precio va al final porque es el resultado. Igual
+                que la tarjeta de celular, que lo lee de arriba abajo. */}
             <th scope="col">Modelo</th>
-            <th scope="col">Construcción</th>
             <th scope="col">Valor avalúo</th>
-            <th scope="col">Precio con descuento</th>
             <th scope="col">Ahorro</th>
+            <th scope="col">Precio con descuento</th>
           </tr>
         </thead>
         <tbody>
@@ -123,12 +125,15 @@ function TablaDeGrupo({
                   </span>
                 </th>
                 {/* Los data-label alimentan la vista de TARJETAS en celular,
-                    donde la tabla se apila (ver el @media de precios.module.css). */}
-                <td data-label="Construcción">
-                  {p.metros_construccion ? `${p.metros_construccion} m²` : "—"}
-                </td>
+                    donde la tabla se apila (ver el @media de precios.module.css).
+                    ⚠️ Los METROS DE CONSTRUCCION se quitaron: quien abre una
+                    lista de PRECIOS viene por el precio, y la superficie ya
+                    esta en la ficha de cada modelo, a un clic. */}
                 <td data-label="Valor avalúo" className={styles.avaluo}>
                   {formatPriceMxn(p.valor_avaluo ?? null)}
+                </td>
+                <td data-label="Ahorro" className={styles.ahorro}>
+                  {ahorro ? `−${formatPriceMxn(ahorro)}` : "—"}
                 </td>
                 <td data-label="Precio con descuento" className={styles.precio}>
                   <span className={styles.precioValor}>
@@ -139,9 +144,6 @@ function TablaDeGrupo({
                     )}
                     {formatPriceMxn(p.precio)}
                   </span>
-                </td>
-                <td data-label="Ahorro" className={styles.ahorro}>
-                  {ahorro ? `−${formatPriceMxn(ahorro)}` : "—"}
                 </td>
               </tr>
             );

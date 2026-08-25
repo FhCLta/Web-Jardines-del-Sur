@@ -162,23 +162,21 @@
 }
 
 .tabla th:nth-child(1) {
-  width: 32%;
+  width: 34%;
 }
 
 .tabla th:nth-child(2) {
-  width: 13%;
+  width: 20%;
 }
 
 .tabla th:nth-child(3) {
-  width: 18%;
+  width: 20%;
 }
 
+/* El precio va al final y es el resultado de la resta, asi que pesa mas que las
+   dos columnas de referencia que lo preceden. */
 .tabla th:nth-child(4) {
-  width: 21%;
-}
-
-.tabla th:nth-child(5) {
-  width: 16%;
+  width: 26%;
 }
 
 .tabla th,
@@ -284,6 +282,8 @@
 
 .precio {
   font-weight: 800;
+  font-size: 1.02rem;
+  color: var(--primary);
 }
 
 .desde {
@@ -470,12 +470,7 @@
     border-bottom: 1px solid var(--border-soft);
   }
 
-  /* Los metros no entran en la tarjeta: quien abre una lista de PRECIOS viene
-     por el precio, y en el ancho de un celular cada renglon de mas empuja las
-     cifras fuera de pantalla. Siguen en la tabla de escritorio. */
-  .tabla tbody td[data-label="Construcción"] {
-    display: none;
-  }
+
 
   .tabla tbody td {
     display: flex;
@@ -527,16 +522,7 @@
      el total de un recibo: linea dorada arriba, rotulo chico y la cifra grande
      debajo, no apretada contra su etiqueta.
      En escritorio no aplica: ahi son columnas y el orden es el del encabezado. */
-  .tabla tbody td[data-label="Valor avalúo"] {
-    order: 1;
-  }
-
-  .tabla tbody td[data-label="Ahorro"] {
-    order: 2;
-  }
-
   .tabla tbody td[data-label="Precio con descuento"] {
-    order: 3;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.15rem;
