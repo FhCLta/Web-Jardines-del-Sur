@@ -151,6 +151,11 @@ export default function NivelesTable({
                               nivel se apila (ver niveles.module.css). */}
                           <td className={styles.nivelesAvaluo} data-label="Valor avalúo">
                             {formatPriceMxn(enNivel[0].avaluo)}
+                            {vistas.length > 0 && (
+                              <span className={styles.marcaDescuento}>
+                                Precio con descuento
+                              </span>
+                            )}
                           </td>
                           {vistas.length > 0 ? (
                             vistas.map((vista) => {

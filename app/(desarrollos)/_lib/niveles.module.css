@@ -135,6 +135,12 @@
   border-bottom: 0;
 }
 
+/* Repone en la tarjeta de celular el techo "Precio con descuento" que el
+   escritorio pinta en el thead. En escritorio sobra: ahi el techo se ve. */
+.marcaDescuento {
+  display: none;
+}
+
 .nivelesRoof {
   display: block;
   font-size: 0.68rem;
@@ -243,6 +249,27 @@
     text-align: right;
     padding: 0.6rem 1rem;
     white-space: nowrap;
+  }
+
+  .nivelesTable tbody td.nivelesAvaluo {
+    flex-wrap: wrap;
+    padding-bottom: 0;
+  }
+
+  .marcaDescuento {
+    display: block;
+    flex-basis: 100%;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.15rem;
+    border-top: 1.5px solid rgba(209, 146, 0, 0.5);
+    font-family: var(--font-montserrat);
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    text-align: left;
   }
 
   .nivelesTable tbody td::before {
