@@ -9,9 +9,14 @@ const props = getPropertiesByDev(dev.name);
 const desde = Math.min(...props.map((p) => p.precio));
 
 // ⚠️ Tope practico ~60 caracteres: Google corta ahi. El titulo ataca "precios
-// de <desarrollo>", que es una consulta distinta de "<desarrollo>" —la que ya
+// en <desarrollo>", que es una consulta distinta de "<desarrollo>" —la que ya
 // trabaja el silo—. Si se parecen, las dos paginas pelean por lo mismo.
-const title = `Precios de ${dev.name} 2026 | Altta Homes Cancún`;
+//
+// SIN el año (decision de Florencio, 30 ago 2026). Lo llevaba desde el 24 ago,
+// pero no se llego a medir si servia: entro el mismo dia que el cambio de URL,
+// asi que no habia forma de saber cual movia que. Y un año viejo en enero es
+// peor que ningun año — le dice al usuario que la pagina esta desactualizada.
+const title = `Precios en ${dev.name} | Altta Homes Cancún`;
 const description = `Lista de precios actualizada de ${dev.name}, Cancún: ${props.length} modelos desde ${formatPriceMxn(desde)}. Valor de avalúo, precio con descuento y cuánto ahorras en cada modelo.`;
 
 export const metadata: Metadata = {
