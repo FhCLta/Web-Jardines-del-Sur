@@ -20,6 +20,7 @@ import {
 import { SITE_URL } from "@/lib/site";
 import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
+import { getEquipamiento } from "./equipamiento";
 
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
@@ -78,6 +79,8 @@ export default async function ModelPage({
   // Tabla de precios por nivel: solo los modelos de precio variable (hoy, los
   // departamentos) tienen algo que mostrar. `getModeloPrecios` traduce el id
   // del inventario al nombre que usa la lista de precios.
+  const equipamiento = getEquipamiento(property);
+
   const modeloPrecios = property.precio_variable ? getModeloPrecios(property.id) : null;
   const variantes = modeloPrecios ? getVariantesDepartamentos(dev.slug) : [];
   const tieneTablaNiveles =
@@ -300,14 +303,21 @@ export default async function ModelPage({
         </section>
       )}
 
-      {/* DISTRIBUCIÓN */}
+      {/* DISTRIBUCIÓN Y EQUIPAMIENTO — como estan repartidos los espacios y
+          que trae la vivienda. Son dos preguntas distintas del mismo cliente,
+          asi que viven en la misma seccion: el equipamiento va DEBAJO de los
+          espacios porque primero se entiende la casa y luego con que viene. */}
       {property.levels.length > 0 && (
         <section className={styles.section}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2>Distribución</h2>
+              <h2>
+                Distribución{equipamiento.length > 0 && " y equipamiento"}
+              </h2>
               <p>
-                Distribución completa del modelo {strippedName}.
+                {equipamiento.length > 0
+                  ? `Cómo está distribuido el modelo ${strippedName} y con qué viene equipado.`
+                  : `Distribución completa del modelo ${strippedName}.`}
               </p>
             </div>
 
@@ -378,6 +388,17 @@ export default async function ModelPage({
                   </div>
                 );
               })}
+
+              {equipamiento.length > 0 && (
+                <div className={styles.levelBlock}>
+                  <h3>Equipamiento</h3>
+                  <ul className={styles.levelList}>
+                    {equipamiento.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </section>
