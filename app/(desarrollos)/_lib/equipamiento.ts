@@ -43,7 +43,10 @@ const COMUN: string[] = [
 
 /** Lo propio de cada tipo, en cualquier desarrollo. */
 const POR_TIPO: Record<Tipo, string[]> = {
-  Casa: [],
+  // Las 8 casas tienen 3 recamaras, verificado contra inventory.json. Si algun
+  // dia entra una casa de 2, este renglon deja de ser cierto para ella y hay que
+  // bajarlo a POR_MODELO.
+  Casa: ["Closets abiertos en 3 recámaras"],
   Departamento: ["Centro de lavado"],
 };
 
