@@ -35,6 +35,10 @@ const COMUN: string[] = [
   "Cocina equipada con barra de granito",
   "Campana",
   "Parrilla (sin instalar)",
+  // Va justo despues de la parrilla a proposito: el contraste importa. La
+  // parrilla llega SIN instalar y el tanque CON instalacion, y leidos seguidos
+  // no queda duda de cual es cual.
+  "Tanque de gas estacionario e instalación",
 ];
 
 /** Lo propio de cada tipo, en cualquier desarrollo. */
