@@ -12,24 +12,23 @@ import { type InventoryProperty, getModelType } from "./model-utils";
  *
  * ── DÓNDE AGREGAR COSAS ──────────────────────────────────────────────────────
  *
- * Se resuelve por TIPO —casa o departamento— porque ahí es donde cambia. Meterlo
- * modelo por modelo en inventory.json habría sido copiar la misma lista doce
- * veces, y cambiar una coma obligaría a tocar los doce archivos: exactamente la
- * deuda que ya tiene el pie de página.
+ * Tres cajones, de lo general a lo particular. Se suman en ese orden:
  *
- *   - Vale para TODOS                    → COMUN
- *   - Solo casas                         → POR_TIPO.Casa
- *   - Solo departamentos                 → POR_TIPO.Departamento
- *   - Solo cierto tipo, cierto desarrollo→ POR_DESARROLLO_Y_TIPO
+ *   - Vale para TODAS las viviendas     → COMUN
+ *   - Todas las casas / todos los depas → POR_TIPO
+ *   - Un modelo concreto                → POR_MODELO
  *
- * El tercer cajón existe porque el mismo modelo NO viene igual en todas partes:
- * el Capua y el Cedro Plus están tanto en Jardines del Sur 6 como en Lirios, y
- * lo que traen no tiene por qué coincidir. Se decide por desarrollo Y tipo, no
- * por nombre de modelo, que es lo que de verdad se repite.
+ * TODO el equipamiento vive en este archivo, en uno de los tres. Que no se
+ * reparta entre aquí e inventory.json: si estuviera en dos sitios habría que
+ * acordarse de cuál mirar, y tarde o temprano se contradicen.
  *
- * Si algún día un modelo suelto trae algo que ningún otro de su tipo tiene, ESE
- * es el momento de abrir un campo `equipamiento` en inventory.json — no antes.
+ * POR_MODELO se lleva lo que depende del modelo Y del desarrollo a la vez,
+ * porque el mismo nombre NO trae lo mismo en todas partes: el Capua de Lirios
+ * lleva closets abiertos en 3 recámaras y el de Jardines del Sur 6 en 2. Por eso
+ * la llave es el id del inventario, que ya distingue los dos.
  */
+
+type Tipo = "Casa" | "Departamento";
 
 /** Lo que traen todas las viviendas, casa o departamento. */
 const COMUN: string[] = [
@@ -38,28 +37,27 @@ const COMUN: string[] = [
   "Parrilla (sin instalar)",
 ];
 
-type Tipo = "Casa" | "Departamento";
-
 /** Lo propio de cada tipo, en cualquier desarrollo. */
 const POR_TIPO: Record<Tipo, string[]> = {
   Casa: [],
-  Departamento: [],
+  Departamento: ["Centro de lavado"],
 };
 
 /**
- * Lo que solo trae cierto tipo en cierto desarrollo. La clave es el nombre del
- * desarrollo tal como viene en inventory.json.
+ * Lo de un modelo concreto. La llave es el `id` de data/inventory.json — no el
+ * nombre del modelo, que se repite entre desarrollos.
  */
-const POR_DESARROLLO_Y_TIPO: Record<string, Partial<Record<Tipo, string[]>>> = {
-  "Jardines del Sur 6": {
-    Departamento: ["Closets abiertos en 2 recámaras"],
-  },
+const POR_MODELO: Record<string, string[]> = {
+  "jds6-capua": ["Closets abiertos en 2 recámaras"],
+  "jds6-cedro-plus": ["Closets abiertos en 2 recámaras"],
+  "lirios2-capua": ["Closets abiertos en 3 recámaras"],
+  "lirios2-cedro-plus": ["Closets abiertos en 2 recámaras"],
 };
 
 /**
- * Equipamiento de un modelo, ya resuelto: lo común primero y luego lo de su
- * tipo. Devuelve [] si el modelo no es casa ni departamento, para que la ficha
- * simplemente no pinte la sección en vez de inventarse una lista.
+ * Equipamiento de un modelo, ya resuelto: lo común, luego lo de su tipo, luego
+ * lo suyo. Devuelve [] si el modelo no es casa ni departamento, para que la
+ * ficha simplemente no pinte la sección en vez de inventarse una lista.
  */
 export function getEquipamiento(property: InventoryProperty): string[] {
   const tipo = getModelType(property.nombre_modelo);
@@ -67,6 +65,6 @@ export function getEquipamiento(property: InventoryProperty): string[] {
   return [
     ...COMUN,
     ...POR_TIPO[tipo],
-    ...(POR_DESARROLLO_Y_TIPO[property.development]?.[tipo] ?? []),
+    ...(POR_MODELO[property.id] ?? []),
   ];
 }
