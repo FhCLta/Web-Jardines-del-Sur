@@ -17,9 +17,15 @@ import { type InventoryProperty, getModelType } from "./model-utils";
  * veces, y cambiar una coma obligaría a tocar los doce archivos: exactamente la
  * deuda que ya tiene el pie de página.
  *
- *   - Vale para TODOS          → COMUN
- *   - Solo casas               → POR_TIPO.Casa
- *   - Solo departamentos       → POR_TIPO.Departamento
+ *   - Vale para TODOS                    → COMUN
+ *   - Solo casas                         → POR_TIPO.Casa
+ *   - Solo departamentos                 → POR_TIPO.Departamento
+ *   - Solo cierto tipo, cierto desarrollo→ POR_DESARROLLO_Y_TIPO
+ *
+ * El tercer cajón existe porque el mismo modelo NO viene igual en todas partes:
+ * el Capua y el Cedro Plus están tanto en Jardines del Sur 6 como en Lirios, y
+ * lo que traen no tiene por qué coincidir. Se decide por desarrollo Y tipo, no
+ * por nombre de modelo, que es lo que de verdad se repite.
  *
  * Si algún día un modelo suelto trae algo que ningún otro de su tipo tiene, ESE
  * es el momento de abrir un campo `equipamiento` en inventory.json — no antes.
@@ -32,10 +38,22 @@ const COMUN: string[] = [
   "Parrilla (sin instalar)",
 ];
 
-/** Lo propio de cada tipo. Vacíos hoy; es donde entra lo que sigue. */
-const POR_TIPO: Record<"Casa" | "Departamento", string[]> = {
+type Tipo = "Casa" | "Departamento";
+
+/** Lo propio de cada tipo, en cualquier desarrollo. */
+const POR_TIPO: Record<Tipo, string[]> = {
   Casa: [],
   Departamento: [],
+};
+
+/**
+ * Lo que solo trae cierto tipo en cierto desarrollo. La clave es el nombre del
+ * desarrollo tal como viene en inventory.json.
+ */
+const POR_DESARROLLO_Y_TIPO: Record<string, Partial<Record<Tipo, string[]>>> = {
+  "Jardines del Sur 6": {
+    Departamento: ["Closets abiertos en 2 recámaras"],
+  },
 };
 
 /**
@@ -46,5 +64,9 @@ const POR_TIPO: Record<"Casa" | "Departamento", string[]> = {
 export function getEquipamiento(property: InventoryProperty): string[] {
   const tipo = getModelType(property.nombre_modelo);
   if (!tipo) return [];
-  return [...COMUN, ...POR_TIPO[tipo]];
+  return [
+    ...COMUN,
+    ...POR_TIPO[tipo],
+    ...(POR_DESARROLLO_Y_TIPO[property.development]?.[tipo] ?? []),
+  ];
 }
