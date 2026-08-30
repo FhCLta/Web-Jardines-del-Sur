@@ -35,9 +35,11 @@ const COMUN: string[] = [
   "Cocina equipada con barra de granito",
   "Campana",
   "Parrilla (sin instalar)",
-  // Va justo despues de la parrilla a proposito: el contraste importa. La
-  // parrilla llega SIN instalar y el tanque CON instalacion, y leidos seguidos
-  // no queda duda de cual es cual.
+  "Boiler (sin instalar)",
+  // El orden de estos tres NO es casual: primero lo que llega SIN instalar y
+  // luego lo unico que viene CON instalacion. Leidos seguidos, el contraste se
+  // entiende solo y nadie da por hecho lo que no es. Si se agrega algo mas de
+  // gas, respetar el mismo criterio.
   "Tanque de gas estacionario e instalación",
 ];
 
