@@ -208,8 +208,16 @@ export default async function ModelPage({
               <span className={styles.eyebrowSub}>{eyebrowSub}</span>
             </span>
 
+            {/* ⚠️ El desarrollo va EXPLICITO en el H1 — §4 de
+                docs/jds7-lanzamiento.md. Los nombres de modelo SE REPITEN entre
+                desarrollos (Capua y Cedro Plus estan en Jardines 6 y en Lirios;
+                Noni en Jardines 6 y La Rioja 2) y sin esto dos fichas distintas
+                mostraban el mismo H1 palabra por palabra, que es justo lo que
+                hace que Google las trate como la misma pagina. Nombrar el
+                desarrollo es la cura, no la enfermedad. */}
             <h1 className={styles.h1}>
               {heroTitle}
+              <span className={styles.h1Dev}>en {dev.name}</span>
             </h1>
 
 

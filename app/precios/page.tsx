@@ -48,8 +48,14 @@ const SLUGS: DevSlug[] = [
 // eso lleva entradilla y preguntas frecuentes propias, y un comparativo de
 // TODOS los modelos que ninguna otra pagina del sitio tiene.
 const metaTitle = "Precios de Casas y Departamentos en Cancún | Altta Homes";
-const metaDescription =
-  "Lista de precios actualizada de casas y departamentos en la Zona Sur de Cancún: 11 modelos en Jardines del Sur 6, La Rioja 2 y Lirios Residencial 2, con valor de avalúo, precio con descuento y cuánto ahorras en cada uno.";
+// ⚠️ El numero de modelos se CUENTA, no se escribe: decia "11 modelos" a mano y
+// quedo desfasado en cuanto entro el Capua de Lirios (12). Es el rotulo fijo
+// describiendo una cifra que varia, el error que mas veces ha mordido aqui.
+const nModelos = SLUGS.reduce(
+  (n, s) => n + getPropertiesByDev(DEVS[s].name).length,
+  0
+);
+const metaDescription = `Lista de precios actualizada de casas y departamentos en la Zona Sur de Cancún: ${nModelos} modelos en Jardines del Sur 6, La Rioja 2 y Lirios Residencial 2, con valor de avalúo, precio con descuento y cuánto ahorras en cada uno.`;
 
 export const metadata: Metadata = {
   title: { absolute: metaTitle },

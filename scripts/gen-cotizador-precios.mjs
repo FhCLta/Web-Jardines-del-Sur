@@ -31,8 +31,19 @@ const precios = JSON.parse(fs.readFileSync(ORIGEN, "utf8"));
 // catalogo que habia antes del refactor (ver check-precios.mjs).
 const EMITE_VALOR_AVALUO = new Set(["Azular1", "LaRioja2", "Azular1-Depas"]);
 
-const claveCatalogo = (entrada) =>
-  entrada.vista === "estacionamiento" ? `${entrada.modelo} PROMO` : entrada.modelo;
+// Clave del catalogo = como el cotizador agrupa las plantas de un modelo. Hay
+// dos razones para partir un modelo en dos grupos, y son excluyentes:
+//   - la VISTA al estacionamiento (Jardines 6), que el catalogo viejo llamaba
+//     "PROMO" y asi se conserva para no romper lo que ya existe;
+//   - el EDIFICIO (el Capua de Lirios: P-4 y L-1), mismo avaluo y distinto
+//     descuento.
+// ⚠️ La clave puede traer un guion ("CAPUA P-4"). script.js lo tiene en cuenta:
+// separa modelo y planta por el ULTIMO guion, no por el primero.
+const claveCatalogo = (entrada) => {
+  if (entrada.vista === "estacionamiento") return `${entrada.modelo} PROMO`;
+  if (entrada.edificio) return `${entrada.modelo} ${entrada.edificio}`;
+  return entrada.modelo;
+};
 
 function filaComun(entrada, bono) {
   const fila = { precioLista: entrada.precio_lista };

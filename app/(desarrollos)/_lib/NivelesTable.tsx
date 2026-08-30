@@ -1,6 +1,15 @@
 import styles from "./niveles.module.css";
 import { formatPriceMxn } from "./model-utils";
-import { type VarianteDepartamento } from "@/lib/precios";
+import {
+  ejeDeVariantes,
+  etiquetaVariante,
+  type VarianteDepartamento,
+} from "@/lib/precios";
+
+/** "edificio P-4" -> "Edificio P-4". Los encabezados van en mayuscula inicial. */
+function capitalizar(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 const NIVEL_LABEL: Record<string, string> = {
   PB: "Planta baja",
@@ -36,11 +45,12 @@ type Props = {
  * Vive en dos pantallas: el catálogo de departamentos, que pinta una tabla por
  * modelo, y la ficha de cada modelo de precio variable, que pinta solo la suya.
  *
- * ⚠️ NO todos los desarrollos tienen variante de vista: los departamentos de
- * Lirios se distinguen solo por nivel. Por eso el título, la entradilla y las
- * columnas se arman a partir de las vistas que EXISTEN en los datos, en vez de
- * darlas por hechas — una tabla que anuncia "y vista" sin vistas es un rótulo
- * que miente.
+ * ⚠️ NO todos los desarrollos parten igual: en Jardines 6 el precio cambia por
+ * VISTA, en el Capua de Lirios por EDIFICIO y en el Cedro Plus de Lirios el
+ * nivel basta. Por eso el título, la entradilla y las columnas se arman a
+ * partir del eje que EXISTE en los datos (`ejeDeVariantes`), en vez de darlo
+ * por hecho — una tabla que anuncia "y vista" sin vistas es un rótulo que
+ * miente, y una que ignora el eje se come filas en silencio.
  */
 export default function NivelesTable({
   variantes,
@@ -53,13 +63,22 @@ export default function NivelesTable({
   if (filas.length === 0) return null;
 
   const modelos = [...new Set(filas.map((v) => v.modelo))];
-  const hayVistas = filas.some((v) => v.vista);
+  // Encabezado y entradilla de la seccion: hablan de TODAS las tablas que se
+  // pintan debajo, asi que el eje se saca del conjunto. Si dos modelos usaran
+  // ejes distintos gana el primero, y cada tabla igual dice el suyo.
+  const ejeGeneral = ejeDeVariantes(filas);
+  const sufijoEje =
+    ejeGeneral?.campo === "vista"
+      ? " y vista"
+      : ejeGeneral?.campo === "edificio"
+      ? " y edificio"
+      : "";
 
   return (
     <section className={styles.nivelesSection} id={id}>
       <div className="container">
         <h2 className={styles.nivelesTitle}>
-          {hayVistas ? "Precios por nivel y vista" : "Precios por nivel"}
+          {`Precios por nivel${sufijoEje}`}
         </h2>
         {/* ⚠️ NO escribir aquí "sin tener que preguntar" ni equivalentes.
             Decía eso y le quitaba al cliente el motivo para escribir, que
@@ -68,7 +87,9 @@ export default function NivelesTable({
             cambia y solo se confirma con el asesor. */}
         <p className={styles.nivelesLead}>
           En los departamentos el precio cambia según el nivel
-          {hayVistas ? " y la vista" : ""}. Aquí están todos, para que compares
+          {ejeGeneral?.campo === "vista" ? " y la vista" : ""}
+          {ejeGeneral?.campo === "edificio" ? " y el edificio" : ""}. Aquí están
+          todos, para que compares
           con calma: <strong>todos ya traen el descuento aplicado</strong>, no
           hay que restarle nada. Lo que cambia cada semana es{" "}
           <strong>qué unidades siguen libres</strong> — eso te lo confirmamos al
@@ -80,13 +101,13 @@ export default function NivelesTable({
           const niveles = [...new Set(delModelo.map((v) => v.nivel))];
           const desde = Math.min(...delModelo.map((v) => v.precio));
           const avaluoTope = Math.max(...delModelo.map((v) => v.avaluo));
-          // Las vistas se calculan POR MODELO: Capua da al parque o al
-          // estacionamiento y Cedro Plus a la alberca o al estacionamiento.
-          // Con una lista global, cada tabla pintaba una columna vacía de
-          // la vista que no le corresponde.
-          const vistas = [
-            ...new Set(delModelo.map((v) => v.vista).filter(Boolean)),
-          ] as string[];
+          // El eje se calcula POR MODELO: en Jardines 6 el Capua da al parque
+          // o al estacionamiento y el Cedro Plus a la alberca o al
+          // estacionamiento; en Lirios el Capua parte por edificio y el Cedro
+          // Plus no parte. Con una lista global, cada tabla pintaba una columna
+          // vacía de la variante que no le corresponde.
+          const eje = ejeDeVariantes(delModelo);
+          const columnas = eje?.valores ?? [];
           return (
             <div key={m} className={styles.nivelesBlock}>
               <h3 className={styles.nivelesModelo}>
@@ -105,13 +126,13 @@ export default function NivelesTable({
                         son precios con descuento, en lugar de alargar cada
                         encabezado. Solo cuando hay mas de una vista; con una
                         sola columna el rotulo va directo en ella. */}
-                    {vistas.length > 1 && (
+                    {columnas.length > 1 && (
                       <tr className={styles.nivelesGroupRow}>
                         <th />
                         <th />
                         <th
                           scope="colgroup"
-                          colSpan={vistas.length}
+                          colSpan={columnas.length}
                           className={styles.nivelesGroupHead}
                         >
                           Precio con descuento
@@ -123,10 +144,10 @@ export default function NivelesTable({
                       {/* El avalúo es del NIVEL: las dos vistas del mismo
                           piso comparten valor comercial. */}
                       <th scope="col">Valor avalúo</th>
-                      {vistas.length > 0 ? (
-                        vistas.map((v) => (
+                      {eje ? (
+                        columnas.map((v) => (
                           <th key={v} scope="col">
-                            Vista a{v === "alberca" ? " la" : "l"} {v}
+                            {capitalizar(etiquetaVariante(eje.campo, v))}
                           </th>
                         ))
                       ) : (
@@ -151,19 +172,23 @@ export default function NivelesTable({
                               nivel se apila (ver niveles.module.css). */}
                           <td className={styles.nivelesAvaluo} data-label="Valor avalúo">
                             {formatPriceMxn(enNivel[0].avaluo)}
-                            {vistas.length > 0 && (
+                            {eje && (
                               <span className={styles.marcaDescuento}>
                                 Precio con descuento
                               </span>
                             )}
                           </td>
-                          {vistas.length > 0 ? (
-                            vistas.map((vista) => {
-                              const v = enNivel.find((x) => x.vista === vista);
+                          {eje ? (
+                            columnas.map((valor) => {
+                              const v = enNivel.find(
+                                (x) => x[eje.campo] === valor
+                              );
                               return (
                                 <td
-                                  key={vista}
-                                  data-label={`Vista a${vista === "alberca" ? " la" : "l"} ${vista}`}
+                                  key={valor}
+                                  data-label={capitalizar(
+                                    etiquetaVariante(eje.campo, valor)
+                                  )}
                                 >
                                   {v ? formatPriceMxn(v.precio) : "—"}
                                 </td>

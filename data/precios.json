@@ -5,7 +5,7 @@
     "\"promocion.bono_extra\" solo aplica a casas: es una promocion real que suma al bono.",
     "El precio NETO que ve el cliente = precio_lista - bono (y - bono_extra si se aplica la promocion)."
   ],
-  "actualizado": "2026-08-05",
+  "actualizado": "2026-08-30",
   "desarrollos": {
     "Azular1": {
       "precio_terreno_excedente": 5750,
@@ -423,6 +423,151 @@
         "bancario": 0.077,
         "contado": 0.072
       }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "PB",
+      "vista": null,
+      "edificio": "P-4",
+      "prototipo": "CAPUA PB P-4",
+      "precio_lista": 2861000,
+      "bono": 701000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "1",
+      "vista": null,
+      "edificio": "P-4",
+      "prototipo": "CAPUA 1N P-4",
+      "precio_lista": 2807000,
+      "bono": 712000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "2",
+      "vista": null,
+      "edificio": "P-4",
+      "prototipo": "CAPUA 2N P-4",
+      "precio_lista": 2754000,
+      "bono": 679000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "3",
+      "vista": null,
+      "edificio": "P-4",
+      "prototipo": "CAPUA 3N P-4",
+      "precio_lista": 2700000,
+      "bono": 670000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "PB",
+      "vista": null,
+      "edificio": "L-1",
+      "prototipo": "CAPUA PB L-1",
+      "precio_lista": 2861000,
+      "bono": 741000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "1",
+      "vista": null,
+      "edificio": "L-1",
+      "prototipo": "CAPUA 1N L-1",
+      "precio_lista": 2807000,
+      "bono": 752000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "2",
+      "vista": null,
+      "edificio": "L-1",
+      "prototipo": "CAPUA 2N L-1",
+      "precio_lista": 2754000,
+      "bono": 719000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "Lirios2-Depas",
+      "modelo": "CAPUA",
+      "nivel": "3",
+      "vista": null,
+      "edificio": "L-1",
+      "prototipo": "CAPUA 3N L-1",
+      "precio_lista": 2700000,
+      "bono": 710000,
+      "avaluo_tramite": 11500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": "lirios2-capua"
     },
     {
       "dev": "Lirios2-Depas",

@@ -8,6 +8,7 @@ import {
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
 import {
   getVariantesDepartamentos,
+  etiquetaVariante,
   type VarianteDepartamento,
 } from "@/lib/precios";
 import styles from "./precios.module.css";
@@ -23,9 +24,25 @@ const NIVEL_LABEL: Record<string, string> = {
 
 const ORDEN_NIVEL = ["PB", "1", "2", "3"];
 
-/** "vista al parque", "vista a la alberca", "vista al estacionamiento". */
-function etiquetaVista(vista: string): string {
-  return `vista a${vista === "alberca" ? " la" : "l"} ${vista}`;
+/**
+ * Lo que distingue a esta unidad de las demas del mismo nivel: la vista en
+ * Jardines 6, el edificio en el Capua de Lirios, nada en el Cedro Plus de
+ * Lirios. Devuelve null cuando el nivel ya la identifica por completo.
+ */
+function detalleVariante(
+  v: VarianteDepartamento
+): { etiqueta: string; frase: string } | null {
+  // `etiqueta` es la insignia corta bajo el nivel; `frase` es como se lee
+  // dentro del mensaje de WhatsApp, donde hace falta la preposicion.
+  if (v.vista) {
+    const e = etiquetaVariante("vista", v.vista);
+    return { etiqueta: e, frase: `con ${e}` };
+  }
+  if (v.edificio) {
+    const e = etiquetaVariante("edificio", v.edificio);
+    return { etiqueta: e, frase: `en el ${e}` };
+  }
+  return null;
 }
 
 /**
@@ -172,8 +189,9 @@ function TablaDeVariantes({
             {filas.map((v) => {
               const nivel = NIVEL_LABEL[v.nivel] ?? v.nivel;
               const roof = /ROOF/i.test(v.prototipo);
-              const detalle = v.vista
-                ? `${nivel.toLowerCase()} con ${etiquetaVista(v.vista)}`
+              const variante = detalleVariante(v);
+              const detalle = variante
+                ? `${nivel.toLowerCase()} ${variante.frase}`
                 : nivel.toLowerCase();
               // El mensaje nombra la UNIDAD, no solo el modelo: asi Florencio
               // sabe el nivel y la vista antes de contestar.
@@ -181,13 +199,13 @@ function TablaDeVariantes({
                 `${getWhatsAppMessageForModel(p).replace(/\.$/, "")}, ${detalle}.`
               )}`;
               return (
-                <tr key={v.prototipo + (v.vista ?? "")}>
+                <tr key={v.prototipo}>
                   <th scope="row">
                     <span className={styles.nivelCab}>
                       {nivel}
-                      {v.vista && (
+                      {variante && (
                         <span className={styles.vista}>
-                          {etiquetaVista(v.vista)}
+                          {variante.etiqueta}
                         </span>
                       )}
                       {roof && <span className={styles.roof}>Roof garden</span>}

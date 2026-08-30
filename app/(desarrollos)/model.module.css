@@ -93,6 +93,21 @@
   color: #fff;
 }
 
+/* Segundo renglon del H1: el desarrollo. Mas chico y en dorado — identifica la
+   ficha sin competir con el nombre del modelo, que sigue siendo lo primero que
+   se lee. Ver la nota de ModelPage.tsx. */
+.h1Dev {
+  display: block;
+  font-size: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  margin-top: 0.45rem;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .h1 em {
   background: var(--gradient-gold);
   -webkit-background-clip: text;

@@ -32,6 +32,13 @@ type Casa = EntradaBase & { promocion?: { bono_extra: number } };
 type Departamento = EntradaBase & {
   nivel: string;
   vista: string | null;
+  /**
+   * Edificio dentro del desarrollo. Solo lo traen los departamentos donde el
+   * descuento cambia de un edificio a otro (hoy: el Capua de Lirios, P-4 y L-1).
+   * Es la MISMA clase de dato que `vista` —una segunda variante que mueve el
+   * precio dentro del mismo nivel— pero ningun modelo usa las dos a la vez.
+   */
+  edificio?: string | null;
   prototipo: string;
 };
 
@@ -121,8 +128,10 @@ export type VarianteDepartamento = {
   modelo: string;
   /** "PB" | "1" | "2" | "3" */
   nivel: string;
-  /** null en los desarrollos sin variante de vista (Lirios) */
+  /** null en los desarrollos sin variante de vista (los Cedro Plus de Lirios) */
   vista: string | null;
+  /** null salvo donde el precio cambia por edificio (el Capua de Lirios) */
+  edificio: string | null;
   /** Nombre comercial exacto, ej. "CEDRO PLUS 3N (ROOF)" */
   prototipo: string;
   /** Lo que paga el cliente: precio de lista menos el bono. */
@@ -151,6 +160,7 @@ export function getVariantesDepartamentos(slug: string): VarianteDepartamento[] 
       modelo: d.modelo,
       nivel: d.nivel,
       vista: d.vista,
+      edificio: d.edificio ?? null,
       prototipo: d.prototipo,
       precio: d.precio_lista - d.bono,
       avaluo: d.precio_lista,
@@ -158,7 +168,11 @@ export function getVariantesDepartamentos(slug: string): VarianteDepartamento[] 
     .sort(
       (a, b) =>
         a.modelo.localeCompare(b.modelo) ||
-        orden.indexOf(a.nivel) - orden.indexOf(b.nivel)
+        orden.indexOf(a.nivel) - orden.indexOf(b.nivel) ||
+        // Sin este ultimo criterio dos variantes del mismo nivel quedaban en
+        // orden indefinido y las tablas se pintaban en distinto orden segun el
+        // modelo. Ordena por la variante que toque (vista o edificio).
+        (a.vista ?? a.edificio ?? "").localeCompare(b.vista ?? b.edificio ?? "")
     );
 }
 
@@ -178,4 +192,38 @@ export function getVariantesDepartamentos(slug: string): VarianteDepartamento[] 
 export function getModeloPrecios(id: string): string | null {
   const todas: EntradaBase[] = [...precios.casas, ...precios.departamentos];
   return todas.find((e) => e.web === id)?.modelo ?? null;
+}
+
+// ── El eje de variantes de un departamento ──────────────────────────────────
+//
+// Dentro de un MISMO nivel el precio se mueve por razones distintas segun el
+// desarrollo: en Jardines 6 por la VISTA (parque o estacionamiento; alberca o
+// estacionamiento) y en el Capua de Lirios por el EDIFICIO (P-4 o L-1, mismo
+// avaluo y distinto descuento). Ningun modelo usa las dos a la vez.
+//
+// Por eso las tablas piden UN solo eje de columnas en vez de dos caminos: la
+// tabla por niveles agrupaba por nivel y pintaba la PRIMERA fila de cada uno,
+// asi que con dos edificios el segundo habria desaparecido sin avisar. Un eje
+// unico hace que cualquier variante nueva entre por el mismo sitio.
+
+export type CampoVariante = "vista" | "edificio";
+export type EjeVariante = { campo: CampoVariante; valores: string[] };
+
+/** El eje que aplica a estas filas, o null si el nivel basta (Cedro Plus de Lirios). */
+export function ejeDeVariantes(
+  filas: VarianteDepartamento[]
+): EjeVariante | null {
+  for (const campo of ["vista", "edificio"] as const) {
+    const valores = [
+      ...new Set(filas.map((f) => f[campo]).filter(Boolean)),
+    ] as string[];
+    if (valores.length > 0) return { campo, valores };
+  }
+  return null;
+}
+
+/** "vista al parque", "vista a la alberca", "edificio P-4". */
+export function etiquetaVariante(campo: CampoVariante, valor: string): string {
+  if (campo === "edificio") return `edificio ${valor}`;
+  return `vista a${valor === "alberca" ? " la" : "l"} ${valor}`;
 }

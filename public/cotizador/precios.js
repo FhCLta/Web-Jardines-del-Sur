@@ -2,7 +2,7 @@
 // Fuente: data/precios.json  |  Generador: scripts/gen-cotizador-precios.mjs
 // Para cambiar precios: edita data/precios.json y corre
 //   node scripts/gen-cotizador-precios.mjs
-// Precios actualizados al 2026-08-05.
+// Precios actualizados al 2026-08-30.
 window.COTIZADOR_PRECIOS = {
   "datosAzular": {
     "Azular1": {
@@ -389,6 +389,114 @@ window.COTIZADOR_PRECIOS = {
     }
   },
   "datosDepartamentosLirios2": {
+    "CAPUA P-4": {
+      "1": {
+        "prototipo": "CAPUA 1N P-4",
+        "precioLista": 2807000,
+        "bono": 712000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      },
+      "2": {
+        "prototipo": "CAPUA 2N P-4",
+        "precioLista": 2754000,
+        "bono": 679000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      },
+      "3": {
+        "prototipo": "CAPUA 3N P-4",
+        "precioLista": 2700000,
+        "bono": 670000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      },
+      "PB": {
+        "prototipo": "CAPUA PB P-4",
+        "precioLista": 2861000,
+        "bono": 701000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      }
+    },
+    "CAPUA L-1": {
+      "1": {
+        "prototipo": "CAPUA 1N L-1",
+        "precioLista": 2807000,
+        "bono": 752000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      },
+      "2": {
+        "prototipo": "CAPUA 2N L-1",
+        "precioLista": 2754000,
+        "bono": 719000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      },
+      "3": {
+        "prototipo": "CAPUA 3N L-1",
+        "precioLista": 2700000,
+        "bono": 710000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      },
+      "PB": {
+        "prototipo": "CAPUA PB L-1",
+        "precioLista": 2861000,
+        "bono": 741000,
+        "avaluo": 11500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.077,
+          "contado": 0.072
+        }
+      }
+    },
     "CEDRO PLUS": {
       "1": {
         "prototipo": "CEDRO PLUS 1N",

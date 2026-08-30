@@ -343,13 +343,13 @@ export const DEVS: Record<DevSlug, DevContent> = {
     slug: "lirios-residencial-2",
     name: "Lirios Residencial 2",
     shortName: "Lirios 2",
-    metaTitle: "Lirios Residencial 2 Cancún · Departamento Cedro Plus desde $2.25M | Altta Homes",
+    metaTitle: "Lirios Residencial 2 Cancún · Departamentos desde $1.99M | Altta Homes",
     seoTitleLead: "Lirios Residencial 2 | Departamentos en Cancún",
     metaDescription:
-      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún. 3 recámaras, 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
+      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún. Dos modelos —Capua y Cedro Plus— de 3 recámaras, hasta 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
     heroSubtitle:
-      "Departamentos Cedro Plus con tres recámaras, 2.5 baños y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
+      "Departamentos Capua y Cedro Plus, de tres recámaras y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
     heroImage: "/optimized/dev-tabs/lirios-2.webp",
     ogImage: "/jardines/Modelo Cedro Plus/1.webp",
     logo: "/logos/lirios-2.webp",
@@ -362,14 +362,14 @@ export const DEVS: Record<DevSlug, DevContent> = {
       preloadImage: "/optimized/hero/hero-lirios.webp",
       eyebrow: {
         strong: "PRÓXIMA APERTURA",
-        rest: ["GRUPO SADASI", "CANCÚN"],
+        rest: ["GRUPO SADASI", "2 MODELOS"],
       },
       title: {
         lines: ["Departamentos", "en Lirios Residencial 2"],
         em: "con el respaldo de Grupo Sadasi",
       },
       subtitle: {
-        bold: "Departamento Cedro Plus desde $2,248,750 MXN",
+        bold: "2 modelos desde $1,990,000 MXN",
         detail: "Smart Home Ready · 2 cajones de estacionamiento.",
         detailAccent: "Smart Home Ready",
       },
@@ -383,12 +383,16 @@ export const DEVS: Record<DevSlug, DevContent> = {
         "Nuestro objetivo: brindar a cada familia un hogar, con arquitectura moderna y un espacio libre, seguro y hermoso.",
       ],
     },
+    // ⚠️ Al entrar el Capua (30 ago 2026) estos puntos dejaron de poder hablar
+    // de un solo modelo. Se quito "N3 con roof garden · 121.13 m²": es del
+    // Cedro Plus, y como punto del DESARROLLO se leia como si lo tuvieran los
+    // dos. Sigue dicho en la ficha del Cedro Plus, que es donde es cierto.
     highlights: [
-      "Departamento Cedro Plus · 104.06 m²",
-      "N3 con roof garden · 121.13 m²",
-      "3 recámaras · 2.5 baños",
+      "2 modelos: Capua y Cedro Plus",
+      "3 recámaras · hasta 2.5 baños",
+      "Desde 85.34 m² de construcción",
       "2 cajones de estacionamiento",
-      "Precio desde $2,248,750 MXN",
+      "Precio desde $1,990,000 MXN",
       "Torres de 4 niveles · Control de acceso",
     ],
     amenitiesSection: {
@@ -443,7 +447,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
         { num: "50", label: "Años de trayectoria Sadasi" },
         { num: "430,000+", label: "Viviendas entregadas" },
         { num: "13", label: "Amenidades + Equipamiento" },
-        { num: "4", label: "Niveles por torre" },
+        { num: "2", label: "Modelos disponibles" },
       ],
     },
   },

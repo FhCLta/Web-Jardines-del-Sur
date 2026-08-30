@@ -71,8 +71,8 @@
       "nombre_modelo": "Casa Flamboyán",
       "precio": 2225850,
       "valor_avaluo": 2621000,
-      "metros_construccion": 89.0,
-      "metros_terreno": 90.0,
+      "metros_construccion": 89,
+      "metros_terreno": 90,
       "levels": [
         {
           "nivel": 1,
@@ -105,8 +105,8 @@
       "nombre_modelo": "Casa Ceiba",
       "precio": 2602050,
       "valor_avaluo": 3230000,
-      "metros_construccion": 120.0,
-      "metros_terreno": 90.0,
+      "metros_construccion": 120,
+      "metros_terreno": 90,
       "levels": [
         {
           "nivel": 1,
@@ -147,7 +147,7 @@
       "precio": 2664750,
       "valor_avaluo": 3300000,
       "metros_construccion": 116.04,
-      "metros_terreno": 120.0,
+      "metros_terreno": 120,
       "levels": [
         {
           "nivel": 1,
@@ -181,7 +181,7 @@
       "precio": 3161125,
       "valor_avaluo": 3850000,
       "metros_construccion": 157.2,
-      "metros_terreno": 120.0,
+      "metros_terreno": 120,
       "levels": [
         {
           "nivel": 1,
@@ -217,7 +217,7 @@
       "precio": 4294950,
       "valor_avaluo": 5350000,
       "metros_construccion": 191.7,
-      "metros_terreno": 150.0,
+      "metros_terreno": 150,
       "levels": [
         {
           "nivel": 1,
@@ -258,7 +258,7 @@
       "precio": 4436025,
       "valor_avaluo": 5820000,
       "metros_construccion": 200.2,
-      "metros_terreno": 150.0,
+      "metros_terreno": 150,
       "levels": [
         {
           "nivel": 1,
@@ -301,7 +301,7 @@
       "precio": 4446997.5,
       "valor_avaluo": 5980000,
       "metros_construccion": 194.8,
-      "metros_terreno": 120.0,
+      "metros_terreno": 120,
       "levels": [
         {
           "nivel": 1,
@@ -347,7 +347,7 @@
       "precio": 4049375,
       "valor_avaluo": 4490000,
       "metros_construccion": 156.7,
-      "metros_terreno": 120.0,
+      "metros_terreno": 120,
       "levels": [
         {
           "nivel": 1,
@@ -374,6 +374,40 @@
         "/larioja2/Casa Noni Elite/2.webp",
         "/larioja2/Casa Noni Elite/4.webp",
         "/larioja2/Casa Noni Elite/7.webp"
+      ]
+    },
+    {
+      "id": "lirios2-capua",
+      "development": "Lirios Residencial 2",
+      "status": "Preventa 2026",
+      "nombre_modelo": "Departamento Capua",
+      "precio": 1990000,
+      "valor_avaluo": 2700000,
+      "precio_variable": true,
+      "metros_construccion": 85.34,
+      "metros_terreno": null,
+      "levels": [
+        {
+          "nivel": 1,
+          "desc": "Estacionamiento 2 autos, Área de lavado, Sala, Comedor, Cocina, Baño completo, Recámara principal con closet y baño completo, 2 Recámaras secundarias con closet"
+        }
+      ],
+      "amenidades_key": [
+        "3 Recámaras",
+        "2 Baños",
+        "Smart Home Ready",
+        "Estacionamiento 2 autos"
+      ],
+      "url_recorrido_virtual": "https://app.lapentor.com/sphere/capua",
+      "images": [
+        "/lirios/capua/1.webp",
+        "/lirios/capua/2.webp",
+        "/lirios/capua/3.webp",
+        "/lirios/capua/4.webp",
+        "/lirios/capua/5.webp",
+        "/lirios/capua/6.webp",
+        "/lirios/capua/7.webp",
+        "/lirios/capua/8.webp"
       ]
     },
     {

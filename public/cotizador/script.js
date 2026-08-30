@@ -423,7 +423,12 @@ document.addEventListener("DOMContentLoaded", function () {
             
             if (!seleccion) return;
             
-            const [modelo, planta] = seleccion.split("-");
+            // El separador es el ULTIMO guion: la clave del modelo puede traer
+            // uno dentro (los edificios del Capua de Lirios son "P-4" y "L-1"),
+            // pero la planta nunca lo trae — es "PB", "1", "2" o "3".
+            const corte = seleccion.lastIndexOf("-");
+            const modelo = seleccion.slice(0, corte);
+            const planta = seleccion.slice(corte + 1);
             const desarrolloActual = azularSelect.value;
             const catalogoActivo = desarrolloActual === "Lirios2-Depas"
                 ? datosDepartamentosLirios2
