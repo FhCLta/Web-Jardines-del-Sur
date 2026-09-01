@@ -17,6 +17,7 @@ import { type InventoryProperty, getModelType } from "./model-utils";
  *   - Vale para TODAS las viviendas     → COMUN
  *   - Todas las casas / todos los depas → POR_TIPO
  *   - Un modelo concreto                → POR_MODELO
+ *   - Lo que un desarrollo NO trae      → NO_APLICA
  *
  * TODO el equipamiento vive en este archivo, en uno de los tres. Que no se
  * reparta entre aquí e inventory.json: si estuviera en dos sitios habría que
@@ -64,16 +65,51 @@ const POR_MODELO: Record<string, string[]> = {
 };
 
 /**
+ * Lo que un desarrollo NO trae, aunque por COMUN o POR_TIPO le tocaría.
+ *
+ * Existe porque los cajones de arriba solo saben SUMAR, y a veces la regla real
+ * es una resta: La Rioja 2 no lleva boiler, aunque las otras once viviendas sí.
+ * Sacar el boiler de COMUN para repetirlo en los demás sitios habría sido peor
+ * —seis renglones copiados en vez de uno— y además esconde la excepción, que es
+ * justo lo que hay que poder ver de un vistazo.
+ */
+const NO_APLICA: Record<string, string[]> = {
+  "La Rioja 2": ["Boiler (sin instalar)"],
+};
+
+// Guarda de integridad. Una exclusión que no coincide con nada NO HACE NADA, y
+// nadie se entera: si alguien reescribe el texto en COMUN y no aquí, el boiler
+// reaparece en La Rioja en silencio. Preferimos que el build reviente.
+{
+  const universo = [
+    ...COMUN,
+    ...POR_TIPO.Casa,
+    ...POR_TIPO.Departamento,
+    ...Object.values(POR_MODELO).flat(),
+  ];
+  for (const [dev, quitar] of Object.entries(NO_APLICA)) {
+    for (const item of quitar) {
+      if (!universo.includes(item)) {
+        throw new Error(
+          `_lib/equipamiento.ts: "${dev}" excluye "${item}", que no existe en ninguna lista. ¿Se cambió el texto en COMUN, POR_TIPO o POR_MODELO?`
+        );
+      }
+    }
+  }
+}
+
+/**
  * Equipamiento de un modelo, ya resuelto: lo común, luego lo de su tipo, luego
- * lo suyo. Devuelve [] si el modelo no es casa ni departamento, para que la
+ * lo suyo, y al final se le quita lo que su desarrollo no trae. Devuelve [] si el modelo no es casa ni departamento, para que la
  * ficha simplemente no pinte la sección en vez de inventarse una lista.
  */
 export function getEquipamiento(property: InventoryProperty): string[] {
   const tipo = getModelType(property.nombre_modelo);
   if (!tipo) return [];
+  const quitar = NO_APLICA[property.development] ?? [];
   return [
     ...COMUN,
     ...POR_TIPO[tipo],
     ...(POR_MODELO[property.id] ?? []),
-  ];
+  ].filter((item) => !quitar.includes(item));
 }
