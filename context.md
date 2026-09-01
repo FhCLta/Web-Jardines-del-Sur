@@ -1,5 +1,72 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
+
+> **✅ COMPLETADO sesiones 51-52 (30 ago – 1 sept 2026) — CAPUA EN LIRIOS, EQUIPAMIENTO EN LAS FICHAS, TÍTULOS DE PRECIOS SIN AÑO. Todo desplegado y verificado en producción.**
+>
+> **1. Departamento Capua en Lirios Residencial 2 — modelo nuevo, de cero.**
+> Lirios pasa de 1 a 2 modelos y su "desde" baja de $2,248,750 a **$1,990,000**.
+> 8 fotos reales del depa muestra (de 16 que mandó) recortadas a webp en
+> `public/lirios/capua/`; la primera es horizontal a propósito porque es la que
+> sale al compartir. **Se dejó FUERA el render `Depa Capua 4k_.jpg`**: es un
+> edificio gris al atardecer y toda la arquitectura de Lirios es blanca — si es
+> de otro desarrollo, mentiría. Pendiente de que Florencio confirme.
+>
+> **⭐ El Capua de Lirios trae una dimensión que el sitio no conocía: EDIFICIO.**
+> Se vende por edificio (P-4 y L-1), no por vista. Mismo avalúo por nivel y
+> distinto descuento — el L-1 sale $40,000 más barato en los cuatro niveles.
+> Eso obligó a generalizar las tablas con un **eje único de variantes**
+> (`ejeDeVariantes` en `lib/precios.ts`): cada modelo se parte por vista *o* por
+> edificio. Sin eso, la tabla por niveles agrupaba por nivel y pintaba la PRIMERA
+> fila de cada uno → **los cuatro precios del segundo edificio habrían
+> desaparecido en silencio.**
+>
+> La ficha publica la variante MÁS BARATA ($1,990,000, 3er nivel del L-1) porque
+> el hero dice "desde" y ese rótulo solo es cierto si no hay nada por debajo.
+> El Cedro Plus de Lirios ya coincidía con la hoja de agosto: no se tocó.
+>
+> **Cotizador:** Lirios pasó de 4 a 12 opciones. ⚠️ Había una mina: el listener
+> partía la opción por el PRIMER guion y "CAPUA P-4" trae uno dentro → habría
+> leído el modelo como "CAPUA P". Ahora parte por el ÚLTIMO guion.
+>
+> **2. Sección "Distribución y equipamiento" en las 12 fichas.**
+> Bloque nuevo debajo de los espacios. Vive en `_lib/equipamiento.ts`, con cuatro
+> cajones — tres que suman y uno que resta:
+> `COMUN` (las 12) · `POR_TIPO` (casas/departamentos) · `POR_MODELO` (id del
+> inventario) · `NO_APLICA` (lo que un desarrollo NO trae).
+> El cuarto nació porque **La Rioja 2 no lleva boiler** y las otras once sí.
+> Lleva **guarda de integridad**: si una exclusión no coincide con ningún texto,
+> el build REVIENTA — sin eso, el día que alguien reescriba "Boiler (sin
+> instalar)" en COMUN, el boiler vuelve a La Rioja calladito.
+>
+> ⚠️ NO confundir con el `equipment` de `dev-content.ts`, que es del DESARROLLO
+> (caseta, macrocisterna, cerco eléctrico). Aquello es del fraccionamiento.
+>
+> **3. Títulos de las tres páginas de precios: `Precios en <desarrollo>`, SIN año.**
+> Decisión de Florencio. El "2026" llevaba puesto desde el 24 ago y **nunca se
+> pudo medir**: entró en el MISMO commit que movió las páginas de `/precios/<dev>`
+> a `/<dev>/precios` — el mismo patrón que ya costó dos meses de diagnóstico el
+> 20 jun. Y en enero un año viejo pesa en contra. Los tres quedaron más cortos
+> (51, 43 y 53 caracteres). El H1 sigue diciendo "Precios de …".
+>
+> **4. El H1 de las fichas ahora nombra el desarrollo** (§4 de
+> `jds7-lanzamiento.md`). Decía solo "Modelo Capua", idéntico en los dos
+> desarrollos; ya pasaba con Cedro Plus y Noni. Ahora "Modelo Capua **en Lirios
+> Residencial 2**", en renglón aparte y en dorado.
+>
+> **5. Encontrado de paso, NO corregido (decisión de precios, toca a Florencio):**
+> la ficha del **Cedro Plus de Jardines del Sur 6** anuncia *"desde $2,247,700"*
+> pero su propia tabla, en la misma página, muestra uno en **$2,072,700** (nivel
+> 2, vista al estacionamiento). El "desde" se contradice solo. Se arregla moviendo
+> cuál variante alimenta la web.
+>
+> **6. También encontrado:** el `ogImage` de Lirios apunta a
+> `/jardines/Modelo Cedro Plus/1.webp` — una foto REAL de un edificio de Jardines
+> del Sur 6 representando a Lirios al compartir. Se dejó porque cambiarlo es
+> canjear una foto real por un render, y esa es decisión suya.
+>
+> **7. Google Ads:** reestructura a 3 grupos y el hallazgo de los sitelinks.
+> Todo el detalle en `google-ads.md` **SESIÓN 33** — no se duplica aquí.
+
 > **📊 ANÁLISIS SEO POST-MIGRACIÓN (12 ago 2026) — Florencio dudaba si cambiar de dominio fue mala idea. LOS DATOS DICEN QUE NO. Conclusión: NO mover el dominio.**
 >
 > **Contexto:** sentía que el dominio viejo (`jardinesdelsurcancun.mx`) rendía mejor — "de aquel me escribieron clientes listos para comprar y de aquí no tanto, son más curiosos". Se compararon los dos Search Console con la misma ventana de 3 meses.

@@ -1606,3 +1606,144 @@ Verificado contra **producción**, mandando eventos reales al endpoint:
 - El error tarda **hasta 3 días** en desaparecer del panel aunque el arreglo ya
   esté arriba: Meta muestra lo detectado en las últimas 72 horas. No alarmarse ni
   "volver a arreglarlo" en ese plazo.
+
+---
+
+## 🏗️ SESIÓN 33 — REESTRUCTURA: 3 grupos por desarrollo + los sitelinks estaban TODOS en campaña (1 sept 2026)
+
+Sesión guiada con Florencio en la cuenta, con el **Informe de campaña 12 may – 30 ago** en mano.
+
+### A) El dato que el promedio escondía
+
+El informe dice CPA **$71.23** en todo el periodo. Partiendo contra lo ya
+registrado (12 may–17 jul: 67 conv, $6,725.79), el tramo reciente sale así:
+
+| Tramo | Conv/día | CPA |
+|---|---|---|
+| 12 may – 1 jun | 0.52 | $92.11 |
+| 18 jun – 17 jul | 1.00 | $122.31 |
+| **18 jul – 30 ago** | **2.16** | **$50.67** |
+
+`162 − 67 = 95 conv` · `$11,539.75 − $6,725.79 = $4,813.96` · `÷ 95 = $50.67`
+
+**La poda del 18 jul funcionó mucho mejor de lo pronosticado** (se esperaba
+$95-105). Tasa de conversión reciente ~14.5% (vs 10.31% del periodo completo):
+la poda quitó clics basura, no solo gasto.
+
+⚠️ Ajuste honesto: Google atribuye hasta 30 días después, así que la cifra de
+julio pudo crecer. Eso subiría algo el $50.67; la dirección no cambia.
+
+### B) ⭐ Reestructura a 3 grupos, uno por desarrollo
+
+| Grupo | Qué se hizo |
+|---|---|
+| **Jardines del Sur 6** | Era "Grupo de anuncios 1". Renombrado y enfocado. Conserva historial y Quality Score — por eso NO se creó uno nuevo. |
+| **La Rioja 2 - Premium** | Ya existía. Se le agregaron sus sitelinks propios y título con precio. |
+| **Lirios Residencial 2** | Creado de cero. |
+
+Palabras de `lirios` sacadas del grupo de Jardines (estaban canibalizando:
+"lirios residencial" y "lirios residencial 2" SÍ se buscan y las atendía Jardines).
+
+**Razón de fondo:** el presupuesto es de la CAMPAÑA y los grupos lo comparten.
+Más grupos no gasta más — sube el Nivel de Calidad y **baja el CPC**. Evidencia
+de la propia cuenta: las palabras de La Rioja dentro del grupo general gastaron
+$100.21 con CERO conversiones; en su grupo propio convierten a $95-146.
+
+### C) 🐛 EL HALLAZGO: todos los sitelinks estaban a nivel CAMPAÑA
+
+Los "sitelinks a nivel de grupo de La Rioja" de la sesión 31 **nunca quedaron a
+nivel de grupo**. Estaban en campaña, igual que todos los demás.
+
+Síntoma visible: el anuncio de Jardines del Sur 6 decía "Casas desde $2.22M" y
+debajo ofrecía Casa Fresno Elite ($4.3M), Casa Noni Elite ($4.4M) y Casa Modelo
+Álamo — **casas de La Rioja**. El anuncio se contradecía solo.
+
+**La regla que explica todo:** los recursos se resuelven por el nivel MÁS
+ESPECÍFICO, y **se sustituyen, no se suman**. Si el grupo tiene los suyos, los
+de campaña no salen ahí.
+
+**Trampa de la interfaz:** desde el editor del anuncio, la sección "Vínculos a
+sitios" guarda a nivel CAMPAÑA. Para que caigan en el grupo hay que **entrar al
+grupo primero** (Grupos de anuncios → clic en el nombre) y agregarlos desde
+adentro. El nivel lo hereda de dónde estés parado.
+
+**Estado final:** 15 asociaciones. 1 en campaña (Informes por WhatsApp, como red
+de seguridad) y el resto repartidas por grupo.
+
+⚠️ Consecuencia que hay que recordar: como los tres grupos ya tienen los suyos,
+**los de campaña ya no salen en ninguno**. Los universalmente útiles (WhatsApp,
+Calculadora) hay que duplicarlos DENTRO de cada grupo, no dejarlos solo arriba.
+
+### D) Copy: el precio que era falso
+
+La receta vieja de Jardines del Sur 6 anunciaba **"Casas desde $1.77M"**. Esa
+cifra es del **departamento Capua** ($1,758,830). La casa más barata es
+Flamboyán a **$2,225,850**. Casi medio millón de diferencia.
+
+Corregido separando las dos cifras: *departamentos desde $1.75M* / *casas desde
+$2.22M*. Las dos ciertas, verificadas contra `data/inventory.json`.
+
+También pendientes de quitar en la cuenta: título "Depas Jardines del Sur 6"
+(abreviatura prohibida) y "Precios desde $1.8 MXN" (le falta la M).
+
+⚠️ **"Cancha de Pádel" sale en el anuncio de Jardines del Sur 6 y ese desarrollo
+NO la tiene** (la tienen La Rioja y Lirios). Viene del fragmento estructurado a
+nivel campaña. Pendiente: fragmento propio de grupo.
+
+### E) Auditoría de conversiones — sana
+
+`WhatsApp Click`: Activa · Principal · recuento "Una" · ventana 30 días ·
+incluida en objetivos de cuenta · **165 conv**. Cuadra con las 162 de la campaña.
+
+**Falsa alarma descartada:** los números grandes de la pantalla de objetivos
+—463 "Other engagements", 191 "Directions", 38 "Store visits", 14 "Website
+visits"— dicen **No** en "Incluida en los objetivos a nivel de la cuenta". NO
+guían la puja. Por eso el total dice 880 y la campaña cuenta 162.
+
+Menores, para después (NO ahora, hay reaprendizaje): las dos de YouTube están
+como principales en cero — pasarlas a secundarias. Y vigilar "Conversation
+started" por si empieza a duplicar con WhatsApp Click.
+
+### F) Trampas rechazadas en la sesión
+
+1. **"Establezca un ROAS objetivo" (+5.5%)** — la recomendación destacada de
+   Google. Rechazada por tres razones: (a) el valor de conversión son **$500
+   simbólicos**, no dinero, así que el ROAS 6.93 es ficción; (b) un tROAS
+   **FRENA el gasto** cuando predice que no alcanza el objetivo — lo contrario
+   de subir presupuesto para ganar volumen; (c) cambiar la puja en pleno
+   reaprendizaje reinicia todo.
+2. **Concordancia amplia (+13.4%)**, dos veces en pantalla.
+3. **Campaña Máximo Rendimiento (+9.2%)**.
+4. **Fijar títulos** (lo sugirió Gemini, no Google): baja la efectividad del
+   anuncio y con ella el CTR de 11.74%, que es el mejor activo de la cuenta. El
+   problema que quería resolver —títulos discordes— solo existía en el grupo
+   general que mezclaba desarrollos: **la cura es el grupo, no el alfiler**.
+
+Nivel de optimización bajó de 75.02 a 69.5% al rechazarlas. Es lo esperado: mide
+cuántas recomendaciones aceptas, no qué tan buena es la cuenta.
+
+### G) Presupuesto → $200/día (decisión de Florencio)
+
+⚠️ **Deroga la regla vieja de "$150 TOPE — no subir"**, que estaba atada al
+crédito de $7,000 (canjeado el 23 jul). El informe además mostraba **$100/día**,
+no $150.
+
+Justificación: CPA bajo y estable 6 semanas + campaña "limitada por presupuesto".
+Aritmética: `$50.67 CPA ÷ $7.35 CPC = 6.9 clics/conv`; `4 conv/día × 6.9 × $7.35
+= $203/día`. La meta de Florencio (3-4 leads/día a ~$50) es consistente **si el
+CPC y la tasa de conversión aguantan**.
+
+Qué esperar: 7-14 días de reaprendizaje, CPA subiendo hacia $70-90. Si se pasa de
+$110 sostenido a las 3 semanas, regresar a $150.
+
+⏳ Pendiente de pedir: **% de impresiones perdidas por presupuesto**. Es el número
+que dice si de verdad hay demanda esperando o solo se encarecerá lo mismo.
+
+### ⏳ Pendientes
+
+1. Fragmento estructurado por grupo (quitar el pádel de Jardines del Sur 6).
+2. Quitar los dos títulos malos de Jardines ("Depas…", "Precios desde $1.8 MXN").
+3. Duplicar WhatsApp y Calculadora dentro de La Rioja y Lirios.
+4. **Promociones de agosto vencidas** (31 ago) y aún publicadas — el cotizador
+   todavía puede cotizar el Noni Elite con los $50,000 que ya no existen.
+5. A un mes: las dos conversiones de YouTube → secundarias.
