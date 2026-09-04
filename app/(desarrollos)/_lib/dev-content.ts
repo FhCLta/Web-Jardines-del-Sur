@@ -93,7 +93,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · agosto 2026",
+      updatedLabel: "Promociones vigentes · septiembre 2026",
       nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y al firmar tu expediente de venta dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
       items: [
         {
@@ -102,14 +102,14 @@ export const DEVS: Record<DevSlug, DevContent> = {
           ubicaciones:
             "Jardines del Sur 6 · Ocelote N, O, P y Q · Antílope N, O, P y Q",
           beneficios: ["2 minisplits de 12,000 BTU"],
-          vigencia: "31 de agosto de 2026",
+          vigencia: "30 de septiembre de 2026",
         },
         {
           modelo: "Modelo Noni",
           modeloSlug: "casa-noni",
           ubicaciones: "Jardines del Sur 6 · Jabalí Mz 30 L14",
           beneficios: ["2 minisplits de 12,000 BTU"],
-          vigencia: "31 de agosto de 2026",
+          vigencia: "30 de septiembre de 2026",
         },
       ],
     },
@@ -223,16 +223,9 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · agosto 2026",
+      updatedLabel: "Promociones vigentes · septiembre 2026",
       nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y al firmar tu expediente de venta dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
       items: [
-        {
-          modelo: "Casa Modelo Álamo",
-          modeloSlug: "casa-modelo-alamo",
-          ubicaciones: "La Rioja 2 · Osos casa 15",
-          beneficios: ["Paquete de paneles"],
-          vigencia: "31 de agosto de 2026",
-        },
         {
           modelo: "Casa Noni Elite",
           modeloSlug: "casa-noni-elite",
@@ -242,7 +235,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
             "1 minisplit de 18,000 BTU",
             "2 minisplits de 12,000 BTU",
           ],
-          vigencia: "31 de agosto de 2026",
+          vigencia: "30 de septiembre de 2026",
         },
       ],
     },

@@ -1747,3 +1747,111 @@ que dice si de verdad hay demanda esperando o solo se encarecerá lo mismo.
 4. **Promociones de agosto vencidas** (31 ago) y aún publicadas — el cotizador
    todavía puede cotizar el Noni Elite con los $50,000 que ya no existen.
 5. A un mes: las dos conversiones de YouTube → secundarias.
+
+---
+
+## 🤖 SESIÓN 34 — REUNIÓN CON EL EXPERTO DE GOOGLE: 6 cambios aplicados, experimento de 14 días (4 sept 2026)
+
+Florencio tuvo reunión con **Santiago Bejarano**, experto asignado por Google, y
+**aplicó todo lo que le recomendó**. Correo de resumen recibido el 4 sept 6:00 am.
+
+**El motivo que dio Florencio en la reunión:** *"últimamente me estaba llegando
+puro cliente desperfilado y brokers que no me sirven."* Problema real; ver §D.
+
+### A) Lo que se cambió
+
+| Cambio | Veredicto | Por qué |
+|---|---|---|
+| Maximizar valor → **Maximizar Conversiones** | ✅ **Bueno** | El valor eran $500 simbólicos; "maximizar valor" perseguía una ficción. Ahora persigue conversaciones. **Resuelve solo el problema del ROAS falso.** |
+| Objetivos: **solo WhatsApp**, fuera llamadas | ✅ Bueno | Concentra la optimización en el único canal que vende. |
+| Google Business **desconectado** | ✅ Bueno | Evita atribución cruzada con perfiles duplicados. |
+| Geografía → **Presencia o interés** | ⚠️ A prueba | Puede traer compradores de CDMX/Monterrey (mercado real) o turistas soñando. Se sabe mirando de dónde vienen los leads. |
+| **Idioma inglés** agregado | ⚠️ A prueba | Anuncios, sitio y WhatsApp son en español. El clic se paga aunque no entienda al llegar. |
+| **Concordancia amplia** en las de mejor rendimiento | 🔴 Riesgo alto | En mayo se comió el **37% del presupuesto** con cero conversiones; arreglarlo bajó el CPA de $160 a $101. |
+| **IA Max** activado | 🔴 Riesgo alto | Amplía segmentación **y puede reescribir títulos** — ahí puede aparecer un precio mal atribuido. |
+
+### B) ⭐ El dato que corrige la razón que le dieron
+
+La justificación para la amplia fue *"por si escriben mal en el buscador"*.
+**Eso ya lo cubría la concordancia exacta.** Desde 2019, `[jardines del sur 6]`
+atrapa también errores de ortografía, singulares/plurales, acentos, abreviaturas
+y palabras reordenadas — Google lo llama **variantes cercanas**.
+
+La amplia hace algo distinto: abre a búsquedas con **significado parecido**. De
+ahí salían los clics de "casas baratas", "renta" e "inmobiliarias" ya podados.
+
+**No se re-litigó.** Florencio decidió probar el plan completo y leer el
+resultado limpio. Es una decisión defendible: además está corriendo con el
+crédito publicitario, así que el experimento sale barato.
+
+### C) Lo único que SÍ se hizo aparte: negativas de brokers
+
+Agregar negativas **no reinicia el aprendizaje**, y el propio Santiago lo pidió
+por escrito ("Acción Requerida"). Se agregaron **12 a nivel campaña, en frase**:
+
+```
+"broker" · "agente inmobiliario" · "asesor inmobiliario" · "bolsa inmobiliaria"
+"vacante" · "empleo" · "bolsa de trabajo" · "se solicita" · "reclutamiento"
+"curso" · "como vender" · "quiero vender"
+```
+
+Antes solo había `inmobiliaria`/`inmobiliarias`. **Se dejó FUERA `"comision"`** a
+propósito: quitaría brokers pero podría bloquear a un comprador real buscando
+"casas en cancún sin comisión". Agregar solo si aparece en términos de búsqueda.
+
+### D) ⚠️ El problema de calidad de leads probablemente NO es de Ads
+
+Diagnóstico ya documentado en `metricas-negocio.md` (23 ago): *"La caída de
+calidad de leads se explica por la página de JdS7: hoy es la consulta #1, pero
+JdS7 todavía no se vende."* Posición **1.32**, ~48% de CTR, **tráfico orgánico**.
+
+Ningún ajuste de la campaña toca eso.
+
+**Y el mecanismo de fondo:** la conversión es "dio clic a WhatsApp". Un broker
+cuenta igual que un comprador con crédito aprobado — los dos valen $500. Al
+poner Maximizar Conversiones se le pide a Google *"más gente como la que ya me
+escribió"*, y entre esa gente están los brokers. **El algoritmo solo puede
+buscar más de lo que se le dijo que era bueno, y nunca se le ha dicho cuáles
+fueron buenos.**
+
+⏳ Pregunta abierta a Florencio: **¿ya abrió la preventa de JdS7?** (estaba
+programada sep-oct 2026). Si abrió, ese tráfico "desperfilado" se vuelve vendible
+sin cambiar nada.
+
+### E) Vigilancia — línea base congelada
+
+Últimas 6 semanas antes de los cambios (18 jul – 30 ago, $100-150/día):
+
+| CPA | Conv/día | CTR | CPC | Tasa conv. |
+|---|---|---|---|---|
+| **$50.67** | **2.16** | **11.74%** | **$7.35** | **14.5%** |
+
+14 días × $200 = **$2,800** en juego (con crédito, en gran parte).
+
+**Alarmas fijadas de antemano:**
+
+| Señal | Cuándo | Qué apagar |
+|---|---|---|
+| CTR bajo 7% | día 5 | Negativas ya — la amplia trae ruido |
+| >30% del gasto en términos que no podrían comprar | cada 3 días | Negativas |
+| Un anuncio con precio que no cuadra | días 3 y 10 | **Apagar IA Max de inmediato — esto NO espera** |
+| CPA >$110 sostenido 5 días | tras día 14 | Quitar **amplia** primero |
+| <2.2 conv/día con $200 | día 14 | Revertir amplia e IA Max |
+
+⚠️ **Al revertir, un cambio a la vez.** Se movieron seis variables juntas más el
+presupuesto: si se deshace todo de golpe, otra vez no se sabrá cuál era.
+
+Mínimos reales para revisar los anuncios (IA Max puede reescribirlos):
+`JdS6 casas $2,225,850 / deptos $1,758,830` · `La Rioja $4,049,375` ·
+`Lirios $1,990,000`.
+
+### ⏳ Pendientes al cerrar los 14 días (~15-17 sept)
+
+1. **Subir las negativas de nivel GRUPO a nivel CAMPAÑA.** Hay 141 negativas y
+   varias (`alquilar`, `alquiler`, `altai`, `amalba`, `aqua`, `ara cancun`…)
+   están solo en el grupo de Jardines del Sur 6 → **La Rioja y Lirios están
+   descubiertos**. Venía pendiente desde julio; con tres grupos ya importa.
+2. Fragmento estructurado por grupo (quitar "Cancha de Pádel" de Jardines 6).
+3. Quitar los títulos "Depas Jardines del Sur 6" y "Precios desde $1.8 MXN".
+4. Las dos conversiones de YouTube → secundarias.
+5. Pedir el **% de impresiones perdidas por presupuesto**.
