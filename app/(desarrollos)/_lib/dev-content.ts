@@ -210,7 +210,12 @@ export const DEVS: Record<DevSlug, DevContent> = {
     name: "La Rioja 2",
     shortName: "La Rioja 2",
     metaTitle: "La Rioja 2 Cancún · Casas Residenciales desde $4.04M | Altta Homes",
-    seoTitleLead: "La Rioja 2 | Casas de Lujo en Cancún",
+    // "La Rioja 2 Residencial" y no "La Rioja Residencial 2": es como se nombra
+    // el desarrollo en el propio texto de esta página, y es la forma que la gente
+    // teclea de verdad — en los términos de búsqueda de Google Ads aparecen
+    // "la rioja 2 residencial" y "residencial la rioja". Se AGREGÓ la palabra,
+    // no se quitó ninguna: el título sigue siendo dueño de "la rioja 2".
+    seoTitleLead: "La Rioja 2 Residencial | Casas de Lujo en Cancún",
     metaDescription:
       "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 10 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",
