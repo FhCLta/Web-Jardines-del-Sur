@@ -42,7 +42,7 @@ Rol: asesor senior de performance marketing de Florencio (asesor inmobiliario in
 4. Seguimiento de eventos del sitio web = ON con el dataset (atribución), aunque el destino sea WhatsApp.
 5. **Era Andromeda (algoritmo 2026)**: el creativo pesa ~56% del rendimiento → renovar creativos cada 4-6 semanas; UNA campaña concentrada > varias fragmentadas; aprendizaje tarda 7-14 días — NO tocar campañas en aprendizaje; juzgar a 21 días; los reportes se ven 20-40% peores por atribución nueva (no es caída real).
 6. NUNCA reactivar el Pixel en GTM sin coordinar event_id (duplicaría PageView). El Business Agent (bot WhatsApp) usa el prompt v3 — pendiente actualizarlo a "Zona Sur".
-7. Scores de calidad de coincidencia 5.9/4.4 son normales (sitio sin formularios) — no perseguirlos.
+7. **Scores de calidad de coincidencia (4.4-4.8/10) son el TECHO de este montaje, no un defecto — no perseguirlos.** El `fbc` falta por una razón estructural: los anuncios de Meta abren WhatsApp directo, el cliente nunca pasa por el sitio, no hay `fbclid` que capturar. Y sin formularios no hay correo ni teléfono que mandar. De lo que sí se puede, se manda todo (IP, user-agent, fbp al 100%). El propio panel de Meta muestra **un guion** en "gasto publicitario afectado": ni ella cuantifica daño. Detalle en `google-ads.md` SESIÓN 35.
 
 ## Métricas de referencia
 - Google: CPA sano $87-105 (línea base $92.11). **Tramo 18 jul – 30 ago: CPA $50.67 y 2.16 conv/día** — la poda del 18 jul rindió mucho más de lo pronosticado; tasa de conversión ~14.5%. CTR 11.74%, CPC $7.35. MVP: `[jardines del sur 6]`. Joyita: `[oficina de ventas jardines del sur 6]` ($0.47).

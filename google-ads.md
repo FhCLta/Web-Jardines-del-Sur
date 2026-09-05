@@ -1855,3 +1855,62 @@ Mínimos reales para revisar los anuncios (IA Max puede reescribirlos):
 3. Quitar los títulos "Depas Jardines del Sur 6" y "Precios desde $1.8 MXN".
 4. Las dos conversiones de YouTube → secundarias.
 5. Pedir el **% de impresiones perdidas por presupuesto**.
+
+---
+
+## 📊 SESIÓN 35 — META: la puntuación 4.4/10 NO es un problema que resolver (5 sept 2026)
+
+Florencio trajo el panel de Events Manager preguntando qué tan grave era.
+**Respuesta: poco grave, y ya estaba decidido dos veces.** Se documenta para que
+no vuelva a salir la duda.
+
+### Lo que muestra el panel
+
+| Evento | Calidad de coincidencias | Eventos |
+|---|---|---|
+| PageView | 4.8/10 | 3,516 |
+| Contactar | **4.4/10** | 150 |
+
+Meta insiste con *"Tu servidor no está enviando Identificador de clic (fbc)"* y
+ofrece su **generador de parámetros** (+0.7 de puntuación).
+
+### ⭐ Por qué falta el fbc — y por qué NO es un bug
+
+El código está bien. `MetaContactTracker.jsx` arma el `_fbc` a partir del
+`fbclid` de la URL, y `functions/index.js` lo manda con `exact(body.fbc, 1024)`,
+sin truncar (arreglado en la sesión 32).
+
+**La causa es estructural, no técnica: los anuncios de Meta abren WhatsApp
+directo y el cliente NUNCA pasa por el sitio.** Sin visita no hay `fbclid`, sin
+`fbclid` no hay `fbc`, y no hay nada que mandar. Y quien sí dispara "Contactar"
+en el sitio viene de Google, orgánico o directo — no trae clic de Meta que
+atribuir.
+
+### Por qué el 4.4 es el techo de este montaje, no un defecto
+
+Meta pide **correo** y **teléfono** para subir la puntuación. El sitio **no tiene
+formularios** (decisión tomada). De lo que sí se puede mandar, se manda todo:
+IP, user-agent y `fbp`, **los tres al 100%** según la propia tabla de Meta.
+
+**Y el dato que zanja la discusión: en "Gasto publicitario afectado" Meta muestra
+un guion.** Su propio panel no cuantifica ningún daño. Lo que ofrece es +0.7 de
+*puntuación*, no de pesos.
+
+### El generador de parámetros: DESCARTADO por tercera vez
+
+Evaluado el 18 jul y el 11 ago. La razón no cambia: es un complemento del **SDK
+de Meta**, o sea volver a cargar código de Meta en el sitio — justo lo que se
+quitó al pasar a CAPI propia, que ahorró **245 KB** de `fbevents.js`.
+
+Cambiar velocidad del sitio por 0.7 puntos de un tablero no sale a cuenta.
+**No re-litigar.**
+
+### ⏳ Lo único que SÍ lo subiría, y va después del CRM
+
+Cuando exista el registro de leads (ver `context.md`, sesión del 4 sept), habrá
+**teléfonos de clientes reales**. Ese teléfono, cifrado con hash, sí se le puede
+mandar a la CAPI y sube la puntuación de verdad.
+
+Sería el mismo dato con tres usos: ordena el seguimiento de Florencio, le dice a
+Google quién compró, y le dice a Meta a quién buscar. **Requiere el trabajo del
+CRM primero**, y hacerlo con cuidado de privacidad y consentimiento.
