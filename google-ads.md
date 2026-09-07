@@ -1914,3 +1914,100 @@ mandar a la CAPI y sube la puntuación de verdad.
 Sería el mismo dato con tres usos: ordena el seguimiento de Florencio, le dice a
 Google quién compró, y le dice a Meta a quién buscar. **Requiere el trabajo del
 CRM primero**, y hacerlo con cuidado de privacidad y consentimiento.
+
+---
+
+## 🔍 SESIÓN 36 — META: el aviso de `user_data`, y confirmación de que el Píxel SIGUE PAUSADO (6 sept 2026)
+
+Continuación de la 35. Florencio trajo el aviso **"Envía los parámetros de datos
+de usuario que faltan"** (prioridad alta, 100% de eventos, 2 conjuntos afectados,
+detectado el 11 ago 2026). Se investigó a fondo. **Nada que arreglar en el
+código.**
+
+### A) El título engaña: el servidor SÍ manda user_data
+
+La propia carga de ejemplo de Meta lo prueba:
+
+```json
+"user_data": {
+  "client_ip_address": "…",  "client_user_agent": "…",
+  "fbp": "…",                "fbc": "…"
+}
+```
+
+Las cuatro claves llegan. **Lo que Meta pide es otra cosa**: un identificador de
+PERSONA — correo, teléfono, sexo, fecha de nacimiento, nombre, apellido, ciudad,
+estado o código postal. IP, navegador y `fbp` no le cuentan para esa verificación.
+
+**Y esos datos no existen en este embudo:** el sitio no tiene formularios, el
+visitante da clic y se va a WhatsApp. No es un olvido, es el diseño.
+
+### B) ⛔ Lo que se propuso y se DESCARTÓ: deducir ciudad/estado de la IP
+
+Técnicamente el aviso desaparecería mandando `ct`/`st` sacados de la IP.
+**No se hace, por dos razones:**
+
+1. **Sería falso.** Justo se abrió la segmentación a "presencia o interés" para
+   alcanzar gente FUERA de Cancún; mandar "Cancún, Quintana Roo" para todos es
+   mentirle a Meta sobre dónde está la gente.
+2. **Haría daño, no bien.** Meta usa esos datos para emparejar personas reales;
+   con ubicaciones inventadas empareja mal y EMPEORA la audiencia. Se cambiaría
+   un aviso amarillo por un problema de verdad.
+
+Es la regla de siempre: **un dato que no cuadra es peor que ningún dato.**
+
+### C) ✅ Confirmado en GTM: el Píxel sigue PAUSADO
+
+Revisado el contenedor `GTM-53BHDRWC`, versión 7 ("Pixel a CAPI server-side"):
+
+| Etiqueta | Activador | Estado |
+|---|---|---|
+| Etiqueta de Google AW-18157218280 | Initialization - All Pages | activa |
+| GA4 - Configuración | Initialization - All Pages | activa |
+| **Meta Pixel - Base Code** | All Pages | **⏸️ PAUSADA** (14 jul 2026) |
+| Vinculación de conversiones | Initialization - All Pages | activa |
+| WhatsApp Click | Click - WhatsApp wa.me | activa |
+
+Esto cierra tres dudas:
+
+- **No hay doble conteo ni segunda fuente.** Lo que Meta lista como "API de
+  conversiones, Píxel de Meta" es lo configurado históricamente en el conjunto de
+  datos, NO lo que dispara hoy.
+- Los campos raros del payload (`capi_param_builder_meta_data_internal`,
+  `primary_container_id`) **no vienen de este lado** — en el contenedor no hay
+  ninguna etiqueta de generador de parámetros. Son anotaciones internas de Meta.
+- Verificado además en el código: el sitio **no carga** `fbevents.js`. La única
+  mención de `fbq` en `MetaContactTracker.jsx` es defensiva (`if (typeof
+  window.fbq === "function")`), solo actúa si algo más ya lo cargó.
+
+### D) ⚠️ Por qué NO se despausa el Píxel (ahora con la prueba, no la sospecha)
+
+Su activador es **All Pages** → dispararía PageView en cada página. **El servidor
+ya manda PageView en cada página** (`MetaContactTracker.jsx` línea 102), y ese NO
+comparte `event_id`. Se duplicaría: los ~3,516 PageViews pasarían a ~7,000 falsos.
+
+**Contact sí está protegido**: el código manda el MISMO `eventId` al Píxel y a la
+CAPI, que es justo el mecanismo de deduplicación de Meta.
+
+**Orden correcto si algún día se prende:** (1) quitar el PageView del servidor,
+(2) publicar, (3) verificar que el conteo no se movió, (4) despausar la etiqueta.
+Nunca al revés. Y no durante un experimento en curso.
+
+### E) Contexto que cambió el diagnóstico
+
+Florencio aclaró que **los 2 conjuntos afectados SÍ mandan al sitio web** (no a
+WhatsApp directo). Eso es buena noticia: esa gente llega con `fbclid` en la URL,
+el código lo convierte en `_fbc` y se manda — **para el tráfico que de verdad
+importa de Meta, la atribución funciona**. El `fbc` aparecía presente en la carga
+de ejemplo.
+
+### Conclusión
+
+**Aviso archivado como "Ignorado" en Events Manager.** No se tapa un problema: se
+archiva una petición de datos que este negocio no recoge a propósito.
+
+⏳ **Lo único que lo resolvería de verdad — el TELÉFONO**, único campo de la lista
+de Meta que Florencio sí tiene (se lo deja cada persona que escribe por WhatsApp).
+Cifrado con hash y enviado desde el registro de leads. Es el mismo dato con tres
+usos: ordena su seguimiento, le dice a Google quién compró, y le dice a Meta a
+quién buscar. **Va después del CRM**, con cuidado de privacidad y consentimiento.
