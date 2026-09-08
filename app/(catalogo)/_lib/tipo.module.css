@@ -1,0 +1,154 @@
+/* Catálogo por TIPO de producto (todas las casas / todos los departamentos),
+   cruzando desarrollos. Es la vista "para ELEGIR": foto, metros y recámaras.
+   No confundir con /precios, que es la vista "para COMPARAR": tabla escaneable
+   sin fotos. Si algún día esta página se convierte en otra tabla de precios,
+   deja de tener razón de existir. */
+
+.hero {
+  background: linear-gradient(160deg, #0f1d33 0%, #16304f 60%, #0f1d33 100%);
+  color: #fff;
+  padding: 5rem 0 3.4rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-montserrat);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.3rem + 2.6vw, 3rem);
+  line-height: 1.08;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 46rem;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.62;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.rango {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.6rem;
+  margin-top: 1.6rem;
+  padding: 0.9rem 1.5rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0.9rem;
+}
+
+.rangoItem { display: flex; flex-direction: column; gap: 0.15rem; }
+.rangoItem span {
+  font-family: var(--font-montserrat);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.rangoItem strong {
+  font-size: 1.08rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.bloque { padding: 3.4rem 0; }
+.bloque:nth-of-type(even) { background: #f6f8fb; }
+
+.bloqueHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem 1.4rem;
+  margin: 0 0 1.8rem;
+}
+
+.bloqueHead h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1rem + 1.4vw, 1.9rem);
+  margin: 0;
+  color: var(--primary);
+}
+
+.bloqueLink {
+  font-family: var(--font-montserrat);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(209, 146, 0, 0.4);
+  padding-bottom: 2px;
+}
+.bloqueLink:hover { border-bottom-color: var(--accent-deep); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+}
+
+.item { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.fichaLink {
+  align-self: center;
+  font-family: var(--font-montserrat);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(209, 146, 0, 0.4);
+  padding-bottom: 2px;
+  text-align: center;
+}
+.fichaLink:hover { border-bottom-color: var(--accent-deep); }
+
+/* Lo que comparten todos — es el contenido que diferencia esta página de la
+   tabla de precios: aquí se explica QUÉ se compra, no cuánto cuesta. */
+.comunes { padding: 3.4rem 0 4.2rem; }
+.comunesHead { text-align: center; max-width: 44rem; margin: 0 auto 2rem; }
+.comunesHead h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1rem + 1.4vw, 1.9rem);
+  margin: 0 0 0.7rem;
+  color: var(--primary);
+}
+.comunesHead p { color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+.comunesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.comun {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.7rem;
+  padding: 1.1rem 1.2rem;
+}
+.comun strong { display: block; color: var(--primary); margin-bottom: 0.3rem; }
+.comun span { color: var(--text-secondary); font-size: 0.93rem; line-height: 1.5; }
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 2.4rem;
+}

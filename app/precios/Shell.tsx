@@ -46,6 +46,12 @@ export default function Shell({ children }: { children: React.ReactNode }) {
                 <a href="/precios">Precios</a>
               </li>
               <li>
+                <a href="/casas-en-cancun">Casas en Cancún</a>
+              </li>
+              <li>
+                <a href="/departamentos-en-cancun">Departamentos en Cancún</a>
+              </li>
+              <li>
                 <a href="/promociones">Promociones</a>
               </li>
               <li>

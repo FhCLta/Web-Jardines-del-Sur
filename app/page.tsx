@@ -242,6 +242,8 @@ export default async function Home() {
               <li><a href="/blog">Blog</a></li>
               <li><a href="#modelos">Modelos y Precios</a></li>
               <li><a href="/precios">Precios</a></li>
+              <li><a href="/casas-en-cancun">Casas en Cancún</a></li>
+              <li><a href="/departamentos-en-cancun">Departamentos en Cancún</a></li>
               <li><ContactNavBtn /></li>
             </ul>
           </div>

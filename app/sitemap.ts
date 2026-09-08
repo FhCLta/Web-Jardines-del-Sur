@@ -64,6 +64,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      // Catálogos por TIPO de producto, cruzando desarrollos. Prioridad 0.9
+      // como /precios y /promociones: son páginas de entrada, no fichas.
+      url: `${SITE_URL}/casas-en-cancun`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/departamentos-en-cancun`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/calculadora-hipotecaria`,
       lastModified,
       changeFrequency: 'monthly' as const,
