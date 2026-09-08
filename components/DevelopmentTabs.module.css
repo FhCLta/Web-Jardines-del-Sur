@@ -3,16 +3,25 @@
 }
 
 /* Selector segmentado premium para desarrollos */
+/* Una columna por desarrollo. Estaba fijo en 3 y al entrar Jardines del Sur 7
+   quedaban 3 arriba y 1 solo abajo. En celular no caben 4, así que se parte en
+   2x2 — una cuadrícula pareja se lee mejor que 3+1. */
 .devSelector {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
   margin: 0 auto 2.5rem;
   padding: 0.5rem;
   background: rgba(15, 23, 42, 0.04);
   border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: 1.1rem;
-  max-width: 720px;
+  max-width: 940px;
+}
+
+@media (max-width: 720px) {
+  .devSelector {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .devCard {

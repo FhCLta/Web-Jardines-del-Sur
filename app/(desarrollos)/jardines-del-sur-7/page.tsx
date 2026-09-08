@@ -269,7 +269,7 @@ export default function Page() {
             <Image
               src="/logos/jardines-7.webp"
               alt="Jardines del Sur 7 Residencial"
-              width={277}
+              width={336}
               height={128}
               priority
             />
