@@ -817,3 +817,47 @@
   background: rgba(255, 255, 255, 0.85);
   box-shadow: none;
 }
+
+/* ── Modelo anunciado sin precio ni fotos (Jardines del Sur 7) ─────────────
+   Ocupa el sitio de la foto. No es una foto ausente: es un espacio que dice,
+   con todas sus letras, que la información todavía no existe. */
+.pendingArt {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(140deg, #12243f 0%, #1d3a5f 55%, #12243f 100%);
+}
+
+/* Trama diagonal tenue: da textura sin competir con el letrero. */
+.pendingArt::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.05) 0 2px,
+    transparent 2px 16px
+  );
+}
+
+/* La banda transversal. */
+.pendingRibbon {
+  position: relative;
+  z-index: 1;
+  width: 150%;
+  padding: 0.6rem 0;
+  transform: rotate(-12deg);
+  text-align: center;
+  font-family: var(--font-montserrat);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #12243f;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.6);
+}

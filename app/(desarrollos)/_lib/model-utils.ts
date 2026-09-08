@@ -7,10 +7,20 @@ export type InventoryProperty = {
   development: string;
   status: string;
   nombre_modelo: string;
-  precio: number;
-  valor_avaluo?: number;
+  /**
+   * null solo en modelos anunciados sin precio (`precio_por_anunciar`). En
+   * todos los demas es obligatorio y `getPrecioPublicado` revienta si falta.
+   */
+  precio: number | null;
+  valor_avaluo?: number | null;
+  /**
+   * Modelo publicado ANTES de tener precio (Jardines del Sur 7 en preventa).
+   * Es una excepcion declarada a proposito: sin esta marca, un modelo sin
+   * precio revienta el build — que es justo lo que se quiere para los demas.
+   */
+  precio_por_anunciar?: boolean;
   precio_variable?: boolean;
-  metros_construccion: number;
+  metros_construccion: number | null;
   metros_construccion_variable?: boolean;
   metros_terreno: number | null;
   levels: { nivel: number; desc: string }[];
@@ -36,10 +46,13 @@ export function getInventory(): InventoryProperty[] {
   // los PRECIOS los manda data/precios.json, que es la misma fuente que come el
   // cotizador. Asi un cambio de precio se hace en un solo lugar y la web y la
   // cotizacion formal no pueden contradecirse. Ver lib/precios.ts.
-  return (data.inventory_stitch_2026 as InventoryProperty[]).map((p) => ({
-    ...p,
-    ...getPrecioPublicado(p.id),
-  }));
+  return (data.inventory_stitch_2026 as InventoryProperty[]).map((p) =>
+    // Los "por anunciar" NO pasan por getPrecioPublicado: esa funcion revienta
+    // a proposito cuando falta un precio, y aqui la ausencia es intencional.
+    p.precio_por_anunciar
+      ? { ...p, precio: null, valor_avaluo: null }
+      : { ...p, ...getPrecioPublicado(p.id) }
+  );
 }
 
 export function getPropertiesByDev(devName: string): InventoryProperty[] {
@@ -91,12 +104,23 @@ export function formatPriceShort(price: number): string {
   return `$${millions.toFixed(2)}M`;
 }
 
+/**
+ * Los precios publicables de una lista de modelos, ya sin los "por anunciar".
+ * Existe para no repetir el mismo filtro en las cuatro páginas de precios —y
+ * para que el compilador sepa que después de filtrar ya no hay nulos.
+ */
+export function preciosPublicados(props: InventoryProperty[]): number[] {
+  return props
+    .map((p) => p.precio)
+    .filter((n): n is number => n !== null && n > 0);
+}
+
 // Precio mínimo "desde" de un desarrollo, leído del inventario (fuente única).
 // Hace que los títulos SEO se actualicen solos al cambiar precios.
 export function getMinPriceByDev(devName: string): number | null {
   const prices = getPropertiesByDev(devName)
     .map((p) => p.precio)
-    .filter((p) => p > 0);
+    .filter((p): p is number => p !== null && p > 0);
   if (prices.length === 0) return null;
   return Math.min(...prices);
 }

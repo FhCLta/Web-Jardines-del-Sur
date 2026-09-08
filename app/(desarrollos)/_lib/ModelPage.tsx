@@ -254,8 +254,12 @@ export default async function ModelPage({
                     : "Precio con descuento"}
                 </span>
                 <span className={styles.heroPriceAmount}>
-                  ${property.precio.toLocaleString("es-MX")}{" "}
-                  <span className={styles.heroPriceCurrency}>MXN</span>
+                  {property.precio === null
+                    ? "Por anunciar"
+                    : `$${property.precio.toLocaleString("es-MX")}`}{" "}
+                  {property.precio !== null && (
+                    <span className={styles.heroPriceCurrency}>MXN</span>
+                  )}
                 </span>
                 {property.precio_variable && (
                   <span className={styles.heroPriceNote}>
@@ -273,10 +277,16 @@ export default async function ModelPage({
               </div>
             ) : (
               <div className={styles.heroPriceBlock}>
-                <span className={styles.heroPriceLabel}>Precio desde</span>
+                <span className={styles.heroPriceLabel}>
+                  {property.precio === null ? "Precio" : "Precio desde"}
+                </span>
                 <span className={styles.heroPriceAmount}>
-                  ${property.precio.toLocaleString("es-MX")}{" "}
-                  <span className={styles.heroPriceCurrency}>MXN</span>
+                  {property.precio === null
+                    ? "Por anunciar"
+                    : `$${property.precio.toLocaleString("es-MX")}`}{" "}
+                  {property.precio !== null && (
+                    <span className={styles.heroPriceCurrency}>MXN</span>
+                  )}
                 </span>
               </div>
             )}
@@ -507,9 +517,13 @@ export default async function ModelPage({
                     Desde{" "}
                     <span className={styles.priceDisplay}>
                       <span className={styles.priceAmount}>
-                        ${other.precio.toLocaleString("es-MX")}
+                        {other.precio === null
+                          ? "Por anunciar"
+                          : `$${other.precio.toLocaleString("es-MX")}`}
                       </span>
-                      <span className={styles.priceCurrency}>MXN</span>
+                      {other.precio !== null && (
+                        <span className={styles.priceCurrency}>MXN</span>
+                      )}
                     </span>
                   </span>
                 </a>

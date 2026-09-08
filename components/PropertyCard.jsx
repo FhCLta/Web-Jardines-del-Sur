@@ -82,12 +82,16 @@ export default function PropertyCard({ property }) {
     return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.`;
   };
 
-  const formatPrice = (price) => {
+  const formatPriceRaw = (price) => {
     if (!price) return 'Precio por definir';
     return `$${price.toLocaleString('es-MX')}`;
   };
 
   // Parsea amenidades clave para extraer recámaras y baños
+  // Un solo punto por donde pasa TODO precio de la tarjeta: si no hay, se dice.
+  const formatPrice = (price) =>
+    price === null || price === undefined ? "Por anunciar" : formatPriceRaw(price);
+
   const parseStat = (regex) => {
     const found = (property.amenidades_key || []).find((a) => regex.test(a));
     if (!found) return null;
@@ -110,6 +114,11 @@ export default function PropertyCard({ property }) {
   // que cambia es que NO se puede cotizar — igual que un descuento vencido.
   const agotado = property.status === "Agotado";
 
+  // Modelo anunciado sin precio ni fotos todavia (Jardines del Sur 7). La
+  // tarjeta se pinta igual que las demas, pero sin inventar lo que no hay:
+  // banda diagonal donde ira la foto y "Por anunciar" donde ira el precio.
+  const porAnunciar = property.precio === null;
+
   const hasDiscount = Boolean(property.valor_avaluo);
   const isDepartamento = modelType === "Departamento";
   const priceLabel = hasDiscount
@@ -121,13 +130,23 @@ export default function PropertyCard({ property }) {
   return (
     <>
       <div className={`${styles.card} glass`}>
-        <div className={styles.imageContainer} onClick={() => setIsLightboxOpen(true)}>
+        <div
+          className={styles.imageContainer}
+          onClick={porAnunciar ? undefined : () => setIsLightboxOpen(true)}
+          style={porAnunciar ? { cursor: "default" } : undefined}
+        >
+          {porAnunciar && (
+            <div className={styles.pendingArt} aria-hidden="true">
+              <span className={styles.pendingRibbon}>Por anunciar</span>
+            </div>
+          )}
           {agotado && (
             <span className={`${styles.statusBadge} ${styles.statusBadgeAgotado}`}>
               Agotado
             </span>
           )}
-          <div className={styles.imageBackground} />
+          {!porAnunciar && <div className={styles.imageBackground} />}
+          {!porAnunciar && (
           <div className={styles.imageForeground}>
             <Image
               src={displayImage}
@@ -138,7 +157,8 @@ export default function PropertyCard({ property }) {
               loading="lazy"
             />
           </div>
-          {images.length > 1 && (
+          )}
+          {!porAnunciar && images.length > 1 && (
             <>
               <button className={styles.carouselBtnLeft} onClick={handlePrev}>‹</button>
               <button className={styles.carouselBtnRight} onClick={handleNext}>›</button>
@@ -212,18 +232,20 @@ export default function PropertyCard({ property }) {
                 <span className={styles.statUnit}>m² terreno</span>
               </div>
             )}
-            <div className={styles.stat}>
-              <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M3 11l9-8 9 8M5 9.5V21h14V9.5" />
-              </svg>
-              <span className={styles.statValue}>
-                {property.metros_construccion_variable && (
-                  <span className={styles.statFrom}>desde </span>
-                )}
-                {property.metros_construccion}
-              </span>
-              <span className={styles.statUnit}>m² construcción</span>
-            </div>
+            {property.metros_construccion != null && (
+              <div className={styles.stat}>
+                <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M3 11l9-8 9 8M5 9.5V21h14V9.5" />
+                </svg>
+                <span className={styles.statValue}>
+                  {property.metros_construccion_variable && (
+                    <span className={styles.statFrom}>desde </span>
+                  )}
+                  {property.metros_construccion}
+                </span>
+                <span className={styles.statUnit}>m² construcción</span>
+              </div>
+            )}
             {recamaras && (
               <div className={styles.stat}>
                 <svg className={styles.statIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -244,6 +266,7 @@ export default function PropertyCard({ property }) {
             )}
           </div>
 
+          {property.levels?.length > 0 && (
           <div className={styles.levels}>
             <h4>Distribución:</h4>
             <ul>
@@ -252,37 +275,50 @@ export default function PropertyCard({ property }) {
               ))}
             </ul>
           </div>
+          )}
 
           <div className={styles.cardActions}>
-            <button 
-              className={`btn btn-secondary ${styles.actionBtn}`}
-              onClick={() => setIsModalOpen(true)}
-            >
-              Visita Virtual
-            </button>
+            {!porAnunciar && (
+              <button 
+                className={`btn btn-secondary ${styles.actionBtn}`}
+                onClick={() => setIsModalOpen(true)}
+              >
+                Visita Virtual
+              </button>
+            )}
             <a 
               className={`btn btn-primary ${styles.actionBtn}`}
               href={`https://wa.me/529982059044?text=${encodeURIComponent(
-                agotado
+                porAnunciar
+                  ? `Hola, me interesa ${property.nombre_modelo} en ${property.development}. ¿Me avisas cuando salgan precios y fechas de la preventa?`
+                  : agotado
                   ? `Hola, vi que ${property.nombre_modelo} está agotado en ${property.development}. ¿Qué opciones similares tienes disponibles?`
                   : getWhatsAppText()
               )}`}
               target="_blank"
               rel="noreferrer"
             >
-              {agotado ? "Ver opciones similares" : "Cotizar ahora"}
+              {porAnunciar
+                ? "Avísame cuando abra"
+                : agotado
+                ? "Ver opciones similares"
+                : "Cotizar ahora"}
             </a>
           </div>
 
           <div className={styles.legalLegend}>
-            <p><strong>*</strong> Precio no incluye gastos de escrituración</p>
+            {porAnunciar ? (
+              <p>Precios, metros y planos se anuncian al abrir la preventa.</p>
+            ) : (
+              <p><strong>*</strong> Precio no incluye gastos de escrituración</p>
+            )}
             {property.metros_terreno && (
               <p><strong>**</strong> Lote tipo. Esquina o excedente varía el costo.</p>
             )}
             {property.precio_variable && (
               <p><strong>**</strong> El precio puede variar según nivel y ubicación</p>
             )}
-            <p><strong>***</strong> Aplican restricciones</p>
+            {!porAnunciar && <p><strong>***</strong> Aplican restricciones</p>}
           </div>
         </div>
       </div>

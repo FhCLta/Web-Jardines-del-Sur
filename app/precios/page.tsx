@@ -8,6 +8,7 @@ import {
   getPropertiesByDev,
   formatPriceMxn,
   formatPriceShort,
+  preciosPublicados,
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
@@ -104,8 +105,9 @@ const FAQS = [
 
 export default function Page() {
   const todos = SLUGS.flatMap((s) => getPropertiesByDev(DEVS[s].name));
-  const desde = Math.min(...todos.map((p) => p.precio));
-  const hasta = Math.max(...todos.map((p) => p.precio));
+  const publicados = preciosPublicados(todos);
+  const desde = Math.min(...publicados);
+  const hasta = Math.max(...publicados);
 
   const waMsg =
     "Hola, vi la lista de precios en el sitio de Altta Homes Cancún y quiero información y disponibilidad.";
@@ -160,7 +162,7 @@ export default function Page() {
       {SLUGS.map((slug) => {
         const dev = DEVS[slug];
         const props = getPropertiesByDev(dev.name);
-        const min = Math.min(...props.map((p) => p.precio));
+        const min = Math.min(...preciosPublicados(props));
         return (
           <section key={slug} className={styles.bloque}>
             <div className="container">

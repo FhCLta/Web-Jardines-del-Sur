@@ -3,7 +3,7 @@ import TablaPrecios from "@/app/precios/TablaPrecios";
 import LogoDev from "@/app/precios/LogoDev";
 import styles from "@/app/precios/precios.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
-import { getPropertiesByDev, formatPriceMxn } from "./model-utils";
+import { getPropertiesByDev, formatPriceMxn, preciosPublicados } from "./model-utils";
 import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 
@@ -39,7 +39,7 @@ function fechaLarga(iso: string): string {
 export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
   const dev = DEVS[slug];
   const props = getPropertiesByDev(dev.name);
-  const desde = Math.min(...props.map((p) => p.precio));
+  const desde = Math.min(...preciosPublicados(props));
   const pageUrl = `${SITE_URL}/${slug}/precios`;
 
   const waMsg = `Hola, vi la lista de precios de ${dev.name} en el sitio y quiero información y disponibilidad.`;

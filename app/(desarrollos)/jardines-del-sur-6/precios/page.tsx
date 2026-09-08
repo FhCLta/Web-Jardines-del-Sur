@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import PreciosDevPage from "../../_lib/PreciosDevPage";
 import { DEVS } from "../../_lib/dev-content";
-import { getPropertiesByDev, formatPriceMxn } from "../../_lib/model-utils";
+import { getPropertiesByDev, formatPriceMxn, preciosPublicados } from "../../_lib/model-utils";
 
 const SLUG = "jardines-del-sur-6" as const;
 const dev = DEVS[SLUG];
 const props = getPropertiesByDev(dev.name);
-const desde = Math.min(...props.map((p) => p.precio));
+const desde = Math.min(...preciosPublicados(props));
 
 // ⚠️ Tope practico ~60 caracteres: Google corta ahi. El titulo ataca "precios
 // en <desarrollo>", que es una consulta distinta de "<desarrollo>" —la que ya

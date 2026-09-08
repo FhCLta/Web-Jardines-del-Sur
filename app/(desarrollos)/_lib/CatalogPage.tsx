@@ -79,7 +79,9 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
   );
 
   const count = properties.length;
-  const prices = properties.map((p) => p.precio).filter((n) => n > 0);
+  const prices = properties
+    .map((p) => p.precio)
+    .filter((n): n is number => n !== null && n > 0);
   const minPrice = prices.length ? Math.min(...prices) : null;
 
   const pageUrl = `${SITE_URL}/${dev.slug}/${kind}`;

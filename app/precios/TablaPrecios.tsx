@@ -72,9 +72,11 @@ function detalleVariante(
  */
 export default function TablaPrecios({ slug }: { slug: DevSlug }) {
   const dev = DEVS[slug];
+  // Esta tabla es una LISTA DE PRECIOS: un modelo sin precio todavia no tiene
+  // nada que mostrar aqui. Se filtra en vez de pintarlo con un hueco.
   const props = getPropertiesByDev(dev.name)
-    .slice()
-    .sort((a, b) => a.precio - b.precio);
+    .filter((p) => p.precio !== null)
+    .sort((a, b) => (a.precio ?? 0) - (b.precio ?? 0));
   if (props.length === 0) return null;
 
   // Casas y departamentos se listan por separado: son productos distintos y
@@ -273,7 +275,10 @@ function TablaDeGrupo({
         </thead>
         <tbody>
           {items.map((p) => {
-            const ahorro = p.valor_avaluo ? p.valor_avaluo - p.precio : null;
+            const ahorro =
+              p.valor_avaluo && p.precio !== null
+                ? p.valor_avaluo - p.precio
+                : null;
             const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
               getWhatsAppMessageForModel(p)
             )}`;

@@ -55,6 +55,12 @@ for (const e of todas) {
 }
 
 for (const modelo of inventario) {
+  // Modelos anunciados sin precio (preventa). No tienen fila en precios.json
+  // a proposito; exigirsela seria pedir un dato que todavia no existe.
+  if (modelo.precio_por_anunciar) {
+    ok(`${modelo.id.padEnd(22)} ${"(precio por anunciar)".padEnd(26)} sin precio, declarado`);
+    continue;
+  }
   const e = porId.get(modelo.id);
   if (!e) {
     mal(`"${modelo.id}" no tiene variante marcada con "web" en precios.json`);

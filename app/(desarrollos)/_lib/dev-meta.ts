@@ -29,7 +29,11 @@ export function buildCatalogMetadata(slug: DevSlug, kind: CatalogKind): Metadata
   );
   const count = props.length;
   const minPrice = props.length
-    ? Math.min(...props.map((p) => p.precio).filter((n) => n > 0))
+    ? Math.min(
+        ...props
+          .map((p) => p.precio)
+          .filter((n): n is number => n !== null && n > 0)
+      )
     : null;
   const nombres = props.map((p) => p.nombre_modelo.replace(/^(Casa|Departamento)\s+/i, ""));
   const listaNombres =

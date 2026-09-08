@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import PropertyCard from "@/components/PropertyCard";
+import { getPropertiesByDev } from "../_lib/model-utils";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
@@ -345,6 +347,30 @@ export default function Page() {
       </section>
 
       {/* ===== AVANCE DE OBRA ===== */}
+      {/* MODELOS — Tabachín y Noni, los dos con los que arranca la preventa.
+          Se publican SIN metros, distribución ni fotos: el mismo nombre no
+          garantiza el mismo producto entre etapas, así que copiar la ficha del
+          6 sería inventar datos del 7. La tarjeta lo dice con todas sus
+          letras en vez de dejar huecos. */}
+      <section id="modelos" className={styles.modelos}>
+        <div className="container">
+          <div className={styles.modelosHead}>
+            <span className={styles.modelosEyebrow}>Los primeros modelos</span>
+            <h2>Jardines del Sur 7 arranca con Tabachín y Noni</h2>
+            <p>
+              Precios, metros y planos se anuncian al abrir la preventa, a
+              finales de septiembre. Déjanos tu mensaje y te avisamos el día
+              que salgan, antes de que se publiquen.
+            </p>
+          </div>
+          <div className={styles.modelosGrid}>
+            {getPropertiesByDev("Jardines del Sur 7").map((p) => (
+              <PropertyCard key={p.id} property={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="avance-de-obra" className={styles.obra}>
         <div className="container">
           <div className={styles.obraHead}>

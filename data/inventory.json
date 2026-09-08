@@ -441,6 +441,36 @@
         "/lirios/cedro-plus/4.webp",
         "/lirios/cedro-plus/5.webp"
       ]
+    },
+    {
+      "id": "jds7-tabachin",
+      "development": "Jardines del Sur 7",
+      "status": "Próximamente",
+      "nombre_modelo": "Casa Tabachín",
+      "precio_por_anunciar": true,
+      "precio": null,
+      "valor_avaluo": null,
+      "metros_construccion": null,
+      "metros_terreno": null,
+      "levels": [],
+      "amenidades_key": [],
+      "url_recorrido_virtual": "",
+      "images": []
+    },
+    {
+      "id": "jds7-noni",
+      "development": "Jardines del Sur 7",
+      "status": "Próximamente",
+      "nombre_modelo": "Casa Noni",
+      "precio_por_anunciar": true,
+      "precio": null,
+      "valor_avaluo": null,
+      "metros_construccion": null,
+      "metros_terreno": null,
+      "levels": [],
+      "amenidades_key": [],
+      "url_recorrido_virtual": "",
+      "images": []
     }
   ]
 }
