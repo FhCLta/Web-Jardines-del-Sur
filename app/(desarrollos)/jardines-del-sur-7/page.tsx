@@ -261,6 +261,19 @@ export default function Page() {
           <div className={styles.heroOverlay} />
         </div>
         <div className={`container ${styles.heroInner}`}>
+          {/* El logo va sobre una placa blanca: el archivo no tiene fondo
+              transparente y su texto es azul marino, asi que puesto directo
+              sobre el hero oscuro no se leeria. La placa lo vuelve
+              deliberado en vez de un parche. */}
+          <span className={styles.logoPlate}>
+            <Image
+              src="/logos/jardines-7.webp"
+              alt="Jardines del Sur 7 Residencial"
+              width={277}
+              height={128}
+              priority
+            />
+          </span>
           <span className={styles.eyebrow}>
             <span className={styles.pulse} aria-hidden="true" />
             Próximamente · Zona Sur Cancún

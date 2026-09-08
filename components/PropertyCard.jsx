@@ -105,6 +105,11 @@ export default function PropertyCard({ property }) {
   // - Si tiene valor_avaluo (descuento aplicado) → "Precio con descuento"
   // - Si es Departamento → "Desde" (precio variable por unidad)
   // - Si es Casa sin avalúo → sin label (solo el precio)
+  // Un modelo agotado sigue publicado a proposito: su ficha conserva el valor
+  // SEO que ya gano y su precio es la referencia para la etapa siguiente. Lo
+  // que cambia es que NO se puede cotizar — igual que un descuento vencido.
+  const agotado = property.status === "Agotado";
+
   const hasDiscount = Boolean(property.valor_avaluo);
   const isDepartamento = modelType === "Departamento";
   const priceLabel = hasDiscount
@@ -117,6 +122,11 @@ export default function PropertyCard({ property }) {
     <>
       <div className={`${styles.card} glass`}>
         <div className={styles.imageContainer} onClick={() => setIsLightboxOpen(true)}>
+          {agotado && (
+            <span className={`${styles.statusBadge} ${styles.statusBadgeAgotado}`}>
+              Agotado
+            </span>
+          )}
           <div className={styles.imageBackground} />
           <div className={styles.imageForeground}>
             <Image
@@ -252,11 +262,15 @@ export default function PropertyCard({ property }) {
             </button>
             <a 
               className={`btn btn-primary ${styles.actionBtn}`}
-              href={`https://wa.me/529982059044?text=${encodeURIComponent(getWhatsAppText())}`}
+              href={`https://wa.me/529982059044?text=${encodeURIComponent(
+                agotado
+                  ? `Hola, vi que ${property.nombre_modelo} está agotado en ${property.development}. ¿Qué opciones similares tienes disponibles?`
+                  : getWhatsAppText()
+              )}`}
               target="_blank"
               rel="noreferrer"
             >
-              Cotizar ahora
+              {agotado ? "Ver opciones similares" : "Cotizar ahora"}
             </a>
           </div>
 

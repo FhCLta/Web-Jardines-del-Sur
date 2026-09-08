@@ -73,7 +73,15 @@ export default async function ModelPage({
   const tourUrl = getTourUrl(property.url_recorrido_virtual);
 
   const pageUrl = `${SITE_URL}/${dev.slug}/${modeloSlug}`;
-  const waMessage = getWhatsAppMessageForModel(property);
+
+  // Modelo agotado: la ficha se queda publicada —conserva el posicionamiento
+  // que ya gano y su precio sigue siendo la referencia de la etapa siguiente—
+  // pero deja de invitar a cotizar algo que ya no se puede vender.
+  const agotado = property.status === "Agotado";
+
+  const waMessage = agotado
+    ? `Hola, vi que ${property.nombre_modelo} está agotado en ${dev.name}. ¿Qué opciones similares tienes disponibles?`
+    : getWhatsAppMessageForModel(property);
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
   // Tabla de precios por nivel: solo los modelos de precio variable (hoy, los
@@ -169,7 +177,9 @@ export default async function ModelPage({
         name: property.nombre_modelo,
         price: property.precio,
         priceCurrency: "MXN",
-        availability: "https://schema.org/InStock",
+        availability: agotado
+          ? "https://schema.org/SoldOut"
+          : "https://schema.org/InStock",
         url: pageUrl,
         itemOffered: { "@id": `${pageUrl}#residence` },
         seller: { "@id": `${SITE_URL}/#business` },
@@ -210,6 +220,12 @@ export default async function ModelPage({
               <span className={styles.eyebrowSep} aria-hidden="true"> · </span>
               <span className={styles.eyebrowSub}>{eyebrowSub}</span>
             </span>
+
+            {agotado && (
+              <span className={styles.agotadoBadge}>
+                Agotado en {dev.name}
+              </span>
+            )}
 
             {/* ⚠️ El desarrollo va EXPLICITO en el H1 — §4 de
                 docs/jds7-lanzamiento.md. Los nombres de modelo SE REPITEN entre
@@ -272,7 +288,7 @@ export default async function ModelPage({
                 target="_blank"
                 rel="noreferrer"
               >
-                Cotizar este modelo
+                {agotado ? "Ver opciones similares" : "Cotizar este modelo"}
               </a>
               {tourUrl && (
                 <a
@@ -443,10 +459,15 @@ export default async function ModelPage({
         <div className="container">
           <div className={styles.ctaBlock}>
             <div className={styles.ctaBlockText}>
-              <h3>¿Te interesa {property.nombre_modelo}?</h3>
+              <h3>
+                {agotado
+                  ? `${property.nombre_modelo} está agotado en ${dev.name}`
+                  : `¿Te interesa ${property.nombre_modelo}?`}
+              </h3>
               <p>
-                Recibe disponibilidad actual, formas de pago y agenda de visita
-                directamente con un asesor de Altta Homes Cancún.
+                {agotado
+                  ? "Se vendieron todas las unidades de este modelo en este desarrollo. Escríbenos y te decimos qué modelos parecidos siguen disponibles y qué viene en las próximas etapas."
+                  : "Recibe disponibilidad actual, formas de pago y agenda de visita directamente con un asesor de Altta Homes Cancún."}
               </p>
             </div>
             <a
@@ -455,7 +476,7 @@ export default async function ModelPage({
               target="_blank"
               rel="noreferrer"
             >
-              Cotizar por WhatsApp
+              {agotado ? "Ver qué hay disponible" : "Cotizar por WhatsApp"}
             </a>
           </div>
         </div>

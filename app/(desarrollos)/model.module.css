@@ -944,3 +944,22 @@
     width: 100%;
   }
 }
+
+/* Insignia de agotado en el hero de la ficha. Gris a proposito: el dorado del
+   sitio celebra, y esto es una advertencia honesta que el cliente necesita
+   ANTES de encariñarse con el precio que viene debajo. */
+.agotadoBadge {
+  display: inline-block;
+  align-self: center;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-montserrat);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(107, 114, 128, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+}

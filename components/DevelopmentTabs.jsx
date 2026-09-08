@@ -6,6 +6,7 @@ import styles from './DevelopmentTabs.module.css';
 
 const SLUG_BY_DEV = {
   "Jardines del Sur 6": "jardines-del-sur-6",
+  "Jardines del Sur 7": "jardines-del-sur-7",
   "La Rioja 2": "la-rioja-2",
   "Lirios Residencial 2": "lirios-residencial-2",
 };
@@ -21,7 +22,16 @@ const parseHashSlug = () => {
 };
 
 export default function DevelopmentTabs({ inventoryData }) {
-  const developments = ["Jardines del Sur 6", "La Rioja 2", "Lirios Residencial 2"];
+  // Jardines del Sur 7 va SEGUNDO, junto a su hermano: la gente que llega
+  // buscando "jardines del sur" los compara entre si, y separarlos obliga a
+  // recorrer toda la fila. Todavia no tiene modelos cargados — el panel lo
+  // resuelve mostrando su estado de preventa en vez de un cero.
+  const developments = [
+    "Jardines del Sur 6",
+    "Jardines del Sur 7",
+    "La Rioja 2",
+    "Lirios Residencial 2",
+  ];
   const [activeTab, setActiveTab] = useState(developments[0]);
   const activeTabRef = useRef(activeTab);
   useEffect(() => {
@@ -61,6 +71,13 @@ export default function DevelopmentTabs({ inventoryData }) {
       tagline: "Casas y departamentos",
       short: "Jardines 6",
     },
+    "Jardines del Sur 7": {
+      logo: "/logos/jardines-7.webp",
+      logoW: 277,
+      logoH: 128,
+      tagline: "Nueva etapa",
+      short: "Jardines 7",
+    },
     "La Rioja 2": {
       logo: "/logos/la-rioja-2.webp",
       logoW: 190,
@@ -84,6 +101,7 @@ export default function DevelopmentTabs({ inventoryData }) {
   const minPrice = activePrices.length > 0 ? Math.min(...activePrices) : null;
 
   const totalAvailable = activeProperties.filter((property) => property.status !== 'Próximamente').length;
+  const enPreventa = activeProperties.length === 0;
 
   const formatPrice = (price) => {
     if (!price) return 'Precio por definir';
@@ -126,11 +144,11 @@ export default function DevelopmentTabs({ inventoryData }) {
           </div>
           <div className={styles.summaryCard}>
             <p>Precio desde</p>
-            <strong>{formatPrice(minPrice)}</strong>
+            <strong>{enPreventa ? "Por anunciar" : formatPrice(minPrice)}</strong>
           </div>
           <div className={styles.summaryCard}>
-            <p>Modelos activos</p>
-            <strong>{totalAvailable}</strong>
+            <p>{enPreventa ? "Estado" : "Modelos activos"}</p>
+            <strong>{enPreventa ? "Preventa" : totalAvailable}</strong>
           </div>
         </div>
 
@@ -141,7 +159,9 @@ export default function DevelopmentTabs({ inventoryData }) {
         </div>
         {activeProperties.length === 0 && (
           <div className={styles.emptyState}>
-            <p>Próximamente más modelos disponibles.</p>
+            <p>
+              Los modelos y precios de este desarrollo se anuncian próximamente.
+            </p>
           </div>
         )}
 

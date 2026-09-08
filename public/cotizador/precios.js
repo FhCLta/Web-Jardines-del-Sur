@@ -9,7 +9,6 @@ window.COTIZADOR_PRECIOS = {
       "modelos": [
         "FLAMBOYAN",
         "CEIBA",
-        "TABACHIN",
         "NONI"
       ],
       "precioTerrenoExcedente": 5750
@@ -51,19 +50,6 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 3230000,
       "valorAvaluo": 3230000,
       "bono": 627950,
-      "avaluo": 12000,
-      "porcentajesEscrituracion": {
-        "infonavit": 0.07,
-        "fovissste": 0.08,
-        "cofinavit": 0.085,
-        "bancario": 0.073,
-        "contado": 0.072
-      }
-    },
-    "TABACHIN": {
-      "precioLista": 3300000,
-      "valorAvaluo": 3300000,
-      "bono": 635250,
       "avaluo": 12000,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,

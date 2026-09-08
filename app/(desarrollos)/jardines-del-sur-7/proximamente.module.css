@@ -432,3 +432,33 @@
   color: var(--accent);
   font-size: 1.2rem;
 }
+
+/* Placa del logo en el hero. El archivo del logo trae fondo blanco y letras
+   azul marino: sobre el hero oscuro no se leería. La placa lo resuelve y de
+   paso lo presenta como marca, no como imagen suelta. */
+.logoPlate {
+  /* ⚠️ flex, NO inline-flex: .heroInner es un bloque con text-align:center, así
+     que un elemento en línea se acomoda al lado del rótulo "Próximamente" y se
+     encimaban. Con flex + width fit-content + margin auto queda en su propio
+     renglón y centrado. */
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.4rem;
+  margin: 0 auto 1.4rem;
+  background: #fff;
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.65);
+}
+
+.logoPlate img {
+  display: block;
+  width: auto;
+  height: 62px;
+}
+
+@media (max-width: 640px) {
+  .logoPlate { padding: 0.75rem 1.1rem; }
+  .logoPlate img { height: 48px; }
+}

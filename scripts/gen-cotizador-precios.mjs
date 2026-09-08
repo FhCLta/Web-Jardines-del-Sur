@@ -58,7 +58,11 @@ function filaComun(entrada, bono) {
 // inmediatamente despues (ese orden es el que ve el usuario en el selector).
 function catalogoCasas(dev) {
   const salida = {};
-  for (const casa of precios.casas.filter((c) => c.dev === dev)) {
+  // ⚠️ Los modelos AGOTADOS no entran al cotizador: cotizar algo que ya no se
+  // puede vender es el mismo error que cotizar un descuento vencido. Siguen en
+  // precios.json y en el sitio —la ficha conserva su valor SEO y su precio es
+  // la referencia de la etapa siguiente— pero no se pueden cotizar.
+  for (const casa of precios.casas.filter((c) => c.dev === dev && !c.agotado)) {
     salida[casa.modelo] = filaComun(casa, casa.bono);
     if (casa.promocion) {
       salida[`${casa.modelo} PROMO`] = filaComun(

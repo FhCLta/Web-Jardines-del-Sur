@@ -802,3 +802,18 @@
   .lightboxBtnRight { right: 0; }
   .lightboxClose { right: 1rem; }
 }
+
+/* Insignia de AGOTADO. Reusa la forma de .statusBadge pero en gris: el dorado
+   con punto pulsante celebra, y "agotado" no es una celebración — es un dato
+   que el cliente necesita antes de ilusionarse con el precio. */
+.statusBadgeAgotado {
+  background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+  box-shadow: 0 6px 14px -4px rgba(15, 23, 42, 0.35),
+    0 2px 4px rgba(15, 23, 42, 0.18);
+}
+
+.statusBadgeAgotado::before {
+  animation: none;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: none;
+}

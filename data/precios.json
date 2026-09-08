@@ -3,7 +3,8 @@
   "_reglas": [
     "\"vista\" solo aplica a departamentos: es una variante permanente del producto, NO una promocion. Lirios no tiene vistas.",
     "\"promocion.bono_extra\" solo aplica a casas: es una promocion real que suma al bono.",
-    "El precio NETO que ve el cliente = precio_lista - bono (y - bono_extra si se aplica la promocion)."
+    "El precio NETO que ve el cliente = precio_lista - bono (y - bono_extra si se aplica la promocion).",
+    "\"agotado\" en una casa la saca del cotizador pero NO del sitio: la ficha conserva valor SEO y su precio es la referencia para la etapa siguiente."
   ],
   "actualizado": "2026-08-30",
   "desarrollos": {
@@ -68,7 +69,8 @@
         "bancario": 0.073,
         "contado": 0.072
       },
-      "web": "jds6-tabachin"
+      "web": "jds6-tabachin",
+      "agotado": true
     },
     {
       "dev": "Azular1",

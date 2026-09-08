@@ -32,6 +32,10 @@ export default function Hero() {
             <span className={styles.devChipDot} />
             Jardines del Sur 6
           </a>
+          <a href="/jardines-del-sur-7" className={styles.devChip}>
+            <span className={styles.devChipDot} />
+            Jardines del Sur 7
+          </a>
           <a href="/la-rioja-2" className={styles.devChip}>
             <span className={styles.devChipDot} />
             La Rioja 2
