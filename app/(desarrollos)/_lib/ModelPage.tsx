@@ -15,6 +15,7 @@ import {
   parseStat,
   getModelType,
   formatPriceMxn,
+  formatMxnNumber,
   getWhatsAppMessageForModel,
 } from "./model-utils";
 import { SITE_URL } from "@/lib/site";
@@ -281,7 +282,7 @@ export default async function ModelPage({
                 <span className={styles.heroAvaluoLine}>
                   <span className={styles.heroAvaluoLabel}>Valor avalúo</span>
                   <span className={styles.heroAvaluoAmount}>
-                    ${property.valor_avaluo.toLocaleString("es-MX")} MXN
+                    ${formatMxnNumber(property.valor_avaluo)} MXN
                   </span>
                 </span>
                 <span className={styles.heroPriceLabel}>
@@ -292,7 +293,7 @@ export default async function ModelPage({
                 <span className={styles.heroPriceAmount}>
                   {property.precio === null
                     ? "Por anunciar"
-                    : `$${property.precio.toLocaleString("es-MX")}`}{" "}
+                    : `$${formatMxnNumber(property.precio)}`}{" "}
                   {property.precio !== null && (
                     <span className={styles.heroPriceCurrency}>MXN</span>
                   )}
@@ -319,7 +320,7 @@ export default async function ModelPage({
                 <span className={styles.heroPriceAmount}>
                   {property.precio === null
                     ? "Por anunciar"
-                    : `$${property.precio.toLocaleString("es-MX")}`}{" "}
+                    : `$${formatMxnNumber(property.precio)}`}{" "}
                   {property.precio !== null && (
                     <span className={styles.heroPriceCurrency}>MXN</span>
                   )}
@@ -389,7 +390,7 @@ export default async function ModelPage({
                           {otroAgotado ? "Último precio " : "Desde "}
                           <span className={styles.priceDisplay}>
                             <span className={styles.priceAmount}>
-                              ${otro.precio.toLocaleString("es-MX")}
+                              ${formatMxnNumber(otro.precio)}
                             </span>
                             <span className={styles.priceCurrency}>MXN</span>
                           </span>
@@ -610,7 +611,7 @@ export default async function ModelPage({
                       <span className={styles.priceAmount}>
                         {other.precio === null
                           ? "Por anunciar"
-                          : `$${other.precio.toLocaleString("es-MX")}`}
+                          : `$${formatMxnNumber(other.precio)}`}
                       </span>
                       {other.precio !== null && (
                         <span className={styles.priceCurrency}>MXN</span>

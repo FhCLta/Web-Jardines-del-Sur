@@ -23,6 +23,11 @@
 }
 
 .hero h1 {
+  /* ⚠️ El color es OBLIGATORIO aquí. globals.css pinta todos los encabezados
+     con var(--primary) —azul marino— y ese selector gana sobre el color
+     heredado de .hero, así que el título salía invisible sobre el fondo
+     oscuro. Lo mismo aplica a cualquier h1/h2 que se ponga sobre oscuro. */
+  color: #fff;
   font-family: var(--font-display);
   font-size: clamp(2rem, 1.3rem + 2.6vw, 3rem);
   line-height: 1.08;
@@ -100,7 +105,23 @@
   gap: 1.6rem;
 }
 
-.item { display: flex; flex-direction: column; gap: 0.75rem; }
+/* Las tarjetas de una fila deben terminar a la misma altura, y su enlace
+   quedar alineado aunque el contenido de arriba mida distinto. La rejilla ya
+   estira cada .item; lo que faltaba era que la tarjeta creciera dentro de él y
+   empujara el enlace al fondo. */
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.item > :first-child {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.fichaLink { margin-top: auto; }
 
 .fichaLink {
   align-self: center;

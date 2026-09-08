@@ -92,9 +92,25 @@ export function getModelType(nombreModelo: string): "Casa" | "Departamento" | nu
   return match[1].toLowerCase() === "departamento" ? "Departamento" : "Casa";
 }
 
+/**
+ * Importe en pesos. Los centavos se muestran SOLO si existen, y entonces con
+ * los dos decimales: el neto del Noni Elite es $4,446,997.50 y `toLocaleString`
+ * a secas lo escribía "4,446,997.5", que no es ni un entero ni una cantidad de
+ * dinero bien escrita. Salía así en /precios, en la lista de La Rioja y en su
+ * propia ficha.
+ */
 export function formatPriceMxn(price: number | null): string {
   if (!price) return "Precio por definir";
-  return `$${price.toLocaleString("es-MX")} MXN`;
+  return `$${formatMxnNumber(price)} MXN`;
+}
+
+/** Solo el número, sin el signo ni "MXN". Misma regla de centavos. */
+export function formatMxnNumber(price: number): string {
+  const conCentavos = !Number.isInteger(price);
+  return price.toLocaleString("es-MX", {
+    minimumFractionDigits: conCentavos ? 2 : 0,
+    maximumFractionDigits: 2,
+  });
 }
 
 // Precio compacto para títulos SEO: 1853830 -> "$1.85M" (floor a 2 decimales

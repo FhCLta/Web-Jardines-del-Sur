@@ -84,7 +84,13 @@ export default function PropertyCard({ property }) {
 
   const formatPriceRaw = (price) => {
     if (!price) return 'Precio por definir';
-    return `$${price.toLocaleString('es-MX')}`;
+    // Centavos solo si los hay, y entonces los dos: el neto del Noni Elite es
+    // $4,446,997.50 y sin esto salia "4,446,997.5".
+    const conCentavos = !Number.isInteger(price);
+    return `$${price.toLocaleString('es-MX', {
+      minimumFractionDigits: conCentavos ? 2 : 0,
+      maximumFractionDigits: 2,
+    })}`;
   };
 
   // Parsea amenidades clave para extraer recámaras y baños

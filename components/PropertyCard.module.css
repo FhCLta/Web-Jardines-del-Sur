@@ -647,6 +647,10 @@
   display: flex;
   gap: 0.5rem;
   width: 100%;
+  /* Empuja los botones al fondo de la tarjeta: .content ya es flex-grow, así
+     que con esto todas las tarjetas de una fila terminan con el botón a la
+     misma altura aunque arriba tengan distinto texto. */
+  margin-top: auto;
 }
 
 .legalLegend {

@@ -59,7 +59,7 @@ const COPY: Record<
       {
         titulo: "Tres recámaras",
         texto:
-          "Todos los modelos son de tres recámaras, con la principal en baño propio y área para clóset o vestidor.",
+          "Todos los modelos son de tres recámaras. La principal tiene baño propio y área para clóset o vestidor.",
       },
       {
         titulo: "Dos y tres niveles",
@@ -88,7 +88,7 @@ const COPY: Record<
       {
         titulo: "Tres recámaras",
         texto:
-          "Ninguno es de una o dos recámaras: todos son de tres, con la principal en baño propio y clóset.",
+          "Ninguno es de una o dos recámaras: todos son de tres. La principal tiene baño propio y clóset.",
       },
       {
         titulo: "El precio cambia por nivel",
@@ -156,6 +156,12 @@ export default function TipoPage({ tipo }: { tipo: Tipo }) {
   const copy = COPY[tipo];
   const { todos, disponibles, desde, hasta } = datosTipo(tipo);
   const devs = ordenarDesarrollos(todos);
+  // Nombrarlos vale más que contarlos: "3 desarrollos" no le dice nada a nadie,
+  // y estos nombres son justo lo que la gente reconoce y busca.
+  const listaDevs =
+    devs.length > 1
+      ? `${devs.slice(0, -1).join(", ")} y ${devs[devs.length - 1]}`
+      : devs[0] ?? "";
   const pageUrl = `${SITE_URL}/${copy.slugPagina}`;
 
   const waMsg = `Hola, vi las ${copy.pluralLower} de Altta Homes en Cancún y quiero información y disponibilidad.`;
@@ -208,9 +214,9 @@ export default function TipoPage({ tipo }: { tipo: Tipo }) {
           <h1>{copy.h1}</h1>
           <p className={styles.lead}>
             {disponibles.length} {copy.pluralLower} de tres recámaras en la Zona
-            Sur de Cancún, repartidas en {devs.length} desarrollos de Altta
-            Homes. Aquí las ves todas juntas —con fotos, metros y precio— para
-            comparar antes de escribir.
+            Sur de Cancún, en {listaDevs}. Aquí{" "}
+            {tipo === "Casa" ? "las ves todas juntas" : "los ves todos juntos"}{" "}
+            —con fotos, metros y precio— para comparar antes de escribir.
           </p>
           {desde !== null && hasta !== null && (
             <div className={styles.rango}>
