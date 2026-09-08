@@ -386,7 +386,7 @@ export default async function ModelPage({
                         "Precio por anunciar"
                       ) : (
                         <>
-                          {otroAgotado ? "Se vendió desde " : "Desde "}
+                          {otroAgotado ? "Último precio " : "Desde "}
                           <span className={styles.priceDisplay}>
                             <span className={styles.priceAmount}>
                               ${otro.precio.toLocaleString("es-MX")}
