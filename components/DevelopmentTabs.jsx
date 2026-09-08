@@ -72,7 +72,7 @@ export default function DevelopmentTabs({ inventoryData }) {
       short: "Jardines 6",
     },
     "Jardines del Sur 7": {
-      logo: "/logos/jardines-7.webp",
+      logo: "/logos/jardines-7-v2.webp",
       logoW: 336,
       logoH: 128,
       tagline: "Nueva etapa",
