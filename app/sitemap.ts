@@ -8,6 +8,7 @@ export const dynamic = 'force-static';
 
 const DEV_SLUG_BY_NAME: Record<string, DevSlug> = {
   'Jardines del Sur 6': 'jardines-del-sur-6',
+  'Jardines del Sur 7': 'jardines-del-sur-7',
   'La Rioja 2': 'la-rioja-2',
   'Lirios Residencial 2': 'lirios-residencial-2',
 };
@@ -43,13 +44,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'weekly' as const,
       priority: 0.9,
-    },
-    // Próximo desarrollo (página "Próximamente", aún sin inventario en DEVS).
-    {
-      url: `${SITE_URL}/jardines-del-sur-7`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
     },
     {
       // Hub que reune las promociones de todos los desarrollos. Prioridad alta

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PropertyCard from "@/components/PropertyCard";
-import { getPropertiesByDev } from "../_lib/model-utils";
+import { getPropertiesByDev, slugifyModel } from "../_lib/model-utils";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
@@ -365,7 +365,18 @@ export default function Page() {
           </div>
           <div className={styles.modelosGrid}>
             {getPropertiesByDev("Jardines del Sur 7").map((p) => (
-              <PropertyCard key={p.id} property={p} />
+              <div key={p.id} className={styles.modeloItem}>
+                <PropertyCard property={p} />
+                {/* Enlace a la ficha: es como Google llega a ella y como el
+                    visitante ve que ese modelo ya existe en Jardines del Sur 6. */}
+                <a
+                  className={styles.modeloLink}
+                  href={`/jardines-del-sur-7/${slugifyModel(p.nombre_modelo)}`}
+                >
+                  Ver el {p.nombre_modelo.replace(/^Casa\s+/i, "")} y dónde
+                  existe hoy →
+                </a>
+              </div>
             ))}
           </div>
         </div>

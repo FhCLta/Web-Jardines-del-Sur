@@ -508,3 +508,23 @@
   max-width: 860px;
   margin: 0 auto;
 }
+
+.modeloItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modeloLink {
+  align-self: center;
+  font-family: var(--font-montserrat);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(209, 146, 0, 0.4);
+  padding-bottom: 2px;
+  text-align: center;
+}
+
+.modeloLink:hover { border-bottom-color: var(--accent-deep); }

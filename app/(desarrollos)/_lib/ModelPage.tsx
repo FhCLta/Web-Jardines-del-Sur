@@ -23,6 +23,15 @@ import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 import { getEquipamiento } from "./equipamiento";
 
 const PHONE_E164 = "529982059044";
+
+// Para enlazar el mismo modelo entre etapas hace falta el slug del OTRO
+// desarrollo, y el inventario solo guarda su nombre.
+const DEV_SLUG_BY_NAME: Record<string, string> = {
+  "Jardines del Sur 6": "jardines-del-sur-6",
+  "Jardines del Sur 7": "jardines-del-sur-7",
+  "La Rioja 2": "la-rioja-2",
+  "Lirios Residencial 2": "lirios-residencial-2",
+};
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 
@@ -79,6 +88,20 @@ export default async function ModelPage({
   // pero deja de invitar a cotizar algo que ya no se puede vender.
   const agotado = property.status === "Agotado";
 
+  // Modelo anunciado antes de tener precio (Jardines del Sur 7 en preventa).
+  const porAnunciar = property.precio === null;
+
+  // EL MISMO MODELO EN OTRAS ETAPAS. Es lo que hace que una ficha sin precio no
+  // sea una pagina hueca, y de paso es la escalera de conversion de
+  // docs/jds7-lanzamiento.md §2: el Tabachin y el Noni existen en Jardines del
+  // Sur 6, asi que a quien llega buscando la etapa 7 se le puede decir hoy que
+  // paso con ese modelo — sin esperar a los precios.
+  const mismoModeloEnOtras = getInventory().filter(
+    (p) =>
+      p.nombre_modelo === property.nombre_modelo &&
+      p.development !== property.development
+  );
+
   const waMessage = agotado
     ? `Hola, vi que ${property.nombre_modelo} está agotado en ${dev.name}. ¿Qué opciones similares tienes disponibles?`
     : getWhatsAppMessageForModel(property);
@@ -106,7 +129,9 @@ export default async function ModelPage({
         "@id": `${pageUrl}#webpage`,
         url: pageUrl,
         name: `${property.nombre_modelo} en ${dev.name}, Cancún`,
-        description: `${property.nombre_modelo} en ${dev.name}, Cancún. ${property.metros_construccion} m² de construcción${recamaras ? `, ${recamaras} recámaras` : ""}${banos ? `, ${banos} baños` : ""}. Desde ${formatPriceMxn(property.precio)}.`,
+        description: porAnunciar
+          ? `${property.nombre_modelo}, uno de los primeros modelos de ${dev.name}, Cancún. Precios y planos por anunciar al abrir la preventa.`
+          : `${property.nombre_modelo} en ${dev.name}, Cancún. ${property.metros_construccion} m² de construcción${recamaras ? `, ${recamaras} recámaras` : ""}${banos ? `, ${banos} baños` : ""}. Desde ${formatPriceMxn(property.precio)}.`,
         inLanguage: "es-MX",
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: { "@id": `${SITE_URL}/#business` },
@@ -142,12 +167,18 @@ export default async function ModelPage({
         "@type": residenceType,
         "@id": `${pageUrl}#residence`,
         name: `${property.nombre_modelo} en ${dev.name}`,
-        description: `${property.nombre_modelo} de Altta Homes en ${dev.name}, Cancún. ${property.metros_construccion} m² de construcción.`,
-        floorSize: {
-          "@type": "QuantitativeValue",
-          value: property.metros_construccion,
-          unitCode: "MTK",
-        },
+        description: porAnunciar
+          ? `${property.nombre_modelo} de Altta Homes en ${dev.name}, Cancún. Metros y planos por anunciar.`
+          : `${property.nombre_modelo} de Altta Homes en ${dev.name}, Cancún. ${property.metros_construccion} m² de construcción.`,
+        ...(property.metros_construccion
+          ? {
+              floorSize: {
+                "@type": "QuantitativeValue",
+                value: property.metros_construccion,
+                unitCode: "MTK",
+              },
+            }
+          : {}),
         ...(recamaras
           ? { numberOfBedrooms: parseFloat(recamaras) }
           : {}),
@@ -175,10 +206,15 @@ export default async function ModelPage({
         "@type": "Offer",
         "@id": `${pageUrl}#offer`,
         name: property.nombre_modelo,
-        price: property.precio,
-        priceCurrency: "MXN",
+        // Sin precio NO se inventa uno: schema.org admite una oferta en
+        // preventa sin importe, y declarar 0 o null seria peor que omitirlo.
+        ...(porAnunciar
+          ? {}
+          : { price: property.precio, priceCurrency: "MXN" }),
         availability: agotado
           ? "https://schema.org/SoldOut"
+          : porAnunciar
+          ? "https://schema.org/PreOrder"
           : "https://schema.org/InStock",
         url: pageUrl,
         itemOffered: { "@id": `${pageUrl}#residence` },
@@ -312,6 +348,61 @@ export default async function ModelPage({
           </div>
         </div>
       </section>
+
+      {/* EL MISMO MODELO EN OTRAS ETAPAS */}
+      {mismoModeloEnOtras.length > 0 && (porAnunciar || agotado) && (
+        <section className={styles.section}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2>Este modelo en otras etapas</h2>
+              <p>
+                {porAnunciar
+                  ? `El ${strippedName} ya existe en otros desarrollos de Altta Homes. Así puedes conocerlo mientras se anuncian los precios de ${dev.name}.`
+                  : `El ${strippedName} también está en otras etapas. Si te gustó este modelo, aquí puedes ver dónde más existe.`}
+              </p>
+            </div>
+            <div className={styles.relatedGrid}>
+              {mismoModeloEnOtras.map((otro) => {
+                const otroSlug = slugifyModel(otro.nombre_modelo);
+                const otroAgotado = otro.status === "Agotado";
+                return (
+                  <a
+                    key={otro.id}
+                    href={`/${DEV_SLUG_BY_NAME[otro.development] ?? ""}/${otroSlug}`}
+                    className={styles.relatedCard}
+                  >
+                    <span className={styles.relatedCardLabel}>
+                      {otro.development}
+                    </span>
+                    <span className={styles.relatedCardName}>
+                      {otroAgotado
+                        ? "Agotado en esta etapa"
+                        : otro.precio === null
+                        ? "Preventa por abrir"
+                        : "Disponible hoy"}
+                    </span>
+                    <span className={styles.relatedCardPrice}>
+                      {otro.precio === null ? (
+                        "Precio por anunciar"
+                      ) : (
+                        <>
+                          {otroAgotado ? "Se vendió desde " : "Desde "}
+                          <span className={styles.priceDisplay}>
+                            <span className={styles.priceAmount}>
+                              ${otro.precio.toLocaleString("es-MX")}
+                            </span>
+                            <span className={styles.priceCurrency}>MXN</span>
+                          </span>
+                        </>
+                      )}
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* GALLERY */}
       {property.images.length > 0 && (

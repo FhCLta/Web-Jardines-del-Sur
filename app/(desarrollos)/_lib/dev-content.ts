@@ -1,4 +1,8 @@
-export type DevSlug = "jardines-del-sur-6" | "la-rioja-2" | "lirios-residencial-2";
+export type DevSlug =
+  | "jardines-del-sur-6"
+  | "jardines-del-sur-7"
+  | "la-rioja-2"
+  | "lirios-residencial-2";
 
 export type DevContent = {
   slug: DevSlug;
@@ -203,6 +207,57 @@ export const DEVS: Record<DevSlug, DevContent> = {
         { num: "11", label: "Amenidades del desarrollo" },
       ],
     },
+  },
+
+  // ⚠️ Jardines del Sur 7 entra a DEVS SOLO para que sus fichas de modelo
+  // existan (ModelPage lee DEVS[slug] para el nombre, el slug y la imagen al
+  // compartir). Su portada NO usa SiloPage: tiene pagina propia en
+  // jardines-del-sur-7/page.tsx, hecha para un desarrollo sin inventario.
+  // Por eso hero, intro y highlights van con lo minimo cierto: si algun dia se
+  // renderizara el silo generico, no diria nada falso.
+  "jardines-del-sur-7": {
+    slug: "jardines-del-sur-7",
+    name: "Jardines del Sur 7",
+    shortName: "Jardines 7",
+    metaTitle: "Jardines del Sur 7 Cancún · Preventa por Abrir | Altta Homes",
+    seoTitleLead: "Jardines del Sur 7 | Nueva Etapa en Cancún",
+    metaDescription:
+      "Jardines del Sur 7, la nueva etapa del residencial más exitoso de la Zona Sur de Cancún. Obra iniciada y preventa por abrir, con los modelos Tabachín y Noni. Chatea con un asesor autorizado de Altta Homes.",
+    h1: "Jardines del Sur 7, Cancún",
+    heroSubtitle:
+      "La nueva etapa de Jardines del Sur en la Zona Sur de Cancún, con obra ya iniciada y preventa por abrir.",
+    heroImage: "/optimized/dev-tabs/jardines-6.webp",
+    ogImage: "/hero-alberca-jardines.webp",
+    logo: "/logos/jardines-7-v2.webp",
+    whatsappMessage:
+      "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.",
+    hero: {
+      slides: ["/hero-alberca-jardines.webp"],
+      eyebrow: { strong: "PRÓXIMAMENTE", rest: ["GRUPO SADASI", "CANCÚN"] },
+      title: {
+        lines: ["Nueva etapa", "en Jardines del Sur 7"],
+        em: "con el respaldo de Grupo Sadasi",
+      },
+      subtitle: {
+        bold: "Preventa por abrir",
+        detail: "Obra ya iniciada · Modelos Tabachín y Noni.",
+      },
+    },
+    intro: {
+      eyebrow: "Nueva etapa · Cancún",
+      paragraphs: [
+        "Jardines del Sur 7 es la nueva etapa del residencial más exitoso de la Zona Sur de Cancún, con el respaldo de Grupo Sadasi: más de 50 años y 430,000 viviendas entregadas en 12 estados del país.",
+        "La obra ya está en proceso y la preventa abre próximamente, arrancando con los modelos Tabachín y Noni. Precios, metros y planos se anuncian al abrir.",
+      ],
+    },
+    highlights: [
+      "Nueva etapa de Jardines del Sur",
+      "Obra ya iniciada",
+      "Arranca con Tabachín y Noni",
+      "Precios por anunciar",
+      "Respaldo de Grupo Sadasi",
+      "Zona Sur Cancún",
+    ],
   },
 
   "la-rioja-2": {

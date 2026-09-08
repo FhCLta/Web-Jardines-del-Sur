@@ -152,8 +152,26 @@ export function buildModelMetadata(
   const recamaras = parseStat(property.amenidades_key, /^([\d.]+)\s*Rec/i);
   const banos = parseStat(property.amenidades_key, /^([\d.]+)\s*Ba/i);
 
-  const title = `${property.nombre_modelo} en ${dev.name}, Cancún · Desde ${formatPriceMxn(property.precio)} | Altta Homes`;
-  const description = `${property.nombre_modelo}: ${property.metros_construccion} m² de construcción${property.metros_terreno ? `, ${property.metros_terreno} m² de terreno` : ""}${recamaras ? `, ${recamaras} recámaras` : ""}${banos ? `, ${banos} baños` : ""}. Desde ${formatPriceMxn(property.precio)}. Recorrido virtual 360°, precios actualizados y atención directa por WhatsApp.`;
+  // Un modelo anunciado sin precio no puede decir "Desde $X" ni "null m²". El
+  // titulo cambia el gancho por el que SI tiene: que la preventa esta por abrir.
+  const porAnunciar = property.precio === null;
+
+  const title = porAnunciar
+    ? `${property.nombre_modelo} en ${dev.name}, Cancún · Preventa por Abrir | Altta Homes`
+    : `${property.nombre_modelo} en ${dev.name}, Cancún · Desde ${formatPriceMxn(property.precio)} | Altta Homes`;
+
+  const ficha = [
+    property.metros_construccion
+      ? `${property.metros_construccion} m² de construcción`
+      : null,
+    property.metros_terreno ? `${property.metros_terreno} m² de terreno` : null,
+    recamaras ? `${recamaras} recámaras` : null,
+    banos ? `${banos} baños` : null,
+  ].filter(Boolean).join(", ");
+
+  const description = porAnunciar
+    ? `${property.nombre_modelo}, uno de los primeros modelos de ${dev.name}, Cancún. Precios, metros y planos se anuncian al abrir la preventa. Escríbenos por WhatsApp y te avisamos el día que salgan.`
+    : `${property.nombre_modelo}: ${ficha}. Desde ${formatPriceMxn(property.precio)}. Recorrido virtual 360°, precios actualizados y atención directa por WhatsApp.`;
   const canonical = `/${dev.slug}/${modeloSlug}`;
   const ogImage = property.images[0] || dev.ogImage;
 
