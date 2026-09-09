@@ -114,24 +114,81 @@ No usa backend ni framework. Toda la lógica está en JavaScript del lado client
 - El HTML sigue siendo mejorable en semántica y mantenimiento general, pero el encabezado principal ya está dentro de `body`.
 
 ## 7) Mapa de datos críticos para cambiar precios
+
+⚠️ **Los precios YA NO se editan en `script.js`.** Desde el refactor viven en
+`data/precios.json` del sitio web y de ahí se generan. Editar `script.js` a mano
+crea una segunda verdad, que es el problema que ese refactor eliminó.
+
 Para actualizar una temporada de precios:
-1. Editar catálogos en script.js:
-- datosAzular (lista de modelos por desarrollo y precioTerrenoExcedente: Azular1 $5,750, LaRioja2 $7,500)
-- datosDepartamentosJardines6 (modelo/planta, Azular1-Depas)
-- datosDepartamentosLirios2 (modelo/planta, Lirios2-Depas)
-- datosCasas1 (casas Jardines del Sur 6, dentro del listener de #prototipo)
-- datosLaRioja2 (casas La Rioja 2, dentro del listener de #prototipo)
-- Cada modelo lleva: precioLista, valorAvaluo, bono, avaluo (costo del trámite) y porcentajesEscrituracion por plan.
-2. Validar escenarios mínimos:
-- una casa Azular1 y una LaRioja2
-- un departamento Azular1-Depas con equipamiento ON/OFF
-- un departamento Lirios2-Depas
-- cambiar plan de venta y verificar que el % de escrituración cambia solo
-3. Verificar impresión en:
-- plan contado
-- plan bancario
-- plan cofinavit
-- caso con >12 meses para modo compacto
+
+1. Editar **solo** `data/precios.json`. Cada modelo lleva `precio_lista`, `bono`,
+   `avaluo_tramite` (costo del trámite) y `escrituracion` por plan de venta.
+   Actualizar también el campo `actualizado`.
+2. Generar y verificar:
+   ```bash
+   node scripts/gen-cotizador-precios.mjs   # escribe precios.js Y api/precios.json
+   node scripts/check-precios.mjs           # debe decir "TODO EN ORDEN"
+   ```
+3. Validar escenarios mínimos:
+   - una casa Azular1 y una LaRioja2
+   - un departamento Azular1-Depas con equipamiento ON/OFF
+   - un departamento Lirios2-Depas
+   - cambiar plan de venta y verificar que el % de escrituración cambia solo
+4. Verificar impresión en: plan contado, bancario, cofinavit, y un caso con
+   >12 meses (modo compacto).
+
+Los precios salen a **tres** destinos desde esa única edición: el sitio web, el
+cotizador (`public/cotizador/precios.js`) y la lista pública que lee la app de
+expedientes (`public/api/precios.json`, contrato en `docs/api-precios.md`).
+
+### 7.1) Alta de un desarrollo nuevo — p. ej. Jardines del Sur 7
+
+Cambiar precios es solo datos. **Un desarrollo nuevo sí necesita código**, y hay
+que saber exactamente dónde: el cotizador elige catálogo comparando contra
+claves de desarrollo escritas a mano en nueve lugares. Si se agrega el dato sin
+tocar esos lugares, el desarrollo nuevo cae en el `else` y se cotiza con los
+precios de otro fraccionamiento. Eso no truena: miente.
+
+**Datos** (`data/precios.json`)
+
+- `desarrollos.<clave>` con `nombre`, `precio_terreno_excedente` y
+  `cuota_contingencia`. La clave es la que viaja en el `<option value>` y la que
+  guardan las cotizaciones: **no cambia nunca**.
+- Las filas en `casas` o en `departamentos` con `dev: "<clave>"`.
+- La cuota de contingencia y la lista de modelos se conectan solas. No hay que
+  tocarlas en el código.
+
+**Código**
+
+1. `scripts/gen-cotizador-precios.mjs`
+   - alta en `CATALOGO_POR_DEV` — **si falta, el generador truena a propósito**;
+   - una clave nueva en `bundle` (`datosCasasJardines7: catalogoCasas("...")`).
+2. `public/cotizador/index.html` — el `<option>` del selector `#Azular`
+   (hoy líneas 55-58). La lista es HTML fijo, no se arma sola.
+3. `public/cotizador/script.js` — las comparaciones contra claves de desarrollo.
+   Aplican unas u otras según sea de casas o de departamentos:
+
+   | Línea | Qué decide | Casas | Depas |
+   |---|---|:--:|:--:|
+   | 108 | terreno excedente editable | ✔ | |
+   | 132 | activa la vista de departamentos | | ✔ |
+   | 138 | qué catálogo de depas se carga | | ✔ |
+   | 273 | `esDesarrolloCasas()` | ✔ | |
+   | 278 | `esDesarrolloDepartamentos()` | | ✔ |
+   | 391 | qué catálogo de casas usa el cálculo | ✔ | |
+   | 433 | qué catálogo de depas usa el cálculo | | ✔ |
+   | 505 | cálculo del precio neto de depas | | ✔ |
+   | 1322 | de qué selector sale el modelo para el PDF | | ✔ |
+
+**Avisar a la app de expedientes.** Tiene su propia copia del cotizador y el
+mismo patrón de comparaciones contra nombres escritos a mano
+(`propuesta.js` ~212, 232, 235). Un desarrollo nuevo que aparezca en
+`/api/precios.json` sin que ellos lo den de alta cae en el catálogo de Jardines.
+Detalle en `docs/api-precios.md`.
+
+**Del lado del sitio web** el desarrollo es otro trabajo aparte:
+`data/inventory.json`, fichas, `app/sitemap.ts` y los mapas de
+`components/SiteHeader.jsx`.
 
 ## 8) Plan sugerido para próximos cambios (sin romper)
 1. Cambios de datos (precios/bonos/avalúos) aislados primero.
