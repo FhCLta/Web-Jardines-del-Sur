@@ -1,19 +1,29 @@
-// Genera public/cotizador/precios.js a partir de data/precios.json.
+// Genera public/cotizador/precios.js y public/api/precios.json a partir de
+// data/precios.json.
 //
 // POR QUE EXISTE: los precios viven en UN solo lugar (data/precios.json) y de
 // ahi comen el sitio web (lib/precios.ts -> getInventory) y el cotizador. Antes
 // el cotizador los tenia hardcodeados en script.js, asi que actualizar precios
 // eran dos ediciones que se podian desincronizar.
 //
-// FORMA DE SALIDA: reproduce EXACTAMENTE los objetos que script.js ya esperaba
+// QUIEN LOS LEE, Y COMO:
+//   1. El cotizador de este sitio  -> <script src="./precios.js"> (sincrono)
+//   2. La app de expedientes       -> <script src> al MISMO precios.js, cruzando
+//      (datosgeneralesalttahomes)     dominios. Una etiqueta <script> no pasa
+//                                     por CORS, por eso les sirve tal cual.
+//   3. Cualquier otro consumidor   -> /api/precios.json (con CORS abierto)
+//
+// ⚠️ precios.js NO PUEDE CAMBIAR DE DIRECCION. Hay una app que lo carga por URL
+// fija; moverlo la deja sin precios y sin aviso.
+//
+// FORMA DE SALIDA: reproduce los objetos que script.js ya esperaba
 // (datosAzular, datosCasas1, datosLaRioja2, datosDepartamentosJardines6,
 // datosDepartamentosLirios2). Se inyectan como un global con un <script> previo,
 // NO con fetch: el arranque del cotizador es sincrono y de el dependen imprimir,
 // compartir imagen y compartir PDF.
 //
 // USO:  node scripts/gen-cotizador-precios.mjs
-// VERIFICAR: node scripts/check-precios.mjs  (compara contra los catalogos
-// originales y contra los precios publicados del sitio)
+// VERIFICAR: node scripts/check-precios.mjs
 
 import fs from "node:fs";
 import path from "node:path";
@@ -21,15 +31,45 @@ import path from "node:path";
 const RAIZ = process.cwd();
 const ORIGEN = path.join(RAIZ, "data", "precios.json");
 const DESTINO = path.join(RAIZ, "public", "cotizador", "precios.js");
+const API_DESTINO = path.join(RAIZ, "public", "api", "precios.json");
 
 const precios = JSON.parse(fs.readFileSync(ORIGEN, "utf8"));
 
 // Los catalogos originales traian `valorAvaluo` repetido e identico a
 // `precioLista` en casas y en los depas de Jardines 6, y NO lo traian en Lirios.
 // `obtenerValorAvaluo()` cae a precioLista cuando falta, asi que da igual para el
-// calculo; se reproduce tal cual para que el archivo generado sea identico al
-// catalogo que habia antes del refactor (ver check-precios.mjs).
+// calculo; se reproduce tal cual para no cambiarle la forma al catalogo que el
+// cotizador ya venia recibiendo.
 const EMITE_VALOR_AVALUO = new Set(["Azular1", "LaRioja2", "Azular1-Depas"]);
+
+// Nombre de la variable del catalogo dentro del bundle. Vive aqui y no en
+// precios.json porque describe la FORMA DEL CODIGO del cotizador, no un dato del
+// producto. Viaja en la salida para que el cotizador pueda elegir catalogo
+// LEYENDO el dato, en vez de comparar contra nombres de desarrollo escritos a
+// mano: eso es lo que hace que un desarrollo nuevo sea solo datos.
+const CATALOGO_POR_DEV = {
+  Azular1: "datosCasas1",
+  LaRioja2: "datosLaRioja2",
+  "Azular1-Depas": "datosDepartamentosJardines6",
+  "Lirios2-Depas": "datosDepartamentosLirios2",
+};
+
+// Los niveles que se saben pintar estan escritos a mano en DOS lugares:
+// `ordenPlantas` en public/cotizador/script.js y `orden` en lib/precios.ts. Un
+// nivel fuera de esa lista no truena en ninguno de los dos: en el cotizador el
+// departamento simplemente NO sale en el selector, y en el sitio se ordena antes
+// que la planta baja. Los dos fallan callados, asi que se cazan aqui.
+const NIVELES_CONOCIDOS = ["PB", "1", "2", "3"];
+
+const slug = (texto) =>
+  String(texto)
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const esDepas = (dev) => precios.departamentos.some((d) => d.dev === dev);
 
 // Clave del catalogo = como el cotizador agrupa las plantas de un modelo. Hay
 // dos razones para partir un modelo en dos grupos, y son excluyentes:
@@ -43,6 +83,59 @@ const claveCatalogo = (entrada) => {
   if (entrada.vista === "estacionamiento") return `${entrada.modelo} PROMO`;
   if (entrada.edificio) return `${entrada.modelo} ${entrada.edificio}`;
   return entrada.modelo;
+};
+
+// Llave estable de un producto: desarrollo + clave del cotizador + nivel. Es
+// exactamente la terna que hace falta para volver a seleccionarlo, y es lo que
+// guardan las cotizaciones de la app de expedientes. NO CAMBIA aunque cambie el
+// nombre comercial o el precio.
+const idProducto = (dev, clave, nivel) =>
+  [slug(dev), slug(clave), nivel ? slug(nivel) : null].filter(Boolean).join("-");
+
+// --- Integridad de la fuente, antes de generar nada -------------------------
+for (const [dev, cfg] of Object.entries(precios.desarrollos)) {
+  if (!cfg.nombre) {
+    throw new Error(`El desarrollo "${dev}" no tiene "nombre" en precios.json.`);
+  }
+  if (!CATALOGO_POR_DEV[dev]) {
+    throw new Error(
+      `El desarrollo "${dev}" no esta en CATALOGO_POR_DEV (scripts/gen-cotizador-precios.mjs). ` +
+        `Un desarrollo nuevo necesita su propio catalogo en el cotizador; sin darlo de alta aqui ` +
+        `acabaria cotizandose con los precios de otro fraccionamiento.`
+    );
+  }
+}
+for (const depa of precios.departamentos) {
+  if (!NIVELES_CONOCIDOS.includes(depa.nivel)) {
+    throw new Error(
+      `Nivel desconocido "${depa.nivel}" en ${depa.dev} / ${depa.prototipo}. ` +
+        `Los que se saben pintar son: ${NIVELES_CONOCIDOS.join(", ")}. Para ` +
+        `agregar otro hay que darlo de alta en "ordenPlantas" ` +
+        `(public/cotizador/script.js) y en "orden" (lib/precios.ts), o el ` +
+        `departamento desaparece del cotizador sin avisar.`
+    );
+  }
+}
+
+// La etiqueta lleva "Casas"/"Depas" solo cuando el mismo nombre aparece dos
+// veces —es lo que distingue "Jardines del Sur 6 Casas" de "... Depas"—. Un
+// desarrollo con un solo producto se queda con su nombre limpio.
+const vecesPorNombre = {};
+for (const cfg of Object.values(precios.desarrollos)) {
+  vecesPorNombre[cfg.nombre] = (vecesPorNombre[cfg.nombre] || 0) + 1;
+}
+const etiquetaDev = (dev) => {
+  const { nombre } = precios.desarrollos[dev];
+  if (vecesPorNombre[nombre] === 1) return nombre;
+  return `${nombre} ${esDepas(dev) ? "Depas" : "Casas"}`;
+};
+
+// El nombre en mayusculas que se imprime en la carta propuesta. Se deriva del
+// nombre publico; si algun fraccionamiento se imprime distinto, se pone
+// "fraccionamiento" a mano en precios.json y ese manda.
+const fraccionamientoDev = (dev) => {
+  const cfg = precios.desarrollos[dev];
+  return cfg.fraccionamiento || cfg.nombre.toUpperCase();
 };
 
 function filaComun(entrada, bono) {
@@ -61,14 +154,19 @@ function catalogoCasas(dev) {
   // ⚠️ Los modelos AGOTADOS no entran al cotizador: cotizar algo que ya no se
   // puede vender es el mismo error que cotizar un descuento vencido. Siguen en
   // precios.json y en el sitio —la ficha conserva su valor SEO y su precio es
-  // la referencia de la etapa siguiente— pero no se pueden cotizar.
+  // la referencia de la etapa siguiente— y siguen en `historico`, para que un
+  // expediente ya firmado se pueda volver a abrir. Pero no se pueden cotizar.
   for (const casa of precios.casas.filter((c) => c.dev === dev && !c.agotado)) {
-    salida[casa.modelo] = filaComun(casa, casa.bono);
+    salida[casa.modelo] = {
+      id: idProducto(casa.dev, casa.modelo, null),
+      ...filaComun(casa, casa.bono),
+    };
     if (casa.promocion) {
-      salida[`${casa.modelo} PROMO`] = filaComun(
-        casa,
-        casa.bono + casa.promocion.bono_extra
-      );
+      const clave = `${casa.modelo} PROMO`;
+      salida[clave] = {
+        id: idProducto(casa.dev, clave, null),
+        ...filaComun(casa, casa.bono + casa.promocion.bono_extra),
+      };
     }
   }
   return salida;
@@ -78,10 +176,11 @@ function catalogoCasas(dev) {
 // un modelo aparte con sufijo PROMO, que es como lo nombraba el catalogo viejo.
 function catalogoDepartamentos(dev) {
   const salida = {};
-  for (const depa of precios.departamentos.filter((d) => d.dev === dev)) {
+  for (const depa of precios.departamentos.filter((d) => d.dev === dev && !d.agotado)) {
     const clave = claveCatalogo(depa);
     salida[clave] = salida[clave] || {};
     salida[clave][depa.nivel] = {
+      id: idProducto(depa.dev, clave, depa.nivel),
       prototipo: depa.prototipo,
       ...filaComun(depa, depa.bono),
     };
@@ -95,160 +194,13 @@ function listaModelos(dev) {
   return Object.keys(catalogoCasas(dev));
 }
 
-// Los niveles que se saben pintar estan escritos a mano en DOS lugares:
-// `ordenPlantas` en public/cotizador/script.js y `orden` en lib/precios.ts. Un
-// nivel fuera de esa lista no truena en ninguno de los dos: en el cotizador el
-// departamento simplemente NO sale en el selector, y en el sitio se ordena antes
-// que la planta baja. Los dos fallan callados, asi que se cazan aqui.
-const NIVELES_CONOCIDOS = ["PB", "1", "2", "3"];
-for (const depa of precios.departamentos) {
-  if (!NIVELES_CONOCIDOS.includes(depa.nivel)) {
-    throw new Error(
-      `Nivel desconocido "${depa.nivel}" en ${depa.dev} / ${depa.prototipo}. ` +
-        `Los que se saben pintar son: ${NIVELES_CONOCIDOS.join(", ")}. Para ` +
-        `agregar otro hay que darlo de alta en "ordenPlantas" ` +
-        `(public/cotizador/script.js) y en "orden" (lib/precios.ts), o el ` +
-        `departamento desaparece del cotizador sin avisar.`
-    );
-  }
-}
-
-const datosAzular = {};
-for (const [dev, cfg] of Object.entries(precios.desarrollos)) {
-  datosAzular[dev] = {
-    modelos: listaModelos(dev),
-    precioTerrenoExcedente: cfg.precio_terreno_excedente,
-  };
-}
-
-const bundle = {
-  datosAzular,
-  datosCasas1: catalogoCasas("Azular1"),
-  datosLaRioja2: catalogoCasas("LaRioja2"),
-  datosDepartamentosJardines6: catalogoDepartamentos("Azular1-Depas"),
-  datosDepartamentosLirios2: catalogoDepartamentos("Lirios2-Depas"),
-  cuotasContingencia: Object.fromEntries(
-    Object.entries(precios.desarrollos).map(([dev, c]) => [dev, c.cuota_contingencia])
-  ),
-};
-
-const cabecera = `// ARCHIVO GENERADO - NO EDITAR A MANO.
-// Fuente: data/precios.json  |  Generador: scripts/gen-cotizador-precios.mjs
-// Para cambiar precios: edita data/precios.json y corre
-//   node scripts/gen-cotizador-precios.mjs
-// Precios actualizados al ${precios.actualizado}.
-`;
-
-fs.mkdirSync(path.dirname(DESTINO), { recursive: true });
-fs.writeFileSync(
-  DESTINO,
-  `${cabecera}window.COTIZADOR_PRECIOS = ${JSON.stringify(bundle, null, 2)};\n`
-);
-
-// ===========================================================================
-// SEGUNDA SALIDA: public/api/precios.json — la lista que leen OTRAS apps.
-//
-// POR QUE EXISTE: la app de expedientes (datosgeneralesalttahomes) tiene una
-// copia del cotizador y hasta hoy tambien una copia de los precios, en su
-// propia base de datos. Dos copias se separan tarde o temprano. Con este
-// archivo esa app lee de aqui y no hay dos verdades.
-//
-// SE PUBLICA EN:  https://alttahomescancun.mx/api/precios.json
-//
-// TRAE DOS VISTAS DEL MISMO DATO, y la diferencia importa:
-//   - `cotizador`  : identico byte a byte a lo que el cotizador de ESTE sitio
-//                    recibe en window.COTIZADOR_PRECIOS. Solo lo VENDIBLE:
-//                    los agotados no estan. Sirve para alimentar un cotizador
-//                    sin escribir ningun adaptador.
-//   - `productos`  : la lista plana y completa, CON los agotados marcados
-//                    `activo: false`. Sirve para que un expediente viejo pueda
-//                    volver a encontrar un producto que ya no se vende. Una
-//                    baja es una bandera, nunca una eliminacion: si el producto
-//                    desaparece del archivo, la cotizacion firmada del cliente
-//                    se abre vacia y se recalcula sobre la nada.
-//
-// ⚠️ NO LLEVA FECHA DE GENERACION. Es a proposito: la salida tiene que ser
-// identica corriendo el generador dos veces, o check-precios.mjs no podria
-// detectar que el archivo quedo viejo. La fecha buena es `actualizado`, que se
-// edita a mano en precios.json cuando cambian los precios de verdad.
-// ===========================================================================
-
-const API_DESTINO = path.join(RAIZ, "public", "api", "precios.json");
-
-// Nombre de la variable del catalogo dentro del bundle. Vive aqui y no en
-// precios.json porque describe la FORMA DEL CODIGO del cotizador, no un dato
-// del producto. Es el campo que le permite a la app de expedientes elegir
-// catalogo sin comparar contra nombres de desarrollo escritos a mano —que es
-// justo como hoy un desarrollo nuevo acabaria mostrando precios de otro.
-const CATALOGO_POR_DEV = {
-  Azular1: "datosCasas1",
-  LaRioja2: "datosLaRioja2",
-  "Azular1-Depas": "datosDepartamentosJardines6",
-  "Lirios2-Depas": "datosDepartamentosLirios2",
-};
-
-const slug = (texto) =>
-  String(texto)
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-const esDepas = (dev) => precios.departamentos.some((d) => d.dev === dev);
-
-// El nombre publico es obligatorio: sin el no hay etiqueta que mostrar, y una
-// etiqueta inventada es peor que ninguna. Mismo criterio para el catalogo: un
-// desarrollo nuevo tiene que darse de alta a proposito, no colarse en silencio
-// al catalogo de otro.
-for (const [dev, cfg] of Object.entries(precios.desarrollos)) {
-  if (!cfg.nombre) {
-    throw new Error(`El desarrollo "${dev}" no tiene "nombre" en precios.json.`);
-  }
-  if (!CATALOGO_POR_DEV[dev]) {
-    throw new Error(
-      `El desarrollo "${dev}" no esta en CATALOGO_POR_DEV (scripts/gen-cotizador-precios.mjs). ` +
-        `Un desarrollo nuevo necesita su propio catalogo en el cotizador; sin darlo de alta aqui ` +
-        `acabaria cotizandose con los precios de otro fraccionamiento.`
-    );
-  }
-}
-
-// La etiqueta lleva "Casas"/"Depas" solo cuando el mismo nombre aparece dos
-// veces —es lo que distingue "Jardines del Sur 6 Casas" de "... Depas"—. Un
-// desarrollo con un solo producto se queda con su nombre limpio.
-const vecesPorNombre = {};
-for (const cfg of Object.values(precios.desarrollos)) {
-  vecesPorNombre[cfg.nombre] = (vecesPorNombre[cfg.nombre] || 0) + 1;
-}
-const etiquetaDev = (dev) => {
-  const { nombre } = precios.desarrollos[dev];
-  if (vecesPorNombre[nombre] === 1) return nombre;
-  return `${nombre} ${esDepas(dev) ? "Depas" : "Casas"}`;
-};
-
-const desarrollosApi = Object.entries(precios.desarrollos).map(([dev, cfg]) => ({
-  // `id` es la llave estable: es la que guardan las cotizaciones y la que el
-  // cotizador lleva en el <option value>. No cambia aunque cambie el nombre
-  // comercial.
-  id: dev,
-  nombre: cfg.nombre,
-  label: etiquetaDev(dev),
-  tipo: esDepas(dev) ? "departamentos" : "casas",
-  catalogo: CATALOGO_POR_DEV[dev],
-  cuotaContingencia: cfg.cuota_contingencia,
-  precioTerrenoExcedente: cfg.precio_terreno_excedente,
-}));
-
-// Una fila de `productos`. `activo: false` = no se vende hoy, pero sigue aqui.
+// --- Lista plana de productos, la vista que usa el expediente ---------------
+// `activo: false` = no se vende hoy, pero sigue aqui. Una baja es una bandera,
+// nunca una eliminacion: si el producto desaparece, la cotizacion firmada del
+// cliente se abre vacia y se recalcula sobre la nada.
 function productoApi(entrada, clave, nivel, bono) {
   return {
-    // id estable = desarrollo + clave del cotizador + nivel. Es exactamente la
-    // terna que el cotizador necesita para volver a seleccionar el producto al
-    // reabrir una cotizacion guardada.
-    id: [slug(entrada.dev), slug(clave), nivel ? slug(nivel) : null]
-      .filter(Boolean)
-      .join("-"),
+    id: idProducto(entrada.dev, clave, nivel),
     desarrollo: entrada.dev,
     tipo: esDepas(entrada.dev) ? "departamento" : "casa",
     modelo: entrada.modelo,
@@ -312,14 +264,76 @@ for (const prod of productosApi) {
   vistos.add(prod.id);
 }
 
+// --- El bundle que recibe el cotizador --------------------------------------
+const datosAzular = {};
+for (const [dev, cfg] of Object.entries(precios.desarrollos)) {
+  datosAzular[dev] = {
+    modelos: listaModelos(dev),
+    precioTerrenoExcedente: cfg.precio_terreno_excedente,
+    // Los cuatro campos siguientes son los que permiten que el cotizador
+    // resuelva un desarrollo LEYENDO el dato en vez de comparar contra nombres
+    // escritos a mano. Sin ellos, cada desarrollo nuevo obliga a tocar codigo
+    // en las dos apps.
+    label: etiquetaDev(dev),
+    fraccionamiento: fraccionamientoDev(dev),
+    tipo: esDepas(dev) ? "departamentos" : "casas",
+    catalogo: CATALOGO_POR_DEV[dev],
+  };
+}
+
+const bundle = {
+  datosAzular,
+  datosCasas1: catalogoCasas("Azular1"),
+  datosLaRioja2: catalogoCasas("LaRioja2"),
+  datosDepartamentosJardines6: catalogoDepartamentos("Azular1-Depas"),
+  datosDepartamentosLirios2: catalogoDepartamentos("Lirios2-Depas"),
+  cuotasContingencia: Object.fromEntries(
+    Object.entries(precios.desarrollos).map(([dev, c]) => [dev, c.cuota_contingencia])
+  ),
+  // Lo que ya no se vende: fuera de los catalogos para que no se pueda cotizar
+  // por accidente, pero presente para que un expediente viejo lo encuentre.
+  historico: productosApi.filter((p) => !p.activo),
+};
+
+const cabecera = `// ARCHIVO GENERADO - NO EDITAR A MANO.
+// Fuente: data/precios.json  |  Generador: scripts/gen-cotizador-precios.mjs
+// Para cambiar precios: edita data/precios.json y corre
+//   node scripts/gen-cotizador-precios.mjs
+// Precios actualizados al ${precios.actualizado}.
+//
+// ⚠️ ESTA DIRECCION NO CAMBIA: la app de expedientes carga este archivo con
+// <script src> desde otro dominio. Moverlo la deja sin precios y sin aviso.
+`;
+
+fs.mkdirSync(path.dirname(DESTINO), { recursive: true });
+fs.writeFileSync(
+  DESTINO,
+  `${cabecera}window.COTIZADOR_PRECIOS = ${JSON.stringify(bundle, null, 2)};\n`
+);
+
+// --- La misma informacion como JSON, para quien prefiera leerla con fetch ----
+// ⚠️ NO LLEVA FECHA DE GENERACION. Es a proposito: la salida tiene que ser
+// identica corriendo el generador dos veces, o check-precios.mjs no podria
+// detectar que el archivo quedo viejo. La fecha buena es `actualizado`.
+const desarrollosApi = Object.entries(precios.desarrollos).map(([dev, cfg]) => ({
+  id: dev,
+  nombre: cfg.nombre,
+  label: etiquetaDev(dev),
+  fraccionamiento: fraccionamientoDev(dev),
+  tipo: esDepas(dev) ? "departamentos" : "casas",
+  catalogo: CATALOGO_POR_DEV[dev],
+  cuotaContingencia: cfg.cuota_contingencia,
+  precioTerrenoExcedente: cfg.precio_terreno_excedente,
+}));
+
 const api = {
   _doc:
     "Lista de precios de Altta Homes Cancun. ARCHIVO GENERADO desde data/precios.json; " +
     "no editar a mano. Contrato y ejemplos en docs/api-precios.md.",
   _vistas: {
     cotizador:
-      "Identico a window.COTIZADOR_PRECIOS del cotizador de alttahomescancun.mx. " +
-      "Solo lo vendible: los agotados NO estan.",
+      "Identico a window.COTIZADOR_PRECIOS de /cotizador/precios.js. Los catalogos " +
+      "traen solo lo vendible; lo dado de baja va en cotizador.historico.",
     productos:
       "Lista plana y completa. Los agotados vienen con activo:false para que un " +
       "expediente viejo pueda seguir encontrando su producto. Una baja es una " +
@@ -340,5 +354,6 @@ const nDepas = Object.values(bundle.datosDepartamentosJardines6).length +
 console.log(`✓ ${path.relative(RAIZ, DESTINO)}`);
 console.log(`  casas: ${Object.keys(bundle.datosCasas1).length + Object.keys(bundle.datosLaRioja2).length} variantes`);
 console.log(`  departamentos: ${nDepas} grupos modelo/vista`);
+console.log(`  historico: ${bundle.historico.length} dado(s) de baja`);
 console.log(`✓ ${path.relative(RAIZ, API_DESTINO)}`);
 console.log(`  productos: ${productosApi.length} (${productosApi.filter((p) => !p.activo).length} inactivos)`);

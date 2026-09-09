@@ -3,6 +3,9 @@
 // Para cambiar precios: edita data/precios.json y corre
 //   node scripts/gen-cotizador-precios.mjs
 // Precios actualizados al 2026-08-30.
+//
+// ⚠️ ESTA DIRECCION NO CAMBIA: la app de expedientes carga este archivo con
+// <script src> desde otro dominio. Moverlo la deja sin precios y sin aviso.
 window.COTIZADOR_PRECIOS = {
   "datosAzular": {
     "Azular1": {
@@ -11,15 +14,27 @@ window.COTIZADOR_PRECIOS = {
         "CEIBA",
         "NONI"
       ],
-      "precioTerrenoExcedente": 5750
+      "precioTerrenoExcedente": 5750,
+      "label": "Jardines del Sur 6 Casas",
+      "fraccionamiento": "JARDINES DEL SUR 6",
+      "tipo": "casas",
+      "catalogo": "datosCasas1"
     },
     "Azular1-Depas": {
       "modelos": [],
-      "precioTerrenoExcedente": 0
+      "precioTerrenoExcedente": 0,
+      "label": "Jardines del Sur 6 Depas",
+      "fraccionamiento": "JARDINES DEL SUR 6",
+      "tipo": "departamentos",
+      "catalogo": "datosDepartamentosJardines6"
     },
     "Lirios2-Depas": {
       "modelos": [],
-      "precioTerrenoExcedente": 0
+      "precioTerrenoExcedente": 0,
+      "label": "Lirios Residencial 2",
+      "fraccionamiento": "LIRIOS RESIDENCIAL 2",
+      "tipo": "departamentos",
+      "catalogo": "datosDepartamentosLirios2"
     },
     "LaRioja2": {
       "modelos": [
@@ -29,11 +44,16 @@ window.COTIZADOR_PRECIOS = {
         "ALAMO",
         "FRESNO ELITE"
       ],
-      "precioTerrenoExcedente": 7500
+      "precioTerrenoExcedente": 7500,
+      "label": "La Rioja 2",
+      "fraccionamiento": "LA RIOJA 2",
+      "tipo": "casas",
+      "catalogo": "datosLaRioja2"
     }
   },
   "datosCasas1": {
     "FLAMBOYAN": {
+      "id": "azular1-flamboyan",
       "precioLista": 2621000,
       "valorAvaluo": 2621000,
       "bono": 395150,
@@ -47,6 +67,7 @@ window.COTIZADOR_PRECIOS = {
       }
     },
     "CEIBA": {
+      "id": "azular1-ceiba",
       "precioLista": 3230000,
       "valorAvaluo": 3230000,
       "bono": 627950,
@@ -60,6 +81,7 @@ window.COTIZADOR_PRECIOS = {
       }
     },
     "NONI": {
+      "id": "azular1-noni",
       "precioLista": 3850000,
       "valorAvaluo": 3850000,
       "bono": 688875,
@@ -75,6 +97,7 @@ window.COTIZADOR_PRECIOS = {
   },
   "datosLaRioja2": {
     "NONI ELITE": {
+      "id": "larioja2-noni-elite",
       "precioLista": 5980000,
       "valorAvaluo": 5980000,
       "bono": 1533002.5,
@@ -88,6 +111,7 @@ window.COTIZADOR_PRECIOS = {
       }
     },
     "NONI ELITE PROMO": {
+      "id": "larioja2-noni-elite-promo",
       "precioLista": 5980000,
       "valorAvaluo": 5980000,
       "bono": 1583002.5,
@@ -101,6 +125,7 @@ window.COTIZADOR_PRECIOS = {
       }
     },
     "NONI": {
+      "id": "larioja2-noni",
       "precioLista": 4490000,
       "valorAvaluo": 4490000,
       "bono": 440625,
@@ -114,6 +139,7 @@ window.COTIZADOR_PRECIOS = {
       }
     },
     "ALAMO": {
+      "id": "larioja2-alamo",
       "precioLista": 5820000,
       "valorAvaluo": 5820000,
       "bono": 1383975,
@@ -127,6 +153,7 @@ window.COTIZADOR_PRECIOS = {
       }
     },
     "FRESNO ELITE": {
+      "id": "larioja2-fresno-elite",
       "precioLista": 5350000,
       "valorAvaluo": 5350000,
       "bono": 1055050,
@@ -143,6 +170,7 @@ window.COTIZADOR_PRECIOS = {
   "datosDepartamentosJardines6": {
     "CAPUA": {
       "1": {
+        "id": "azular1-depas-capua-1",
         "prototipo": "CAPUA 1N",
         "precioLista": 2280000,
         "valorAvaluo": 2280000,
@@ -157,6 +185,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "azular1-depas-capua-2",
         "prototipo": "CAPUA 2N",
         "precioLista": 2260000,
         "valorAvaluo": 2260000,
@@ -171,6 +200,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "azular1-depas-capua-3",
         "prototipo": "CAPUA 3N",
         "precioLista": 2230000,
         "valorAvaluo": 2230000,
@@ -185,6 +215,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "azular1-depas-capua-pb",
         "prototipo": "CAPUA PB",
         "precioLista": 2330000,
         "valorAvaluo": 2330000,
@@ -201,6 +232,7 @@ window.COTIZADOR_PRECIOS = {
     },
     "CAPUA PROMO": {
       "1": {
+        "id": "azular1-depas-capua-promo-1",
         "prototipo": "CAPUA 1N V. Est.",
         "precioLista": 2280000,
         "valorAvaluo": 2280000,
@@ -215,6 +247,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "azular1-depas-capua-promo-2",
         "prototipo": "CAPUA 2N V. Est.",
         "precioLista": 2260000,
         "valorAvaluo": 2260000,
@@ -229,6 +262,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "azular1-depas-capua-promo-3",
         "prototipo": "CAPUA 3N V. Est.",
         "precioLista": 2230000,
         "valorAvaluo": 2230000,
@@ -243,6 +277,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "azular1-depas-capua-promo-pb",
         "prototipo": "CAPUA PB V. Est.",
         "precioLista": 2330000,
         "valorAvaluo": 2330000,
@@ -259,6 +294,7 @@ window.COTIZADOR_PRECIOS = {
     },
     "CEDRO PLUS": {
       "1": {
+        "id": "azular1-depas-cedro-plus-1",
         "prototipo": "CEDRO PLUS 1N",
         "precioLista": 2790000,
         "valorAvaluo": 2790000,
@@ -273,6 +309,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "azular1-depas-cedro-plus-2",
         "prototipo": "CEDRO PLUS 2N",
         "precioLista": 2760000,
         "valorAvaluo": 2760000,
@@ -287,6 +324,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "azular1-depas-cedro-plus-3",
         "prototipo": "CEDRO PLUS 3N (ROOF)",
         "precioLista": 2920000,
         "valorAvaluo": 2920000,
@@ -301,6 +339,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "azular1-depas-cedro-plus-pb",
         "prototipo": "CEDRO PLUS PB",
         "precioLista": 2870000,
         "valorAvaluo": 2870000,
@@ -317,6 +356,7 @@ window.COTIZADOR_PRECIOS = {
     },
     "CEDRO PLUS PROMO": {
       "1": {
+        "id": "azular1-depas-cedro-plus-promo-1",
         "prototipo": "CEDRO PLUS 1N V. Est.",
         "precioLista": 2790000,
         "valorAvaluo": 2790000,
@@ -331,6 +371,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "azular1-depas-cedro-plus-promo-2",
         "prototipo": "CEDRO PLUS 2N V. Est.",
         "precioLista": 2760000,
         "valorAvaluo": 2760000,
@@ -345,6 +386,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "azular1-depas-cedro-plus-promo-3",
         "prototipo": "CEDRO PLUS 3N (ROOF) V. Est.",
         "precioLista": 2920000,
         "valorAvaluo": 2920000,
@@ -359,6 +401,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "azular1-depas-cedro-plus-promo-pb",
         "prototipo": "CEDRO PLUS PB V. Est.",
         "precioLista": 2870000,
         "valorAvaluo": 2870000,
@@ -377,6 +420,7 @@ window.COTIZADOR_PRECIOS = {
   "datosDepartamentosLirios2": {
     "CAPUA P-4": {
       "1": {
+        "id": "lirios2-depas-capua-p-4-1",
         "prototipo": "CAPUA 1N P-4",
         "precioLista": 2807000,
         "bono": 712000,
@@ -390,6 +434,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "lirios2-depas-capua-p-4-2",
         "prototipo": "CAPUA 2N P-4",
         "precioLista": 2754000,
         "bono": 679000,
@@ -403,6 +448,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "lirios2-depas-capua-p-4-3",
         "prototipo": "CAPUA 3N P-4",
         "precioLista": 2700000,
         "bono": 670000,
@@ -416,6 +462,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "lirios2-depas-capua-p-4-pb",
         "prototipo": "CAPUA PB P-4",
         "precioLista": 2861000,
         "bono": 701000,
@@ -431,6 +478,7 @@ window.COTIZADOR_PRECIOS = {
     },
     "CAPUA L-1": {
       "1": {
+        "id": "lirios2-depas-capua-l-1-1",
         "prototipo": "CAPUA 1N L-1",
         "precioLista": 2807000,
         "bono": 752000,
@@ -444,6 +492,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "lirios2-depas-capua-l-1-2",
         "prototipo": "CAPUA 2N L-1",
         "precioLista": 2754000,
         "bono": 719000,
@@ -457,6 +506,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "lirios2-depas-capua-l-1-3",
         "prototipo": "CAPUA 3N L-1",
         "precioLista": 2700000,
         "bono": 710000,
@@ -470,6 +520,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "lirios2-depas-capua-l-1-pb",
         "prototipo": "CAPUA PB L-1",
         "precioLista": 2861000,
         "bono": 741000,
@@ -485,6 +536,7 @@ window.COTIZADOR_PRECIOS = {
     },
     "CEDRO PLUS": {
       "1": {
+        "id": "lirios2-depas-cedro-plus-1",
         "prototipo": "CEDRO PLUS 1N",
         "precioLista": 2677000,
         "bono": 408250,
@@ -498,6 +550,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "2": {
+        "id": "lirios2-depas-cedro-plus-2",
         "prototipo": "CEDRO PLUS 2N",
         "precioLista": 2653000,
         "bono": 404250,
@@ -511,6 +564,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "3": {
+        "id": "lirios2-depas-cedro-plus-3",
         "prototipo": "CEDRO PLUS 3N (ROOF)",
         "precioLista": 2915000,
         "bono": 441250,
@@ -524,6 +578,7 @@ window.COTIZADOR_PRECIOS = {
         }
       },
       "PB": {
+        "id": "lirios2-depas-cedro-plus-pb",
         "prototipo": "CEDRO PLUS PB",
         "precioLista": 2810000,
         "bono": 441250,
@@ -543,5 +598,33 @@ window.COTIZADOR_PRECIOS = {
     "Azular1-Depas": 4000,
     "Lirios2-Depas": 6000,
     "LaRioja2": 10000
-  }
+  },
+  "historico": [
+    {
+      "id": "azular1-tabachin",
+      "desarrollo": "Azular1",
+      "tipo": "casa",
+      "modelo": "TABACHIN",
+      "claveCotizador": "TABACHIN",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "TABACHIN",
+      "activo": false,
+      "precioLista": 3300000,
+      "bono": 635250,
+      "neto": 2664750,
+      "valorAvaluo": 3300000,
+      "avaluo": 12000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.073,
+        "contado": 0.072
+      },
+      "web": "jds6-tabachin"
+    }
+  ]
 };
