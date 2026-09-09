@@ -95,6 +95,24 @@ function listaModelos(dev) {
   return Object.keys(catalogoCasas(dev));
 }
 
+// Los niveles que se saben pintar estan escritos a mano en DOS lugares:
+// `ordenPlantas` en public/cotizador/script.js y `orden` en lib/precios.ts. Un
+// nivel fuera de esa lista no truena en ninguno de los dos: en el cotizador el
+// departamento simplemente NO sale en el selector, y en el sitio se ordena antes
+// que la planta baja. Los dos fallan callados, asi que se cazan aqui.
+const NIVELES_CONOCIDOS = ["PB", "1", "2", "3"];
+for (const depa of precios.departamentos) {
+  if (!NIVELES_CONOCIDOS.includes(depa.nivel)) {
+    throw new Error(
+      `Nivel desconocido "${depa.nivel}" en ${depa.dev} / ${depa.prototipo}. ` +
+        `Los que se saben pintar son: ${NIVELES_CONOCIDOS.join(", ")}. Para ` +
+        `agregar otro hay que darlo de alta en "ordenPlantas" ` +
+        `(public/cotizador/script.js) y en "orden" (lib/precios.ts), o el ` +
+        `departamento desaparece del cotizador sin avisar.`
+    );
+  }
+}
+
 const datosAzular = {};
 for (const [dev, cfg] of Object.entries(precios.desarrollos)) {
   datosAzular[dev] = {
