@@ -1,26 +1,31 @@
 {
-  "_doc": "FUENTE UNICA DE PRECIOS. Alimenta el sitio web (getInventory) y el cotizador (scripts/gen-cotizador-precios.mjs -> public/cotizador/precios.js). Editar SOLO aqui.",
+  "_doc": "FUENTE UNICA DE PRECIOS. Alimenta el sitio web (getInventory), el cotizador (public/cotizador/precios.js) y la lista publica que leen otras apps (public/api/precios.json). Los tres se generan con scripts/gen-cotizador-precios.mjs. Editar SOLO aqui.",
   "_reglas": [
     "\"vista\" solo aplica a departamentos: es una variante permanente del producto, NO una promocion. Lirios no tiene vistas.",
     "\"promocion.bono_extra\" solo aplica a casas: es una promocion real que suma al bono.",
     "El precio NETO que ve el cliente = precio_lista - bono (y - bono_extra si se aplica la promocion).",
-    "\"agotado\" en una casa la saca del cotizador pero NO del sitio: la ficha conserva valor SEO y su precio es la referencia para la etapa siguiente."
+    "\"agotado\" en una casa la saca del cotizador pero NO del sitio: la ficha conserva valor SEO y su precio es la referencia para la etapa siguiente.",
+    "\"nombre\" en un desarrollo es el nombre publico; de el salen las etiquetas de la lista publica. Un desarrollo sin nombre revienta el generador a proposito."
   ],
   "actualizado": "2026-08-30",
   "desarrollos": {
     "Azular1": {
+      "nombre": "Jardines del Sur 6",
       "precio_terreno_excedente": 5750,
       "cuota_contingencia": 4000
     },
     "Azular1-Depas": {
+      "nombre": "Jardines del Sur 6",
       "precio_terreno_excedente": 0,
       "cuota_contingencia": 4000
     },
     "Lirios2-Depas": {
+      "nombre": "Lirios Residencial 2",
       "precio_terreno_excedente": 0,
       "cuota_contingencia": 6000
     },
     "LaRioja2": {
+      "nombre": "La Rioja 2",
       "precio_terreno_excedente": 7500,
       "cuota_contingencia": 10000
     }

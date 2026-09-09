@@ -30,7 +30,8 @@ vivienda de Grupo Sadasi) en Cancún. Trabaja solo: vende y mantiene este sitio.
 
 ## 2. Precios — fuente única
 
-`data/precios.json` alimenta **a la vez** la web y el cotizador. Nunca se edita
+`data/precios.json` alimenta **a la vez** la web, el cotizador y la lista
+publica `public/api/precios.json` que lee la app de expedientes. Nunca se edita
 un precio en un componente.
 
 ```bash
@@ -44,6 +45,8 @@ node scripts/check-precios.mjs           # SIEMPRE al final: debe decir "TODO EN
   existe. Detalle en `docs/actualizar-promociones.md`.
 - "PROMO" significa dos cosas: en departamentos es la **vista** (variante
   permanente); en casas, una promoción real. No modelarlos igual.
+- La lista publicada en `/api/precios.json` **sí** incluye lo agotado, marcado
+  `activo: false`. El cotizador no. Contrato en `docs/api-precios.md`.
 
 ---
 
@@ -69,6 +72,7 @@ Después del deploy se commitea también `.firebase/hosting.*.cache`.
 | El dominio viejo / la hipótesis de confianza | `docs/prueba-dominio.md` (CERRADA) |
 | Segundo sitio o dominios | `sites/RIESGOS.md` |
 | El cotizador | `docs/cotizador-context.md` |
+| Compartir precios con otra app | `docs/api-precios.md` |
 | Historia de decisiones pasadas | `context.md` (lo reciente está arriba) |
 
 `context.md` son 1,500+ líneas: leer solo la parte de arriba salvo que se

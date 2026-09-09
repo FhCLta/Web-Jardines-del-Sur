@@ -46,7 +46,7 @@ type Precios = {
   actualizado: string;
   desarrollos: Record<
     string,
-    { precio_terreno_excedente: number; cuota_contingencia: number }
+    { nombre: string; precio_terreno_excedente: number; cuota_contingencia: number }
   >;
   casas: Casa[];
   departamentos: Departamento[];

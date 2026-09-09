@@ -1,0 +1,1553 @@
+{
+  "_doc": "Lista de precios de Altta Homes Cancun. ARCHIVO GENERADO desde data/precios.json; no editar a mano. Contrato y ejemplos en docs/api-precios.md.",
+  "_vistas": {
+    "cotizador": "Identico a window.COTIZADOR_PRECIOS del cotizador de alttahomescancun.mx. Solo lo vendible: los agotados NO estan.",
+    "productos": "Lista plana y completa. Los agotados vienen con activo:false para que un expediente viejo pueda seguir encontrando su producto. Una baja es una bandera, nunca una eliminacion."
+  },
+  "version": 1,
+  "actualizado": "2026-08-30",
+  "desarrollos": [
+    {
+      "id": "Azular1",
+      "nombre": "Jardines del Sur 6",
+      "label": "Jardines del Sur 6 Casas",
+      "tipo": "casas",
+      "catalogo": "datosCasas1",
+      "cuotaContingencia": 4000,
+      "precioTerrenoExcedente": 5750
+    },
+    {
+      "id": "Azular1-Depas",
+      "nombre": "Jardines del Sur 6",
+      "label": "Jardines del Sur 6 Depas",
+      "tipo": "departamentos",
+      "catalogo": "datosDepartamentosJardines6",
+      "cuotaContingencia": 4000,
+      "precioTerrenoExcedente": 0
+    },
+    {
+      "id": "Lirios2-Depas",
+      "nombre": "Lirios Residencial 2",
+      "label": "Lirios Residencial 2",
+      "tipo": "departamentos",
+      "catalogo": "datosDepartamentosLirios2",
+      "cuotaContingencia": 6000,
+      "precioTerrenoExcedente": 0
+    },
+    {
+      "id": "LaRioja2",
+      "nombre": "La Rioja 2",
+      "label": "La Rioja 2",
+      "tipo": "casas",
+      "catalogo": "datosLaRioja2",
+      "cuotaContingencia": 10000,
+      "precioTerrenoExcedente": 7500
+    }
+  ],
+  "productos": [
+    {
+      "id": "azular1-flamboyan",
+      "desarrollo": "Azular1",
+      "tipo": "casa",
+      "modelo": "FLAMBOYAN",
+      "claveCotizador": "FLAMBOYAN",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "FLAMBOYAN",
+      "activo": true,
+      "precioLista": 2621000,
+      "bono": 395150,
+      "neto": 2225850,
+      "valorAvaluo": 2621000,
+      "avaluo": 12000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.073,
+        "contado": 0.072
+      },
+      "web": "jds6-flamboyan"
+    },
+    {
+      "id": "azular1-ceiba",
+      "desarrollo": "Azular1",
+      "tipo": "casa",
+      "modelo": "CEIBA",
+      "claveCotizador": "CEIBA",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CEIBA",
+      "activo": true,
+      "precioLista": 3230000,
+      "bono": 627950,
+      "neto": 2602050,
+      "valorAvaluo": 3230000,
+      "avaluo": 12000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.073,
+        "contado": 0.072
+      },
+      "web": "jds6-ceiba"
+    },
+    {
+      "id": "azular1-tabachin",
+      "desarrollo": "Azular1",
+      "tipo": "casa",
+      "modelo": "TABACHIN",
+      "claveCotizador": "TABACHIN",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "TABACHIN",
+      "activo": false,
+      "precioLista": 3300000,
+      "bono": 635250,
+      "neto": 2664750,
+      "valorAvaluo": 3300000,
+      "avaluo": 12000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.073,
+        "contado": 0.072
+      },
+      "web": "jds6-tabachin"
+    },
+    {
+      "id": "azular1-noni",
+      "desarrollo": "Azular1",
+      "tipo": "casa",
+      "modelo": "NONI",
+      "claveCotizador": "NONI",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "NONI",
+      "activo": true,
+      "precioLista": 3850000,
+      "bono": 688875,
+      "neto": 3161125,
+      "valorAvaluo": 3850000,
+      "avaluo": 14000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "jds6-noni"
+    },
+    {
+      "id": "larioja2-noni-elite",
+      "desarrollo": "LaRioja2",
+      "tipo": "casa",
+      "modelo": "NONI ELITE",
+      "claveCotizador": "NONI ELITE",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "NONI ELITE",
+      "activo": true,
+      "precioLista": 5980000,
+      "bono": 1533002.5,
+      "neto": 4446997.5,
+      "valorAvaluo": 5980000,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "larioja2-noni-elite"
+    },
+    {
+      "id": "larioja2-noni-elite-promo",
+      "desarrollo": "LaRioja2",
+      "tipo": "casa",
+      "modelo": "NONI ELITE",
+      "claveCotizador": "NONI ELITE PROMO",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": true,
+      "prototipo": "NONI ELITE PROMO",
+      "activo": true,
+      "precioLista": 5980000,
+      "bono": 1583002.5,
+      "neto": 4396997.5,
+      "valorAvaluo": 5980000,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "larioja2-noni-elite"
+    },
+    {
+      "id": "larioja2-noni",
+      "desarrollo": "LaRioja2",
+      "tipo": "casa",
+      "modelo": "NONI",
+      "claveCotizador": "NONI",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "NONI",
+      "activo": true,
+      "precioLista": 4490000,
+      "bono": 440625,
+      "neto": 4049375,
+      "valorAvaluo": 4490000,
+      "avaluo": 16000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "larioja2-noni"
+    },
+    {
+      "id": "larioja2-alamo",
+      "desarrollo": "LaRioja2",
+      "tipo": "casa",
+      "modelo": "ALAMO",
+      "claveCotizador": "ALAMO",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "ALAMO",
+      "activo": true,
+      "precioLista": 5820000,
+      "bono": 1383975,
+      "neto": 4436025,
+      "valorAvaluo": 5820000,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "larioja2-alamo"
+    },
+    {
+      "id": "larioja2-fresno-elite",
+      "desarrollo": "LaRioja2",
+      "tipo": "casa",
+      "modelo": "FRESNO ELITE",
+      "claveCotizador": "FRESNO ELITE",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "FRESNO ELITE",
+      "activo": true,
+      "precioLista": 5350000,
+      "bono": 1055050,
+      "neto": 4294950,
+      "valorAvaluo": 5350000,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "larioja2-fresno"
+    },
+    {
+      "id": "azular1-depas-capua-pb",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA",
+      "nivel": "PB",
+      "edificio": null,
+      "vista": "parque",
+      "promocion": false,
+      "prototipo": "CAPUA PB",
+      "activo": true,
+      "precioLista": 2330000,
+      "bono": 332120,
+      "neto": 1997880,
+      "valorAvaluo": 2330000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-1",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA",
+      "nivel": "1",
+      "edificio": null,
+      "vista": "parque",
+      "promocion": false,
+      "prototipo": "CAPUA 1N",
+      "activo": true,
+      "precioLista": 2280000,
+      "bono": 336460,
+      "neto": 1943540,
+      "valorAvaluo": 2280000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-2",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA",
+      "nivel": "2",
+      "edificio": null,
+      "vista": "parque",
+      "promocion": false,
+      "prototipo": "CAPUA 2N",
+      "activo": true,
+      "precioLista": 2260000,
+      "bono": 337360,
+      "neto": 1922640,
+      "valorAvaluo": 2260000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-3",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA",
+      "nivel": "3",
+      "edificio": null,
+      "vista": "parque",
+      "promocion": false,
+      "prototipo": "CAPUA 3N",
+      "activo": true,
+      "precioLista": 2230000,
+      "bono": 326170,
+      "neto": 1903830,
+      "valorAvaluo": 2230000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-promo-pb",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA PROMO",
+      "nivel": "PB",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CAPUA PB V. Est.",
+      "activo": true,
+      "precioLista": 2330000,
+      "bono": 477120,
+      "neto": 1852880,
+      "valorAvaluo": 2330000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-promo-1",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA PROMO",
+      "nivel": "1",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CAPUA 1N V. Est.",
+      "activo": true,
+      "precioLista": 2280000,
+      "bono": 481460,
+      "neto": 1798540,
+      "valorAvaluo": 2280000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-promo-2",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA PROMO",
+      "nivel": "2",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CAPUA 2N V. Est.",
+      "activo": true,
+      "precioLista": 2260000,
+      "bono": 482360,
+      "neto": 1777640,
+      "valorAvaluo": 2260000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-capua-promo-3",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA PROMO",
+      "nivel": "3",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CAPUA 3N V. Est.",
+      "activo": true,
+      "precioLista": 2230000,
+      "bono": 471170,
+      "neto": 1758830,
+      "valorAvaluo": 2230000,
+      "avaluo": 10500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": "jds6-capua"
+    },
+    {
+      "id": "azular1-depas-cedro-plus-pb",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "PB",
+      "edificio": null,
+      "vista": "alberca",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS PB",
+      "activo": true,
+      "precioLista": 2870000,
+      "bono": 541835,
+      "neto": 2328165,
+      "valorAvaluo": 2870000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-cedro-plus-1",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "1",
+      "edificio": null,
+      "vista": "alberca",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 1N",
+      "activo": true,
+      "precioLista": 2790000,
+      "bono": 509905,
+      "neto": 2280095,
+      "valorAvaluo": 2790000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-cedro-plus-2",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "2",
+      "edificio": null,
+      "vista": "alberca",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 2N",
+      "activo": true,
+      "precioLista": 2760000,
+      "bono": 512300,
+      "neto": 2247700,
+      "valorAvaluo": 2760000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": "jds6-cedro-plus"
+    },
+    {
+      "id": "azular1-depas-cedro-plus-3",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "3",
+      "edificio": null,
+      "vista": "alberca",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 3N (ROOF)",
+      "activo": true,
+      "precioLista": 2920000,
+      "bono": 524955,
+      "neto": 2395045,
+      "valorAvaluo": 2920000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-cedro-plus-promo-pb",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS PROMO",
+      "nivel": "PB",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS PB V. Est.",
+      "activo": true,
+      "precioLista": 2870000,
+      "bono": 716835,
+      "neto": 2153165,
+      "valorAvaluo": 2870000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-cedro-plus-promo-1",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS PROMO",
+      "nivel": "1",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 1N V. Est.",
+      "activo": true,
+      "precioLista": 2790000,
+      "bono": 684905,
+      "neto": 2105095,
+      "valorAvaluo": 2790000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-cedro-plus-promo-2",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS PROMO",
+      "nivel": "2",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 2N V. Est.",
+      "activo": true,
+      "precioLista": 2760000,
+      "bono": 687300,
+      "neto": 2072700,
+      "valorAvaluo": 2760000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "azular1-depas-cedro-plus-promo-3",
+      "desarrollo": "Azular1-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS PROMO",
+      "nivel": "3",
+      "edificio": null,
+      "vista": "estacionamiento",
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 3N (ROOF) V. Est.",
+      "activo": true,
+      "precioLista": 2920000,
+      "bono": 699955,
+      "neto": 2220045,
+      "valorAvaluo": 2920000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-p-4-pb",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA P-4",
+      "nivel": "PB",
+      "edificio": "P-4",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA PB P-4",
+      "activo": true,
+      "precioLista": 2861000,
+      "bono": 701000,
+      "neto": 2160000,
+      "valorAvaluo": 2861000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-p-4-1",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA P-4",
+      "nivel": "1",
+      "edificio": "P-4",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA 1N P-4",
+      "activo": true,
+      "precioLista": 2807000,
+      "bono": 712000,
+      "neto": 2095000,
+      "valorAvaluo": 2807000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-p-4-2",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA P-4",
+      "nivel": "2",
+      "edificio": "P-4",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA 2N P-4",
+      "activo": true,
+      "precioLista": 2754000,
+      "bono": 679000,
+      "neto": 2075000,
+      "valorAvaluo": 2754000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-p-4-3",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA P-4",
+      "nivel": "3",
+      "edificio": "P-4",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA 3N P-4",
+      "activo": true,
+      "precioLista": 2700000,
+      "bono": 670000,
+      "neto": 2030000,
+      "valorAvaluo": 2700000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-l-1-pb",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA L-1",
+      "nivel": "PB",
+      "edificio": "L-1",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA PB L-1",
+      "activo": true,
+      "precioLista": 2861000,
+      "bono": 741000,
+      "neto": 2120000,
+      "valorAvaluo": 2861000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-l-1-1",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA L-1",
+      "nivel": "1",
+      "edificio": "L-1",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA 1N L-1",
+      "activo": true,
+      "precioLista": 2807000,
+      "bono": 752000,
+      "neto": 2055000,
+      "valorAvaluo": 2807000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-l-1-2",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA L-1",
+      "nivel": "2",
+      "edificio": "L-1",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA 2N L-1",
+      "activo": true,
+      "precioLista": 2754000,
+      "bono": 719000,
+      "neto": 2035000,
+      "valorAvaluo": 2754000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-capua-l-1-3",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CAPUA",
+      "claveCotizador": "CAPUA L-1",
+      "nivel": "3",
+      "edificio": "L-1",
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CAPUA 3N L-1",
+      "activo": true,
+      "precioLista": 2700000,
+      "bono": 710000,
+      "neto": 1990000,
+      "valorAvaluo": 2700000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": "lirios2-capua"
+    },
+    {
+      "id": "lirios2-depas-cedro-plus-pb",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "PB",
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CEDRO PLUS PB",
+      "activo": true,
+      "precioLista": 2810000,
+      "bono": 441250,
+      "neto": 2368750,
+      "valorAvaluo": 2810000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-cedro-plus-1",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "1",
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 1N",
+      "activo": true,
+      "precioLista": 2677000,
+      "bono": 408250,
+      "neto": 2268750,
+      "valorAvaluo": 2677000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    },
+    {
+      "id": "lirios2-depas-cedro-plus-2",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "2",
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 2N",
+      "activo": true,
+      "precioLista": 2653000,
+      "bono": 404250,
+      "neto": 2248750,
+      "valorAvaluo": 2653000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": "lirios2-cedro-plus"
+    },
+    {
+      "id": "lirios2-depas-cedro-plus-3",
+      "desarrollo": "Lirios2-Depas",
+      "tipo": "departamento",
+      "modelo": "CEDRO PLUS",
+      "claveCotizador": "CEDRO PLUS",
+      "nivel": "3",
+      "edificio": null,
+      "vista": null,
+      "promocion": false,
+      "prototipo": "CEDRO PLUS 3N (ROOF)",
+      "activo": true,
+      "precioLista": 2915000,
+      "bono": 441250,
+      "neto": 2473750,
+      "valorAvaluo": 2915000,
+      "avaluo": 11500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.077,
+        "contado": 0.072
+      },
+      "web": null
+    }
+  ],
+  "cotizador": {
+    "datosAzular": {
+      "Azular1": {
+        "modelos": [
+          "FLAMBOYAN",
+          "CEIBA",
+          "NONI"
+        ],
+        "precioTerrenoExcedente": 5750
+      },
+      "Azular1-Depas": {
+        "modelos": [],
+        "precioTerrenoExcedente": 0
+      },
+      "Lirios2-Depas": {
+        "modelos": [],
+        "precioTerrenoExcedente": 0
+      },
+      "LaRioja2": {
+        "modelos": [
+          "NONI ELITE",
+          "NONI ELITE PROMO",
+          "NONI",
+          "ALAMO",
+          "FRESNO ELITE"
+        ],
+        "precioTerrenoExcedente": 7500
+      }
+    },
+    "datosCasas1": {
+      "FLAMBOYAN": {
+        "precioLista": 2621000,
+        "valorAvaluo": 2621000,
+        "bono": 395150,
+        "avaluo": 12000,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.073,
+          "contado": 0.072
+        }
+      },
+      "CEIBA": {
+        "precioLista": 3230000,
+        "valorAvaluo": 3230000,
+        "bono": 627950,
+        "avaluo": 12000,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.073,
+          "contado": 0.072
+        }
+      },
+      "NONI": {
+        "precioLista": 3850000,
+        "valorAvaluo": 3850000,
+        "bono": 688875,
+        "avaluo": 14000,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      }
+    },
+    "datosLaRioja2": {
+      "NONI ELITE": {
+        "precioLista": 5980000,
+        "valorAvaluo": 5980000,
+        "bono": 1533002.5,
+        "avaluo": 18500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      },
+      "NONI ELITE PROMO": {
+        "precioLista": 5980000,
+        "valorAvaluo": 5980000,
+        "bono": 1583002.5,
+        "avaluo": 18500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      },
+      "NONI": {
+        "precioLista": 4490000,
+        "valorAvaluo": 4490000,
+        "bono": 440625,
+        "avaluo": 16000,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      },
+      "ALAMO": {
+        "precioLista": 5820000,
+        "valorAvaluo": 5820000,
+        "bono": 1383975,
+        "avaluo": 18500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      },
+      "FRESNO ELITE": {
+        "precioLista": 5350000,
+        "valorAvaluo": 5350000,
+        "bono": 1055050,
+        "avaluo": 18500,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      }
+    },
+    "datosDepartamentosJardines6": {
+      "CAPUA": {
+        "1": {
+          "prototipo": "CAPUA 1N",
+          "precioLista": 2280000,
+          "valorAvaluo": 2280000,
+          "bono": 336460,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CAPUA 2N",
+          "precioLista": 2260000,
+          "valorAvaluo": 2260000,
+          "bono": 337360,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CAPUA 3N",
+          "precioLista": 2230000,
+          "valorAvaluo": 2230000,
+          "bono": 326170,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CAPUA PB",
+          "precioLista": 2330000,
+          "valorAvaluo": 2330000,
+          "bono": 332120,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      },
+      "CAPUA PROMO": {
+        "1": {
+          "prototipo": "CAPUA 1N V. Est.",
+          "precioLista": 2280000,
+          "valorAvaluo": 2280000,
+          "bono": 481460,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CAPUA 2N V. Est.",
+          "precioLista": 2260000,
+          "valorAvaluo": 2260000,
+          "bono": 482360,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CAPUA 3N V. Est.",
+          "precioLista": 2230000,
+          "valorAvaluo": 2230000,
+          "bono": 471170,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CAPUA PB V. Est.",
+          "precioLista": 2330000,
+          "valorAvaluo": 2330000,
+          "bono": 477120,
+          "avaluo": 10500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      },
+      "CEDRO PLUS": {
+        "1": {
+          "prototipo": "CEDRO PLUS 1N",
+          "precioLista": 2790000,
+          "valorAvaluo": 2790000,
+          "bono": 509905,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CEDRO PLUS 2N",
+          "precioLista": 2760000,
+          "valorAvaluo": 2760000,
+          "bono": 512300,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CEDRO PLUS 3N (ROOF)",
+          "precioLista": 2920000,
+          "valorAvaluo": 2920000,
+          "bono": 524955,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CEDRO PLUS PB",
+          "precioLista": 2870000,
+          "valorAvaluo": 2870000,
+          "bono": 541835,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      },
+      "CEDRO PLUS PROMO": {
+        "1": {
+          "prototipo": "CEDRO PLUS 1N V. Est.",
+          "precioLista": 2790000,
+          "valorAvaluo": 2790000,
+          "bono": 684905,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CEDRO PLUS 2N V. Est.",
+          "precioLista": 2760000,
+          "valorAvaluo": 2760000,
+          "bono": 687300,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CEDRO PLUS 3N (ROOF) V. Est.",
+          "precioLista": 2920000,
+          "valorAvaluo": 2920000,
+          "bono": 699955,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CEDRO PLUS PB V. Est.",
+          "precioLista": 2870000,
+          "valorAvaluo": 2870000,
+          "bono": 716835,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      }
+    },
+    "datosDepartamentosLirios2": {
+      "CAPUA P-4": {
+        "1": {
+          "prototipo": "CAPUA 1N P-4",
+          "precioLista": 2807000,
+          "bono": 712000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CAPUA 2N P-4",
+          "precioLista": 2754000,
+          "bono": 679000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CAPUA 3N P-4",
+          "precioLista": 2700000,
+          "bono": 670000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CAPUA PB P-4",
+          "precioLista": 2861000,
+          "bono": 701000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      },
+      "CAPUA L-1": {
+        "1": {
+          "prototipo": "CAPUA 1N L-1",
+          "precioLista": 2807000,
+          "bono": 752000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CAPUA 2N L-1",
+          "precioLista": 2754000,
+          "bono": 719000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CAPUA 3N L-1",
+          "precioLista": 2700000,
+          "bono": 710000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CAPUA PB L-1",
+          "precioLista": 2861000,
+          "bono": 741000,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      },
+      "CEDRO PLUS": {
+        "1": {
+          "prototipo": "CEDRO PLUS 1N",
+          "precioLista": 2677000,
+          "bono": 408250,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "2": {
+          "prototipo": "CEDRO PLUS 2N",
+          "precioLista": 2653000,
+          "bono": 404250,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "3": {
+          "prototipo": "CEDRO PLUS 3N (ROOF)",
+          "precioLista": 2915000,
+          "bono": 441250,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        },
+        "PB": {
+          "prototipo": "CEDRO PLUS PB",
+          "precioLista": 2810000,
+          "bono": 441250,
+          "avaluo": 11500,
+          "porcentajesEscrituracion": {
+            "infonavit": 0.07,
+            "fovissste": 0.08,
+            "cofinavit": 0.085,
+            "bancario": 0.077,
+            "contado": 0.072
+          }
+        }
+      }
+    },
+    "cuotasContingencia": {
+      "Azular1": 4000,
+      "Azular1-Depas": 4000,
+      "Lirios2-Depas": 6000,
+      "LaRioja2": 10000
+    }
+  }
+}

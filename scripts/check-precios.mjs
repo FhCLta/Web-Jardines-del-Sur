@@ -4,7 +4,8 @@
 //   node scripts/gen-cotizador-precios.mjs && node scripts/check-precios.mjs
 //
 // Comprueba 4 cosas:
-//   1. public/cotizador/precios.js esta regenerado (no quedo viejo).
+//   1. Los archivos generados estan al dia (precios.js del cotizador y
+//      api/precios.json, la lista que leen otras apps).
 //   2. Cada modelo publicado en el sitio tiene precio en la fuente unica.
 //   3. Ningun id del inventario esta marcado como publicable dos veces.
 //   4. El neto que vera el cliente cuadra: precio_lista - bono.
@@ -28,21 +29,26 @@ const mal = (msg) => {
   console.log(`  ✗ ${msg}`);
 };
 
-// 1) precios.js regenerado ------------------------------------------------
-console.log("\n1) precios.js al dia");
-const generado = leer("public/cotizador/precios.js");
+// 1) archivos generados al dia --------------------------------------------
+// Son dos: el que come el cotizador de este sitio y el que leen otras apps.
+// Cualquiera de los dos viejo significa que se publicaria un precio que ya
+// cambio en la fuente.
+console.log("\n1) archivos generados al dia");
+const GENERADOS = ["public/cotizador/precios.js", "public/api/precios.json"];
+const antes = GENERADOS.map(leer);
 execFileSync(process.execPath, ["scripts/gen-cotizador-precios.mjs"], {
   cwd: RAIZ,
   stdio: "pipe",
 });
-const recien = leer("public/cotizador/precios.js");
-if (generado === recien) {
-  ok("public/cotizador/precios.js coincide con data/precios.json");
-} else {
-  mal(
-    "public/cotizador/precios.js estaba DESACTUALIZADO (ya se regenero; revisa el diff y vuelve a commitear)"
-  );
-}
+GENERADOS.forEach((archivo, i) => {
+  if (antes[i] === leer(archivo)) {
+    ok(`${archivo} coincide con data/precios.json`);
+  } else {
+    mal(
+      `${archivo} estaba DESACTUALIZADO (ya se regenero; revisa el diff y vuelve a commitear)`
+    );
+  }
+});
 
 // 2 y 3) mapeo a la web ---------------------------------------------------
 console.log("\n2) cada modelo del sitio tiene precio en la fuente unica");
