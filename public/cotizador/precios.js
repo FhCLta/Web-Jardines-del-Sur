@@ -12,6 +12,7 @@ window.COTIZADOR_PRECIOS = {
       "modelos": [
         "FLAMBOYAN",
         "CEIBA",
+        "TABACHIN",
         "NONI"
       ],
       "precioTerrenoExcedente": 5750,
@@ -71,6 +72,20 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 3230000,
       "valorAvaluo": 3230000,
       "bono": 627950,
+      "avaluo": 12000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.073,
+        "contado": 0.072
+      }
+    },
+    "TABACHIN": {
+      "id": "azular1-tabachin",
+      "precioLista": 3300000,
+      "valorAvaluo": 3300000,
+      "bono": 635250,
       "avaluo": 12000,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,
@@ -599,32 +614,5 @@ window.COTIZADOR_PRECIOS = {
     "Lirios2-Depas": 6000,
     "LaRioja2": 10000
   },
-  "historico": [
-    {
-      "id": "azular1-tabachin",
-      "desarrollo": "Azular1",
-      "tipo": "casa",
-      "modelo": "TABACHIN",
-      "claveCotizador": "TABACHIN",
-      "nivel": null,
-      "edificio": null,
-      "vista": null,
-      "promocion": false,
-      "prototipo": "TABACHIN",
-      "activo": false,
-      "precioLista": 3300000,
-      "bono": 635250,
-      "neto": 2664750,
-      "valorAvaluo": 3300000,
-      "avaluo": 12000,
-      "porcentajesEscrituracion": {
-        "infonavit": 0.07,
-        "fovissste": 0.08,
-        "cofinavit": 0.085,
-        "bancario": 0.073,
-        "contado": 0.072
-      },
-      "web": "jds6-tabachin"
-    }
-  ]
+  "historico": []
 };
