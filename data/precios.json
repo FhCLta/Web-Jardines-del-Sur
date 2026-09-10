@@ -4,7 +4,9 @@
     "\"vista\" solo aplica a departamentos: es una variante permanente del producto, NO una promocion. Lirios no tiene vistas.",
     "\"promocion.bono_extra\" solo aplica a casas: es una promocion real que suma al bono.",
     "El precio NETO que ve el cliente = precio_lista - bono (y - bono_extra si se aplica la promocion).",
-    "\"agotado\" en una casa la saca del cotizador pero NO del sitio: la ficha conserva valor SEO y su precio es la referencia para la etapa siguiente.",
+    "\"agotado\" saca el modelo del cotizador pero NO del sitio: la ficha conserva valor SEO y su precio es la referencia para la etapa siguiente. Sigue en la lista publica dentro de \"historico\", con activo:false, para que un expediente ya firmado se pueda volver a abrir.",
+    "\"agotado\" (aqui) y status \"Agotado\" (inventory.json) son marcas DISTINTAS y no tienen que coincidir. En la web se pone Agotado en cuanto se acaba; del cotizador se quita solo cuando Florencio lo pide, porque una unidad se puede liberar y mientras tanto necesita poder cotizarla. Lo unico prohibido es al reves: que la web lo ofrezca y el cotizador no lo pueda cotizar. check-precios.mjs lo verifica.",
+    "Al quitar un \"agotado\" hay que CONFIRMAR EL PRECIO antes: el que quedo guardado es el del dia que se agoto, y si hubo lista nueva se estaria republicando un precio que ya no existe.",
     "\"nombre\" en un desarrollo es el nombre publico; de el salen las etiquetas de la lista publica. Un desarrollo sin nombre revienta el generador a proposito."
   ],
   "actualizado": "2026-08-30",

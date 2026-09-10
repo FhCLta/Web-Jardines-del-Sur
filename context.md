@@ -1,6 +1,47 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
 
+> **✅ COMPLETADO sesión 53 (9 sept 2026) — LOS PRECIOS SE COMPARTEN CON LA APP DE EXPEDIENTES. Desplegado y verificado en producción.**
+>
+> **0. El dato del día: Jardines del Sur 7 ya da 10-15 leads orgánicos** y la
+> preventa todavía no abre. Sin costo publicitario, solo por la posición. Es la
+> confirmación con números de la estrategia de defender el #1.
+>
+> **1. Los precios ahora se publican para otras apps.** La app de expedientes
+> (`datosgeneralesalttahomes`) tenía su propia copia de los precios en Firestore
+> más un respaldo en su código: tres copias del mismo dato. Ahora leen la de
+> aquí. Dos direcciones estables, generadas las dos por
+> `scripts/gen-cotizador-precios.mjs` desde `data/precios.json`:
+> `/cotizador/precios.js` (etiqueta `<script>`, no pasa por CORS — es la que
+> usan ellos) y `/api/precios.json` (con `fetch`, CORS abierto).
+> **⚠️ Ninguna de las dos puede cambiar de dirección.**
+>
+> **2. `precios.js` emite cuatro campos nuevos por desarrollo** —`label`,
+> `fraccionamiento`, `tipo` y `catalogo`— para que el cotizador resuelva un
+> desarrollo LEYENDO el dato en vez de comparar contra nombres escritos a mano.
+> Con eso, agregar un desarrollo pasa a ser solo datos en las dos apps. También
+> `id` estable por producto, e `historico` con lo dado de baja
+> (`activo: false`), para que un expediente firmado se pueda volver a abrir.
+> **Verificado campo por campo: todo lo que el cotizador ya leía quedó idéntico.**
+>
+> **3. Tres redes nuevas que detienen el generador** antes de publicar algo malo:
+> desarrollo sin `nombre`, desarrollo sin catálogo declarado, nivel de
+> departamento desconocido, e id repetido. El de los niveles cazó un fallo real:
+> `PB/1/2/3` está escrito a mano en dos lugares y un nivel nuevo no tronaba en
+> ninguno — desaparecía del cotizador y se desordenaba en la web, callado.
+>
+> **4. El Píxel de Meta se ENCENDIÓ** (decisión de Florencio, a sabiendas del
+> costo). Efecto no previsto y bueno: el `Contact` ahora viaja por navegador y
+> servidor con el mismo `event_id`, así que Meta los une. El `PageView` se cuenta
+> doble; se acepta y se revisa con datos. Detalle en `google-ads.md` SESIÓN 37.
+>
+> **Pendiente:** que la otra app mande los archivos de su cotizador (proponen que
+> el suyo sea la base, y el argumento es correcto: ya trae la capa del expediente
+> y la parte data-driven) y que confirmen las cuatro cadenas de
+> `fraccionamiento`. Plan de integración sin romper nada: en paralelo, comparar,
+> y recién entonces cambiar.
+
+
 > **✅ COMPLETADO sesiones 51-52 (30 ago – 1 sept 2026) — CAPUA EN LIRIOS, EQUIPAMIENTO EN LAS FICHAS, TÍTULOS DE PRECIOS SIN AÑO. Todo desplegado y verificado en producción.**
 >
 > **1. Departamento Capua en Lirios Residencial 2 — modelo nuevo, de cero.**

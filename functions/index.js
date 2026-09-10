@@ -5,9 +5,17 @@
 // código). El navegador manda el mismo evento vía fbq() con el MISMO event_id
 // → Meta deduplica y se queda con el mejor de los dos canales.
 //
-// Fase actual: SOLO el evento "Contact" (clic a WhatsApp). NO se manda
-// PageView por CAPI todavía: el Pixel de GTM ya lo envía sin event_id y se
-// duplicaría. Cuando se haga la Fase de "aligerar el Pixel", se migra todo.
+// Fase actual, VERIFICADO el 9 sep 2026 (este comentario decía lo contrario y
+// estaba equivocado): el sitio manda PageView Y Contact por CAPI —ver
+// components/MetaContactTracker.jsx— y NO carga el Pixel. En el HTML publicado
+// no aparece connect.facebook.net: la etiqueta "Meta Pixel - Base Code" de GTM
+// está PAUSADA, así que window.fbq no existe y el fbq() del tracker nunca corre.
+//
+// ⚠️ SI ALGÚN DÍA SE DESPAUSA ESA ETIQUETA: "Contact" queda bien, porque el
+// navegador y el servidor mandan el MISMO event_id y Meta deduplica. Pero
+// "PageView" NO: el del navegador y el del servidor llevan event_id distintos
+// y se contaría doble. Orden correcto: quitar primero el PageView del servidor,
+// publicar, verificar el conteo, y hasta entonces despausar. Nunca al revés.
 
 const { onRequest } = require("firebase-functions/v2/https");
 const { defineSecret } = require("firebase-functions/params");

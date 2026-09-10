@@ -2011,3 +2011,47 @@ de Meta que Florencio sí tiene (se lo deja cada persona que escribe por WhatsAp
 Cifrado con hash y enviado desde el registro de leads. Es el mismo dato con tres
 usos: ordena su seguimiento, le dice a Google quién compró, y le dice a Meta a
 quién buscar. **Va después del CRM**, con cuidado de privacidad y consentimiento.
+
+---
+
+## 🟢 SESIÓN 37 — META: el Píxel SE ENCENDIÓ (deroga la Sesión 36) — 9 sept 2026
+
+**Decisión de Florencio:** encender los eventos web de Meta en GTM para que el
+panel deje de marcar errores. Se le advirtió del peso (`fbevents.js` ~245 KB en
+cada página) y del PageView duplicado; lo aceptó a sabiendas, para revisarlo con
+datos. **Publicado y verificado en el contenedor `GTM-53BHDRWC` el 9 sept 2026.**
+
+### Estado real AHORA (verificado leyendo el contenedor publicado, no de palabra)
+
+| | Antes (sesiones 35-36) | Ahora |
+|---|---|---|
+| `Meta Pixel - Base Code` | PAUSADA | **ACTIVA** |
+| Dispara con | — | **solo carga de página** (All Pages) |
+| `fbq('track','PageView')` | — | presente (línea 12, se conservó) |
+| Activador `Click - WhatsApp wa.me` | estaba en la etiqueta | **QUITADO** ✔ |
+| PageView | solo servidor (CAPI) | **servidor + navegador, SIN event_id común → se cuenta DOBLE** |
+| Contact | solo servidor | **servidor + navegador con el MISMO event_id → deduplicado ✔** |
+
+### Lo bueno que no estaba previsto
+El `Contact` ahora viaja por los dos canales con el mismo `event_id`. El código
+ya estaba escrito y esperando (`components/MetaContactTracker.jsx:113`, detrás de
+un `if (typeof window.fbq === "function")` que hasta hoy nunca se cumplía). Meta
+une los dos y se queda con el mejor → **mejora la calidad de coincidencia**, que
+es justo lo que el panel venía marcando (ver Sesión 35).
+
+### Lo que hay que vigilar
+- **PageView duplicado.** No corrompe la optimización —Meta optimiza sobre
+  Contact, que sí está deduplicado— ni infla públicos (se cuentan personas).
+  Es un número inflado en el reporte. Revisar a los 7 días.
+- Si molesta: **borrar la línea 12** de la etiqueta (`fbq('track','PageView')`).
+  Con eso el Píxel sigue instalado y detectado, el Contact sigue deduplicado, y
+  el PageView vuelve a mandarlo solo el servidor. Es un cambio de una línea.
+- La otra salida es la de la regla vieja: quitar el PageView del servidor
+  (`MetaContactTracker.jsx:102`). **Peor opción**: el canal servidor no lo
+  bloquean los bloqueadores de anuncios ni Safari.
+
+### Corregido de paso
+`functions/index.js` tenía un comentario que afirmaba lo contrario de lo que hace
+el código: decía que el servidor NO manda PageView. Cualquiera que lo leyera
+concluiría que encender la etiqueta era inofensivo. Reescrito con lo verificado
+el 9 sept 2026.

@@ -9,6 +9,7 @@
 //   2. Cada modelo publicado en el sitio tiene precio en la fuente unica.
 //   3. Ningun id del inventario esta marcado como publicable dos veces.
 //   4. El neto que vera el cliente cuadra: precio_lista - bono.
+//   5. Nada se ofrece en la web sin poder cotizarse.
 //
 // Sale con codigo 1 si algo falla, para poder encadenarlo en un pre-deploy.
 
@@ -90,6 +91,41 @@ for (const [id] of porId) {
   }
 }
 if (!huerfanas) ok("ninguna");
+
+// 5) agotado en el cotizador vs. agotado en la web --------------------------
+// ⚠️ NO son la misma marca y NO tienen que coincidir. Es una decisión de
+// Florencio (9 sept 2026) y responde a como se vende de verdad:
+//
+//   - En la WEB se pone "Agotado" en cuanto se acaba. Es honesto con quien
+//     visita, y la ficha conserva su valor de posicionamiento.
+//   - Del COTIZADOR se quita solo cuando el lo pide. Una unidad se puede
+//     liberar (una cancelacion), y mientras tanto el necesita poder cotizarla.
+//
+// Asi que "agotado en la web y todavia cotizable" es un estado VALIDO y comun.
+// El que si es un error es el contrario: la web lo ofrece y el cotizador no lo
+// puede cotizar. Ahi un cliente pregunta por algo que no se le puede vender.
+console.log("\n4) agotado en la web vs. agotado en el cotizador");
+let desfases = 0;
+for (const modelo of inventario) {
+  if (modelo.precio_por_anunciar) continue;
+  const e = porId.get(modelo.id);
+  if (!e) continue; // ya se reporto arriba
+  const fueraDelCotizador = e.agotado === true;
+  const agotadoEnLaWeb = modelo.status === "Agotado";
+
+  if (fueraDelCotizador && !agotadoEnLaWeb) {
+    mal(
+      `"${modelo.id}" se OFRECE en la web (status "${modelo.status}") pero NO se puede cotizar ` +
+        `(agotado en precios.json). Marca "Agotado" en inventory.json o quitale el agotado a precios.json.`
+    );
+  } else if (agotadoEnLaWeb && !fueraDelCotizador) {
+    desfases++;
+    console.log(
+      `  · ${modelo.id.padEnd(22)} agotado en la web, todavia cotizable — estado intencional`
+    );
+  }
+}
+if (!desfases) ok("ninguna combinacion rara");
 
 console.log(
   `\n${fallos.length === 0 ? "TODO EN ORDEN" : `${fallos.length} PROBLEMA(S)`} — ${todas.length} variantes, ${porId.size} publicadas en la web\n`
