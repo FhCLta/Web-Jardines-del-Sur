@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./FooterPhoneContact.module.css";
+import { hrefWhatsAppPorRuta } from "@/lib/whatsapp-ruta";
 
 const PHONE_DISPLAY = "+52 998 205 9044";
 const PHONE_TEL = "+529982059044";
-const WA_HREF =
-  "https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn.";
+// El mensaje cambia segun la pagina: ver lib/whatsapp-ruta.ts.
 
 export default function FooterPhoneContact() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() ?? "";
 
   useEffect(() => {
     const onOpen = () => setOpen(true);
@@ -75,7 +77,7 @@ export default function FooterPhoneContact() {
               </a>
               <a
                 className={styles.whatsBtn}
-                href={WA_HREF}
+                href={hrefWhatsAppPorRuta(pathname)}
                 target="_blank"
                 rel="noreferrer"
               >

@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import styles from "./SiteHeader.module.css";
-
-const WA_HREF =
-  "https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn.";
+import {
+  hrefWhatsAppPorRuta,
+  MODEL_NAMES_BY_SLUG,
+  SECTION_NAMES_BY_SLUG,
+} from "@/lib/whatsapp-ruta";
 
 const SILO_LINKS = [
   { slug: "jardines-del-sur-6", name: "Jardines del Sur 6", shortName: "Jardines 6" },
@@ -14,29 +16,8 @@ const SILO_LINKS = [
   { slug: "jardines-del-sur-7", name: "Jardines del Sur 7", shortName: "Jardines 7" },
 ];
 
-// Conservar acentos en los nombres de modelos para el breadcrumb del navbar.
-// Los slugs no contienen acentos (slugify los remueve), por eso es necesario este mapa.
-const MODEL_NAMES_BY_SLUG = {
-  "casa-tabachin": "Casa Tabachín",
-  "casa-ceiba": "Casa Ceiba",
-  "casa-flamboyan": "Casa Flamboyán",
-  "casa-noni": "Casa Noni",
-  "casa-fresno-elite": "Casa Fresno Elite",
-  "casa-modelo-alamo": "Casa Modelo Alamo",
-  "casa-noni-elite": "Casa Noni Elite",
-  "departamento-capua": "Departamento Capua",
-  "departamento-cedro-plus": "Departamento Cedro Plus",
-};
-
-// Secciones que cuelgan de un desarrollo y NO son modelos. Sin este mapa el
-// breadcrumb caia al segmento crudo de la URL y mostraba "precios", "casas",
-// "departamentos" o "promociones" en minuscula. Pasaba desde julio.
-const SECTION_NAMES_BY_SLUG = {
-  casas: "Casas",
-  departamentos: "Departamentos",
-  promociones: "Promociones",
-  precios: "Precios",
-};
+// Los nombres de modelos y de secciones viven en lib/whatsapp-ruta.ts: la
+// migaja de pan y el mensaje de WhatsApp necesitan exactamente los mismos.
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -152,7 +133,7 @@ export default function SiteHeader() {
           )}
 
           <a
-            href={WA_HREF}
+            href={hrefWhatsAppPorRuta(pathname)}
             className={`btn btn-primary ${styles.ctaBtn}`}
             target="_blank"
             rel="noreferrer"
@@ -259,7 +240,7 @@ export default function SiteHeader() {
           </nav>
         )}
         <a
-          href={WA_HREF}
+          href={hrefWhatsAppPorRuta(pathname)}
           className={`btn btn-primary ${styles.drawerCta}`}
           target="_blank"
           rel="noreferrer"

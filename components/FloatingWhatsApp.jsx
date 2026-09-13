@@ -2,9 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import styles from './FloatingWhatsApp.module.css';
+import { usePathname } from 'next/navigation';
+import { hrefWhatsAppPorRuta } from '@/lib/whatsapp-ruta';
 
 export default function FloatingWhatsApp() {
   const [showTooltip, setShowTooltip] = useState(false);
+  // El mensaje cambia segun la pagina: ver lib/whatsapp-ruta.ts.
+  const pathname = usePathname() ?? "";
 
   useEffect(() => {
     // Ciclo: visible 3s, oculto 0.5s
@@ -48,7 +52,7 @@ export default function FloatingWhatsApp() {
       </div>
 
       <a
-        href="https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn."
+        href={hrefWhatsAppPorRuta(pathname)}
         target="_blank"
         rel="noreferrer"
         className={styles.floatBtn}

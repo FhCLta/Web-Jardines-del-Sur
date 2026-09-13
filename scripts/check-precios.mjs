@@ -10,6 +10,7 @@
 //   3. Ningun id del inventario esta marcado como publicable dos veces.
 //   4. El neto que vera el cliente cuadra: precio_lista - bono.
 //   5. Nada se ofrece en la web sin poder cotizarse.
+//   6. El mensaje de WhatsApp no promete un producto que el desarrollo no tiene.
 //
 // Sale con codigo 1 si algo falla, para poder encadenarlo en un pre-deploy.
 
@@ -126,6 +127,34 @@ for (const modelo of inventario) {
   }
 }
 if (!desfases) ok("ninguna combinacion rara");
+
+// 5) data/silos.json vs. el inventario -------------------------------------
+// El mensaje de WhatsApp de los botones fijos dice "las casas de X", "los
+// departamentos de X" o las dos cosas, segun esta tabla. Si un desarrollo
+// estrena el otro producto y la tabla no se actualiza, el mensaje le promete
+// al cliente algo que no existe — o se calla algo que si. Es el mismo error de
+// rotulo que no cuadra.
+console.log("\n5) data/silos.json refleja lo que hay en el inventario");
+const silos = JSON.parse(leer("data/silos.json")).silos;
+for (const [slug, cfg] of Object.entries(silos)) {
+  const delDev = inventario.filter((m) => m.development === cfg.nombre);
+  if (!delDev.length) {
+    mal(`silos.json nombra "${cfg.nombre}" y no hay ningun modelo suyo en inventory.json`);
+    continue;
+  }
+  const casas = delDev.filter((m) => !/departamento/i.test(m.nombre_modelo)).length;
+  const depas = delDev.length - casas;
+  const real = casas && depas ? "ambos" : depas ? "departamentos" : "casas";
+  if (real !== cfg.tiene) {
+    mal(
+      `silos.json dice que ${cfg.nombre} tiene "${cfg.tiene}" pero el inventario trae ` +
+        `${casas} casa(s) y ${depas} departamento(s) -> deberia decir "${real}". ` +
+        `Con esto el boton de WhatsApp manda un mensaje que no cuadra (${slug}).`
+    );
+  } else {
+    ok(`${cfg.nombre.padEnd(22)} ${real}`);
+  }
+}
 
 console.log(
   `\n${fallos.length === 0 ? "TODO EN ORDEN" : `${fallos.length} PROBLEMA(S)`} — ${todas.length} variantes, ${porId.size} publicadas en la web\n`
