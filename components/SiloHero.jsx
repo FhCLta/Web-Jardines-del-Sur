@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import styles from "./Hero.module.css";
 import siloStyles from "@/app/(desarrollos)/silo.module.css";
 import HeroBackground from "./HeroBackground";
@@ -37,13 +38,35 @@ export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown,
           <span className={siloStyles.breadcrumbCurrent}>{name}</span>
         </nav>
 
-        <span className={styles.eyebrow}>
+        {/* Logo del desarrollo sobre placa blanca, igual que en Jardines del Sur 7.
+            Los cuatro logos son de tinta oscura con fondo transparente: directo
+            sobre la foto oscura no se leerian. El h1 sigue siendo texto, que es lo
+            que cuenta para el posicionamiento; el logo solo acompana. */}
+        {dev.logo && (
+          <span
+            className={
+              dev.logoSobreFoto === "blanco" ? siloStyles.logoBlanco : siloStyles.logoPlate
+            }
+          >
+            <Image
+              src={dev.logo}
+              alt={`Logo de ${name}`}
+              width={dev.logoWidth}
+              height={128}
+              priority
+            />
+          </span>
+        )}
+
+        <span className={`${styles.eyebrow} ${siloStyles.eyebrowSilo}`}>
           <span className={styles.eyebrowDot} />
           <strong>{hero.eyebrow.strong}</strong>
           {hero.eyebrow.rest.map((part, i) => (
             <React.Fragment key={i}>
-              <span className={styles.eyebrowSep}>·</span>
-              {part}
+              <span className={`${styles.eyebrowSep} ${siloStyles.eyebrowSepSilo}`}>·</span>
+              {/* Cada frase en su propio elemento: como texto suelto, al ocultar el
+                  puntito en telefono dos frases se fundian ("CANCÚN3 MODELOS"). */}
+              <span>{part}</span>
             </React.Fragment>
           ))}
         </span>

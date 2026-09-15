@@ -23,6 +23,19 @@ export type DevContent = {
    * que la lista se reconozca de un vistazo al compartirla por WhatsApp.
    */
   logo: string;
+  /** Ancho del archivo del logo en px. Todos miden 128 de alto y vienen recortados. */
+  logoWidth: number;
+  /**
+   * Como va el logo sobre la foto oscura del encabezado del silo:
+   *  - "blanco": sin fondo, recoloreado en blanco con CSS. Se ve mejor
+   *    (decision de Florencio), pero SOLO sirve si el dibujo son formas sobre
+   *    transparencia.
+   *  - "placa" (por omision): sobre placa blanca. Para logos cuyo icono trae un
+   *    cuadro opaco, como Jardines del Sur 6: en blanco el cuadro se vuelve un
+   *    bloque solido. Con sus colores originales y sin placa, los cuatro logos
+   *    se pierden contra la foto (medido).
+   */
+  logoSobreFoto?: "blanco" | "placa";
   location?: { label: string; value: string };
   whatsappMessage: string;
   hero: {
@@ -93,6 +106,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     heroImage: "/optimized/dev-tabs/jardines-6.webp",
     ogImage: "/jardines/Imagnes de amenidades y hero/alberca.webp",
     logo: "/logos/jardines-6.webp",
+    logoWidth: 400,
     location: { label: "Ubicación", value: "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
@@ -229,6 +243,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     heroImage: "/optimized/dev-tabs/jardines-6.webp",
     ogImage: "/hero-alberca-jardines.webp",
     logo: "/logos/jardines-7-v2.webp",
+    logoWidth: 336,
     whatsappMessage:
       "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.",
     hero: {
@@ -283,6 +298,8 @@ export const DEVS: Record<DevSlug, DevContent> = {
     heroImage: "/optimized/dev-tabs/la-rioja-2.webp",
     ogImage: "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
     logo: "/logos/la-rioja-2.webp",
+    logoWidth: 190,
+    logoSobreFoto: "blanco",
     location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
@@ -410,6 +427,8 @@ export const DEVS: Record<DevSlug, DevContent> = {
     heroImage: "/optimized/dev-tabs/lirios-2.webp",
     ogImage: "/jardines/Modelo Cedro Plus/1.webp",
     logo: "/logos/lirios-2.webp",
+    logoWidth: 260,
+    logoSobreFoto: "blanco",
     location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre los departamentos de Lirios Residencial 2 en Cancún.",

@@ -522,16 +522,6 @@ export default async function ModelPage({
         </section>
       )}
 
-      {/* PRECIOS POR NIVEL — el abanico completo del modelo, no solo el gancho */}
-      {tieneTablaNiveles && (
-        <NivelesTable
-          variantes={variantes}
-          modelo={modeloPrecios!}
-          waHref={waHref}
-          showModelName={false}
-        />
-      )}
-
       {/* TOUR VIRTUAL */}
       {tourUrl && (
         <section
@@ -554,6 +544,19 @@ export default async function ModelPage({
             />
           </div>
         </section>
+      )}
+
+      {/* PRECIOS POR NIVEL — el abanico completo del modelo, no solo el gancho.
+          Va DESPUES del recorrido virtual y antes del CTA: primero se conoce el
+          modelo, luego los precios, y al final cotizar (decision de Florencio,
+          15 sept 2026). */}
+      {tieneTablaNiveles && (
+        <NivelesTable
+          variantes={variantes}
+          modelo={modeloPrecios!}
+          waHref={waHref}
+          showModelName={false}
+        />
       )}
 
       {/* CTA */}

@@ -1,0 +1,138 @@
+/* Mismo lenguaje que .devSelector del inicio (DevelopmentTabs.module.css). */
+.contenedor {
+  width: 100%;
+}
+
+.selector {
+  display: grid;
+  /* minmax(0, 1fr): sin el 0, un texto que no cabe ensancha su columna y la
+     pestana activa se sale del recuadro por la derecha (paso en celular). */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0 auto 2.75rem;
+  padding: 0.5rem;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 1.1rem;
+  max-width: 560px;
+}
+
+.opcion {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 84px;
+  min-width: 0;
+  padding: 0.9rem 0.6rem 1rem;
+  border: none;
+  border-radius: 0.85rem;
+  background: transparent;
+  color: var(--primary);
+  font-family: var(--font-montserrat);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.35s ease;
+}
+
+.opcion:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.opcion:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+
+.etiqueta {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.detalle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.trozo {
+  white-space: nowrap;
+}
+
+/* En celular la pestana es angosta: "4 modelos" arriba y "desde $X" abajo,
+   completos, en vez de cortar entre "desde" y el precio. */
+@media (max-width: 520px) {
+  .detalle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.05rem;
+  }
+
+  .separador {
+    display: none;
+  }
+}
+
+.opcionActiva {
+  background: #fff;
+  box-shadow: 0 14px 28px -16px rgba(15, 23, 42, 0.25),
+    0 0 0 2px rgba(209, 146, 0, 0.55);
+  transform: translateY(-2px);
+}
+
+.opcionActiva .detalle {
+  color: #735000;
+}
+
+.opcionActiva::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-right: 2px solid rgba(209, 146, 0, 0.55);
+  border-bottom: 2px solid rgba(209, 146, 0, 0.55);
+  border-bottom-right-radius: 3px;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opcion {
+    transition: none;
+  }
+  .opcionActiva {
+    transform: none;
+  }
+}
+
+/* Telefonos angostos (iPhone 375 px, Android 360 px): letra y relleno un poco
+   menores para que "desde $2,225,850" quepa completo dentro de su pestana. */
+@media (max-width: 420px) {
+  .selector {
+    gap: 0.35rem;
+    padding: 0.35rem;
+  }
+
+  .opcion {
+    min-height: 76px;
+    padding: 0.75rem 0.3rem 0.85rem;
+  }
+
+  .etiqueta {
+    font-size: 0.98rem;
+  }
+
+  .detalle {
+    font-size: 0.72rem;
+  }
+}

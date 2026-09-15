@@ -7,6 +7,7 @@ import FooterPhoneContact from "@/components/FooterPhoneContact";
 import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import SiloHero from "@/components/SiloHero";
+import SiloTiposTabs from "@/components/SiloTiposTabs";
 import AmenitiesSection from "@/components/AmenitiesSection";
 import pageStyles from "@/app/page.module.css";
 import styles from "../silo.module.css";
@@ -62,6 +63,30 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
     ? `${casasCount} ${casasCount === 1 ? "casa" : "casas"} y ${deptosCount} ${deptosCount === 1 ? "departamento" : "departamentos"}`
     : undefined;
   const dynamicSubtitleDetail = dev.hero.subtitle.detail;
+
+  // Un desarrollo con casas Y departamentos (hoy solo Jardines del Sur 6) muestra
+  // un selector Departamentos / Casas (SiloTiposTabs) en vez de una sola rejilla. Son dos compradores distintos
+  // —presupuesto y credito distintos—: quien busca casa no deberia tener que
+  // pasar primero por departamentos de otro rango de precio para encontrar lo
+  // suyo. La Rioja y Lirios, con un solo tipo, siguen con una sola rejilla.
+  const separarPorTipo = casasCount > 0 && deptosCount > 0;
+  const grupos = separarPorTipo
+    ? [
+        // Casas PRIMERO, y es la pestana que se ve al entrar: decision de Florencio.
+        {
+          tipo: "casas",
+          titulo: "Casas",
+          verSolo: "las casas",
+          props: properties.filter((p) => /^Casa\s/i.test(p.nombre_modelo)),
+        },
+        {
+          tipo: "departamentos",
+          titulo: "Departamentos",
+          verSolo: "los departamentos",
+          props: properties.filter((p) => /^Departamento\s/i.test(p.nombre_modelo)),
+        },
+      ]
+    : [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -165,39 +190,6 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
         </div>
       </nav>
 
-      {dev.promos && (
-        <div className="container" style={{ marginTop: "1.25rem" }}>
-          <a
-            href={`/${dev.slug}/promociones`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "1rem",
-              flexWrap: "wrap",
-              background:
-                "linear-gradient(135deg, #E8B43A 0%, #D19200 55%, #A37200 100%)",
-              color: "#1a1204",
-              textDecoration: "none",
-              borderRadius: "1rem",
-              padding: "1rem 1.4rem",
-              fontWeight: 700,
-              boxShadow: "0 16px 36px -14px rgba(214, 158, 46, 0.55)",
-            }}
-          >
-            <span
-              style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}
-            >
-              <span style={{ fontSize: "1.3rem" }} aria-hidden="true">
-                🏷️
-              </span>
-              Promociones del mes en {dev.name} — minisplits y descuentos
-            </span>
-            <span style={{ whiteSpace: "nowrap" }}>Ver promociones →</span>
-          </a>
-        </div>
-      )}
-
       <section id="modelos" className={styles.modelsSection} style={{ scrollMarginTop: "110px" }}>
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -206,36 +198,50 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
             <p>
               Recorridos virtuales 360°, precios actualizados y atención directa por WhatsApp.
             </p>
-            {/* Enlaces a las páginas-catálogo (comparte/descarga). Discretos, no
-                en el navbar. Jardines 6 es el único desarrollo con los dos tipos,
-                así que es el único que muestra los dos enlaces. */}
-            {dev.slug === "jardines-del-sur-6" && (
-              <p style={{ marginTop: "0.85rem", display: "flex", flexWrap: "wrap", gap: "0.4rem 1.5rem" }}>
-                {casasCount > 0 && (
-                  <a
-                    href="/jardines-del-sur-6/casas"
-                    style={{ color: "var(--accent-deep)", fontWeight: 700, textDecoration: "none" }}
-                  >
-                    Ver solo las casas de Jardines del Sur 6 →
-                  </a>
-                )}
-                {deptosCount > 0 && (
-                  <a
-                    href="/jardines-del-sur-6/departamentos"
-                    style={{ color: "var(--accent-deep)", fontWeight: 700, textDecoration: "none" }}
-                  >
-                    Ver solo los departamentos de Jardines del Sur 6 →
-                  </a>
-                )}
-              </p>
-            )}
           </div>
 
-          <div className={styles.modelsGrid}>
-            {properties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
+          {separarPorTipo ? (
+            <SiloTiposTabs
+              tabs={grupos.map((g) => {
+                const precios = g.props.map((p) => p.precio).filter((n) => n > 0);
+                const desde = precios.length ? Math.min(...precios) : null;
+                const n = g.props.length;
+                return {
+                  id: g.tipo,
+                  label: g.titulo,
+                  // Separados para que el precio nunca se parta de su "desde".
+                  modelos: `${n} ${n === 1 ? "modelo" : "modelos"}`,
+                  desde: desde !== null ? `desde $${desde.toLocaleString("es-MX")}` : null,
+                  content: (
+                    <>
+                      {/* De 2 en 2: las 4 casas quedan 2x2 y no 3 arriba y 1 abajo. */}
+                      <div className={`${styles.modelsGrid} ${styles.modelsGridDos}`}>
+                        {g.props.map((property) => (
+                          <PropertyCard key={property.id} property={property} />
+                        ))}
+                      </div>
+                      {/* La subpagina /casas y /departamentos solo existe en Jardines 6.
+                          Si otro desarrollo estrena los dos tipos, hay que crearla antes
+                          de quitar esta condicion, o el enlace da 404. */}
+                      {dev.slug === "jardines-del-sur-6" && (
+                        <p className={styles.modelsGroupLinkWrap}>
+                          <a className={styles.modelsGroupLink} href={`/${dev.slug}/${g.tipo}`}>
+                            Ver solo {g.verSolo} de {dev.name} →
+                          </a>
+                        </p>
+                      )}
+                    </>
+                  ),
+                };
+              })}
+            />
+          ) : (
+            <div className={styles.modelsGrid}>
+              {properties.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
+          )}
 
           {properties.length > 0 && (
             <div className={styles.modelLinks}>
@@ -324,6 +330,41 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
           extraAmenities={dev.amenitiesSection.extraAmenities}
           equipment={dev.amenitiesSection.equipment}
         />
+      )}
+
+      {/* Promociones AL FINAL, despues de amenidades. Arriba de los modelos
+          distraian del inventario (decision de Florencio, 15 sept 2026). */}
+      {dev.promos && (
+        <div className="container" style={{ marginTop: "3rem", marginBottom: "3.5rem" }}>
+          <a
+            href={`/${dev.slug}/promociones`}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "1rem",
+              flexWrap: "wrap",
+              background:
+                "linear-gradient(135deg, #E8B43A 0%, #D19200 55%, #A37200 100%)",
+              color: "#1a1204",
+              textDecoration: "none",
+              borderRadius: "1rem",
+              padding: "1rem 1.4rem",
+              fontWeight: 700,
+              boxShadow: "0 16px 36px -14px rgba(214, 158, 46, 0.55)",
+            }}
+          >
+            <span
+              style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}
+            >
+              <span style={{ fontSize: "1.3rem" }} aria-hidden="true">
+                🏷️
+              </span>
+              Promociones del mes en {dev.name} — minisplits y descuentos
+            </span>
+            <span style={{ whiteSpace: "nowrap" }}>Ver promociones →</span>
+          </a>
+        </div>
       )}
 
       <footer id="contacto" className={pageStyles.footer}>

@@ -31,6 +31,46 @@
 > (`SiloPage.tsx` y `app/page.tsx`): el filtro se repite ahí. Verificado que la
 > Noni de Jardines 6 y la de Jardines 7 NO se tocaron.
 >
+> **4. La página de Jardines del Sur 6 separa Departamentos y Casas con un
+> selector de pestañas** (`components/SiloTiposTabs.jsx`), con el mismo estilo
+> que el selector de desarrollos del inicio. Primero se hizo con bloques
+> apilados y Florencio pidió pestañas, con las casas de **2 en 2** (4 casas =
+> 2x2, no 3+1) y **Casas como primera pestaña**, la que se ve al entrar.
+> ⚠️ Los dos paneles vienen completos en el HTML y el inactivo
+> solo se oculta con `hidden`, para que Google siga viendo los modelos de la
+> pestaña cerrada. `#modelos-casas` abre esa pestaña. Solo se activa en
+> desarrollos con los dos tipos; el enlace a `/casas` y `/departamentos` va
+> condicionado a JdS6 porque solo ahí existen. No cambia título ni URL.
+>
+> **5. Orden de secciones: lo que distrae, al final.** En los silos, la franja
+> de "Promociones del mes" pasó de ARRIBA de los modelos a después de
+> Amenidades: distraía del inventario. En las fichas de departamentos, la
+> tabla de precios por nivel pasó a DESPUÉS del recorrido virtual y antes del
+> "Cotizar por WhatsApp": primero se conoce el modelo, luego los precios,
+> luego cotizar. Decisión de Florencio. Además, las pestañas se ajustaron
+> para teléfonos de 360-375 px (se salían del recuadro).
+>
+> **6. Logo de cada desarrollo en su encabezado**, sobre placa blanca, igual que
+> Jardines del Sur 7 (ahora también Jardines 6, La Rioja 2 y Lirios 2). Da
+> sensación de marca: es el logo que la gente ve en lonas, oficina de ventas y
+> anuncios. Placa obligatoria porque los cuatro logos son de tinta oscura. El
+> h1 sigue siendo texto. Estilo copiado exacto de `proximamente.module.css`
+> a `silo.module.css`: si se cambia uno, cambiar el otro.
+> En teléfonos (≤767 px / ≤400 px) el encabezado de silo tiene ajustes propios,
+> fuera de esa copia: la placa sin margen duplicado y más chica, y la etiqueta
+> sin partir palabras ni puntitos colgando. Medido en 360×640 y 375×667: con la
+> placa, el botón "Hablar con un asesor" se salía de la pantalla. Todo en
+> `silo.module.css`; `Hero.module.css` es compartido con el inicio y no se tocó.
+> **Después Florencio pidió probar sin placa.** Con sus colores originales los
+> logos se pierden contra la foto (La Rioja casi desaparece); en blanco se ven
+> mucho mejor. **La Rioja 2 y Lirios 2 quedaron sin placa y todo en blanco**
+> (filtro CSS). Se probó el "2" en rojo y Florencio lo descartó: el "2" de
+> Lirios es verde como su logo, no rojo; mejor todo blanco. **Jardines 6 sigue
+> con placa** (su palmera va dentro de un cuadro opaco: en blanco sale un
+> bloque), pero ahora **ajustada al logo y translúcida (70% de blanco)**, a
+> petición suya: que solo esté ahí para que el logo resalte. Menos blanco y el
+> texto azul marino del logo se pierde. Jardines 7 conserva su placa original.
+>
 > **Pendiente en Google Ads** (detalle en `google-ads.md`): el sitelink "Casa
 > Noni La Rioja 2" apunta a la ficha oculta — quitarlo ya; el título "Casas
 > desde $4.04M" se cambia a $4.29M **después del 18 sept**, para no mover el
