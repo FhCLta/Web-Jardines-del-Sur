@@ -67,7 +67,7 @@
 > (filtro CSS). Se probó el "2" en rojo y Florencio lo descartó: el "2" de
 > Lirios es verde como su logo, no rojo; mejor todo blanco. **Jardines 6 sigue
 > con placa** (su palmera va dentro de un cuadro opaco: en blanco sale un
-> bloque), pero ahora **ajustada al logo y translúcida (70% de blanco)**, a
+> bloque), pero ahora **ajustada al logo y translúcida (80% del mismo blanco #fff del título)**, a
 > petición suya: que solo esté ahí para que el logo resalte. Menos blanco y el
 > texto azul marino del logo se pierde. Jardines 7 conserva su placa original.
 >

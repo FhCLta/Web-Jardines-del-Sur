@@ -508,14 +508,16 @@
 }
 
 /* Placa ajustada (Jardines del Sur 6, 15 sept 2026). Florencio la pidio pegada al
-   logo y con el blanco rebajado (70%, tras probar 65/80/90): que solo este ahi
+   logo y con el blanco rebajado (80%, tras probar 65/70/90): que solo este ahi
    para que el logo resalte. No mucho mas transparente que esto: el texto del logo es azul marino y con menos blanco
    se pierde contra la foto. Declarada al final para ganarle a la copia de arriba
    y a sus ajustes de telefono. */
 .logoPlate {
   padding: 0.32rem 0.5rem;
   border-radius: 0.55rem;
-  background: rgba(255, 255, 255, 0.7);
+  /* El mismo blanco del titulo del encabezado (#fff en Hero.module.css .title),
+     al 80%. Se probo 70% y Florencio prefirio 80%. */
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.35);
 }
 
