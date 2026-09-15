@@ -114,7 +114,9 @@
 
       { "source": "/precios/jardines-del-sur-6",     "destination": "/jardines-del-sur-6/precios",     "type": 301 },
       { "source": "/precios/la-rioja-2",             "destination": "/la-rioja-2/precios",             "type": 301 },
-      { "source": "/precios/lirios-residencial-2",   "destination": "/lirios-residencial-2/precios",   "type": 301 }
+      { "source": "/precios/lirios-residencial-2",   "destination": "/lirios-residencial-2/precios",   "type": 301 },
+
+      { "source": "/brochure-pdf/jardines-del-sur-6-casas.pdf", "destination": "/jardines-del-sur-6/casas", "type": 301 }
     ]
   }
 }

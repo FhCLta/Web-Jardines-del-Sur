@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import PropertyCard from "@/components/PropertyCard";
@@ -14,49 +14,15 @@ import {
   getModelType,
   slugifyModel,
   formatPriceMxn,
-  parseStat,
 } from "./model-utils";
 import { type CatalogKind } from "./dev-meta";
 import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
-import fs from "node:fs";
-import path from "node:path";
 
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
-
-/**
- * FOLLETO PDF RETIRADO (decisión de Florencio, 11 ago 2026).
- *
- * El flujo pasó a ser compartir el LINK de esta página: siempre está al día,
- * mientras que el PDF hay que regenerarlo a mano cada vez que cambian precios
- * o fotos — y si no se regenera, el cliente recibe un documento que miente
- * mientras la web dice otra cosa.
- *
- * Se deja solo esta bandera en false: el markup del brochure, los estilos de
- * `@media print` y los scripts `gen-brochure-*` quedan dormidos por si algún
- * día se retoma. Volver a activarlo es cambiar esta palabra.
- */
-const MOSTRAR_FOLLETO_PDF = false;
-
-/**
- * Versión LIGERA (JPEG ~1000-1600px) de una imagen del sitio, para el brochure
- * imprimible: mantiene el PDF por debajo de ~2 MB (compartible por WhatsApp).
- * Las genera scripts/gen-brochure-img — la misma regla de slug debe coincidir.
- */
-function brImg(src: string): string {
-  const slug = src
-    .replace(/^\//, "")
-    .replace(/\.[^.]+$/, "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  return `/brochure-img/${slug}.jpg`;
-}
 
 type CatalogPageProps = {
   slug: DevSlug;
@@ -65,8 +31,8 @@ type CatalogPageProps = {
 
 /**
  * Página-catálogo compartible: las viviendas de UN tipo (casas o departamentos)
- * de un desarrollo, con hero compacto, comparativa y (en pasos siguientes)
- * amenidades + botón de imprimir. URL corta para WhatsApp, título largo para SEO.
+ * de un desarrollo, con hero compacto, modelos, tabla de precios (departamentos)
+ * y amenidades. URL corta para WhatsApp, título largo para SEO.
  */
 export default function CatalogPage({ slug, kind }: CatalogPageProps) {
   const dev = DEVS[slug];
@@ -85,43 +51,31 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
   const minPrice = prices.length ? Math.min(...prices) : null;
 
   const pageUrl = `${SITE_URL}/${dev.slug}/${kind}`;
-  const pageUrlShort = `alttahomescancun.mx/${dev.slug}/${kind}`;
-  // Folleto PDF pre-generado (links clicables + peso ligero). Se regenera con
-  // scripts/gen-brochure-img + puppeteer al cambiar precios/fotos.
-  const brochurePdf = `/brochure-pdf/${dev.slug}-${kind}.pdf`;
-  const brochureName = `${productoPlural}-${dev.name.replace(/\s+/g, "-")}-Altta-Homes.pdf`;
-  // El PDF se genera a mano y no existe para todos los catálogos: sin el
-  // `existsSync`, un catálogo nuevo publicaba un botón de descarga que daba 404.
-  // Hoy además está apagado por bandera (ver MOSTRAR_FOLLETO_PDF).
-  const hayBrochure =
-    MOSTRAR_FOLLETO_PDF &&
-    fs.existsSync(
-      path.join(process.cwd(), "public", "brochure-pdf", `${dev.slug}-${kind}.pdf`)
-    );
-
   // Departamentos: el precio cambia por nivel y por vista. La ficha de cada
   // modelo publica una sola variante, así que esta tabla es lo único en el
   // sitio que muestra el abanico completo.
   const variantes = kind === "departamentos" ? getVariantesDepartamentos(slug) : [];
   const heroImage = dev.hero.preloadImage || dev.ogImage;
   const heroMobile = dev.hero.mobileImage || heroImage;
+  // Foto distinta en celular y en escritorio, con getImageProps + <picture>
+  // ("Art direction" en la guia de next/image). Con `images.unoptimized` no hay
+  // srcSet y se usa el src tal cual. Sin `priority`: las precargas ya van arriba,
+  // cada una con su media; con priority se duplicaban.
+  const heroComun = {
+    alt: `${dev.name}, Cancún`,
+    fill: true,
+    sizes: "100vw",
+    loading: "eager" as const,
+    fetchPriority: "high" as const,
+  };
+  const {
+    props: { srcSet: srcSetCel, src: srcCel },
+  } = getImageProps({ ...heroComun, src: heroMobile });
+  const { props: heroImgProps } = getImageProps({ ...heroComun, src: heroImage });
+  const heroCel = srcSetCel ?? srcCel;
 
   const waMessage = `Hola, quiero información de las ${productoPlural.toLowerCase()} en ${dev.name}, Cancún (vi la página con los modelos y precios).`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
-
-  const today = new Date().toLocaleDateString("es-MX", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  // Amenidades en texto para la hoja impresa (sin las fotos pesadas de pantalla).
-  const amenidadesList: string[] = dev.amenitiesSection
-    ? [
-        ...dev.amenitiesSection.items.map((a) => a.label),
-        ...(dev.amenitiesSection.extraAmenities ?? []),
-      ]
-    : [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -210,188 +164,17 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
       />
       <SiteHeader />
 
-      {/* ===== BROCHURE IMPRIMIBLE (solo al imprimir / guardar PDF) =====
-          Folleto de varias páginas: portada + una página por vivienda +
-          amenidades/contacto. Se genera de la misma página → precios al día.
-          QR y link de vuelta a la web en cada pie. */}
-      <div className={styles.brochure} aria-hidden="true">
-        {/* --- PORTADA --- */}
-        <section className={styles.brCover}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={brImg(heroImage)} alt="" className={styles.brCoverImg} />
-          <div className={styles.brCoverOverlay} />
-          <div className={styles.brCoverContent}>
-            <p className={styles.brCoverBrand}>
-              Altta<span>Homes</span> Cancún
-            </p>
-            <div className={styles.brCoverMain}>
-              <p className={styles.brCoverKicker}>Catálogo de {productoPlural.toLowerCase()}</p>
-              <h1>
-                {productoPlural} en {dev.name}
-              </h1>
-              <p className={styles.brCoverSub}>
-                Cancún, Quintana Roo · {count} {count === 1 ? "modelo" : "modelos"}
-                {minPrice && <> · Desde {formatPriceMxn(minPrice)}</>}
-              </p>
-              {dev.amenitiesSection && dev.amenitiesSection.items.length > 0 && (
-                <ul className={styles.brCoverHighlights}>
-                  {dev.amenitiesSection.items.slice(0, 5).map((a) => (
-                    <li key={a.label}>{a.label}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <div className={styles.brCoverFoot}>
-              <a href={pageUrl} className={styles.brCoverLink}>
-                {pageUrlShort}
-              </a>
-              <a href={waHref} className={styles.brCoverLink}>
-                WhatsApp 998 205 9044
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* --- UNA PÁGINA POR VIVIENDA --- */}
-        {properties.map((property) => {
-          const rec = parseStat(property.amenidades_key, /^([\d.]+)\s*Rec/i);
-          const ban = parseStat(property.amenidades_key, /^([\d.]+)\s*Ba/i);
-          const specs = [
-            property.metros_construccion && `${property.metros_construccion} m² construcción`,
-            property.metros_terreno && `${property.metros_terreno} m² terreno`,
-            rec && `${rec} recámaras`,
-            ban && `${ban} baños`,
-          ].filter(Boolean) as string[];
-          const modelUrl = `${SITE_URL}/${dev.slug}/${slugifyModel(property.nombre_modelo)}`;
-          // WhatsApp con el modelo ya escrito: al tocar el número del folleto se
-          // abre WhatsApp (no la web) con el mensaje listo para enviar.
-          const waModelMsg = `Hola, me interesa la ${property.nombre_modelo} en ${dev.name}, Cancún (${formatPriceMxn(property.precio)}). ¿Me pueden dar más información?`;
-          const waModelHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waModelMsg)}`;
-          return (
-            <section key={property.id} className={styles.brPage}>
-              {/* Foto a sangre completa con la marca arriba y el nombre+precio
-                  sobre la imagen: portada editorial por modelo, sin huecos. */}
-              {property.images?.[0] && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <a href={modelUrl} className={styles.brPhotoLink}>
-                  <img src={brImg(property.images[0])} alt={property.nombre_modelo} className={styles.brPhoto} />
-                  <div className={styles.brPhotoOverlay} />
-                  <span className={styles.brPhotoBrand}>
-                    Altta<span>Homes</span> Cancún
-                  </span>
-                  <span className={styles.brPhotoDev}>{dev.name} · Cancún</span>
-                  <div className={styles.brPhotoTitle}>
-                    <p className={styles.brKicker}>Modelo</p>
-                    <h2>{property.nombre_modelo}</h2>
-                    <p className={styles.brPrice}>{formatPriceMxn(property.precio)}</p>
-                  </div>
-                </a>
-              )}
-
-              <div className={styles.brBody}>
-                <ul className={styles.brSpecs}>
-                  {specs.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-
-                {property.levels?.length > 0 && (
-                  <div className={styles.brDist}>
-                    <h3>Distribución</h3>
-                    {property.levels.map((lvl) => (
-                      <p key={lvl.nivel}>
-                        <strong>Nivel {lvl.nivel}:</strong> {lvl.desc}
-                      </p>
-                    ))}
-                  </div>
-                )}
-
-                <a href={modelUrl} className={styles.brModelCta}>
-                  Ver ficha y recorrido virtual 360° →
-                </a>
-
-                <footer className={styles.brFoot}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/jds6/casas-qr.png" alt="" className={styles.brFootQr} />
-                  <span className={styles.brFootText}>
-                    Más fotos y recorrido virtual 360° en{" "}
-                    <a href={modelUrl} className={styles.brFootLink}>
-                      {pageUrlShort}
-                    </a>{" "}
-                    ·{" "}
-                    <a href={waModelHref} className={styles.brFootWa}>
-                      WhatsApp 998 205 9044
-                    </a>
-                  </span>
-                </footer>
-              </div>
-            </section>
-          );
-        })}
-
-        {/* --- AMENIDADES + CONTACTO --- */}
-        <section className={`${styles.brPage} ${styles.brAmenPage}`}>
-          <header className={styles.brHead}>
-            <span className={styles.brHeadBrand}>
-              Altta<span>Homes</span> Cancún
-            </span>
-            <span className={styles.brHeadDev}>{dev.name} · Cancún</span>
-          </header>
-
-          <h2 className={styles.brSectionTitle}>Amenidades del desarrollo</h2>
-
-          {dev.amenitiesSection && (
-            <div className={styles.brAmenGrid}>
-              {dev.amenitiesSection.items.map((a) => (
-                <figure key={a.label}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={brImg(a.img)} alt={a.label} />
-                  <figcaption>{a.label}</figcaption>
-                </figure>
-              ))}
-            </div>
-          )}
-
-          {dev.amenitiesSection?.extraAmenities && (
-            <ul className={styles.brChips}>
-              {dev.amenitiesSection.extraAmenities.map((a) => (
-                <li key={a}>{a}</li>
-              ))}
-            </ul>
-          )}
-
-          {/* Contacto + legal anclados al fondo de la hoja (margin-top:auto):
-              rellena el espacio sobrante sea cual sea el nº de amenidades. */}
-          <div className={styles.brAmenFoot}>
-            <div className={styles.brContact}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/jds6/casas-qr.png" alt="" className={styles.brContactQr} />
-              <div>
-                <p className={styles.brContactLead}>
-                  Precios al día, más fotos y recorridos virtuales 360°:
-                </p>
-                <a href={pageUrl} className={styles.brContactUrl}>
-                  {pageUrlShort}
-                </a>
-                <a href={waHref} className={styles.brContactWa}>
-                  WhatsApp 998 205 9044 · Altta Homes Cancún
-                </a>
-                <p className={styles.brContactAddr}>{OFFICE_ADDRESS}</p>
-              </div>
-            </div>
-
-            <p className={styles.brLegal}>
-              Precios en pesos mexicanos, no incluyen gastos de escrituración; sujetos a cambio sin
-              previo aviso. Documento informativo, no constituye oferta ni contrato. Impreso el {today}.
-            </p>
-          </div>
-        </section>
-      </div>
-
       {/* ===== HERO COMPACTO ===== */}
       <section className={styles.hero}>
         <div className={styles.heroMedia}>
-          <Image src={heroImage} alt={`${dev.name}, Cancún`} fill priority sizes="100vw" />
+          {/* Antes era el componente Image de Next con la foto de escritorio tambien
+              en celular: el celular precargaba su foto, no la usaba y ademas bajaba
+              la de escritorio. */}
+          <picture>
+            <source media="(max-width: 767px)" srcSet={heroCel} />
+            {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+            <img {...heroImgProps} />
+          </picture>
           <div className={styles.heroOverlay} />
         </div>
         <div className={`container ${styles.heroInner}`}>
@@ -483,38 +266,6 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             equipment={dev.amenitiesSection.equipment}
           />
         </div>
-      )}
-
-      {/* ===== DESCARGAR FOLLETO PDF (banda, fuera del hero) ===== */}
-      {hayBrochure && (
-      <section className={styles.printCtaSection}>
-        <div className="container">
-          <div className={styles.printCtaInner}>
-            <div className={styles.printCtaText}>
-              <h2>Llévate el folleto completo</h2>
-              <p>
-                {count === 1 ? "El modelo" : `Las ${count} ${productoPlural.toLowerCase()}`}, precios,
-                distribución y amenidades en un PDF con enlaces a cada ficha — listo para compartir o
-                imprimir.
-              </p>
-            </div>
-            <a
-              href={brochurePdf}
-              download={brochureName}
-              target="_blank"
-              rel="noreferrer"
-              className={styles.printCtaBtn}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <path d="M7 10l5 5 5-5" />
-                <path d="M12 15V3" />
-              </svg>
-              Descargar folleto (PDF)
-            </a>
-          </div>
-        </div>
-      </section>
       )}
 
       {/* ===== FOOTER ===== */}

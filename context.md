@@ -71,6 +71,16 @@
 > petición suya: que solo esté ahí para que el logo resalte. Menos blanco y el
 > texto azul marino del logo se pierde. Jardines 7 conserva su placa original.
 >
+> **7. El folleto PDF se ELIMINÓ de raíz** (antes solo estaba "apagado por
+> bandera"). La bandera ocultaba el botón, pero el folleto seguía armado dentro
+> de `/jardines-del-sur-6/casas` y `/departamentos` y el navegador bajaba sus
+> fotos: **42-43% del peso en imágenes** de esas páginas, medido en producción,
+> más dos 404 (Capua y Cedro Plus). Se borraron markup, ~550 renglones de CSS,
+> fotos, PDF, QR, scripts `gen-brochure-*` y `PreviewGate`. El PDF viejo
+> redirige 301 a `/jardines-del-sur-6/casas`. De paso, el encabezado de esas
+> páginas usa `<picture>` (getImageProps): en celular precargaba la foto de
+> celular, no la usaba y bajaba también la de escritorio.
+>
 > **Pendiente en Google Ads** (detalle en `google-ads.md`): el sitelink "Casa
 > Noni La Rioja 2" apunta a la ficha oculta — quitarlo ya; el título "Casas
 > desde $4.04M" se cambia a $4.29M **después del 18 sept**, para no mover el
