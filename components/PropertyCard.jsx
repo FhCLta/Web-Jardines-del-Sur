@@ -19,7 +19,7 @@ const FIRST_IMAGE_THUMBS = {
   '/jardines/Modelo Tabachin/1.webp': '/optimized/model-thumbs/jardines-Modelo-Tabachin-1.webp',
   '/jardines/Modelo Noni/1.webp': '/optimized/model-thumbs/jardines-Modelo-Noni-1.webp',
   '/larioja2/Casa Fresno Elite/fachada.webp': '/optimized/model-thumbs/larioja2-Casa-Fresno-Elite-fachada.webp',
-  '/larioja2/Casa Modelo Alamo/1.webp': '/optimized/model-thumbs/larioja2-Casa-Modelo-Alamo-1.webp',
+  '/larioja2/Casa Modelo Alamo/fachada.webp': '/optimized/model-thumbs/larioja2-Casa-Modelo-Alamo-fachada.webp',
   '/larioja2/Casa Noni Elite/1_new.png': '/optimized/model-thumbs/larioja2-Casa-Noni-Elite-1_new.webp',
   '/larioja2/Casa noni/1.webp': '/optimized/model-thumbs/larioja2-Casa-noni-1.webp',
 };
