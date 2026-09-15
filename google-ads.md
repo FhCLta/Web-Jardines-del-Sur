@@ -2055,3 +2055,27 @@ es justo lo que el panel venía marcando (ver Sesión 35).
 el código: decía que el servidor NO manda PageView. Cualquiera que lo leyera
 concluiría que encender la etiqueta era inofensivo. Reescrito con lo verificado
 el 9 sept 2026.
+
+---
+
+## ⏳ PENDIENTE (15 sept 2026) — La Rioja 2: la Casa Noni se OCULTÓ del sitio
+
+Decisión de Florencio: ocultar `larioja2-noni` de la web **sin borrarla**
+(`oculto_web` en `data/inventory.json`). Sigue en el cotizador. Su ficha
+`/la-rioja-2/casa-noni` ya no existe y responde con **302 → `/la-rioja-2`**.
+
+Consecuencias en Google Ads, grupo `La Rioja 2 - Premium`:
+
+| Recurso | Qué dice | Qué pasa ahora | Qué hacer |
+|---|---|---|---|
+| Sitelink "Casa Noni La Rioja 2" | → `/la-rioja-2/casa-noni` · "Desde $4.04M" | el clic cae en La Rioja 2 **sin** la Noni | **quitarlo** |
+| Título RSA "Casas desde $4.04M MXN" | $4.04M | la página ahora muestra **desde $4,294,950** (Fresno Elite) | cambiar a `Casas desde $4.29M MXN` |
+
+⚠️ **Choca con el experimento del 4-18 sept ("NO tocar hasta ~17 sept").**
+- El **sitelink** es un recurso, no toca la puja: se puede quitar ya, y deja de
+  mandar gente a una página que no tiene lo que promete.
+- El **título** sí reinicia la revisión y los datos del anuncio: esperar al 18.
+
+Si la Noni vuelve a mostrarse: quitar `oculto_web`, quitar el 302 de
+`firebase.json`, y los textos de La Rioja en `dev-content.ts` regresan a
+"4 modelos desde $4,049,375" (hay un comentario ahí que lo recuerda).

@@ -36,7 +36,11 @@ async function getInventory(): Promise<InventoryProperty[]> {
   const filePath = path.join(process.cwd(), "data", "inventory.json");
   const fileContents = fs.readFileSync(filePath, "utf8");
   const data = JSON.parse(fileContents);
-  return data.inventory_stitch_2026;
+  // ⚠️ Este lector NO pasa por model-utils.getInventory, asi que el filtro de
+  // `oculto_web` se repite aqui. Sin el, lo oculto reaparece en el silo.
+  return data.inventory_stitch_2026.filter(
+    (p: { oculto_web?: boolean }) => !p.oculto_web
+  );
 }
 
 export default async function SiloPage({ slug }: { slug: DevSlug }) {

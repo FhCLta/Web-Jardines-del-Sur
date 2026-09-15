@@ -19,6 +19,14 @@ export type InventoryProperty = {
    * precio revienta el build — que es justo lo que se quiere para los demas.
    */
   precio_por_anunciar?: boolean;
+  /**
+   * Oculto del SITIO sin borrarlo: no sale en silos, catalogos, precios,
+   * sitemap ni "otras etapas", y su ficha no se genera (firebase.json la
+   * redirige con 302). SIGUE en el cotizador, que lee data/precios.json y no
+   * pasa por aqui. Para volver a mostrarlo: quitar la marca, quitar el 302 y
+   * revisar los textos fijos del desarrollo que cuentan modelos o dicen "desde".
+   */
+  oculto_web?: boolean;
   precio_variable?: boolean;
   metros_construccion: number | null;
   metros_construccion_variable?: boolean;
@@ -46,7 +54,9 @@ export function getInventory(): InventoryProperty[] {
   // los PRECIOS los manda data/precios.json, que es la misma fuente que come el
   // cotizador. Asi un cambio de precio se hace en un solo lugar y la web y la
   // cotizacion formal no pueden contradecirse. Ver lib/precios.ts.
-  return (data.inventory_stitch_2026 as InventoryProperty[]).map((p) =>
+  return (data.inventory_stitch_2026 as InventoryProperty[])
+    .filter((p) => !p.oculto_web)
+    .map((p) =>
     // Los "por anunciar" NO pasan por getPrecioPublicado: esa funcion revienta
     // a proposito cuando falta un precio, y aqui la ausencia es intencional.
     p.precio_por_anunciar

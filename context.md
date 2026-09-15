@@ -1,6 +1,38 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
 
+> **✅ COMPLETADO sesión 54 (13-15 sept 2026) — BOTONES DE WHATSAPP POR PÁGINA · FACHADA NUEVA DE LA FRESNO ELITE · CASA NONI DE LA RIOJA OCULTA.**
+>
+> **1. Los botones fijos dicen de qué desarrollo escriben** (13 sept). El del
+> encabezado, el flotante y el del pie mandaban siempre el mismo texto
+> genérico. Ahora el mensaje sale de la ruta (`lib/whatsapp-ruta.ts`) y se
+> adapta a lo que cada desarrollo TIENE (`data/silos.json`): solo Jardines del
+> Sur 6 vende casas y departamentos. `check-precios.mjs` §5 truena si esa tabla
+> deja de coincidir con el inventario. El Hero del inicio sigue genérico a
+> propósito.
+>
+> **2. Fachada nueva de la Casa Fresno Elite** (15 sept). Render de la misma
+> fachada con jardín: 8.3 MB → **152 KB** (webp 1600 px) +
+> miniatura de tarjeta de 41 KB. Con **nombre nuevo** (`fachada.webp`) y no
+> encima de `1.webp`: la caché de imágenes es de 30 días y ya mordió con el logo.
+>
+> **3. La Casa Noni de La Rioja 2 se OCULTÓ del sitio, sin borrarla.** Marca
+> nueva `oculto_web` en `data/inventory.json`. Sale de silo, catálogos, precios,
+> sitemap y "otras etapas"; su ficha no se genera y responde **302 →
+> `/la-rioja-2`** (302 y no 301 porque es reversible). **Sigue en el
+> cotizador.** ⚠️ Era la casa más barata del desarrollo, así que La Rioja pasa de
+> "4 modelos desde $4,049,375" a **"3 modelos desde $4,294,950"** (Fresno
+> Elite); los textos fijos de `dev-content.ts` se ajustaron y llevan un
+> comentario para regresarlos. ⚠️ **Dos lectores leen `inventory.json` directo**
+> (`SiloPage.tsx` y `app/page.tsx`): el filtro se repite ahí. Verificado que la
+> Noni de Jardines 6 y la de Jardines 7 NO se tocaron.
+>
+> **Pendiente en Google Ads** (detalle en `google-ads.md`): el sitelink "Casa
+> Noni La Rioja 2" apunta a la ficha oculta — quitarlo ya; el título "Casas
+> desde $4.04M" se cambia a $4.29M **después del 18 sept**, para no mover el
+> experimento.
+
+
 > **✅ COMPLETADO sesión 53 (9 sept 2026) — LOS PRECIOS SE COMPARTEN CON LA APP DE EXPEDIENTES. Desplegado y verificado en producción.**
 >
 > **0. El dato del día: Jardines del Sur 7 ya da 10-15 leads orgánicos** y la

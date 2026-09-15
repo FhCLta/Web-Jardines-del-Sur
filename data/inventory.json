@@ -238,7 +238,7 @@
       ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/fresno-elite",
       "images": [
-        "/larioja2/Casa Fresno Elite/1.webp",
+        "/larioja2/Casa Fresno Elite/fachada.webp",
         "/larioja2/Casa Fresno Elite/2.webp",
         "/larioja2/Casa Fresno Elite/3.webp",
         "/larioja2/Casa Fresno Elite/4.webp",
@@ -341,6 +341,7 @@
     },
     {
       "id": "larioja2-noni",
+      "oculto_web": true,
       "development": "La Rioja 2",
       "status": "Preventa",
       "nombre_modelo": "Casa Noni",

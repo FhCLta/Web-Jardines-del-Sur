@@ -137,7 +137,11 @@ if (!desfases) ok("ninguna combinacion rara");
 console.log("\n5) data/silos.json refleja lo que hay en el inventario");
 const silos = JSON.parse(leer("data/silos.json")).silos;
 for (const [slug, cfg] of Object.entries(silos)) {
-  const delDev = inventario.filter((m) => m.development === cfg.nombre);
+  // Solo lo VISIBLE: el mensaje describe lo que la web ensena, y un modelo con
+  // `oculto_web` no se ensena.
+  const delDev = inventario.filter(
+    (m) => m.development === cfg.nombre && !m.oculto_web
+  );
   if (!delDev.length) {
     mal(`silos.json nombra "${cfg.nombre}" y no hay ningun modelo suyo en inventory.json`);
     continue;

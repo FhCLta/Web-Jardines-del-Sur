@@ -77,6 +77,7 @@
       { "source": "/alamo",           "destination": "/la-rioja-2/casa-modelo-alamo",            "type": 301 },
       { "source": "/noni-elite",      "destination": "/la-rioja-2/casa-noni-elite",              "type": 301 },
       { "source": "/noni-la-rioja",   "destination": "/la-rioja-2/casa-noni",                    "type": 301 },
+      { "source": "/la-rioja-2/casa-noni", "destination": "/la-rioja-2",                   "type": 302 },
       { "source": "/lirios-cedro",    "destination": "/lirios-residencial-2/departamento-cedro-plus", "type": 301 },
       { "source": "/jardines",        "destination": "/jardines-del-sur-6",                      "type": 301 },
       { "source": "/jardines-7",      "destination": "/jardines-del-sur-7",                      "type": 301 },

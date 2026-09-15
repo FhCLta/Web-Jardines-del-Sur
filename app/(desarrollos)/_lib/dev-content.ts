@@ -261,10 +261,14 @@ export const DEVS: Record<DevSlug, DevContent> = {
   },
 
   "la-rioja-2": {
+    // ⚠️ La Casa Noni (larioja2-noni) esta OCULTA del sitio desde el 15 sept 2026
+    // (`oculto_web` en inventory.json). Por eso estos textos dicen 3 modelos desde
+    // la Fresno Elite. Si se vuelve a mostrar, regresan a 4 modelos desde
+    // $4,049,375 y la Noni vuelve a la lista de la introduccion.
     slug: "la-rioja-2",
     name: "La Rioja 2",
     shortName: "La Rioja 2",
-    metaTitle: "La Rioja 2 Cancún · Casas Residenciales desde $4.04M | Altta Homes",
+    metaTitle: "La Rioja 2 Cancún · Casas Residenciales desde $4.29M | Altta Homes",
     // "La Rioja 2 Residencial" y no "La Rioja Residencial 2": es como se nombra
     // el desarrollo en el propio texto de esta página, y es la forma que la gente
     // teclea de verdad — en los términos de búsqueda de Google Ads aparecen
@@ -275,7 +279,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 10 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",
     heroSubtitle:
-      "Cuatro modelos de casas premium con tres recámaras, baños completos y terraza al frente, en el desarrollo más exclusivo de Altta Homes en Cancún.",
+      "Tres modelos de casas premium con tres recámaras, baños completos y terraza al frente, en el desarrollo más exclusivo de Altta Homes en Cancún.",
     heroImage: "/optimized/dev-tabs/la-rioja-2.webp",
     ogImage: "/larioja2/Imagnes de amenidades y hero/Vista aerea.webp",
     logo: "/logos/la-rioja-2.webp",
@@ -308,14 +312,14 @@ export const DEVS: Record<DevSlug, DevContent> = {
       preloadImage: "/optimized/hero/vista-aerea.webp",
       eyebrow: {
         strong: "RESIDENCIAL PREMIUM",
-        rest: ["CANCÚN", "4 MODELOS"],
+        rest: ["CANCÚN", "3 MODELOS"],
       },
       title: {
         lines: ["Casas residenciales", "en La Rioja 2"],
         em: "con el respaldo de Grupo Sadasi",
       },
       subtitle: {
-        bold: "4 modelos desde $4,049,375 MXN",
+        bold: "3 modelos desde $4,294,950 MXN",
         detail: "Recorridos virtuales 360° e informes por WhatsApp.",
         detailAccent: "por WhatsApp",
       },
@@ -325,15 +329,15 @@ export const DEVS: Record<DevSlug, DevContent> = {
       paragraphs: [
         "Sé parte de la historia de La Rioja 2 Residencial en Cancún. Vivir aquí será una nueva aventura cada día — la tranquilidad de un ambiente seguro y armonioso que complementará tu estilo de vida, en una de las zonas de mayor plusvalía de la ciudad.",
         "Cada hogar ha sido cuidadosamente diseñado para ofrecerte espacios únicos, materiales de alta calidad y atención al detalle que transforman tu vida en un sinnúmero de experiencias inolvidables. Espacios amplios, acabados de alta gama y, en algunos modelos, hasta tres niveles con terraza al frente.",
-        "Escoge entre cuatro modelos pensados para distintos perfiles familiares: Casa Fresno Elite, Modelo Álamo, Casa Noni Elite y Casa Noni. Cada uno con distribución optimizada — sala, comedor, cocina integral, medio baño en planta baja, cuarto de lavado independiente y recámara principal con vestidor y baño completo. Los recorridos virtuales 360° permiten conocer cada espacio antes de visitar el modelo en sitio.",
+        "Escoge entre tres modelos pensados para distintos perfiles familiares: Casa Fresno Elite, Modelo Álamo y Casa Noni Elite. Cada uno con distribución optimizada — sala, comedor, cocina integral, medio baño en planta baja, cuarto de lavado independiente y recámara principal con vestidor y baño completo. Los recorridos virtuales 360° permiten conocer cada espacio antes de visitar el modelo en sitio.",
         "El desarrollo cuenta con casa club, alberca, gimnasio, dog park, cancha de pádel, áreas verdes integradas y vigilancia 24/7. La Rioja 2 es la propuesta para quienes valoran la exclusividad, la calidad constructiva certificada por Grupo Sadasi y una ubicación estratégica en Cancún.",
       ],
     },
     highlights: [
-      "4 modelos premium de casas",
+      "3 modelos premium de casas",
       "3 recámaras · hasta 3.5 baños",
       "Hasta 3 niveles con terraza",
-      "Precio desde $4,049,375 MXN",
+      "Precio desde $4,294,950 MXN",
       "Casa club, alberca y áreas verdes",
       "Recorridos virtuales 360° disponibles",
     ],
