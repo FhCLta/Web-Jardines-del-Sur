@@ -16,7 +16,9 @@
 > miniatura de tarjeta de 41 KB. Con **nombre nuevo** (`fachada.webp`) y no
 > encima de `1.webp`: la caché de imágenes es de 30 días y ya mordió con el logo.
 > Mismo tratamiento el mismo día para la **Casa Modelo Álamo** (6.6 MB de
-> origen), también con `fachada.webp` y su miniatura propia.
+> origen) y la **Casa Noni Elite** (su fachada era un PNG de 879 KB), también
+> con `fachada.webp` y miniatura propia. Las tres fachadas de La Rioja 2
+> quedaron con render y jardín.
 >
 > **3. La Casa Noni de La Rioja 2 se OCULTÓ del sitio, sin borrarla.** Marca
 > nueva `oculto_web` en `data/inventory.json`. Sale de silo, catálogos, precios,
