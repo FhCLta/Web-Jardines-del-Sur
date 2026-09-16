@@ -1,6 +1,33 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
 
+> **✅ COMPLETADO sesión 55 (16 sept 2026) — CALCULADORA: MODO "SOLO EL CRÉDITO" · CASAS DE 2 EN 2.**
+>
+> **1. La calculadora acepta el monto del crédito directo.** Tercera opción del
+> mismo selector ("Ya sé mi monto de crédito", centinela `__credito__` en
+> `components/MortgageCalculator.jsx`), junto a los modelos y a "ingresar mis
+> propios valores" — no un interruptor aparte: es el lugar donde ya se elige.
+> Florencio saca el monto del crédito bancario de su cotizador y solo quiere la
+> mensualidad: se escribe el monto, se ajustan plazo y tasa, y salen mensualidad
+> e ingreso sugerido. En ese modo desaparecen precio, avalúo y la barra de
+> aportación, porque no aplican. ⚠️ El seguro de DAÑOS va sobre el valor de la
+> vivienda y ahí no lo hay: se estima sobre `crédito ÷ 90%` (el mismo tope LTV
+> del resto de la calculadora), así sale un poco por arriba y nunca por debajo;
+> la nota al pie lo dice. Verificado contra un cálculo independiente: $2,000,000
+> a 20 años y 10.25% → **$21,877/mes** ($19,633 capital e intereses + $2,244
+> seguros y comisión) e ingreso sugerido **$43,755**.
+> ⚠️ `model` también es `null` en este modo: sin eso el componente caía a
+> `models[0]` y pintaba su nota de variante ("Nivel 3 · vista estacionamiento")
+> donde no hay modelo.
+>
+> **2. Las páginas-catálogo muestran los modelos de 2 en 2.** En
+> `catalog.module.css` se quitaron las reglas de "última fila centrada" (6
+> columnas con tarjetas de span 2) y arriba de 1100px van dos columnas de
+> `minmax(0, 420px)`. Las 4 casas de Jardines del Sur 6 salían 3 arriba y 1 sola
+> abajo. Los 2 departamentos no cambian. Mismo criterio que el selector
+> Casas/Departamentos del silo.
+
+
 > **✅ COMPLETADO sesión 54 (13-15 sept 2026) — BOTONES DE WHATSAPP POR PÁGINA · FACHADA NUEVA DE LA FRESNO ELITE · CASA NONI DE LA RIOJA OCULTA.**
 >
 > **1. Los botones fijos dicen de qué desarrollo escriben** (13 sept). El del

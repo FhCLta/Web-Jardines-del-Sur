@@ -35,6 +35,11 @@ const CASH_STEP = 5000;
 // con ningún id del inventario (esos son tipo "jds6-capua").
 const MANUAL_ID = "__manual__";
 
+// Valor centinela del modo "solo el credito": el cliente (o Florencio con su
+// cotizador en la mano) ya sabe cuanto le presta el banco y lo unico que
+// quiere es la mensualidad. Sin precio, sin avaluo y sin enganche.
+const CREDIT_ID = "__credito__";
+
 // Departamentos: a qué nivel/vista corresponde el precio publicado.
 // MANTENIMIENTO: si cambia el precio del inventario, actualizar la etiqueta.
 const VARIANT_NOTE = {
@@ -78,6 +83,10 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
   const [customAppraisal, setCustomAppraisal] = useState("");
   const [customPrice, setCustomPrice] = useState("");
   const isManual = modelId === MANUAL_ID;
+  const [customCredit, setCustomCredit] = useState("");
+  const isCreditOnly = modelId === CREDIT_ID;
+  const creditOnly = Number(customCredit) || 0;
+  const creditReady = creditOnly > 0;
 
   // Modelos agrupados por desarrollo para los <optgroup> del selector.
   // Conserva el orden en que vienen del inventario.
@@ -90,7 +99,12 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
     return [...groups];
   }, [models]);
 
-  const model = isManual ? null : models.find((m) => m.id === modelId) || models[0];
+  // Sin modelo en los dos modos sueltos. Con `isCreditOnly` fuera de esta
+  // condicion, el componente seguia cayendo a models[0] y pintaba su nota de
+  // variante ("Precio correspondiente al Nivel 3 · vista estacionamiento") en
+  // un modo donde no hay modelo ni precio.
+  const model =
+    isManual || isCreditOnly ? null : models.find((m) => m.id === modelId) || models[0];
   // ⚠️ SIN RESPALDO SILENCIOSO. Antes, con el avalúo vacío se usaba el precio de
   // venta y la tabla calculaba igual — pero rotulaba esos números como "% del
   // avalúo" y "8.5% del avalúo" cuando en realidad salían del precio. Como
@@ -140,6 +154,38 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
   const cashTotal = Math.min(Math.max(cash, requiredCash), maxCash);
 
   const calc = useMemo(() => {
+    // MODO "SOLO EL CREDITO": no hay precio, avaluo ni aportacion, asi que no
+    // pasa por el camino de abajo. El seguro de DANOS va sobre el valor de la
+    // vivienda y aqui no lo tenemos: se estima sobre el avaluo minimo que
+    // sostendria ese credito (credito / 90%, el mismo tope que usa el resto de
+    // la calculadora). Estimar de mas es preferible a prometer una mensualidad
+    // mas baja que la real.
+    if (isCreditOnly) {
+      const i = rate / 100 / 12;
+      const meses = years * 12;
+      const principal = creditOnly;
+      const avaluoImplicito = principal / LTV_ON_APPRAISAL;
+      const base =
+        principal > 0 ? (principal * i) / (1 - Math.pow(1 + i, -meses)) : 0;
+      const insurance =
+        principal > 0
+          ? principal * LIFE_INSURANCE_FACTOR +
+            avaluoImplicito * DAMAGE_INSURANCE_FACTOR +
+            principal * ADMIN_FEE_FACTOR
+          : 0;
+      const total = base + insurance;
+      return {
+        principal,
+        base,
+        insurance,
+        total,
+        isCash: false,
+        suggestedIncome: total / SUGGESTED_PAYMENT_TO_INCOME,
+        noDownPayment: false,
+        ltvPct: 0,
+      };
+    }
+
     const principal = Math.max(0, totalCost - cashTotal);
     // Pago de contado: la aportación cubre precio + gastos y no queda crédito.
     // Sin crédito NO hay mensualidad ni seguros: el de vida, el de daños y la
@@ -180,7 +226,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
       // credibilidad de toda la tabla. El .0 sí se recorta ("90%", no "90.0%").
       ltvPct: appraisal > 0 ? (principal / appraisal) * 100 : 0,
     };
-  }, [totalCost, cashTotal, appraisal, requiredCash, years, rate]);
+  }, [totalCost, cashTotal, appraisal, requiredCash, years, rate, isCreditOnly, creditOnly]);
 
   // Qué dice la línea chica bajo "Crédito bancario estimado". Tiene que decir
   // la VERDAD en los tres escenarios; una sola frase mentía:
@@ -214,7 +260,11 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             : ", sin enganche (el crédito sobre avalúo cubre precio y gastos)"
           : ` con ${fmtMXN(cashTotal)} de efectivo inicial`
       }.`;
-  const waMessage = isManual
+  const waMessage = isCreditOnly
+    ? !creditReady
+      ? `Hola, quiero calcular la mensualidad de un credito bancario para una vivienda en Cancun.${waInfonavit} ¿Me ayudas?`
+      : `Hola, hice el ejercicio en el sitio de Altta Homes con un credito bancario de ${fmtMXN(creditOnly)} a ${years} años y tasa ${rate.toFixed(2)}%: me estimo ${fmtMXN(calc.total)} al mes, con ingreso sugerido de ${fmtMXN(calc.suggestedIncome)}.${waInfonavit} ¿Me ayudas con la cotizacion exacta?`
+    : isManual
     ? // El link de WhatsApp de la caja manual está visible ANTES de que el
       // cliente escriba nada ("¿No conoces el avalúo? … escríbenos"). Sin este
       // caso el mensaje salía con "precio $0 … $0 al mes".
@@ -269,6 +319,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             ))}
             <optgroup label="Otra propiedad">
               <option value={MANUAL_ID}>Ingresar mis propios valores</option>
+              <option value={CREDIT_ID}>Ya sé mi monto de crédito</option>
             </optgroup>
           </select>
           {variantNote && (
@@ -345,6 +396,33 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
           </div>
         )}
 
+        {isCreditOnly && (
+          <div className={styles.manualBox}>
+            <label className={styles.manualField}>
+              <span className={styles.fieldLabel}>Monto del crédito</span>
+              <div className={styles.manualInputWrap}>
+                <span className={styles.manualPrefix}>$</span>
+                <input
+                  className={styles.manualInput}
+                  type="text"
+                  inputMode="numeric"
+                  autoComplete="off"
+                  placeholder="Ej. 2,000,000"
+                  value={fmtGrouped(customCredit)}
+                  onChange={(e) => setCustomCredit(digitsOnly(e.target.value))}
+                />
+              </div>
+              <span className={styles.fieldHint}>
+                El monto que te presta el banco, tal como viene en tu cotización.
+                Aquí no van precio, avalúo ni enganche: solo el crédito.
+              </span>
+            </label>
+          </div>
+        )}
+
+        {/* Sin precio no hay aportación que calcular: en el modo "solo el
+            crédito" esta barra no aplica. */}
+        {!isCreditOnly && (
         <label className={styles.field}>
           <span className={styles.fieldLabel}>
             Aportación en efectivo: <strong>{fmtMXN(cashTotal)}</strong>
@@ -368,6 +446,7 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
             Puedes subirla hasta cubrir el total y comprar de contado.
           </span>
         </label>
+        )}
 
         <div className={styles.field}>
           <span className={styles.fieldLabel}>Plazo</span>
@@ -441,7 +520,70 @@ export default function MortgageCalculator({ models, initialModelId = null }) {
         {/* En manual no se pinta una tabla hasta tener AMBOS datos: sin avalúo
             los cálculos no existen (el banco presta sobre él). Se dice cuál
             falta, no un genérico "llena los campos". */}
-        {isManual && !manualReady ? (
+        {isCreditOnly && !creditReady ? (
+          <p className={styles.awaitingInput}>
+            Escribe el <strong>monto del crédito</strong> y aquí aparecerá tu
+            mensualidad estimada y el ingreso sugerido. Ajusta el plazo y la tasa
+            para comparar.
+          </p>
+        ) : isCreditOnly ? (
+          <>
+            <p className={styles.resultsEyebrow}>Mensualidad estimada*</p>
+            <p className={styles.resultsTotal}>
+              {fmtMXN(calc.total)}
+              <span className={styles.resultsPerMonth}> /mes</span>
+            </p>
+            <ul className={styles.breakdown}>
+              <li>
+                <span className={styles.breakdownLabel}>
+                  Crédito bancario
+                  <em className={styles.breakdownSub}>
+                    {years} años · {rate.toFixed(2)}% anual fija
+                  </em>
+                </span>
+                <strong>{fmtMXN(calc.principal)}</strong>
+              </li>
+              <li>
+                <span>Capital e intereses</span>
+                <strong>{fmtMXN(calc.base)}</strong>
+              </li>
+              <li>
+                <span className={styles.breakdownLabel}>
+                  Seguros y comisión
+                  <em className={styles.breakdownSub}>
+                    Vida y daños + comisión de administración
+                  </em>
+                </span>
+                <strong>{fmtMXN(calc.insurance)}</strong>
+              </li>
+              <li className={styles.breakdownDivider} aria-hidden="true" />
+              <li>
+                <span className={styles.breakdownLabel}>
+                  Ingreso sugerido
+                  <em className={styles.breakdownSub}>
+                    Para que la mensualidad no pase de la mitad del ingreso
+                  </em>
+                </span>
+                <strong>{fmtMXN(calc.suggestedIncome)}</strong>
+              </li>
+            </ul>
+            <a
+              className={`btn btn-primary ${styles.cta}`}
+              href={waHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Recibe tu cotización exacta por WhatsApp
+            </a>
+            <p className={styles.disclaimer}>
+              *Estimado: capital e intereses a tasa fija más seguro de vida, seguro
+              de daños y comisión de administración, con los factores típicos de la
+              banca (2026). El seguro de daños va sobre el valor de la vivienda; sin
+              ese dato se estima a partir del crédito, así que sale un poco por
+              arriba y nunca por debajo. La mensualidad final la define cada banco.
+            </p>
+          </>
+        ) : isManual && !manualReady ? (
           <p className={styles.awaitingInput}>
             {manualPrice <= 0 && manualAppraisal <= 0 ? (
               <>
