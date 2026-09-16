@@ -3,6 +3,27 @@
 
 > **✅ COMPLETADO sesión 55 (16 sept 2026) — CALCULADORA: MODO "SOLO EL CRÉDITO" · CASAS DE 2 EN 2.**
 >
+> **3. El encabezado de las páginas-catálogo se armó como el de los silos.**
+> Florencio comparó los dos y el de `/casas` se veía plano. Ahora lleva las
+> mismas piezas: logo sobre su placa, etiqueta con puntitos
+> ("CASAS · ZONA SUR · 4 MODELOS"), título en la tipografía serif con la línea
+> dorada "con el respaldo de Grupo Sadasi", subtítulo y los dos botones. Se
+> reutilizan las clases de `Hero.module.css` y la placa de `silo.module.css`;
+> lo único que NO se copia es el alto: el hero del catálogo sigue compacto
+> (~684px) para que las tarjetas no se vayan abajo, con el título limitado por
+> `.heroInner h1`. ⚠️ Dos errores que salieron y se corrigieron midiendo:
+> `formatPriceMxn` ya agrega "MXN" (salía dos veces) y el separador "·" del
+> precio tiene que ir DENTRO del bloque que no se parte.
+>
+> **4. Los textos de la sección de modelos dejaron de repetir el encabezado.**
+> Decía "Casas en Jardines del Sur 6" arriba y otra vez sobre las tarjetas, y
+> la frase de los recorridos virtuales también estaba dos veces. Ahora:
+> "INVENTARIO Y PRECIOS" (como el silo) · **"Conoce los N modelos"** · "Precio
+> con descuento, metros, recámaras y distribución de cada modelo". El verbo lo
+> eligió Florencio: **"conoce" y no "compara", pensando en quien llega nuevo**
+> — "compara" da por hecho que ya sabe entre qué elegir. Dice "modelos" y no
+> "casas"/"departamentos" para que las dos páginas suenen igual.
+>
 > **1. La calculadora acepta el monto del crédito directo.** Tercera opción del
 > mismo selector ("Ya sé mi monto de crédito", centinela `__credito__` en
 > `components/MortgageCalculator.jsx`), junto a los modelos y a "ingresar mis

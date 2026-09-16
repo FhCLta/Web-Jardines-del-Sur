@@ -37,8 +37,35 @@
 .heroInner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
   text-align: center;
   max-width: 820px;
+}
+
+/* La migaja ya se separa con el `gap` de arriba. */
+.heroInner .breadcrumb {
+  margin: 0;
+}
+
+/* El titulo viene de Hero.module.css (el del silo), pero alla el hero ocupa la
+   pantalla completa y aqui es compacto: se limita el maximo para que las
+   tarjetas no se vayan demasiado abajo. */
+.heroInner h1 {
+  font-size: clamp(2.2rem, 5.2vw * var(--mz, 1), 3.5rem);
+}
+
+/* Doble clase para ganarle a `.title .trustTitle` de Hero.module.css sin
+   depender del orden en que se cargan las dos hojas. */
+.heroTrust.heroTrust {
+  font-size: clamp(1.4rem, 2.9vw * var(--mz, 1), 2.05rem);
+}
+
+/* El importe no se parte entre el signo y la cifra en pantallas angostas. */
+.heroPrecio {
+  white-space: nowrap;
 }
 
 .breadcrumb {
@@ -256,18 +283,4 @@
   background: rgba(209, 146, 0, 0.16);
   border-color: rgba(209, 146, 0, 0.55);
   transform: translateY(-1px);
-}
-
-/* "Desde $X" del hero: en celular baja a su propio renglón. En una sola línea
-   el importe se partía a la mitad ("$1,758,830" / "MXN") y el bloque se veía
-   desalineado. En escritorio cabe de sobra y se queda junto, con el separador. */
-@media (max-width: 700px) {
-  .subtitleDesde {
-    display: block;
-    margin-top: 0.15rem;
-  }
-
-  .subtitleSep {
-    display: none;
-  }
 }

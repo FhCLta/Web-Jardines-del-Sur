@@ -8,6 +8,10 @@ import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import pageStyles from "@/app/page.module.css";
 import styles from "../catalog.module.css";
+// El encabezado de esta pagina usa las mismas piezas que el de los silos
+// (titulo serif, etiqueta, botones) y la placa del logo. Ver SiloHero.
+import heroStyles from "@/components/Hero.module.css";
+import siloStyles from "@/app/(desarrollos)/silo.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
 import {
   getPropertiesByDev,
@@ -49,6 +53,16 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
     .map((p) => p.precio)
     .filter((n): n is number => n !== null && n > 0);
   const minPrice = prices.length ? Math.min(...prices) : null;
+  // El encabezado ya dice "Casas en Jardines del Sur 6"; repetirlo aqui no
+  // aporta nada y se veia redundante (lo noto Florencio). Este titulo dice que
+  // hacer en esta seccion, y el nombre del desarrollo sigue en el h1, la migaja
+  // y las tarjetas.
+  // "Conoce" y no "Compara": decision de Florencio, pensando en quien llega
+  // NUEVO al desarrollo — "compara" da por hecho que ya sabe entre que elegir.
+  // Dice "modelos" (no "casas"/"departamentos") para que las dos paginas suenen
+  // igual y no repita el h1 del encabezado.
+  const tituloModelos =
+    count === 1 ? "Conoce el modelo" : `Conoce los ${count} modelos`;
 
   const pageUrl = `${SITE_URL}/${dev.slug}/${kind}`;
   // Departamentos: el precio cambia por nivel y por vista. La ficha de cada
@@ -186,31 +200,85 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             <span className={styles.breadcrumbCurrent}>{productoPlural}</span>
           </nav>
 
-          <h1 className={styles.title}>
-            {productoPlural} en{" "}
-            <em>{dev.name}</em>
+          {/* Mismas piezas que el encabezado del silo: logo sobre placa, etiqueta
+              con puntitos, titulo serif con la linea dorada y los dos botones.
+              Lo unico que NO se copia es el alto: aqui el hero es compacto para
+              que las tarjetas queden cerca. */}
+          {dev.logo && (
+            <span
+              className={
+                dev.logoSobreFoto === "blanco" ? siloStyles.logoBlanco : siloStyles.logoPlate
+              }
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={dev.logo}
+                alt={`Logo de ${dev.name}`}
+                width={dev.logoWidth}
+                height={128}
+              />
+            </span>
+          )}
+
+          <span className={`${heroStyles.eyebrow} ${siloStyles.eyebrowSilo}`}>
+            <span className={heroStyles.eyebrowDot} />
+            <strong>{productoPlural.toUpperCase()}</strong>
+            <span className={`${heroStyles.eyebrowSep} ${siloStyles.eyebrowSepSilo}`}>·</span>
+            <span>{dev.hero.eyebrow.strong}</span>
+            <span className={`${heroStyles.eyebrowSep} ${siloStyles.eyebrowSepSilo}`}>·</span>
+            <span>
+              {count} {count === 1 ? "MODELO" : "MODELOS"}
+            </span>
+          </span>
+
+          <h1 className={heroStyles.title}>
+            <span className={heroStyles.titleLine}>{productoPlural} en</span>
+            <span className={heroStyles.titleLine}>{dev.name}</span>
+            <em className={`${heroStyles.trustTitle} ${styles.heroTrust}`}>
+              {dev.hero.title.em}
+            </em>
           </h1>
-          <p className={styles.subtitle}>
-            {count === 1
-              ? `Un ${productoSingular} disponible`
-              : `${count} ${productoPlural.toLowerCase()} disponibles`}
-            {minPrice && (
-              /* En celular baja a su propio renglón: en una sola línea el
-                 importe se partía ("$1,758,830" / "MXN") y se veía desalineado.
-                 En escritorio sigue en la misma línea, con el separador. */
-              <span className={styles.subtitleDesde}>
-                <span className={styles.subtitleSep} aria-hidden="true"> · </span>
-                Desde <strong>{formatPriceMxn(minPrice)}</strong>
-              </span>
-            )}
+
+          <p className={heroStyles.subtitle}>
+            <span className={heroStyles.subtitleDevelopments}>
+              {count === 1
+                ? `Un ${productoSingular} disponible`
+                : `${count} ${productoPlural.toLowerCase()} disponibles`}
+              {/* El separador va DENTRO del bloque que no se parte: fuera, en
+                  celular el renglón terminaba con un "·" colgando. Y el "MXN" lo
+                  pone formatPriceMxn — no se repite aquí. */}
+              {minPrice && (
+                <span className={styles.heroPrecio}>
+                  {" · "}
+                  Desde {formatPriceMxn(minPrice)}
+                </span>
+              )}
+            </span>
+            <span className={heroStyles.subtitleDetail}>
+              Recorridos virtuales 360°, precios actualizados e informes por WhatsApp.
+            </span>
           </p>
 
-          <div className={styles.ctaRow}>
-            <a href="#modelos" className="btn btn-primary">
+          <div className={heroStyles.ctas}>
+            <a href="#modelos" className={`btn btn-primary ${heroStyles.ctaPrimary}`}>
               Ver {productoPlural.toLowerCase()} y precios
             </a>
-            <a href={waHref} target="_blank" rel="noreferrer" className={styles.ctaGhost}>
-              Informes por WhatsApp
+            <a
+              href={waHref}
+              className={`btn ${heroStyles.ctaSecondary}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M20.5 3.5A11.4 11.4 0 0012 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.3zM12 21.8c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.7 9.7 0 01-1.5-5.2C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 9.8-10 9.8zm5.5-7.4c-.3-.2-1.8-.9-2-1s-.5-.2-.7.1-.8 1-1 1.2-.4.2-.7 0c-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5l.3-.4c0-.2.1-.3 0-.5l-.9-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z" />
+              </svg>
+              Hablar con un asesor
             </a>
           </div>
         </div>
@@ -220,11 +288,11 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
       <section id="modelos" className={styles.modelsSection} style={{ scrollMarginTop: "90px" }}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <span className="text-accent">Modelos y precios</span>
-            <h2>
-              {productoPlural} en {dev.name}
-            </h2>
-            <p>Recorridos virtuales 360°, precios actualizados y atención directa por WhatsApp.</p>
+            {/* "Inventario y precios" y no "Modelos y precios": el titulo de abajo ya
+                dice "modelos", y asi ademas coincide con la seccion del silo. */}
+              <span className="text-accent">Inventario y precios</span>
+            <h2>{tituloModelos}</h2>
+            <p>Precio con descuento, metros, recámaras y distribución de cada modelo.</p>
           </div>
 
           <div className={styles.modelsGrid}>
