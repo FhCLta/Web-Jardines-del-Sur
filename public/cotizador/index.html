@@ -163,6 +163,11 @@
                         <label for="subcuentaVivienda">(-) Subcuenta Vivienda:</label>
                         <input type="text" id="subcuentaVivienda" placeholder="">
                     </div>
+                    <!-- Solo en planes con Infonavit o Fovissste: su mensualidad la fija
+                         el instituto, no se estima aquí. El texto lo pone script.js
+                         según el plan (Infonavit o Fovissste). Va DEBAJO de Subcuenta
+                         Vivienda, para no partir en dos los renglones de créditos. -->
+                    <p class="mensualidad-leyenda leyenda-instituto hidden" id="leyendaInstituto"></p>
                 </div>
                 <!-- Gastos ocultos: ahora se muestran en el recuadro de Gastos (columna 2).
                      Se conservan como inputs (el cálculo de Gastos Totales los lee por id). -->
@@ -345,6 +350,27 @@
                 </div>
                 <p>*Los gastos notariales y comisiones bancarias son aproximados por lo que pueden variar de acuerdo a
                     condiciones financieras.*</p>
+            </div>
+            <!-- MENSUALIDAD ESTIMADA DEL CRÉDITO BANCARIO.
+                 Va al final de la columna derecha, en su propio bloque: la
+                 mensualidad no es un gasto de la operación. En papel tiene que
+                 caber en el hueco que queda (medido: entre 60 y 145 px según
+                 el plan de enganche), por eso el CSS de impresión lo aprieta.
+                 Si se le agrega un renglón, volver a contar páginas. -->
+            <div id="mensualidadGastos" class="bloque mensualidad-gastos hidden">
+                <h2>Mensualidad Promedio Estimada</h2>
+                <div class="mensualidad-fila">
+                    <span>Mensualidad promedio:</span>
+                    <strong id="mensualidadGastosMonto"></strong>
+                </div>
+                <div class="mensualidad-fila">
+                    <span>Ingreso sugerido:</span>
+                    <strong id="mensualidadGastosIngreso"></strong>
+                </div>
+                <p class="mensualidad-leyenda" id="mensualidadGastosLeyenda">
+                    <span class="leyenda-larga"></span>
+                    <span class="leyenda-corta"></span>
+                </p>
             </div>
         </div>
 

@@ -633,6 +633,92 @@ document.addEventListener("DOMContentLoaded", function () {
     porcentajeCreditoBancarioInput.addEventListener('change', calcularCreditoBancarioAutomatico);
     creditoBancarioInput.addEventListener('input', actualizarPorcentajeCreditoBancarioManual);
     creditoBancarioInput.addEventListener('blur', actualizarPorcentajeCreditoBancarioManual);
+
+    // --- INICIO: mensualidad estimada del credito bancario -------------------
+    // Misma formula que la calculadora del sitio (components/MortgageCalculator.jsx,
+    // modo "solo el credito"), verificada al centavo contra BBVA. Si cambia una,
+    // cambia la otra: Florencio decidio que los dos digan el mismo numero.
+    const TASA_ANUAL = 9.75;   // tasa promedio de mercado; se actualiza a mano
+    const PLAZO_ANIOS = 20;
+    const FACTOR_SEGURO_VIDA = 0.0006;    // mensual, sobre el credito
+    const FACTOR_SEGURO_DANOS = 0.0002;   // mensual, sobre el valor de la vivienda
+    const FACTOR_COMISION_ADMON = 0.0003; // mensual, sobre el credito
+    const PROPORCION_INGRESO = 0.5;       // la mensualidad no pasa de la mitad del ingreso
+    const LTV_AVALUO = 0.9;               // el banco presta ~90% del avaluo
+
+    const fmtPesos = (n) => Math.round(n).toLocaleString("es-MX", {
+        style: "currency", currency: "MXN", maximumFractionDigits: 0
+    });
+
+    function calcularMensualidadCredito(credito, valorVivienda) {
+        const i = TASA_ANUAL / 100 / 12;
+        const meses = PLAZO_ANIOS * 12;
+        const capitalEIntereses = (credito * i) / (1 - Math.pow(1 + i, -meses));
+        // El seguro de danos va sobre el valor de la vivienda. Si todavia no hay
+        // avaluo capturado se estima con el avaluo minimo que sostendria ese
+        // credito (credito / 90%), igual que la calculadora del sitio.
+        const baseDanos = valorVivienda > 0 ? valorVivienda : credito / LTV_AVALUO;
+        const seguros = credito * FACTOR_SEGURO_VIDA
+            + baseDanos * FACTOR_SEGURO_DANOS
+            + credito * FACTOR_COMISION_ADMON;
+        const mensualidad = capitalEIntereses + seguros;
+        return { mensualidad, ingreso: mensualidad / PROPORCION_INGRESO };
+    }
+
+    function actualizarMensualidadCredito() {
+        const plan = document.getElementById("planVenta")?.value || "";
+        const credito = parseFloat((creditoBancarioInput.value || "").replace(/[^0-9.-]+/g, "")) || 0;
+        const valorVivienda = parseFloat(sessionStorage.getItem("valorAvaluo")) || 0;
+        // Solo donde hay credito bancario de verdad: Bancario y Cofinavit.
+        const aplica = (plan === "bancario" || plan === "cofinavit") && credito > 0;
+
+        const contenedor = document.getElementById("mensualidadGastos");
+        if (contenedor) {
+            contenedor.classList.toggle("hidden", !aplica);
+            if (aplica) {
+                const { mensualidad, ingreso } = calcularMensualidadCredito(credito, valorVivienda);
+                document.getElementById("mensualidadGastosMonto").textContent = fmtPesos(mensualidad);
+                document.getElementById("mensualidadGastosIngreso").textContent = fmtPesos(ingreso);
+                // Las dos leyendas salen de las MISMAS constantes del calculo: si
+                // algun dia cambia la tasa o el plazo, el texto cambia solo y nunca
+                // miente. La corta es para el papel, donde el espacio esta medido.
+                const leyenda = document.getElementById("mensualidadGastosLeyenda");
+                // Decisión de Florencio (17 sept 2026): lo que el cliente tiene
+                // que entender es que es un PROMEDIO ENTRE BANCOS y que el suyo
+                // puede darle otra cifra. Ya no se enumera qué incluye (el
+                // cálculo SÍ lleva seguros de vida y daños y comisión de
+                // administración, ver calcularMensualidadCredito).
+                leyenda.querySelector(".leyenda-larga").textContent =
+                    `Promedio entre bancos, a ${PLAZO_ANIOS} años y tasa promedio de `
+                    + `${TASA_ANUAL}%. Tu mensualidad real depende del banco que te `
+                    + `autorice el crédito.`;
+                leyenda.querySelector(".leyenda-corta").textContent =
+                    `Promedio entre bancos · ${PLAZO_ANIOS} años · tasa promedio `
+                    + `${TASA_ANUAL}% · tu banco puede variar.`;
+            }
+        }
+
+        // Infonavit/Fovissste: su mensualidad la fija el instituto, no se estima.
+        const leyendaInstituto = document.getElementById("leyendaInstituto");
+        if (leyendaInstituto) {
+            const conInstituto = plan === "infonavit" || plan === "fovissste" || plan === "cofinavit";
+            leyendaInstituto.classList.toggle("hidden", !conInstituto);
+            if (conInstituto) {
+                const instituto = plan === "fovissste" ? "Fovissste" : "Infonavit";
+                leyendaInstituto.textContent = `La mensualidad de tu crédito ${instituto} `
+                    + `la consultas directamente en tu portal de ${instituto}.`;
+            }
+        }
+
+        // La hoja impresa se estira o encoge segun lo que lleve; estos dos
+        // renglones cuentan, asi que hay que recalcular al mostrarlos u
+        // ocultarlos (y no solo al imprimir).
+        if (typeof actualizarModoCompactoPrint === "function") actualizarModoCompactoPrint();
+    }
+
+    document.getElementById("planVenta").addEventListener("change", actualizarMensualidadCredito);
+    actualizarMensualidadCredito();
+    // --- FIN: mensualidad estimada del credito bancario ----------------------
     // --- FIN: Nuevo código ---
 
     // --- INICIO: Nuevo código para cálculo de crédito INFONAVIT ---
@@ -937,6 +1023,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("engancheTotalPagar").value = engancheTotalPagar.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
 
         actualizarTablaEnganche(); // ✅  Actualiza la tabla dinámicamente
+        actualizarMensualidadCredito(); // mensualidad estimada del crédito bancario
     }
 
     // Escuchar cambios en los campos del Cuarto Bloque
@@ -1689,7 +1776,19 @@ function actualizarModoCompactoPrint() {
     let escala = 1;
     if (meses > 0) {
         escala = 1.085 - (meses * 0.0033);
-        escala = Math.min(1.08, Math.max(0.98, escala));
+        // La mensualidad estimada (~40 px) y la leyenda de Infonavit (~10 px)
+        // agregan contenido a la hoja, así que se le baja un poco a la escala
+        // para que siga cabiendo en una.
+        // ⚠️ OJO AL VERIFICAR: la impresión automática (Chrome headless →
+        // PDF) IGNORA este `zoom`, así que contar páginas ahí no sirve para
+        // este ajuste; hay que mirar la vista previa de impresión real.
+        const visible = (id) => {
+            const el = document.getElementById(id);
+            return Boolean(el) && !el.classList.contains("hidden");
+        };
+        if (visible("mensualidadGastos")) escala -= 0.055;
+        if (visible("leyendaInstituto")) escala -= 0.02;
+        escala = Math.min(1.08, Math.max(0.95, escala));
     }
 
     body.style.setProperty("--print-scale", escala.toFixed(3));

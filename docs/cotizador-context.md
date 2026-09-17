@@ -205,6 +205,40 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-17] - Mensualidad promedio estimada del crédito bancario
+
+**Qué se agregó:** un bloque al final de la columna de Gastos que muestra
+**mensualidad promedio** e **ingreso sugerido** a partir del crédito bancario ya
+calculado. Sale solo en planes **Bancario** y **Cofinavit** (donde hay crédito de
+banco) y desaparece si el crédito es 0. En Infonavit/Fovissste/Cofinavit sale en
+su lugar una línea: la mensualidad del instituto se consulta en su portal.
+
+**La cuenta:** la MISMA de `components/MortgageCalculator.jsx` (modo "solo el
+crédito"), verificada al centavo contra BBVA: amortización francesa + seguro de
+vida (0.6‰ del crédito) + seguro de daños (0.2‰ del valor de la vivienda) +
+comisión de administración (0.3‰). Ingreso sugerido = mensualidad ÷ 0.5. Tasa
+**9.75%** y plazo **20 años**, constantes al inicio del bloque en `script.js`
+(`TASA_ANUAL`, `PLAZO_ANIOS`); la leyenda se arma con esas mismas constantes, así
+que si cambia la tasa, el texto cambia solo.
+
+**Decisiones de Florencio:** la cifra es "promedio entre bancos" y así se rotula
+(título "Mensualidad Promedio Estimada", etiqueta "Mensualidad promedio"); no se
+enumera qué incluye —aunque el cálculo SÍ lleva seguros y comisión—, lo que
+importa es que su banco puede darle otra cifra. Montos en negro. En celular baja
+después del Cálculo Final (`order` propio: sin él se iba hasta arriba, porque ahí
+las columnas se disuelven con `display: contents`).
+
+**⚠️ Cómo verificar la impresión:** contando páginas con Chrome headless
+(`page.pdf`) **NO sirve**: ignora el `zoom` que `actualizarModoCompactoPrint()`
+aplica al body, y da falsos positivos y falsas alarmas. La prueba válida es la
+vista previa de impresión real (⌘P). La hoja va justa: cuando el bloque se
+muestra se le descuenta a la escala (0.055, y 0.02 más si sale la línea del
+instituto) para que siga cabiendo en una sola hoja.
+
+**De paso:** el "PAGO N" del Plan de Enganche se veía cortado contra el borde del
+recuadro azul (el `letter-spacing` mete el espacio DESPUÉS del último carácter);
+se compensó con más aire a la derecha.
+
 ### [YYYY-MM-DD] - Título corto del cambio
 - Autor:
 - Motivo:

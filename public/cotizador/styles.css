@@ -1057,6 +1057,15 @@ input[readonly] {
         order: 5;
     }
 
+    /* En celular los bloques se apilan por este `order` y las columnas
+       desaparecen (display: contents). Sin número propio, la mensualidad se
+       iba hasta ARRIBA de todo. Va después del Cálculo Final, o sea justo
+       después de las cifras del crédito de las que sale. En computadora e
+       impresión no cambia nada: ahí sigue al final de la columna de Gastos. */
+    #mensualidadGastos {
+        order: 5;
+    }
+
     #planEnganche {
         order: 6;
     }
@@ -3046,5 +3055,143 @@ body.generando-imagen .bloque h2::after {
     body.es-departamento.plan-cofinavit #tablaEnganche .fecha-pago {
         width: 108px !important;
         max-width: calc(100% - 4px) !important;
+    }
+}
+
+/* ===================================================================
+   MENSUALIDAD ESTIMADA DEL CRÉDITO BANCARIO
+   Bloque chico al final de la columna derecha (después de Gastos).
+   EN PAPEL EL ESPACIO ESTÁ MEDIDO: según el plan de enganche quedan
+   entre 60 y 145 px libres antes de que la cotización brinque a una
+   segunda hoja, así que en impresión va sin título, los dos montos
+   en un mismo renglón y con la leyenda corta. Si se le agrega algo,
+   volver a contar páginas (imprimir a PDF) antes de publicar.
+   =================================================================== */
+
+.mensualidad-gastos h2 {
+    margin-bottom: 6px;
+}
+
+.mensualidad-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    padding: 1px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.mensualidad-fila span {
+    color: var(--brand-navy);
+}
+
+.mensualidad-fila strong {
+    color: var(--brand-text);
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.mensualidad-leyenda {
+    margin: 4px 0 0 0;
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--brand-muted);
+}
+
+/* En pantalla la leyenda larga; en papel la corta (ver arriba). */
+.leyenda-corta {
+    display: none;
+}
+
+/* Infonavit/Fovissste: su mensualidad la fija el instituto. */
+.leyenda-instituto {
+    margin: 2px 0 8px 0;
+    padding-left: 2px;
+}
+
+@media print {
+    .mensualidad-gastos {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0 16px;
+        padding: 2px 10px 0 10px !important;
+        page-break-inside: avoid;
+    }
+
+    /* En papel se ve IGUAL que en pantalla (Florencio lo pidió): título
+       centrado con su rayita dorada, etiqueta a la izquierda y monto en
+       dorado a la derecha. Todo achicado para seguir cabiendo en una hoja. */
+    .mensualidad-gastos h2 {
+        font-size: 7.5pt !important;
+        line-height: 1.1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex: 0 0 100% !important;
+        text-align: center !important;
+    }
+
+    .mensualidad-gastos h2::after {
+        width: 26px !important;
+        height: 2px !important;
+        margin: 3px auto 4px !important;
+    }
+
+    /* Cada cifra en su renglón, con el monto alineado a la derecha: el mismo
+       acomodo que en pantalla y que el resto de los campos de la hoja. */
+    .mensualidad-gastos .mensualidad-fila {
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 0;
+    }
+
+    .mensualidad-gastos .mensualidad-leyenda {
+        flex: 0 0 100%;
+        font-size: 6.5pt;
+        line-height: 1.2;
+        margin: 2px 0 0 0;
+    }
+
+    /* La leyenda de Infonavit/Fovissste también cuenta para la hoja: va
+       chica. MEDIDO: a tamaño de pantalla partía el plan de 8 meses. */
+    .leyenda-instituto {
+        font-size: 6.5pt;
+        line-height: 1.15;
+        margin: 0 0 2px 0;
+    }
+
+    .leyenda-larga {
+        display: none;
+    }
+
+    .leyenda-corta {
+        display: inline;
+    }
+}
+
+/* ===================================================================
+   "PAGO N": el número se veía cortado contra el borde del recuadro
+   azul (visto por Florencio en la impresión de un plan de 5 pagos).
+   Causa: `letter-spacing` agrega el espacio DESPUÉS del último
+   carácter, así que el dígito queda pegado a la orilla derecha. Se
+   compensa dándole ese mismo espacio de más a la derecha.
+   =================================================================== */
+
+#tablaEnganche tbody td:first-child {
+    padding-right: 9px;
+    white-space: nowrap;
+}
+
+@media print {
+    #tablaEnganche tbody td:first-child {
+        padding-left: 5px !important;
+        padding-right: 6px !important;
+        white-space: nowrap !important;
     }
 }

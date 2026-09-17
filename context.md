@@ -1462,6 +1462,27 @@
 
 ---
 
+## 17 sept 2026 · Cotizador: mensualidad promedio del crédito bancario
+
+Florencio pidió que el cotizador mostrara, además del monto del crédito, la
+**mensualidad promedio** y el **ingreso sugerido**, y que salieran bonitos en la
+impresión. Se agregó un bloque al final de la columna de Gastos (él descartó
+pegarlo al crédito y el bloque a todo lo ancho), con la misma fórmula que la
+calculadora del sitio a 20 años y 9.75%.
+
+**Lo que costó trabajo fue la hoja, no el cálculo.** La cotización cabe en una
+sola hoja carta con muy poco margen, y el cotizador la estira o encoge con un
+`zoom` según los meses de enganche. Perseguí durante un buen rato conteos de
+páginas de Chrome headless hasta descubrir que **ese método ignora el `zoom`**:
+mis mediciones decían que se partía en dos donde en realidad cabía. Lo válido es
+la vista previa de impresión de Florencio, y con ella confirmó que entra en una.
+Queda anotado en `docs/cotizador-context.md` para no repetir el camino.
+
+También: los montos en negro (probamos dorado, no le gustó), la leyenda dice
+"promedio entre bancos… depende del banco que te autorice el crédito", en celular
+el bloque baja después del Cálculo Final, y se arregló el "PAGO N" que se veía
+cortado en el Plan de Enganche.
+
 ## 1. Visión General
 **Objetivo:** Landing page de alta conversión para Google Ads + WhatsApp leads de **Grupo Sadasi / Altta Homes** en Cancún: 3 desarrollos (Jardines del Sur 6, La Rioja 2, Lirios Residencial 2).  
 **Estética 2026:** Luxury dark/gold, glassmorphism, Playfair Display + Montserrat, hero cinematográfico, Ken Burns slideshow.
