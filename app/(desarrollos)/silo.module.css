@@ -533,3 +533,10 @@
     border-radius: 0.45rem;
   }
 }
+
+/* Logo ya preparado en archivo (dev.logoFoto): blanco con contorno de 1 px del
+   color original. Solo la sombra: el filtro brightness/invert de .logoBlanco
+   pintaria de blanco tambien el contorno. */
+.logoBlanco.logoBlancoPropio img {
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
+}

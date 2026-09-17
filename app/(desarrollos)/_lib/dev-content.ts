@@ -36,6 +36,14 @@ export type DevContent = {
    *    se pierden contra la foto (medido).
    */
   logoSobreFoto?: "blanco" | "placa";
+  /**
+   * Logo YA PREPARADO para la foto del encabezado: blanco con contorno de 1 px
+   * del color original. Si existe, se usa tal cual y el CSS no lo recolorea (el
+   * filtro de blanco borraria el contorno). Lo genera
+   * scripts/gen-logos-contorno.mjs. SOLO va sobre foto: en las pestañas del
+   * inicio y en las listas de precios se usa `logo`, a color.
+   */
+  logoFoto?: { src: string; width: number; height: number };
   location?: { label: string; value: string };
   whatsappMessage: string;
   hero: {
@@ -300,6 +308,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logo: "/logos/la-rioja-2.webp",
     logoWidth: 190,
     logoSobreFoto: "blanco",
+    logoFoto: { src: "/logos/la-rioja-2-contorno.webp", width: 346, height: 235 },
     location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
@@ -429,6 +438,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logo: "/logos/lirios-2.webp",
     logoWidth: 260,
     logoSobreFoto: "blanco",
+    logoFoto: { src: "/logos/lirios-2-contorno.webp", width: 470, height: 235 },
     location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre los departamentos de Lirios Residencial 2 en Cancún.",
@@ -528,3 +538,27 @@ export const DEVS: Record<DevSlug, DevContent> = {
     },
   },
 };
+
+/**
+ * Que logo va sobre la foto oscura de un encabezado, y en que forma. Lo usan el
+ * hero de los silos y el de las paginas-catalogo, para no repetir la decision.
+ *  - "propio": archivo ya preparado (blanco con contorno de color).
+ *  - "blanco": el logo original, recoloreado en blanco con CSS.
+ *  - "placa":  el logo original sobre una placa blanca translucida.
+ */
+export function logoSobreFotoDe(dev: DevContent): {
+  modo: "propio" | "blanco" | "placa";
+  src: string;
+  width: number;
+  height: number;
+} {
+  if (dev.logoSobreFoto === "blanco" && dev.logoFoto) {
+    return { modo: "propio", ...dev.logoFoto };
+  }
+  return {
+    modo: dev.logoSobreFoto === "blanco" ? "blanco" : "placa",
+    src: dev.logo,
+    width: dev.logoWidth,
+    height: 128,
+  };
+}

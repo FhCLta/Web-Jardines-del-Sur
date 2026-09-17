@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./Hero.module.css";
 import siloStyles from "@/app/(desarrollos)/silo.module.css";
+import { logoSobreFotoDe } from "@/app/(desarrollos)/_lib/dev-content";
 import HeroBackground from "./HeroBackground";
 
 // Resalta en dorado la frase detailAccent dentro del texto del subtítulo
@@ -19,6 +20,12 @@ function renderDetail(text, accent) {
 
 export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown, subtitleDetail }) {
   const { hero, name } = dev;
+  const logoFoto = logoSobreFotoDe(dev);
+  const claseLogo = {
+    propio: `${siloStyles.logoBlanco} ${siloStyles.logoBlancoPropio}`,
+    blanco: siloStyles.logoBlanco,
+    placa: siloStyles.logoPlate,
+  };
 
   return (
     <section id="top" className={styles.hero}>
@@ -43,16 +50,12 @@ export default function SiloHero({ dev, waHref, subtitleBold, subtitleBreakdown,
             sobre la foto oscura no se leerian. El h1 sigue siendo texto, que es lo
             que cuenta para el posicionamiento; el logo solo acompana. */}
         {dev.logo && (
-          <span
-            className={
-              dev.logoSobreFoto === "blanco" ? siloStyles.logoBlanco : siloStyles.logoPlate
-            }
-          >
+          <span className={claseLogo[logoFoto.modo]}>
             <Image
-              src={dev.logo}
+              src={logoFoto.src}
               alt={`Logo de ${name}`}
-              width={dev.logoWidth}
-              height={128}
+              width={logoFoto.width}
+              height={logoFoto.height}
               priority
             />
           </span>

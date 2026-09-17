@@ -1,6 +1,30 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
 
+> **✅ COMPLETADO sesión 56 (17 sept 2026) — LOGOS DE LA RIOJA 2 Y LIRIOS 2 CON CONTORNO DE COLOR.**
+>
+> Sobre la foto del encabezado, los logos de La Rioja 2 y Lirios 2 siguen
+> blancos, pero ahora con un **contorno de 1 px del color original** de cada
+> logo: rojo `#a22f2c` en La Rioja, verde azulado `#11abab` en Lirios (medidos
+> de los pixeles de los logos, no a ojo). En La Rioja, **"RESIDENCIAL" va sin
+> contorno**: esas letras miden ~3 px en pantalla y con contorno se empastan.
+>
+> **Por qué archivo y no CSS** (se probó todo antes de decidir): con
+> `filter: drop-shadow` el contorno no puede ser más delgado que un pixel de
+> pantalla —0.2 y 0.5 px salen igual que 1 px— y a 1 px el color rellena los
+> huecos entre letras, con efecto calcomanía. Dibujado en archivo a 4x y
+> reducido sale fino y nítido. Se probaron 0.5 y 1 px en monitor común, Mac y
+> celular; Florencio eligió **1 px** porque a 0.5 el color casi no se ve en
+> monitores comunes.
+>
+> Los genera `scripts/gen-logos-contorno.mjs` (mide solo dónde está
+> "RESIDENCIAL" y truena si no lo encuentra). Campo `logoFoto` en
+> `dev-content.ts` y función `logoSobreFotoDe()`, que usan el hero del silo y el
+> de las páginas-catálogo. ⚠️ Solo van sobre foto: las pestañas del inicio y las
+> listas de precios siguen con el logo original a color. Nombres nuevos
+> (`*-contorno.webp`) por la caché de imágenes de 30 días.
+
+
 > **✅ COMPLETADO sesión 55 (16 sept 2026) — CALCULADORA: MODO "SOLO EL CRÉDITO" · CASAS DE 2 EN 2.**
 >
 > **3. El encabezado de las páginas-catálogo se armó como el de los silos.**

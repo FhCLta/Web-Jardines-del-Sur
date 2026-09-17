@@ -12,7 +12,7 @@ import styles from "../catalog.module.css";
 // (titulo serif, etiqueta, botones) y la placa del logo. Ver SiloHero.
 import heroStyles from "@/components/Hero.module.css";
 import siloStyles from "@/app/(desarrollos)/silo.module.css";
-import { DEVS, type DevSlug } from "./dev-content";
+import { DEVS, type DevSlug, logoSobreFotoDe } from "./dev-content";
 import {
   getPropertiesByDev,
   getModelType,
@@ -207,15 +207,19 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
           {dev.logo && (
             <span
               className={
-                dev.logoSobreFoto === "blanco" ? siloStyles.logoBlanco : siloStyles.logoPlate
+                {
+                  propio: `${siloStyles.logoBlanco} ${siloStyles.logoBlancoPropio}`,
+                  blanco: siloStyles.logoBlanco,
+                  placa: siloStyles.logoPlate,
+                }[logoSobreFotoDe(dev).modo]
               }
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={dev.logo}
+                src={logoSobreFotoDe(dev).src}
                 alt={`Logo de ${dev.name}`}
-                width={dev.logoWidth}
-                height={128}
+                width={logoSobreFotoDe(dev).width}
+                height={logoSobreFotoDe(dev).height}
               />
             </span>
           )}
