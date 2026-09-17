@@ -9,6 +9,13 @@
 //
 // DECISIONES DE FLORENCIO:
 // - 1 px y no 0.5: a 0.5 el color casi no se distingue en monitores comunes.
+// - Logos +20% (17 sept 2026): 90 px en computadora, 70 en tablet, 56 en celular.
+//   El archivo se genera a 3x de esos 90 px para que no pierda nitidez al crecer.
+// - Lirios con VERDE PROFUNDO #087777, no con el #11abab del logo: la nitidez que se
+//   percibe depende del contraste entre el blanco y el contorno, y el verde del logo
+//   es claro (se leia como brillo, no como orilla). Es el mismo tono, mas oscuro; el
+//   logo original no trae un verde tan oscuro en ninguna parte. El rojo de La Rioja
+//   ya es oscuro y se queda tal cual.
 // - En La Rioja 2, "RESIDENCIAL" va SIN contorno: sus letras miden ~3 px en
 //   pantalla y con contorno se empastan en una rayita roja.
 //
@@ -19,24 +26,25 @@
 
 import sharp from "sharp";
 
-const ALTO_EN_PANTALLA = 76; // .logoBlanco img en silo.module.css (escritorio)
+const ALTO_EN_PANTALLA = 90; // .logoBlanco img en silo.module.css (escritorio)
 const ALTO_ARCHIVO = ALTO_EN_PANTALLA * 3; // 3x: nitido en pantallas de alta densidad
 const TRABAJO = 4; // se dibuja a 4x del archivo final y se reduce
 const GROSOR = 1; // px de pantalla
 
-// Colores medidos de los pixeles de cada logo original (promedio de la tinta
-// de color), no escogidos a ojo.
+// Colores medidos de los pixeles de cada logo original (promedio de la tinta de
+// color), no escogidos a ojo. Excepcion: Lirios, oscurecido a proposito.
 const LOGOS = [
   {
     origen: "public/logos/la-rioja-2.webp",
-    destino: "public/logos/la-rioja-2-contorno.webp",
+    // -v2: nombre nuevo por la cache de imagenes de 30 dias (la v1 era de 76 px).
+    destino: "public/logos/la-rioja-2-contorno-v2.webp",
     color: "#a22f2c",
     sinContorno: medirResidencial,
   },
   {
     origen: "public/logos/lirios-2.webp",
-    destino: "public/logos/lirios-2-contorno.webp",
-    color: "#11abab",
+    destino: "public/logos/lirios-2-contorno-v2.webp",
+    color: "#087777", // verde profundo (ver arriba); el del logo es #11abab
   },
 ];
 

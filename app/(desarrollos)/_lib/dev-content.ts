@@ -308,7 +308,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logo: "/logos/la-rioja-2.webp",
     logoWidth: 190,
     logoSobreFoto: "blanco",
-    logoFoto: { src: "/logos/la-rioja-2-contorno.webp", width: 346, height: 235 },
+    logoFoto: { src: "/logos/la-rioja-2-contorno-v2.webp", width: 408, height: 277 },
     location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
@@ -438,7 +438,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logo: "/logos/lirios-2.webp",
     logoWidth: 260,
     logoSobreFoto: "blanco",
-    logoFoto: { src: "/logos/lirios-2-contorno.webp", width: 470, height: 235 },
+    logoFoto: { src: "/logos/lirios-2-contorno-v2.webp", width: 556, height: 277 },
     location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
     whatsappMessage:
       "Hola, quiero más información sobre los departamentos de Lirios Residencial 2 en Cancún.",

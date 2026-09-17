@@ -485,7 +485,9 @@
 .logoBlanco img {
   display: block;
   width: auto;
-  height: 76px;
+  /* +20% (17 sept 2026): antes 76 / 58 / 48. Si cambia, regenerar los logos con
+     scripts/gen-logos-contorno.mjs (ALTO_EN_PANTALLA) para que sigan nitidos. */
+  height: 90px;
   /* brightness(0) lo pasa a negro e invert(1) a blanco: una sola tinta limpia.
      La sombra lo despega de los cielos claros (Lirios). */
   filter: brightness(0) invert(1) drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
@@ -497,13 +499,13 @@
   }
 
   .logoBlanco img {
-    height: 58px;
+    height: 70px;
   }
 }
 
 @media (max-width: 400px) {
   .logoBlanco img {
-    height: 48px;
+    height: 56px;
   }
 }
 

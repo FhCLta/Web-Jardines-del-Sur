@@ -23,6 +23,16 @@
 > de las páginas-catálogo. ⚠️ Solo van sobre foto: las pestañas del inicio y las
 > listas de precios siguen con el logo original a color. Nombres nuevos
 > (`*-contorno.webp`) por la caché de imágenes de 30 días.
+>
+> **Ajuste el mismo día:** los dos logos **+20%** (90 px computadora, 70 tablet,
+> 56 celular; antes 76/58/48) y Lirios con **verde profundo `#087777`** en vez
+> del `#11abab` del logo. Florencio notó que La Rioja se veía más nítido: la
+> nitidez que se percibe depende del contraste entre el blanco de la letra y el
+> contorno, y el verde del logo es claro (luz 138 vs 71 del rojo) — se leía como
+> brillo. Se probaron el tono más oscuro del propio logo (apenas cambia) y el
+> profundo (luz 95); ganó el profundo. ⚠️ Es el mismo tono pero más oscuro de lo
+> que trae el logo. Archivos `*-contorno-v2.webp` (nombre nuevo por la caché).
+> En un teléfono de 360×640 los dos botones siguen cabiendo.
 
 
 > **✅ COMPLETADO sesión 55 (16 sept 2026) — CALCULADORA: MODO "SOLO EL CRÉDITO" · CASAS DE 2 EN 2.**
