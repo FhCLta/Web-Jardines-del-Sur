@@ -1478,6 +1478,11 @@ mis mediciones decían que se partía en dos donde en realidad cabía. Lo válid
 la vista previa de impresión de Florencio, y con ella confirmó que entra en una.
 Queda anotado en `docs/cotizador-context.md` para no repetir el camino.
 
+Al ver sus hojas impresas pidió un último ajuste que mejoró el reparto: en casas
+con plan puro Bancario el bloque baja al hueco que queda bajo el Cálculo Final;
+con Cofinavit y en departamentos se queda al final de Gastos. Se mueve el mismo
+elemento entre columnas, sin duplicarlo.
+
 También: los montos en negro (probamos dorado, no le gustó), la leyenda dice
 "promedio entre bancos… depende del banco que te autorice el crédito", en celular
 el bloque baja después del Cálculo Final, y se arregló el "PAGO N" que se veía

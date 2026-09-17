@@ -665,8 +665,34 @@ document.addEventListener("DOMContentLoaded", function () {
         return { mensualidad, ingreso: mensualidad / PROPORCION_INGRESO };
     }
 
+    // Dónde va el bloque de la mensualidad. Decisión de Florencio (17 sept
+    // 2026), mirando sus impresiones reales:
+    // - CASAS con plan puro Bancario: debajo del Cálculo Final. Ahí la columna
+    //   izquierda queda corta y el bloque llena ese hueco.
+    // - Cofinavit (y cualquier otro caso): al final de la columna de Gastos,
+    //   que es donde sobra espacio cuando hay dos créditos.
+    // - Departamentos: igual, al final de Gastos; ahí la hoja va holgada.
+    // Se MUEVE el mismo elemento, no se duplica: un solo lugar que mantener.
+    // Cambia también en pantalla, a propósito: lo que se ve es lo que se imprime.
+    function ubicarBloqueMensualidad(plan) {
+        const bloque = document.getElementById("mensualidadGastos");
+        const calculoFinal = document.getElementById("calculoFinal");
+        const columnaGastos = document.querySelector(".column-2");
+        if (!bloque || !calculoFinal || !columnaGastos) return;
+
+        const bajoCalculoFinal = plan === "bancario" && esDesarrolloCasas();
+        if (bajoCalculoFinal) {
+            if (bloque.previousElementSibling !== calculoFinal) {
+                calculoFinal.insertAdjacentElement("afterend", bloque);
+            }
+        } else if (bloque.parentElement !== columnaGastos || bloque.nextElementSibling) {
+            columnaGastos.appendChild(bloque);
+        }
+    }
+
     function actualizarMensualidadCredito() {
         const plan = document.getElementById("planVenta")?.value || "";
+        ubicarBloqueMensualidad(plan);
         const credito = parseFloat((creditoBancarioInput.value || "").replace(/[^0-9.-]+/g, "")) || 0;
         const valorVivienda = parseFloat(sessionStorage.getItem("valorAvaluo")) || 0;
         // Solo donde hay credito bancario de verdad: Bancario y Cofinavit.

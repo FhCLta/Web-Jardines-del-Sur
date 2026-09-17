@@ -221,6 +221,13 @@ comisión de administración (0.3‰). Ingreso sugerido = mensualidad ÷ 0.5. Ta
 (`TASA_ANUAL`, `PLAZO_ANIOS`); la leyenda se arma con esas mismas constantes, así
 que si cambia la tasa, el texto cambia solo.
 
+**Dónde aparece (mirando sus impresiones reales):** en **casas con plan puro
+Bancario** va **debajo del Cálculo Final** —ahí la columna izquierda queda corta
+y el bloque llena el hueco—; con **Cofinavit** y en **departamentos** se queda al
+final de la columna de Gastos. Lo hace `ubicarBloqueMensualidad()` moviendo el
+mismo elemento entre columnas (no hay copias). Cambia también en pantalla, a
+propósito: lo que se ve es lo que se imprime.
+
 **Decisiones de Florencio:** la cifra es "promedio entre bancos" y así se rotula
 (título "Mensualidad Promedio Estimada", etiqueta "Mensualidad promedio"); no se
 enumera qué incluye —aunque el cálculo SÍ lleva seguros y comisión—, lo que
