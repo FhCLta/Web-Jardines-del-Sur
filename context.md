@@ -1476,8 +1476,17 @@ la página tal como se ve **no sirve en el teléfono** (ahí va apilada y es muc
 más alta que la captura, que se arma a 1200px). Con la medida cruda el celular
 se quedaba en escala 1.5.
 
-El PDF bajó de 643 a 428 KB bajando la definición (282 → 212 DPI) y NO la
-calidad del JPEG, que es lo que ensucia las letras. Se probó WebP dentro del
+El PDF bajó de 643 a 428 KB bajando la definición (282 → 212 DPI), pero a
+calidad 0.80 el texto se veía sucio y Florencio lo notó. **Corregido el mismo
+día: calidad 0.92, 597 KB.** La lección: WhatsApp manda los PDF tal cual, sin
+recomprimir y con tope de 100 MB, así que pelear por 200 KB no vale la pena
+cuando el costo es un documento con las letras manchadas.
+
+Investigando a fondo salió el dato que faltaba: **el PDF de verdad bueno no sale
+del botón**. Con Imprimir → Guardar como PDF el navegador escribe el texto como
+texto (nítido a cualquier zoom, color exacto) y pesa 505 KB con los logos a la
+medida. Se decidió no cambiarle la costumbre —él cotiza desde el celular a las
+carreras— pero queda documentado para el día que haga falta. Se probó WebP dentro del
 PDF: no sirve, jsPDF lo descomprime y sube a 2.5 MB.
 
 ## 19 sept 2026 · Encabezado nuevo del cotizador

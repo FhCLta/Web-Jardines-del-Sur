@@ -1712,13 +1712,20 @@ document.addEventListener("DOMContentLoaded", function () {
         // MEDIDO (19 sept 2026) en una cotizacion tipica, peso del PDF:
         //   escala 2.0 (282 DPI) calidad 0.80 → 643 KB   ← como estaba
         //   escala 1.75 (247 DPI) calidad 0.80 → 533 KB
-        //   escala 1.6 (226 DPI) calidad 0.82 → 489 KB
-        //   escala 1.5 (212 DPI) calidad 0.80 → 431 KB  ← este
-        // A 226 DPI el texto se lee e imprime perfecto (una impresora casera
-        // trabaja a 150-300 DPI), y el archivo baja casi 200 KB. Bajar la
-        // CALIDAD en vez de la escala se ve peor: el JPEG ensucia las letras.
+        //   escala 1.5 (212 DPI) calidad 0.80 → 431 KB (se veian sucias las letras)
+        //   escala 1.5 (212 DPI) calidad 0.92 → 618 KB  ← este
+        //   escala 2.0 (282 DPI) calidad 0.92 → 922 KB
+        // Se prioriza la CALIDAD sobre el peso: WhatsApp manda los PDF tal cual,
+        // sin recomprimir y con tope de 100 MB, asi que medio mega no estorba;
+        // en cambio la calidad baja se ve como manchas alrededor del texto.
+        // A 212 DPI se lee e imprime perfecto (una impresora casera trabaja a
+        // 150-300 DPI).
+        // Si algun dia hace falta un PDF impecable —texto como texto, nitido a
+        // cualquier zoom— NO sale de aqui: sale de Imprimir → Guardar como PDF
+        // (medido: 505 KB con los logos a la medida). Este boton siempre hara
+        // una foto de la hoja.
         const canvas = await crearCanvasCotizacion(1.5);
-        const imagenData = canvas.toDataURL("image/jpeg", 0.8);
+        const imagenData = canvas.toDataURL("image/jpeg", 0.92);
 
         // Página a la medida exacta de la captura (sin franjas ni bordes):
         // ancho de hoja carta (612pt) y alto proporcional al contenido.

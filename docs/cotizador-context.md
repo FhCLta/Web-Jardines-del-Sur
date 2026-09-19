@@ -238,6 +238,23 @@ a 150-300 DPI— mientras que bajar la calidad ensucia las letras. Medido:
 | 1.75 | 247 | 0.80 | 533 KB |
 | **1.5** | **212** | **0.80** | **428 KB** |
 
+**Rectificado el mismo día:** 212 DPI a calidad 0.80 se veía sucio alrededor del
+texto, así que el PDF quedó en **calidad 0.92 (597 KB)**. Se prioriza la calidad
+sobre el peso: WhatsApp manda los PDF **tal cual, sin recomprimir**, con tope de
+100 MB, así que medio mega no estorba; las manchas en las letras sí.
+
+**El PDF impecable NO sale de ese botón.** Con *Imprimir → Guardar como PDF* el
+navegador escribe el **texto como texto**: nítido a cualquier zoom y color
+exacto. Medido: 744 KB, de los cuales **417 KB eran los logos**; con logos a la
+medida baja a **505 KB**. Quitar sombras y degradados no cambia nada. Ese es el
+camino el día que un cliente pida el documento fino.
+
+**Logos del encabezado:** los dos de marca (solo del cotizador) se dejaron al
+doble de su tamaño en pantalla: 27→15 KB y 44→21 KB. ⚠️ Los CUATRO logos de
+desarrollos NO se tocan: `/logos/*.webp` son los mismos archivos que usa el
+sitio web (`dev-content.ts`, `DevelopmentTabs.jsx`), donde se ven mucho más
+grandes.
+
 **Descartado:** WebP dentro del PDF. Pesa la mitad como imagen suelta, pero
 jsPDF lo descomprime y el PDF se va a 2.5 MB. Y para la imagen compartida se
 mantiene PNG porque el respaldo de "copiar imagen" (ClipboardItem) solo acepta
