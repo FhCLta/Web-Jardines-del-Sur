@@ -205,6 +205,33 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-19] - Imagen compartida: tope de tamaño, fechas dd/mm/aaaa y logo de Jardines 7
+
+**Lo que Florencio reportó:** la imagen compartida "se ve más fea" desde que se
+agregó la mensualidad.
+
+**Causa real (medida):** `crearCanvasCotizacion()` capturaba a **escala 5**, o sea
+6000 × 9220 px = **55 millones de píxeles**. Safari en iPhone degrada o deja en
+blanco los canvas de más de ~17 millones, y la hoja creció al sumarle el bloque
+de la mensualidad. Además no servía de nada: WhatsApp reduce la imagen igual —a
+escala 5, 3 o 2 el cliente recibe lo mismo, ~175 KB y con la misma legibilidad,
+comprobado lado a lado—.
+
+**Arreglo:** tope automático por número de píxeles (`MAX_PIXELES = 16000000`),
+nunca por debajo de escala 2. Hoy sale a ~2.5: **13.9 Mpx y 1.9 MB** en vez de
+55 Mpx y 4.7 MB. Como es un tope y no un número fijo, se ajusta solo si la hoja
+vuelve a crecer. El PDF no cambió (pide escala 2, que ya está bajo el tope).
+
+**Además:**
+- Las **fechas** del Plan de Enganche se compartían como `2026-10-30`;
+  `valorControlParaCanvas()` ahora las manda como **30/10/2026**.
+- Las **tarjetas de pago** se salían de renglón en la captura (el campo de fecha
+  pedía 267 px y el quinto pago se iba solo a lo ancho, feo y de antes): con
+  `min-width: 0` en `body.generando-imagen` los cinco entran parejos.
+- La **mensualidad** salía a 14 px mientras el resto de la captura va a 18.
+- Se agregó el **logo de Jardines del Sur 7** al encabezado: ya son cuatro
+  desarrollos, en un solo renglón, sin crecerle al encabezado impreso (97 px).
+
 ### [2026-09-17] - Mensualidad promedio estimada del crédito bancario
 
 **Qué se agregó:** un bloque al final de la columna de Gastos que muestra

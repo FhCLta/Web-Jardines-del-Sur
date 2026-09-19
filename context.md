@@ -1462,6 +1462,23 @@
 
 ---
 
+## 19 sept 2026 · La imagen que comparte el cotizador
+
+Florencio notó que la imagen compartida se veía peor desde que le pusimos la
+mensualidad. No era la mensualidad: la captura se hacía a **escala 5**, 55
+millones de píxeles, y **Safari en iPhone degrada los canvas de más de ~17
+millones**. Al crecer la hoja, se metió de lleno en esa zona. Y la escala alta
+no servía para nada: WhatsApp reduce la imagen igual — a escala 5, 3 o 2 el
+cliente recibe exactamente lo mismo. Ahora hay un tope automático por número de
+píxeles: 13.9 Mpx y 1.9 MB.
+
+De paso: las fechas se compartían como 2026-10-30 y ahora van como 30/10/2026;
+las tarjetas de pago ya no se salen de renglón en la captura; y el encabezado
+lleva el logo de **Jardines del Sur 7**, así que ya son los cuatro desarrollos.
+
+Pendiente: Florencio va a pasar un logo suyo de Altta Homes Cancún (para la
+izquierda) y uno nuevo de Sadasi (para la derecha) del encabezado del cotizador.
+
 ## 17 sept 2026 · Cotizador: mensualidad promedio del crédito bancario
 
 Florencio pidió que el cotizador mostrara, además del monto del crédito, la

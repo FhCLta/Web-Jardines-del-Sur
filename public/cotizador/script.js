@@ -1509,6 +1509,14 @@ document.addEventListener("DOMContentLoaded", function () {
             return control.options[control.selectedIndex]?.textContent?.trim() || "";
         }
 
+        // Las fechas se guardan como "2026-10-30" y asi salian en la imagen y el
+        // PDF compartidos. Al cliente se le manda como 30/10/2026, que es como
+        // las ve en pantalla y como se leen aqui.
+        if (control.type === "date" && control.value) {
+            const [anio, mes, dia] = control.value.split("-");
+            if (anio && mes && dia) return `${dia}/${mes}/${anio}`;
+        }
+
         const valor = control.value || "";
         return valor || control.getAttribute("placeholder") || "";
     }
@@ -1587,6 +1595,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const anchoCaptura = 1200;
         escala = escala || 5;
+
+        // TOPE DE TAMANO. Un canvas gigante NO mejora la imagen: WhatsApp la
+        // reduce igual (medido: a escala 5, 3 o 2 el cliente recibe lo mismo,
+        // ~175 KB y se lee igual). Lo que si provoca es que en iPhone Safari
+        // degrade o deje en blanco la captura: su limite ronda los 17 millones
+        // de pixeles y a escala 5 esta hoja pedia 55 millones. Se baja la
+        // escala lo justo para no pasarse, nunca abajo de 2 (ahi si se notaria).
+        const MAX_PIXELES = 16000000;
+        const altoCaptura = Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight
+        );
+        if (altoCaptura > 0) {
+            const escalaTope = Math.sqrt(MAX_PIXELES / (anchoCaptura * altoCaptura));
+            escala = Math.max(2, Math.min(escala, escalaTope));
+        }
         // El fondo de la captura se LEE del CSS en vez de escribirlo aqui: antes
         // estaba hardcodeado ("#fbf7ef") y al retintar el cotizador con los
         // colores del sitio la imagen y el PDF habrian salido con el fondo viejo

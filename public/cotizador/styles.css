@@ -3195,3 +3195,35 @@ body.generando-imagen .bloque h2::after {
         white-space: nowrap !important;
     }
 }
+
+/* ===================================================================
+   IMAGEN / PDF COMPARTIDOS (body.generando-imagen)
+   =================================================================== */
+
+/* Las tarjetas del Plan de Enganche se salían de renglón: con las letras
+   grandes de la captura, el campo de fecha pedía 267 px y cinco pagos ya no
+   cabían, así que el quinto se iba solo a lo ancho de toda la hoja (feo, y
+   venía de antes). Dejándolos encogerse hasta su ancho de columna, los cinco
+   entran en un renglón parejo. */
+body.generando-imagen #tablaEnganche tbody tr {
+    min-width: 0 !important;
+}
+
+body.generando-imagen #tablaEnganche .monto-pago,
+body.generando-imagen #tablaEnganche .fecha-pago {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* La mensualidad, al mismo tamaño que el resto de la captura (18 px): con los
+   14 px de pantalla se veía chiquita y desentonaba. */
+body.generando-imagen .mensualidad-gastos .mensualidad-fila {
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+}
+
+body.generando-imagen .mensualidad-gastos .mensualidad-leyenda {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+}
