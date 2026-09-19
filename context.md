@@ -1462,6 +1462,24 @@
 
 ---
 
+## 19 sept 2026 · Nitidez de la imagen y peso del PDF del cotizador
+
+Florencio reportó que las imágenes compartidas seguían menos nítidas y que el
+PDF pasaba de 500 KB. Lo primero **era culpa de mi arreglo anterior**: el tope
+de tamaño que puse para proteger a Safari en iPhone también aplicaba en la
+computadora y la bajaba de escala 5 a 2.5. Ahora el programa **prueba el
+aparato** en vez de adivinar: pinta una esquina del lienzo y la vuelve a leer;
+si sale blanco, baja un escalón. Computadora vuelve a 5, teléfono usa 2.5.
+
+Ojo para la próxima: la prueba necesita el alto que tendrá la captura, y medir
+la página tal como se ve **no sirve en el teléfono** (ahí va apilada y es mucho
+más alta que la captura, que se arma a 1200px). Con la medida cruda el celular
+se quedaba en escala 1.5.
+
+El PDF bajó de 643 a 428 KB bajando la definición (282 → 212 DPI) y NO la
+calidad del JPEG, que es lo que ensucia las letras. Se probó WebP dentro del
+PDF: no sirve, jsPDF lo descomprime y sube a 2.5 MB.
+
 ## 19 sept 2026 · Encabezado nuevo del cotizador
 
 Florencio pasó dos logos suyos y pidió rehacer la barra de logos "manteniendo el

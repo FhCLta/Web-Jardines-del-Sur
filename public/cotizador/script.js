@@ -1568,6 +1568,69 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Cuanto va a medir de alto la captura. OJO: se arma a 1200px de ancho (el
+    // diseno de computadora), asi que en un telefono NO sirve medir la pagina
+    // tal como se ve: ahi va apilada en una columna y es mucho mas alta. Medirla
+    // asi hacia que la prueba de abajo se pasara de prudente y bajara la escala
+    // mas de la cuenta — justo lo que Florencio veia menos nitido.
+    function altoEstimadoDeCaptura(anchoCaptura) {
+        const alto = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        const ancho = Math.max(document.documentElement.clientWidth || 0, 1);
+        const factor = Math.min(1, Math.max(ancho / anchoCaptura, 0.5));
+        return Math.round(alto * factor);
+    }
+
+    // Un lienzo que el navegador no aguanto se entrega EN BLANCO. Se mira una
+    // banda de abajo, que es donde falla primero.
+    function lienzoUtil(canvas) {
+        try {
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return false;
+            const alto = Math.min(40, canvas.height);
+            const datos = ctx.getImageData(0, canvas.height - alto, Math.min(600, canvas.width), alto).data;
+            for (let i = 0; i < datos.length; i += 4) {
+                if (datos[i + 3] > 0 && (datos[i] < 250 || datos[i + 1] < 250 || datos[i + 2] < 250)) return true;
+            }
+            return false;
+        } catch (error) {
+            return true; // si no se puede mirar, se da por bueno
+        }
+    }
+
+    // Devuelve la escala mas alta con la que este navegador SI puede generar el
+    // lienzo. Safari en iPhone acepta crear lienzos enormes pero los entrega en
+    // blanco (su limite ronda los 17 millones de pixeles); por eso no basta con
+    // crear el lienzo, hay que pintar y volver a leer una esquina.
+    function escalaQueAguantaElNavegador(ancho, alto, deseada) {
+        const candidatas = [];
+        for (let e = deseada; e >= 1.5; e -= 0.5) candidatas.push(Math.round(e * 100) / 100);
+        if (!candidatas.length) candidatas.push(deseada);
+
+        for (const escala of candidatas) {
+            const prueba = document.createElement("canvas");
+            prueba.width = Math.round(ancho * escala);
+            prueba.height = Math.round(alto * escala);
+            let sirve = false;
+            try {
+                const ctx = prueba.getContext("2d");
+                if (ctx) {
+                    // La esquina de ABAJO A LA DERECHA: es la que se queda en
+                    // blanco cuando el lienzo pasa del limite.
+                    ctx.fillStyle = "rgb(18, 52, 86)";
+                    ctx.fillRect(prueba.width - 2, prueba.height - 2, 2, 2);
+                    const d = ctx.getImageData(prueba.width - 1, prueba.height - 1, 1, 1).data;
+                    sirve = d[0] === 18 && d[1] === 52 && d[2] === 86;
+                }
+            } catch (error) {
+                sirve = false;
+            }
+            prueba.width = 0;
+            prueba.height = 0;
+            if (sirve) return escala;
+        }
+        return candidatas[candidatas.length - 1];
+    }
+
     async function crearCanvasCotizacion(escala) {
         if (typeof html2canvas !== "function") {
             throw new Error("html2canvas no esta disponible.");
@@ -1579,20 +1642,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const anchoCaptura = 1200;
         escala = escala || 5;
 
-        // TOPE DE TAMANO. Un canvas gigante NO mejora la imagen: WhatsApp la
-        // reduce igual (medido: a escala 5, 3 o 2 el cliente recibe lo mismo,
-        // ~175 KB y se lee igual). Lo que si provoca es que en iPhone Safari
-        // degrade o deje en blanco la captura: su limite ronda los 17 millones
-        // de pixeles y a escala 5 esta hoja pedia 55 millones. Se baja la
-        // escala lo justo para no pasarse, nunca abajo de 2 (ahi si se notaria).
-        const MAX_PIXELES = 16000000;
-        const altoCaptura = Math.max(
-            document.body.scrollHeight,
-            document.documentElement.scrollHeight
-        );
+        // La escala la decide EL APARATO, no un numero fijo. Antes habia un tope
+        // de 16 millones de pixeles para que Safari en iPhone no degradara la
+        // captura; el problema es que ese tope tambien le bajaba la calidad en
+        // la computadora, donde no hace falta. Ahora se prueba de verdad: se
+        // crea un lienzo del tamano pedido, se pinta una esquina y se lee de
+        // vuelta. Si el navegador no puede, devuelve blanco y se baja un
+        // escalon. Asi la computadora usa la maxima nitidez y el telefono la
+        // mayor que aguante, sin adivinar limites.
+        const altoCaptura = altoEstimadoDeCaptura(anchoCaptura);
         if (altoCaptura > 0) {
-            const escalaTope = Math.sqrt(MAX_PIXELES / (anchoCaptura * altoCaptura));
-            escala = Math.max(2, Math.min(escala, escalaTope));
+            escala = escalaQueAguantaElNavegador(anchoCaptura, altoCaptura, escala);
         }
         // El fondo de la captura se LEE del CSS en vez de escribirlo aqui: antes
         // estaba hardcodeado ("#fbf7ef") y al retintar el cotizador con los
@@ -1600,9 +1660,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // mientras la pantalla mostraba el nuevo.
         const fondo = getComputedStyle(document.documentElement)
             .getPropertyValue("--brand-cream").trim() || "#F7FAFC";
-        return html2canvas(document.body, {
+        const dibujar = (escalaUsada) => html2canvas(document.body, {
             backgroundColor: fondo,
-            scale: escala,
+            scale: escalaUsada,
             useCORS: true,
             allowTaint: false,
             logging: false,
@@ -1623,6 +1683,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 reemplazarControlesPorTextoParaCanvas(clonedDocument);
             }
         });
+
+        // Red de seguridad: si aun asi el lienzo salio en blanco (el calculo de
+        // arriba es una estimacion), se repite mas chico en vez de entregar una
+        // imagen vacia.
+        let canvas = await dibujar(escala);
+        if (!lienzoUtil(canvas)) {
+            const menor = Math.max(1.5, Math.round(escala * 0.6 * 10) / 10);
+            canvas.width = 0;
+            canvas.height = 0;
+            canvas = await dibujar(menor);
+        }
+        return canvas;
     }
 
     async function crearImagenCotizacion() {
@@ -1637,9 +1709,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Misma captura probada de "Compartir imagen", en pagina a medida.
-        // Escala 2 (no 5): en pagina de 612pt de ancho rinde ~280 DPI;
-        // reduce mucho el peso del PDF sin pérdida visible de nitidez.
-        const canvas = await crearCanvasCotizacion(2);
+        // MEDIDO (19 sept 2026) en una cotizacion tipica, peso del PDF:
+        //   escala 2.0 (282 DPI) calidad 0.80 → 643 KB   ← como estaba
+        //   escala 1.75 (247 DPI) calidad 0.80 → 533 KB
+        //   escala 1.6 (226 DPI) calidad 0.82 → 489 KB
+        //   escala 1.5 (212 DPI) calidad 0.80 → 431 KB  ← este
+        // A 226 DPI el texto se lee e imprime perfecto (una impresora casera
+        // trabaja a 150-300 DPI), y el archivo baja casi 200 KB. Bajar la
+        // CALIDAD en vez de la escala se ve peor: el JPEG ensucia las letras.
+        const canvas = await crearCanvasCotizacion(1.5);
         const imagenData = canvas.toDataURL("image/jpeg", 0.8);
 
         // Página a la medida exacta de la captura (sin franjas ni bordes):

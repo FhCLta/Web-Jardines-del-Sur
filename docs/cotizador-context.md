@@ -205,6 +205,47 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-19] - Calidad de la imagen compartida y peso del PDF
+
+**Lo que reportó Florencio:** las imágenes seguían saliendo menos nítidas y el
+PDF pesaba más de 500 KB.
+
+**La nitidez era culpa del arreglo anterior.** El tope fijo de 16 millones de
+píxeles —puesto para que Safari en iPhone no degradara la captura— se aplicaba
+TAMBIÉN en la computadora, donde no hace falta: la bajaba de escala 5 a 2.5.
+Ahora no se adivina el límite, **se prueba el aparato**: se crea un lienzo del
+tamaño pedido, se pinta la esquina de abajo a la derecha y se vuelve a leer; si
+el navegador no puede, devuelve blanco y se baja un escalón
+(`escalaQueAguantaElNavegador`). Computadora: escala 5. iPhone: la mayor que
+aguante.
+
+⚠️ **Y un detalle que costó encontrar:** la prueba necesita saber cuánto va a
+medir la captura, y medir `document.body.scrollHeight` tal cual **no sirve en un
+teléfono**: ahí la página va apilada en una columna y es mucho más alta que la
+captura, que se arma a 1200px de ancho. Con la medida cruda la prueba se pasaba
+de prudente y elegía escala 1.5 en el celular. `altoEstimadoDeCaptura()` corrige
+con la proporción de anchos (tope 0.5) y sube a 2.5. Además, si aun así el
+lienzo saliera en blanco, `lienzoUtil()` lo detecta y repite la captura más
+chica.
+
+**PDF: 643 KB → 428 KB.** Se bajó la ESCALA (282 → 212 DPI) y no la calidad
+JPEG: a 212 DPI el texto se lee e imprime perfecto —una impresora casera trabaja
+a 150-300 DPI— mientras que bajar la calidad ensucia las letras. Medido:
+
+| Escala | DPI | Calidad | Peso |
+|---|---|---|---|
+| 2.0 | 282 | 0.80 | 643 KB (como estaba) |
+| 1.75 | 247 | 0.80 | 533 KB |
+| **1.5** | **212** | **0.80** | **428 KB** |
+
+**Descartado:** WebP dentro del PDF. Pesa la mitad como imagen suelta, pero
+jsPDF lo descomprime y el PDF se va a 2.5 MB. Y para la imagen compartida se
+mantiene PNG porque el respaldo de "copiar imagen" (ClipboardItem) solo acepta
+PNG en la mayoría de navegadores.
+
+**Costo aceptado:** la imagen desde la computadora pesa ~4.3 MB (antes 1.9). Por
+WhatsApp da igual porque él la recomprime; por correo es pesada.
+
 ### [2026-09-19] - Encabezado nuevo: logos de marca, Jardines 7 y limpieza
 
 **Cómo quedó:** arriba los logos principales —**Altta Homes** (el oficial, de
