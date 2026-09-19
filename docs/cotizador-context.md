@@ -205,6 +205,32 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-19] - Encabezado nuevo: logos de marca, Jardines 7 y limpieza
+
+**Cómo quedó:** arriba los logos principales —**Altta Homes** (el oficial, de
+1536×1024, con el fondo blanco quitado) a la izquierda y **Grupo Sadasi 50 años**
+a la derecha—, "Presupuesto · Para tu Hogar Ideal" centrado, y debajo la tira de
+los **cuatro** desarrollos, separada por una línea dorada tenue. Se probó una
+variante de una sola fila y Florencio prefirió el membrete de dos.
+
+**La impresión no cambia:** tiene sus propias reglas (bloque `@media print` de
+más abajo) y deja el encabezado en 97 px pase lo que pase, así que el acomodo de
+pantalla no le quita espacio a la cotización.
+
+**⚠️ Especificidad, otra vez:** `.header-fixed img` (0,1,1) le gana a
+`.brand-logo-altta` (0,1,0) y su `height: auto` dejaba los logos nuevos a su
+tamaño natural — el encabezado se fue a 283 px y tapaba la cotización. Las
+alturas van anidadas bajo `.header-fixed`. Y el `padding-top` del `body` tiene
+que cuadrar con el alto real del encabezado (hoy 158 px para 149 px reales).
+
+**Limpieza:** `script.js` cargaba **copias en base64** de los dos logos viejos
+(`imagenesSegurasCanvas` + `prepararImagenesSegurasParaCanvas`), ~11 KB del
+archivo. Todos los logos viven en el mismo dominio, así que html2canvas los toma
+sin problema: comprobado generando la imagen compartida real. Script de 100 a
+89 KB, y fuera los tres archivos de logo que ya no usaba nadie.
+
+**Pesos:** altta-homes-nuevo.webp 27 KB · grupo-sadasi-50.webp 43 KB.
+
 ### [2026-09-19] - Imagen compartida: tope de tamaño, fechas dd/mm/aaaa y logo de Jardines 7
 
 **Lo que Florencio reportó:** la imagen compartida "se ve más fea" desde que se

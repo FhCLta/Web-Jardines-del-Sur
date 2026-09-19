@@ -1462,6 +1462,23 @@
 
 ---
 
+## 19 sept 2026 · Encabezado nuevo del cotizador
+
+Florencio pasó dos logos suyos y pidió rehacer la barra de logos "manteniendo el
+estilo". Se le enseñaron dos propuestas en local —membrete de dos filas y una
+sola fila compacta— y eligió la de dos filas: **Altta Homes** a la izquierda,
+**Grupo Sadasi 50 años** a la derecha, el título centrado y los cuatro
+desarrollos abajo. Primero probamos su logo de Altta Homes Cancún y al final se
+quedó el oficial, que viene a mucha mejor resolución.
+
+Dos cosas que valen para la próxima: **la impresión no depende del encabezado de
+pantalla** (tiene sus propias reglas y siempre son 97 px), y el `padding-top` del
+body tiene que cuadrar con el alto real del encabezado fijo o tapa la cotización
+—pasó, por la misma trampa de especificidad que ya estaba documentada—.
+
+De paso salieron ~11 KB del script: guardaba copias en base64 de los logos
+viejos que ya no hacían falta.
+
 ## 19 sept 2026 · La imagen que comparte el cotizador
 
 Florencio notó que la imagen compartida se veía peor desde que le pusimos la

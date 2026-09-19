@@ -103,9 +103,10 @@ body {
     /* Eliminamos el padding del body */
     font-size: 14px;
     /* AÃƒÂ±adido para establecer una base mÃƒÂ¡s pequeÃƒÂ±a */
-    /* Espacio para la cabecera fija. Debe ser >= al alto real del header, que
-       crecio al sumarle la tira de logos de desarrollos (medido: 194px). */
-    padding-top: 206px;
+    /* Espacio para la cabecera fija. Debe cuadrar con el alto real del header:
+       de menos tapa la cotizacion, de mas deja un vacio. Medido: 149px con el
+       encabezado del 19 sept 2026 (en celular lo ajusta su media query). */
+    padding-top: 158px;
 }
 
 /* Aplicar negrita a todos los textos */
@@ -3226,4 +3227,55 @@ body.generando-imagen .mensualidad-gastos .mensualidad-fila {
 body.generando-imagen .mensualidad-gastos .mensualidad-leyenda {
     font-size: 13px !important;
     line-height: 1.4 !important;
+}
+
+/* ===================================================================
+   ENCABEZADO (19 sept 2026)
+   Florencio eligió este acomodo: los logos principales arriba —Altta
+   Homes Cancún a la izquierda y Grupo Sadasi 50 años a la derecha—,
+   "Presupuesto · Para tu Hogar Ideal" centrado, y debajo la tira de los
+   cuatro desarrollos. Se descartó una variante de una sola fila.
+   La impresión NO depende de esto: tiene sus propias reglas más abajo
+   y deja el membrete en dos filas de ~97px en cualquier caso.
+   =================================================================== */
+
+.header-fixed {
+    padding: 12px 0 10px;
+    gap: 8px;
+    border-bottom-width: 3px;
+}
+
+.brand-logos {
+    gap: 32px;
+}
+
+/* OJO CON LA ESPECIFICIDAD (el mismo tropiezo ya documentado para los logos
+   de desarrollos): `.header-fixed img` le gana a una clase suelta y su
+   `height: auto` dejaba estos dos logos a su tamaño natural — el encabezado
+   se iba a 283px y tapaba la cotización. Por eso van anidados aquí. */
+.header-fixed .brand-logo-altta {
+    height: 70px;
+}
+
+.header-fixed .brand-logo-sadasi {
+    height: 56px;
+}
+
+.brand-title span {
+    letter-spacing: 0.4px;
+}
+
+.brand-title strong {
+    letter-spacing: 0.2px;
+}
+
+/* La línea sobre los desarrollos, en dorado tenue en vez de gris */
+.brand-devs {
+    gap: 46px;
+    padding-top: 9px;
+    border-top: 1px solid rgba(232, 180, 58, 0.55);
+}
+
+.header-fixed .brand-dev-logo {
+    height: 36px;
 }
