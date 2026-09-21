@@ -1802,8 +1802,12 @@ body.generando-imagen #departamentoContainer #departamentoSelect {
     flex-grow: 1 !important;
 }
 
+/* Este rotulo es el mas largo de Gastos y necesita ir mas chico que los demas
+   o empuja su monto fuera de la columna. MEDIDO: a 20.7px el monto se iba 74px
+   a la derecha; a 17.3px (el 15% sobre los 15px de antes) y con el texto
+   acortado —"Libertad de Gravamen (CLG)"— queda alineado al pixel. */
 body.generando-imagen label[for="infoCertificadoLibertadGravamen"] {
-    font-size: 15px !important;
+    font-size: 17.3px !important;
     line-height: 1.05 !important;
     padding-right: 4px !important;
 }

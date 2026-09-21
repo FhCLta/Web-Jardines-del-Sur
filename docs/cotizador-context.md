@@ -221,6 +221,13 @@ pierde nitidez: cada letra lleva más píxeles. La hoja crece ~5% de alto.
 Precio y en Gastos, y las fechas del Plan de Enganche se cortan. Los campos tienen
 altura fija. Si algún día se sube más, revisar esos dos bloques primero.
 
+**Efecto colateral que hubo que corregir:** el rótulo de Certificado de Libertad
+de Gravamen tiene su propia regla para ir más chico que los demás (es el más
+largo de Gastos); la regla nueva del 15% se la pisaba y su monto se iba 74px
+fuera de la columna. Se le devolvió su tamaño propio (17.3px) y Florencio pidió
+acortar el texto: ahora dice **"(+) Libertad de Gravamen (CLG)"**. Medido: los
+ocho montos de Gastos arrancan en el mismo píxel.
+
 ⚠️ **Lo que NO funciona para agrandar la letra:** capturar con un ancho menor
 (`windowWidth`). html2canvas no reacomoda la página con eso — solo recorta el
 lienzo, así que la hoja sale cortada por la derecha. La única vía es subir los
