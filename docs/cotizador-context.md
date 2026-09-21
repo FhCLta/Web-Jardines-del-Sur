@@ -205,6 +205,29 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-21] - Imagen compartida: las cifras, un 25% por encima de las etiquetas
+
+Segunda vuelta sobre lo mismo. Las CIFRAS son lo que el cliente busca en la
+imagen, así que van a **25.9px** (25% sobre los 20.7px del rótulo) y las del plan
+de enganche a **28px**. Antes había seis tamaños distintos conviviendo —18,
+17.5, 18.2, 20.7, 21.9, 22.4— porque varios campos tenían regla propia; ahora
+todas las cifras miden igual.
+
+⚠️ **Los campos de TEXTO se quedan en 20.7px a propósito.** A 25.9px se cortan:
+probado con "María Fernanda González" y con "Jardines del Sur 6 Casas", los dos
+salían recortados. Son: nombre del cliente, desarrollo, prototipo, departamento,
+# de unidad, plan de ventas, asesor y teléfono.
+
+⚠️ **Cómo probar esto, que me costó dos intentos:** hay que generar la imagen con
+el BOTÓN real, no llamando a html2canvas por fuera. En el flujo real los campos
+se sustituyen por texto (`reemplazarControlesPorTextoParaCanvas`), y sin eso los
+`<input>` recortan el número y parece que no cabe cuando sí cabe.
+
+**Lo que NO rinde (medido):** pre-reducir la imagen nosotros antes de compartir.
+Se comparó lo que recibe el cliente y dio igual (nitidez 8.17 contra 8.19): el
+reductor de WhatsApp es bueno. Un afinado ligero sí daría +4%, pero no se
+implementó por ser marginal frente al tamaño de letra.
+
 ### [2026-09-21] - Imagen compartida: letra 15% más grande
 
 La imagen se manda por WhatsApp y se lee en un teléfono; con la letra anterior

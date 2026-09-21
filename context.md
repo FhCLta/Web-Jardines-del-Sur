@@ -1462,6 +1462,19 @@
 
 ---
 
+## 21 sept 2026 · Las cifras de la imagen compartida, más grandes
+
+Florencio pidió subirle nitidez a la imagen ("ojo, ya se ve bien"). Se investigó
+a fondo: pre-reducir la imagen nosotros **no gana nada** —el reductor de WhatsApp
+es bueno: 8.17 contra 8.19 de nitidez— y un afinado ligero solo da +4%. Lo que sí
+rinde es el tamaño: las cifras subieron a 25.9px, un 25% por encima de las
+etiquetas, y las del plan de enganche a 28px. Los textos (nombres) se quedan
+donde estaban porque a ese tamaño se cortan.
+
+Lección de método: para probar la imagen hay que usar el BOTÓN real. Llamando a
+html2canvas por fuera, los campos siguen siendo `<input>` y recortan el número —
+me hizo descartar un tamaño que en realidad sí cabía.
+
 ## 21 sept 2026 · Letra más grande en la imagen compartida
 
 Florencio pidió agrandar la letra y los números de la imagen que comparte, sin

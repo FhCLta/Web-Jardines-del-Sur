@@ -3332,3 +3332,52 @@ body.generando-imagen .leyenda-notarial p,
 body.generando-imagen .final .leyenda {
     font-size: 15px !important;
 }
+
+/* ===================================================================
+   IMAGEN COMPARTIDA · LOS NÚMEROS, MÁS GRANDES (21 sept 2026)
+   Segunda vuelta: las CIFRAS son lo que el cliente busca en la imagen,
+   así que van un 25% por encima de las etiquetas (25.9px contra los
+   20.7px del rótulo). El plan de enganche todavía más (28px), que es
+   lo que más se mira.
+   ⚠️ Los campos de TEXTO se quedan en 20.7px a propósito: con 25.9px
+   se cortan los nombres largos —probado con "María Fernanda González"
+   y con "Jardines del Sur 6 Casas", los dos salían recortados—.
+   Comprobado generando la imagen real con el botón, en casas y en
+   departamentos: cifras grandes, nombres completos, columna de Gastos
+   alineada.
+   =================================================================== */
+
+body.generando-imagen .campo-horizontal input,
+body.generando-imagen .campo-horizontal select,
+body.generando-imagen .control-texto-canvas,
+body.generando-imagen .valor-destacado input,
+body.generando-imagen input[readonly],
+body.generando-imagen #gastosEscrituracion,
+body.generando-imagen #comisionApertura,
+body.generando-imagen #apartado,
+body.generando-imagen #mesesPagarEnganche,
+body.generando-imagen #totalPagos {
+    font-size: 25.9px !important;
+}
+
+body.generando-imagen #tablaEnganche .monto-pago,
+body.generando-imagen #tablaEnganche .fecha-pago {
+    font-size: 28px !important;
+}
+
+body.generando-imagen .mensualidad-fila strong {
+    font-size: 24px !important;
+}
+
+/* Los textos largos NO crecen: se cortarían. */
+body.generando-imagen #nombreCliente,
+body.generando-imagen #Azular,
+body.generando-imagen #prototipo,
+body.generando-imagen #departamentoSelect,
+body.generando-imagen #planVenta,
+body.generando-imagen #letrasNumeros,
+body.generando-imagen #letrasNumerosDepa,
+body.generando-imagen #nombreAsesor,
+body.generando-imagen #telefonoAsesor {
+    font-size: 20.7px !important;
+}
