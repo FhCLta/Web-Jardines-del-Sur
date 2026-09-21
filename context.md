@@ -1462,6 +1462,22 @@
 
 ---
 
+## 21 sept 2026 · Letra más grande en la imagen compartida
+
+Florencio pidió agrandar la letra y los números de la imagen que comparte, sin
+perder nitidez. Se subió **15%** en el modo captura. La decisión se tomó mirando
+cómo LLEGA al cliente —imagen reducida a 1200px, como la entrega WhatsApp—, no
+cómo se ve en el monitor. A +30% se rompe: los montos se salen de sus recuadros.
+
+Dos callejones sin salida que quedan anotados para no repetirlos: capturar con un
+ancho menor NO agranda la letra (html2canvas no reacomoda, solo recorta), y medir
+el alto de la hoja para verificar el cambio engaña, porque en la captura los
+campos se sustituyen por texto.
+
+Pendiente aparte: la miniatura del PDF en WhatsApp. Se descartó que sea el nombre
+del archivo; la página de pruebas quedó en `/pruebas/compartir` con seis
+variantes, esperando que Florencio las mande desde su celular.
+
 ## 19 sept 2026 · Nitidez de la imagen y peso del PDF del cotizador
 
 Florencio reportó que las imágenes compartidas seguían menos nítidas y que el

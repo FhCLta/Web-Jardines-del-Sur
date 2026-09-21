@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Prueba de compartir PDF</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 24px 18px 60px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #F7FAFC;
+            color: #1A202C;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0 0 6px;
+            color: #1A365D;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #4A5568;
+            margin: 0 0 18px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin: 0 0 14px;
+            padding: 16px 18px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+            color: #fff;
+            background: #1A365D;
+            border: none;
+            border-radius: 10px;
+        }
+
+        button small {
+            display: block;
+            margin-top: 4px;
+            font-weight: 400;
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+        }
+
+        #estado {
+            font-size: 14px;
+            color: #1A365D;
+            background: #fff;
+            border: 1px solid #DDE4ED;
+            border-radius: 10px;
+            padding: 12px 14px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Prueba: miniatura del PDF en WhatsApp</h1>
+    <p>Manda cada botón a un chat contigo mismo y anota cuáles salen con la imagen
+        de la hoja y cuáles solo con el ícono rojo. Los tres mandan EL MISMO PDF;
+        lo único que cambia es cómo se entrega.</p>
+
+    <button id="a" type="button">1 · Como está hoy
+        <small>Nombre con acentos y "·", con título</small>
+    </button>
+    <button id="b" type="button">2 · Nombre simple
+        <small>Cotizacion-Jardines-del-Sur-6.pdf, con título</small>
+    </button>
+    <button id="c" type="button">3 · Nombre simple y sin título
+        <small>Solo el archivo, sin nada más</small>
+    </button>
+
+    <button id="d" type="button">4 · Hoja carta, foto más chica
+        <small>La misma hoja pero la foto de adentro a la mitad</small>
+    </button>
+    <button id="e" type="button">5 · Hoja carta, foto muy chica
+        <small>Para ver si el tamaño de la foto es lo que estorba</small>
+    </button>
+    <button id="f" type="button">6 · Sin foto: texto de verdad
+        <small>Como el de Imprimir. Si este SÍ sale con hoja, ya sabemos</small>
+    </button>
+
+    <div id="estado">Listo.</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        const estado = document.getElementById("estado");
+
+        // Un PDF parecido al del cotizador: hoja a la medida, con una imagen
+        // encima. Lo que se prueba es el ENVIO, no el contenido.
+        async function crearPdf() {
+            const jsPDF = window.jspdf.jsPDF;
+            const lienzo = document.createElement("canvas");
+            lienzo.width = 1800;
+            lienzo.height = 2700;
+            const ctx = lienzo.getContext("2d");
+            ctx.fillStyle = "#F7FAFC";
+            ctx.fillRect(0, 0, lienzo.width, lienzo.height);
+            ctx.fillStyle = "#1A365D";
+            ctx.fillRect(0, 0, lienzo.width, 180);
+            ctx.fillStyle = "#fff";
+            ctx.font = "bold 70px sans-serif";
+            ctx.fillText("Presupuesto para tu Hogar Ideal", 80, 115);
+            ctx.fillStyle = "#1A202C";
+            ctx.font = "bold 54px sans-serif";
+            for (let i = 0; i < 18; i++) {
+                ctx.fillText("Renglón de prueba " + (i + 1) + " .................. $1,234,567.00", 80, 340 + i * 120);
+            }
+            ctx.fillStyle = "#D19200";
+            ctx.fillRect(80, 2500, lienzo.width - 160, 8);
+            const datos = lienzo.toDataURL("image/jpeg", 0.92);
+            const ancho = 612;
+            const alto = 612 * (lienzo.height / lienzo.width);
+            const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: [ancho, alto] });
+            pdf.addImage(datos, "JPEG", 0, 0, ancho, alto);
+            return pdf.output("blob");
+        }
+
+        async function compartir(nombre, conTitulo, boton) {
+            estado.textContent = "Preparando...";
+            boton.disabled = true;
+            try {
+                const blob = await crearPdf();
+                const archivo = new File([blob], nombre, { type: "application/pdf" });
+                if (!navigator.canShare || !navigator.canShare({ files: [archivo] })) {
+                    estado.textContent = "Este navegador no puede compartir archivos; pruébalo en el celular.";
+                    return;
+                }
+                const datos = { files: [archivo] };
+                if (conTitulo) datos.title = "Cotización · Jardines del Sur 6 Casas · FLAMBOYAN";
+                await navigator.share(datos);
+                estado.textContent = "Enviado como: " + nombre;
+            } catch (error) {
+                estado.textContent = error && error.name === "AbortError"
+                    ? "Cancelado."
+                    : "No se pudo compartir: " + (error && error.message);
+            } finally {
+                boton.disabled = false;
+            }
+        }
+
+        document.getElementById("a").addEventListener("click", function () {
+            compartir("Cotización para Shun · Jardines del Sur 6 Casas · FLAMBOYAN.pdf", true, this);
+        });
+        document.getElementById("b").addEventListener("click", function () {
+            compartir("Cotizacion-Jardines-del-Sur-6-Flamboyan.pdf", true, this);
+        });
+        document.getElementById("c").addEventListener("click", function () {
+            compartir("Cotizacion-Jardines-del-Sur-6-Flamboyan.pdf", false, this);
+        });
+
+        // --- las tres pruebas nuevas: cambia lo que va DENTRO del PDF ---
+        function lienzoDePrueba(ancho, alto) {
+            const lienzo = document.createElement("canvas");
+            lienzo.width = ancho;
+            lienzo.height = alto;
+            const ctx = lienzo.getContext("2d");
+            const k = ancho / 1800;
+            ctx.fillStyle = "#F7FAFC";
+            ctx.fillRect(0, 0, ancho, alto);
+            ctx.fillStyle = "#1A365D";
+            ctx.fillRect(0, 0, ancho, 180 * k);
+            ctx.fillStyle = "#fff";
+            ctx.font = `bold ${Math.round(70 * k)}px sans-serif`;
+            ctx.fillText("Presupuesto para tu Hogar Ideal", 80 * k, 115 * k);
+            ctx.fillStyle = "#1A202C";
+            ctx.font = `bold ${Math.round(54 * k)}px sans-serif`;
+            for (let i = 0; i < 18; i++) {
+                ctx.fillText("Renglon de prueba " + (i + 1) + " .................. $1,234,567.00", 80 * k, (340 + i * 120) * k);
+            }
+            return lienzo;
+        }
+
+        async function pdfConFoto(ancho, alto) {
+            const jsPDF = window.jspdf.jsPDF;
+            const lienzo = lienzoDePrueba(ancho, alto);
+            const datos = lienzo.toDataURL("image/jpeg", 0.92);
+            const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "letter" });
+            const escala = Math.min(612 / lienzo.width, 792 / lienzo.height);
+            const w = lienzo.width * escala, h = lienzo.height * escala;
+            pdf.addImage(datos, "JPEG", (612 - w) / 2, (792 - h) / 2, w, h);
+            return pdf.output("blob");
+        }
+
+        async function pdfSoloTexto() {
+            const jsPDF = window.jspdf.jsPDF;
+            const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "letter" });
+            pdf.setFillColor(26, 54, 93);
+            pdf.rect(0, 0, 612, 60, "F");
+            pdf.setTextColor(255, 255, 255);
+            pdf.setFont("helvetica", "bold");
+            pdf.setFontSize(18);
+            pdf.text("Presupuesto para tu Hogar Ideal", 40, 38);
+            pdf.setTextColor(26, 32, 44);
+            pdf.setFontSize(12);
+            for (let i = 0; i < 18; i++) {
+                pdf.text("Renglon de prueba " + (i + 1) + " .................. $1,234,567.00", 40, 110 + i * 26);
+            }
+            pdf.setFillColor(209, 146, 0);
+            pdf.rect(40, 620, 532, 4, "F");
+            return pdf.output("blob");
+        }
+
+        async function compartirBlob(hacerBlob, nombre, boton) {
+            estado.textContent = "Preparando...";
+            boton.disabled = true;
+            try {
+                const blob = await hacerBlob();
+                const archivo = new File([blob], nombre, { type: "application/pdf" });
+                if (!navigator.canShare || !navigator.canShare({ files: [archivo] })) {
+                    estado.textContent = "Este navegador no puede compartir archivos; pruebalo en el celular.";
+                    return;
+                }
+                await navigator.share({ files: [archivo] });
+                estado.textContent = "Enviado: " + nombre + " (" + Math.round(blob.size / 1024) + " KB)";
+            } catch (error) {
+                estado.textContent = error && error.name === "AbortError" ? "Cancelado." : "No se pudo compartir: " + (error && error.message);
+            } finally {
+                boton.disabled = false;
+            }
+        }
+
+        document.getElementById("d").addEventListener("click", function () {
+            compartirBlob(() => pdfConFoto(1200, 1800), "Prueba-4-foto-chica.pdf", this);
+        });
+        document.getElementById("e").addEventListener("click", function () {
+            compartirBlob(() => pdfConFoto(800, 1200), "Prueba-5-foto-muy-chica.pdf", this);
+        });
+        document.getElementById("f").addEventListener("click", function () {
+            compartirBlob(pdfSoloTexto, "Prueba-6-solo-texto.pdf", this);
+        });
+    </script>
+</body>
+
+</html>

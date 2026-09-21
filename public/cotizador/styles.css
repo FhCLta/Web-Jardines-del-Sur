@@ -3279,3 +3279,52 @@ body.generando-imagen .mensualidad-gastos .mensualidad-leyenda {
 .header-fixed .brand-dev-logo {
     height: 36px;
 }
+
+/* ===================================================================
+   IMAGEN COMPARTIDA · LETRA UN 15% MÁS GRANDE (21 sept 2026)
+   La imagen se manda por WhatsApp y se lee en un teléfono: con la
+   letra de antes costaba. MEDIDO comparando cómo llega al cliente
+   (imagen reducida a 1200px de ancho, como la entrega WhatsApp):
+   a +15% se lee claramente mejor y no se pierde nitidez —cada letra
+   lleva más píxeles—; la hoja solo crece un 5% de alto.
+   ⚠️ +30% NO sirve: los montos se salen de sus recuadros en Detalles
+   de Precio y en Gastos, y las fechas del Plan de Enganche se cortan.
+   Los campos tienen altura fija. Si algún día se sube más, revisar
+   esos dos bloques antes.
+   =================================================================== */
+
+body.generando-imagen .campo-horizontal label,
+body.generando-imagen .campo-horizontal input,
+body.generando-imagen .campo-horizontal select,
+body.generando-imagen .control-texto-canvas,
+body.generando-imagen #mesesPagarEnganche {
+    font-size: 20.7px !important;
+}
+
+body.generando-imagen .bloque h2 {
+    font-size: 17.3px !important;
+}
+
+body.generando-imagen .valor-destacado input,
+body.generando-imagen #totalPagos {
+    font-size: 21.9px !important;
+}
+
+body.generando-imagen #tablaEnganche .monto-pago,
+body.generando-imagen #tablaEnganche .fecha-pago {
+    font-size: 22.4px !important;
+}
+
+body.generando-imagen #tablaEnganche tbody td:first-child {
+    font-size: 16.1px !important;
+}
+
+body.generando-imagen .mensualidad-gastos .mensualidad-fila {
+    font-size: 20.7px !important;
+}
+
+body.generando-imagen .mensualidad-gastos .mensualidad-leyenda,
+body.generando-imagen .leyenda-notarial p,
+body.generando-imagen .final .leyenda {
+    font-size: 15px !important;
+}

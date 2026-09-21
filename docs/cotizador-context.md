@@ -205,6 +205,27 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-21] - Imagen compartida: letra 15% más grande
+
+La imagen se manda por WhatsApp y se lee en un teléfono; con la letra anterior
+costaba. Se subieron **un 15%** los tamaños de la captura (`body.generando-imagen`):
+etiquetas y valores 18→20.7px, títulos 15→17.3px, montos del plan 19.5→22.4px,
+totales 19→21.9px, leyendas 13→15px.
+
+**Cómo se eligió el 15%:** comparando cómo LLEGA al cliente, no cómo se ve en el
+monitor — se generó la imagen, se redujo a 1200px de ancho (como hace WhatsApp) y
+se recortó el mismo trozo en cada versión. A +15% se lee claramente mejor y no se
+pierde nitidez: cada letra lleva más píxeles. La hoja crece ~5% de alto.
+
+⚠️ **+30% NO sirve, probado:** los montos se salen de sus recuadros en Detalles de
+Precio y en Gastos, y las fechas del Plan de Enganche se cortan. Los campos tienen
+altura fija. Si algún día se sube más, revisar esos dos bloques primero.
+
+⚠️ **Lo que NO funciona para agrandar la letra:** capturar con un ancho menor
+(`windowWidth`). html2canvas no reacomoda la página con eso — solo recorta el
+lienzo, así que la hoja sale cortada por la derecha. La única vía es subir los
+tamaños de letra.
+
 ### [2026-09-19] - Calidad de la imagen compartida y peso del PDF
 
 **Lo que reportó Florencio:** las imágenes seguían saliendo menos nítidas y el
