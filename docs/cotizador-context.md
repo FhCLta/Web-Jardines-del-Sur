@@ -205,6 +205,14 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-21] - Impresión: fuera las flechitas de los selectores y el calendario
+
+En papel no tienen sentido la flecha de los `<select>` ni el icono de calendario
+de los `<input type="date">`. En la computadora casi no se notaban; **el Chrome
+de Android sí los dibuja** y ensuciaban la hoja (lo reportó Florencio). Se
+ocultan solo dentro de `@media print` —en pantalla siguen viéndose, que ahí sí
+hacen falta para usar el cotizador—.
+
 ### [2026-09-21] - La miniatura del PDF en WhatsApp: investigado y CERRADO sin solución
 
 **El síntoma:** el PDF que sale del botón "Compartir PDF" llega a WhatsApp como

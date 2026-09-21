@@ -3382,3 +3382,37 @@ body.generando-imagen #nombreAsesor,
 body.generando-imagen #telefonoAsesor {
     font-size: 20.7px !important;
 }
+
+/* ===================================================================
+   IMPRESIÓN: QUE LOS CAMPOS NO SE VEAN COMO CAMPOS (21 sept 2026)
+   En papel no tiene sentido la flechita de los selectores ni el
+   iconito de calendario de las fechas. En la computadora casi no se
+   notaban; el Chrome de Android sí los dibuja y se ven feos.
+   =================================================================== */
+
+@media print {
+    select {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+        background-image: none !important;
+        padding-right: 6px !important;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button,
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        display: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        margin: 0 !important;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield !important;
+    }
+}
