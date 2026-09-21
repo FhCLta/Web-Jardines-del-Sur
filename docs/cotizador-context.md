@@ -208,8 +208,10 @@ Usar este formato para registrar todas las actualizaciones.
 ### [2026-09-21] - Imagen compartida: las cifras, un 25% por encima de las etiquetas
 
 Segunda vuelta sobre lo mismo. Las CIFRAS son lo que el cliente busca en la
-imagen, así que van a **25.9px** (25% sobre los 20.7px del rótulo) y las del plan
-de enganche a **28px**. Antes había seis tamaños distintos conviviendo —18,
+imagen, así que van a **24.6px** (sobre los 20.7px del rótulo) y las del plan de
+enganche a **26.6px**. Primero se pusieron a 25.9 y 28px; Florencio las vio
+exageradas y se les bajó un 5%. Contra el tamaño de ayer siguen siendo ~37% más
+grandes. Antes había seis tamaños distintos conviviendo —18,
 17.5, 18.2, 20.7, 21.9, 22.4— porque varios campos tenían regla propia; ahora
 todas las cifras miden igual.
 

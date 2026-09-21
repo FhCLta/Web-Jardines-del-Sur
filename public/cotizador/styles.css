@@ -3336,9 +3336,10 @@ body.generando-imagen .final .leyenda {
 /* ===================================================================
    IMAGEN COMPARTIDA · LOS NÚMEROS, MÁS GRANDES (21 sept 2026)
    Segunda vuelta: las CIFRAS son lo que el cliente busca en la imagen,
-   así que van un 25% por encima de las etiquetas (25.9px contra los
-   20.7px del rótulo). El plan de enganche todavía más (28px), que es
-   lo que más se mira.
+   así que van por encima de las etiquetas: 24.6px contra los 20.7px del
+   rótulo, y el plan de enganche a 26.6px, que es lo que más se mira.
+   (Se probaron a 25.9 y 28px; Florencio las vio exageradas y se les bajó
+   un 5%. Contra el tamaño de ayer siguen siendo ~37% más grandes.)
    ⚠️ Los campos de TEXTO se quedan en 20.7px a propósito: con 25.9px
    se cortan los nombres largos —probado con "María Fernanda González"
    y con "Jardines del Sur 6 Casas", los dos salían recortados—.
@@ -3357,16 +3358,16 @@ body.generando-imagen #comisionApertura,
 body.generando-imagen #apartado,
 body.generando-imagen #mesesPagarEnganche,
 body.generando-imagen #totalPagos {
-    font-size: 25.9px !important;
+    font-size: 24.6px !important;
 }
 
 body.generando-imagen #tablaEnganche .monto-pago,
 body.generando-imagen #tablaEnganche .fecha-pago {
-    font-size: 28px !important;
+    font-size: 26.6px !important;
 }
 
 body.generando-imagen .mensualidad-fila strong {
-    font-size: 24px !important;
+    font-size: 22.8px !important;
 }
 
 /* Los textos largos NO crecen: se cortarían. */
