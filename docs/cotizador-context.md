@@ -205,6 +205,34 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-09-21] - La miniatura del PDF en WhatsApp: investigado y CERRADO sin solución
+
+**El síntoma:** el PDF que sale del botón "Compartir PDF" llega a WhatsApp como
+una tarjeta gris con el ícono rojo; el que sale de *Imprimir → Guardar como PDF*
+llega con la miniatura de la hoja. Antes el del botón sí la traía.
+
+**Lo que se descartó, probándolo:**
+- **El nombre del archivo** (acentos, el símbolo "·", con y sin título en el
+  envío): los tres llegan igual, sin miniatura.
+- **El camino de envío**: Florencio lo intentó compartiendo desde Chrome, y
+  guardando el PDF en Archivos para después compartirlo desde ahí, y también
+  adjuntándolo desde el propio WhatsApp (clip → Documento). En los tres, nada.
+- **Que el archivo estuviera roto**: se dibuja perfecto con PDFium, el mismo
+  motor que usa Android para hacer miniaturas.
+- **La hoja a la medida**: se cambió a hoja carta exacta y comprimida, igual que
+  el de Imprimir. No devolvió la miniatura y además dejaba la cotización
+  enmarcada y más chica. Revertido (`HOJA_CARTA` en `crearPdfCotizacion`).
+
+**Lo que quedó sin probar** (y es lo único que queda): que el problema sea que
+nuestro PDF es **una foto** y el de Imprimir es **texto de verdad**. La página
+`/pruebas/compartir` tiene los botones para comprobarlo (4 y 5 con fotos más
+chicas, 6 sin foto).
+
+**Conclusión práctica:** no se invierte más en esto. La IMAGEN compartida sí se
+ve siempre y es la que los clientes abren —hay gente que ni siquiera puede abrir
+PDF—, así que el esfuerzo se puso ahí (letra y cifras más grandes). Si algún día
+hace falta un PDF con miniatura, el camino es *Imprimir → Guardar como PDF*.
+
 ### [2026-09-21] - Imagen compartida: las cifras, un 25% por encima de las etiquetas
 
 Segunda vuelta sobre lo mismo. Las CIFRAS son lo que el cliente busca en la

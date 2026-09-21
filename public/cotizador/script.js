@@ -1727,17 +1727,46 @@ document.addEventListener("DOMContentLoaded", function () {
         const canvas = await crearCanvasCotizacion(1.5);
         const imagenData = canvas.toDataURL("image/jpeg", 0.92);
 
-        // Página a la medida exacta de la captura (sin franjas ni bordes):
-        // ancho de hoja carta (612pt) y alto proporcional al contenido.
-        const anchoPagina = 612;
-        const altoPagina = anchoPagina * (canvas.height / canvas.width);
-        const pdf = new jsPDFConstructor({
-            orientation: altoPagina >= anchoPagina ? "portrait" : "landscape",
-            unit: "pt",
-            format: [anchoPagina, altoPagina]
-        });
+        // PRUEBA (21 sept 2026): WhatsApp le hace miniatura al PDF que sale de
+        // Imprimir —hoja carta exacta, comprimido— y NO al de este boton, que
+        // usaba una hoja a la medida de 8.5x13 pulgadas. Probado ya: no es el
+        // camino de envio (Florencio lo intento compartiendo desde Chrome,
+        // desde Archivos y adjuntandolo desde el propio WhatsApp), asi que solo
+        // queda el archivo. Aqui se imita al que si funciona.
+        //
+        // PROBADO EL 21 SEPT 2026 Y DESCARTADO: la hoja carta NO devuelve la
+        // miniatura en WhatsApp, y ademas deja la cotizacion enmarcada y mas
+        // chica. Se vuelve a la hoja a la medida. El camino queda escrito por
+        // si algun dia hace falta, pero apagado.
+        const HOJA_CARTA = false;
 
-        pdf.addImage(imagenData, "JPEG", 0, 0, anchoPagina, altoPagina);
+        let pdf;
+        if (HOJA_CARTA) {
+            const ANCHO = 612, ALTO = 792; // carta, en puntos
+            pdf = new jsPDFConstructor({
+                orientation: "portrait",
+                unit: "pt",
+                format: "letter",
+                compress: true
+            });
+            // La cotizacion es mas alargada que una hoja carta, asi que se
+            // acomoda centrada y deja margen a los lados.
+            const ajuste = Math.min(ANCHO / canvas.width, ALTO / canvas.height);
+            const ancho = canvas.width * ajuste;
+            const alto = canvas.height * ajuste;
+            pdf.addImage(imagenData, "JPEG", (ANCHO - ancho) / 2, (ALTO - alto) / 2, ancho, alto);
+        } else {
+            // Página a la medida exacta de la captura (sin franjas ni bordes):
+            // ancho de hoja carta (612pt) y alto proporcional al contenido.
+            const anchoPagina = 612;
+            const altoPagina = anchoPagina * (canvas.height / canvas.width);
+            pdf = new jsPDFConstructor({
+                orientation: altoPagina >= anchoPagina ? "portrait" : "landscape",
+                unit: "pt",
+                format: [anchoPagina, altoPagina]
+            });
+            pdf.addImage(imagenData, "JPEG", 0, 0, anchoPagina, altoPagina);
+        }
         return pdf.output("blob");
     }
 

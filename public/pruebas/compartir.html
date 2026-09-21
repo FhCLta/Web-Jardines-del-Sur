@@ -92,6 +92,19 @@
         <small>Como el de Imprimir. Si este SÍ sale con hoja, ya sabemos</small>
     </button>
 
+    <p style="margin:26px 0 10px;font-weight:700;color:#1A365D">Prueba del PESO
+        (la hipótesis nueva: WhatsApp no hace miniatura si el PDF pesa de más)</p>
+
+    <button id="p250" type="button">7 · PDF de ~250 KB
+        <small>Misma hoja, muy comprimida</small>
+    </button>
+    <button id="p450" type="button">8 · PDF de ~450 KB
+        <small>Como estaba cuando sí funcionaba</small>
+    </button>
+    <button id="p700" type="button">9 · PDF de ~700 KB
+        <small>Como está hoy</small>
+    </button>
+
     <div id="estado">Listo.</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -241,6 +254,51 @@
         document.getElementById("f").addEventListener("click", function () {
             compartirBlob(pdfSoloTexto, "Prueba-6-solo-texto.pdf", this);
         });
+
+        // --- pruebas de PESO: la misma hoja, apuntando a un tamaño concreto ---
+        async function pdfDeTamano(objetivoKB) {
+            const jsPDF = window.jspdf.jsPDF;
+            const lienzo = lienzoDePrueba(1800, 2700);
+            // se busca la calidad JPEG que deja el archivo cerca del objetivo
+            let bajo = 0.3, alto = 0.98, mejor = null;
+            for (let i = 0; i < 7; i++) {
+                const q = (bajo + alto) / 2;
+                const datos = lienzo.toDataURL("image/jpeg", q);
+                const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "letter" });
+                const escala = Math.min(612 / lienzo.width, 792 / lienzo.height);
+                const w = lienzo.width * escala, h = lienzo.height * escala;
+                pdf.addImage(datos, "JPEG", (612 - w) / 2, (792 - h) / 2, w, h);
+                const blob = pdf.output("blob");
+                const kb = blob.size / 1024;
+                mejor = { blob, kb };
+                if (kb > objetivoKB) alto = q; else bajo = q;
+            }
+            return mejor;
+        }
+
+        async function compartirPorPeso(objetivoKB, boton) {
+            estado.textContent = "Preparando...";
+            boton.disabled = true;
+            try {
+                const { blob, kb } = await pdfDeTamano(objetivoKB);
+                const nombre = `Prueba-${Math.round(kb)}KB.pdf`;
+                const archivo = new File([blob], nombre, { type: "application/pdf" });
+                if (!navigator.canShare || !navigator.canShare({ files: [archivo] })) {
+                    estado.textContent = "Este navegador no puede compartir archivos; pruebalo en el celular.";
+                    return;
+                }
+                await navigator.share({ files: [archivo] });
+                estado.textContent = `Enviado: ${nombre} (${Math.round(kb)} KB de verdad)`;
+            } catch (error) {
+                estado.textContent = error && error.name === "AbortError" ? "Cancelado." : "No se pudo compartir: " + (error && error.message);
+            } finally {
+                boton.disabled = false;
+            }
+        }
+
+        document.getElementById("p250").addEventListener("click", function () { compartirPorPeso(250, this); });
+        document.getElementById("p450").addEventListener("click", function () { compartirPorPeso(450, this); });
+        document.getElementById("p700").addEventListener("click", function () { compartirPorPeso(700, this); });
     </script>
 </body>
 

@@ -1462,6 +1462,22 @@
 
 ---
 
+## 21 sept 2026 · La miniatura del PDF en WhatsApp: cerrado sin solución
+
+Se persiguió a fondo por qué el PDF del botón llega a WhatsApp sin miniatura y el
+de Imprimir sí. Se descartó, probándolo: el nombre del archivo, el camino de
+envío (compartir desde Chrome, desde Archivos, y adjuntar desde el propio
+WhatsApp), que el archivo estuviera roto (PDFium lo dibuja perfecto) y la hoja a
+la medida (se probó hoja carta comprimida: no la devolvió y encima enmarcaba la
+cotización; revertido).
+
+Queda una hipótesis sin probar —que el problema sea que nuestro PDF es una foto y
+el de Imprimir es texto— pero se decidió parar: la imagen compartida siempre se
+ve y es la que los clientes abren.
+
+⚠️ Para mí: le pedí a Florencio la misma prueba varias veces y ya la había hecho.
+Anotar lo que él reporta antes de volver a pedirlo.
+
 ## 21 sept 2026 · Las cifras de la imagen compartida, más grandes
 
 Florencio pidió subirle nitidez a la imagen ("ojo, ya se ve bien"). Se investigó
