@@ -319,7 +319,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
         {
           modelo: "Casa Noni Elite",
           modeloSlug: "casa-noni-elite",
-          ubicaciones: "La Rioja 2 · Oso casas 05 y 07",
+          ubicaciones: "La Rioja 2 · Oso casa 05",
           beneficios: [
             "Descuento de $50,000",
             "1 minisplit de 18,000 BTU",
