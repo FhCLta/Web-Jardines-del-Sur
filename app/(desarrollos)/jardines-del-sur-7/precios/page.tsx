@@ -63,20 +63,20 @@ type Fila = {
   estado: string;
   href: string;
   enlace: string;
-  // Segundo enlace: a donde se vende hoy ese modelo.
-  hoy?: { href: string; enlace: string };
+  // Dorado: lleva a lo que se vende HOY en el 6.
+  hoy?: boolean;
 };
 
-const fichaJds7 = (p: (typeof modelosJds7)[number]) =>
-  `/${SLUG}/${slugifyModel(p.nombre_modelo)}`;
-
+// Lo que llega despues o esta por confirmar manda DIRECTO al 6, sin pasar por
+// la ficha del 7 (decision de Florencio, 27 sept 2026): quien ve esta tabla
+// busca precio, y el unico precio real hoy esta en el 6.
 const filas: Fila[] = [
   ...modelosJds7
     .filter((p) => !p.llega_despues)
     .map((p) => ({
       modelo: p.nombre_modelo,
       estado: "Abre con la preventa",
-      href: fichaJds7(p),
+      href: `/${SLUG}/${slugifyModel(p.nombre_modelo)}`,
       enlace: "Ver el modelo",
     })),
   ...modelosJds7
@@ -84,20 +84,16 @@ const filas: Fila[] = [
     .map((p) => ({
       modelo: p.nombre_modelo,
       estado: "Llegará más adelante",
-      href: fichaJds7(p),
-      enlace: "Ver el modelo",
-      hoy: {
-        href: `/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`,
-        enlace: "Disponible hoy en Jardines del Sur 6",
-      },
+      href: `/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`,
+      enlace: "Disponible hoy en Jardines del Sur 6",
+      hoy: true,
     })),
-  // Sin enlace a /jardines-del-sur-7/departamentos (decision de Florencio):
-  // se manda directo a lo que se vende hoy.
   {
     modelo: "Departamentos",
     estado: "Por confirmar",
     href: "/jardines-del-sur-6/departamentos",
     enlace: "Disponibles hoy en Jardines del Sur 6",
+    hoy: true,
   },
 ];
 
@@ -183,12 +179,9 @@ export default function Page() {
                     </td>
                     <td className={styles.celdaAcciones}>
                       <span className={styles.acciones}>
-                        <a href={f.href}>{f.enlace} →</a>
-                        {f.hoy && (
-                          <a className={styles.cotizar} href={f.hoy.href}>
-                            {f.hoy.enlace} →
-                          </a>
-                        )}
+                        <a className={f.hoy ? styles.cotizar : undefined} href={f.href}>
+                          {f.enlace} →
+                        </a>
                       </span>
                     </td>
                   </tr>
