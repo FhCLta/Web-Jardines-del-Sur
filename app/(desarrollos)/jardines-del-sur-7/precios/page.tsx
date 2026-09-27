@@ -53,7 +53,9 @@ export const metadata: Metadata = {
   },
 };
 
-// Los modelos del 7 que ya existen en el inventario (Tabachin y Noni, sin precio).
+// Los modelos del 7 en el inventario, sin precio: Tabachin y Noni abren la
+// preventa; Flamboyan y Ceiba (`llega_despues`) llegan mas adelante y hoy se
+// venden en el 6. Todos enlazan a SU ficha del 7 — asi Google llega a ellas.
 const modelosJds7 = getPropertiesByDev(dev.name);
 
 type Fila = {
@@ -61,32 +63,43 @@ type Fila = {
   estado: string;
   href: string;
   enlace: string;
+  // Segundo enlace: a donde se vende hoy ese modelo.
+  hoy?: { href: string; enlace: string };
 };
 
+const fichaJds7 = (p: (typeof modelosJds7)[number]) =>
+  `/${SLUG}/${slugifyModel(p.nombre_modelo)}`;
+
 const filas: Fila[] = [
-  ...modelosJds7.map((p) => ({
-    modelo: p.nombre_modelo,
-    estado: "Abre con la preventa",
-    href: `/${SLUG}/${slugifyModel(p.nombre_modelo)}`,
-    enlace: "Ver el modelo",
-  })),
-  {
-    modelo: "Casa Flamboyán",
-    estado: "Llegará más adelante",
-    href: "/jardines-del-sur-6/casa-flamboyan",
-    enlace: "Disponible hoy en Jardines del Sur 6",
-  },
-  {
-    modelo: "Casa Ceiba",
-    estado: "Llegará más adelante",
-    href: "/jardines-del-sur-6/casa-ceiba",
-    enlace: "Disponible hoy en Jardines del Sur 6",
-  },
+  ...modelosJds7
+    .filter((p) => !p.llega_despues)
+    .map((p) => ({
+      modelo: p.nombre_modelo,
+      estado: "Abre con la preventa",
+      href: fichaJds7(p),
+      enlace: "Ver el modelo",
+    })),
+  ...modelosJds7
+    .filter((p) => p.llega_despues)
+    .map((p) => ({
+      modelo: p.nombre_modelo,
+      estado: "Llegará más adelante",
+      href: fichaJds7(p),
+      enlace: "Ver el modelo",
+      hoy: {
+        href: `/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`,
+        enlace: "Disponible hoy en Jardines del Sur 6",
+      },
+    })),
   {
     modelo: "Departamentos",
     estado: "Por confirmar",
-    href: "/jardines-del-sur-6/departamentos",
-    enlace: "Disponibles hoy en Jardines del Sur 6",
+    href: `/${SLUG}/departamentos`,
+    enlace: "Ver departamentos",
+    hoy: {
+      href: "/jardines-del-sur-6/departamentos",
+      enlace: "Disponibles hoy en Jardines del Sur 6",
+    },
   },
 ];
 
@@ -173,6 +186,11 @@ export default function Page() {
                     <td className={styles.celdaAcciones}>
                       <span className={styles.acciones}>
                         <a href={f.href}>{f.enlace} →</a>
+                        {f.hoy && (
+                          <a className={styles.cotizar} href={f.hoy.href}>
+                            {f.hoy.enlace} →
+                          </a>
+                        )}
                       </span>
                     </td>
                   </tr>

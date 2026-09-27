@@ -25,8 +25,12 @@ async function getInventory(): Promise<InventoryProperty[]> {
   const data = JSON.parse(fileContents);
   // ⚠️ Este lector NO pasa por model-utils.getInventory, asi que el filtro de
   // `oculto_web` se repite aqui. Sin el, lo oculto reaparece en el inicio.
+  // `llega_despues` tambien fuera: la pestaña del 7 muestra solo los modelos
+  // con los que abre la preventa (Flamboyan y Ceiba tienen su lugar en
+  // /jardines-del-sur-7/casas).
   return data.inventory_stitch_2026.filter(
-    (p: { oculto_web?: boolean }) => !p.oculto_web
+    (p: { oculto_web?: boolean; llega_despues?: boolean }) =>
+      !p.oculto_web && !p.llega_despues
   );
 }
 

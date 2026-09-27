@@ -472,6 +472,38 @@
       "amenidades_key": [],
       "url_recorrido_virtual": "",
       "images": []
+    },
+    {
+      "id": "jds7-flamboyan",
+      "development": "Jardines del Sur 7",
+      "status": "Próximamente",
+      "nombre_modelo": "Casa Flamboyán",
+      "precio_por_anunciar": true,
+      "llega_despues": true,
+      "precio": null,
+      "valor_avaluo": null,
+      "metros_construccion": null,
+      "metros_terreno": null,
+      "levels": [],
+      "amenidades_key": [],
+      "url_recorrido_virtual": "",
+      "images": []
+    },
+    {
+      "id": "jds7-ceiba",
+      "development": "Jardines del Sur 7",
+      "status": "Próximamente",
+      "nombre_modelo": "Casa Ceiba",
+      "precio_por_anunciar": true,
+      "llega_despues": true,
+      "precio": null,
+      "valor_avaluo": null,
+      "metros_construccion": null,
+      "metros_terreno": null,
+      "levels": [],
+      "amenidades_key": [],
+      "url_recorrido_virtual": "",
+      "images": []
     }
   ]
 }

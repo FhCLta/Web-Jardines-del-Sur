@@ -17,7 +17,16 @@ import {
  */
 export type CatalogKind = "casas" | "departamentos";
 
-export function buildCatalogMetadata(slug: DevSlug, kind: CatalogKind): Metadata {
+/**
+ * `descripcionPreventa`: para un desarrollo sin precios (Jardines del Sur 7) la
+ * descripcion armada con conteo y "desde" no aplica — la pone la pagina. El
+ * titulo NO cambia: "Casas en X | Altta Homes Cancún" en todos.
+ */
+export function buildCatalogMetadata(
+  slug: DevSlug,
+  kind: CatalogKind,
+  descripcionPreventa?: string
+): Metadata {
   const dev = DEVS[slug];
   const tipo = kind === "casas" ? "Casa" : "Departamento";
   const productoPlural = kind === "casas" ? "Casas" : "Departamentos";
@@ -42,9 +51,11 @@ export function buildCatalogMetadata(slug: DevSlug, kind: CatalogKind): Metadata
       : nombres[0] ?? "";
 
   const title = `${productoPlural} en ${dev.name} | Altta Homes Cancún`;
-  const description = `${count} ${productoLower} en venta en ${dev.name}, Cancún: ${listaNombres}.${
-    minPrice ? ` Desde ${formatPriceMxn(minPrice)}.` : ""
-  } Fotos, precios actualizados, amenidades y atención directa por WhatsApp.`;
+  const description =
+    descripcionPreventa ??
+    `${count} ${productoLower} en venta en ${dev.name}, Cancún: ${listaNombres}.${
+      minPrice ? ` Desde ${formatPriceMxn(minPrice)}.` : ""
+    } Fotos, precios actualizados, amenidades y atención directa por WhatsApp.`;
 
   return {
     title: { absolute: title },
@@ -155,8 +166,13 @@ export function buildModelMetadata(
   // Un modelo anunciado sin precio no puede decir "Desde $X" ni "null m²". El
   // titulo cambia el gancho por el que SI tiene: que la preventa esta por abrir.
   const porAnunciar = property.precio === null;
+  // Confirmado para la etapa pero no abre con ella: NO decir "preventa por
+  // abrir" ni "uno de los primeros modelos" — seria prometer de mas.
+  const llegaDespues = porAnunciar && property.llega_despues === true;
 
-  const title = porAnunciar
+  const title = llegaDespues
+    ? `${property.nombre_modelo} en ${dev.name}, Cancún · Próximamente | Altta Homes`
+    : porAnunciar
     ? `${property.nombre_modelo} en ${dev.name}, Cancún · Preventa por Abrir | Altta Homes`
     : `${property.nombre_modelo} en ${dev.name}, Cancún · Desde ${formatPriceMxn(property.precio)} | Altta Homes`;
 
@@ -169,7 +185,9 @@ export function buildModelMetadata(
     banos ? `${banos} baños` : null,
   ].filter(Boolean).join(", ");
 
-  const description = porAnunciar
+  const description = llegaDespues
+    ? `${property.nombre_modelo} llegará a ${dev.name}, Cancún, más adelante. Precios por anunciar. Mientras tanto, está disponible en Jardines del Sur 6: escríbenos por WhatsApp.`
+    : porAnunciar
     ? `${property.nombre_modelo}, uno de los primeros modelos de ${dev.name}, Cancún. Precios, metros y planos se anuncian al abrir la preventa. Escríbenos por WhatsApp y te avisamos el día que salgan.`
     : `${property.nombre_modelo}: ${ficha}. Desde ${formatPriceMxn(property.precio)}. Recorrido virtual 360°, precios actualizados y atención directa por WhatsApp.`;
   const canonical = `/${dev.slug}/${modeloSlug}`;

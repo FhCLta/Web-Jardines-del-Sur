@@ -614,3 +614,32 @@
 .preciosLinkWrap .preciosLink {
   margin-top: 0;
 }
+
+/* "Ver solo las casas / los departamentos de Jardines del Sur 7", al pie de
+   cada pestaña: lleva a su pagina propia (/casas, /departamentos), igual que
+   en el silo de Jardines del Sur 6. */
+.verSoloWrap {
+  text-align: center;
+  margin: 2.25rem 0 0;
+  text-wrap: balance;
+}
+
+.verSoloLink {
+  position: relative;
+  font-family: var(--font-montserrat);
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(209, 146, 0, 0.4);
+  padding-bottom: 2px;
+}
+
+.verSoloLink:hover { border-bottom-color: var(--accent-deep); }
+
+.verSoloLink::after {
+  content: "";
+  position: absolute;
+  inset: -12px -8px;
+}

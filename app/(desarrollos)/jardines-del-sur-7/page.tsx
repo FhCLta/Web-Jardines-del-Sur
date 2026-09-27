@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import PropertyCard from "@/components/PropertyCard";
 import SiloTiposTabs from "@/components/SiloTiposTabs";
-import { getPropertiesByDev, slugifyModel } from "../_lib/model-utils";
+import {
+  CasasJds7,
+  DepartamentosJds7,
+  casasAbren,
+  casasPuente,
+} from "./ModelosJds7";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import FooterPhoneContact from "@/components/FooterPhoneContact";
@@ -105,17 +109,8 @@ const OBRA_PHOTOS = [
 }));
 
 /* ===== Modelos que se muestran en la pagina =====
-   Por ID de inventario, NO por nombre: Noni y Tabachin existen en varias
-   etapas y no son el mismo producto (memoria "mismo modelo, distinto por
-   desarrollo"). Si un ID deja de existir, la tarjeta simplemente no sale. */
-const casasJds7 = getPropertiesByDev("Jardines del Sur 7");
-const jds6 = getPropertiesByDev("Jardines del Sur 6");
-const porId = (ids: string[]) =>
-  ids.map((id) => jds6.find((p) => p.id === id)).filter((p) => p !== undefined);
-// Confirmados para el 7, llegan despues. Hoy se venden en el 6.
-const casasPuente = porId(["jds6-flamboyan", "jds6-ceiba"]);
-// Por confirmar en el 7. Hoy se venden en el 6.
-const deptosPuente = porId(["jds6-capua", "jds6-cedro-plus"]);
+   Viven en ModelosJds7.tsx: los comparte con /casas y /departamentos del 7,
+   para que las tres paginas prometan exactamente lo mismo. */
 
 const WA_MESSAGE =
   "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.";
@@ -390,52 +385,16 @@ export default function Page() {
               {
                 id: "casas",
                 label: "Casas",
-                modelos: `${casasJds7.length + casasPuente.length} modelos`,
+                modelos: `${casasAbren.length + casasPuente.length} modelos`,
                 desde: "precios por anunciar",
                 content: (
                   <>
-                    <h3 className={styles.grupoTitulo}>Con los que abre la preventa</h3>
-                    <div className={styles.modelosGrid}>
-                      {casasJds7.map((p) => (
-                        <div key={p.id} className={styles.modeloItem}>
-                          <PropertyCard property={p} />
-                          {/* Enlace a la ficha: es como Google llega a ella y como el
-                              visitante ve que ese modelo ya existe en Jardines del Sur 6. */}
-                          <a
-                            className={styles.modeloLink}
-                            href={`/jardines-del-sur-7/${slugifyModel(p.nombre_modelo)}`}
-                          >
-                            Ver el {p.nombre_modelo.replace(/^Casa\s+/i, "")} y dónde
-                            existe hoy →
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className={styles.grupoPuente}>
-                      <h3 className={styles.grupoTitulo}>
-                        Llegarán más adelante: Flamboyán y Ceiba
-                      </h3>
-                      <p className={styles.grupoNota}>
-                        También estarán en Jardines del Sur 7.{" "}
-                        <strong>Mientras tanto, disponibles hoy en Jardines del Sur 6.</strong>
-                      </p>
-                    </div>
-                    <div className={styles.modelosGrid}>
-                      {casasPuente.map((p) => (
-                        <div key={p.id} className={styles.modeloItem}>
-                          <span className={styles.etiquetaEtapa}>En Jardines del Sur 6</span>
-                          <PropertyCard property={p} origen="Jardines del Sur 7" />
-                          <a
-                            className={styles.modeloLink}
-                            href={`/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`}
-                          >
-                            Ver la {p.nombre_modelo.replace(/^Casa\s+/i, "")} en Jardines
-                            del Sur 6 →
-                          </a>
-                        </div>
-                      ))}
-                    </div>
+                    <CasasJds7 />
+                    <p className={styles.verSoloWrap}>
+                      <a className={styles.verSoloLink} href="/jardines-del-sur-7/casas">
+                        Ver solo las casas de Jardines del Sur 7 →
+                      </a>
+                    </p>
                   </>
                 ),
               },
@@ -446,32 +405,15 @@ export default function Page() {
                 desde: null,
                 content: (
                   <>
-                    <div className={styles.grupoPuente}>
-                      <h3 className={styles.grupoTitulo}>
-                        Departamentos en Jardines del Sur 7: por confirmar
-                      </h3>
-                      <p className={styles.grupoNota}>
-                        <strong>
-                          Mientras tanto, Capua y Cedro Plus están disponibles hoy en
-                          Jardines del Sur 6.
-                        </strong>
-                      </p>
-                    </div>
-                    <div className={styles.modelosGrid}>
-                      {deptosPuente.map((p) => (
-                        <div key={p.id} className={styles.modeloItem}>
-                          <span className={styles.etiquetaEtapa}>En Jardines del Sur 6</span>
-                          <PropertyCard property={p} origen="Jardines del Sur 7" />
-                          <a
-                            className={styles.modeloLink}
-                            href={`/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`}
-                          >
-                            Ver el {p.nombre_modelo.replace(/^Departamento\s+/i, "")} en
-                            Jardines del Sur 6 →
-                          </a>
-                        </div>
-                      ))}
-                    </div>
+                    <DepartamentosJds7 />
+                    <p className={styles.verSoloWrap}>
+                      <a
+                        className={styles.verSoloLink}
+                        href="/jardines-del-sur-7/departamentos"
+                      >
+                        Ver solo los departamentos de Jardines del Sur 7 →
+                      </a>
+                    </p>
                   </>
                 ),
               },

@@ -20,6 +20,13 @@ export type InventoryProperty = {
    */
   precio_por_anunciar?: boolean;
   /**
+   * Confirmado para una etapa en preventa pero NO abre con ella (Flamboyan y
+   * Ceiba de Jardines del Sur 7). Tiene ficha propia y sale en /casas del
+   * desarrollo, pero no en el inicio ni en "con los que abre la preventa".
+   * Su ficha dice "llegara mas adelante" y manda a donde se vende hoy.
+   */
+  llega_despues?: boolean;
+  /**
    * Oculto del SITIO sin borrarlo: no sale en silos, catalogos, precios,
    * sitemap ni "otras etapas", y su ficha no se genera (firebase.json la
    * redirige con 302). SIGUE en el cotizador, que lee data/precios.json y no

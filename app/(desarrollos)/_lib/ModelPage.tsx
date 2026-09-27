@@ -91,6 +91,9 @@ export default async function ModelPage({
 
   // Modelo anunciado antes de tener precio (Jardines del Sur 7 en preventa).
   const porAnunciar = property.precio === null;
+  // Confirmado para la etapa pero NO abre con ella (Flamboyan y Ceiba del 7).
+  // Hoy se vende en otra etapa: la ficha lo dice y manda ahi.
+  const llegaDespues = porAnunciar && property.llega_despues === true;
 
   // EL MISMO MODELO EN OTRAS ETAPAS. Es lo que hace que una ficha sin precio no
   // sea una pagina hueca, y de paso es la escalera de conversion de
@@ -103,8 +106,16 @@ export default async function ModelPage({
       p.development !== property.development
   );
 
+  // Donde se vende HOY un modelo que llega despues (por id, no por nombre:
+  // se toma la primera etapa con precio y sin agotar).
+  const disponibleHoy = llegaDespues
+    ? mismoModeloEnOtras.find((p) => p.precio !== null && p.status !== "Agotado")
+    : undefined;
+
   const waMessage = agotado
     ? `Hola, vi que ${property.nombre_modelo} está agotado en ${dev.name}. ¿Qué opciones similares tienes disponibles?`
+    : disponibleHoy
+    ? `Hola, vi que ${property.nombre_modelo} llegará a ${dev.name} más adelante. Me interesa la que está disponible en ${disponibleHoy.development}.`
     : getWhatsAppMessageForModel(property);
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
@@ -130,7 +141,9 @@ export default async function ModelPage({
         "@id": `${pageUrl}#webpage`,
         url: pageUrl,
         name: `${property.nombre_modelo} en ${dev.name}, Cancún`,
-        description: porAnunciar
+        description: llegaDespues
+          ? `${property.nombre_modelo} llegará a ${dev.name}, Cancún, más adelante. Precios y planos por anunciar.`
+          : porAnunciar
           ? `${property.nombre_modelo}, uno de los primeros modelos de ${dev.name}, Cancún. Precios y planos por anunciar al abrir la preventa.`
           : `${property.nombre_modelo} en ${dev.name}, Cancún. ${property.metros_construccion} m² de construcción${recamaras ? `, ${recamaras} recámaras` : ""}${banos ? `, ${banos} baños` : ""}. Desde ${formatPriceMxn(property.precio)}.`,
         inLanguage: "es-MX",
@@ -263,6 +276,11 @@ export default async function ModelPage({
                 Agotado en {dev.name}
               </span>
             )}
+            {llegaDespues && (
+              <span className={styles.llegaBadge}>
+                Llegará más adelante a {dev.name}
+              </span>
+            )}
 
             {/* ⚠️ El desarrollo va EXPLICITO en el H1 — §4 de
                 docs/jds7-lanzamiento.md. Los nombres de modelo SE REPITEN entre
@@ -335,7 +353,11 @@ export default async function ModelPage({
                 target="_blank"
                 rel="noreferrer"
               >
-                {agotado ? "Ver opciones similares" : "Cotizar este modelo"}
+                {agotado
+                  ? "Ver opciones similares"
+                  : disponibleHoy
+                  ? `Cotizarla en ${disponibleHoy.development}`
+                  : "Cotizar este modelo"}
               </a>
               {tourUrl && (
                 <a
@@ -357,7 +379,9 @@ export default async function ModelPage({
             <div className={styles.sectionHeader}>
               <h2>Este modelo en otras etapas</h2>
               <p>
-                {porAnunciar
+                {llegaDespues
+                  ? `La ${strippedName} llegará a ${dev.name} más adelante.${disponibleHoy ? ` Mientras tanto, está disponible en ${disponibleHoy.development}.` : ""}`
+                  : porAnunciar
                   ? `El ${strippedName} ya existe en otros desarrollos de Altta Homes. Así puedes conocerlo mientras se anuncian los precios de ${dev.name}.`
                   : `El ${strippedName} también está en otras etapas. Si te gustó este modelo, aquí puedes ver dónde más existe.`}
               </p>
@@ -593,7 +617,12 @@ export default async function ModelPage({
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2>Otros modelos en {dev.name}</h2>
-              <p>Compara con los demás modelos disponibles en el desarrollo.</p>
+              {/* En preventa no hay nada "disponible" que comparar todavia. */}
+              <p>
+                {porAnunciar
+                  ? `Los demás modelos confirmados para ${dev.name}.`
+                  : "Compara con los demás modelos disponibles en el desarrollo."}
+              </p>
             </div>
             <div className={styles.relatedGrid}>
               {otherProperties.map((other) => (
@@ -609,17 +638,20 @@ export default async function ModelPage({
                     {"Modelo " + other.nombre_modelo.replace(/^(Casa|Departamento)\s+/i, "")}
                   </span>
                   <span className={styles.relatedCardPrice}>
-                    Desde{" "}
-                    <span className={styles.priceDisplay}>
-                      <span className={styles.priceAmount}>
-                        {other.precio === null
-                          ? "Por anunciar"
-                          : `$${formatMxnNumber(other.precio)}`}
-                      </span>
-                      {other.precio !== null && (
-                        <span className={styles.priceCurrency}>MXN</span>
-                      )}
-                    </span>
+                    {/* Sin precio decia "Desde Por anunciar". */}
+                    {other.precio === null ? (
+                      "Precio por anunciar"
+                    ) : (
+                      <>
+                        Desde{" "}
+                        <span className={styles.priceDisplay}>
+                          <span className={styles.priceAmount}>
+                            ${formatMxnNumber(other.precio)}
+                          </span>
+                          <span className={styles.priceCurrency}>MXN</span>
+                        </span>
+                      </>
+                    )}
                   </span>
                 </a>
               ))}

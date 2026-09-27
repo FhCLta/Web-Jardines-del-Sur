@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { getImageProps } from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -18,6 +19,7 @@ import {
   getModelType,
   slugifyModel,
   formatPriceMxn,
+  type InventoryProperty,
 } from "./model-utils";
 import { type CatalogKind } from "./dev-meta";
 import NivelesTable from "./NivelesTable";
@@ -28,9 +30,31 @@ const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 
+/**
+ * Desarrollo en preventa (hoy, Jardines del Sur 7): sin precios, asi que los
+ * textos que dependen de ellos ("4 casas disponibles", "desde $X") y la
+ * cuadricula de modelos vienen de la pagina. Sin esta prop, la pagina es la de
+ * siempre — Jardines del Sur 6 no cambia.
+ */
+export type CatalogPreventa = {
+  /** Tercer rotulo de la etiqueta del encabezado: "4 MODELOS", "POR CONFIRMAR". */
+  eyebrowConteo: string;
+  subtituloFuerte: string;
+  subtituloDetalle: string;
+  ctaTexto: string;
+  waMessage: string;
+  tituloModelos: string;
+  introModelos: string;
+  /** Lo que va en la seccion de modelos, en lugar de la cuadricula con precios. */
+  modelos: ReactNode;
+  /** Fichas del desarrollo (sin precio): lista de enlaces y JSON-LD PreOrder. */
+  fichas: InventoryProperty[];
+};
+
 type CatalogPageProps = {
   slug: DevSlug;
   kind: CatalogKind;
+  preventa?: CatalogPreventa;
 };
 
 /**
@@ -38,7 +62,7 @@ type CatalogPageProps = {
  * de un desarrollo, con hero compacto, modelos, tabla de precios (departamentos)
  * y amenidades. URL corta para WhatsApp, título largo para SEO.
  */
-export default function CatalogPage({ slug, kind }: CatalogPageProps) {
+export default function CatalogPage({ slug, kind, preventa }: CatalogPageProps) {
   const dev = DEVS[slug];
   const tipo = kind === "casas" ? "Casa" : "Departamento";
   const productoPlural = kind === "casas" ? "Casas" : "Departamentos";
@@ -88,7 +112,11 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
   const { props: heroImgProps } = getImageProps({ ...heroComun, src: heroImage });
   const heroCel = srcSetCel ?? srcCel;
 
-  const waMessage = `Hola, quiero información de las ${productoPlural.toLowerCase()} en ${dev.name}, Cancún (vi la página con los modelos y precios).`;
+  const waMessage =
+    preventa?.waMessage ??
+    `Hola, quiero información de las ${productoPlural.toLowerCase()} en ${dev.name}, Cancún (vi la página con los modelos y precios).`;
+  // Fichas que se enlazan al pie de los modelos.
+  const fichas = preventa ? preventa.fichas : properties;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
   const jsonLd = {
@@ -120,6 +148,37 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
           { "@type": "ListItem", position: 3, name: productoPlural, item: pageUrl },
         ],
       },
+      // En preventa: una oferta por ficha, SIN precio (schema.org admite una
+      // oferta en preventa sin importe; inventar uno seria peor). Sin fichas
+      // —departamentos por confirmar— no hay catalogo que declarar.
+      ...(preventa
+        ? preventa.fichas.length > 0
+          ? [
+              {
+                "@type": "OfferCatalog",
+                "@id": `${pageUrl}#offers`,
+                name: `${productoPlural} en ${dev.name}`,
+                url: pageUrl,
+                itemListElement: preventa.fichas.map((property) => ({
+                  "@type": "Offer",
+                  name: property.nombre_modelo,
+                  availability: "https://schema.org/PreOrder",
+                  url: `${SITE_URL}/${dev.slug}/${slugifyModel(property.nombre_modelo)}`,
+                  itemOffered: {
+                    "@type": "Residence",
+                    name: `${property.nombre_modelo} · ${dev.name}`,
+                    address: {
+                      "@type": "PostalAddress",
+                      addressLocality: "Cancún",
+                      addressRegion: "Quintana Roo",
+                      addressCountry: "MX",
+                    },
+                  },
+                })),
+              },
+            ]
+          : []
+        : [
       {
         "@type": "OfferCatalog",
         "@id": `${pageUrl}#offers`,
@@ -149,6 +208,7 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
           },
         })),
       },
+          ]),
     ],
   };
 
@@ -231,7 +291,9 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             <span>{dev.hero.eyebrow.strong}</span>
             <span className={`${heroStyles.eyebrowSep} ${siloStyles.eyebrowSepSilo}`}>·</span>
             <span>
-              {count} {count === 1 ? "MODELO" : "MODELOS"}
+              {preventa
+                ? preventa.eyebrowConteo
+                : `${count} ${count === 1 ? "MODELO" : "MODELOS"}`}
             </span>
           </span>
 
@@ -243,6 +305,16 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
             </em>
           </h1>
 
+          {preventa ? (
+            <p className={heroStyles.subtitle}>
+              <span className={heroStyles.subtitleDevelopments}>
+                {preventa.subtituloFuerte}
+              </span>
+              <span className={heroStyles.subtitleDetail}>
+                {preventa.subtituloDetalle}
+              </span>
+            </p>
+          ) : (
           <p className={heroStyles.subtitle}>
             <span className={heroStyles.subtitleDevelopments}>
               {count === 1
@@ -262,10 +334,11 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
               Recorridos virtuales 360°, precios actualizados e informes por WhatsApp.
             </span>
           </p>
+          )}
 
           <div className={heroStyles.ctas}>
             <a href="#modelos" className={`btn btn-primary ${heroStyles.ctaPrimary}`}>
-              Ver {productoPlural.toLowerCase()} y precios
+              {preventa?.ctaTexto ?? `Ver ${productoPlural.toLowerCase()} y precios`}
             </a>
             <a
               href={waHref}
@@ -294,22 +367,35 @@ export default function CatalogPage({ slug, kind }: CatalogPageProps) {
           <div className={styles.sectionHeader}>
             {/* "Inventario y precios" y no "Modelos y precios": el titulo de abajo ya
                 dice "modelos", y asi ademas coincide con la seccion del silo. */}
-              <span className="text-accent">Inventario y precios</span>
-            <h2>{tituloModelos}</h2>
-            <p>Precio con descuento, metros, recámaras y distribución de cada modelo.</p>
+              <span className="text-accent">
+                {preventa ? "Modelos y disponibilidad" : "Inventario y precios"}
+              </span>
+            <h2>{preventa?.tituloModelos ?? tituloModelos}</h2>
+            <p>
+              {preventa?.introModelos ??
+                "Precio con descuento, metros, recámaras y distribución de cada modelo."}
+            </p>
           </div>
 
+          {preventa ? (
+            preventa.modelos
+          ) : (
           <div className={styles.modelsGrid}>
             {properties.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
           </div>
+          )}
 
-          {properties.length > 0 && (
+          {fichas.length > 0 && (
             <div className={styles.modelLinks}>
-              <span className={styles.modelLinksLabel}>Ver ficha completa de cada modelo:</span>
+              <span className={styles.modelLinksLabel}>
+                {preventa
+                  ? `Ficha de cada modelo en ${dev.name}:`
+                  : "Ver ficha completa de cada modelo:"}
+              </span>
               <ul className={styles.modelLinksList}>
-                {properties.map((property) => (
+                {fichas.map((property) => (
                   <li key={property.id}>
                     <a href={`/${dev.slug}/${slugifyModel(property.nombre_modelo)}`}>
                       {property.nombre_modelo}

@@ -199,7 +199,7 @@ export default function PropertyCard({ property, origen = "" }) {
               </div>
             </div>
           ) : hasSplitHeader ? (
-            <div className={`${styles.header} ${styles.headerSplit}`}>
+            <div className={`${styles.header} ${styles.headerSplit} ${porAnunciar ? styles.headerPorAnunciar : ""}`}>
               <div className={styles.titleCol}>
                 <span className={styles.modelType}>{modelType}</span>
                 <h3 className={styles.modelNameTitle}>{modelName}</h3>
@@ -233,6 +233,8 @@ export default function PropertyCard({ property, origen = "" }) {
             </div>
           )}
 
+          {/* Sin ningun dato (modelo por anunciar) la caja salia vacia. */}
+          {(property.metros_terreno || property.metros_construccion != null || recamaras || banos) && (
           <div className={styles.statsRow}>
             {property.metros_terreno && (
               <div className={styles.stat}>
@@ -277,6 +279,7 @@ export default function PropertyCard({ property, origen = "" }) {
               </div>
             )}
           </div>
+          )}
 
           {property.levels?.length > 0 && (
           <div className={styles.levels}>

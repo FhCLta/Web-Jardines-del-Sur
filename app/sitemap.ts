@@ -18,6 +18,10 @@ const DEV_SLUG_BY_NAME: Record<string, DevSlug> = {
 const CATALOG_PAGES: { slug: DevSlug; kind: 'casas' | 'departamentos' }[] = [
   { slug: 'jardines-del-sur-6', kind: 'casas' },
   { slug: 'jardines-del-sur-6', kind: 'departamentos' },
+  // Jardines del Sur 7 en preventa: captan "casas/departamentos en jardines
+  // del sur 7" y llevan a lo que se vende hoy en el 6.
+  { slug: 'jardines-del-sur-7', kind: 'casas' },
+  { slug: 'jardines-del-sur-7', kind: 'departamentos' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

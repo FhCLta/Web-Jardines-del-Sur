@@ -963,3 +963,25 @@
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
 }
+
+/* Modelo confirmado que llega despues (Flamboyan y Ceiba del 7). Dorado y no
+   gris: no es una mala noticia, es un "todavia no, pero ya existe". */
+.llegaBadge {
+  display: inline-block;
+  align-self: center;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-montserrat);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: #fff;
+  background: rgba(209, 146, 0, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+}

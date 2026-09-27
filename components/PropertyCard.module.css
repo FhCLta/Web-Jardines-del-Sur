@@ -865,3 +865,26 @@
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
   box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.6);
 }
+
+/* Modelo sin precio (preventa): en computadora tambien va centrado y en un
+   solo renglon, como en celular. En fila, "Casa Tabachin" se partia en dos
+   junto a "Por anunciar" y la tarjeta se veia desbalanceada. */
+@media (min-width: 769px) {
+  .header.headerSplit.headerPorAnunciar {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .headerPorAnunciar .titleCol {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .headerPorAnunciar .priceCol {
+    align-items: center;
+  }
+}
