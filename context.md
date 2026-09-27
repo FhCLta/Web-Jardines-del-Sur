@@ -1462,6 +1462,27 @@
 
 ---
 
+## 27 sept 2026 · La página de Jardines 7 capta tráfico para Jardines 6
+
+Idea de Florencio: usar el #1 de "jardines del sur 7" para llevar gente al 6,
+que es lo único que se puede comprar hoy. La página del 7 ahora tiene el mismo
+selector **Casas | Departamentos** del 6: Tabachín y Noni abren la preventa;
+**Flamboyán y Ceiba están confirmados** para el 7 y "mientras tanto, disponibles
+hoy en Jardines del Sur 6"; los **departamentos están por confirmar**. Y hay una
+página nueva, `/jardines-del-sur-7/precios`, con todo "por anunciar" y la tabla
+del 6 como referencia — lista para llenarse el día que salgan los precios.
+
+Se verificó que no se tocara nada que sostiene el #1 (título, H1, descripción,
+canonical, datos estructurados: idénticos) y que 37 de las 38 páginas del sitio
+quedaran iguales para Google. En celular: nada se desliza de lado, los enlaces
+tienen ~44px de zona tocable y la página pesa 2% más al abrir (las fotos nuevas
+cargan al bajar).
+
+De paso salió un error que ya estaba en producción: **la tabla de precios del 6
+mostraba el Tabachín agotado como disponible**, con "Cotizar ahora". Ahora dice
+Agotado · último precio y "Ver opciones similares". Y la estrategia escrita del 7
+todavía daba al Tabachín como disponible en el 6; corregido.
+
 ## 21 sept 2026 · La miniatura del PDF en WhatsApp: cerrado sin solución
 
 Se persiguió a fondo por qué el PDF del botón llega a WhatsApp sin miniatura y el

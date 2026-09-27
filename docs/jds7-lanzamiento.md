@@ -30,8 +30,12 @@ prospecto tiene una salida**, y la mejor no es la obvia.
 
 | Modelo | JdS6 — entrega ya | JdS7 — preventa |
 |---|---|---|
-| **Tabachín** | $2,664,750 ✓ disponible | por definir |
+| **Tabachín** | ⚠️ **AGOTADO** en la web desde sept 2026 (último precio $2,664,750) | por definir |
 | **Noni** | $3,161,125 ✓ disponible | por definir |
+
+> ⚠️ **Actualizado el 27 sept 2026:** el Tabachín de JdS6 se marcó agotado en la
+> web (del cotizador sigue, a decisión de Florencio). Para Tabachín el peldaño 1
+> ya NO es "el mismo modelo sin esperar": es Noni, o bajar a Ceiba/Flamboyán.
 
 Entonces el cruce más potente **no es cambiarle el modelo**, es **quitarle la
 espera**:
@@ -183,6 +187,41 @@ enfermedad.
    que la página las responda **antes** de que haya volumen.
 3. **Sin formulario de lista de espera** — decisión tomada, ver la memoria
    `jds7-preventa-sin-formulario`. El contacto entra por WhatsApp.
+
+### ⭐ Lo que ya hace la página para capturar hacia JdS6 (27 sept 2026)
+
+Idea de Florencio: aprovechar el #1 para que quien busca el 7 encuentre casas,
+departamentos y precios —y como hoy solo se puede comprar en el 6, llevarlo ahí.
+
+**En `/jardines-del-sur-7`**, sección `#modelos`, con el mismo selector **Casas |
+Departamentos** del silo del 6 (los dos paneles van completos en el HTML):
+
+| Pestaña | Qué dice | Hacia dónde lleva |
+|---|---|---|
+| Casas · "con los que abre la preventa" | Tabachín y Noni, precio por anunciar | sus fichas del 7 |
+| Casas · "Llegarán más adelante" | **Flamboyán y Ceiba: CONFIRMADOS para el 7.** "Mientras tanto, disponibles hoy en Jardines del Sur 6" | tarjetas y fichas del 6 |
+| Departamentos | **"Por confirmar"** en el 7. "Mientras tanto, Capua y Cedro Plus están disponibles hoy en Jardines del Sur 6" | tarjetas y fichas del 6 |
+
+⚠️ **Esas son las promesas aprobadas, palabra por palabra.** Los departamentos en
+el 7 NO están confirmados: no escribir "llegarán". Si Sadasi confirma, se cambia
+el texto; si Flamboyán o Ceiba se caen del 7, también.
+
+**`/jardines-del-sur-7/precios`** (nueva): ataca "precios jardines del sur 7".
+Todo "por anunciar" para el 7 y, abajo, la tabla oficial de JdS6 como
+referencia, aclarando que esos precios son del 6. **El día que salgan los precios
+del 7, esta página se llena con la comparación lado a lado** (§3) — ya llega
+posicionada.
+
+**El lead se identifica:** las tarjetas del 6 mostradas en el 7 mandan el
+WhatsApp con *"Lo vi en la página de Jardines del Sur 7"* (prop `origen` de
+`PropertyCard`).
+
+**Cómo se protegió el #1, verificado antes y después de publicar:** título, H1,
+descripción, canonical y datos estructurados de `/jardines-del-sur-7` quedaron
+idénticos; todo lo nuevo se AGREGÓ. De las 38 páginas del sitemap, 37 quedaron
+idénticas en todas sus señales para Google; la única diferencia fue que la lista
+de precios del 6 ahora marca el Tabachín como `SoldOut`. **Vigilar la posición
+en Search Console hasta el 11 oct 2026**; si baja, lo primero es revisar esto.
 
 ### Estar listo para el día 1
 

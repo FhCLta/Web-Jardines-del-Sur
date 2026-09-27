@@ -357,6 +357,21 @@
   color: var(--primary);
 }
 
+/* Modelo agotado: la fila sigue, pero se dice con todas sus letras. */
+.agotado {
+  display: inline-block;
+  font-family: var(--font-montserrat);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #9b2c2c;
+  border-radius: 4px;
+  padding: 0.12rem 0.45rem;
+  margin-bottom: 0.2rem;
+}
+
 .desde {
   display: block;
   font-family: var(--font-montserrat);

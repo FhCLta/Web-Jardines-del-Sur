@@ -134,10 +134,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Silo de precios por desarrollo. Solo los que tienen precios publicados:
-  // Jardines del Sur 7 esta en preventa y entra el dia que los tenga.
+  // Silo de precios por desarrollo. Jardines del Sur 7 entra ANTES de tener
+  // precios (decision de Florencio, 27 sept 2026): su pagina captura la
+  // busqueda "precios jardines del sur 7" desde ya y se llena el dia que salgan.
   const precioEntries: MetadataRoute.Sitemap = (
-    ['jardines-del-sur-6', 'la-rioja-2', 'lirios-residencial-2'] as DevSlug[]
+    ['jardines-del-sur-6', 'la-rioja-2', 'lirios-residencial-2', 'jardines-del-sur-7'] as DevSlug[]
   ).map((slug) => ({
     url: `${SITE_URL}/${slug}/precios`,
     lastModified,

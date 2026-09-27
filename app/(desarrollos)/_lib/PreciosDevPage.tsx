@@ -76,6 +76,8 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
           name: p.nombre_modelo,
           price: p.precio,
           priceCurrency: "MXN",
+          // Un agotado no se ofrece como disponible, tampoco para Google.
+          ...(p.status === "Agotado" && { availability: "https://schema.org/SoldOut" }),
           url: `${SITE_URL}/${slug}/${p.nombre_modelo
             .toLowerCase()
             .normalize("NFD")

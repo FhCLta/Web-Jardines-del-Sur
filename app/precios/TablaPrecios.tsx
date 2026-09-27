@@ -279,8 +279,16 @@ function TablaDeGrupo({
               p.valor_avaluo && p.precio !== null
                 ? p.valor_avaluo - p.precio
                 : null;
+            // Un modelo agotado sigue en la lista —su precio es la referencia
+            // para quien llega buscandolo, y la ficha conserva el SEO—, pero NO
+            // puede presentarse como disponible: antes la tabla mostraba el
+            // Tabachin de Jardines 6 con su precio y un "Cotizar ahora" como si
+            // se pudiera comprar. Mismo criterio que la tarjeta y la ficha.
+            const agotado = p.status === "Agotado";
             const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
-              getWhatsAppMessageForModel(p)
+              agotado
+                ? `Hola, vi que ${p.nombre_modelo} está agotado en ${p.development}. ¿Qué opciones similares tienes disponibles?`
+                : getWhatsAppMessageForModel(p)
             )}`;
             return (
               <tr key={p.id}>
@@ -302,10 +310,13 @@ function TablaDeGrupo({
                 </td>
                 <td data-label="Precio con descuento" className={styles.precio}>
                   <span className={styles.precioValor}>
+                    {agotado && <span className={styles.agotado}>Agotado</span>}
                     {/* "desde" va ANTES del importe: en español se dice "desde
                         $1,758,830", no al reves. */}
-                    {p.precio_variable && (
-                      <span className={styles.desde}>desde</span>
+                    {agotado ? (
+                      <span className={styles.desde}>último precio</span>
+                    ) : (
+                      p.precio_variable && <span className={styles.desde}>desde</span>
                     )}
                     {formatPriceMxn(p.precio)}
                   </span>
@@ -321,7 +332,7 @@ function TablaDeGrupo({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Cotizar ahora
+                      {agotado ? "Ver opciones similares" : "Cotizar ahora"}
                     </a>
                   </span>
                 </td>

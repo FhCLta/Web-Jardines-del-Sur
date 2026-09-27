@@ -24,7 +24,13 @@ const FIRST_IMAGE_THUMBS = {
   '/larioja2/Casa noni/1.webp': '/optimized/model-thumbs/larioja2-Casa-noni-1.webp',
 };
 
-export default function PropertyCard({ property }) {
+/**
+ * `origen` (opcional): la pagina donde se muestra la tarjeta cuando NO es la de
+ * su propio desarrollo. Se agrega al mensaje de WhatsApp para que Florencio sepa
+ * de donde llego el cliente — p. ej. un Flamboyan de Jardines 6 mostrado en la
+ * pagina de Jardines 7: el lead es del 6, pero llego buscando el 7.
+ */
+export default function PropertyCard({ property, origen = "" }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
@@ -79,7 +85,7 @@ export default function PropertyCard({ property }) {
       text = property.nombre_modelo.substring(13);
     }
 
-    return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.`;
+    return `Hola, quiero cotizar ${prefix} ${text} en ${property.development}.${origen ? ` Lo vi en la página de ${origen}.` : ""}`;
   };
 
   const formatPriceRaw = (price) => {
