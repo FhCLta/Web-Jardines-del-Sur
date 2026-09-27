@@ -406,12 +406,15 @@ export default function Page() {
                 content: (
                   <>
                     <DepartamentosJds7 />
+                    {/* NO enlaza a /jardines-del-sur-7/departamentos (decision de
+                        Florencio, 27 sept 2026): esa pagina queda como silo para
+                        Google, pero aqui se manda a lo que SI se vende hoy. */}
                     <p className={styles.verSoloWrap}>
                       <a
                         className={styles.verSoloLink}
-                        href="/jardines-del-sur-7/departamentos"
+                        href="/jardines-del-sur-6/departamentos"
                       >
-                        Ver solo los departamentos de Jardines del Sur 7 →
+                        Ver departamentos disponibles en Jardines del Sur 6 →
                       </a>
                     </p>
                   </>

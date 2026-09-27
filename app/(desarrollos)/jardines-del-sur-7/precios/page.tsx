@@ -91,15 +91,13 @@ const filas: Fila[] = [
         enlace: "Disponible hoy en Jardines del Sur 6",
       },
     })),
+  // Sin enlace a /jardines-del-sur-7/departamentos (decision de Florencio):
+  // se manda directo a lo que se vende hoy.
   {
     modelo: "Departamentos",
     estado: "Por confirmar",
-    href: `/${SLUG}/departamentos`,
-    enlace: "Ver departamentos",
-    hoy: {
-      href: "/jardines-del-sur-6/departamentos",
-      enlace: "Disponibles hoy en Jardines del Sur 6",
-    },
+    href: "/jardines-del-sur-6/departamentos",
+    enlace: "Disponibles hoy en Jardines del Sur 6",
   },
 ];
 
