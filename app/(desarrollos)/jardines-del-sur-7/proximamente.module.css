@@ -604,3 +604,13 @@
   position: absolute;
   inset: -12px -8px;
 }
+
+/* Enlace a precios, al pie de la seccion de modelos. */
+.preciosLinkWrap {
+  text-align: center;
+  margin: 2.6rem 0 0;
+}
+
+.preciosLinkWrap .preciosLink {
+  margin-top: 0;
+}

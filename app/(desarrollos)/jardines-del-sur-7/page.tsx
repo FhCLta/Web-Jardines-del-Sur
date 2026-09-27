@@ -380,12 +380,9 @@ export default function Page() {
             <h2>Modelos de Jardines del Sur 7</h2>
             <p>
               Abre con Tabachín y Noni. Precios, metros y planos se anuncian al
-              abrir la preventa. Mientras tanto, los modelos que llegarán después
-              ya están disponibles en Jardines del Sur 6.
+              abrir la preventa. Mientras tanto, hay modelos disponibles en
+              Jardines del Sur 6.
             </p>
-            <a className={styles.preciosLink} href="/jardines-del-sur-7/precios">
-              Ver precios de Jardines del Sur 7 →
-            </a>
           </div>
 
           <SiloTiposTabs
@@ -480,6 +477,13 @@ export default function Page() {
               },
             ]}
           />
+          {/* Al FINAL, no arriba: encima del selector se atravesaba entre el
+              titulo y los modelos (lo noto Florencio en su celular). */}
+          <p className={styles.preciosLinkWrap}>
+            <a className={styles.preciosLink} href="/jardines-del-sur-7/precios">
+              Ver precios de Jardines del Sur 7 →
+            </a>
+          </p>
         </div>
       </section>
 
