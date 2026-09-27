@@ -310,11 +310,15 @@ function TablaDeGrupo({
                 </td>
                 <td data-label="Precio con descuento" className={styles.precio}>
                   <span className={styles.precioValor}>
-                    {agotado && <span className={styles.agotado}>Agotado</span>}
                     {/* "desde" va ANTES del importe: en español se dice "desde
-                        $1,758,830", no al reves. */}
+                        $1,758,830", no al reves. El agotado lleva su etiqueta en
+                        un renglon PROPIO: en celular "Agotado · ultimo precio ·
+                        $2,664,750 MXN" en una sola linea se salia por la derecha. */}
                     {agotado ? (
-                      <span className={styles.desde}>último precio</span>
+                      <span className={styles.agotadoLinea}>
+                        <span className={styles.agotado}>Agotado</span>
+                        <span className={styles.desde}>último precio</span>
+                      </span>
                     ) : (
                       p.precio_variable && <span className={styles.desde}>desde</span>
                     )}

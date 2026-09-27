@@ -357,6 +357,24 @@
   color: var(--primary);
 }
 
+/* Renglon del agotado: la insignia y "ultimo precio" juntos, la cifra debajo. */
+.agotadoLinea {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.2rem;
+  white-space: normal;
+}
+
+.agotadoLinea .agotado {
+  margin-bottom: 0;
+}
+
+.agotadoLinea .desde {
+  display: inline;
+}
+
 /* Modelo agotado: la fila sigue, pero se dice con todas sus letras. */
 .agotado {
   display: inline-block;
@@ -656,9 +674,12 @@
     color: var(--accent-deep);
   }
 
-  /* El "desde" va en la misma linea que la cifra, no como rotulo aparte. */
+  /* El "desde" va en la misma linea que la cifra, no como rotulo aparte.
+     text-align izquierda: en escritorio la columna va a la derecha, y en la
+     tarjeta del agotado la cifra quedaba corrida bajo su renglon de etiqueta. */
   .tabla tbody td[data-label="Precio con descuento"] .precioValor {
     display: block;
+    text-align: left;
   }
 
   .tabla tbody td[data-label="Precio con descuento"] .desde {
