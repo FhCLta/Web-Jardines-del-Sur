@@ -248,7 +248,7 @@ export default function Page() {
                   className={styles.devGroupLink}
                   href={`/${slug}/promociones`}
                 >
-                  Ver la página de promociones de {dev.shortName} →
+                  Ver la página de promociones de {dev.shortName} →
                 </a>
               </div>
 

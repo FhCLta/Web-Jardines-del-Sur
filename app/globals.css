@@ -90,6 +90,21 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-montserrat), sans-serif;
   color: var(--primary);
   margin-bottom: 1rem;
+  /* Renglones parejos: sin esto un titulo largo dejaba "6" o "7" solo abajo. */
+  text-wrap: balance;
+}
+
+/* Sin palabra huerfana al final de un parrafo ("reservados.", "preventa.").
+   Solo cambia DONDE se corta el renglon; el navegador que no lo entiende lo
+   ignora. Ver .claude/skills/diseno-altta. */
+p, li {
+  text-wrap: pretty;
+}
+
+/* Botones y textos centrados cortos: reparto parejo (pretty no siempre
+   alcanza a mover la ultima palabra en textos de dos renglones). */
+.btn {
+  text-wrap: balance;
 }
 
 a {

@@ -223,6 +223,27 @@ idénticas en todas sus señales para Google; la única diferencia fue que la li
 de precios del 6 ahora marca el Tabachín como `SoldOut`. **Vigilar la posición
 en Search Console hasta el 11 oct 2026**; si baja, lo primero es revisar esto.
 
+**Silo completo, igual que el del 6 (27 sept 2026, commit 4876662).** Una
+página por búsqueda:
+
+| URL | Captura | Qué hace |
+|---|---|---|
+| `/jardines-del-sur-7/casas` | "casas jardines del sur 7" | los 4 modelos del 7 + tarjetas del 6 |
+| `/jardines-del-sur-7/departamentos` | "departamentos jardines del sur 7" | "por confirmar" + Capua y Cedro Plus del 6 |
+| `/jardines-del-sur-7/casa-flamboyan` y `/casa-ceiba` | "flamboyan/ceiba jardines del sur 7" | "llegará más adelante" y botón "Cotizarla en Jardines del Sur 6" |
+
+- Flamboyán y Ceiba del 7 están en `inventory.json` con **`llega_despues`**: no
+  salen en el inicio ni en "con los que abre la preventa".
+- Los bloques de modelos viven en `jardines-del-sur-7/ModelosJds7.tsx` y los
+  usan las tres páginas: **cambiar una promesa ahí la cambia en todas.**
+- **Sin fichas de departamento del 7, a propósito:** no hay modelo confirmado
+  que describir.
+- Las 39 páginas que ya existían quedaron idénticas en sus señales para Google.
+
+**El día que abra la preventa:** Flamboyán y Ceiba dejan de ser `llega_despues`
+solo cuando Sadasi los abra; los departamentos cambian de "por confirmar" solo
+cuando se confirmen.
+
 ### Estar listo para el día 1
 
 El día que salgan precios y modelos, la página debe cambiar **en horas, no en

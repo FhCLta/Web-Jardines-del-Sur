@@ -72,6 +72,7 @@ Después del deploy se commitea también `.firebase/hosting.*.cache`.
 | El dominio viejo / la hipótesis de confianza | `docs/prueba-dominio.md` (CERRADA) |
 | Segundo sitio o dominios | `sites/RIESGOS.md` |
 | El cotizador | `docs/cotizador-context.md` |
+| Cualquier cambio visual (página, sección, CSS, texto visible) | skill `diseno-altta` (`.claude/skills/diseno-altta/SKILL.md`) |
 | Compartir precios con otra app | `docs/api-precios.md` |
 | Historia de decisiones pasadas | `context.md` (lo reciente está arriba) |
 

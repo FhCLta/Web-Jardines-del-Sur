@@ -120,7 +120,7 @@ export default function PreciosDevPage({ slug }: { slug: DevSlug }) {
           <div className={styles.bloqueHead}>
             <h2>Todos los modelos, desde {formatPriceMxn(desde)}</h2>
             <a className={styles.bloqueLink} href={`/${slug}`}>
-              Ver {dev.name} con fotos y amenidades →
+              Ver {dev.name} con fotos y amenidades →
             </a>
           </div>
           <TablaPrecios slug={slug} />

@@ -71,6 +71,8 @@
   .eyebrowMain,
   .eyebrowSub {
     display: block;
+    /* "CASA RESIDENCIAL · JARDINES DEL SUR 7": el 7 quedaba solo abajo. */
+    text-wrap: balance;
   }
 }
 
@@ -449,6 +451,7 @@
   line-height: 1.6;
   margin: 0 auto;
   max-width: 640px;
+  text-wrap: balance;
 }
 
 /* Gallery grid */

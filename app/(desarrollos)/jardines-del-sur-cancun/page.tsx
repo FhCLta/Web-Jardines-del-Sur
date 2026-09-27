@@ -45,10 +45,10 @@ import {
    palabras. El reparto completo, con su evidencia, en docs/jds7-lanzamiento.md §4.
 
    REPARTO DE TÉRMINOS (ver docs/jds7-lanzamiento.md §4):
-     /                        → "altta homes cancun"  (marca)
-     /jardines-del-sur-cancun → "jardines del sur cancun", "jardines del sur"
-     /jardines-del-sur-6      → "jardines del sur 6"
-     /jardines-del-sur-7      → "jardines del sur 7"   ⭐ intocable
+     /                        → "altta homes cancun"  (marca)
+     /jardines-del-sur-cancun → "jardines del sur cancun", "jardines del sur"
+     /jardines-del-sur-6      → "jardines del sur 6"
+     /jardines-del-sur-7      → "jardines del sur 7"   ⭐ intocable
 
    ⚠️ LA DISTINCIÓN EXACTA (precisada por Florencio, 18 ago 2026):
    Jardines del Sur SÍ se desarrolla POR ETAPAS — el 6 y el 7 son etapas. Lo

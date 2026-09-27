@@ -56,6 +56,17 @@
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  /* Si no cabe, dos renglones parejos: "CANCÚN" quedaba solo abajo. */
+  text-wrap: balance;
+}
+
+/* En celular cabe en UN renglon con un poco menos de espaciado. */
+@media (max-width: 420px) {
+  .eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    padding: 0.45rem 0.95rem;
+  }
 }
 
 .pulse {
@@ -89,6 +100,14 @@
   text-transform: uppercase;
   color: var(--accent-2);
   margin-bottom: 0.6rem;
+}
+
+/* En celulares angostos (360 px) no cabia y dejaba el "·" colgando al final
+   del renglon. Con menos espaciado va en uno solo. */
+@media (max-width: 380px) {
+  .titleSmall {
+    letter-spacing: 0.1em;
+  }
 }
 
 .subtitle {
@@ -348,6 +367,7 @@
 }
 
 .eyebrow2 {
+  text-wrap: balance;
   display: block;
   color: var(--accent);
   font-family: var(--font-montserrat), sans-serif;

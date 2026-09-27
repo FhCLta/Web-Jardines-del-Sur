@@ -226,7 +226,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
                       {dev.slug === "jardines-del-sur-6" && (
                         <p className={styles.modelsGroupLinkWrap}>
                           <a className={styles.modelsGroupLink} href={`/${dev.slug}/${g.tipo}`}>
-                            Ver solo {g.verSolo} de {dev.name} →
+                            Ver solo {g.verSolo} de {dev.name} →
                           </a>
                         </p>
                       )}
@@ -362,7 +362,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
               </span>
               Promociones del mes en {dev.name} — minisplits y descuentos
             </span>
-            <span style={{ whiteSpace: "nowrap" }}>Ver promociones →</span>
+            <span style={{ whiteSpace: "nowrap" }}>Ver promociones →</span>
           </a>
         </div>
       )}

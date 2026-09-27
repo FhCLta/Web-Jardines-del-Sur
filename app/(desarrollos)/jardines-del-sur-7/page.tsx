@@ -392,7 +392,7 @@ export default function Page() {
                     <CasasJds7 />
                     <p className={styles.verSoloWrap}>
                       <a className={styles.verSoloLink} href="/jardines-del-sur-7/casas">
-                        Ver solo las casas de Jardines del Sur 7 →
+                        Ver solo las casas de Jardines del Sur 7 →
                       </a>
                     </p>
                   </>
@@ -411,7 +411,7 @@ export default function Page() {
                         className={styles.verSoloLink}
                         href="/jardines-del-sur-7/departamentos"
                       >
-                        Ver solo los departamentos de Jardines del Sur 7 →
+                        Ver solo los departamentos de Jardines del Sur 7 →
                       </a>
                     </p>
                   </>
@@ -423,7 +423,7 @@ export default function Page() {
               titulo y los modelos (lo noto Florencio en su celular). */}
           <p className={styles.preciosLinkWrap}>
             <a className={styles.preciosLink} href="/jardines-del-sur-7/precios">
-              Ver precios de Jardines del Sur 7 →
+              Ver precios de Jardines del Sur 7 →
             </a>
           </p>
         </div>
@@ -567,7 +567,7 @@ export default function Page() {
                   rel="noreferrer"
                   className={styles.ubicacionLink}
                 >
-                  Ver el perfil en Google →
+                  Ver el perfil en Google →
                 </a>
               </div>
             </div>

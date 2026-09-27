@@ -256,7 +256,7 @@ export default function TipoPage({ tipo }: { tipo: Tipo }) {
                 </h2>
                 {slug && (
                   <a className={styles.bloqueLink} href={`/${slug}`}>
-                    Ver {devName} completo →
+                    Ver {devName} completo →
                   </a>
                 )}
               </div>
@@ -271,7 +271,7 @@ export default function TipoPage({ tipo }: { tipo: Tipo }) {
                       >
                         Ver ficha completa de{" "}
                         {p.nombre_modelo.replace(/^(Casa|Departamento)\s+/i, "")}{" "}
-                        →
+                        →
                       </a>
                     )}
                   </div>

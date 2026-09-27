@@ -40,7 +40,7 @@ export function CasasJds7() {
               href={`/jardines-del-sur-7/${slugifyModel(p.nombre_modelo)}`}
             >
               Ver el {p.nombre_modelo.replace(/^Casa\s+/i, "")} y dónde
-              existe hoy →
+              existe hoy →
             </a>
           </div>
         ))}
@@ -65,7 +65,7 @@ export function CasasJds7() {
               href={`/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`}
             >
               Ver la {p.nombre_modelo.replace(/^Casa\s+/i, "")} en Jardines
-              del Sur 6 →
+              del Sur 6 →
             </a>
           </div>
         ))}
@@ -98,7 +98,7 @@ export function DepartamentosJds7() {
               href={`/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`}
             >
               Ver el {p.nombre_modelo.replace(/^Departamento\s+/i, "")} en
-              Jardines del Sur 6 →
+              Jardines del Sur 6 →
             </a>
           </div>
         ))}

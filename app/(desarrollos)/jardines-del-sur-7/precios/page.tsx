@@ -160,7 +160,7 @@ export default function Page() {
           <div className={styles.bloqueHead}>
             <h2>Modelos de {dev.name}</h2>
             <a className={styles.bloqueLink} href={`/${SLUG}`}>
-              Ver {dev.name} con fotos de obra y ubicación →
+              Ver {dev.name} con fotos de obra y ubicación →
             </a>
           </div>
           <div className={styles.tablaWrap}>
@@ -185,10 +185,10 @@ export default function Page() {
                     </td>
                     <td className={styles.celdaAcciones}>
                       <span className={styles.acciones}>
-                        <a href={f.href}>{f.enlace} →</a>
+                        <a href={f.href}>{f.enlace} →</a>
                         {f.hoy && (
                           <a className={styles.cotizar} href={f.hoy.href}>
-                            {f.hoy.enlace} →
+                            {f.hoy.enlace} →
                           </a>
                         )}
                       </span>
@@ -212,7 +212,7 @@ export default function Page() {
           <div className={styles.bloqueHead}>
             <h2>Mientras tanto: precios de hoy en Jardines del Sur 6</h2>
             <a className={styles.bloqueLink} href="/jardines-del-sur-6">
-              Ver Jardines del Sur 6 →
+              Ver Jardines del Sur 6 →
             </a>
           </div>
           <TablaPrecios slug="jardines-del-sur-6" />

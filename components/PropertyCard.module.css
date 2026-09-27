@@ -663,6 +663,7 @@
 }
 
 .legalLegend p {
+  text-wrap: balance;
   margin: 0;
   font-family: var(--font-lato);
   font-size: 0.72rem;
