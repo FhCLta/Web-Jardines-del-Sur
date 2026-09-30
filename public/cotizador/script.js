@@ -1965,7 +1965,8 @@ const telefonoAsesorInput = document.getElementById("telefonoAsesor");
 // accesibles aqui. Si se agrega uno, va tambien en el <select> de index.html.
 const datosAsesores = {
     "Florencio Hurtado": "+52 998 205 9044",
-    "Eduardo Gonzalez Nuñez": "+52 998 148 6819"
+    "Eduardo Gonzalez Nuñez": "+52 998 148 6819",
+    "Estefania Sosa": "+52 55 1797 7114"
 };
 
 if (nombreAsesorSelect && telefonoAsesorInput) {
