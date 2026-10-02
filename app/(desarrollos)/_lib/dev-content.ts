@@ -119,23 +119,38 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · septiembre 2026",
-      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y al firmar tu expediente de venta dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
+      updatedLabel: "Promociones vigentes · octubre 2026",
+      nota: "Aplica con apartado del 1 al 31 de octubre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
       items: [
         {
           modelo: "Modelo Capua",
           modeloSlug: "departamento-capua",
-          ubicaciones:
-            "Jardines del Sur 6 · Ocelote N, O, P y Q · Antílope N, O, P y Q",
-          beneficios: ["2 minisplits de 12,000 BTU"],
-          vigencia: "30 de septiembre de 2026",
+          ubicaciones: "Jardines del Sur 6 · Ocelote N, P y Q",
+          beneficios: ["4 minisplits de 12,000 BTU"],
+          vigencia: "31 de octubre de 2026",
+        },
+        {
+          modelo: "Modelo Capua",
+          modeloSlug: "departamento-capua",
+          ubicaciones: "Jardines del Sur 6 · Antílope N, O, P y Q",
+          beneficios: ["3 minisplits de 12,000 BTU"],
+          vigencia: "31 de octubre de 2026",
         },
         {
           modelo: "Modelo Noni",
           modeloSlug: "casa-noni",
           ubicaciones: "Jardines del Sur 6 · Jabalí Mz 30 L14",
-          beneficios: ["2 minisplits de 12,000 BTU"],
-          vigencia: "30 de septiembre de 2026",
+          beneficios: ["3 minisplits de 12,000 BTU"],
+          vigencia: "31 de octubre de 2026",
+        },
+        {
+          // "O": el cliente elige UNO de los dos. El descuento tambien esta en
+          // data/precios.json (variante CEIBA con bono_extra) para el cotizador.
+          modelo: "Casa Ceiba",
+          modeloSlug: "casa-ceiba",
+          ubicaciones: "Jardines del Sur 6 · Todos los lotes disponibles",
+          beneficios: ["4 minisplits de 12,000 BTU", "o descuento de $40,000"],
+          vigencia: "31 de octubre de 2026",
         },
       ],
     },
@@ -313,19 +328,20 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · septiembre 2026",
-      nota: "Los minisplits no incluyen instalación. Aplica en las ubicaciones indicadas y al firmar tu expediente de venta dentro del mes de vigencia. Promociones sujetas a disponibilidad; consulta requisitos con tu asesor.",
+      updatedLabel: "Promociones vigentes · octubre 2026",
+      nota: "Aplica con apartado del 1 al 31 de octubre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
       items: [
         {
+          // "O": el cliente elige UNO de los dos paquetes. El descuento de
+          // $50,000 sigue en data/precios.json (NONI ELITE, bono_extra).
           modelo: "Casa Noni Elite",
           modeloSlug: "casa-noni-elite",
-          ubicaciones: "La Rioja 2 · Oso casa 05",
+          ubicaciones: "La Rioja 2 · Casas 69 a 74",
           beneficios: [
-            "Descuento de $50,000",
-            "1 minisplit de 18,000 BTU",
-            "2 minisplits de 12,000 BTU",
+            "Paquete de paneles solares",
+            "o descuento de $50,000 + 1 minisplit de 18,000 BTU y 2 de 12,000 BTU",
           ],
-          vigencia: "30 de septiembre de 2026",
+          vigencia: "31 de octubre de 2026",
         },
       ],
     },
@@ -440,6 +456,28 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logoSobreFoto: "blanco",
     logoFoto: { src: "/logos/lirios-2-contorno-v2.webp", width: 556, height: 277 },
     location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
+    // Primeras promociones de Lirios (octubre 2026). Con este bloque se
+    // publica /lirios-residencial-2/promociones y entra al hub y al sitemap.
+    promos: {
+      updatedLabel: "Promociones vigentes · octubre 2026",
+      nota: "Aplica con apartado del 1 al 31 de octubre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
+      items: [
+        {
+          modelo: "Departamento Capua",
+          modeloSlug: "departamento-capua",
+          ubicaciones: "Lirios Residencial 2 · P4 y L1",
+          beneficios: ["3 minisplits de 12,000 BTU"],
+          vigencia: "31 de octubre de 2026",
+        },
+        {
+          modelo: "Departamento Cedro Plus",
+          modeloSlug: "departamento-cedro-plus",
+          ubicaciones: "Lirios Residencial 2 · P1, P2 y P3",
+          beneficios: ["3 minisplits de 12,000 BTU"],
+          vigencia: "31 de octubre de 2026",
+        },
+      ],
+    },
     whatsappMessage:
       "Hola, quiero más información sobre los departamentos de Lirios Residencial 2 en Cancún.",
     hero: {

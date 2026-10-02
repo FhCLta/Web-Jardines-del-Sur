@@ -12,6 +12,7 @@ window.COTIZADOR_PRECIOS = {
       "modelos": [
         "FLAMBOYAN",
         "CEIBA",
+        "CEIBA PROMO",
         "TABACHIN",
         "NONI"
       ],
@@ -72,6 +73,20 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 3230000,
       "valorAvaluo": 3230000,
       "bono": 627950,
+      "avaluo": 12000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.073,
+        "contado": 0.072
+      }
+    },
+    "CEIBA PROMO": {
+      "id": "azular1-ceiba-promo",
+      "precioLista": 3230000,
+      "valorAvaluo": 3230000,
+      "bono": 667950,
       "avaluo": 12000,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,

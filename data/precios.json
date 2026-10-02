@@ -61,6 +61,9 @@
         "bancario": 0.073,
         "contado": 0.072
       },
+      "promocion": {
+        "bono_extra": 40000
+      },
       "web": "jds6-ceiba"
     },
     {
