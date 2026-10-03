@@ -74,6 +74,7 @@ Después del deploy se commitea también `.firebase/hosting.*.cache`.
 | El cotizador | `docs/cotizador-context.md` |
 | Cualquier cambio visual (página, sección, CSS, texto visible) | skill `diseno-altta` (`.claude/skills/diseno-altta/SKILL.md`) |
 | Compartir precios con otra app | `docs/api-precios.md` |
+| El inventario que lee el CRM (KloseAI) | `docs/inventario-crm.md` |
 | Historia de decisiones pasadas | `context.md` (lo reciente está arriba) |
 
 `context.md` son 1,500+ líneas: leer solo la parte de arriba salvo que se
