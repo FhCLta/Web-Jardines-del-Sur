@@ -62,6 +62,27 @@ que hace que un desarrollo nuevo sea solo datos y no codigo.
 - **`tipo`** — `casas` o `departamentos`.
 - **`catalogo`** — cual de las tablas le corresponde.
 
+### La Rioja 2 trae además su lista casa por casa (`unidades`)
+
+```json
+"LaRioja2": {
+  "modelos": ["NONI ELITE", "NONI ELITE PROMO", ...],
+  "unidades": [
+    { "etiqueta": "ALAMO · OSO 2 #52", "clave": "ALAMO OSO 2 CASA 52", "unidad": "OSO 2 #52" },
+    ...
+  ]
+}
+```
+
+El cotizador muestra una opción por casa y escribe `unidad` en "# de la
+Unidad". El precio sale de `clave`, que es una fila del catálogo: varias casas
+comparten clave cuando comparten precio. **`modelos` no cambió** (es lo que lee
+la app de expedientes); `unidades` es un campo agregado. Se captura en
+`data/precios.json` (`desarrollos.LaRioja2.unidades`) y el generador se niega a
+publicar si una casa apunta a una clave que no existe o si una dirección se
+repite. La opción `PROMO` de una casa sale sola mientras su clave tenga
+promoción vigente.
+
 ### Cada producto trae un identificador estable
 
 Toda fila de los catalogos lleva `id`:

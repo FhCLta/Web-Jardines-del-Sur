@@ -264,11 +264,51 @@ for (const prod of productosApi) {
   vistos.add(prod.id);
 }
 
+// --- Unidades: la lista de precios CASA POR CASA (hoy, solo La Rioja 2) -----
+// El cotizador muestra una opcion por casa ("ALAMO · OSO 2 #52") y escribe su
+// direccion en "# de la Unidad". El PRECIO no se repite aqui: cada casa apunta
+// con `clave` a su fila de `casas`, que sigue siendo la unica fuente. `modelos`
+// NO cambia, porque es lo que lee la app de expedientes.
+// Se valida antes de publicar: una casa que apunta a una clave inexistente (o
+// agotada) se cotizaria en blanco, y una direccion repetida es un error de captura.
+function unidadesDe(dev, cfg) {
+  if (!cfg.unidades) return undefined;
+  const catalogo = catalogoCasas(dev);
+  const salida = [];
+  const direcciones = new Set();
+  for (const u of cfg.unidades) {
+    const direccion = `${u.calle} #${u.numero}`;
+    if (direcciones.has(direccion)) {
+      throw new Error(`Unidad repetida en ${dev}: "${direccion}".`);
+    }
+    direcciones.add(direccion);
+    if (!catalogo[u.clave]) {
+      throw new Error(
+        `La unidad "${direccion}" de ${dev} apunta a la clave "${u.clave}", que no esta ` +
+          `en el cotizador (no existe o esta agotada). Se cotizaria sin precio.`
+      );
+    }
+    salida.push({ etiqueta: `${u.prototipo} · ${direccion}`, clave: u.clave, unidad: direccion });
+    // La promocion vigente de su clave, como opcion aparte. Cuando la promocion
+    // se retira de `casas`, esta opcion desaparece sola.
+    if (u.promo && catalogo[`${u.clave} PROMO`]) {
+      salida.push({
+        etiqueta: `${u.prototipo} PROMO · ${direccion}`,
+        clave: `${u.clave} PROMO`,
+        unidad: direccion,
+      });
+    }
+  }
+  return salida;
+}
+
 // --- El bundle que recibe el cotizador --------------------------------------
 const datosAzular = {};
 for (const [dev, cfg] of Object.entries(precios.desarrollos)) {
+  const unidades = unidadesDe(dev, cfg);
   datosAzular[dev] = {
     modelos: listaModelos(dev),
+    ...(unidades ? { unidades } : {}),
     precioTerrenoExcedente: cfg.precio_terreno_excedente,
     // Los cuatro campos siguientes son los que permiten que el cotizador
     // resuelva un desarrollo LEYENDO el dato en vez de comparar contra nombres

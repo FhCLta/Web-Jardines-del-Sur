@@ -51,6 +51,198 @@ window.COTIZADOR_PRECIOS = {
         "ALAMO OSO 2 CASA 78",
         "FRESNO ELITE"
       ],
+      "unidades": [
+        {
+          "etiqueta": "NONI ELITE · OSO 1 #5",
+          "clave": "NONI ELITE OSO 1 CASAS 5 Y 7",
+          "unidad": "OSO 1 #5"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 1 #7",
+          "clave": "NONI ELITE OSO 1 CASAS 5 Y 7",
+          "unidad": "OSO 1 #7"
+        },
+        {
+          "etiqueta": "NONI · OSO 1 #10",
+          "clave": "NONI",
+          "unidad": "OSO 1 #10"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 1 #15",
+          "clave": "ALAMO OSO 1 CASAS 15 Y 31",
+          "unidad": "OSO 1 #15"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 1 #17",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 1 #17"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 1 #21",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 1 #21"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 1 #28",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 1 #28"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 1 #30",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 1 #30"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 1 #31",
+          "clave": "ALAMO OSO 1 CASAS 15 Y 31",
+          "unidad": "OSO 1 #31"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #44",
+          "clave": "ALAMO OSO 2 CASAS 44 Y 65",
+          "unidad": "OSO 2 #44"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #45",
+          "clave": "ALAMO",
+          "unidad": "OSO 2 #45"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 2 #46",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 2 #46"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #47",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #47"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #48",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #48"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #49",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #49"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 2 #50",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 2 #50"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #51",
+          "clave": "ALAMO",
+          "unidad": "OSO 2 #51"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #52",
+          "clave": "ALAMO OSO 2 CASA 52",
+          "unidad": "OSO 2 #52"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #65",
+          "clave": "ALAMO OSO 2 CASAS 44 Y 65",
+          "unidad": "OSO 2 #65"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #66",
+          "clave": "ALAMO",
+          "unidad": "OSO 2 #66"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 2 #67",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 2 #67"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #68",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #68"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #69",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #69"
+        },
+        {
+          "etiqueta": "NONI ELITE PROMO · OSO 2 #69",
+          "clave": "NONI ELITE PROMO",
+          "unidad": "OSO 2 #69"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #70",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #70"
+        },
+        {
+          "etiqueta": "NONI ELITE PROMO · OSO 2 #70",
+          "clave": "NONI ELITE PROMO",
+          "unidad": "OSO 2 #70"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #71",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #71"
+        },
+        {
+          "etiqueta": "NONI ELITE PROMO · OSO 2 #71",
+          "clave": "NONI ELITE PROMO",
+          "unidad": "OSO 2 #71"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #72",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #72"
+        },
+        {
+          "etiqueta": "NONI ELITE PROMO · OSO 2 #72",
+          "clave": "NONI ELITE PROMO",
+          "unidad": "OSO 2 #72"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #73",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #73"
+        },
+        {
+          "etiqueta": "NONI ELITE PROMO · OSO 2 #73",
+          "clave": "NONI ELITE PROMO",
+          "unidad": "OSO 2 #73"
+        },
+        {
+          "etiqueta": "NONI ELITE · OSO 2 #74",
+          "clave": "NONI ELITE",
+          "unidad": "OSO 2 #74"
+        },
+        {
+          "etiqueta": "NONI ELITE PROMO · OSO 2 #74",
+          "clave": "NONI ELITE PROMO",
+          "unidad": "OSO 2 #74"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 2 #75",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 2 #75"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 2 #76",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 2 #76"
+        },
+        {
+          "etiqueta": "FRESNO ELITE · OSO 2 #77",
+          "clave": "FRESNO ELITE",
+          "unidad": "OSO 2 #77"
+        },
+        {
+          "etiqueta": "ALAMO · OSO 2 #78",
+          "clave": "ALAMO OSO 2 CASA 78",
+          "unidad": "OSO 2 #78"
+        }
+      ],
       "precioTerrenoExcedente": 7500,
       "label": "La Rioja 2",
       "fraccionamiento": "LA RIOJA 2",

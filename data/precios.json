@@ -29,7 +29,42 @@
     "LaRioja2": {
       "nombre": "La Rioja 2",
       "precio_terreno_excedente": 7500,
-      "cuota_contingencia": 10000
+      "cuota_contingencia": 10000,
+      "_unidades": "Lista de precios de La Rioja 2 casa por casa (AGO 2026). El cotizador muestra UNA opcion por casa y escribe su direccion en '# de la Unidad'. 'clave' = de que fila de 'casas' sale el precio. 'promo': esa casa tambien se ofrece con la promocion vigente de su clave, si existe.",
+      "unidades": [
+        { "calle": "OSO 1", "numero": 5, "prototipo": "NONI ELITE", "clave": "NONI ELITE OSO 1 CASAS 5 Y 7" },
+        { "calle": "OSO 1", "numero": 7, "prototipo": "NONI ELITE", "clave": "NONI ELITE OSO 1 CASAS 5 Y 7" },
+        { "calle": "OSO 1", "numero": 10, "prototipo": "NONI", "clave": "NONI" },
+        { "calle": "OSO 1", "numero": 15, "prototipo": "ALAMO", "clave": "ALAMO OSO 1 CASAS 15 Y 31" },
+        { "calle": "OSO 1", "numero": 17, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 1", "numero": 21, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 1", "numero": 28, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 1", "numero": 30, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 1", "numero": 31, "prototipo": "ALAMO", "clave": "ALAMO OSO 1 CASAS 15 Y 31" },
+        { "calle": "OSO 2", "numero": 44, "prototipo": "ALAMO", "clave": "ALAMO OSO 2 CASAS 44 Y 65" },
+        { "calle": "OSO 2", "numero": 45, "prototipo": "ALAMO", "clave": "ALAMO" },
+        { "calle": "OSO 2", "numero": 46, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 2", "numero": 47, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 2", "numero": 48, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 2", "numero": 49, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 2", "numero": 50, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 2", "numero": 51, "prototipo": "ALAMO", "clave": "ALAMO" },
+        { "calle": "OSO 2", "numero": 52, "prototipo": "ALAMO", "clave": "ALAMO OSO 2 CASA 52" },
+        { "calle": "OSO 2", "numero": 65, "prototipo": "ALAMO", "clave": "ALAMO OSO 2 CASAS 44 Y 65" },
+        { "calle": "OSO 2", "numero": 66, "prototipo": "ALAMO", "clave": "ALAMO" },
+        { "calle": "OSO 2", "numero": 67, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 2", "numero": 68, "prototipo": "NONI ELITE", "clave": "NONI ELITE" },
+        { "calle": "OSO 2", "numero": 69, "prototipo": "NONI ELITE", "clave": "NONI ELITE", "promo": true },
+        { "calle": "OSO 2", "numero": 70, "prototipo": "NONI ELITE", "clave": "NONI ELITE", "promo": true },
+        { "calle": "OSO 2", "numero": 71, "prototipo": "NONI ELITE", "clave": "NONI ELITE", "promo": true },
+        { "calle": "OSO 2", "numero": 72, "prototipo": "NONI ELITE", "clave": "NONI ELITE", "promo": true },
+        { "calle": "OSO 2", "numero": 73, "prototipo": "NONI ELITE", "clave": "NONI ELITE", "promo": true },
+        { "calle": "OSO 2", "numero": 74, "prototipo": "NONI ELITE", "clave": "NONI ELITE", "promo": true },
+        { "calle": "OSO 2", "numero": 75, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 2", "numero": 76, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 2", "numero": 77, "prototipo": "FRESNO ELITE", "clave": "FRESNO ELITE" },
+        { "calle": "OSO 2", "numero": 78, "prototipo": "ALAMO", "clave": "ALAMO OSO 2 CASA 78" }
+      ]
     }
   },
   "casas": [

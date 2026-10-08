@@ -92,13 +92,36 @@ document.addEventListener("DOMContentLoaded", function () {
         let seleccion = this.value;
         actualizarCuotaContingencia(seleccion);
 
+        // La direccion que el selector escribio sola en "# de la Unidad" se
+        // borra al cambiar de desarrollo; si el asesor la escribio a mano, se queda.
+        const unidadInput = document.getElementById("letrasNumeros");
+        if (unidadInput && unidadInput.dataset.autoUnidad && unidadInput.value === unidadInput.dataset.autoUnidad) {
+            unidadInput.value = "";
+        }
+        if (unidadInput) delete unidadInput.dataset.autoUnidad;
+
         if (seleccion && datosAzular[seleccion]) {
-            datosAzular[seleccion].modelos.forEach(modelo => {
-                let option = document.createElement("option");
-                option.value = modelo;
-                option.textContent = modelo;
-                prototipoSelect.appendChild(option);
-            });
+            // La Rioja 2 trae su lista CASA POR CASA (`unidades`): una opcion por
+            // casa con su direccion. El value sigue siendo la clave del catalogo
+            // (varias casas comparten precio), asi que el resto del cotizador no
+            // cambia. Los demas desarrollos siguen con su lista de modelos.
+            const unidades = datosAzular[seleccion].unidades;
+            if (Array.isArray(unidades) && unidades.length) {
+                unidades.forEach(u => {
+                    const option = document.createElement("option");
+                    option.value = u.clave;
+                    option.textContent = u.etiqueta;
+                    option.dataset.unidad = u.unidad;
+                    prototipoSelect.appendChild(option);
+                });
+            } else {
+                datosAzular[seleccion].modelos.forEach(modelo => {
+                    let option = document.createElement("option");
+                    option.value = modelo;
+                    option.textContent = modelo;
+                    prototipoSelect.appendChild(option);
+                });
+            }
 
             let precioTerrenoExcedente = datosAzular[seleccion].precioTerrenoExcedente;
             const precioMetrosExcedentesInput = document.getElementById("precioMetrosExcedentes");
@@ -378,6 +401,14 @@ document.addEventListener("DOMContentLoaded", function () {
         desactivarModoPrecioManual();
         gastosTitulacionManuallyEdited = false; // Reiniciar el flag al cambiar de modelo
         let modeloSeleccionado = this.value;
+
+        // Opcion de una casa concreta (La Rioja 2): su direccion va a "# de la Unidad".
+        const unidadElegida = this.options[this.selectedIndex]?.dataset.unidad;
+        const unidadInput = document.getElementById("letrasNumeros");
+        if (unidadElegida && unidadInput) {
+            unidadInput.value = unidadElegida;
+            unidadInput.dataset.autoUnidad = unidadElegida;
+        }
         let desarrolloSeleccionado = azularSelect.value;
 
         // Datos para La Rioja 2 - Casas
