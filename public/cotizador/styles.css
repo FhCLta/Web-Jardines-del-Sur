@@ -1190,7 +1190,6 @@ input[readonly] {
     /* Prototipo y Departamento: select + input a todo lo ancho apilados */
     #prototipoContainer #prototipo,
     #prototipoContainer #letrasNumeros,
-    #prototipoContainer #unidadSelect,
     #departamentoContainer #departamentoSelect,
     #departamentoContainer #letrasNumerosDepa {
         width: 100% !important;
@@ -1970,8 +1969,7 @@ body.generando-imagen .bloque h2::after {
     /* Dar mÃƒÂ¡s espacio al selector de prototipo */
 }
 
-#datosGenerales .campo-horizontal input#letrasNumeros,
-#datosGenerales .campo-horizontal #unidadSelect {
+#datosGenerales .campo-horizontal input#letrasNumeros {
     flex-grow: 1;
 }
 
@@ -2373,13 +2371,11 @@ body.generando-imagen .bloque h2::after {
     #prototipoContainer #prototipo,
     #departamentoContainer #departamentoSelect,
     #letrasNumeros,
-    #unidadSelect,
     #letrasNumerosDepa {
         width: 100% !important;
         min-width: 0 !important;
     }
     #letrasNumeros,
-    #unidadSelect,
     #letrasNumerosDepa {
         font-size: 7pt !important;
         padding: 2px 3px !important;
@@ -3381,7 +3377,6 @@ body.generando-imagen #prototipo,
 body.generando-imagen #departamentoSelect,
 body.generando-imagen #planVenta,
 body.generando-imagen #letrasNumeros,
-body.generando-imagen #unidadSelect,
 body.generando-imagen #letrasNumerosDepa,
 body.generando-imagen #nombreAsesor,
 body.generando-imagen #telefonoAsesor {
