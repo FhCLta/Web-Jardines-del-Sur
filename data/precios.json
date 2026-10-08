@@ -116,9 +116,23 @@
     },
     {
       "dev": "LaRioja2",
+      "modelo": "NONI ELITE OSO 1 CASAS 5 Y 7",
+      "precio_lista": 6101500,
+      "bono": 1452002.5,
+      "avaluo_tramite": 18500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "LaRioja2",
       "modelo": "NONI",
-      "precio_lista": 4490000,
-      "bono": 440625,
+      "precio_lista": 4751285,
+      "bono": 865810,
       "avaluo_tramite": 16000,
       "escrituracion": {
         "infonavit": 0.07,
@@ -143,6 +157,62 @@
         "contado": 0.072
       },
       "web": "larioja2-alamo"
+    },
+    {
+      "dev": "LaRioja2",
+      "modelo": "ALAMO OSO 1 CASAS 15 Y 31",
+      "precio_lista": 5820000,
+      "bono": 1333975,
+      "avaluo_tramite": 18500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "LaRioja2",
+      "modelo": "ALAMO OSO 2 CASAS 44 Y 65",
+      "precio_lista": 5820000,
+      "bono": 1333975,
+      "avaluo_tramite": 18500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "LaRioja2",
+      "modelo": "ALAMO OSO 2 CASA 52",
+      "precio_lista": 6040545,
+      "bono": 1236945,
+      "avaluo_tramite": 18500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    {
+      "dev": "LaRioja2",
+      "modelo": "ALAMO OSO 2 CASA 78",
+      "precio_lista": 5869230,
+      "bono": 1351155,
+      "avaluo_tramite": 18500,
+      "escrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
     },
     {
       "dev": "LaRioja2",

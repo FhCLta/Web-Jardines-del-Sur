@@ -42,8 +42,13 @@ window.COTIZADOR_PRECIOS = {
       "modelos": [
         "NONI ELITE",
         "NONI ELITE PROMO",
+        "NONI ELITE OSO 1 CASAS 5 Y 7",
         "NONI",
         "ALAMO",
+        "ALAMO OSO 1 CASAS 15 Y 31",
+        "ALAMO OSO 2 CASAS 44 Y 65",
+        "ALAMO OSO 2 CASA 52",
+        "ALAMO OSO 2 CASA 78",
         "FRESNO ELITE"
       ],
       "precioTerrenoExcedente": 7500,
@@ -154,11 +159,25 @@ window.COTIZADOR_PRECIOS = {
         "contado": 0.072
       }
     },
+    "NONI ELITE OSO 1 CASAS 5 Y 7": {
+      "id": "larioja2-noni-elite-oso-1-casas-5-y-7",
+      "precioLista": 6101500,
+      "valorAvaluo": 6101500,
+      "bono": 1452002.5,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
     "NONI": {
       "id": "larioja2-noni",
-      "precioLista": 4490000,
-      "valorAvaluo": 4490000,
-      "bono": 440625,
+      "precioLista": 4751285,
+      "valorAvaluo": 4751285,
+      "bono": 865810,
       "avaluo": 16000,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,
@@ -173,6 +192,62 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 5820000,
       "valorAvaluo": 5820000,
       "bono": 1383975,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    "ALAMO OSO 1 CASAS 15 Y 31": {
+      "id": "larioja2-alamo-oso-1-casas-15-y-31",
+      "precioLista": 5820000,
+      "valorAvaluo": 5820000,
+      "bono": 1333975,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    "ALAMO OSO 2 CASAS 44 Y 65": {
+      "id": "larioja2-alamo-oso-2-casas-44-y-65",
+      "precioLista": 5820000,
+      "valorAvaluo": 5820000,
+      "bono": 1333975,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    "ALAMO OSO 2 CASA 52": {
+      "id": "larioja2-alamo-oso-2-casa-52",
+      "precioLista": 6040545,
+      "valorAvaluo": 6040545,
+      "bono": 1236945,
+      "avaluo": 18500,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    "ALAMO OSO 2 CASA 78": {
+      "id": "larioja2-alamo-oso-2-casa-78",
+      "precioLista": 5869230,
+      "valorAvaluo": 5869230,
+      "bono": 1351155,
       "avaluo": 18500,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,
