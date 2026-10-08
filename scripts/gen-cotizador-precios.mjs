@@ -265,8 +265,8 @@ for (const prod of productosApi) {
 }
 
 // --- Unidades: la lista de precios CASA POR CASA (hoy, solo La Rioja 2) -----
-// El cotizador muestra una opcion por casa ("ALAMO · OSO 2 #52") y escribe su
-// direccion en "# de la Unidad". El PRECIO no se repite aqui: cada casa apunta
+// El cotizador muestra en "Prototipo" solo el modelo ("ALAMO") y en "# de la
+// Unidad" las casas de ese modelo ("OSO 2 #52"); la casa elegida trae su precio. El PRECIO no se repite aqui: cada casa apunta
 // con `clave` a su fila de `casas`, que sigue siendo la unica fuente. `modelos`
 // NO cambia, porque es lo que lee la app de expedientes.
 // Se valida antes de publicar: una casa que apunta a una clave inexistente (o
@@ -288,11 +288,17 @@ function unidadesDe(dev, cfg) {
           `en el cotizador (no existe o esta agotada). Se cotizaria sin precio.`
       );
     }
-    salida.push({ etiqueta: `${u.prototipo} · ${direccion}`, clave: u.clave, unidad: direccion });
+    salida.push({
+      prototipo: u.prototipo,
+      etiqueta: `${u.prototipo} · ${direccion}`,
+      clave: u.clave,
+      unidad: direccion,
+    });
     // La promocion vigente de su clave, como opcion aparte. Cuando la promocion
     // se retira de `casas`, esta opcion desaparece sola.
     if (u.promo && catalogo[`${u.clave} PROMO`]) {
       salida.push({
+        prototipo: `${u.prototipo} PROMO`,
         etiqueta: `${u.prototipo} PROMO · ${direccion}`,
         clave: `${u.clave} PROMO`,
         unidad: direccion,

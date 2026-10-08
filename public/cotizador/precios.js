@@ -53,191 +53,229 @@ window.COTIZADOR_PRECIOS = {
       ],
       "unidades": [
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 1 #5",
           "clave": "NONI ELITE OSO 1 CASAS 5 Y 7",
           "unidad": "OSO 1 #5"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 1 #7",
           "clave": "NONI ELITE OSO 1 CASAS 5 Y 7",
           "unidad": "OSO 1 #7"
         },
         {
+          "prototipo": "NONI",
           "etiqueta": "NONI · OSO 1 #10",
           "clave": "NONI",
           "unidad": "OSO 1 #10"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 1 #15",
           "clave": "ALAMO OSO 1 CASAS 15 Y 31",
           "unidad": "OSO 1 #15"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 1 #17",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 1 #17"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 1 #21",
           "clave": "NONI ELITE",
           "unidad": "OSO 1 #21"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 1 #28",
           "clave": "NONI ELITE",
           "unidad": "OSO 1 #28"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 1 #30",
           "clave": "NONI ELITE",
           "unidad": "OSO 1 #30"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 1 #31",
           "clave": "ALAMO OSO 1 CASAS 15 Y 31",
           "unidad": "OSO 1 #31"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #44",
           "clave": "ALAMO OSO 2 CASAS 44 Y 65",
           "unidad": "OSO 2 #44"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #45",
           "clave": "ALAMO",
           "unidad": "OSO 2 #45"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 2 #46",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 2 #46"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #47",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #47"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #48",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #48"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #49",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #49"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 2 #50",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 2 #50"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #51",
           "clave": "ALAMO",
           "unidad": "OSO 2 #51"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #52",
           "clave": "ALAMO OSO 2 CASA 52",
           "unidad": "OSO 2 #52"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #65",
           "clave": "ALAMO OSO 2 CASAS 44 Y 65",
           "unidad": "OSO 2 #65"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #66",
           "clave": "ALAMO",
           "unidad": "OSO 2 #66"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 2 #67",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 2 #67"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #68",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #68"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #69",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #69"
         },
         {
+          "prototipo": "NONI ELITE PROMO",
           "etiqueta": "NONI ELITE PROMO · OSO 2 #69",
           "clave": "NONI ELITE PROMO",
           "unidad": "OSO 2 #69"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #70",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #70"
         },
         {
+          "prototipo": "NONI ELITE PROMO",
           "etiqueta": "NONI ELITE PROMO · OSO 2 #70",
           "clave": "NONI ELITE PROMO",
           "unidad": "OSO 2 #70"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #71",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #71"
         },
         {
+          "prototipo": "NONI ELITE PROMO",
           "etiqueta": "NONI ELITE PROMO · OSO 2 #71",
           "clave": "NONI ELITE PROMO",
           "unidad": "OSO 2 #71"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #72",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #72"
         },
         {
+          "prototipo": "NONI ELITE PROMO",
           "etiqueta": "NONI ELITE PROMO · OSO 2 #72",
           "clave": "NONI ELITE PROMO",
           "unidad": "OSO 2 #72"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #73",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #73"
         },
         {
+          "prototipo": "NONI ELITE PROMO",
           "etiqueta": "NONI ELITE PROMO · OSO 2 #73",
           "clave": "NONI ELITE PROMO",
           "unidad": "OSO 2 #73"
         },
         {
+          "prototipo": "NONI ELITE",
           "etiqueta": "NONI ELITE · OSO 2 #74",
           "clave": "NONI ELITE",
           "unidad": "OSO 2 #74"
         },
         {
+          "prototipo": "NONI ELITE PROMO",
           "etiqueta": "NONI ELITE PROMO · OSO 2 #74",
           "clave": "NONI ELITE PROMO",
           "unidad": "OSO 2 #74"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 2 #75",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 2 #75"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 2 #76",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 2 #76"
         },
         {
+          "prototipo": "FRESNO ELITE",
           "etiqueta": "FRESNO ELITE · OSO 2 #77",
           "clave": "FRESNO ELITE",
           "unidad": "OSO 2 #77"
         },
         {
+          "prototipo": "ALAMO",
           "etiqueta": "ALAMO · OSO 2 #78",
           "clave": "ALAMO OSO 2 CASA 78",
           "unidad": "OSO 2 #78"

@@ -92,28 +92,32 @@ document.addEventListener("DOMContentLoaded", function () {
         let seleccion = this.value;
         actualizarCuotaContingencia(seleccion);
 
-        // La direccion que el selector escribio sola en "# de la Unidad" se
-        // borra al cambiar de desarrollo; si el asesor la escribio a mano, se queda.
+        // La direccion que el selector de casas escribio sola en "# de la Unidad"
+        // se borra al cambiar de desarrollo; si el asesor la escribio a mano, se queda.
         const unidadInput = document.getElementById("letrasNumeros");
         if (unidadInput && unidadInput.dataset.autoUnidad && unidadInput.value === unidadInput.dataset.autoUnidad) {
             unidadInput.value = "";
         }
         if (unidadInput) delete unidadInput.dataset.autoUnidad;
+        mostrarSelectorDeCasas(false);
 
         if (seleccion && datosAzular[seleccion]) {
-            // La Rioja 2 trae su lista CASA POR CASA (`unidades`): una opcion por
-            // casa con su direccion. El value sigue siendo la clave del catalogo
-            // (varias casas comparten precio), asi que el resto del cotizador no
-            // cambia. Los demas desarrollos siguen con su lista de modelos.
-            const unidades = datosAzular[seleccion].unidades;
-            if (Array.isArray(unidades) && unidades.length) {
-                unidades.forEach(u => {
+            // La Rioja 2 trae su lista CASA POR CASA (`unidades`). "Prototipo"
+            // muestra solo el modelo ("NONI ELITE") y "# de la Unidad" se vuelve
+            // la lista de casas de ese modelo ("OSO 1 #5"): la casa elegida trae
+            // su precio. Los demas desarrollos siguen con su lista de modelos.
+            const unidades = unidadesDelDesarrollo(seleccion);
+            if (unidades) {
+                // En el orden de siempre del cotizador: cada PROMO junto a su modelo.
+                const orden = datosAzular[seleccion].modelos;
+                const pos = nombre => { const i = orden.indexOf(nombre); return i < 0 ? orden.length : i; };
+                [...new Set(unidades.map(u => u.prototipo))].sort((a, b) => pos(a) - pos(b)).forEach(nombre => {
                     const option = document.createElement("option");
-                    option.value = u.clave;
-                    option.textContent = u.etiqueta;
-                    option.dataset.unidad = u.unidad;
+                    option.value = nombre;
+                    option.textContent = nombre;
                     prototipoSelect.appendChild(option);
                 });
+                mostrarSelectorDeCasas(true);
             } else {
                 datosAzular[seleccion].modelos.forEach(modelo => {
                     let option = document.createElement("option");
@@ -397,19 +401,66 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // --- Selector de casas (La Rioja 2) --------------------------------------
+    // Vive en el lugar de "# de la Unidad": se muestra en vez del campo de texto
+    // cuando el desarrollo trae su lista casa por casa.
+    const unidadSelect = document.getElementById("unidadSelect");
+
+    function unidadesDelDesarrollo(desarrollo) {
+        const unidades = datosAzular[desarrollo]?.unidades;
+        return Array.isArray(unidades) && unidades.length ? unidades : null;
+    }
+
+    function mostrarSelectorDeCasas(mostrar) {
+        const unidadInput = document.getElementById("letrasNumeros");
+        if (!unidadSelect || !unidadInput) return;
+        unidadSelect.classList.toggle("hidden", !mostrar);
+        unidadInput.classList.toggle("hidden", mostrar);
+        if (!mostrar) unidadSelect.innerHTML = "";
+    }
+
+    // Llena "# de la Unidad" con las casas del modelo y elige la primera, para
+    // que lo que se ve (modelo, casa y precio) siempre sea de la misma casa.
+    function llenarCasasDelModelo(nombreModelo) {
+        const unidades = unidadesDelDesarrollo(azularSelect.value) || [];
+        unidadSelect.innerHTML = "";
+        unidades.filter(u => u.prototipo === nombreModelo).forEach(u => {
+            const option = document.createElement("option");
+            option.value = u.clave;
+            option.textContent = u.unidad;
+            unidadSelect.appendChild(option);
+        });
+        aplicarCasaElegida();
+    }
+
+    function aplicarCasaElegida() {
+        const unidadInput = document.getElementById("letrasNumeros");
+        const opcion = unidadSelect.options[unidadSelect.selectedIndex];
+        if (!opcion) return;
+        // El campo de texto (oculto) guarda la misma direccion: es el que se
+        // limpia y se lee como "# de la Unidad" en el resto del cotizador.
+        if (unidadInput) {
+            unidadInput.value = opcion.textContent;
+            unidadInput.dataset.autoUnidad = opcion.textContent;
+        }
+        desactivarModoPrecioManual();
+        gastosTitulacionManuallyEdited = false;
+        cargarPrecioDelModelo(azularSelect.value, opcion.value);
+    }
+
+    if (unidadSelect) unidadSelect.addEventListener("change", aplicarCasaElegida);
+
     prototipoSelect.addEventListener("change", function () {
         desactivarModoPrecioManual();
         gastosTitulacionManuallyEdited = false; // Reiniciar el flag al cambiar de modelo
-        let modeloSeleccionado = this.value;
-
-        // Opcion de una casa concreta (La Rioja 2): su direccion va a "# de la Unidad".
-        const unidadElegida = this.options[this.selectedIndex]?.dataset.unidad;
-        const unidadInput = document.getElementById("letrasNumeros");
-        if (unidadElegida && unidadInput) {
-            unidadInput.value = unidadElegida;
-            unidadInput.dataset.autoUnidad = unidadElegida;
+        if (unidadesDelDesarrollo(azularSelect.value)) {
+            llenarCasasDelModelo(this.value);
+            return;
         }
-        let desarrolloSeleccionado = azularSelect.value;
+        cargarPrecioDelModelo(azularSelect.value, this.value);
+    });
+
+    function cargarPrecioDelModelo(desarrolloSeleccionado, modeloSeleccionado) {
 
         // Datos para La Rioja 2 - Casas
         const datosLaRioja2 = window.COTIZADOR_PRECIOS.datosLaRioja2;
@@ -443,7 +494,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.warn("⚠️ Modelo no encontrado en el desarrollo:", desarrolloSeleccionado, "Modelo:", modeloSeleccionado);
             actualizarDisponibilidadModoPrecioManual();
         }
-    });
+    }
 
     // --- INICIO: Event listener para selector único de Departamentos ---
     if (departamentoSelect) {
@@ -1368,6 +1419,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Resetear selectores a vacío/default
     document.getElementById("Azular").value = "";
     document.getElementById("prototipo").innerHTML = '<option value="">Seleccione...</option>';
+    mostrarSelectorDeCasas(false);
     document.getElementById("modoCalculoEnganche").value = "automatico";
     if (departamentoSelect) departamentoSelect.innerHTML = '<option value="">Seleccione...</option>';
 
