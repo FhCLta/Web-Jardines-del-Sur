@@ -1991,14 +1991,18 @@ actualizarModoCompactoPrint();
 const nombreAsesorSelect = document.getElementById("nombreAsesor");
 const telefonoAsesorInput = document.getElementById("telefonoAsesor");
 
-// Solo los asesores vigentes. Se recortaron los otros 6 al mover el cotizador
-// al dominio publico: sus nombres y telefonos no tienen por que quedar
-// accesibles aqui. Si se agrega uno, va tambien en el <select> de index.html.
+// Asesores vigentes (Florencio los da de alta). Si se agrega uno, va tambien
+// en el <select> de index.html, con el MISMO nombre: es la llave del telefono.
 const datosAsesores = {
     "Florencio Hurtado": "+52 998 205 9044",
     "Eduardo Gonzalez Nuñez": "+52 998 148 6819",
     "Estefania Sosa": "+52 998 306 4183",
-    "Rafael Heredia": "+52 998 136 5090"
+    "Rafael Heredia": "+52 998 136 5090",
+    "Angela Tlelo Tlaxcaltecatl": "+52 998 122 6599",
+    "Briseida Bravo Sanchez": "+52 998 830 3462",
+    "David Besne Peña": "+52 998 860 1833",
+    "Lily Ramirez Rodriguez": "+52 998 119 7232",
+    "R. Jonathan Ricalde Moreno": "+52 998 188 8384"
 };
 
 if (nombreAsesorSelect && telefonoAsesorInput) {
