@@ -1997,7 +1997,7 @@ const telefonoAsesorInput = document.getElementById("telefonoAsesor");
 const datosAsesores = {
     "Florencio Hurtado": "+52 998 205 9044",
     "Eduardo Gonzalez Nuñez": "+52 998 148 6819",
-    "Estefania Sosa": "+52 55 1797 7114",
+    "Estefania Sosa": "+52 998 306 4183",
     "Rafael Heredia": "+52 998 136 5090"
 };
 
