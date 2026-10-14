@@ -278,9 +278,9 @@ export default function Page() {
               deliberado en vez de un parche. */}
           <span className={styles.logoPlate}>
             <Image
-              src="/logos/jardines-7-v2.webp"
+              src="/logos/jardines-7-v3.webp"
               alt="Jardines del Sur 7 Residencial"
-              width={336}
+              width={360}
               height={128}
               priority
             />

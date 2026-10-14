@@ -265,8 +265,10 @@ export const DEVS: Record<DevSlug, DevContent> = {
       "La nueva etapa de Jardines del Sur en la Zona Sur de Cancún, con obra ya iniciada y preventa por abrir.",
     heroImage: "/optimized/dev-tabs/jardines-6.webp",
     ogImage: "/hero-alberca-jardines.webp",
-    logo: "/logos/jardines-7-v2.webp",
-    logoWidth: 336,
+    // Logo oficial (oct 2026): texto gris oscuro sobre fondo transparente, asi
+    // que sobre foto va en placa blanca (logoSobreFoto sin definir = "placa").
+    logo: "/logos/jardines-7-v3.webp",
+    logoWidth: 360,
     whatsappMessage:
       "Hola, quiero más información sobre Jardines del Sur 7 en Cancún. Avísenme cuando abra a la venta.",
     hero: {
