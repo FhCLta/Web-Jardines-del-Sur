@@ -835,8 +835,8 @@ window.COTIZADOR_PRECIOS = {
       "1": {
         "id": "lirios2-depas-cedro-plus-1",
         "prototipo": "CEDRO PLUS 1N",
-        "precioLista": 2677000,
-        "bono": 408250,
+        "precioLista": 3174000,
+        "bono": 905250,
         "avaluo": 11500,
         "porcentajesEscrituracion": {
           "infonavit": 0.07,
@@ -849,8 +849,8 @@ window.COTIZADOR_PRECIOS = {
       "2": {
         "id": "lirios2-depas-cedro-plus-2",
         "prototipo": "CEDRO PLUS 2N",
-        "precioLista": 2653000,
-        "bono": 404250,
+        "precioLista": 3111000,
+        "bono": 862250,
         "avaluo": 11500,
         "porcentajesEscrituracion": {
           "infonavit": 0.07,
@@ -863,8 +863,8 @@ window.COTIZADOR_PRECIOS = {
       "3": {
         "id": "lirios2-depas-cedro-plus-3",
         "prototipo": "CEDRO PLUS 3N (ROOF)",
-        "precioLista": 2915000,
-        "bono": 441250,
+        "precioLista": 3207000,
+        "bono": 733250,
         "avaluo": 11500,
         "porcentajesEscrituracion": {
           "infonavit": 0.07,
@@ -877,8 +877,8 @@ window.COTIZADOR_PRECIOS = {
       "PB": {
         "id": "lirios2-depas-cedro-plus-pb",
         "prototipo": "CEDRO PLUS PB",
-        "precioLista": 2810000,
-        "bono": 441250,
+        "precioLista": 3237000,
+        "bono": 868250,
         "avaluo": 11500,
         "porcentajesEscrituracion": {
           "infonavit": 0.07,
