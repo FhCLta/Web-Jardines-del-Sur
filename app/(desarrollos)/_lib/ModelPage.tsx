@@ -22,6 +22,7 @@ import { SITE_URL } from "@/lib/site";
 import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 import { getEquipamiento } from "./equipamiento";
+import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
 
 const PHONE_E164 = "529982059044";
 
@@ -113,9 +114,9 @@ export default async function ModelPage({
     : undefined;
 
   const waMessage = agotado
-    ? `Hola, vi que ${property.nombre_modelo} está agotado en ${dev.name}. ¿Qué opciones similares tienes disponibles?`
+    ? `Hola, vi que ${conArticulo(property.nombre_modelo)} está ${agotadoDe(property.nombre_modelo)} en ${dev.name}. ¿Qué opciones similares tienes disponibles?`
     : disponibleHoy
-    ? `Hola, vi que ${property.nombre_modelo} llegará a ${dev.name} más adelante. Me interesa la que está disponible en ${disponibleHoy.development}.`
+    ? `Hola, vi que ${conArticulo(property.nombre_modelo)} llegará a ${dev.name} más adelante. Me interesa la que está disponible en ${disponibleHoy.development}.`
     : getWhatsAppMessageForModel(property);
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
@@ -590,7 +591,7 @@ export default async function ModelPage({
             <div className={styles.ctaBlockText}>
               <h3>
                 {agotado
-                  ? `${property.nombre_modelo} está agotado en ${dev.name}`
+                  ? `${property.nombre_modelo} está ${agotadoDe(property.nombre_modelo)} en ${dev.name}`
                   : `¿Te interesa ${property.nombre_modelo}?`}
               </h3>
               <p>

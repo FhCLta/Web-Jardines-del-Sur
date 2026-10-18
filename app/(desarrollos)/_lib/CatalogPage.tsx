@@ -25,6 +25,7 @@ import { type CatalogKind } from "./dev-meta";
 import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
+import { conArticuloPlural } from "@/lib/texto-modelo";
 
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
@@ -114,7 +115,7 @@ export default function CatalogPage({ slug, kind, preventa }: CatalogPageProps) 
 
   const waMessage =
     preventa?.waMessage ??
-    `Hola, quiero información de las ${productoPlural.toLowerCase()} en ${dev.name}, Cancún (vi la página con los modelos y precios).`;
+    `Hola, quiero información de ${conArticuloPlural(productoPlural.toLowerCase())} en ${dev.name}, Cancún (vi la página con los modelos y precios).`;
   // Fichas que se enlazan al pie de los modelos.
   const fichas = preventa ? preventa.fichas : properties;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;

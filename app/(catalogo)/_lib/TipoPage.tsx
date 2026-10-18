@@ -12,6 +12,7 @@ import {
   type InventoryProperty,
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { SITE_URL } from "@/lib/site";
+import { conArticuloPlural } from "@/lib/texto-modelo";
 
 const PHONE_E164 = "529982059044";
 
@@ -164,7 +165,7 @@ export default function TipoPage({ tipo }: { tipo: Tipo }) {
       : devs[0] ?? "";
   const pageUrl = `${SITE_URL}/${copy.slugPagina}`;
 
-  const waMsg = `Hola, vi las ${copy.pluralLower} de Altta Homes en Cancún y quiero información y disponibilidad.`;
+  const waMsg = `Hola, vi ${conArticuloPlural(copy.pluralLower)} de Altta Homes en Cancún y quiero información y disponibilidad.`;
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMsg)}`;
 
   const jsonLd = {

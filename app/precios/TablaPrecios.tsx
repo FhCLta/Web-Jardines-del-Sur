@@ -12,6 +12,7 @@ import {
   type VarianteDepartamento,
 } from "@/lib/precios";
 import styles from "./precios.module.css";
+import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
 
 const PHONE_E164 = "529982059044";
 
@@ -287,7 +288,7 @@ function TablaDeGrupo({
             const agotado = p.status === "Agotado";
             const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
               agotado
-                ? `Hola, vi que ${p.nombre_modelo} está agotado en ${p.development}. ¿Qué opciones similares tienes disponibles?`
+                ? `Hola, vi que ${conArticulo(p.nombre_modelo)} está ${agotadoDe(p.nombre_modelo)} en ${p.development}. ¿Qué opciones similares tienes disponibles?`
                 : getWhatsAppMessageForModel(p)
             )}`;
             return (

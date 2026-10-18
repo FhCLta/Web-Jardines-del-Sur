@@ -8,6 +8,7 @@ import pageStyles from "@/app/page.module.css";
 import styles from "../(desarrollos)/promos.module.css";
 import { DEVS, type DevSlug } from "../(desarrollos)/_lib/dev-content";
 import { SITE_URL } from "@/lib/site";
+import { deModelo } from "@/lib/texto-modelo";
 
 const PHONE_E164 = "529982059044";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
@@ -256,7 +257,7 @@ export default function Page() {
                 {promos.items.map((item, i) => {
                   const isModel = Boolean(item.modeloSlug);
                   const cardMsg = isModel
-                    ? `Hola, vi la promoción del ${item.modelo} en ${dev.name} (${item.beneficios[0]}) y quiero cotizar precio y disponibilidad.`
+                    ? `Hola, vi la promoción ${deModelo(item.modelo)} en ${dev.name} (${item.beneficios[0]}) y quiero cotizar precio y disponibilidad.`
                     : `Hola, vi la promoción "${item.titulo ?? item.modelo}" de ${dev.name} y quiero que un asesor me dé informes.`;
                   const cardWaHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(cardMsg)}`;
                   return (
