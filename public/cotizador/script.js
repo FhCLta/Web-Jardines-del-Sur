@@ -387,6 +387,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (bonoInput) {
+        // Modo manual: al entrar al campo se muestra el descuento BASE (sin restar
+        // la esquina), que es lo que se edita; al salir vuelve a verse el aplicado.
+        bonoInput.addEventListener("focus", function () {
+            if (!esModoPrecioManualActivo()) return;
+            this.value = formatearMoneda(sessionStorage.getItem("bonoDescuento"));
+        });
         bonoInput.addEventListener("blur", function () {
             if (!esModoPrecioManualActivo()) return;
             const valor = parsearMonto(this.value);
@@ -532,6 +538,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Calcular valor avalúo y precio neto según el tipo de desarrollo
         let valorAvaluoActual;
         let precioNetoCasa;
+        let descuentoAplicado = bonoDescuento;
 
         if (desarrolloSeleccionado === "Azular1-Depas" || desarrolloSeleccionado === "Lirios2-Depas") {
             // DEPARTAMENTOS: Valor Avalúo = Precio Lista; Precio Neto = Precio Lista - equipamiento - bono
@@ -540,9 +547,20 @@ document.addEventListener("DOMContentLoaded", function () {
             valorAvaluoActual = precioLista;
             precioNetoCasa = precioLista - equipamiento - bonoDescuento;
         } else {
-            // CASAS: el Valor Avalúo incluye terreno excedente y esquina.
-            valorAvaluoActual = precioLista + valorTerrenoExcedente + esquina;
-            precioNetoCasa = valorAvaluoActual - bonoDescuento;
+            // CASAS: el Valor Avalúo incluye el terreno excedente. La ESQUINA ya
+            // no suma al avalúo: se le RESTA al descuento (Florencio, 22 oct 2026).
+            // El neto queda igual; bajan el avalúo y, con él, escrituración y
+            // crédito. `bonoDescuento` (sessionStorage) sigue siendo el descuento
+            // BASE; lo que se muestra y se aplica es base - esquina.
+            valorAvaluoActual = precioLista + valorTerrenoExcedente;
+            descuentoAplicado = bonoDescuento - esquina;
+            precioNetoCasa = valorAvaluoActual - descuentoAplicado;
+            // Mientras el asesor edita el descuento en modo manual, no se le
+            // pisa el campo (ahí escribe el descuento base).
+            const campoBono = document.getElementById("bono");
+            if (campoBono && document.activeElement !== campoBono) {
+                campoBono.value = formatearMoneda(descuentoAplicado);
+            }
         }
 
         const valorAvaluoFormato = valorAvaluoActual.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
