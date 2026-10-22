@@ -3416,3 +3416,70 @@ body.generando-imagen #telefonoAsesor {
         -moz-appearance: textfield !important;
     }
 }
+
+
+/* ===================================================================
+   BOTONES DE COPIAR (22 oct 2026)
+   Flotan sobre el borde derecho del campo: no mueven el acomodo. Solo en
+   pantalla — son .no-imprimir y en la imagen compartida tampoco salen.
+   =================================================================== */
+.campo-con-copiar { position: relative; }
+
+.copiar-campo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid rgba(26, 54, 93, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--brand-navy, #1A365D);
+    box-shadow: 0 2px 6px -3px rgba(15, 23, 42, 0.35);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+/* Zona de toque de ~44 px sin agrandar el botón. */
+.copiar-campo::after {
+    content: "";
+    position: absolute;
+    inset: -7px;
+}
+
+.copiar-campo:hover { background: #fff; border-color: rgba(209, 146, 0, 0.6); color: #A37200; }
+.copiar-campo:active { transform: scale(0.94); }
+.copiar-campo:focus-visible { outline: 2px solid #D19200; outline-offset: 2px; }
+
+.copiar-campo.copiado {
+    background: #E8F6EE;
+    border-color: #2F9E64;
+    color: #1F7A4C;
+}
+
+/* En el renglón de la mensualidad va junto al número, no flotando. */
+.copiar-campo.copiar-en-linea {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    margin-left: 8px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Que el texto del campo no quede debajo del botón (solo en pantalla). */
+@media screen {
+    body:not(.generando-imagen) .control-con-copiar { padding-right: 40px !important; }
+    body:not(.generando-imagen) .control-con-copiar-select { padding-right: 64px !important; }
+}
+
+@media print {
+    .copiar-campo { display: none !important; }
+}
+
+body.generando-imagen .copiar-campo { display: none !important; }

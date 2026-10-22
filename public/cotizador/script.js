@@ -880,18 +880,17 @@ document.addEventListener("DOMContentLoaded", function () {
             actualizarValores();
         }
     });
+    // ESQUINA (22 oct 2026): antes, al entrar se vaciaba y al salir vacía
+    // regresaba el valor anterior, así que NO había forma de quitarla. Ahora:
+    // al entrar se selecciona (una tecla la reemplaza o la borra), recalcula
+    // mientras se escribe, y vacía vale $0. Al borrarla se ve la lista de opciones.
     document.getElementById("esquina").addEventListener("focus", function () {
-        this._savedEsquina = this.value;
-        this.value = "";
+        this.select();
     });
+    document.getElementById("esquina").addEventListener("input", actualizarValores);
     document.getElementById("esquina").addEventListener("blur", function () {
         let valor = parseFloat(this.value.replace(/[^0-9.-]+/g, "")) || 0;
-        if (valor === 0 && this._savedEsquina) {
-            this.value = this._savedEsquina;
-        } else {
-            this.value = valor > 0 ? valor.toLocaleString("es-MX", { style: "currency", currency: "MXN" }) : "";
-        }
-        delete this._savedEsquina;
+        this.value = valor > 0 ? valor.toLocaleString("es-MX", { style: "currency", currency: "MXN" }) : "";
         actualizarValores();
     });
 
@@ -927,19 +926,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // La Comisión de Apertura se captura directamente en el recuadro de Gastos.
 
-    // Apartado: limpiar al enfocar para mostrar todas las opciones del datalist
+    // APARTADO (22 oct 2026): igual que la esquina, antes no se podía dejar en
+    // cero (al salir vacío regresaba el anterior). Ahora se selecciona al entrar
+    // y vacío vale $0. Recalcula al escribir (listener "input" del cuarto bloque)
+    // y el formato al salir lo pone formatearEntradaDinero.
     document.getElementById("apartado").addEventListener("focus", function () {
-        this._savedApartado = this.value;
-        this.value = "";
-    });
-    document.getElementById("apartado").addEventListener("blur", function () {
-        let valor = parseFloat(this.value.replace(/[^0-9.-]+/g, "")) || 0;
-        if (valor === 0 && this._savedApartado) {
-            this.value = this._savedApartado;
-        } else {
-            this.value = valor.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
-        }
-        delete this._savedApartado;
+        this.select();
     });
 
     // modificar vista con plan de contado.
@@ -2035,3 +2027,127 @@ if (nombreAsesorSelect && telefonoAsesorInput) {
     nombreAsesorSelect.dispatchEvent(new Event("change"));
 }
 // --- FIN: Autocompletar teléfono del asesor ---
+
+
+// --- INICIO: Botones para copiar valores (22 oct 2026) ---
+// Los datos que los clientes piden por WhatsApp: modelo, precios, gastos,
+// totales, créditos y mensualidad. El botón FLOTA sobre el borde derecho del
+// campo (position:absolute), así que no mueve el acomodo de la pantalla ni el
+// de la impresión, que ya está medido. Es `no-imprimir`: no sale en papel ni
+// en la imagen o el PDF que se comparten. Copia el valor tal como se ve.
+(function () {
+    // id del campo -> nombre para lectores de pantalla ("Copiar <nombre>").
+    const CAMPOS = {
+        prototipo: "modelo", departamentoSelect: "departamento",
+        precioLista: "valor avalúo", bono: "descuento", precioNetoCasa: "precio neto",
+        gastosEscrituracion: "gastos de escrituración", gastosTotales: "gastos totales",
+        precioNetoCasa3: "total a pagar por el cliente",
+        creditoBancario: "crédito bancario", creditoInfonavit: "crédito Infonavit",
+        totalPagar: "enganche total a pagar", engancheTotalPagar: "enganche por pagar"
+    };
+    const EN_LINEA = { mensualidadGastosMonto: "mensualidad promedio", mensualidadGastosIngreso: "ingreso sugerido" };
+
+    const ICONO_COPIAR = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>';
+    const ICONO_LISTO = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+    function textoDe(el) {
+        if (el.tagName === "SELECT") {
+            const op = el.options[el.selectedIndex];
+            return op && op.value ? op.textContent.trim() : "";
+        }
+        if ("value" in el && el.tagName !== "STRONG") return String(el.value || "").trim();
+        return String(el.textContent || "").trim();
+    }
+
+    async function copiarTexto(texto) {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(texto);
+                return true;
+            }
+        } catch (e) { /* cae al respaldo */ }
+        const area = document.createElement("textarea");
+        area.value = texto;
+        area.setAttribute("readonly", "");
+        area.style.cssText = "position:fixed;top:-1000px;opacity:0;";
+        document.body.appendChild(area);
+        area.select();
+        let ok = false;
+        try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+        area.remove();
+        return ok;
+    }
+
+    function crearBoton(el, nombre) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "copiar-campo no-imprimir";
+        btn.innerHTML = ICONO_COPIAR;
+        btn.title = "Copiar";
+        btn.setAttribute("aria-label", "Copiar " + nombre);
+        btn.addEventListener("click", async function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            const texto = textoDe(el);
+            if (!texto) return;
+            const ok = await copiarTexto(texto);
+            if (!ok) return;
+            btn.innerHTML = ICONO_LISTO;
+            btn.classList.add("copiado");
+            btn.title = "Copiado";
+            clearTimeout(btn._t);
+            btn._t = setTimeout(function () {
+                btn.innerHTML = ICONO_COPIAR;
+                btn.classList.remove("copiado");
+                btn.title = "Copiar";
+            }, 1400);
+        });
+        return btn;
+    }
+
+    // Botón sobre el borde derecho del control, centrado en su alto.
+    function colocar(btn, el) {
+        if (!el.offsetParent || !btn.offsetParent) return;
+        const margen = el.tagName === "SELECT" ? 30 : 6;   // en el select, a la izquierda de la flecha
+        // Del alto del campo menos un respiro (los selectores de escritorio son bajitos).
+        const lado = Math.max(22, Math.min(30, el.offsetHeight - 6));
+        btn.style.width = lado + "px";
+        btn.style.height = lado + "px";
+        btn.style.top = (el.offsetTop + (el.offsetHeight - btn.offsetHeight) / 2) + "px";
+        btn.style.left = (el.offsetLeft + el.offsetWidth - btn.offsetWidth - margen) + "px";
+    }
+
+    const pares = [];
+    Object.keys(CAMPOS).forEach(function (id) {
+        const el = document.getElementById(id);
+        if (!el || !el.parentElement) return;
+        const campo = el.parentElement;
+        campo.classList.add("campo-con-copiar");
+        el.classList.add(el.tagName === "SELECT" ? "control-con-copiar-select" : "control-con-copiar");
+        const btn = crearBoton(el, CAMPOS[id]);
+        campo.appendChild(btn);
+        pares.push([btn, el]);
+    });
+    Object.keys(EN_LINEA).forEach(function (id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const btn = crearBoton(el, EN_LINEA[id]);
+        btn.classList.add("copiar-en-linea");
+        el.insertAdjacentElement("afterend", btn);
+    });
+
+    function recolocarTodo() { pares.forEach(function (p) { colocar(p[0], p[1]); }); }
+    recolocarTodo();
+    window.addEventListener("resize", recolocarTodo);
+    window.addEventListener("load", recolocarTodo);
+    if (window.ResizeObserver) {
+        const ro = new ResizeObserver(recolocarTodo);
+        pares.forEach(function (p) { ro.observe(p[1]); ro.observe(p[1].parentElement); });
+    }
+    // Los bloques se muestran/ocultan al cambiar de desarrollo o de plan.
+    ["Azular", "prototipo", "departamentoSelect", "planVenta"].forEach(function (id) {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener("change", function () { requestAnimationFrame(recolocarTodo); });
+    });
+})();
+// --- FIN: Botones para copiar valores ---
