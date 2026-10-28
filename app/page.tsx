@@ -53,7 +53,7 @@ export default async function Home() {
           'Altta Homes by Grupo Sadasi',
         ],
         url: siteUrl,
-        telephone: '+529982059044',
+        telephone: '+529981098443',
         priceRange: '$$-$$$$',
         image: `${siteUrl}/jardines/Imagnes%20de%20amenidades%20y%20hero/alberca.webp`,
         foundingDate: '1975',
@@ -77,7 +77,7 @@ export default async function Home() {
         hasMap: googleBusinessUrl,
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+529982059044',
+          telephone: '+529981098443',
           contactType: 'sales',
           availableLanguage: ['es-MX'],
         },
@@ -224,7 +224,7 @@ export default async function Home() {
             <span className={styles.footerTagline}>by Grupo Sadasi · Cancún</span>
             <p>50 años de trayectoria ininterrumpida, 430,000 viviendas entregadas y el respaldo de la primera desarrolladora mexicana certificada <em style={{ whiteSpace: "nowrap" }}>Best Place to Live</em>.</p>
             <a
-              href="https://wa.me/529982059044?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn."
+              href="https://wa.me/529981098443?text=Hola,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20las%20casas%20y%20departamentos%20de%20Altta%20Homes%20en%20Canc%C3%BAn."
               target="_blank"
               rel="noreferrer"
               className={styles.footerBrandCta}

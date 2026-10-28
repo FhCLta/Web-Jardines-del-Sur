@@ -12,7 +12,7 @@ import styles from "./calculadora.module.css";
 import { getInventory } from "@/app/(desarrollos)/_lib/model-utils";
 import { SITE_URL } from "@/lib/site";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/calculadora-hipotecaria`;

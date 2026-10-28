@@ -17,7 +17,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./MortgageCalculator.module.css";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 
 const LTV_ON_APPRAISAL = 0.9; // el banco presta ~90% sobre el avalúo
 const CLOSING_COSTS_PCT = 0.085; // gastos de escrituración sobre el AVALÚO

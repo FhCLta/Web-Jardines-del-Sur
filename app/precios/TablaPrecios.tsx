@@ -14,7 +14,7 @@ import {
 import styles from "./precios.module.css";
 import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 
 const NIVEL_LABEL: Record<string, string> = {
   PB: "Planta baja",

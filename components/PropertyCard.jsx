@@ -304,7 +304,7 @@ export default function PropertyCard({ property, origen = "" }) {
             )}
             <a 
               className={`btn btn-primary ${styles.actionBtn}`}
-              href={`https://wa.me/529982059044?text=${encodeURIComponent(
+              href={`https://wa.me/529981098443?text=${encodeURIComponent(
                 porAnunciar
                   ? `Hola, me interesa ${conArticulo(property.nombre_modelo)} en ${property.development}. ¿Me avisas cuando salgan precios y fechas de la preventa?`
                   : agotado

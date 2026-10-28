@@ -17,7 +17,7 @@
 
 import silosData from "@/data/silos.json";
 
-export const PHONE_E164 = "529982059044";
+export const PHONE_E164 = "529981098443";
 
 type Tiene = "casas" | "departamentos" | "ambos";
 type Silo = { nombre: string; tiene: Tiene; preventa?: boolean };

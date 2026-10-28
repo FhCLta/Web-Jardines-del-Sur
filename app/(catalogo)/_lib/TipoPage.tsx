@@ -14,7 +14,7 @@ import {
 import { SITE_URL } from "@/lib/site";
 import { conArticuloPlural } from "@/lib/texto-modelo";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 
 /**
  * CATÁLOGO POR TIPO DE PRODUCTO, cruzando desarrollos.

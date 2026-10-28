@@ -6,7 +6,7 @@ import Script from "next/script";
 // Destino: chat de WhatsApp con mensaje prellenado que identifica al lead
 // como proveniente de un anuncio de Google. Editar solo el texto del mensaje;
 // la codificación de la URL se hace sola con encodeURIComponent.
-const WHATSAPP_NUMBER = "529982059044";
+const WHATSAPP_NUMBER = "529981098443";
 const WHATSAPP_MESSAGE =
   "Hola, vi su anuncio en Google y quiero más información sobre las propiedades de Altta Homes en Cancún.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(

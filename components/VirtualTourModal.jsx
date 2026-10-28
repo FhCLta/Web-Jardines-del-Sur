@@ -81,7 +81,7 @@ export default function VirtualTourModal({ onClose, property }) {
         </div>
         <div className={styles.footer}>
           <p>¿Te interesa este modelo?</p>
-          <a href={`https://wa.me/529982059044?text=${encodeURIComponent(getWhatsAppText())}`} target="_blank" rel="noreferrer" className="btn btn-primary">
+          <a href={`https://wa.me/529981098443?text=${encodeURIComponent(getWhatsAppText())}`} target="_blank" rel="noreferrer" className="btn btn-primary">
             Solicitar Cotización
           </a>
         </div>

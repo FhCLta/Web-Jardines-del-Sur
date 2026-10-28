@@ -7,7 +7,7 @@ import { getPropertiesByDev, formatPriceMxn, preciosPublicados } from "./model-u
 import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 
 /**
  * "2026-08-05" → "5 de agosto de 2026".

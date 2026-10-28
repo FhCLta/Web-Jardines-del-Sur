@@ -13,7 +13,7 @@ import {
 import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 const PAGE_URL = `${SITE_URL}/precios`;
 
 /**

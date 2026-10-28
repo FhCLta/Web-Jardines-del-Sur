@@ -24,7 +24,7 @@ import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 import { getEquipamiento } from "./equipamiento";
 import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 
 // Para enlazar el mismo modelo entre etapas hace falta el slug del OTRO
 // desarrollo, y el inventario solo guarda su nombre.

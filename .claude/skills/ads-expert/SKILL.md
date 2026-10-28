@@ -14,7 +14,7 @@ Rol: asesor senior de performance marketing de Florencio (asesor inmobiliario in
 4. Verificar TODO copy propuesto (precios, recámaras, amenidades, ubicación) contra `data/inventory.json` y `app/(desarrollos)/_lib/dev-content.ts`. URLs de anuncios/sitelinks: verificar HTTP 200 en producción antes de entregarlas.
 
 ## Datos fijos de la cuenta
-- Dominio: `alttahomescancun.mx` (cambiar dominio = solo `lib/site.ts`). WhatsApp: 998 205 9044.
+- Dominio: `alttahomescancun.mx` (cambiar dominio = solo `lib/site.ts`). WhatsApp: 998 109 8443 (desde el 28 oct 2026; el 998 205 9044 perdió su WhatsApp Business).
 - Google Ads: campaña `Cancún - Search - Casas y Deptos - v1`, **$200/día desde el 1 sept 2026** (deroga el "$150 TOPE", que estaba atado al crédito de $7,000 ya canjeado). Conversión "WhatsApp Click" `AW-18157218280 / UXk0CJTznrIcEOjThNJD`.
 - ⚠️ **EXPERIMENTO EN CURSO (4-18 sept 2026).** Tras reunión con Santiago Bejarano (experto de Google), Florencio aplicó 6 cambios: IA Max ON, concordancia amplia, Maximizar Conversiones, geografía "presencia o interés", idioma inglés, objetivos solo WhatsApp. **NO tocar nada hasta ~17 sept.** Línea base a batir: **CPA $50.67 · 2.16 conv/día · CTR 11.74%**. Alarmas, veredicto de cada cambio y plan de reversión (uno a la vez) en `google-ads.md` SESIÓN 34. Las reglas 1 y 2 de abajo siguen siendo la política; hoy están suspendidas a propósito y se re-evalúan con datos.
 - **Estructura: UNA campaña, TRES grupos, uno por desarrollo** (1 sept 2026): `Jardines del Sur 6` (era "Grupo de anuncios 1", renombrado para conservar historial) · `La Rioja 2 - Premium` (lujo, SIN Infonavit) · `Lirios Residencial 2`. Cada palabra clave vive en UN solo grupo.

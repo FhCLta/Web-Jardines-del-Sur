@@ -61,7 +61,7 @@ import {
    data/precios.json esta página se mueve sola — no hay cifras a mano.
 ============================================================================= */
 
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/jardines-del-sur-cancun`;

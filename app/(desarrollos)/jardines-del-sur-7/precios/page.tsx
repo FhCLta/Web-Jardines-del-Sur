@@ -25,7 +25,7 @@ import { SITE_URL } from "@/lib/site";
 
 const SLUG = "jardines-del-sur-7" as const;
 const dev = DEVS[SLUG];
-const PHONE_E164 = "529982059044";
+const PHONE_E164 = "529981098443";
 const pageUrl = `${SITE_URL}/${SLUG}/precios`;
 
 // ⚠️ Tope practico ~60 caracteres. Ataca "precios jardines del sur 7", que es
