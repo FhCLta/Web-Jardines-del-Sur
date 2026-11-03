@@ -6,6 +6,7 @@ import FooterSocial from "@/components/FooterSocial";
 import ContactNavBtn from "@/components/ContactNavBtn";
 import ModelGallery from "./ModelGallery";
 import ModelTour from "./ModelTour";
+import PropertyCard from "@/components/PropertyCard";
 import pageStyles from "@/app/page.module.css";
 import styles from "../model.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
@@ -390,6 +391,22 @@ export default async function ModelPage({
                   : `El ${strippedName} también está en otras etapas. Si te gustó este modelo, aquí puedes ver dónde más existe.`}
               </p>
             </div>
+            {/* Modelo que llega despues (Flamboyan, Ceiba, Capua y Cedro Plus del
+                7): en vez del recuadro chico va la TARJETA COMPLETA de donde se
+                vende hoy (fotos, precio, metros, recorrido y cotizar), con la
+                marca de origen para el WhatsApp. Decision de Florencio, 3 nov 2026. */}
+            {llegaDespues && disponibleHoy ? (
+              <div className={styles.puenteHoy}>
+                <span className={styles.puenteEtiqueta}>En {disponibleHoy.development}</span>
+                <PropertyCard property={disponibleHoy} origen={dev.name} />
+                <a
+                  className={styles.puenteLink}
+                  href={`/${DEV_SLUG_BY_NAME[disponibleHoy.development] ?? ""}/${slugifyModel(disponibleHoy.nombre_modelo)}`}
+                >
+                  Ver {conArticulo(disponibleHoy.nombre_modelo).replace(/^(la|el) (Casa|Departamento) /, "$1 ")} en {disponibleHoy.development} →
+                </a>
+              </div>
+            ) : (
             <div className={styles.relatedGrid}>
               {mismoModeloEnOtras.map((otro) => {
                 const otroSlug = slugifyModel(otro.nombre_modelo);
@@ -429,6 +446,7 @@ export default async function ModelPage({
                 );
               })}
             </div>
+            )}
           </div>
         </section>
       )}

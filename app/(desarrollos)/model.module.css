@@ -988,3 +988,52 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
 }
+
+
+/* Tarjeta completa de donde se vende HOY un modelo que llega despues (fichas
+   del 7: Flamboyan, Ceiba, Capua y Cedro Plus). Mismo ancho que una tarjeta del
+   catalogo, centrada; etiqueta de etapa arriba para que nadie confunda su
+   precio con el del 7. */
+.puenteHoy {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.9rem;
+  max-width: 440px;
+  margin: 1.6rem auto 0;
+}
+
+.puenteEtiqueta {
+  align-self: center;
+  font-family: var(--font-montserrat);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(26, 54, 93, 0.08);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+}
+
+.puenteLink {
+  position: relative;
+  align-self: center;
+  font-family: var(--font-montserrat);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(209, 146, 0, 0.4);
+  padding-bottom: 2px;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.puenteLink:hover { border-bottom-color: var(--accent-deep); }
+
+.puenteLink::after {
+  content: "";
+  position: absolute;
+  inset: -12px -8px;
+}
