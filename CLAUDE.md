@@ -55,8 +55,11 @@ node scripts/check-precios.mjs           # SIEMPRE al final: debe decir "TODO EN
 ```bash
 npm run build
 firebase deploy --only hosting     # el sitio
-firebase deploy --only functions   # la CAPI de Meta — despliegue DISTINTO
 ```
+
+**Sin Meta desde el 3 nov 2026:** la web se desconectó del portafolio de Meta
+(Píxel, CAPI, Facebook/Instagram). Ya no hay `functions/`. El botón de WhatsApp
+sí se queda. Detalle y pendientes en `docs/meta-desconexion.md`.
 
 Después del deploy se commitea también `.firebase/hosting.*.cache`.
 

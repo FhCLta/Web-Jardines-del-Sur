@@ -1,7 +1,4 @@
 {
-  "functions": {
-    "source": "functions"
-  },
   "hosting": {
     "public": "out",
     "ignore": [
@@ -75,9 +72,6 @@
     ],
     "cleanUrls": true,
     "trailingSlash": false,
-    "rewrites": [
-      { "source": "/api/meta-capi", "function": "metacapi" }
-    ],
     "redirects": [
       { "source": "/desarrollos-cancun/:path*", "destination": "/:path*", "type": 301 },
       { "source": "/capua",           "destination": "/jardines-del-sur-6/departamento-capua",  "type": 301 },
