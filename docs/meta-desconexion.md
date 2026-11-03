@@ -37,13 +37,17 @@ Todo lo de Meta apuntaba al mismo píxel/dataset: **2016457592282966**.
 4. **Meta Business:** revocar el token de Conversiones (usuario del sistema / app)
    y, si se desea, quitar la app del CRM y los socios "unknown".
 
-## Pendiente — requiere confirmación expresa (no reversible)
+## Cerrado también (3 nov 2026, con confirmación de Florencio)
 
-- Borrar la función ya desplegada en Firebase (sigue viva en su dirección
-  directa, aunque la web ya no la llama):
-  `firebase functions:delete metacapi --region us-central1`
-- Borrar su llave: `firebase functions:secrets:destroy META_CAPI_TOKEN`
-- Borrar el archivo local `../meta-capi-token.txt` (después de revocar el token).
+- Función `metacapi` borrada de Firebase; secreto `META_CAPI_TOKEN` destruido;
+  archivo local `../meta-capi-token.txt` borrado.
+- En Meta: dominio quitado del portafolio, píxel quitado de GTM (versión 9
+  "v9 - Sin Meta"), TXT `facebook-domain-verification` borrado del DNS
+  (Hostinger), token del "Conversions API System User" revocado y el usuario
+  sin activos. El conjunto de datos 2016457592282966 no se puede borrar
+  (Meta no lo permite): queda apagado y sin nada conectado.
+- Recomendación dada: NO borrar el portafolio ni la página por ahora
+  (es la evidencia del 28 oct para apelar); congelarlo un mes.
 
 ## Para reconectar con un portafolio nuevo
 
