@@ -17,7 +17,9 @@
 
 import silosData from "@/data/silos.json";
 
-export const PHONE_E164 = "529981098443";
+// El número vive en lib/contacto.ts; se re-exporta para quien ya lo importaba de aquí.
+import { PHONE_E164 } from "./contacto";
+export { PHONE_E164 };
 
 type Tiene = "casas" | "departamentos" | "ambos";
 type Silo = { nombre: string; tiene: Tiene; preventa?: boolean };

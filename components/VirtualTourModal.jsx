@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './VirtualTourModal.module.css';
+import { PHONE_E164 } from "@/lib/contacto";
 
 export default function VirtualTourModal({ onClose, property }) {
   const getTourUrl = () => {
@@ -81,7 +82,7 @@ export default function VirtualTourModal({ onClose, property }) {
         </div>
         <div className={styles.footer}>
           <p>¿Te interesa este modelo?</p>
-          <a href={`https://wa.me/529981098443?text=${encodeURIComponent(getWhatsAppText())}`} target="_blank" rel="noreferrer" className="btn btn-primary">
+          <a href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(getWhatsAppText())}`} target="_blank" rel="noreferrer" className="btn btn-primary">
             Solicitar Cotización
           </a>
         </div>

@@ -6,6 +6,7 @@ import styles from "@/app/precios/precios.module.css";
 import { DEVS } from "../../_lib/dev-content";
 import { getPropertiesByDev, slugifyModel } from "../../_lib/model-utils";
 import { SITE_URL } from "@/lib/site";
+import { PHONE_E164 } from "@/lib/contacto";
 
 /**
  * Precios de Jardines del Sur 7 — ANTES de que haya precios.
@@ -25,7 +26,6 @@ import { SITE_URL } from "@/lib/site";
 
 const SLUG = "jardines-del-sur-7" as const;
 const dev = DEVS[SLUG];
-const PHONE_E164 = "529981098443";
 const pageUrl = `${SITE_URL}/${SLUG}/precios`;
 
 // ⚠️ Tope practico ~60 caracteres. Ataca "precios jardines del sur 7", que es

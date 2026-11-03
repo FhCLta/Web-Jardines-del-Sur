@@ -12,8 +12,8 @@ import {
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
+import { PHONE_E164 } from "@/lib/contacto";
 
-const PHONE_E164 = "529981098443";
 const PAGE_URL = `${SITE_URL}/precios`;
 
 /**

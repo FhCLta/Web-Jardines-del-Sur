@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import styles from "./FooterPhoneContact.module.css";
 import { hrefWhatsAppPorRuta } from "@/lib/whatsapp-ruta";
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contacto";
 
-const PHONE_DISPLAY = "+52 998 109 8443";
-const PHONE_TEL = "+529981098443";
 // El mensaje cambia segun la pagina: ver lib/whatsapp-ruta.ts.
 
 export default function FooterPhoneContact() {

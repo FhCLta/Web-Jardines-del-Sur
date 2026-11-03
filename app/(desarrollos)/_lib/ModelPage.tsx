@@ -24,8 +24,8 @@ import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 import { getEquipamiento } from "./equipamiento";
 import { conArticulo, agotadoDe, cotizarlo, elQue, esFemenino } from "@/lib/texto-modelo";
+import { PHONE_E164 } from "@/lib/contacto";
 
-const PHONE_E164 = "529981098443";
 
 // Para enlazar el mismo modelo entre etapas hace falta el slug del OTRO
 // desarrollo, y el inventario solo guarda su nombre.

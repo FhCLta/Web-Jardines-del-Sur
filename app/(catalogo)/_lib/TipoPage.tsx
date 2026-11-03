@@ -13,8 +13,8 @@ import {
 } from "@/app/(desarrollos)/_lib/model-utils";
 import { SITE_URL } from "@/lib/site";
 import { conArticuloPlural } from "@/lib/texto-modelo";
+import { PHONE_E164 } from "@/lib/contacto";
 
-const PHONE_E164 = "529981098443";
 
 /**
  * CATÁLOGO POR TIPO DE PRODUCTO, cruzando desarrollos.

@@ -6,8 +6,8 @@ import { DEVS, type DevSlug } from "./dev-content";
 import { getPropertiesByDev, formatPriceMxn, preciosPublicados } from "./model-utils";
 import { getFechaPrecios } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
+import { PHONE_E164 } from "@/lib/contacto";
 
-const PHONE_E164 = "529981098443";
 
 /**
  * "2026-08-05" → "5 de agosto de 2026".

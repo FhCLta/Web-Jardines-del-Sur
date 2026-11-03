@@ -9,8 +9,8 @@ import { DEVS, type DevSlug } from "./dev-content";
 import { getPropertiesByDev, getModelType } from "./model-utils";
 import { SITE_URL } from "@/lib/site";
 import { deModelo } from "@/lib/texto-modelo";
+import { PHONE_E164 } from "@/lib/contacto";
 
-const PHONE_E164 = "529981098443";
 const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
 const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 

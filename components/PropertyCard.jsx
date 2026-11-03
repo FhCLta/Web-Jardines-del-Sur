@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { createPortal } from 'react-dom';
 import styles from './PropertyCard.module.css';
 import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
+import { PHONE_E164 } from "@/lib/contacto";
 
 const VirtualTourModal = dynamic(() => import('./VirtualTourModal'), {
   ssr: false,
@@ -304,7 +305,7 @@ export default function PropertyCard({ property, origen = "" }) {
             )}
             <a 
               className={`btn btn-primary ${styles.actionBtn}`}
-              href={`https://wa.me/529981098443?text=${encodeURIComponent(
+              href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
                 porAnunciar
                   ? `Hola, me interesa ${conArticulo(property.nombre_modelo)} en ${property.development}. ¿Me avisas cuando salgan precios y fechas de la preventa?`
                   : agotado
