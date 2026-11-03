@@ -244,6 +244,15 @@ página por búsqueda:
 solo cuando Sadasi los abra; los departamentos cambian de "por confirmar" solo
 cuando se confirmen.
 
+**Actualización 3 nov 2026 — departamentos CONFIRMADOS.** Capua y Cedro Plus
+también estarán en el 7 y llegan cuando se acaben los del 6, exactamente como
+Flamboyán y Ceiba: inventario `jds7-capua` y `jds7-cedro-plus` con
+`llega_despues`, fichas propias (`/jardines-del-sur-7/departamento-capua` y
+`/departamento-cedro-plus`), "Llegarán más adelante" en el selector, en
+`/departamentos` y en `/precios`, y todo lo que se vende hoy sigue llevando al
+6. En las fichas del 7, "otras etapas" muestra solo Jardines del Sur 6 (el
+Capua/Cedro Plus de Lirios es otro producto). Ya no queda nada "por confirmar".
+
 ### Estar listo para el día 1
 
 El día que salgan precios y modelos, la página debe cambiar **en horas, no en

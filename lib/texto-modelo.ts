@@ -3,7 +3,17 @@
 // y "Departamento Capua" / "Modelo Capua" masculino; escribirlo a mano en cada
 // plantilla dio "del Casa Ceiba" y "Casa Tabachín está agotado". Una sola regla.
 
-const esFemenino = (nombre: string) => /^casa\b/i.test(nombre.trim());
+export const esFemenino = (nombre: string) => /^casa\b/i.test(nombre.trim());
+
+/** "Cotizarla" (casa) · "Cotizarlo" (departamento) */
+export function cotizarlo(nombre: string): string {
+  return esFemenino(nombre) ? "Cotizarla" : "Cotizarlo";
+}
+
+/** "la que" (casa) · "el que" (departamento): "Me interesa la que está…" */
+export function elQue(nombre: string): string {
+  return esFemenino(nombre) ? "la que" : "el que";
+}
 
 /** "la Casa Ceiba" · "el Departamento Capua" */
 export function conArticulo(nombre: string): string {

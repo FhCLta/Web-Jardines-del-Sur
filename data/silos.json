@@ -4,6 +4,6 @@
     "jardines-del-sur-6": { "nombre": "Jardines del Sur 6", "tiene": "ambos" },
     "la-rioja-2": { "nombre": "La Rioja 2", "tiene": "casas" },
     "lirios-residencial-2": { "nombre": "Lirios Residencial 2", "tiene": "departamentos" },
-    "jardines-del-sur-7": { "nombre": "Jardines del Sur 7", "tiene": "casas", "preventa": true }
+    "jardines-del-sur-7": { "nombre": "Jardines del Sur 7", "tiene": "ambos", "preventa": true }
   }
 }

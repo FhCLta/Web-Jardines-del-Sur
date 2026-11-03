@@ -19,7 +19,7 @@ import { SITE_URL } from "@/lib/site";
  *
  * ⚠️ Aqui NO se inventa ningun precio del 7. Lo que se promete es lo que
  * aprobo Florencio: Tabachin y Noni abren la preventa; Flamboyan y Ceiba estan
- * confirmados y llegan despues; los departamentos estan POR CONFIRMAR.
+ * confirmados y llegan despues, igual que Capua y Cedro Plus (3 nov 2026).
  * Los precios del 6 salen de la lista oficial (TablaPrecios), nunca a mano.
  */
 
@@ -67,7 +67,7 @@ type Fila = {
   hoy?: boolean;
 };
 
-// Lo que llega despues o esta por confirmar manda DIRECTO al 6, sin pasar por
+// Lo que llega despues (casas y departamentos) manda DIRECTO al 6, sin pasar por
 // la ficha del 7 (decision de Florencio, 27 sept 2026): quien ve esta tabla
 // busca precio, y el unico precio real hoy esta en el 6.
 const filas: Fila[] = [
@@ -88,13 +88,6 @@ const filas: Fila[] = [
       enlace: "Disponible hoy en Jardines del Sur 6",
       hoy: true,
     })),
-  {
-    modelo: "Departamentos",
-    estado: "Por confirmar",
-    href: "/jardines-del-sur-6/departamentos",
-    enlace: "Disponibles hoy en Jardines del Sur 6",
-    hoy: true,
-  },
 ];
 
 export default function Page() {

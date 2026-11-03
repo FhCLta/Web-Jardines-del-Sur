@@ -504,6 +504,38 @@
       "amenidades_key": [],
       "url_recorrido_virtual": "",
       "images": []
+    },
+    {
+      "id": "jds7-capua",
+      "development": "Jardines del Sur 7",
+      "status": "Próximamente",
+      "nombre_modelo": "Departamento Capua",
+      "precio_por_anunciar": true,
+      "llega_despues": true,
+      "precio": null,
+      "valor_avaluo": null,
+      "metros_construccion": null,
+      "metros_terreno": null,
+      "levels": [],
+      "amenidades_key": [],
+      "url_recorrido_virtual": "",
+      "images": []
+    },
+    {
+      "id": "jds7-cedro-plus",
+      "development": "Jardines del Sur 7",
+      "status": "Próximamente",
+      "nombre_modelo": "Departamento Cedro Plus",
+      "precio_por_anunciar": true,
+      "llega_despues": true,
+      "precio": null,
+      "valor_avaluo": null,
+      "metros_construccion": null,
+      "metros_terreno": null,
+      "levels": [],
+      "amenidades_key": [],
+      "url_recorrido_virtual": "",
+      "images": []
     }
   ]
 }

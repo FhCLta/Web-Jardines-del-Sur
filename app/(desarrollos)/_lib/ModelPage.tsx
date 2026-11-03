@@ -22,7 +22,7 @@ import { SITE_URL } from "@/lib/site";
 import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 import { getEquipamiento } from "./equipamiento";
-import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
+import { conArticulo, agotadoDe, cotizarlo, elQue, esFemenino } from "@/lib/texto-modelo";
 
 const PHONE_E164 = "529981098443";
 
@@ -104,7 +104,10 @@ export default async function ModelPage({
   const mismoModeloEnOtras = getInventory().filter(
     (p) =>
       p.nombre_modelo === property.nombre_modelo &&
-      p.development !== property.development
+      p.development !== property.development &&
+      // Para Jardines del Sur 7, "otra etapa" es solo Jardines del Sur 6: el
+      // Capua y el Cedro Plus de Lirios son OTRO producto con el mismo nombre.
+      (dev.slug !== "jardines-del-sur-7" || p.development === "Jardines del Sur 6")
   );
 
   // Donde se vende HOY un modelo que llega despues (por id, no por nombre:
@@ -116,7 +119,7 @@ export default async function ModelPage({
   const waMessage = agotado
     ? `Hola, vi que ${conArticulo(property.nombre_modelo)} está ${agotadoDe(property.nombre_modelo)} en ${dev.name}. ¿Qué opciones similares tienes disponibles?`
     : disponibleHoy
-    ? `Hola, vi que ${conArticulo(property.nombre_modelo)} llegará a ${dev.name} más adelante. Me interesa la que está disponible en ${disponibleHoy.development}.`
+    ? `Hola, vi que ${conArticulo(property.nombre_modelo)} llegará a ${dev.name} más adelante. Me interesa ${elQue(property.nombre_modelo)} está disponible en ${disponibleHoy.development}.`
     : getWhatsAppMessageForModel(property);
   const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(waMessage)}`;
 
@@ -357,7 +360,7 @@ export default async function ModelPage({
                 {agotado
                   ? "Ver opciones similares"
                   : disponibleHoy
-                  ? `Cotizarla en ${disponibleHoy.development}`
+                  ? `${cotizarlo(property.nombre_modelo)} en ${disponibleHoy.development}`
                   : "Cotizar este modelo"}
               </a>
               {tourUrl && (
@@ -381,7 +384,7 @@ export default async function ModelPage({
               <h2>Este modelo en otras etapas</h2>
               <p>
                 {llegaDespues
-                  ? `La ${strippedName} llegará a ${dev.name} más adelante.${disponibleHoy ? ` Mientras tanto, está disponible en ${disponibleHoy.development}.` : ""}`
+                  ? `${esFemenino(property.nombre_modelo) ? "La" : "El"} ${strippedName} llegará a ${dev.name} más adelante.${disponibleHoy ? ` Mientras tanto, está disponible en ${disponibleHoy.development}.` : ""}`
                   : porAnunciar
                   ? `El ${strippedName} ya existe en otros desarrollos de Altta Homes. Así puedes conocerlo mientras se anuncian los precios de ${dev.name}.`
                   : `El ${strippedName} también está en otras etapas. Si te gustó este modelo, aquí puedes ver dónde más existe.`}

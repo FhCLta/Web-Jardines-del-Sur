@@ -6,6 +6,7 @@ import {
   DepartamentosJds7,
   casasAbren,
   casasPuente,
+  deptosPuente,
 } from "./ModelosJds7";
 import SiteHeader from "@/components/SiteHeader";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -365,7 +366,8 @@ export default function Page() {
           - Tabachin y Noni: abren la preventa (sin metros ni fotos: el mismo
             nombre no garantiza el mismo producto entre etapas).
           - Flamboyan y Ceiba: CONFIRMADOS para el 7, llegan mas adelante.
-          - Departamentos: POR CONFIRMAR en el 7. No prometer mas que eso.
+          - Departamentos (Capua y Cedro Plus): CONFIRMADOS desde el 3 nov 2026,
+            llegan mas adelante, igual que Flamboyan y Ceiba.
           Las tarjetas del 6 se buscan por ID de inventario, nunca por nombre:
           Noni y Tabachin existen en varias etapas y no son el mismo producto. */}
       <section id="modelos" className={styles.modelos}>
@@ -401,8 +403,8 @@ export default function Page() {
               {
                 id: "departamentos",
                 label: "Departamentos",
-                modelos: "por confirmar",
-                desde: null,
+                modelos: `${deptosPuente.length} modelos`,
+                desde: "precios por anunciar",
                 content: (
                   <>
                     <DepartamentosJds7 />
