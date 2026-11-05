@@ -10,7 +10,16 @@ import FooterSocial from '@/components/FooterSocial';
 import ContactNavBtn from '@/components/ContactNavBtn';
 import { SITE_URL } from '@/lib/site';
 import styles from './page.module.css';
-import { PHONE_E164, PHONE_TEL } from "@/lib/contacto";
+import {
+  PHONE_E164,
+  PHONE_TEL,
+  OFFICE_ADDRESS,
+  OFFICE_GEO,
+  OFFICE_MAP_URL,
+  OFFICE_PLACE_URL,
+  OFFICE_POSTAL,
+  OFFICE_STREET,
+} from "@/lib/contacto";
 
 type InventoryProperty = {
   development: string;
@@ -38,9 +47,9 @@ async function getInventory(): Promise<InventoryProperty[]> {
 export default async function Home() {
   const inventoryData = await getInventory();
   const siteUrl = SITE_URL;
-  const googleBusinessUrl =
-    'https://www.google.com/maps/place/Jardines+del+Sur+6+%7C+Altta+Homes/@21.082209,-86.8865266,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2b2036689c1f:0xa44142d0c992c304!8m2!3d21.082209!4d-86.8865266!16s%2Fg%2F11njlpp4sw';
-  const googleBusinessShortUrl = 'https://maps.app.goo.gl/9sKBR1fUNSswv5d19';
+  // Perfil de Google de Florencio (ver lib/contacto.ts).
+  const googleBusinessUrl = OFFICE_PLACE_URL;
+  const googleBusinessShortUrl = OFFICE_MAP_URL;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -64,16 +73,16 @@ export default async function Home() {
         },
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Av. 127 SM 342 MZ 27',
+          streetAddress: OFFICE_STREET,
           addressLocality: 'Cancún',
           addressRegion: 'Quintana Roo',
-          postalCode: '77536',
+          postalCode: OFFICE_POSTAL,
           addressCountry: 'MX',
         },
         geo: {
           '@type': 'GeoCoordinates',
-          latitude: 21.082209,
-          longitude: -86.8865266,
+          latitude: OFFICE_GEO.lat,
+          longitude: OFFICE_GEO.lng,
         },
         hasMap: googleBusinessUrl,
         contactPoint: {
@@ -256,12 +265,8 @@ export default async function Home() {
             <h3>Contacto</h3>
             <div className={styles.footerContactItem}>
               <span className={styles.footerContactIcon}>📍</span>
-              <a
-                href="https://maps.app.goo.gl/9sKBR1fUNSswv5d19"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.
+              <a href={OFFICE_MAP_URL} target="_blank" rel="noreferrer">
+                {OFFICE_ADDRESS}
               </a>
             </div>
             <div className={styles.footerContactItem}>

@@ -17,7 +17,7 @@ import {
   formatPriceShort,
   parseStat,
 } from "../_lib/model-utils";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
 /* =============================================================================
    HUB DE FAMILIA — "Jardines del Sur Cancún"
@@ -62,8 +62,6 @@ import { PHONE_E164 } from "@/lib/contacto";
    data/precios.json esta página se mueve sola — no hay cifras a mano.
 ============================================================================= */
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/jardines-del-sur-cancun`;
 
 const DEV6 = "Jardines del Sur 6";

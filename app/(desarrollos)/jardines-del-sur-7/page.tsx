@@ -18,10 +18,8 @@ import MapEmbedCard from "@/components/MapEmbedCard";
 import pageStyles from "@/app/page.module.css";
 import styles from "./proximamente.module.css";
 import { SITE_URL } from "@/lib/site";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/jardines-del-sur-7`;
 
 /* ===== Perfil de Google Business de Jardines del Sur 7 =====

@@ -24,7 +24,7 @@ import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos, getModeloPrecios } from "@/lib/precios";
 import { getEquipamiento } from "./equipamiento";
 import { conArticulo, agotadoDe, cotizarlo, elQue, esFemenino } from "@/lib/texto-modelo";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
 
 // Para enlazar el mismo modelo entre etapas hace falta el slug del OTRO
@@ -35,8 +35,6 @@ const DEV_SLUG_BY_NAME: Record<string, string> = {
   "La Rioja 2": "la-rioja-2",
   "Lirios Residencial 2": "lirios-residencial-2",
 };
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 
 function getTourUrl(rawUrl: string): string | null {
   if (!rawUrl || rawUrl === "#") return null;

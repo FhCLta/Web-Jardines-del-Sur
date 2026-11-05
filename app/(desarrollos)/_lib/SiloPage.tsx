@@ -9,15 +9,14 @@ import ContactNavBtn from "@/components/ContactNavBtn";
 import SiloHero from "@/components/SiloHero";
 import SiloTiposTabs from "@/components/SiloTiposTabs";
 import AmenitiesSection from "@/components/AmenitiesSection";
+import MapEmbedCard from "@/components/MapEmbedCard";
 import pageStyles from "@/app/page.module.css";
 import styles from "../silo.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
 import { slugifyModel } from "./model-utils";
 import { SITE_URL } from "@/lib/site";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 
 type InventoryProperty = {
   id: string;
@@ -47,6 +46,12 @@ async function getInventory(): Promise<InventoryProperty[]> {
 export default async function SiloPage({ slug }: { slug: DevSlug }) {
   const dev = DEVS[slug];
   const location = dev.location;
+  const mapa = dev.mapa;
+  // El embed va por el id del perfil (cid): muestra SOLO ese pin, con su ficha.
+  // Buscando por nombre (q=) salían también los lugares de nombre parecido.
+  const mapaEmbed = mapa
+    ? `https://maps.google.com/maps?cid=${mapa.cid}&z=16&hl=es&output=embed`
+    : null;
   const inventory = await getInventory();
   const properties = inventory.filter((p) => p.development === dev.name);
 
@@ -117,6 +122,36 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
           { "@type": "ListItem", position: 2, name: dev.name, item: pageUrl },
         ],
       },
+      // El lugar, con coordenadas y enlace a su perfil de Google: el mismo
+      // nodo que tiene /jardines-del-sur-7. Solo si el desarrollo trae `mapa`.
+      ...(mapa
+        ? [
+            {
+              "@type": "Residence",
+              "@id": `${pageUrl}#residence`,
+              name: dev.name,
+              alternateName: mapa.placeName,
+              description: dev.heroSubtitle,
+              url: pageUrl,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: mapa.street,
+                addressLocality: "Cancún",
+                addressRegion: "Quintana Roo",
+                postalCode: mapa.postalCode,
+                addressCountry: "MX",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: mapa.geo.lat,
+                longitude: mapa.geo.lng,
+              },
+              telephone: `+${PHONE_E164}`,
+              hasMap: mapa.placeUrl,
+              sameAs: [mapa.placeUrl, mapa.url],
+            },
+          ]
+        : []),
       {
         "@type": "OfferCatalog",
         "@id": `${pageUrl}#offers`,
@@ -264,7 +299,12 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
         </div>
       </section>
 
-      <section id="ubicacion" className={styles.aboutSection} style={{ scrollMarginTop: "110px" }}>
+      {/* Con mapa, el ancla "Ubicación" del menú va a la sección del mapa. */}
+      <section
+        id={mapa ? undefined : "ubicacion"}
+        className={styles.aboutSection}
+        style={{ scrollMarginTop: "110px" }}
+      >
         <div className="container">
           <div className={styles.aboutGrid}>
             <div className={styles.aboutCopy}>
@@ -330,6 +370,50 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
           extraAmenities={dev.amenitiesSection.extraAmenities}
           equipment={dev.amenitiesSection.equipment}
         />
+      )}
+
+      {/* Ubicación con mapa, espejo de la de /jardines-del-sur-7. Va después de
+          amenidades: el mismo orden que el menú de anclas. */}
+      {mapa && mapaEmbed && (
+        <section id="ubicacion" className={styles.ubicacion}>
+          <div className="container">
+            <span className={styles.ubicacionEyebrow}>Dónde está</span>
+            <h2>Ubicación de {dev.name}</h2>
+
+            <div className={styles.ubicacionGrid}>
+              <MapEmbedCard embedSrc={mapaEmbed} title={`Mapa de ${dev.name}, Cancún`} />
+
+              <div>
+                <p className={styles.ubicacionLead}>
+                  {mapa.lead.antes}
+                  <strong>{mapa.lead.fuerte}</strong>
+                  {mapa.lead.despues}
+                </p>
+
+                <ul className={styles.ubicacionList}>
+                  {mapa.puntos.map((p) => (
+                    <li key={p.titulo}>
+                      <span aria-hidden="true">{p.icono}</span>
+                      <div>
+                        <strong>{p.titulo}</strong>
+                        {p.detalle}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className={styles.ubicacionBtns}>
+                  <a href={mapa.url} target="_blank" rel="noreferrer" className="btn btn-primary">
+                    Cómo llegar
+                  </a>
+                  <a href={mapa.url} target="_blank" rel="noreferrer" className={styles.ubicacionLink}>
+                    Ver el perfil en Google&nbsp;→
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       )}
 
       {/* Promociones AL FINAL, despues de amenidades. Arriba de los modelos

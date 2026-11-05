@@ -7,10 +7,8 @@ import ContactNavBtn from "@/components/ContactNavBtn";
 import pageStyles from "@/app/page.module.css";
 import styles from "./faq.module.css";
 import { SITE_URL } from "@/lib/site";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/preguntas-frecuentes`;
 
 const WA_MESSAGE =
@@ -67,7 +65,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "¿Cómo los contacto o agendo una visita?",
-    a: "La forma más rápida es por WhatsApp, donde un asesor te atiende directamente, te envía información, precios y recorridos, y agenda tu visita. También puedes visitarnos en la oficina de ventas en Av. 127 SM 342 MZ 27, Cancún.",
+    a: "La forma más rápida es por WhatsApp, donde un asesor te atiende directamente, te envía información, precios y recorridos, y agenda tu visita. También puedes visitarnos en la oficina de ventas en Calle Tucán Mza 27 Lt 9, SM 341, Jardines del Sur 6, Cancún.",
     link: { href: waHref, label: "Escríbenos por WhatsApp" },
   },
 ];

@@ -9,10 +9,8 @@ import styles from "../(desarrollos)/promos.module.css";
 import { DEVS, type DevSlug } from "../(desarrollos)/_lib/dev-content";
 import { SITE_URL } from "@/lib/site";
 import { deModelo } from "@/lib/texto-modelo";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/promociones`;
 
 // ⚠️ ESTA PAGINA NO DEBE DUPLICAR A LAS DE CADA DESARROLLO.

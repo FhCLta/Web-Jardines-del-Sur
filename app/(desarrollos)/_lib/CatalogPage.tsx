@@ -26,10 +26,8 @@ import NivelesTable from "./NivelesTable";
 import { getVariantesDepartamentos } from "@/lib/precios";
 import { SITE_URL } from "@/lib/site";
 import { conArticuloPlural } from "@/lib/texto-modelo";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 
 /**
  * Desarrollo en preventa (hoy, Jardines del Sur 7): sin precios, asi que los

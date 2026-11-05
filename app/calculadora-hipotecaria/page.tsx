@@ -11,10 +11,8 @@ import styles from "./calculadora.module.css";
 // salgan de data/precios.json, la misma fuente que alimenta al cotizador.
 import { getInventory } from "@/app/(desarrollos)/_lib/model-utils";
 import { SITE_URL } from "@/lib/site";
-import { PHONE_E164 } from "@/lib/contacto";
+import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
-const OFFICE_ADDRESS = "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R.";
-const OFFICE_MAP_URL = "https://maps.app.goo.gl/9sKBR1fUNSswv5d19";
 const PAGE_URL = `${SITE_URL}/calculadora-hipotecaria`;
 const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
   "Hola, quiero más información sobre casas y departamentos en Cancún."

@@ -542,3 +542,112 @@
 .logoBlanco.logoBlancoPropio img {
   filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
 }
+
+/* ===== UBICACIÓN CON MAPA (dev.mapa) =====
+   Copia de la sección de /jardines-del-sur-7 (proximamente.module.css). */
+.ubicacion {
+  padding: 3.5rem 0 4.5rem;
+  border-top: 1px solid var(--border-soft);
+  scroll-margin-top: 110px;
+}
+
+.ubicacion h2 {
+  font-size: clamp(1.8rem, 4vw * var(--mz, 1), 2.6rem);
+  margin: 0.6rem 0 2rem;
+}
+
+.ubicacionEyebrow {
+  text-wrap: balance;
+  display: block;
+  color: var(--accent);
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ubicacionGrid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .ubicacionGrid {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 2.8rem;
+    align-items: start;
+  }
+}
+
+.ubicacionLead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--secondary);
+  margin: 0 0 1.5rem;
+}
+
+.ubicacionLead strong {
+  color: var(--primary);
+}
+
+.ubicacionList {
+  list-style: none;
+  margin: 0 0 1.8rem;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.ubicacionList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.ubicacionList li > span {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+
+.ubicacionList li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.ubicacionList strong {
+  font-family: var(--font-montserrat), sans-serif;
+  color: var(--primary);
+  font-size: 0.98rem;
+}
+
+.ubicacionBtns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.4rem;
+}
+
+.ubicacionLink {
+  position: relative;
+  color: var(--accent-deep);
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ubicacionLink::after {
+  content: "";
+  position: absolute;
+  inset: -12px -8px;
+}
+
+.ubicacionLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

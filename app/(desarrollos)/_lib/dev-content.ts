@@ -1,3 +1,14 @@
+import {
+  OFFICE_ADDRESS,
+  OFFICE_CALLE,
+  OFFICE_CID,
+  OFFICE_GEO,
+  OFFICE_MAP_URL,
+  OFFICE_PLACE_URL,
+  OFFICE_POSTAL,
+  OFFICE_STREET,
+} from "@/lib/contacto";
+
 export type DevSlug =
   | "jardines-del-sur-6"
   | "jardines-del-sur-7"
@@ -45,6 +56,24 @@ export type DevContent = {
    */
   logoFoto?: { src: string; width: number; height: number };
   location?: { label: string; value: string };
+  /**
+   * Perfil de Google Business del desarrollo. Si existe, el silo pinta la
+   * sección "Ubicación de X" con mapa —igual que /jardines-del-sur-7, que va
+   * #1— y pone coordenadas y enlace al perfil en los datos para Google.
+   * Nombre, coordenadas y links se leen del propio perfil: no se inventan.
+   * Si el perfil cambia, actualizar aquí.
+   */
+  mapa?: {
+    placeName: string; // nombre exacto del perfil en Google
+    cid: string; // id del perfil: el mapa muestra SOLO ese pin, con su ficha
+    url: string; // abre el perfil (botones)
+    placeUrl: string; // link largo /maps/place/ (hasMap y sameAs)
+    geo: { lat: number; lng: number };
+    street: string;
+    postalCode: string;
+    lead: { antes: string; fuerte: string; despues: string };
+    puntos: Array<{ icono: string; titulo: string; detalle: string }>;
+  };
   whatsappMessage: string;
   hero: {
     slides: string[];
@@ -104,8 +133,12 @@ export const DEVS: Record<DevSlug, DevContent> = {
     slug: "jardines-del-sur-6",
     name: "Jardines del Sur 6",
     shortName: "Jardines 6",
-    metaTitle: "Jardines del Sur 6 Cancún · Casas y Departamentos desde $1.85M | Altta Homes",
-    seoTitleLead: "Jardines del Sur 6 | Casas y Departamentos en Cancún",
+    // Título espejo del de /jardines-del-sur-7 ("Jardines del Sur 7 Cancún | …"),
+    // que va #1. Pedido por Florencio el 5 nov 2026. Antes: "Jardines del Sur 6 |
+    // Casas y Departamentos en Cancún". metaTitle es el nombre en los datos para
+    // Google y debe decir lo mismo que el <title>.
+    metaTitle: "Jardines del Sur 6 Cancún | Casas y departamentos en venta",
+    seoTitleLead: "Jardines del Sur 6 Cancún | Casas y departamentos en venta",
     metaDescription:
       "Casas y departamentos en Jardines del Sur 6, Zona Sur de Cancún. 6 modelos de 3 recámaras con alberca, gimnasio y casa club, a 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas y Departamentos en Jardines del Sur 6, Cancún",
@@ -115,7 +148,34 @@ export const DEVS: Record<DevSlug, DevContent> = {
     ogImage: "/jardines/Imagnes de amenidades y hero/alberca.webp",
     logo: "/logos/jardines-6.webp",
     logoWidth: 400,
-    location: { label: "Ubicación", value: "Av. 127 SM 342 MZ 27, 77536 Cancún, Q.R." },
+    location: { label: "Ubicación", value: OFFICE_ADDRESS },
+    // Perfil de Google de Florencio, el mismo del pie de página: todos los
+    // datos (cid, coordenadas, links) viven en lib/contacto.ts.
+    mapa: {
+      placeName: "Jardines del Sur 6 | Altta Homes Cancun",
+      cid: OFFICE_CID,
+      url: OFFICE_MAP_URL,
+      placeUrl: OFFICE_PLACE_URL,
+      geo: OFFICE_GEO,
+      street: OFFICE_STREET,
+      postalCode: OFFICE_POSTAL,
+      lead: {
+        antes: "Jardines del Sur 6 está en la ",
+        fuerte: "Zona Sur de Cancún",
+        despues:
+          ", la de mayor proyección de la ciudad, con escuelas, plazas comerciales y restaurantes a unos minutos.",
+      },
+      puntos: [
+        {
+          icono: "📍",
+          titulo: OFFICE_CALLE,
+          detalle: `Jardines\u00a0del\u00a0Sur\u00a06, ${OFFICE_POSTAL} Cancún, Q.R.`,
+        },
+        { icono: "✈️", titulo: "A 10 minutos del aeropuerto", detalle: "Conexión directa por la Zona Sur" },
+        { icono: "🛣️", titulo: "A 500 m de Av. Huayacán", detalle: "Escuelas, comercio y servicios consolidados" },
+        { icono: "🏢", titulo: "Oficina de ventas en el desarrollo", detalle: "Ven a conocerlo en persona" },
+      ],
+    },
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
     promos: {
