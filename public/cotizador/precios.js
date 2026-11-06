@@ -14,7 +14,8 @@ window.COTIZADOR_PRECIOS = {
         "CEIBA",
         "CEIBA PROMO",
         "TABACHIN",
-        "NONI"
+        "NONI",
+        "NONI PROMO"
       ],
       "precioTerrenoExcedente": 5750,
       "label": "Jardines del Sur 6 Casas",
@@ -312,6 +313,20 @@ window.COTIZADOR_PRECIOS = {
       "precioLista": 3850000,
       "valorAvaluo": 3850000,
       "bono": 688875,
+      "avaluo": 14000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      }
+    },
+    "NONI PROMO": {
+      "id": "azular1-noni-promo",
+      "precioLista": 3850000,
+      "valorAvaluo": 3850000,
+      "bono": 738875,
       "avaluo": 14000,
       "porcentajesEscrituracion": {
         "infonavit": 0.07,

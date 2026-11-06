@@ -10,6 +10,7 @@ import PropertyCard from "@/components/PropertyCard";
 import pageStyles from "@/app/page.module.css";
 import styles from "../model.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
+import { conPromoUno } from "./promo-tarjeta";
 import {
   slugifyModel,
   getInventory,
@@ -396,7 +397,7 @@ export default async function ModelPage({
             {llegaDespues && disponibleHoy ? (
               <div className={styles.puenteHoy}>
                 <span className={styles.puenteEtiqueta}>En {disponibleHoy.development}</span>
-                <PropertyCard property={disponibleHoy} origen={dev.name} />
+                <PropertyCard property={conPromoUno(disponibleHoy)} origen={dev.name} />
                 <a
                   className={styles.puenteLink}
                   href={`/${DEV_SLUG_BY_NAME[disponibleHoy.development] ?? ""}/${slugifyModel(disponibleHoy.nombre_modelo)}`}

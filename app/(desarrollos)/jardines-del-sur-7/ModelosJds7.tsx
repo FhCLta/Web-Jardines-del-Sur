@@ -1,5 +1,6 @@
 import PropertyCard from "@/components/PropertyCard";
 import { getPropertiesByDev, getModelType, slugifyModel } from "../_lib/model-utils";
+import { conPromoUno } from "../_lib/promo-tarjeta";
 import styles from "./proximamente.module.css";
 
 /* ===== Modelos de Jardines del Sur 7 =====
@@ -40,7 +41,7 @@ export function CasasJds7() {
       <div className={styles.modelosGrid}>
         {casasAbren.map((p) => (
           <div key={p.id} className={styles.modeloItem}>
-            <PropertyCard property={p} />
+            <PropertyCard property={conPromoUno(p)} />
             {/* Enlace a la ficha: es como Google llega a ella y como el
                 visitante ve que ese modelo ya existe en Jardines del Sur 6. */}
             <a
@@ -67,7 +68,7 @@ export function CasasJds7() {
         {casasPuente.map((p) => (
           <div key={p.id} className={styles.modeloItem}>
             <span className={styles.etiquetaEtapa}>En Jardines del Sur 6</span>
-            <PropertyCard property={p} origen="Jardines del Sur 7" />
+            <PropertyCard property={conPromoUno(p)} origen="Jardines del Sur 7" />
             <a
               className={styles.modeloLink}
               href={`/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`}
@@ -98,7 +99,7 @@ export function DepartamentosJds7() {
         {deptosPuente.map((p) => (
           <div key={p.id} className={styles.modeloItem}>
             <span className={styles.etiquetaEtapa}>En Jardines del Sur 6</span>
-            <PropertyCard property={p} origen="Jardines del Sur 7" />
+            <PropertyCard property={conPromoUno(p)} origen="Jardines del Sur 7" />
             <a
               className={styles.modeloLink}
               href={`/jardines-del-sur-6/${slugifyModel(p.nombre_modelo)}`}

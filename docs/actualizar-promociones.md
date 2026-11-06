@@ -12,12 +12,14 @@ mismo lugar.
 app/(desarrollos)/_lib/dev-content.ts
 ```
 
-Dentro de cada desarrollo hay un bloque `promos`. Hoy lo tienen
-`jardines-del-sur-6` y `la-rioja-2`; `lirios-residencial-2` no.
+Dentro de cada desarrollo hay un bloque `promos`. Hoy (nov 2026) lo tienen
+los tres que se venden: `jardines-del-sur-6`, `la-rioja-2` y
+`lirios-residencial-2`.
 
 ```ts
 promos: {
   updatedLabel: "Promociones vigentes · agosto 2026",   // ← el mes
+  vence: "2026-08-31",                                    // ← último día (AAAA-MM-DD)
   nota: "Los minisplits no incluyen instalación. …",     // ← letra chica
   items: [
     {
@@ -34,9 +36,11 @@ promos: {
 ### Qué actualizar cada mes
 
 1. **`updatedLabel`** → el mes nuevo. Se ve como insignia dorada en el hero.
-2. **`vigencia`** de cada item → la fecha nueva.
-3. **`items`** → agrega, borra o cambia las promociones que correspondan.
-4. **`ubicaciones`** → las manzanas/lotes/unidades del mes.
+2. **`vence`** → el último día del mes de la promoción, en `AAAA-MM-DD`. Es el
+   que manda en el aviso con cuenta regresiva de las tarjetas (ver abajo).
+3. **`vigencia`** de cada item → la fecha nueva, escrita para el cliente.
+4. **`items`** → agrega, borra o cambia las promociones que correspondan.
+5. **`ubicaciones`** → las manzanas/lotes/unidades del mes.
 
 ### Reglas de contenido
 
@@ -62,9 +66,19 @@ Al editar ese archivo, se actualizan **a la vez**:
 | `/la-rioja-2/promociones` | Solo las de ese desarrollo |
 | `sitemap.xml` | Las entradas de promociones |
 | Silo de cada desarrollo | El enlace "Ver promociones →" |
+| Tarjeta de cada modelo con promoción (en todas las páginas donde salga) | Insignia "Promoción [mes]", panel con cuenta regresiva y botón "Pregunta por la promoción" |
 
 Además:
 
+- **El aviso de las tarjetas se apaga solo.** Cuenta hacia `vence` y al pasar
+  la medianoche de ese día (hora de Cancún) desaparece del navegador del
+  cliente aunque la web no se haya vuelto a publicar; el botón regresa a
+  "Cotizar ahora". No vuelve a salir hasta que se carguen las del mes nuevo con
+  otro `vence`. A propósito no dice CUÁL es la promoción: invita a preguntar
+  por WhatsApp. Lleva "Aplican restricciones" y la vigencia, que Altta exige en
+  toda publicación digital, y "En unidades seleccionadas" cuando la promoción
+  no es de todos los lotes. Código: `app/(desarrollos)/_lib/promo-tarjeta.ts`
+  y `components/PropertyCard.jsx`.
 - **Un desarrollo aparece o desaparece solo.** Si le agregas un bloque `promos`
   a Lirios, entra al hub, al sitemap y a su propio silo sin tocar nada más. Si
   se lo quitas, desaparece de todos lados.
@@ -83,6 +97,12 @@ Ojo: hay dos tipos de promoción y se manejan distinto.
 |---|---|---|
 | **Regalo / equipamiento** | minisplits, paquete de paneles | Solo en `dev-content.ts`. **No toca el cotizador.** |
 | **Descuento sobre el precio** | "Descuento de $50,000" | En `dev-content.ts` **y además** en `data/precios.json` |
+
+⚠️ **Descuento en un departamento:** `promocion.bono_extra` solo existe para
+casas (en departamentos "PROMO" ya es la vista). El cotizador todavía no puede
+ofrecer un descuento de departamento como opción; mientras no se construya,
+el asesor lo captura a mano en el bono. Caso real: Capua de Jardines del Sur 6,
+noviembre 2026 (−$40,000).
 
 Un descuento real es una variante de precio, así que también va en la fuente
 única de precios:

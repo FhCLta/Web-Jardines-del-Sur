@@ -3,6 +3,7 @@ import LogoDev from "@/app/precios/LogoDev";
 import PropertyCard from "@/components/PropertyCard";
 import styles from "./tipo.module.css";
 import { DEVS, type DevSlug } from "@/app/(desarrollos)/_lib/dev-content";
+import { conPromoUno } from "@/app/(desarrollos)/_lib/promo-tarjeta";
 import {
   getInventory,
   getModelType,
@@ -264,7 +265,7 @@ export default function TipoPage({ tipo }: { tipo: Tipo }) {
               <div className={styles.grid}>
                 {delDev.map((p) => (
                   <div key={p.id} className={styles.item}>
-                    <PropertyCard property={p} />
+                    <PropertyCard property={conPromoUno(p)} />
                     {slug && (
                       <a
                         className={styles.fichaLink}

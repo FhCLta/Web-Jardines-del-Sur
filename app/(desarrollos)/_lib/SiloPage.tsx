@@ -14,6 +14,7 @@ import pageStyles from "@/app/page.module.css";
 import styles from "../silo.module.css";
 import { DEVS, type DevSlug } from "./dev-content";
 import { slugifyModel } from "./model-utils";
+import { conPromoUno } from "./promo-tarjeta";
 import { SITE_URL } from "@/lib/site";
 import { PHONE_E164, OFFICE_ADDRESS, OFFICE_MAP_URL } from "@/lib/contacto";
 
@@ -252,7 +253,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
                       {/* De 2 en 2: las 4 casas quedan 2x2 y no 3 arriba y 1 abajo. */}
                       <div className={`${styles.modelsGrid} ${styles.modelsGridDos}`}>
                         {g.props.map((property) => (
-                          <PropertyCard key={property.id} property={property} />
+                          <PropertyCard key={property.id} property={conPromoUno(property)} />
                         ))}
                       </div>
                       {/* La subpagina /casas y /departamentos solo existe en Jardines 6.
@@ -273,7 +274,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
           ) : (
             <div className={styles.modelsGrid}>
               {properties.map((property) => (
-                <PropertyCard key={property.id} property={property} />
+                <PropertyCard key={property.id} property={conPromoUno(property)} />
               ))}
             </div>
           )}

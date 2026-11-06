@@ -180,6 +180,32 @@
       "web": "jds6-noni"
     },
     {
+      "id": "azular1-noni-promo",
+      "desarrollo": "Azular1",
+      "tipo": "casa",
+      "modelo": "NONI",
+      "claveCotizador": "NONI PROMO",
+      "nivel": null,
+      "edificio": null,
+      "vista": null,
+      "promocion": true,
+      "prototipo": "NONI PROMO",
+      "activo": true,
+      "precioLista": 3850000,
+      "bono": 738875,
+      "neto": 3111125,
+      "valorAvaluo": 3850000,
+      "avaluo": 14000,
+      "porcentajesEscrituracion": {
+        "infonavit": 0.07,
+        "fovissste": 0.08,
+        "cofinavit": 0.085,
+        "bancario": 0.075,
+        "contado": 0.072
+      },
+      "web": "jds6-noni"
+    },
+    {
       "id": "larioja2-noni-elite",
       "desarrollo": "LaRioja2",
       "tipo": "casa",
@@ -1176,7 +1202,8 @@
           "CEIBA",
           "CEIBA PROMO",
           "TABACHIN",
-          "NONI"
+          "NONI",
+          "NONI PROMO"
         ],
         "precioTerrenoExcedente": 5750,
         "label": "Jardines del Sur 6 Casas",
@@ -1474,6 +1501,20 @@
         "precioLista": 3850000,
         "valorAvaluo": 3850000,
         "bono": 688875,
+        "avaluo": 14000,
+        "porcentajesEscrituracion": {
+          "infonavit": 0.07,
+          "fovissste": 0.08,
+          "cofinavit": 0.085,
+          "bancario": 0.075,
+          "contado": 0.072
+        }
+      },
+      "NONI PROMO": {
+        "id": "azular1-noni-promo",
+        "precioLista": 3850000,
+        "valorAvaluo": 3850000,
+        "bono": 738875,
         "avaluo": 14000,
         "porcentajesEscrituracion": {
           "infonavit": 0.07,

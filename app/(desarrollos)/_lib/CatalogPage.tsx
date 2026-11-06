@@ -14,6 +14,7 @@ import styles from "../catalog.module.css";
 import heroStyles from "@/components/Hero.module.css";
 import siloStyles from "@/app/(desarrollos)/silo.module.css";
 import { DEVS, type DevSlug, logoSobreFotoDe } from "./dev-content";
+import { conPromoUno } from "./promo-tarjeta";
 import {
   getPropertiesByDev,
   getModelType,
@@ -381,7 +382,7 @@ export default function CatalogPage({ slug, kind, preventa }: CatalogPageProps) 
           ) : (
           <div className={styles.modelsGrid}>
             {properties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+              <PropertyCard key={property.id} property={conPromoUno(property)} />
             ))}
           </div>
           )}

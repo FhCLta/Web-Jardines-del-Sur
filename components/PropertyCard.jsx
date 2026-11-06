@@ -27,6 +27,62 @@ const FIRST_IMAGE_THUMBS = {
 };
 
 /**
+ * Cuenta regresiva de la promoción del mes (`property.promo`, que arma
+ * app/(desarrollos)/_lib/promo-tarjeta.ts desde los bloques `promos`).
+ * En el HTML publicado sale vigente, igual que la vio el build; ya en el
+ * navegador, al pasar el último día (hora de Cancún) se apaga sola aunque la
+ * web no se haya vuelto a publicar, y no regresa hasta cargar las del mes nuevo.
+ */
+function usePromoVigente(promo) {
+  const [restante, setRestante] = useState(null); // ms; null = aún sin reloj
+  const vence = promo?.vence;
+  useEffect(() => {
+    if (!vence) return;
+    // Quintana Roo está en UTC−5 todo el año (no cambia de horario).
+    const fin = Date.parse(`${vence}T23:59:59-05:00`);
+    let id;
+    const tic = () => {
+      const r = Math.max(0, fin - Date.now());
+      setRestante(r);
+      if (r === 0) clearInterval(id);
+    };
+    tic();
+    id = setInterval(tic, 1000);
+    return () => clearInterval(id);
+  }, [vence]);
+  return { vigente: Boolean(vence) && restante !== 0, restante };
+}
+
+function ContadorPromo({ restante, venceTexto }) {
+  // Antes de que corra el reloj (el HTML publicado) no se sabe la hora del
+  // visitante: se dice la fecha, en el mismo lugar que luego ocupa el contador.
+  if (restante === null) {
+    return <span className={styles.promoHasta}>Válida hasta el {venceTexto}</span>;
+  }
+  const s = Math.floor(restante / 1000);
+  const dias = Math.floor(s / 86400);
+  const celdas = [
+    [dias, dias === 1 ? "día" : "días"],
+    [Math.floor((s % 86400) / 3600), "horas"],
+    [Math.floor((s % 3600) / 60), "min"],
+    [s % 60, "seg"],
+  ];
+  return (
+    <>
+      <span className={styles.promoTermina}>Termina en</span>
+      <span className={styles.promoReloj} role="timer" aria-label={`Termina el ${venceTexto}`}>
+        {celdas.map(([n, etiqueta], i) => (
+          <span key={etiqueta} className={styles.promoCelda} aria-hidden="true">
+            <b>{i === 0 ? n : String(n).padStart(2, "0")}</b>
+            <small>{etiqueta}</small>
+          </span>
+        ))}
+      </span>
+    </>
+  );
+}
+
+/**
  * `origen` (opcional): la pagina donde se muestra la tarjeta cuando NO es la de
  * su propio desarrollo. Se agrega al mensaje de WhatsApp para que Florencio sepa
  * de donde llego el cliente — p. ej. un Flamboyan de Jardines 6 mostrado en la
@@ -133,6 +189,10 @@ export default function PropertyCard({ property, origen = "" }) {
   // banda diagonal donde ira la foto y "Por anunciar" donde ira el precio.
   const porAnunciar = property.precio === null;
 
+  // Promoción del mes: solo si el modelo se vende hoy.
+  const promo = agotado || porAnunciar ? null : property.promo ?? null;
+  const { vigente: promoVigente, restante } = usePromoVigente(promo);
+
   const hasDiscount = Boolean(property.valor_avaluo);
   const isDepartamento = modelType === "Departamento";
   const priceLabel = hasDiscount
@@ -157,6 +217,11 @@ export default function PropertyCard({ property, origen = "" }) {
           {agotado && (
             <span className={`${styles.statusBadge} ${styles.statusBadgeAgotado}`}>
               Agotado
+            </span>
+          )}
+          {promoVigente && (
+            <span className={`${styles.statusBadge} ${styles.statusBadgePromo}`}>
+              Promoción {promo.mes}
             </span>
           )}
           {!porAnunciar && <div className={styles.imageBackground} />}
@@ -232,6 +297,44 @@ export default function PropertyCard({ property, origen = "" }) {
                   {formatPrice(property.precio)}
                 </span>
               </span>
+            </div>
+          )}
+
+          {/* No dice cuál es la promoción a propósito: la idea es que el
+              cliente pregunte por WhatsApp. La leyenda "Aplican restricciones"
+              y la vigencia los exige Altta en toda publicación digital. */}
+          {promoVigente && (
+            <div className={styles.promoPanel}>
+              <p className={styles.promoTitulo}>
+                <span aria-hidden="true">🎁 </span>
+                {modelType === "Casa" ? "Esta casa tiene" : modelType === "Departamento" ? "Este departamento tiene" : "Tiene"}{" "}
+                promoción en {promo.mes}
+              </p>
+              {promo.condicion && (
+                <span className={styles.promoCondicion}>{promo.condicion}</span>
+              )}
+              <div className={styles.promoCuenta}>
+                <ContadorPromo restante={restante} venceTexto={promo.venceTexto} />
+              </div>
+              {/* Botón aparte, no en lugar de "Cotizar ahora": se va con el
+                  recuadro al vencer y la tarjeta queda como siempre. */}
+              <a
+                className={`btn btn-primary ${styles.promoBtn}`}
+                href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
+                  `Hola, vi que ${conArticulo(property.nombre_modelo)} en ${property.development} tiene promoción en ${promo.mes}${promo.condicion ? ` (${promo.condicion.toLowerCase()})` : ""}. ¿Me das los detalles?${origen ? ` Lo vi en la página de ${origen}.` : ""}`
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Pregunta por la promoción
+              </a>
+              {/* Cada frase entera en su renglón; el "·" va pegado a la frase
+                  de la izquierda para que nunca abra una línea. */}
+              <p className={styles.promoLetra}>
+                {promo.seleccionadas && <span>En unidades seleccionadas ·</span>}{" "}
+                <span>Aplican restricciones ·</span>{" "}
+                <span>Vigencia: {promo.venceTexto}</span>
+              </p>
             </div>
           )}
 

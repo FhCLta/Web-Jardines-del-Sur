@@ -9,6 +9,7 @@ import FooterPhoneContact from '@/components/FooterPhoneContact';
 import FooterSocial from '@/components/FooterSocial';
 import ContactNavBtn from '@/components/ContactNavBtn';
 import { SITE_URL } from '@/lib/site';
+import { conPromo } from '@/app/(desarrollos)/_lib/promo-tarjeta';
 import styles from './page.module.css';
 import {
   PHONE_E164,
@@ -215,7 +216,7 @@ export default async function Home() {
           </div>
 
           <div id="desarrollos" style={{scrollMarginTop: '72px'}} />
-          <DevelopmentTabs inventoryData={inventoryData} />
+          <DevelopmentTabs inventoryData={conPromo(inventoryData)} />
         </div>
       </section>
 

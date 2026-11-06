@@ -116,12 +116,20 @@ export type DevContent = {
   //     en data/precios.json, que es lo que come el cotizador)
   promos?: {
     updatedLabel: string; // ej. "Promociones vigentes · julio 2026"
+    // Último día de la promoción (AAAA-MM-DD, hora de Cancún). El aviso
+    // "Promoción" de las tarjetas de modelo cuenta hacia esta fecha y se
+    // apaga SOLO al pasar: no vuelve hasta que se carguen las del mes nuevo.
+    vence: string;
     nota?: string;
     items: Array<{
       titulo?: string; // nombre de la promo, ej. "La Portería de JDS"
       modelo: string; // "Todos los modelos", "Modelo Capua", etc.
       modeloSlug?: string; // si es promo de un modelo, su slug de ficha (ej. "departamento-capua") → activa botones "Cotizar / Ver el modelo"
       ubicaciones?: string;
+      // Condición que el cliente tiene que saber antes de escribir, en corto
+      // (ej. "Con vista al estacionamiento"). La tarjeta del modelo la pone
+      // como etiqueta bajo el título del aviso, no en la letra chica.
+      condicion?: string;
       beneficios: string[];
       vigencia: string; // "31 de julio de 2026"
     }>;
@@ -179,29 +187,32 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas y departamentos de Jardines del Sur 6 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · octubre 2026",
-      nota: "Aplica con apartado del 1 al 31 de octubre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
+      updatedLabel: "Promociones vigentes · noviembre 2026",
+      vence: "2026-11-30",
+      nota: "Aplica con apartado del 1 al 30 de noviembre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
       items: [
         {
+          // "MÁS": los dos juntos. El cotizador aún no aplica descuentos a
+          // departamentos (bono_extra es solo de casas): el asesor lo captura.
           modelo: "Modelo Capua",
           modeloSlug: "departamento-capua",
-          ubicaciones: "Jardines del Sur 6 · Ocelote N, P y Q",
-          beneficios: ["4 minisplits de 12,000 BTU"],
-          vigencia: "31 de octubre de 2026",
+          ubicaciones: "Jardines del Sur 6 · Antílope N, O, P y Q · Vista al estacionamiento",
+          condicion: "Con vista al estacionamiento",
+          beneficios: ["3 minisplits de 12,000 BTU", "más descuento de $40,000"],
+          vigencia: "30 de noviembre de 2026",
         },
         {
-          modelo: "Modelo Capua",
-          modeloSlug: "departamento-capua",
-          ubicaciones: "Jardines del Sur 6 · Antílope N, O, P y Q",
-          beneficios: ["3 minisplits de 12,000 BTU"],
-          vigencia: "31 de octubre de 2026",
-        },
-        {
+          // "O": el cliente elige UNO de los tres. El descuento tambien esta en
+          // data/precios.json (variante NONI con bono_extra) para el cotizador.
           modelo: "Modelo Noni",
           modeloSlug: "casa-noni",
           ubicaciones: "Jardines del Sur 6 · Jabalí Mz 30 L14",
-          beneficios: ["3 minisplits de 12,000 BTU"],
-          vigencia: "31 de octubre de 2026",
+          beneficios: [
+            "Paquete de paneles solares",
+            "o descuento de $50,000",
+            "o 4 minisplits: 1 de 18,000 BTU y 3 de 12,000 BTU",
+          ],
+          vigencia: "30 de noviembre de 2026",
         },
         {
           // "O": el cliente elige UNO de los dos. El descuento tambien esta en
@@ -210,7 +221,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
           modeloSlug: "casa-ceiba",
           ubicaciones: "Jardines del Sur 6 · Todos los lotes disponibles",
           beneficios: ["4 minisplits de 12,000 BTU", "o descuento de $40,000"],
-          vigencia: "31 de octubre de 2026",
+          vigencia: "30 de noviembre de 2026",
         },
       ],
     },
@@ -390,8 +401,9 @@ export const DEVS: Record<DevSlug, DevContent> = {
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     promos: {
-      updatedLabel: "Promociones vigentes · octubre 2026",
-      nota: "Aplica con apartado del 1 al 31 de octubre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
+      updatedLabel: "Promociones vigentes · noviembre 2026",
+      vence: "2026-11-30",
+      nota: "Aplica con apartado del 1 al 30 de noviembre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
       items: [
         {
           // "O": el cliente elige UNO de los dos paquetes. El descuento de
@@ -403,7 +415,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
             "Paquete de paneles solares",
             "o descuento de $50,000 + 1 minisplit de 18,000 BTU y 2 de 12,000 BTU",
           ],
-          vigencia: "31 de octubre de 2026",
+          vigencia: "30 de noviembre de 2026",
         },
       ],
     },
@@ -521,22 +533,23 @@ export const DEVS: Record<DevSlug, DevContent> = {
     // Primeras promociones de Lirios (octubre 2026). Con este bloque se
     // publica /lirios-residencial-2/promociones y entra al hub y al sitemap.
     promos: {
-      updatedLabel: "Promociones vigentes · octubre 2026",
-      nota: "Aplica con apartado del 1 al 31 de octubre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
+      updatedLabel: "Promociones vigentes · noviembre 2026",
+      vence: "2026-11-30",
+      nota: "Aplica con apartado del 1 al 30 de noviembre de 2026 y solo en las ubicaciones indicadas: si cambias de ubicación, la promoción no se respeta. Los minisplits no incluyen instalación. Aplican restricciones; consulta requisitos con tu asesor.",
       items: [
         {
           modelo: "Departamento Capua",
           modeloSlug: "departamento-capua",
           ubicaciones: "Lirios Residencial 2 · P4 y L1",
           beneficios: ["3 minisplits de 12,000 BTU"],
-          vigencia: "31 de octubre de 2026",
+          vigencia: "30 de noviembre de 2026",
         },
         {
           modelo: "Departamento Cedro Plus",
           modeloSlug: "departamento-cedro-plus",
           ubicaciones: "Lirios Residencial 2 · P1, P2 y P3",
           beneficios: ["3 minisplits de 12,000 BTU"],
-          vigencia: "31 de octubre de 2026",
+          vigencia: "30 de noviembre de 2026",
         },
       ],
     },
