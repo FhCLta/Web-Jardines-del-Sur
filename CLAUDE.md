@@ -52,6 +52,10 @@ node scripts/check-precios.mjs           # SIEMPRE al final: debe decir "TODO EN
 
 ## 3. Publicar
 
+**Teléfono, dirección de la oficina y perfil de Google** viven en un solo
+archivo, `lib/contacto.ts`. Hoy el WhatsApp es TEMPORALMENTE el de su jefe
+(998 148 6819). El cotizador no lee de ahí.
+
 ```bash
 npm run build
 firebase deploy --only hosting     # el sitio
@@ -77,6 +81,8 @@ Después del deploy se commitea también `.firebase/hosting.*.cache`.
 | El cotizador | `docs/cotizador-context.md` |
 | Cualquier cambio visual (página, sección, CSS, texto visible) | skill `diseno-altta` (`.claude/skills/diseno-altta/SKILL.md`) |
 | Compartir precios con otra app | `docs/api-precios.md` |
+| Títulos de los desarrollos, sección de ubicación con mapa, perfiles de Google | `docs/seo-local-ubicaciones.md` |
+| Fotos de los modelos (elegir, convertir a WebP, galería) | `docs/fotos-modelos.md` |
 | El inventario que lee el CRM (KloseAI) | `docs/inventario-crm.md` |
 | Historia de decisiones pasadas | `context.md` (lo reciente está arriba) |
 
@@ -104,6 +110,13 @@ cualquier cifra, revisar que su etiqueta siga siendo cierta.
 
 **Las fotos de obra nunca reemplazan el hero.** Van en su propia sección "Avance
 de obra" con fecha.
+
+**Títulos de los desarrollos: `Nombre Cancún | Producto en venta`** (nov 2026),
+espejo del 7. Medir en Search Console antes de volver a moverlos.
+
+**Cada desarrollo está en su propia zona.** Una distancia ("500 m de Av.
+Huayacán", "10 min del aeropuerto") se mide para ESE desarrollo; no se copia de
+otro. Lirios llevaba meses con datos del 6. Ver `docs/seo-local-ubicaciones.md`.
 
 ---
 

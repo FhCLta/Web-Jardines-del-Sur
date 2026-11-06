@@ -70,15 +70,26 @@ Al editar ese archivo, se actualizan **a la vez**:
 
 Además:
 
-- **El aviso de las tarjetas se apaga solo.** Cuenta hacia `vence` y al pasar
-  la medianoche de ese día (hora de Cancún) desaparece del navegador del
-  cliente aunque la web no se haya vuelto a publicar; el botón regresa a
-  "Cotizar ahora". No vuelve a salir hasta que se carguen las del mes nuevo con
-  otro `vence`. A propósito no dice CUÁL es la promoción: invita a preguntar
-  por WhatsApp. Lleva "Aplican restricciones" y la vigencia, que Altta exige en
-  toda publicación digital, y "En unidades seleccionadas" cuando la promoción
-  no es de todos los lotes. Código: `app/(desarrollos)/_lib/promo-tarjeta.ts`
-  y `components/PropertyCard.jsx`.
+- **El aviso de las tarjetas se apaga solo.** Insignia "Promoción [mes]" sobre
+  la foto y un recuadro azul con cuenta regresiva y su propio botón **"Pregunta
+  por la promoción"**, APARTE de "Visita Virtual" y "Cotizar ahora", que no se
+  tocan. El recuadro va **debajo de la distribución** (decisión de Florencio:
+  el cliente ve primero metros y espacios y la promoción remata). Cuenta hacia
+  `vence` y al pasar la medianoche de ese día (hora de Cancún) la insignia, el
+  recuadro y su botón desaparecen del navegador del cliente aunque la web no
+  se haya vuelto a publicar; la tarjeta queda como siempre. No vuelve a salir
+  hasta que se carguen las del mes nuevo con otro `vence`. A propósito no dice
+  CUÁL es la promoción: invita a preguntar por WhatsApp. Lleva "Aplican
+  restricciones" y la vigencia, que Altta exige en toda publicación digital, y
+  "En unidades seleccionadas" cuando la promoción no es de todos los lotes.
+  Código: `app/(desarrollos)/_lib/promo-tarjeta.ts` y
+  `components/PropertyCard.jsx`.
+- **`condicion` (opcional en cada item):** lo que el cliente tiene que saber
+  antes de escribir, en corto. Sale como etiqueta dorada bajo el título del
+  recuadro (no en la letra chica) y entra al mensaje de WhatsApp. Ejemplo real:
+  el Capua de Jardines del Sur 6 en noviembre 2026, `condicion: "Con vista al
+  estacionamiento"`. Solo se muestra si TODAS las promociones de ese modelo la
+  comparten.
 - **Un desarrollo aparece o desaparece solo.** Si le agregas un bloque `promos`
   a Lirios, entra al hub, al sitemap y a su propio silo sin tocar nada más. Si
   se lo quitas, desaparece de todos lados.

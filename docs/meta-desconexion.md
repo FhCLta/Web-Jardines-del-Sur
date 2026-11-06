@@ -17,7 +17,8 @@ Todo lo de Meta apuntaba al mismo píxel/dataset: **2016457592282966**.
 - Fuera el puente `/api/meta-capi` de `firebase.json` y el código de la función
   (`functions/`). La dirección ya responde 404.
 - Fuera los íconos de Facebook e Instagram del pie (queda la línea
-  "Florencio Hurtado · Asesor inmobiliario") y el `sameAs` a esas redes en los
+  "Florencio Hurtado · Asesor inmobiliario"; desde el 3 nov 2026 dice solo
+  "Altta Homes Cancún") y el `sameAs` a esas redes en los
   datos del inicio. Títulos, descripciones y H1: sin cambio (43 de 44 páginas
   idénticas; la del inicio solo perdió esos dos links en su JSON-LD).
 

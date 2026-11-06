@@ -1,6 +1,30 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
 
+> **✅ COMPLETADO 3–6 nov 2026 — SIN META, NÚMERO TEMPORAL, PROMOCIONES CON CONTADOR, FOTOS NUEVAS DE JDS6, TÍTULOS Y MAPAS DE LOS 4 DESARROLLOS.**
+>
+> - **Sin Meta (3 nov):** fuera Píxel, CAPI, `functions/` e íconos de redes; el
+>   botón de WhatsApp se queda. Detalle en `docs/meta-desconexion.md`. El pie
+>   dice solo "Altta Homes Cancún".
+> - **WhatsApp:** el 998 109 8443 también fue bloqueado; la web usa
+>   TEMPORALMENTE el de su jefe, 998 148 6819. Número, dirección y perfil de
+>   Google viven ahora en `lib/contacto.ts` (antes copiados en ~25 archivos).
+> - **Promociones de noviembre** + aviso en las tarjetas con cuenta regresiva y
+>   botón "Pregunta por la promoción", que se apaga solo al vencer. Campos nuevos
+>   `promos.vence` e `items[].condicion`. Cotizador: `NONI PROMO` (JdS6,
+>   −$50,000). El descuento del Capua del 6 no entra: el cotizador no tiene
+>   descuentos de departamento. Ver `docs/actualizar-promociones.md`.
+> - **Fotos nuevas de Jardines del Sur 6** (fachada primero, luego vistas de
+>   cocina-comedor-sala; 9 o 13 por modelo) y galería sin huecos. Ver
+>   `docs/fotos-modelos.md`.
+> - **Títulos de los 4 desarrollos en formato `Nombre Cancún | … en venta`** y
+>   sección "Ubicación de X" con mapa de su perfil de Google en JdS6, Lirios y
+>   La Rioja. Se descubrió que la web enlazaba un perfil ajeno, que Lirios
+>   llevaba datos de zona del 6 y que el perfil de La Rioja es la oficina con
+>   casas muestra, no el residencial. Todo en `docs/seo-local-ubicaciones.md`.
+> - **Pendiente de Florencio:** teléfono y "sitio web" de los 4 perfiles de
+>   Google; igualar la dirección del 6 (perfil vs web); pedir indexación.
+
 > **✅ COMPLETADO sesión 56 (17 sept 2026) — LOGOS DE LA RIOJA 2 Y LIRIOS 2 CON CONTORNO DE COLOR.**
 >
 > Sobre la foto del encabezado, los logos de La Rioja 2 y Lirios 2 siguen
