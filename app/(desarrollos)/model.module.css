@@ -603,6 +603,25 @@
   }
 }
 
+/* Columnas fijas cuando la principal va en 2x2 (ver principalAlta en
+   ModelGallery). Con auto-fit salían 3 columnas en pantallas medianas y 13
+   fotos dejaban huecos al final. */
+.galleryCuadrada {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .galleryCuadrada {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .galleryCuadrada {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* La principal en 2x2 (ver principalAlta en ModelGallery): su alto lo dan los
    dos renglones, así no queda hueco bajo las fotos chicas de arriba. */
 .galleryFeaturedAlto {

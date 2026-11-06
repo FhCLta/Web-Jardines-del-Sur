@@ -1,7 +1,9 @@
 // Fotos nuevas de Jardines del Sur 6 (nov 2026), elegidas de las carpetas que
 // armó Florencio en "jardines del sur 6/Modelo X/X/". Fachada siempre primero.
-// 9 por modelo a propósito: con 1 grande + 8 la galería de la ficha cierra sin
-// huecos (ver .galleryFeaturedAlto en model.module.css).
+// Después de la fachada, las vistas de cocina, comedor y sala juntas (pedido
+// de Florencio). 9 o 13 por modelo a propósito: con 1 grande + 8 o + 12 la
+// galería de la ficha cierra sin huecos (ver .galleryCuadrada en
+// model.module.css).
 // Nombres nuevos a propósito: las imágenes se guardan 30 días en el navegador
 // (firebase.json), y con el mismo nombre algunos clientes verían las viejas.
 // Uso: node scripts/fotos-jds6-nov2026.mjs   → escribe webp + miniatura y
@@ -12,7 +14,7 @@ import path from "path";
 
 const ORIGEN = "jardines del sur 6";
 const ANCHO = 1280; // nunca se agranda una foto más chica
-const CALIDAD = 76;
+const CALIDAD = 80; // calidad alta: casi no se nota contra el original
 const ANCHO_MINI = 640; // primera foto de la tarjeta (FIRST_IMAGE_THUMBS)
 
 const SELECCION = {
@@ -22,8 +24,8 @@ const SELECCION = {
     fotos: [
       ["departamento-modelo-capua-jardines-del-sur.jpg", "fachada"],
       ["vista-general-departamento-capua-jardines-del-sur.jpg", "sala-comedor-cocina"],
-      ["sala-departamento-capua-jardines-del-sur.jpg", "sala"],
       ["cocina-departamento-capua-jardines-del-sur.jpg", "cocina"],
+      ["sala-departamento-capua-jardines-del-sur.jpg", "sala"],
       ["recamara-principal-departamento-capua-jardines-del-sur.jpg", "recamara-principal"],
       ["recamara-departamento-capua-jardines-del-sur.jpg", "recamara-2"],
       ["recamara-departamento-capua-jardines-del-sur-2.jpg", "recamara-3"],
@@ -38,9 +40,9 @@ const SELECCION = {
       ["1.jpg", "fachada"],
       ["5.jpg", "sala-comedor"],
       ["8.jpg", "sala"],
+      ["3.jpg", "barra-y-lavado"],
       ["6.jpg", "comedor"],
       ["4.jpg", "cocina"],
-      ["3.jpg", "barra-y-lavado"],
       ["7.jpg", "estancia"],
       ["10.jpg", "recamara"],
       ["9.jpg", "bano"],
@@ -52,12 +54,16 @@ const SELECCION = {
     fotos: [
       ["1.jpg", "fachada"],
       ["2.jpg", "cocina-comedor-sala"],
-      ["3.jpg", "sala"],
+      ["12.jpg", "cocina-y-comedor"],
+      ["11.jpg", "comedor-y-sala"],
       ["5.jpg", "comedor"],
+      ["3.jpg", "sala"],
+      ["13.jpg", "sala-2"],
       ["4.jpg", "cocina"],
       ["6.jpg", "patio"],
       ["7.jpg", "recamara-principal"],
       ["8.jpg", "recamara-2"],
+      ["10.jpg", "estancia"],
       ["15.jpg", "roof-garden"],
     ],
   },
@@ -67,10 +73,14 @@ const SELECCION = {
     fotos: [
       ["1.jpg", "fachada"],
       ["2.jpg", "sala-comedor"],
+      ["14.jpg", "comedor-y-sala"],
+      ["13.jpg", "comedor-sala-y-escalera"],
       ["6.jpg", "sala"],
+      ["12.jpg", "sala-y-comedor"],
       ["3.jpg", "cocina"],
       ["4.jpg", "cocina-detalle"],
       ["5.jpg", "recamara-principal"],
+      ["8.jpg", "recamara-principal-2"],
       ["7.jpg", "recamara-2"],
       ["10.jpg", "recamara-3"],
       ["11.jpg", "estancia"],
@@ -81,15 +91,26 @@ const SELECCION = {
     sub: "Noni",
     fotos: [
       ["1.jpg", "fachada"],
+      ["16.jpg", "comedor-cocina-y-sala"],
       ["2.jpg", "sala"],
+      ["17.jpg", "comedor-y-cocina"],
+      ["18.jpg", "sala-comedor-y-escalera"],
       ["6.jpg", "comedor"],
-      ["3.jpg", "cocina"],
+      ["19.jpg", "cocina-con-barra"],
       ["7.jpg", "recibidor"],
       ["8.jpg", "recamara-principal"],
       ["13.jpg", "bano-y-vestidor"],
       ["11.jpg", "recamara-2"],
       ["14.jpg", "recamara-3"],
+      ["10.jpg", "estancia"],
     ],
+  },
+  // Solo la fachada es nueva. En el inventario le siguen 2, 6, 4 y 5.webp (la
+  // 3 era otra vista de la cocina): 5 fotos, que también cierran la galería.
+  "Modelo Tabachin": {
+    slug: "casa-tabachin",
+    sub: "Tabachin",
+    fotos: [["Fachada Tabachin.jpg", "fachada"]],
   },
 };
 

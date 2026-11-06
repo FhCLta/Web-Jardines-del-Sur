@@ -26,8 +26,8 @@
       "images": [
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-fachada.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-sala-comedor-cocina.webp",
-        "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-sala.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-cocina.webp",
+        "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-sala.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-recamara-principal.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-recamara-2.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-recamara-3.webp",
@@ -62,9 +62,9 @@
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-fachada.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-sala-comedor.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-sala.webp",
+        "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-barra-y-lavado.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-comedor.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-cocina.webp",
-        "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-barra-y-lavado.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-estancia.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-recamara.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-bano.webp"
@@ -99,10 +99,14 @@
       "images": [
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-fachada.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-sala-comedor.webp",
+        "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-comedor-y-sala.webp",
+        "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-comedor-sala-y-escalera.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-sala.webp",
+        "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-sala-y-comedor.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-cocina.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-cocina-detalle.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-recamara-principal.webp",
+        "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-recamara-principal-2.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-recamara-2.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-recamara-3.webp",
         "/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-estancia.webp"
@@ -142,12 +146,16 @@
       "images": [
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-fachada.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-cocina-comedor-sala.webp",
-        "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-sala.webp",
+        "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-cocina-y-comedor.webp",
+        "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-comedor-y-sala.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-comedor.webp",
+        "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-sala.webp",
+        "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-sala-2.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-cocina.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-patio.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-recamara-principal.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-recamara-2.webp",
+        "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-estancia.webp",
         "/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-roof-garden.webp"
       ]
     },
@@ -177,12 +185,11 @@
       ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/tabachin",
       "images": [
-        "/jardines/Modelo Tabachin/1.webp",
+        "/jardines/Modelo Tabachin/casa-tabachin-jardines-del-sur-6-fachada.webp",
         "/jardines/Modelo Tabachin/2.webp",
-        "/jardines/Modelo Tabachin/3.webp",
+        "/jardines/Modelo Tabachin/6.webp",
         "/jardines/Modelo Tabachin/4.webp",
-        "/jardines/Modelo Tabachin/5.webp",
-        "/jardines/Modelo Tabachin/6.webp"
+        "/jardines/Modelo Tabachin/5.webp"
       ]
     },
     {
@@ -213,14 +220,18 @@
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni",
       "images": [
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-fachada.webp",
+        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-comedor-cocina-y-sala.webp",
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-sala.webp",
+        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-comedor-y-cocina.webp",
+        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-sala-comedor-y-escalera.webp",
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-comedor.webp",
-        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-cocina.webp",
+        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-cocina-con-barra.webp",
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-recibidor.webp",
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-recamara-principal.webp",
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-bano-y-vestidor.webp",
         "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-recamara-2.webp",
-        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-recamara-3.webp"
+        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-recamara-3.webp",
+        "/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-estancia.webp"
       ]
     },
     {
