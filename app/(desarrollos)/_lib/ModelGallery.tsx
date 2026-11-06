@@ -48,13 +48,20 @@ export default function ModelGallery({
     };
   }, [lightboxIndex, prev, next]);
 
+  // Con 1 + múltiplo de 4 fotos (5, 9, 13) la principal puede ocupar 2x2: a su
+  // lado caben justas las chicas y la cuadrícula cierra sin huecos en 4 y en 3
+  // columnas. Con otros conteos se queda como estaba.
+  const principalAlta = images.length > 1 && (images.length - 1) % 4 === 0;
+
   return (
     <>
       <div className={styles.gallery}>
         {images.map((src, i) => (
           <div
             key={src}
-            className={`${styles.galleryItem} ${i === 0 ? styles.galleryFeatured : ""}`}
+            className={`${styles.galleryItem} ${i === 0 ? styles.galleryFeatured : ""} ${
+              i === 0 && principalAlta ? styles.galleryFeaturedAlto : ""
+            }`}
             onClick={() => open(i)}
             role="button"
             tabIndex={0}

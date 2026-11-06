@@ -13,13 +13,16 @@ const VirtualTourModal = dynamic(() => import('./VirtualTourModal'), {
   loading: () => null,
 });
 
+// Miniatura (640 px) de la PRIMERA foto, la única que carga la tarjeta al
+// abrir la página. Jardines del Sur 6 (menos Tabachín): fotos nuevas de nov
+// 2026, ver scripts/fotos-jds6-nov2026.mjs.
 const FIRST_IMAGE_THUMBS = {
-  '/jardines/Modelo Capua/1.webp': '/optimized/model-thumbs/jardines-Modelo-Capua-1.webp',
-  '/jardines/Modelo Cedro Plus/1.webp': '/optimized/model-thumbs/jardines-Modelo-Cedro-Plus-1.webp',
-  '/jardines/Modelo Flamboyan/1.webp': '/optimized/model-thumbs/jardines-Modelo-Flamboyan-1.webp',
-  '/jardines/Modelo Ceiba/1.webp': '/optimized/model-thumbs/jardines-Modelo-Ceiba-1.webp',
+  '/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Capua-departamento-capua-fachada.webp',
+  '/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Cedro-Plus-departamento-cedro-plus-fachada.webp',
+  '/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Flamboyan-casa-flamboyan-fachada.webp',
+  '/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Ceiba-casa-ceiba-fachada.webp',
   '/jardines/Modelo Tabachin/1.webp': '/optimized/model-thumbs/jardines-Modelo-Tabachin-1.webp',
-  '/jardines/Modelo Noni/1.webp': '/optimized/model-thumbs/jardines-Modelo-Noni-1.webp',
+  '/jardines/Modelo Noni/casa-noni-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Noni-casa-noni-fachada.webp',
   '/larioja2/Casa Fresno Elite/fachada.webp': '/optimized/model-thumbs/larioja2-Casa-Fresno-Elite-fachada.webp',
   '/larioja2/Casa Modelo Alamo/fachada.webp': '/optimized/model-thumbs/larioja2-Casa-Modelo-Alamo-fachada.webp',
   '/larioja2/Casa Noni Elite/fachada.webp': '/optimized/model-thumbs/larioja2-Casa-Noni-Elite-fachada.webp',

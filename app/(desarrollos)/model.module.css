@@ -603,6 +603,20 @@
   }
 }
 
+/* La principal en 2x2 (ver principalAlta en ModelGallery): su alto lo dan los
+   dos renglones, así no queda hueco bajo las fotos chicas de arriba. */
+.galleryFeaturedAlto {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 640px) {
+  .galleryFeaturedAlto {
+    grid-row: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
+
 /* Distribución */
 .levels {
   display: grid;
