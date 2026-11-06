@@ -125,7 +125,55 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
       },
       // El lugar, con coordenadas y enlace a su perfil de Google: el mismo
       // nodo que tiene /jardines-del-sur-7. Solo si el desarrollo trae `mapa`.
-      ...(mapa
+      // Si el perfil es la oficina (mapa.residencial), van dos nodos: el
+      // residencial en su ubicación real y la oficina con su perfil.
+      ...(mapa?.residencial
+        ? [
+            {
+              "@type": "Residence",
+              "@id": `${pageUrl}#residence`,
+              name: dev.name,
+              description: dev.heroSubtitle,
+              url: pageUrl,
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Cancún",
+                addressRegion: "Quintana Roo",
+                postalCode: mapa.postalCode,
+                addressCountry: "MX",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: mapa.residencial.geo.lat,
+                longitude: mapa.residencial.geo.lng,
+              },
+              hasMap: `https://www.google.com/maps?q=${mapa.residencial.geo.lat},${mapa.residencial.geo.lng}`,
+            },
+            {
+              "@type": "RealEstateAgent",
+              "@id": `${pageUrl}#oficina`,
+              name: mapa.placeName,
+              description: `Oficina de ventas y casas muestra de ${dev.name}.`,
+              url: pageUrl,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: mapa.street,
+                addressLocality: "Cancún",
+                addressRegion: "Quintana Roo",
+                postalCode: mapa.postalCode,
+                addressCountry: "MX",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: mapa.geo.lat,
+                longitude: mapa.geo.lng,
+              },
+              telephone: `+${PHONE_E164}`,
+              hasMap: mapa.placeUrl,
+              sameAs: [mapa.placeUrl, mapa.url],
+            },
+          ]
+        : mapa
         ? [
             {
               "@type": "Residence",
@@ -382,7 +430,10 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
             <h2>Ubicación de {dev.name}</h2>
 
             <div className={styles.ubicacionGrid}>
-              <MapEmbedCard embedSrc={mapaEmbed} title={`Mapa de ${dev.name}, Cancún`} />
+              <MapEmbedCard
+                embedSrc={mapaEmbed}
+                title={mapa.residencial ? `Mapa de las casas muestra de ${dev.name}` : `Mapa de ${dev.name}, Cancún`}
+              />
 
               <div>
                 <p className={styles.ubicacionLead}>
@@ -405,7 +456,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
 
                 <div className={styles.ubicacionBtns}>
                   <a href={mapa.url} target="_blank" rel="noreferrer" className="btn btn-primary">
-                    Cómo llegar
+                    {mapa.boton ?? "Cómo llegar"}
                   </a>
                   <a href={mapa.url} target="_blank" rel="noreferrer" className={styles.ubicacionLink}>
                     Ver el perfil en Google&nbsp;→

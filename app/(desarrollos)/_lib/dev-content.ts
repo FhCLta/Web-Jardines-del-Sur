@@ -73,6 +73,12 @@ export type DevContent = {
     postalCode: string;
     lead: { antes: string; fuerte: string; despues: string };
     puntos: Array<{ icono: string; titulo: string; detalle: string }>;
+    // Cuando el perfil de Google es la OFICINA con casas muestra y no el
+    // residencial (La Rioja 2): el mapa y "Cómo llegar" llevan a la oficina,
+    // que es donde se cita a los clientes, y los datos para Google ponen el
+    // residencial en su ubicación real y la oficina como un lugar aparte.
+    residencial?: { geo: { lat: number; lng: number } };
+    boton?: string; // texto del botón principal (por omisión "Cómo llegar")
   };
   whatsappMessage: string;
   hero: {
@@ -401,7 +407,40 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logoWidth: 190,
     logoSobreFoto: "blanco",
     logoFoto: { src: "/logos/la-rioja-2-contorno-v2.webp", width: 408, height: 277 },
-    location: { label: "Ubicación", value: "Av. 135 esq. Av. 127, Cancún, Q.R." },
+    // En Av. 135 esq. Av. 127 están la oficina y las casas muestra, NO el
+    // residencial (ese está junto a Jardines del Sur 6, a 2.9 km).
+    location: { label: "Casas muestra", value: "Av. 135 esq. Av. 127, 77536 Cancún, Q.R." },
+    // Perfil de Google de Florencio "La Rioja 2 | Altta Homes Cancun" = la
+    // oficina con casas muestra, donde cita a los clientes. El residencial es
+    // otro punto: "LA RIOJA RESIDENCIAL 2" en Maps es de otras personas, así que
+    // de ese solo se usan las coordenadas, sin enlazarlo. Medido en
+    // OpenStreetMap el 6 nov 2026 desde el residencial: Av. 127 a 90 m,
+    // Huayacán a ~540 m, aeropuerto 4.8 km en línea recta, JdS6 a 600 m.
+    // OJO: "Oficina de ventas de La Rioja Residencial" es la oficial, no suya.
+    mapa: {
+      placeName: "La Rioja 2 | Altta Homes Cancun",
+      cid: "10624409005148155448",
+      url: "https://www.google.com/maps?cid=10624409005148155448",
+      placeUrl:
+        "https://www.google.com/maps/place/La+Rioja+2+%7C+Altta+Homes+Cancun/@21.1028811,-86.8795074,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2be922ce401f:0x93717bb31c512e38!8m2!3d21.1028811!4d-86.8795074!16s%2Fg%2F11npy_dkg2",
+      geo: { lat: 21.1028811, lng: -86.8795074 },
+      street: "Av. 135 esq. Av. 127",
+      postalCode: "77536",
+      residencial: { geo: { lat: 21.0782863, lng: -86.8897497 } },
+      boton: "Cómo llegar a las casas muestra",
+      lead: {
+        antes: "La Rioja 2 está en la ",
+        fuerte: "Zona Sur de Cancún",
+        despues:
+          ", junto a Jardines\u00a0del\u00a0Sur\u00a06. Las casas muestra y la oficina de ventas, donde te recibimos para tu cita, están a 2.9\u00a0km, en Av. 135 esquina con Av. 127.",
+      },
+      puntos: [
+        { icono: "🏠", titulo: "Casas muestra y oficina de ventas", detalle: "Av. 135 esq. Av. 127 · aquí te recibimos para tu cita" },
+        { icono: "🏘️", titulo: "El residencial, junto a Jardines\u00a0del\u00a0Sur\u00a06", detalle: "A 2.9\u00a0km de las casas muestra" },
+        { icono: "🛣️", titulo: "A medio kilómetro de la Av. Huayacán", detalle: "Desde el residencial" },
+        { icono: "✈️", titulo: "A 10 minutos del aeropuerto", detalle: "Desde el residencial" },
+      ],
+    },
     whatsappMessage:
       "Hola, quiero más información sobre las casas residenciales de La Rioja 2 en Cancún.",
     promos: {

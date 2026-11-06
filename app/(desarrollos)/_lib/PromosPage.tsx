@@ -27,10 +27,10 @@ const EVERGREEN = [
   },
 ];
 
-// La primera tarjeta de EVERGREEN describe la zona de Jardines del Sur 6.
-// Lirios está en OTRA zona: la Huayacán le queda a ~4 km, no a 500 m (medido el
-// 6 nov 2026). La Rioja también la tiene pendiente (Huayacán a 1.5 km), pero
-// Florencio pidió dejar La Rioja para el final.
+// La primera tarjeta de EVERGREEN describe la zona de Jardines del Sur 6, y
+// también le sirve a La Rioja 2 (el residencial está a 600 m del 6; Huayacán a
+// ~540 m). Lirios está en OTRA zona: la Huayacán le queda a ~4 km (medido el
+// 6 nov 2026).
 const ZONA_POR_DEV: Partial<Record<DevSlug, string>> = {
   "lirios-residencial-2":
     "En la Zona Sur de Cancún: junto a la Av. Las Torres y a 600 m del Chedraui Santuario, en un residencial con control de acceso.",
