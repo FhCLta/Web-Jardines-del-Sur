@@ -379,16 +379,17 @@ export const DEVS: Record<DevSlug, DevContent> = {
     slug: "la-rioja-2",
     name: "La Rioja 2",
     shortName: "La Rioja 2",
-    // "La Rioja 2 Residencial" y no "La Rioja Residencial 2": es como se nombra
-    // el desarrollo en el propio texto de esta página, y es la forma que la gente
-    // teclea de verdad — en los términos de búsqueda de Google Ads aparecen
-    // "la rioja 2 residencial" y "residencial la rioja". Se AGREGÓ la palabra,
-    // no se quitó ninguna: el título sigue siendo dueño de "la rioja 2".
-    // 6 nov 2026: formato de Jardines del Sur 6/7 y Lirios 2 ("X Cancún | … en
-    // venta"), pedido por Florencio; se conserva "casas de lujo". Antes: "La
-    // Rioja 2 Residencial | Casas de Lujo en Cancún". metaTitle dice lo mismo.
-    metaTitle: "La Rioja 2 Residencial Cancún | Casas de lujo en venta",
-    seoTitleLead: "La Rioja 2 Residencial Cancún | Casas de lujo en venta",
+    // 6 nov 2026, decisión de Florencio: "La Rioja Residencial 2", igual que
+    // "Lirios Residencial 2" y que el nombre oficial (así se llaman la oficina de
+    // ventas y el residencial en Google Maps), en el formato de los demás
+    // ("X Cancún | … en venta"). Se conserva "casas de lujo".
+    // Antes decía "La Rioja 2 Residencial": en Google Ads la gente teclea "la
+    // rioja 2 residencial". Google entiende el orden distinto, pero si la
+    // posición de "la rioja 2" cae, este es el primer sospechoso.
+    // Títulos anteriores: "La Rioja 2 Residencial | Casas de Lujo en Cancún" y,
+    // unas horas, "La Rioja 2 Residencial Cancún | Casas de lujo en venta".
+    metaTitle: "La Rioja Residencial 2 Cancún | Casas de lujo en venta",
+    seoTitleLead: "La Rioja Residencial 2 Cancún | Casas de lujo en venta",
     metaDescription:
       "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 10 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",
