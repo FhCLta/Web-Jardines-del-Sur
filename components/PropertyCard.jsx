@@ -303,44 +303,6 @@ export default function PropertyCard({ property, origen = "" }) {
             </div>
           )}
 
-          {/* No dice cuál es la promoción a propósito: la idea es que el
-              cliente pregunte por WhatsApp. La leyenda "Aplican restricciones"
-              y la vigencia los exige Altta en toda publicación digital. */}
-          {promoVigente && (
-            <div className={styles.promoPanel}>
-              <p className={styles.promoTitulo}>
-                <span aria-hidden="true">🎁 </span>
-                {modelType === "Casa" ? "Esta casa tiene" : modelType === "Departamento" ? "Este departamento tiene" : "Tiene"}{" "}
-                promoción en {promo.mes}
-              </p>
-              {promo.condicion && (
-                <span className={styles.promoCondicion}>{promo.condicion}</span>
-              )}
-              <div className={styles.promoCuenta}>
-                <ContadorPromo restante={restante} venceTexto={promo.venceTexto} />
-              </div>
-              {/* Botón aparte, no en lugar de "Cotizar ahora": se va con el
-                  recuadro al vencer y la tarjeta queda como siempre. */}
-              <a
-                className={`btn btn-primary ${styles.promoBtn}`}
-                href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
-                  `Hola, vi que ${conArticulo(property.nombre_modelo)} en ${property.development} tiene promoción en ${promo.mes}${promo.condicion ? ` (${promo.condicion.toLowerCase()})` : ""}. ¿Me das los detalles?${origen ? ` Lo vi en la página de ${origen}.` : ""}`
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Pregunta por la promoción
-              </a>
-              {/* Cada frase entera en su renglón; el "·" va pegado a la frase
-                  de la izquierda para que nunca abra una línea. */}
-              <p className={styles.promoLetra}>
-                {promo.seleccionadas && <span>En unidades seleccionadas ·</span>}{" "}
-                <span>Aplican restricciones ·</span>{" "}
-                <span>Vigencia: {promo.venceTexto}</span>
-              </p>
-            </div>
-          )}
-
           {/* Sin ningun dato (modelo por anunciar) la caja salia vacia. */}
           {(property.metros_terreno || property.metros_construccion != null || recamaras || banos) && (
           <div className={styles.statsRow}>
@@ -398,6 +360,48 @@ export default function PropertyCard({ property, origen = "" }) {
               ))}
             </ul>
           </div>
+          )}
+
+          {/* Va DESPUÉS de metros y distribución (decisión de Florencio, 6 nov
+              2026): el cliente ve primero qué incluye y la promoción remata.
+              .levels crece (flex-grow), así que el recuadro queda pegado a los
+              botones y alineado en todas las tarjetas de la fila.
+              No dice cuál es la promoción a propósito: la idea es que el
+              cliente pregunte por WhatsApp. La leyenda "Aplican restricciones"
+              y la vigencia los exige Altta en toda publicación digital. */}
+          {promoVigente && (
+            <div className={styles.promoPanel}>
+              <p className={styles.promoTitulo}>
+                <span aria-hidden="true">🎁 </span>
+                {modelType === "Casa" ? "Esta casa tiene" : modelType === "Departamento" ? "Este departamento tiene" : "Tiene"}{" "}
+                promoción en {promo.mes}
+              </p>
+              {promo.condicion && (
+                <span className={styles.promoCondicion}>{promo.condicion}</span>
+              )}
+              <div className={styles.promoCuenta}>
+                <ContadorPromo restante={restante} venceTexto={promo.venceTexto} />
+              </div>
+              {/* Botón aparte, no en lugar de "Cotizar ahora": se va con el
+                  recuadro al vencer y la tarjeta queda como siempre. */}
+              <a
+                className={`btn btn-primary ${styles.promoBtn}`}
+                href={`https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
+                  `Hola, vi que ${conArticulo(property.nombre_modelo)} en ${property.development} tiene promoción en ${promo.mes}${promo.condicion ? ` (${promo.condicion.toLowerCase()})` : ""}. ¿Me das los detalles?${origen ? ` Lo vi en la página de ${origen}.` : ""}`
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Pregunta por la promoción
+              </a>
+              {/* Cada frase entera en su renglón; el "·" va pegado a la frase
+                  de la izquierda para que nunca abra una línea. */}
+              <p className={styles.promoLetra}>
+                {promo.seleccionadas && <span>En unidades seleccionadas ·</span>}{" "}
+                <span>Aplican restricciones ·</span>{" "}
+                <span>Vigencia: {promo.venceTexto}</span>
+              </p>
+            </div>
           )}
 
           <div className={styles.cardActions}>
