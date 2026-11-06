@@ -516,10 +516,13 @@ export const DEVS: Record<DevSlug, DevContent> = {
     slug: "lirios-residencial-2",
     name: "Lirios Residencial 2",
     shortName: "Lirios 2",
-    metaTitle: "Lirios Residencial 2 Cancún · Departamentos desde $1.99M | Altta Homes",
-    seoTitleLead: "Lirios Residencial 2 | Departamentos en Cancún",
+    // Título espejo de /jardines-del-sur-7 y /jardines-del-sur-6. Pedido por
+    // Florencio el 6 nov 2026. Antes: "Lirios Residencial 2 | Departamentos en
+    // Cancún". metaTitle (nombre en los datos para Google) dice lo mismo.
+    metaTitle: "Lirios Residencial 2 Cancún | Departamentos en venta",
+    seoTitleLead: "Lirios Residencial 2 Cancún | Departamentos en venta",
     metaDescription:
-      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún. Dos modelos —Capua y Cedro Plus— de 3 recámaras, hasta 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. A 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
+      "Departamentos en Lirios Residencial 2, Zona Sur de Cancún. Dos modelos —Capua y Cedro Plus— de 3 recámaras, hasta 2.5 baños y 2 estacionamientos, con amenidades y control de acceso. Junto a la Av. Las Torres, a 600 m del Chedraui Santuario. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Departamentos en Lirios Residencial 2, Cancún",
     heroSubtitle:
       "Departamentos Capua y Cedro Plus, de tres recámaras y dos cajones de estacionamiento, en el nuevo desarrollo residencial de Altta Homes en Cancún.",
@@ -530,6 +533,35 @@ export const DEVS: Record<DevSlug, DevContent> = {
     logoSobreFoto: "blanco",
     logoFoto: { src: "/logos/lirios-2-contorno-v2.webp", width: 556, height: 277 },
     location: { label: "Ubicación", value: "Av. Robles, 77536 Cancún, Q.R." },
+    // Perfil de Google de Florencio "Lirios Residencial 2 | Altta Homes Cancun"
+    // (agentes inmobiliarios). Datos leídos del perfil el 6 nov 2026.
+    mapa: {
+      placeName: "Lirios Residencial 2 | Altta Homes Cancun",
+      cid: "4371211098013598685",
+      url: "https://www.google.com/maps?cid=4371211098013598685",
+      placeUrl:
+        "https://www.google.com/maps/place/Lirios+Residencial+2+%7C+Altta+Homes+Cancun/@21.1283273,-86.8877574,17z/data=!3m1!4b1!4m6!3m5!1s0x8f4c2b365d8005fd:0x3ca9a9557f5883dd!8m2!3d21.1283273!4d-86.8877574!16s%2Fg%2F11nvtpk1xl",
+      geo: { lat: 21.1283273, lng: -86.8877574 },
+      street: "Av. Robles",
+      postalCode: "77536",
+      lead: {
+        antes: "Lirios Residencial 2 está en la ",
+        fuerte: "Zona Sur de Cancún",
+        despues:
+          ", junto a la Av. Las Torres, con supermercados, escuelas y el Santuario María Desatadora de Nudos a unos minutos.",
+      },
+      // Su zona es OTRA que la de Jardines del Sur 6 y 7 (Florencio, 6 nov
+      // 2026). Distancias en línea recta desde el pin del perfil (OpenStreetMap
+      // y Google Maps). "Av. Las Torres" es la Av. Cancún. La Av. Huayacán queda
+      // a ~4 km: el "500 m de Av. Huayacán" es de Jardines del Sur 6, no de aquí.
+      puntos: [
+        { icono: "📍", titulo: "Av. Robles", detalle: "77536 Cancún, Q.R." },
+        // \u00a0: el número nunca se separa de su unidad ("2 km" salía solo).
+        { icono: "🛣️", titulo: "A 450\u00a0m de la Av. Las Torres", detalle: "Y a 1\u00a0km de la Av. 135" },
+        { icono: "🛒", titulo: "A 600\u00a0m del Chedraui Santuario", detalle: "Walmart, Soriana y Bodega Aurrera a menos de\u00a02\u00a0km" },
+        { icono: "⛪", titulo: "A 800\u00a0m del Santuario María Desatadora de Nudos", detalle: "Escuelas a 1\u00a0km" },
+      ],
+    },
     // Primeras promociones de Lirios (octubre 2026). Con este bloque se
     // publica /lirios-residencial-2/promociones y entra al hub y al sitemap.
     promos: {
