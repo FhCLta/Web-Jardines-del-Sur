@@ -53,8 +53,9 @@ node scripts/check-precios.mjs           # SIEMPRE al final: debe decir "TODO EN
 ## 3. Publicar
 
 **Teléfono, dirección de la oficina y perfil de Google** viven en un solo
-archivo, `lib/contacto.ts`. Hoy el WhatsApp es TEMPORALMENTE el de su jefe
-(998 148 6819). El cotizador no lee de ahí.
+archivo, `lib/contacto.ts`. Desde el 7 nov 2026 el WhatsApp es el número nuevo
+de Florencio, 998 704 3388 (los dos anteriores fueron bloqueados). El
+cotizador no lee de ahí: su teléfono va en `datosAsesores` de `script.js`.
 
 ```bash
 npm run build

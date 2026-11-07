@@ -4,17 +4,17 @@
 // este archivo, se compila y se publica.
 //
 // Historial: 998 205 9044 (hasta 28 oct 2026) → 998 109 8443 (bloqueado el
-// 3 nov 2026) → 998 148 6819, TEMPORAL: es el de su jefe, Eduardo González
-// Núñez, mientras Florencio activa su WhatsApp Business nuevo.
+// 3 nov 2026) → 998 148 6819, temporal, el de su jefe Eduardo González Núñez
+// (3–7 nov 2026) → 998 704 3388, el WhatsApp nuevo de Florencio (7 nov 2026).
 // ⚠️ El cotizador (public/cotizador) NO lee de aquí: ahí cada asesor tiene su
-// propio teléfono en `datosAsesores`.
+// propio teléfono en `datosAsesores` (el de Florencio es el mismo).
 
 /** Formato internacional sin "+", para wa.me: 52 + lada + número. */
-export const PHONE_E164 = "529981486819";
+export const PHONE_E164 = "529987043388";
 /** Para enlaces tel: y para el JSON-LD. */
 export const PHONE_TEL = `+${PHONE_E164}`;
 /** Como se ve escrito en la página. */
-export const PHONE_DISPLAY = "+52 998 148 6819";
+export const PHONE_DISPLAY = "+52 998 704 3388";
 
 // DIRECCIÓN DE LA OFICINA DE VENTAS — UN SOLO LUGAR.
 // Dirección dada por Florencio el 5 nov 2026. Antes la web decía

@@ -2004,7 +2004,7 @@ const telefonoAsesorInput = document.getElementById("telefonoAsesor");
 // Asesores vigentes (Florencio los da de alta). Si se agrega uno, va tambien
 // en el <select> de index.html, con el MISMO nombre: es la llave del telefono.
 const datosAsesores = {
-    "Florencio Hurtado": "+52 998 109 8443",
+    "Florencio Hurtado": "+52 998 704 3388",
     "Eduardo Gonzalez Nuñez": "+52 998 148 6819",
     "Estefania Sosa": "+52 998 306 4183",
     "Rafael Heredia": "+52 998 136 5090",
