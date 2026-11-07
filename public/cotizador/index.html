@@ -17,13 +17,17 @@
 
 <body>
     <header class="header-fixed brand-header">
+        <!-- Rutas ABSOLUTAS (/cotizador/Imagen/...), no "Imagen/...": en el iPhone,
+             la copia que arma html2canvas para la imagen y el PDF compartidos
+             ignora el <base> y buscaba /Imagen/... (404). Esos dos documentos
+             salian SIN estos logos. Medido el 6 nov 2026. -->
         <div class="brand-logos">
-            <img class="brand-logo brand-logo-altta" src="Imagen/altta-homes-v2.webp" alt="Altta Homes · una marca de Grupo Sadasi">
+            <img class="brand-logo brand-logo-altta" src="/cotizador/Imagen/altta-homes-v2.webp" alt="Altta Homes · una marca de Grupo Sadasi">
             <div class="brand-title" aria-label="Presupuesto para tu hogar ideal">
                 <span>Presupuesto</span>
                 <strong>Para tu Hogar Ideal</strong>
             </div>
-            <img class="brand-logo brand-logo-sadasi" src="Imagen/grupo-sadasi-50-v2.webp" alt="Grupo Sadasi · 50 años">
+            <img class="brand-logo brand-logo-sadasi" src="/cotizador/Imagen/grupo-sadasi-50-v2.webp" alt="Grupo Sadasi · 50 años">
         </div>
         <!-- Logos de los 3 desarrollos, tomados del sitio (/logos/) para que sean
              LOS MISMOS archivos que ve el cliente en la web. Rutas ABSOLUTAS a
@@ -288,7 +292,7 @@
                     <div class="input-group">
                         <input type="text" id="precioTotalCasa" readonly>
                         <button id="copiarBtn" class="copiar-btn">
-                            <img src="Imagen/copy_8241358.png" alt="Copiar">
+                            <img src="/cotizador/Imagen/copy_8241358.png" alt="Copiar">
                         </button>
                     </div>
                 </div>

@@ -205,6 +205,72 @@ Detalle en `docs/api-precios.md`.
 ## 9) Bitácora de actualizaciones
 Usar este formato para registrar todas las actualizaciones.
 
+### [2026-11-06] - iPhone: la imagen, el PDF y la impresión ya no cortan los montos
+
+**Lo que reportó Florencio:** desde el iPhone no salían bien ni la impresión ni
+la imagen compartida, en Safari ni en Chrome (en el iPhone los dos usan el motor
+de Safari, WebKit).
+
+**Cómo se midió (vale para la próxima):** no hay simulador de iPhone en la Mac,
+pero sí se puede correr **WebKit** con Playwright (`npx playwright install
+webkit`, en una carpeta temporal) emulando un iPhone 15 Pro Max, generar la
+imagen con el BOTÓN real y emular la impresión. Las fallas salieron igual que en
+el teléfono.
+
+**Causa 1 — la letra de los campos.** Los `<input>` y `<select>` no tenían letra
+propia y cada navegador ponía la suya: Chrome, Arial (con la que está calibrado
+todo); el iPhone, la letra del sistema de Apple, más ancha y más gruesa.
+Medido: "$3,230,000.00" pedía 184 px en una caja de 168. Por eso en la imagen y
+el PDF hechos desde el iPhone se cortaban los montos de Detalles de Precio, los
+totales y los pagos. **Arreglo:** `font-family: Arial` explícita en
+`input, select`. En Chrome no cambia nada, salvo las **fechas**: Chrome las
+dibujaba en letra de máquina de escribir (monospace) y ahora van en Arial como
+todo lo demás.
+
+**Causa 2 — Safari imprime a 90 px por pulgada, no a 96.** WebKit armaba la hoja
+con 1.25 px por punto (herencia de 2003, para imitar a Internet Explorer). En
+carta con nuestros márgenes caben 704 px en vez de los 751 de Chrome, y todo sale
+6.7% más grande. Apple lo corrigió en su código el **31 oct 2026**
+(bugs.webkit.org 329426, "Print Page Content at 96 px per inch"), pero aún no
+llega a los iPhone. **Arreglo:** al final de `styles.css`, solo en impresión y
+solo en el motor de Safari (`@supports (font: -apple-system-body)`, que Chrome y
+Firefox no reconocen), `html { zoom: 0.9375 }` = 704/751: Safari arma
+exactamente la hoja de Chrome. ⚠️ **Cuando el arreglo de Apple llegue a los
+iPhone, esa regla sobra**: la hoja saldría 6% más chica de lo necesario, sin
+cortar nada. Ese día se quita.
+
+**Red de seguridad:** las columnas etiqueta | valor de impresión pasaron de
+`184px minmax(0, 1fr)` a `minmax(0, 184px) minmax(108px, 1fr)` (y lo mismo con
+170/182/188 px). Si la hoja sale más angosta de lo calibrado, cede la ETIQUETA
+(se parte en dos renglones) y el monto nunca se corta. Con el ancho de Chrome
+las etiquetas tienen su medida de siempre.
+
+**Corrige la entrada de junio de 2026:** el corte NO venía de que Safari
+imprimiera "al ancho de la pantalla del teléfono" (eso daría una hoja de 430 px,
+con los valores casi invisibles). Venía de estas dos causas juntas. El
+`min-width: 7.4in` de entonces (710 px) era más ancho que los 704 px de Safari;
+por eso el navegador reescalaba la hoja.
+
+**Causa 3 — la imagen y el PDF del iPhone salían SIN los logos de Altta y
+Grupo Sadasi.** Se encontró al probar ya publicado. Esos dos logos (y el ícono
+de copiar) usaban rutas relativas (`Imagen/...`). En el iPhone, la copia de la
+página que arma html2canvas ignora el `<base href="/cotizador/">` y los buscaba
+en `/Imagen/...`: 404. En Chrome sí respeta el `<base>`, y en un servidor local
+con la URL `/cotizador/index.html` tampoco se nota. Solo falla en la URL real,
+`/cotizador` sin diagonal. **Arreglo:** rutas absolutas
+`/cotizador/Imagen/...`, como ya llevaban los logos de los desarrollos.
+⚠️ Cualquier imagen nueva del cotizador va con ruta absoluta.
+
+**Además:** `text-size-adjust: 100%` en `html`, para que el iPhone no agrande la
+letra por su cuenta (lo hace al girar el teléfono).
+
+**Verificado (WebKit y Chrome, 7 escenarios):** casas y departamentos de los
+cuatro desarrollos, planes bancario, cofinavit, infonavit y contado, de 3 a 24
+pagos. En Chrome la impresión es idéntica píxel por píxel, salvo las fechas. En
+WebKit a 704 px antes se cortaban de 2 a 4 montos por cotización; ahora ninguno,
+y la hoja mide en proporción lo mismo que en Chrome. La prueba final es la vista
+previa de impresión en el iPhone de Florencio.
+
 ### [2026-09-21] - Impresión: fuera las flechitas de los selectores y el calendario
 
 En papel no tienen sentido la flecha de los `<select>` ni el icono de calendario

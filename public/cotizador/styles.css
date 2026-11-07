@@ -93,6 +93,13 @@
     box-shadow: 0 0 3px rgba(232, 93, 37, 0.28);
 }
 
+/* Que el iPhone no agrande la letra por su cuenta (lo hace al girarlo y
+   puede hacerlo al imprimir): todos los tamanos de este archivo estan medidos. */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
@@ -479,6 +486,13 @@ label {
 /* Estilos normales para pantalla */
 input,
 select {
+    /* La letra de los campos va EXPLICITA. Sin esto cada navegador pone la
+       suya: Chrome, Arial (con la que esta calibrado todo); el iPhone —Safari
+       y Chrome, que alla usan el mismo motor— la letra del sistema de Apple,
+       mas ancha y mas gruesa. Medido (6 nov 2026): "$3,230,000.00" ocupaba
+       184 px en una caja de 168, y en la imagen, el PDF y la impresion
+       hechos desde el iPhone los montos salian cortados. */
+    font-family: Arial, sans-serif;
     width: 100%;
     margin-top: 10px;
     border: 1px solid var(--brand-line);
@@ -2631,18 +2645,23 @@ body.generando-imagen .bloque h2::after {
         margin-bottom: 3px !important;
     }
 
+    /* Etiqueta | valor. Si la hoja sale mas angosta de lo calibrado (Safari,
+       ver el final del archivo), cede la ETIQUETA —parte su texto en dos
+       renglones— y el monto nunca se corta: cada valor tiene un minimo en el
+       que cabe completo ("$2,864,140.00" en negritas). Con el ancho de Chrome
+       las etiquetas tienen su medida de siempre y nada cambia. */
     .campo-horizontal {
-        grid-template-columns: 184px minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 184px) minmax(108px, 1fr) !important;
         column-gap: 8px !important;
         min-height: 20px !important;
     }
 
     .column-2 .campo-horizontal {
-        grid-template-columns: 170px minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 170px) minmax(96px, 1fr) !important;
     }
 
     #detallesPrecio .campo-horizontal {
-        grid-template-columns: 182px minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 182px) minmax(106px, 1fr) !important;
     }
 
     .campo-horizontal label {
@@ -2700,7 +2719,7 @@ body.generando-imagen .bloque h2::after {
        fila con su propia etiqueta, alineada como las demás. */
     #prototipoContainer,
     #departamentoContainer {
-        grid-template-columns: 184px minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 184px) minmax(108px, 1fr) !important;
         row-gap: 3px !important;
     }
 
@@ -2867,7 +2886,7 @@ body.generando-imagen .bloque h2::after {
        conserva una etiqueta un poco más ancha en Detalles de Precio porque
        sus textos son más largos ("Valor Avalúo del Departamento:"). */
     body.es-departamento #detallesPrecio .campo-horizontal {
-        grid-template-columns: 188px minmax(0, 1fr) !important;
+        grid-template-columns: minmax(0, 188px) minmax(106px, 1fr) !important;
     }
 
     /* Departamentos con 7+ pagos: antes de llegar al modo compacto general
@@ -3483,3 +3502,25 @@ body.generando-imagen #telefonoAsesor {
 }
 
 body.generando-imagen .copiar-campo { display: none !important; }
+
+/* --- IMPRESION EN SAFARI Y EN EL IPHONE (6 nov 2026) ---
+   Todo lo de arriba esta calibrado en Chrome, que imprime a 96 px por
+   pulgada: en una hoja carta con estos margenes caben 751 px de ancho.
+   Safari —y TODO navegador del iPhone, Chrome incluido, porque alla usan el
+   motor de Safari— imprime a 90 px por pulgada: solo caben 704 px y todo sale
+   6.7% mas grande. Con eso los montos se cortaban y la hoja se apretaba.
+   Aqui se reduce la hoja en esa misma proporcion (704 / 751 = 0.9375) para
+   que Safari arme exactamente lo que arma Chrome.
+   La condicion solo la cumple el motor de Safari (Chrome y Firefox no
+   reconocen esa letra del sistema de Apple).
+   ⚠️ Apple ya lo corrigio en su codigo el 31 oct 2026 (bugs.webkit.org
+   329426, "Print Page Content at 96 px per inch"). Cuando llegue a los
+   iPhone, Safari imprimira como Chrome y esta regla dejara la hoja 6% mas
+   chica de lo necesario —se ve bien, con mas margen—. Ese dia se quita. */
+@media print {
+    @supports (font: -apple-system-body) {
+        html {
+            zoom: 0.9375;
+        }
+    }
+}
