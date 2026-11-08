@@ -17,8 +17,8 @@ const VirtualTourModal = dynamic(() => import('./VirtualTourModal'), {
 // abrir la página. Jardines del Sur 6: fotos nuevas de nov 2026 (del Tabachín,
 // solo la fachada), ver scripts/fotos-jds6-nov2026.mjs.
 const FIRST_IMAGE_THUMBS = {
-  '/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Capua-departamento-capua-fachada.webp',
-  '/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Cedro-Plus-departamento-cedro-plus-fachada.webp',
+  '/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-fachada-edificio.webp': '/optimized/model-thumbs/jardines-Modelo-Capua-departamento-capua-fachada-edificio.webp',
+  '/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-fachada-edificio.webp': '/optimized/model-thumbs/jardines-Modelo-Cedro-Plus-departamento-cedro-plus-fachada-edificio.webp',
   '/jardines/Modelo Flamboyan/casa-flamboyan-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Flamboyan-casa-flamboyan-fachada.webp',
   '/jardines/Modelo Ceiba/casa-ceiba-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Ceiba-casa-ceiba-fachada.webp',
   '/jardines/Modelo Tabachin/casa-tabachin-jardines-del-sur-6-fachada.webp': '/optimized/model-thumbs/jardines-Modelo-Tabachin-casa-tabachin-fachada.webp',

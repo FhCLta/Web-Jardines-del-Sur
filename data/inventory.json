@@ -24,7 +24,7 @@
       ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/capua",
       "images": [
-        "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-fachada.webp",
+        "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-fachada-edificio.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-sala-comedor-cocina.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-cocina.webp",
         "/jardines/Modelo Capua/departamento-capua-jardines-del-sur-6-sala.webp",
@@ -59,7 +59,7 @@
       ],
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/cedro-plus",
       "images": [
-        "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-fachada.webp",
+        "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-fachada-edificio.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-sala-comedor.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-sala.webp",
         "/jardines/Modelo Cedro Plus/departamento-cedro-plus-jardines-del-sur-6-barra-y-lavado.webp",
@@ -264,15 +264,14 @@
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/fresno-elite",
       "images": [
         "/larioja2/Casa Fresno Elite/fachada.webp",
-        "/larioja2/Casa Fresno Elite/2.webp",
-        "/larioja2/Casa Fresno Elite/3.webp",
-        "/larioja2/Casa Fresno Elite/4.webp",
-        "/larioja2/Casa Fresno Elite/5.webp",
-        "/larioja2/Casa Fresno Elite/6.webp",
-        "/larioja2/Casa Fresno Elite/7.webp",
-        "/larioja2/Casa Fresno Elite/8.webp",
-        "/larioja2/Casa Fresno Elite/9.webp",
-        "/larioja2/Casa Fresno Elite/10.webp"
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-comedor-y-sala.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-sala-y-comedor.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-cocina.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-comedor.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-sala-de-tv.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-recamara-principal.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-recamara-2.webp",
+        "/larioja2/Casa Fresno Elite/casa-fresno-elite-la-rioja-2-bano.webp"
       ]
     },
     {
@@ -305,17 +304,18 @@
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/alamo",
       "images": [
         "/larioja2/Casa Modelo Alamo/fachada.webp",
-        "/larioja2/Casa Modelo Alamo/2.webp",
-        "/larioja2/Casa Modelo Alamo/3.webp",
-        "/larioja2/Casa Modelo Alamo/4.webp",
-        "/larioja2/Casa Modelo Alamo/5.webp",
-        "/larioja2/Casa Modelo Alamo/6.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-sala-y-comedor.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-cocina-y-comedor.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-cocina.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-comedor.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-sala.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-estancia.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-recamara-principal.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-recamara-2.webp",
         "/larioja2/Casa Modelo Alamo/7.webp",
-        "/larioja2/Casa Modelo Alamo/8.webp",
-        "/larioja2/Casa Modelo Alamo/9.webp",
-        "/larioja2/Casa Modelo Alamo/10.webp",
-        "/larioja2/Casa Modelo Alamo/11.webp",
-        "/larioja2/Casa Modelo Alamo/12.webp"
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-balcon.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-terraza.webp",
+        "/larioja2/Casa Modelo Alamo/casa-modelo-alamo-la-rioja-2-jardin.webp"
       ]
     },
     {
@@ -352,16 +352,18 @@
       "url_recorrido_virtual": "https://app.lapentor.com/sphere/noni-elite",
       "images": [
         "/larioja2/Casa Noni Elite/fachada.webp",
-        "/larioja2/Casa Noni Elite/2.webp",
-        "/larioja2/Casa Noni Elite/3.webp",
-        "/larioja2/Casa Noni Elite/4.webp",
-        "/larioja2/Casa Noni Elite/5.webp",
-        "/larioja2/Casa Noni Elite/6.webp",
-        "/larioja2/Casa Noni Elite/7.webp",
-        "/larioja2/Casa Noni Elite/8.webp",
-        "/larioja2/Casa Noni Elite/9.webp",
-        "/larioja2/Casa Noni Elite/10.webp",
-        "/larioja2/Casa Noni Elite/11.webp"
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-sala.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-comedor.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-cocina.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-estancia.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-escalera.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-estudio.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-recamara-principal.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-vestidor.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-bano.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-recamara-2.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-recamara-3.webp",
+        "/larioja2/Casa Noni Elite/casa-noni-elite-la-rioja-2-terraza.webp"
       ]
     },
     {

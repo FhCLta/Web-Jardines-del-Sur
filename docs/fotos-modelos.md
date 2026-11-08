@@ -41,6 +41,14 @@ personas.
 Resultado nov 2026: Ceiba, Flamboyán y Noni 13; Capua y Cedro Plus 9 (no hay más
 vistas combinadas); Tabachín 5 (fachada nueva + 4 que ya tenía).
 
+**La Rioja 2 (7 nov 2026), `scripts/fotos-larioja2-nov2026.mjs`:** Florencio
+pidió NO tocar la fachada, solo los interiores, así que la primera foto sigue
+siendo `fachada.webp` (y su miniatura). Noni Elite 13 y Álamo 13 (las fotos
+nuevas no traen baño: se conservó el `7.webp` de antes); Fresno Elite 9 (de 3
+fotos del comedor entraron 2). En sus carpetas venían archivos repetidos con
+otro nombre: comparar con `md5` antes de elegir. Las fotos viejas de Noni Elite
+se quedan: la Casa Noni de La Rioja (`larioja2-noni`) usa varias.
+
 ## 3. Cómo se convierten
 
 `node scripts/fotos-jds6-nov2026.mjs` — la lista de cada modelo está en el
@@ -66,6 +74,25 @@ node scripts/diseno/verificar-pantallas.mjs /jardines-del-sur-6 /jardines-del-su
 ```
 
 Revisar que no haya imágenes rotas y mirar la galería en 1280, 900 y 390 px.
+
+**Fachadas nuevas del Capua y el Cedro Plus (8 nov 2026):** Florencio las dejó
+retocadas en 4K (`Fachada 4k.jpg`, y una copia `Fachada.png` más chica que no
+se usa). Etiqueta nueva `fachada-edificio`, así que el webp y la miniatura
+tienen nombre nuevo (`FIRST_IMAGE_THUMBS` en `PropertyCard.jsx` apunta a ella).
+Para cambiar solo esos modelos: `node scripts/fotos-jds6-nov2026.mjs "Modelo
+Capua" "Modelo Cedro Plus"`.
+
+⚠️ **Las fotos retocadas pesan el doble.** Traen tanto detalle fino que a
+calidad 80 la del Capua pesaba 177 KB y la del Cedro 222 (las de antes, 90 y
+95), y la fachada es lo primero que carga la ficha. Con un suavizado muy leve
+(0.7) y calidad 72 (`RETOCADA` en el script) quedaron en 95 y 129 KB, y sus
+miniaturas en 26 y 35 KB, como antes. Comparadas al 100% casi no se
+distinguen. Florencio pidió expresamente que no pesen ni pongan lento el sitio.
+
+⚠️ **Una fachada cuadrada se ve mal en la tarjeta:** la tarjeta pinta la foto
+con `objectFit: contain` y deja franjas a los lados. La del Capua venía de
+3840×3840; se recorta a 4:3 por el centro (tercer valor de la lista en el
+script).
 
 ## 4. Ojo
 

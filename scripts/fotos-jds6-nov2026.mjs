@@ -6,8 +6,11 @@
 // model.module.css).
 // Nombres nuevos a propósito: las imágenes se guardan 30 días en el navegador
 // (firebase.json), y con el mismo nombre algunos clientes verían las viejas.
+// Por eso la etiqueta de la fachada también nombra su miniatura: una fachada
+// que se cambia lleva etiqueta nueva ("fachada-edificio", 8 nov 2026).
 // Uso: node scripts/fotos-jds6-nov2026.mjs   → escribe webp + miniatura y
 // muestra la lista de rutas para data/inventory.json.
+// Solo algunos modelos: node scripts/fotos-jds6-nov2026.mjs "Modelo Capua"
 import sharp from "sharp";
 import fs from "fs";
 import path from "path";
@@ -16,13 +19,25 @@ const ORIGEN = "jardines del sur 6";
 const ANCHO = 1280; // nunca se agranda una foto más chica
 const CALIDAD = 80; // calidad alta: casi no se nota contra el original
 const ANCHO_MINI = 640; // primera foto de la tarjeta (FIRST_IMAGE_THUMBS)
+const CALIDAD_MINI = 65;
+
+// Las fachadas retocadas en 4K traen tanto detalle fino que a calidad 80
+// pesaban el doble que las de antes (Capua 177 KB contra 90; Cedro 222 contra
+// 95), y la fachada es lo primero que carga la ficha. Un suavizado muy leve y
+// calidad 72 las dejan en 99 y 134 KB (miniaturas 26 y 35 KB, como antes):
+// comparadas al 100% casi no se distinguen y en pantalla no se nota.
+const RETOCADA = { suavizado: 0.7, calidad: 72 };
 
 const SELECCION = {
   "Modelo Capua": {
     slug: "departamento-capua",
     sub: "Capua",
     fotos: [
-      ["departamento-modelo-capua-jardines-del-sur.jpg", "fachada"],
+      // Fachada retocada que Florencio agregó el 7 nov 2026 (antes:
+      // departamento-modelo-capua-jardines-del-sur.jpg, "fachada"). Viene
+      // CUADRADA y la tarjeta la mostraba con franjas a los lados (la pinta
+      // con objectFit contain): se recorta a 4:3 por el centro, como el Cedro.
+      ["Fachada 4k.jpg", "fachada-edificio", { proporcion: 4 / 3, ...RETOCADA }],
       ["vista-general-departamento-capua-jardines-del-sur.jpg", "sala-comedor-cocina"],
       ["cocina-departamento-capua-jardines-del-sur.jpg", "cocina"],
       ["sala-departamento-capua-jardines-del-sur.jpg", "sala"],
@@ -37,7 +52,8 @@ const SELECCION = {
     slug: "departamento-cedro-plus",
     sub: "Cedro Plus",
     fotos: [
-      ["1.jpg", "fachada"],
+      // Fachada retocada del 7 nov 2026 (antes: 1.jpg, "fachada").
+      ["Fachada 4k.jpg", "fachada-edificio", RETOCADA],
       ["5.jpg", "sala-comedor"],
       ["8.jpg", "sala"],
       ["3.jpg", "barra-y-lavado"],
@@ -114,27 +130,34 @@ const SELECCION = {
   },
 };
 
+const SOLO = process.argv.slice(2);
 let total = 0;
 for (const [carpeta, { slug, sub, fotos }] of Object.entries(SELECCION)) {
+  if (SOLO.length && !SOLO.includes(carpeta)) continue;
   const destino = path.join("public/jardines", carpeta);
   const rutas = [];
-  for (const [i, [archivo, etiqueta]] of fotos.entries()) {
+  for (const [i, [archivo, etiqueta, opciones = {}]] of fotos.entries()) {
     const nombre = `${slug}-jardines-del-sur-6-${etiqueta}.webp`;
     const entrada = path.join(ORIGEN, carpeta, sub, archivo);
-    await sharp(entrada)
-      .rotate()
-      .resize({ width: ANCHO, withoutEnlargement: true })
-      .webp({ quality: CALIDAD, effort: 5 })
+    // Opciones: `proporcion` (ancho / alto) recorta por el centro a esa forma;
+    // `suavizado` y `calidad`, ver RETOCADA.
+    const { proporcion, suavizado, calidad = CALIDAD } = opciones;
+    const preparar = (ancho) => {
+      const foto = sharp(entrada).rotate().resize(proporcion
+        ? { width: ancho, height: Math.round(ancho / proporcion), fit: "cover", withoutEnlargement: true }
+        : { width: ancho, withoutEnlargement: true });
+      return suavizado ? foto.blur(suavizado) : foto;
+    };
+    await preparar(ANCHO)
+      .webp({ quality: calidad, effort: suavizado ? 6 : 5 })
       .toFile(path.join(destino, nombre));
     const kb = Math.round(fs.statSync(path.join(destino, nombre)).size / 1024);
     total += kb;
     rutas.push(`/jardines/${carpeta}/${nombre}`);
     if (i === 0) {
-      const mini = `jardines-${carpeta.replace(/ /g, "-")}-${slug}-fachada.webp`;
-      await sharp(entrada)
-        .rotate()
-        .resize({ width: ANCHO_MINI, withoutEnlargement: true })
-        .webp({ quality: 65, effort: 6 })
+      const mini = `jardines-${carpeta.replace(/ /g, "-")}-${slug}-${etiqueta}.webp`;
+      await preparar(ANCHO_MINI)
+        .webp({ quality: CALIDAD_MINI, effort: 6 })
         .toFile(path.join("public/optimized/model-thumbs", mini));
       console.log(`  miniatura /optimized/model-thumbs/${mini} (${Math.round(fs.statSync(path.join("public/optimized/model-thumbs", mini)).size / 1024)} KB)`);
     }
