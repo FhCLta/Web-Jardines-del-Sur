@@ -15,15 +15,14 @@ export type Oficina = {
   /** Como se lee dentro del mensaje: "las casas muestra de La Rioja 2". */
   enMensaje: string;
   direccion: string;
-  /** Sin espacios duros, para el mensaje de WhatsApp. */
-  direccionMensaje: string;
   mapa: string;
 };
 
 export type Desarrollo = {
   slug: string;
   nombre: string;
-  /** Dónde se atiende; null = el cliente elige. */
+  /** Dónde se atiende; null = el cliente elige. Con oficina fija, el
+   *  calendario solo muestra esa: Lirios no se agenda en La Rioja por error. */
   oficina: string | null;
   nota?: string;
 };
@@ -99,11 +98,16 @@ export default function AgendarCita({
 
   const href = useMemo(() => {
     if (falta || !dev || !ofi || !dia || hora === null) return undefined;
-    const que = dev.slug === "aun-no-se" ? "los desarrollos de Altta Homes" : dev.nombre;
+    // Corto, como lo pidió Florencio (9 nov 2026): desarrollo, día, hora y
+    // nombre; sin dirección. La oficina solo se nombra cuando el cliente la
+    // eligió ("Aún no lo decido"); en los demás ya se sabe cuál es.
+    const para = dev.slug === "aun-no-se" ? "conocer los desarrollos de Altta Homes" : dev.nombre;
+    const donde = dev.oficina ? "" : ` en ${ofi.enMensaje}`;
+    // "a. m." ya termina en punto: sin esto salía "10:00 a. m.." .
+    const cuando = `${horaLarga(hora)}${donde}`;
     const texto =
-      `Hola, quiero agendar una cita para conocer ${que} el ${dia.largo} a las ` +
-      `${horaLarga(hora)} en ${ofi.enMensaje} (${ofi.direccionMensaje}). ` +
-      `Mi nombre es ${nombre.trim()}.` +
+      `Hola, quiero agendar una cita para ${para} el ${dia.largo} a las ` +
+      `${cuando}${cuando.endsWith(".") ? "" : "."} Mi nombre es ${nombre.trim()}.` +
       (desdeGoogle ? " Vi su perfil en Google." : "");
     return `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
   }, [falta, dev, ofi, dia, hora, nombre, desdeGoogle, telefono]);
@@ -153,7 +157,7 @@ export default function AgendarCita({
           <span className={styles.pasoNum}>2</span> ¿Dónde te recibimos?
         </legend>
         <div className={styles.oficinas}>
-          {oficinas.map((o) => (
+          {(dev?.oficina ? oficinas.filter((o) => o.id === dev.oficina) : oficinas).map((o) => (
             <button
               key={o.id}
               type="button"

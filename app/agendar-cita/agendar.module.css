@@ -161,6 +161,11 @@
   gap: 0.6rem;
 }
 
+/* Con oficina fija se muestra una sola: que ocupe todo el ancho. */
+.oficinas > :only-child {
+  grid-column: 1 / -1;
+}
+
 .oficina {
   display: flex;
   flex-direction: column;

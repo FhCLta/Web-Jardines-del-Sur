@@ -13,7 +13,6 @@ import {
   PHONE_E164,
   OFFICE_ADDRESS,
   OFFICE_MAP_URL,
-  OFFICE_STREET,
 } from "@/lib/contacto";
 
 // Contenido de las páginas de citas (9 nov 2026). Es un silo:
@@ -38,7 +37,6 @@ const OFICINAS: Oficina[] = [
     nombre: "Oficina de Jardines del Sur 6",
     enMensaje: "la oficina de Jardines del Sur 6",
     direccion: OFFICE_ADDRESS,
-    direccionMensaje: OFFICE_STREET,
     mapa: OFFICE_MAP_URL,
   },
   {
@@ -46,7 +44,6 @@ const OFICINAS: Oficina[] = [
     nombre: "Casas muestra de La Rioja 2",
     enMensaje: "las casas muestra de La Rioja 2",
     direccion: RIOJA_DIRECCION,
-    direccionMensaje: rioja.mapa?.street ?? "Av. 135 esq. Av. 127",
     mapa: rioja.mapa?.url ?? "https://www.google.com/maps?cid=10624409005148155448",
   },
 ];
@@ -59,20 +56,24 @@ const legible = (t: string) =>
     .replace(/Jardines del Sur \d|La Rioja 2|Lirios Residencial 2/g, (m) => m.replace(/ /g, "\u00a0"))
     .replace(/ (\S+)$/, "\u00a0$1");
 
+// Solo en las páginas de citas (decisión de Florencio, 9 nov 2026); la página
+// principal de Jardines del Sur 7 no lo dice. ⚠️ Cambiarlo cuando abra la venta.
+const JDS7_VENTA = "Jardines del Sur 7 abre a la venta en diciembre.";
+
 const DESARROLLOS: Desarrollo[] = [
   { slug: "jardines-del-sur-6", nombre: "Jardines del Sur 6", oficina: "jds6" },
   {
     slug: "jardines-del-sur-7",
     nombre: "Jardines del Sur 7",
     oficina: "jds6",
-    nota: legible("La obra de Jardines del Sur 7 no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6."),
+    nota: legible(`${JDS7_VENTA} La obra no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6.`),
   },
   { slug: "la-rioja-2", nombre: "La Rioja 2", oficina: "rioja" },
   {
     slug: "lirios-residencial-2",
     nombre: "Lirios Residencial 2",
-    oficina: null,
-    nota: legible("La oficina de Lirios Residencial 2 abre próximamente. Mientras, elige en cuál de nuestras oficinas te recibimos."),
+    oficina: "jds6",
+    nota: legible("Te recibimos en la oficina de Jardines del Sur 6, donde están los departamentos muestra."),
   },
   { slug: "aun-no-se", nombre: "Aún no lo decido", oficina: null },
 ];
@@ -101,11 +102,14 @@ const GENERAL: Pagina = {
     "Elige el desarrollo, el día y la hora. Se abre WhatsApp con tu cita ya escrita y te la confirmamos en ese mismo chat.",
   oficinas: ["jds6", "rioja"],
   lugar:
-    "En la oficina de Jardines del Sur 6 te atendemos para Jardines del Sur 6 y Jardines del Sur 7. En La Rioja 2 conoces sus casas muestra. Próximamente abriremos también oficina en Lirios Residencial 2.",
+    "En la oficina de Jardines del Sur 6, donde están los departamentos muestra, te atendemos para Jardines del Sur 6, Jardines del Sur 7 y Lirios Residencial 2. Las casas muestra de La Rioja 2 son solo para La Rioja 2.",
 };
 
-// Textos de cada desarrollo. Solo dicen lo que Florencio confirmó: dónde
-// recibe a cada quien. ⚠️ Jardines del Sur 7: la obra NO se visita.
+// Textos de cada desarrollo. Solo dicen lo que Florencio confirmó (9 nov 2026):
+// Jardines del Sur 6, Jardines del Sur 7 y Lirios Residencial 2 se atienden en
+// la oficina de Jardines del Sur 6, donde están los departamentos muestra; las
+// casas muestra de La Rioja 2 son SOLO para La Rioja 2.
+// ⚠️ Jardines del Sur 7: la obra NO se visita.
 export const PAGINAS: Record<string, Pagina> = {
   "jardines-del-sur-6": {
     nombre: "Jardines del Sur 6",
@@ -116,18 +120,18 @@ export const PAGINAS: Record<string, Pagina> = {
     intro: `Te recibimos en la oficina de Jardines del Sur 6, en la Zona Sur de Cancún. ${PASOS}`,
     oficinas: ["jds6"],
     lugar:
-      "La oficina está dentro del desarrollo, en la calle Tucán. Ahí te atendemos para conocer las casas y los departamentos de Jardines del Sur 6.",
+      "La oficina está dentro del desarrollo, en la calle Tucán, y ahí están los departamentos muestra. Te atendemos para conocer las casas y los departamentos de Jardines del Sur 6.",
   },
   "jardines-del-sur-7": {
     nombre: "Jardines del Sur 7",
     titulo: "Agendar cita para Jardines del Sur 7 | Altta Homes Cancún",
     descripcion:
-      "Agenda tu cita para conocer Jardines del Sur 7 en Cancún: te recibimos en la oficina de Jardines del Sur 6, a medio kilómetro. Elige día y hora y envíala por WhatsApp.",
+      "Jardines del Sur 7 abre a la venta en diciembre. Agenda tu cita: te recibimos en la oficina de Jardines del Sur 6, a medio kilómetro. Elige día y hora y envíala por WhatsApp.",
     h1: "Agenda tu cita para Jardines del Sur 7",
-    intro: `La obra de Jardines del Sur 7 no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6, a medio kilómetro. ${PASOS}`,
+    intro: `${JDS7_VENTA} La obra no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6, a medio kilómetro. ${PASOS}`,
     oficinas: ["jds6"],
     lugar:
-      "En la oficina de Jardines del Sur 6 te damos toda la información de Jardines del Sur 7 y de su próxima apertura a la venta.",
+      "En la oficina de Jardines del Sur 6 te damos toda la información de Jardines del Sur 7 antes de que abra a la venta en diciembre.",
   },
   "la-rioja-2": {
     nombre: "La Rioja 2",
@@ -144,12 +148,12 @@ export const PAGINAS: Record<string, Pagina> = {
     nombre: "Lirios Residencial 2",
     titulo: "Agendar cita para Lirios Residencial 2 | Altta Homes Cancún",
     descripcion:
-      "Agenda tu cita para conocer los departamentos de Lirios Residencial 2 en Cancún. Elige día, hora y oficina y envíala por WhatsApp; te confirmamos en el mismo chat.",
+      "Agenda tu cita para conocer los departamentos de Lirios Residencial 2: te recibimos en la oficina de Jardines del Sur 6, donde están los departamentos muestra. Confírmala por WhatsApp.",
     h1: "Agenda tu cita para Lirios Residencial 2",
-    intro: `La oficina de Lirios Residencial 2 abre próximamente. Mientras, te recibimos en la oficina de Jardines del Sur 6 o en las casas muestra de La Rioja 2. ${PASOS}`,
-    oficinas: ["jds6", "rioja"],
+    intro: `Te recibimos en la oficina de Jardines del Sur 6, donde están los departamentos muestra. ${PASOS}`,
+    oficinas: ["jds6"],
     lugar:
-      "Elige la oficina que te quede mejor. Próximamente abriremos también oficina en Lirios Residencial 2.",
+      "En la oficina de Jardines del Sur 6 conoces los departamentos muestra y te damos toda la información de Lirios Residencial 2. Próximamente abriremos también oficina en Lirios Residencial 2.",
   },
 };
 

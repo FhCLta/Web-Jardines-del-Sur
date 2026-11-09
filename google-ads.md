@@ -2079,3 +2079,36 @@ Consecuencias en Google Ads, grupo `La Rioja 2 - Premium`:
 Si la Noni vuelve a mostrarse: quitar `oculto_web`, quitar el 302 de
 `firebase.json`, y los textos de La Rioja en `dev-content.ts` regresan a
 "4 modelos desde $4,049,375" (hay un comentario ahí que lo recuerda).
+
+---
+
+## 🧭 SESIÓN 38 — Plan: 3 grupos nuevos y $300/día (9 nov 2026) — SOLO PLAN, nada aplicado aún
+
+Florencio quiere tres grupos más (Agendar cita, Promociones, Jardines del Sur 7)
+y subir a **$300/día** "a ver qué tal".
+
+### ⚠️ Urgente, antes de subir un peso
+El **recurso de Mensaje (WhatsApp)** de la campaña se dio de alta el 27 jun con el
+**998 205 9044**, que perdió su WhatsApp Business el 28 oct. El 998 109 8443
+también se bloqueó (3 nov). Hoy el WhatsApp es el **998 704 3388** (web y
+cotizador desde el 7 nov). Si el recurso sigue con un número muerto, los clics
+a "Obtener información" del anuncio abren un WhatsApp que no existe. Cambiarlo a
+nivel CAMPAÑA, con el check de "conversión de leads de mensajes" DESMARCADO
+(regla de la sesión 30).
+
+### Recomendación por grupo
+| Grupo | Veredicto | Por qué |
+|---|---|---|
+| Promociones | ✅ Crear | Promos reales de noviembre (vencen el 30). Landing `/promociones` (200). Sin keywords de `rioja` (viven en Premium, cuyo copy no lleva Infonavit). Pausar o reescribir el 1 dic. |
+| Agendar cita | ↪️ Mejor como sitelink en cada grupo | Casi nadie busca "agendar cita"; la intención de visita ya entra por el nombre del desarrollo (`[oficina de ventas jardines del sur 6]` vive en JdS6, CPA $0.47). Sitelink "Agenda tu Cita" → `/agendar-cita/<desarrollo>`, DENTRO de cada grupo (regla 9). |
+| Jardines del Sur 7 | ⏸️ Esperar | #1 orgánico (1.32) y 10-15 leads gratis; sin precios que anunciar; el plan acordado era Ads al ABRIR la venta. Excepción: si en incógnito salen anuncios de otros asesores arriba de él en "jardines del sur 7" → grupo defensivo chico, solo exacta (como `[altta homes cancun]`). |
+
+### $300/día
+Los grupos comparten el presupuesto de la campaña: crear grupos no gasta más.
+Antes de subir pedir: CPA y conv/día de los últimos 30 días + **% de impresiones
+perdidas por presupuesto** (pendiente desde la sesión 33). Si ese % es bajo, los
+$100 extra solo encarecen el clic. Alarma: CPA > $110 sostenido 5 días → volver
+a $200.
+
+⏳ Falta saber cómo cerró el experimento de septiembre (IA Max, amplia, etc.):
+IA Max puede reescribir títulos — revisar los anuncios de Promociones al día 3.

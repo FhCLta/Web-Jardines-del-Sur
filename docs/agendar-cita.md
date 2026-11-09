@@ -33,9 +33,21 @@ El cliente elige desarrollo, oficina, día y hora, escribe su nombre y toca
 "Enviar mi cita por WhatsApp". Se abre WhatsApp con el mensaje ya escrito y le
 llega a Florencio, que confirma en ese chat:
 
-> Hola, quiero agendar una cita para conocer La Rioja 2 el martes 10 de
-> noviembre a las 11:00 a. m. en las casas muestra de La Rioja 2 (Av. 135 esq.
-> Av. 127). Mi nombre es Ana López. Vi su perfil en Google.
+> Hola, quiero agendar una cita para La Rioja 2 el martes 10 de noviembre a
+> las 10:00 a. m. Mi nombre es Ana López.
+
+Corto a propósito (Florencio, 9 nov 2026): desarrollo, día, hora y nombre, sin
+dirección. La oficina solo se nombra con "Aún no lo decido". Desde los links de
+Google se agrega "Vi su perfil en Google.".
+
+- **Jardines del Sur 7 "abre a la venta en diciembre":** SOLO en las páginas de
+  citas (`JDS7_VENTA` en `PaginaCita.tsx`); la página principal del 7 no lo
+  dice. ⚠️ Cambiarlo cuando abra la venta.
+- **¿Enviar la cita sin que el cliente abra WhatsApp?** No. WhatsApp no deja
+  que una página mande mensajes por el cliente. Las alternativas (la API de
+  WhatsApp, que es de Meta, o que Florencio escriba primero a números que dejan
+  en un formulario) son justo lo que más arriesga un número: los dos que se
+  bloquearon en oct-nov 2026. Que el cliente escriba primero es lo más seguro.
 
 - **No guarda nada ni aparta horarios.** Si dos clientes piden la misma hora,
   Florencio le propone otra a uno. La página lo dice.
@@ -44,10 +56,14 @@ llega a Florencio, que confirma en ese chat:
   10:00–18:00, cada 30 min (las oficinas cierran a las 7; la última cita a las
   6 deja una hora). Hoy solo ofrece horas que empiecen al menos 1 hora después
   de ahora, en hora de Cancún aunque el teléfono del cliente esté en otra zona.
-- **Oficinas:** Jardines del Sur 6 (atiende también Jardines del Sur 7: la obra
-  no está abierta a visitas) y casas muestra de La Rioja 2. Lirios Residencial
-  2 abre oficina "próximamente": hasta entonces el cliente elige oficina.
-  Cuando abra, se agrega en `OFICINAS` y en `DESARROLLOS` de `page.tsx`.
+- **Oficinas (corregido por Florencio el 9 nov 2026):** la de **Jardines del
+  Sur 6**, donde están los departamentos muestra, atiende Jardines del Sur 6,
+  Jardines del Sur 7 (la obra no está abierta a visitas) y **Lirios Residencial
+  2**. Las **casas muestra de La Rioja 2 son SOLO para La Rioja 2**. El
+  calendario solo muestra la oficina que corresponde a cada desarrollo; con
+  "Aún no lo decido" se elige entre las dos. Lirios tendrá oficina propia
+  "próximamente": cuando abra, se agrega en `OFICINAS` y se cambia su
+  `oficina` en `DESARROLLOS` (`PaginaCita.tsx`).
 - Los días se calculan en el navegador (en el servidor saldrían congelados en
   el día de la compilación); antes de eso se ve "Cargando los próximos días…".
 
