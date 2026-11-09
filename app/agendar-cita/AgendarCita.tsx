@@ -37,7 +37,7 @@ export default function AgendarCita({
   oficinas: Oficina[];
   desarrollos: Desarrollo[];
   telefono: string;
-  /** Desarrollo ya elegido: lo traen los links cortos /cita/… de Google. */
+  /** Desarrollo de la página (/agendar-cita/<desarrollo> o /cita/…). */
   inicial?: string;
   desdeGoogle?: boolean;
 }) {
@@ -52,11 +52,12 @@ export default function AgendarCita({
   const [aviso, setAviso] = useState("");
 
   // Los días dependen de HOY en Cancún: se calculan al abrir la página, no al
-  // compilarla. El desarrollo puede venir ya elegido de dos formas: los links
-  // cortos de los perfiles de Google (/cita/la-rioja-2, por `inicial`) o los
-  // botones de cada desarrollo (?desarrollo=la-rioja-2).
+  // compilarla. De la dirección se lee: ?desarrollo= (página general),
+  // ?desde=google, y lo que el cliente ya había llenado si llegó aquí desde la
+  // página de otro desarrollo (?fecha=&hora=&nombre=, ver elegirDesarrollo).
   useEffect(() => {
-    setDias(proximosDias());
+    const proximos = proximosDias();
+    setDias(proximos);
     const q = new URLSearchParams(window.location.search);
     const elegido = desarrollos.find((d) => d.slug === q.get("desarrollo"));
     if (elegido) {
@@ -64,6 +65,14 @@ export default function AgendarCita({
       if (elegido.oficina) setOficina(elegido.oficina);
     }
     if (q.get("desde") === "google") setDesdeGoogle(true);
+    const conDia = proximos.find((d) => d.fecha === q.get("fecha"));
+    if (conDia) {
+      setFecha(conDia.fecha);
+      const h = Number(q.get("hora"));
+      if (conDia.horas.includes(h)) setHora(h);
+    }
+    const n = q.get("nombre");
+    if (n) setNombre(n);
   }, [desarrollos]);
 
   const dev = desarrollos.find((d) => d.slug === desarrollo);
@@ -71,6 +80,22 @@ export default function AgendarCita({
   const dia = dias?.find((d) => d.fecha === fecha);
 
   const elegirDesarrollo = (slug: string) => {
+    // En la página de un desarrollo, el título y los textos son de ESE
+    // desarrollo: elegir otro lleva a su página (reportado por Florencio, 9 nov
+    // 2026: en la de Jardines del Sur 6 se elegía La Rioja 2 y todo seguía
+    // diciendo Jardines del Sur 6). Se conserva lo que ya llenó.
+    if (inicial && slug !== inicial) {
+      const q = new URLSearchParams();
+      if (slug === "aun-no-se") q.set("desarrollo", slug);
+      if (desdeGoogle) q.set("desde", "google");
+      if (fecha) q.set("fecha", fecha);
+      if (hora !== null) q.set("hora", String(hora));
+      if (nombre.trim()) q.set("nombre", nombre.trim());
+      const ruta = slug === "aun-no-se" ? "/agendar-cita" : `/agendar-cita/${slug}`;
+      const consulta = q.toString();
+      window.location.assign(consulta ? `${ruta}?${consulta}` : ruta);
+      return;
+    }
     setDesarrollo(slug);
     const d = desarrollos.find((x) => x.slug === slug);
     if (d?.oficina) setOficina(d.oficina);
