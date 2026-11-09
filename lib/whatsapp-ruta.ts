@@ -74,7 +74,7 @@ function objeto(segmentos: string[]): { texto: string; coda?: string } {
     return { texto: "las promociones de Altta Homes en Cancún" };
   if (primero === "jardines-del-sur-cancun")
     return { texto: "los desarrollos de Jardines del Sur en Cancún" };
-  if (primero === "agendar-cita")
+  if (primero === "agendar-cita" || primero === "cita")
     return { texto: GENERAL, coda: "Quiero agendar una cita." };
 
   const silo = SILOS[primero];

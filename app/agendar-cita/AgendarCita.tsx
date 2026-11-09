@@ -32,23 +32,30 @@ export default function AgendarCita({
   oficinas,
   desarrollos,
   telefono,
+  inicial,
+  desdeGoogle: desdeGoogleInicial = false,
 }: {
   oficinas: Oficina[];
   desarrollos: Desarrollo[];
   telefono: string;
+  /** Desarrollo ya elegido: lo traen los links cortos /cita/… de Google. */
+  inicial?: string;
+  desdeGoogle?: boolean;
 }) {
+  const devInicial = desarrollos.find((d) => d.slug === inicial);
   const [dias, setDias] = useState<Dia[] | null>(null);
-  const [desarrollo, setDesarrollo] = useState<string>("");
-  const [oficina, setOficina] = useState<string>("");
+  const [desarrollo, setDesarrollo] = useState<string>(devInicial?.slug ?? "");
+  const [oficina, setOficina] = useState<string>(devInicial?.oficina ?? "");
   const [fecha, setFecha] = useState<string>("");
   const [hora, setHora] = useState<number | null>(null);
   const [nombre, setNombre] = useState("");
-  const [desdeGoogle, setDesdeGoogle] = useState(false);
+  const [desdeGoogle, setDesdeGoogle] = useState(desdeGoogleInicial);
   const [aviso, setAviso] = useState("");
 
   // Los días dependen de HOY en Cancún: se calculan al abrir la página, no al
-  // compilarla. Los links de los perfiles de Google traen el desarrollo ya
-  // elegido (?desarrollo=la-rioja-2&desde=google).
+  // compilarla. El desarrollo puede venir ya elegido de dos formas: los links
+  // cortos de los perfiles de Google (/cita/la-rioja-2, por `inicial`) o los
+  // botones de cada desarrollo (?desarrollo=la-rioja-2).
   useEffect(() => {
     setDias(proximosDias());
     const q = new URLSearchParams(window.location.search);
@@ -57,7 +64,7 @@ export default function AgendarCita({
       setDesarrollo(elegido.slug);
       if (elegido.oficina) setOficina(elegido.oficina);
     }
-    setDesdeGoogle(q.get("desde") === "google");
+    if (q.get("desde") === "google") setDesdeGoogle(true);
   }, [desarrollos]);
 
   const dev = desarrollos.find((d) => d.slug === desarrollo);

@@ -36,15 +36,22 @@ llega a Florencio, que confirma en ese chat:
 
 ### Links para los perfiles de Google (campo "Reserva")
 
-Cada uno trae su desarrollo ya elegido y avisa en el mensaje que viene de
-Google (`desde=google`):
+Links cortos (9 nov 2026), uno por perfil. Abren la misma página de citas con
+su desarrollo ya elegido y el mensaje termina en "Vi su perfil en Google":
 
 | Perfil | Link |
 |---|---|
-| Jardines del Sur 6 | `https://alttahomescancun.mx/agendar-cita?desarrollo=jardines-del-sur-6&desde=google` |
-| Jardines del Sur 7 | `https://alttahomescancun.mx/agendar-cita?desarrollo=jardines-del-sur-7&desde=google` |
-| La Rioja 2 | `https://alttahomescancun.mx/agendar-cita?desarrollo=la-rioja-2&desde=google` |
-| Lirios Residencial 2 | `https://alttahomescancun.mx/agendar-cita?desarrollo=lirios-residencial-2&desde=google` |
+| Jardines del Sur 6 | `https://alttahomescancun.mx/cita/jardines-6` |
+| Jardines del Sur 7 | `https://alttahomescancun.mx/cita/jardines-7` |
+| La Rioja 2 | `https://alttahomescancun.mx/cita/la-rioja-2` |
+| Lirios Residencial 2 | `https://alttahomescancun.mx/cita/lirios-2` |
+
+- Son páginas de verdad (`app/cita/[clave]/page.tsx`), no redirecciones:
+  Google rechaza acortadores y pide que el link responda 200.
+- No se indexan (`noindex`) y su canonical es `/agendar-cita`: así no hay cinco
+  páginas iguales compitiendo en Google. No van en el sitemap.
+- Los links largos (`/agendar-cita?desarrollo=la-rioja-2&desde=google`) siguen
+  funcionando, por si alguno ya quedó guardado.
 
 El WhatsApp directo (`https://wa.me/529987043388`) va en el campo **Chat** del
 perfil, no en Reserva.
