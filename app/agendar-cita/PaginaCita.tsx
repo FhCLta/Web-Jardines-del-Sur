@@ -16,21 +16,18 @@ import {
   OFFICE_STREET,
 } from "@/lib/contacto";
 
-// Contenido de la página de citas (9 nov 2026). Lo usan /agendar-cita y los
-// links cortos de los perfiles de Google (/cita/la-rioja-2…), que la abren con
-// el desarrollo ya elegido. Google no acepta en "Reserva" un link directo a
-// WhatsApp, pero sí una página propia donde el cliente elige día y hora.
-// Detalle y plan B en docs/agendar-cita.md.
+// Contenido de las páginas de citas (9 nov 2026). Es un silo:
+//   /agendar-cita                    → la general, con los cuatro desarrollos
+//   /agendar-cita/<desarrollo>       → una por desarrollo, con su propio título
+//   /cita/<clave>                    → links cortos de los perfiles de Google
+//                                      (noindex; canonical a la del desarrollo)
+// Google no acepta en "Reserva" un link directo a WhatsApp, pero sí una página
+// propia donde el cliente elige día y hora. Detalle y plan B en
+// docs/agendar-cita.md.
 
-const PAGE_URL = `${SITE_URL}/agendar-cita`;
 const waHref = `https://wa.me/${PHONE_E164}?text=${encodeURIComponent(
   "Hola, quiero agendar una cita para conocer las casas y departamentos de Altta Homes en Cancún."
 )}`;
-
-export const metaTitle = "Agendar cita en Altta Homes Cancún | Casas y departamentos";
-export const metaDescription =
-  "Agenda tu cita en Altta Homes Cancún: elige desarrollo, día y hora y envíala por WhatsApp. Te recibimos en las oficinas de Jardines del Sur 6 y La Rioja 2, de lunes a domingo.";
-
 
 const rioja = DEVS["la-rioja-2"];
 const RIOJA_DIRECCION = rioja.location?.value ?? "Av. 135 esq. Av. 127, 77536 Cancún, Q.R.";
@@ -54,50 +51,149 @@ const OFICINAS: Oficina[] = [
   },
 ];
 
+// Texto visible sin cortes feos: el nombre de un desarrollo nunca se parte en
+// dos renglones ("Jardines del Sur / 6") y el párrafo no termina con una
+// palabra sola. Solo para lo que se ve; títulos y descripciones van normales.
+const legible = (t: string) =>
+  t
+    .replace(/Jardines del Sur \d|La Rioja 2|Lirios Residencial 2/g, (m) => m.replace(/ /g, "\u00a0"))
+    .replace(/ (\S+)$/, "\u00a0$1");
+
 const DESARROLLOS: Desarrollo[] = [
   { slug: "jardines-del-sur-6", nombre: "Jardines del Sur 6", oficina: "jds6" },
   {
     slug: "jardines-del-sur-7",
     nombre: "Jardines del Sur 7",
     oficina: "jds6",
-    nota: "La obra de Jardines del Sur 7 no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6.",
+    nota: legible("La obra de Jardines del Sur 7 no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6."),
   },
   { slug: "la-rioja-2", nombre: "La Rioja 2", oficina: "rioja" },
   {
     slug: "lirios-residencial-2",
     nombre: "Lirios Residencial 2",
     oficina: null,
-    nota: "La oficina de Lirios Residencial 2 abre próximamente. Mientras, elige en cuál de nuestras oficinas te recibimos.",
+    nota: legible("La oficina de Lirios Residencial 2 abre próximamente. Mientras, elige en cuál de nuestras oficinas te recibimos."),
   },
   { slug: "aun-no-se", nombre: "Aún no lo decido", oficina: null },
 ];
 
+type Pagina = {
+  /** "Jardines del Sur 6" (en el silo de citas); vacío en la general. */
+  nombre: string;
+  titulo: string;
+  descripcion: string;
+  h1: string;
+  intro: string;
+  /** Oficinas que se muestran en "Dónde te recibimos". */
+  oficinas: string[];
+  lugar: string;
+};
+
+const PASOS = "Elige el día y la hora: se abre WhatsApp con tu cita ya escrita y te la confirmamos en ese mismo chat.";
+
+const GENERAL: Pagina = {
+  nombre: "",
+  titulo: "Agendar cita en Altta Homes Cancún | Casas y departamentos",
+  descripcion:
+    "Agenda tu cita en Altta Homes Cancún: elige desarrollo, día y hora y envíala por WhatsApp. Te recibimos en las oficinas de Jardines del Sur 6 y La Rioja 2, de lunes a domingo.",
+  h1: "Agenda tu cita",
+  intro:
+    "Elige el desarrollo, el día y la hora. Se abre WhatsApp con tu cita ya escrita y te la confirmamos en ese mismo chat.",
+  oficinas: ["jds6", "rioja"],
+  lugar:
+    "En la oficina de Jardines del Sur 6 te atendemos para Jardines del Sur 6 y Jardines del Sur 7. En La Rioja 2 conoces sus casas muestra. Próximamente abriremos también oficina en Lirios Residencial 2.",
+};
+
+// Textos de cada desarrollo. Solo dicen lo que Florencio confirmó: dónde
+// recibe a cada quien. ⚠️ Jardines del Sur 7: la obra NO se visita.
+export const PAGINAS: Record<string, Pagina> = {
+  "jardines-del-sur-6": {
+    nombre: "Jardines del Sur 6",
+    titulo: "Agendar cita en Jardines del Sur 6 | Altta Homes Cancún",
+    descripcion:
+      "Agenda tu cita para conocer las casas y departamentos de Jardines del Sur 6 en Cancún. Elige día y hora y envíala por WhatsApp. Te recibimos en la oficina del desarrollo, de lunes a domingo.",
+    h1: "Agenda tu cita en Jardines del Sur 6",
+    intro: `Te recibimos en la oficina de Jardines del Sur 6, en la Zona Sur de Cancún. ${PASOS}`,
+    oficinas: ["jds6"],
+    lugar:
+      "La oficina está dentro del desarrollo, en la calle Tucán. Ahí te atendemos para conocer las casas y los departamentos de Jardines del Sur 6.",
+  },
+  "jardines-del-sur-7": {
+    nombre: "Jardines del Sur 7",
+    titulo: "Agendar cita para Jardines del Sur 7 | Altta Homes Cancún",
+    descripcion:
+      "Agenda tu cita para conocer Jardines del Sur 7 en Cancún: te recibimos en la oficina de Jardines del Sur 6, a medio kilómetro. Elige día y hora y envíala por WhatsApp.",
+    h1: "Agenda tu cita para Jardines del Sur 7",
+    intro: `La obra de Jardines del Sur 7 no está abierta a visitas: te recibimos en la oficina de Jardines del Sur 6, a medio kilómetro. ${PASOS}`,
+    oficinas: ["jds6"],
+    lugar:
+      "En la oficina de Jardines del Sur 6 te damos toda la información de Jardines del Sur 7 y de su próxima apertura a la venta.",
+  },
+  "la-rioja-2": {
+    nombre: "La Rioja 2",
+    titulo: "Agendar cita en La Rioja 2 | Altta Homes Cancún",
+    descripcion:
+      "Agenda tu cita para conocer las casas muestra de La Rioja 2 en Cancún, en Av. 135 esq. Av. 127. Elige día y hora y envíala por WhatsApp; te confirmamos en el mismo chat.",
+    h1: "Agenda tu cita en La Rioja 2",
+    intro: `Te recibimos en las casas muestra y la oficina de La Rioja 2, en Av. 135 esquina con Av. 127. ${PASOS}`,
+    oficinas: ["rioja"],
+    lugar:
+      "Las casas muestra y la oficina de ventas están en Av. 135 esquina con Av. 127. El residencial está junto a Jardines del Sur 6.",
+  },
+  "lirios-residencial-2": {
+    nombre: "Lirios Residencial 2",
+    titulo: "Agendar cita para Lirios Residencial 2 | Altta Homes Cancún",
+    descripcion:
+      "Agenda tu cita para conocer los departamentos de Lirios Residencial 2 en Cancún. Elige día, hora y oficina y envíala por WhatsApp; te confirmamos en el mismo chat.",
+    h1: "Agenda tu cita para Lirios Residencial 2",
+    intro: `La oficina de Lirios Residencial 2 abre próximamente. Mientras, te recibimos en la oficina de Jardines del Sur 6 o en las casas muestra de La Rioja 2. ${PASOS}`,
+    oficinas: ["jds6", "rioja"],
+    lugar:
+      "Elige la oficina que te quede mejor. Próximamente abriremos también oficina en Lirios Residencial 2.",
+  },
+};
+
+/** Título y descripción para la metadata de cada página del silo. */
+export function textosDe(desarrollo?: string): { titulo: string; descripcion: string } {
+  const p = (desarrollo && PAGINAS[desarrollo]) || GENERAL;
+  return { titulo: p.titulo, descripcion: p.descripcion };
+}
+
 export default function PaginaCita({
-  inicial,
+  desarrollo,
   desdeGoogle = false,
 }: {
-  /** Slug del desarrollo ya elegido (links de los perfiles de Google). */
-  inicial?: string;
+  /** Slug del desarrollo de la página (y ya elegido en el calendario). */
+  desarrollo?: string;
   desdeGoogle?: boolean;
 }) {
+  const pagina = (desarrollo && PAGINAS[desarrollo]) || GENERAL;
+  const ruta = pagina === GENERAL ? "/agendar-cita" : `/agendar-cita/${desarrollo}`;
+  const pageUrl = `${SITE_URL}${ruta}`;
+  const oficinas = OFICINAS.filter((o) => pagina.oficinas.includes(o.id));
+  const otros = Object.entries(PAGINAS).filter(([slug]) => slug !== desarrollo);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": `${PAGE_URL}#webpage`,
-        url: PAGE_URL,
-        name: metaTitle,
-        description: metaDescription,
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: pagina.titulo,
+        description: pagina.descripcion,
         inLanguage: "es-MX",
         isPartOf: { "@id": `${SITE_URL}/#website` },
       },
       {
         "@type": "BreadcrumbList",
-        "@id": `${PAGE_URL}#breadcrumbs`,
+        "@id": `${pageUrl}#breadcrumbs`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
-          { "@type": "ListItem", position: 2, name: "Agendar cita", item: PAGE_URL },
+          { "@type": "ListItem", position: 2, name: "Agendar cita", item: `${SITE_URL}/agendar-cita` },
+          ...(pagina.nombre
+            ? [{ "@type": "ListItem", position: 3, name: pagina.nombre, item: pageUrl }]
+            : []),
         ],
       },
     ],
@@ -113,12 +209,11 @@ export default function PaginaCita({
 
       <header className={styles.head}>
         <div className="container">
-          <span className={styles.eyebrow}>Citas · Altta Homes Cancún</span>
-          <h1>Agenda tu cita</h1>
-          <p>
-            Elige el desarrollo, el día y la hora. Se abre WhatsApp con tu cita
-            ya escrita y te la confirmamos en ese mismo chat.
-          </p>
+          <span className={styles.eyebrow}>
+            Citas · {pagina.nombre || "Altta Homes Cancún"}
+          </span>
+          <h1>{pagina.h1}</h1>
+          <p>{legible(pagina.intro)}</p>
         </div>
       </header>
 
@@ -128,7 +223,7 @@ export default function PaginaCita({
             oficinas={OFICINAS}
             desarrollos={DESARROLLOS}
             telefono={PHONE_E164}
-            inicial={inicial}
+            inicial={desarrollo}
             desdeGoogle={desdeGoogle}
           />
         </div>
@@ -139,7 +234,7 @@ export default function PaginaCita({
           <div className={styles.contenidoInner}>
             <h2>Dónde te recibimos</h2>
             <div className={styles.lugares}>
-              {OFICINAS.map((o) => (
+              {oficinas.map((o) => (
                 <div key={o.id} className={styles.lugar}>
                   <h3>{o.nombre}</h3>
                   <p>{o.direccion}</p>
@@ -149,12 +244,7 @@ export default function PaginaCita({
                 </div>
               ))}
             </div>
-            <p style={{ marginTop: "1rem" }}>
-              En la oficina de Jardines del Sur 6 te atendemos para Jardines
-              del Sur 6 y Jardines del Sur 7. En La Rioja 2 conoces sus casas
-              muestra. Próximamente abriremos también oficina en Lirios
-              Residencial 2.
-            </p>
+            <p style={{ marginTop: "1rem" }}>{legible(pagina.lugar)}</p>
 
             <h2>Horario de citas</h2>
             <ul className={styles.horario}>
@@ -168,10 +258,26 @@ export default function PaginaCita({
               </li>
             </ul>
             <p>
-              Las citas son cada {HORARIO.intervalo} minutos. Si el horario que
-              elegiste ya está ocupado, te proponemos otro en el mismo chat
+              {`Las citas son cada ${HORARIO.intervalo} minutos. `}Si el horario
+              que elegiste ya está ocupado, te proponemos otro en el mismo chat
               de&nbsp;WhatsApp.
             </p>
+
+            <h2>{pagina.nombre ? "Citas en otros desarrollos" : "Agenda por desarrollo"}</h2>
+            <div className={styles.desarrollos}>
+              {otros.map(([slug, p]) => (
+                <a key={slug} className={styles.desarrolloLink} href={`/agendar-cita/${slug}`}>
+                  {p.nombre}&nbsp;→
+                </a>
+              ))}
+            </div>
+            {pagina.nombre && desarrollo && (
+              <p className={styles.verDesarrollo}>
+                <a className={styles.lugarLink} href={`/${desarrollo}`}>
+                  Conoce los modelos de {pagina.nombre}&nbsp;→
+                </a>
+              </p>
+            )}
           </div>
         </div>
       </section>

@@ -1,6 +1,23 @@
 # Agendar cita (`/agendar-cita`)
 
-Página creada el 9 nov 2026, a pedido de Florencio. Sirve para dos cosas:
+Creada el 9 nov 2026, a pedido de Florencio. Es un **silo**:
+
+| Página | Para qué | Google |
+|---|---|---|
+| `/agendar-cita` | La general, con los cuatro desarrollos | Se indexa |
+| `/agendar-cita/<desarrollo>` | Una por desarrollo, con su título ("Agendar cita en La Rioja 2 \| Altta Homes Cancún"), su texto y su oficina; el desarrollo ya elegido | Se indexan (sitemap) |
+| `/cita/<clave>` | Links cortos de los perfiles de Google | `noindex`, canonical a `/agendar-cita/<desarrollo>` |
+
+Todas salen de `app/agendar-cita/PaginaCita.tsx` (textos de cada desarrollo en
+`PAGINAS`). Se enlazan entre sí ("Citas en otros desarrollos") y cada una
+enlaza a la página de su desarrollo; el botón "Agenda tu cita" de cada
+desarrollo lleva a la suya.
+
+⚠️ **Un espacio después de un dato en el texto se perdía** al compilar:
+"cada {HORARIO.intervalo} minutos" salía "cada 30minutos". Se arma con una
+plantilla de texto. Revisar eso si se agrega otro dato a una frase.
+
+Sirve para dos cosas:
 
 1. **Botón de "Reserva" de los perfiles de Google.** Google no acepta ahí un
    link directo a WhatsApp (sus políticas prohíben vínculos de mensajería en
@@ -48,8 +65,9 @@ su desarrollo ya elegido y el mensaje termina en "Vi su perfil en Google":
 
 - Son páginas de verdad (`app/cita/[clave]/page.tsx`), no redirecciones:
   Google rechaza acortadores y pide que el link responda 200.
-- No se indexan (`noindex`) y su canonical es `/agendar-cita`: así no hay cinco
-  páginas iguales compitiendo en Google. No van en el sitemap.
+- No se indexan (`noindex`) y su canonical es la página de su desarrollo
+  (`/agendar-cita/la-rioja-2`…): así no compiten con ella. No van en el
+  sitemap.
 - Los links largos (`/agendar-cita?desarrollo=la-rioja-2&desde=google`) siguen
   funcionando, por si alguno ya quedó guardado.
 

@@ -74,8 +74,12 @@ function objeto(segmentos: string[]): { texto: string; coda?: string } {
     return { texto: "las promociones de Altta Homes en Cancún" };
   if (primero === "jardines-del-sur-cancun")
     return { texto: "los desarrollos de Jardines del Sur en Cancún" };
-  if (primero === "agendar-cita" || primero === "cita")
-    return { texto: GENERAL, coda: "Quiero agendar una cita." };
+  if (primero === "agendar-cita" || primero === "cita") {
+    // /agendar-cita/la-rioja-2 → "las casas de La Rioja 2. Quiero agendar…"
+    const silo = segundo ? SILOS[segundo] : undefined;
+    const texto = silo ? (silo.preventa ? silo.nombre : productoDe(silo)) : GENERAL;
+    return { texto, coda: "Quiero agendar una cita." };
+  }
 
   const silo = SILOS[primero];
   if (!silo) return { texto: GENERAL };

@@ -88,13 +88,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      // Citas por WhatsApp; también es el link de "Reserva" de los perfiles
-      // de Google (9 nov 2026).
+      // Silo de citas (9 nov 2026): la general y una por desarrollo. Los
+      // links cortos /cita/… de los perfiles de Google NO van: son noindex.
       url: `${SITE_URL}/agendar-cita`,
       lastModified,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    ...(Object.keys(DEVS) as DevSlug[]).map((slug) => ({
+      url: `${SITE_URL}/agendar-cita/${slug}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
     {
       url: `${SITE_URL}/preguntas-frecuentes`,
       lastModified,

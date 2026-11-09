@@ -364,6 +364,36 @@
   color: var(--primary);
 }
 
+/* Enlaces entre las páginas del silo de citas. */
+.desarrollos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.desarrolloLink {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--primary);
+  font-family: var(--font-montserrat), sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease;
+}
+
+.desarrolloLink:hover {
+  border-color: var(--accent);
+}
+
+.verDesarrollo {
+  margin-top: 1.4rem;
+}
+
 @media (max-width: 640px) {
   .tarjeta {
     padding: 1.3rem 1rem 1.1rem;
@@ -375,7 +405,8 @@
   }
 
   .oficinas,
-  .lugares {
+  .lugares,
+  .desarrollos {
     grid-template-columns: 1fr;
   }
 }

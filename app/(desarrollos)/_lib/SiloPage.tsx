@@ -458,7 +458,7 @@ export default async function SiloPage({ slug }: { slug: DevSlug }) {
                   <a href={mapa.url} target="_blank" rel="noreferrer" className="btn btn-primary">
                     {mapa.boton ?? "Cómo llegar"}
                   </a>
-                  <a href={`/agendar-cita?desarrollo=${dev.slug}`} className="btn btn-secondary">
+                  <a href={`/agendar-cita/${dev.slug}`} className="btn btn-secondary">
                     Agenda tu cita
                   </a>
                   <a href={mapa.url} target="_blank" rel="noreferrer" className={styles.ubicacionLink}>
