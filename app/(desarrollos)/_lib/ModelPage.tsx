@@ -461,7 +461,7 @@ export default async function ModelPage({
                 muestran acabados de referencia.
               </p>
             </div>
-            <ModelGallery images={property.images} modelName={property.nombre_modelo} />
+            <ModelGallery images={property.images} modelName={property.nombre_modelo} development={property.development} />
           </div>
         </section>
       )}

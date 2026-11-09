@@ -4,13 +4,16 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import styles from "../model.module.css";
+import { altDeFoto } from "@/lib/texto-modelo";
 
 export default function ModelGallery({
   images,
   modelName,
+  development,
 }: {
   images: string[];
   modelName: string;
+  development: string;
 }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -71,7 +74,7 @@ export default function ModelGallery({
           >
             <Image
               src={src}
-              alt={`${modelName} - imagen ${i + 1}`}
+              alt={altDeFoto(src, modelName, development, i + 1)}
               fill
               sizes={i === 0 ? "(max-width: 640px) 100vw, 720px" : "(max-width: 640px) 100vw, 360px"}
               loading={i < 2 ? "eager" : "lazy"}
@@ -98,7 +101,7 @@ export default function ModelGallery({
             <div className={styles.lbContent} onClick={(e) => e.stopPropagation()}>
               <Image
                 src={images[lightboxIndex]}
-                alt={`${modelName} - imagen ${lightboxIndex + 1}`}
+                alt={altDeFoto(images[lightboxIndex], modelName, development, lightboxIndex + 1)}
                 fill
                 sizes="100vw"
                 className={styles.lbImage}

@@ -84,6 +84,7 @@ Después del deploy se commitea también `.firebase/hosting.*.cache`.
 | Compartir precios con otra app | `docs/api-precios.md` |
 | Títulos de los desarrollos, sección de ubicación con mapa, perfiles de Google | `docs/seo-local-ubicaciones.md` |
 | Fotos de los modelos (elegir, convertir a WebP, galería) | `docs/fotos-modelos.md` |
+| Página de citas `/agendar-cita`, botón "Reserva" de Google, plan B con servidor | `docs/agendar-cita.md` |
 | El inventario que lee el CRM (KloseAI) | `docs/inventario-crm.md` |
 | Historia de decisiones pasadas | `context.md` (lo reciente está arriba) |
 

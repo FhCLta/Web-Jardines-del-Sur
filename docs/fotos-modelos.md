@@ -94,6 +94,19 @@ con `objectFit: contain` y deja franjas a los lados. La del Capua venía de
 3840×3840; se recorta a 4:3 por el centro (tercer valor de la lista en el
 script).
 
+## 3b. El texto alternativo sale del nombre
+
+Desde el 8 nov 2026 el `alt` de cada foto (galería de la ficha y tarjeta) se
+arma solo con la etiqueta del nombre: `casa-ceiba-jardines-del-sur-6-cocina-y-comedor.webp`
+→ "Cocina y comedor de la Casa Ceiba en Jardines del Sur 6" (`altDeFoto` en
+`lib/texto-modelo.ts`). Antes todas decían "Casa Ceiba - imagen 9". Google lo
+usa para entender la foto; no cambia títulos ni descripciones.
+
+⚠️ **Una etiqueta nueva hay que darla de alta en `ESPACIOS`** (mismo archivo),
+con su texto y acentos. Si no está, la foto sale como "Casa Ceiba en Jardines
+del Sur 6, foto 9": no se rompe, pero pierde la descripción. Las fotos con
+nombre genérico (`2.webp`) salen así a propósito: no se inventa qué muestran.
+
 ## 4. Ojo
 
 - **Mismo modelo, distinto desarrollo:** el Capua y el Cedro Plus de Lirios

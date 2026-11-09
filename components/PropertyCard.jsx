@@ -5,7 +5,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { createPortal } from 'react-dom';
 import styles from './PropertyCard.module.css';
-import { conArticulo, agotadoDe } from "@/lib/texto-modelo";
+import { conArticulo, agotadoDe, altDeFoto } from "@/lib/texto-modelo";
 import { PHONE_E164 } from "@/lib/contacto";
 
 const VirtualTourModal = dynamic(() => import('./VirtualTourModal'), {
@@ -232,7 +232,7 @@ export default function PropertyCard({ property, origen = "" }) {
           <div className={styles.imageForeground}>
             <Image
               src={displayImage}
-              alt={`${property.nombre_modelo} - imagen ${currentImgIndex + 1}`}
+              alt={altDeFoto(images[currentImgIndex] ?? "", property.nombre_modelo, property.development, currentImgIndex + 1)}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
               style={{ objectFit: 'contain' }}
@@ -469,7 +469,7 @@ export default function PropertyCard({ property, origen = "" }) {
           <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
             <Image
               src={images[currentImgIndex]} 
-              alt={`Imagen ${currentImgIndex + 1} de ${property.nombre_modelo}`} 
+              alt={altDeFoto(images[currentImgIndex] ?? "", property.nombre_modelo, property.development, currentImgIndex + 1)}
               fill
               sizes="100vw"
               className={styles.lightboxImage}
