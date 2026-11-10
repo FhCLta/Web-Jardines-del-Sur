@@ -2112,3 +2112,68 @@ a $200.
 
 ⏳ Falta saber cómo cerró el experimento de septiembre (IA Max, amplia, etc.):
 IA Max puede reescribir títulos — revisar los anuncios de Promociones al día 3.
+
+---
+
+## 🛠️ SESIÓN 39 — Configurar los 3 grupos (9 nov 2026) — EN CURSO
+
+Florencio decidió crear los tres grupos (Agendar cita, Promociones, Jardines
+del Sur 7), no solo Promociones como recomendaba la sesión 38. Se arma en la
+otra computadora; él avisa cuando termine.
+
+### ⚠️ Hallazgo: `[jardines del sur 7]` es NEGATIVA
+Se agregó el 29 may (sesión 26, lista "Fases viejas Jardines del Sur", junto a
+`[jardines del sur 4]` y `[jardines del sur 5]`). Las negativas estaban a nivel
+GRUPO y había pendiente subirlas a CAMPAÑA. Si sigue en la lista de campaña, el
+grupo nuevo de JdS7 **no va a salir nunca**. Revisar dónde está:
+- En **campaña** → quitarla de ahí y ponerla como negativa dentro de cada grupo
+  que NO es el 7 (JdS6, La Rioja 2 - Premium, Lirios, Promociones, Citas), para
+  que esos grupos no se queden con las búsquedas del 7.
+- Solo en el **grupo JdS6** → dejarla ahí. Con eso basta.
+
+### Revisar antes de crear nada (estado desconocido desde septiembre)
+1. Configuración de la campaña: **concordancia amplia** e **IA Max**. Nunca se
+   registró cómo cerró el experimento del 4-18 sept. Si la amplia sigue
+   encendida a nivel campaña, las `[exactas]` de los grupos nuevos se comportan
+   como amplias (regla dura 1).
+2. El **recurso de Mensaje (WhatsApp)** de la campaña: debe decir 998 704 3388
+   (ver sesión 38).
+
+### Datos verificados para el texto de los anuncios (9 nov 2026)
+**Mínimos del inventario** (`data/inventory.json`):
+- JdS6: casas desde $2,225,850 (Flamboyán), departamentos desde $1,758,830 (Capua).
+- Lirios: departamentos desde $1,990,000.
+- La Rioja 2: la página dice "3 modelos desde $4,294,950", pero el inventario
+  trae también una Casa Noni de La Rioja a $4,049,375 (estado "Preventa").
+  ⚠️ Aclarar cuál es el mínimo ANTES de poner precio de La Rioja en un anuncio.
+
+**Promociones de noviembre** (vencen el **30 nov**; `dev-content.ts`). Aplican
+con apartado del 1 al 30 de noviembre y solo en las ubicaciones indicadas:
+- JdS6 · Capua, vista al estacionamiento (Antílope N, O, P y Q): 3 minisplits
+  de 12,000 BTU **más** $40,000 de descuento.
+- JdS6 · Casa Noni (Jabalí Mz 30 L14): paneles solares **o** $50,000 **o**
+  4 minisplits.
+- JdS6 · Casa Ceiba (todos los lotes): 4 minisplits **o** $40,000.
+- La Rioja 2 · Noni Elite (casas 69 a 74): paneles solares **o** $50,000 +
+  3 minisplits.
+- Lirios · Capua (P4 y L1) y Cedro Plus (P1, P2 y P3): 3 minisplits.
+
+Landings: `/promociones`, `/jardines-del-sur-6/promociones`,
+`/la-rioja-2/promociones`, `/lirios-residencial-2/promociones`,
+`/agendar-cita` y `/agendar-cita/<desarrollo>`, `/jardines-del-sur-7`.
+Verificar 200 en producción antes de entregarlas.
+
+### Reglas para cada grupo
+- **Promociones:** nada con "rioja" en sus palabras (viven en Premium). El
+  grupo vence con las promos: el **1 dic** se pausa o se reescribe con las de
+  diciembre.
+- **Agendar cita:** palabras de visita que NO existan ya en otro grupo.
+  `[oficina de ventas jardines del sur 6]` se queda en JdS6 (CPA $0.47, no
+  moverla). Oficinas: JdS6, JdS7 y Lirios se atienden en la oficina de JdS6;
+  las casas muestra de La Rioja 2 son solo para La Rioja 2. Además del grupo,
+  sitelink "Agenda tu Cita" DENTRO de cada grupo (regla 9).
+- **Jardines del Sur 7:** solo `[exacta]`. Sin precios (no hay). Nunca ofrecer
+  visitas a la obra. Ojo: ahí ya sale #1 orgánico gratis (10-15 leads sin
+  costo); si los leads orgánicos del 7 bajan al prender el grupo, se pausa.
+- Todos: "Zona Sur", crédito bancario antes que Infonavit, sin títulos fijados,
+  sin aceptar sugerencias de Google.
