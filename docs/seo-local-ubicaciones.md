@@ -34,6 +34,28 @@ residencial". Florencio eligió "La Rioja **Residencial 2**" (como Lirios y como
 el nombre oficial). Google entiende el orden distinto, pero **si la posición de
 "la rioja 2" cae, este es el primer sospechoso**.
 
+### 🧪 Prueba desde el 10 nov 2026: título = nombre del perfil de Google
+
+Decisión de Florencio, para ver cómo posiciona. Solo dos páginas:
+
+| Página | Título de prueba | Título que reemplaza (5/6–10 nov) |
+|---|---|---|
+| `/jardines-del-sur-6` | Jardines del Sur 6 \| Altta Homes Cancun | Jardines del Sur 6 Cancún \| Casas y departamentos en venta |
+| `/la-rioja-2` | La Rioja Residencial 2 \| Altta Homes Cancun | La Rioja Residencial 2 Cancún \| Casas de lujo en venta |
+
+El mismo día renombró el perfil de La Rioja a "La Rioja Residencial 2 \| Altta
+Homes Cancun" (antes "La Rioja 2 \| …"), y su `placeName` se igualó. Sin acento
+en "Cancun", como los perfiles. Lirios y Jardines del Sur 7 **no** entran en la
+prueba. Las búsquedas de "casas"/"departamentos" las trabajan los catálogos
+(`/casas-en-cancun`, `/departamentos-en-cancun`).
+
+⚠️ Los títulos de noviembre tenían 4-5 días: Google no alcanzó a reflejarlos, así
+que lo que se mida es la prueba contra lo que había antes del 5 nov. Medir
+**hacia el 1 dic 2026** con Search Console (posición y CTR de "jardines del sur
+6", "la rioja 2" y "la rioja residencial 2", página por página). Para regresar:
+`seoTitleLead` y `metaTitle` en `dev-content.ts` (los comentarios guardan los
+anteriores).
+
 **Dónde se cambia:** `seoTitleLead` y `metaTitle` de cada desarrollo en
 `app/(desarrollos)/_lib/dev-content.ts`. Comprobar siempre con
 `python3 scripts/diseno/comparar-seo.py`: solo debe cambiar la página tocada.
@@ -85,7 +107,7 @@ espacio duro entre número y unidad (`450 m`) para que en celular no quede
 |---|---|---|---|
 | Jardines del Sur 6 \| Altta Homes Cancun | 15319358797701757229 | 21.0826758, -86.8863806 | Av. 127 SM 342 MZ 27, 77536 |
 | Jardines del Sur 7 \| Altta Homes Cancun | place `0x39666beb394ecc4c` | 21.0835955, -86.8914348 | Josefa Ortiz de Domínguez, 77500 |
-| La Rioja 2 \| Altta Homes Cancun | 10624409005148155448 | 21.1028811, -86.8795074 | Esquina Av. 135 y Av. 127, 77536 |
+| La Rioja Residencial 2 \| Altta Homes Cancun (hasta el 10 nov 2026: "La Rioja 2 \| …") | 10624409005148155448 | 21.1028811, -86.8795074 | Esquina Av. 135 y Av. 127, 77536 |
 | Lirios Residencial 2 \| Altta Homes Cancun | 4371211098013598685 | 21.1283273, -86.8877574 | Av Robles, 77536 |
 
 Jardines del Sur 6 vive en `lib/contacto.ts` (`OFFICE_*`, que también alimenta

@@ -1,6 +1,16 @@
 # Contexto del Proyecto: Stitch - Ecosistema Inmobiliario Cancún 2026
 
 
+> **🧪 PRUEBA 10 nov 2026 — TÍTULOS DE JARDINES DEL SUR 6 Y LA RIOJA 2 = NOMBRE DE SU PERFIL DE GOOGLE.**
+>
+> Decisión de Florencio, para ver cómo posicionan. `/jardines-del-sur-6` →
+> "Jardines del Sur 6 | Altta Homes Cancun"; `/la-rioja-2` → "La Rioja
+> Residencial 2 | Altta Homes Cancun" (ese día renombró el perfil de La Rioja,
+> antes "La Rioja 2 | …"; `placeName` igualado). Lirios y Jardines del Sur 7
+> no se tocan. `comparar-seo.py`: solo cambian esas dos páginas (49 de 51
+> iguales). Medir hacia el 1 dic: detalle y cómo regresar en
+> `docs/seo-local-ubicaciones.md` §1.
+
 > **✅ COMPLETADO 3–6 nov 2026 — SIN META, NÚMERO TEMPORAL, PROMOCIONES CON CONTADOR, FOTOS NUEVAS DE JDS6, TÍTULOS Y MAPAS DE LOS 4 DESARROLLOS.**
 >
 > - **Sin Meta (3 nov):** fuera Píxel, CAPI, `functions/` e íconos de redes; el

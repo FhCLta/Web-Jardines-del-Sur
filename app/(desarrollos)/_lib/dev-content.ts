@@ -147,12 +147,17 @@ export const DEVS: Record<DevSlug, DevContent> = {
     slug: "jardines-del-sur-6",
     name: "Jardines del Sur 6",
     shortName: "Jardines 6",
-    // Título espejo del de /jardines-del-sur-7 ("Jardines del Sur 7 Cancún | …"),
-    // que va #1. Pedido por Florencio el 5 nov 2026. Antes: "Jardines del Sur 6 |
-    // Casas y Departamentos en Cancún". metaTitle es el nombre en los datos para
-    // Google y debe decir lo mismo que el <title>.
-    metaTitle: "Jardines del Sur 6 Cancún | Casas y departamentos en venta",
-    seoTitleLead: "Jardines del Sur 6 Cancún | Casas y departamentos en venta",
+    // PRUEBA desde el 10 nov 2026 (decisión de Florencio): título idéntico al
+    // nombre de su perfil de Google, "Jardines del Sur 6 | Altta Homes Cancun"
+    // (sin acento, como el perfil). Para ver si posiciona mejor; las búsquedas
+    // de "casas"/"departamentos" las trabajan los catálogos. Medir antes de
+    // volver a moverlo (docs/seo-local-ubicaciones.md §1).
+    // Títulos anteriores: "Jardines del Sur 6 Cancún | Casas y departamentos en
+    // venta" (5–10 nov 2026) y "Jardines del Sur 6 | Casas y Departamentos en
+    // Cancún". metaTitle es el nombre en los datos para Google y debe decir lo
+    // mismo que el <title>.
+    metaTitle: "Jardines del Sur 6 | Altta Homes Cancun",
+    seoTitleLead: "Jardines del Sur 6 | Altta Homes Cancun",
     metaDescription:
       "Casas y departamentos en Jardines del Sur 6, Zona Sur de Cancún. 6 modelos de 3 recámaras con alberca, gimnasio y casa club, a 10 min del aeropuerto y 500 m de Av. Huayacán. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas y Departamentos en Jardines del Sur 6, Cancún",
@@ -394,8 +399,12 @@ export const DEVS: Record<DevSlug, DevContent> = {
     // posición de "la rioja 2" cae, este es el primer sospechoso.
     // Títulos anteriores: "La Rioja 2 Residencial | Casas de Lujo en Cancún" y,
     // unas horas, "La Rioja 2 Residencial Cancún | Casas de lujo en venta".
-    metaTitle: "La Rioja Residencial 2 Cancún | Casas de lujo en venta",
-    seoTitleLead: "La Rioja Residencial 2 Cancún | Casas de lujo en venta",
+    // PRUEBA desde el 10 nov 2026 (decisión de Florencio): título idéntico al
+    // nombre de su perfil de Google, que ese día renombró a "La Rioja
+    // Residencial 2 | Altta Homes Cancun". Antes de la prueba (6–10 nov): "La
+    // Rioja Residencial 2 Cancún | Casas de lujo en venta".
+    metaTitle: "La Rioja Residencial 2 | Altta Homes Cancun",
+    seoTitleLead: "La Rioja Residencial 2 | Altta Homes Cancun",
     metaDescription:
       "Casas residenciales premium en La Rioja 2, Zona Sur de Cancún. 3 recámaras, hasta 3.5 baños y terraza, con casa club, alberca y vigilancia 24/7. A 10 min del aeropuerto y 15 min de las playas. Chatea con un asesor autorizado de Altta Homes. Crédito bancario e Infonavit.",
     h1: "Casas Residenciales en La Rioja 2, Cancún",
@@ -410,7 +419,8 @@ export const DEVS: Record<DevSlug, DevContent> = {
     // En Av. 135 esq. Av. 127 están la oficina y las casas muestra, NO el
     // residencial (ese está junto a Jardines del Sur 6, a 2.9 km).
     location: { label: "Casas muestra", value: "Av. 135 esq. Av. 127, 77536 Cancún, Q.R." },
-    // Perfil de Google de Florencio "La Rioja 2 | Altta Homes Cancun" = la
+    // Perfil de Google de Florencio "La Rioja Residencial 2 | Altta Homes
+    // Cancun" (hasta el 10 nov 2026 se llamaba "La Rioja 2 | …") = la
     // oficina con casas muestra, donde cita a los clientes. El residencial es
     // otro punto: "LA RIOJA RESIDENCIAL 2" en Maps es de otras personas, así que
     // de ese solo se usan las coordenadas, sin enlazarlo. Medido en
@@ -418,7 +428,7 @@ export const DEVS: Record<DevSlug, DevContent> = {
     // Huayacán a ~540 m, aeropuerto 4.8 km en línea recta, JdS6 a 600 m.
     // OJO: "Oficina de ventas de La Rioja Residencial" es la oficial, no suya.
     mapa: {
-      placeName: "La Rioja 2 | Altta Homes Cancun",
+      placeName: "La Rioja Residencial 2 | Altta Homes Cancun",
       cid: "10624409005148155448",
       url: "https://www.google.com/maps?cid=10624409005148155448",
       placeUrl:
