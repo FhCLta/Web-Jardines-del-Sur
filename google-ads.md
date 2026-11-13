@@ -2143,9 +2143,13 @@ grupo nuevo de JdS7 **no va a salir nunca**. Revisar dónde está:
 **Mínimos del inventario** (`data/inventory.json`):
 - JdS6: casas desde $2,225,850 (Flamboyán), departamentos desde $1,758,830 (Capua).
 - Lirios: departamentos desde $1,990,000.
-- La Rioja 2: la página dice "3 modelos desde $4,294,950", pero el inventario
-  trae también una Casa Noni de La Rioja a $4,049,375 (estado "Preventa").
-  ⚠️ Aclarar cuál es el mínimo ANTES de poner precio de La Rioja en un anuncio.
+- La Rioja 2: casas desde **$4,294,950** (Fresno Elite). La Casa Noni de La
+  Rioja ($4,049,375) tiene `oculto_web: true`: no sale en la web, así que el
+  anuncio no la usa (aclarado el 13 nov; el anuncio debe cuadrar con su página).
+
+Las 12 páginas de destino respondieron 200 el 13 nov (incluida `/whatsapp`).
+Ninguna negativa vieja bloquea "promociones" ni "cita"; la única que estorba es
+`[jardines del sur 7]`.
 
 **Promociones de noviembre** (vencen el **30 nov**; `dev-content.ts`). Aplican
 con apartado del 1 al 30 de noviembre y solo en las ubicaciones indicadas:
